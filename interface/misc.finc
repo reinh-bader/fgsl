@@ -1,0 +1,28 @@
+!-*-f90-*-
+!
+!  Interfaces: miscellaneous additions
+!
+  function gsl_aux_sizeof_double() bind(c)
+    import :: c_size_t
+    integer(c_size_t) :: gsl_aux_sizeof_double
+  end function gsl_aux_sizeof_double
+  function gsl_aux_sizeof_float() bind(c)
+    import :: c_size_t
+    integer(c_size_t) :: gsl_aux_sizeof_float
+  end function gsl_aux_sizeof_float
+  function gsl_aux_sizeof_int() bind(c)
+    import :: c_size_t
+    integer(c_size_t) :: gsl_aux_sizeof_int
+  end function gsl_aux_sizeof_int
+  function gsl_aux_sizeof_long() bind(c)
+    import :: c_size_t
+    integer(c_size_t) :: gsl_aux_sizeof_long
+  end function gsl_aux_sizeof_long
+  function gsl_aux_sizeof_size_t() bind(c)
+    import :: c_size_t
+    integer(c_size_t) :: gsl_aux_sizeof_size_t
+  end function gsl_aux_sizeof_size_t
+  function gsl_aux_sizeof_char() bind(c)
+    import :: c_size_t
+    integer(c_size_t) :: gsl_aux_sizeof_char
+  end function gsl_aux_sizeof_char

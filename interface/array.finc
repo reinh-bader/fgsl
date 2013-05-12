@@ -1,0 +1,167 @@
+!-*-f90-*-
+!
+!  Interfaces: Array support
+!
+  function gsl_vector_get(v, i) bind(c)
+    import
+    type(c_ptr), value :: v
+    integer(c_size_t), value :: i
+    real(c_double) :: gsl_vector_get
+  end function gsl_vector_get
+  function gsl_vector_ptr(v, i) bind(c)
+    import
+    type(c_ptr), value :: v
+    integer(c_size_t), value :: i
+    type(c_ptr) :: gsl_vector_ptr
+  end function gsl_vector_ptr
+  function gsl_vector_complex_get(v, i) bind(c)
+    import
+    type(c_ptr), value :: v
+    integer(c_size_t), value :: i
+    type(gsl_complex) :: gsl_vector_complex_get
+  end function gsl_vector_complex_get
+  function gsl_vector_complex_ptr(v, i) bind(c)
+    import
+    type(c_ptr), value :: v
+    integer(c_size_t), value :: i
+    type(c_ptr) :: gsl_vector_complex_ptr
+  end function gsl_vector_complex_ptr
+  function gsl_matrix_get(v, j, i) bind(c)
+    import
+    type(c_ptr), value :: v
+    integer(c_size_t), value :: j, i
+    real(c_double) :: gsl_matrix_get
+  end function gsl_matrix_get
+  function gsl_matrix_complex_get(v, j, i) bind(c)
+    import
+    type(c_ptr), value :: v
+    integer(c_size_t), value :: j, i
+    type(gsl_complex) :: gsl_matrix_complex_get
+  end function gsl_matrix_complex_get
+!
+! auxiliary functions within FGSL only
+!
+  function fgsl_aux_vector_double_init() bind(c)
+    import
+    type(c_ptr) :: fgsl_aux_vector_double_init
+  end function fgsl_aux_vector_double_init
+  subroutine fgsl_aux_vector_double_free(v) bind(c)
+    import
+    type(c_ptr), value :: v
+  end subroutine fgsl_aux_vector_double_free
+  function fgsl_aux_vector_double_align(a, len, fvec, size, offset, stride) bind(c)
+    import
+    real(c_double), dimension(*), intent(in) :: a
+    type(c_ptr), value :: fvec
+    integer(c_size_t), value :: len, size, offset, stride
+    integer(c_int) :: fgsl_aux_vector_double_align
+  end function fgsl_aux_vector_double_align
+  function fgsl_aux_vector_double_size(fvec) bind(c)
+    import
+    type(c_ptr), value :: fvec
+    integer(c_size_t) fgsl_aux_vector_double_size
+  end function fgsl_aux_vector_double_size
+  function fgsl_aux_vector_double_stride(fvec) bind(c)
+    import
+    type(c_ptr), value :: fvec
+    integer(c_size_t) fgsl_aux_vector_double_stride
+  end function fgsl_aux_vector_double_stride
+  function fgsl_aux_matrix_double_init() bind(c)
+    import
+    type(c_ptr) :: fgsl_aux_matrix_double_init
+  end function fgsl_aux_matrix_double_init
+  subroutine fgsl_aux_matrix_double_free(v) bind(c)
+    import
+    type(c_ptr), value :: v
+  end subroutine fgsl_aux_matrix_double_free
+  function fgsl_aux_matrix_double_align(a, lda, n, m, fvec) bind(c)
+    import
+    integer(c_size_t), value :: lda, n, m
+    type(c_ptr), value :: a
+!    real(c_double), dimension(lda, *), intent(in) :: a
+    type(c_ptr), value :: fvec
+    integer(c_int) :: fgsl_aux_matrix_double_align
+  end function fgsl_aux_matrix_double_align
+  subroutine fgsl_aux_matrix_double_size(fmat, lda, m, n) bind(c)
+    import
+    type(c_ptr), value :: fmat
+    integer(c_size_t), intent(out) :: lda, m, n
+  end subroutine fgsl_aux_matrix_double_size
+  function gsl_matrix_ptr(m, i, j) bind(c)
+    import
+    type(c_ptr), value :: m
+    integer(c_size_t), value :: i, j
+    type(c_ptr) :: gsl_matrix_ptr
+  end function gsl_matrix_ptr
+  function gsl_aux_sizeof_vector() bind(c)
+    import :: c_size_t
+    integer(c_size_t) :: gsl_aux_sizeof_vector
+  end function gsl_aux_sizeof_vector
+  function gsl_aux_sizeof_matrix() bind(c)
+    import :: c_size_t
+    integer(c_size_t) :: gsl_aux_sizeof_matrix
+  end function gsl_aux_sizeof_matrix
+!
+! complex variants
+!
+  function fgsl_aux_vector_complex_init() bind(c)
+    import
+    type(c_ptr) :: fgsl_aux_vector_complex_init
+  end function fgsl_aux_vector_complex_init
+  subroutine fgsl_aux_vector_complex_free(v) bind(c)
+    import
+    type(c_ptr), value :: v
+  end subroutine fgsl_aux_vector_complex_free
+  function fgsl_aux_vector_complex_align(a, len, fvec, size, offset, stride) bind(c)
+    import
+!    complex(c_double), dimension(*), intent(in) :: a
+    type(c_ptr), value :: a
+    type(c_ptr), value :: fvec
+    integer(c_size_t), value :: len, size, offset, stride
+    integer(c_int) :: fgsl_aux_vector_complex_align
+  end function fgsl_aux_vector_complex_align
+  function fgsl_aux_vector_complex_size(fvec) bind(c)
+    import
+    type(c_ptr), value :: fvec
+    integer(c_size_t) fgsl_aux_vector_complex_size
+  end function fgsl_aux_vector_complex_size
+  function fgsl_aux_vector_complex_stride(fvec) bind(c)
+    import
+    type(c_ptr), value :: fvec
+    integer(c_size_t) fgsl_aux_vector_complex_stride
+  end function fgsl_aux_vector_complex_stride
+  function fgsl_aux_matrix_complex_init() bind(c)
+    import
+    type(c_ptr) :: fgsl_aux_matrix_complex_init
+  end function fgsl_aux_matrix_complex_init
+  subroutine fgsl_aux_matrix_complex_free(v) bind(c)
+    import
+    type(c_ptr), value :: v
+  end subroutine fgsl_aux_matrix_complex_free
+  function fgsl_aux_matrix_complex_align(a, lda, n, m, fvec) bind(c)
+    import
+    integer(c_size_t), value :: lda, n, m
+!    complex(c_double), dimension(lda, *), intent(in) :: a
+    type(c_ptr), value :: a
+    type(c_ptr), value :: fvec
+    integer(c_int) :: fgsl_aux_matrix_complex_align
+  end function fgsl_aux_matrix_complex_align
+  subroutine fgsl_aux_matrix_complex_size(fmat, lda, m, n) bind(c)
+    import
+    type(c_ptr), value :: fmat
+    integer(c_size_t), intent(out) :: lda, m, n
+  end subroutine fgsl_aux_matrix_complex_size
+  function gsl_matrix_complex_ptr(m, i, j) bind(c)
+    import
+    type(c_ptr), value :: m
+    integer(c_size_t), value :: i, j
+    type(c_ptr) :: gsl_matrix_complex_ptr
+  end function gsl_matrix_complex_ptr
+  function gsl_aux_sizeof_vector_complex() bind(c)
+    import :: c_size_t
+    integer(c_size_t) :: gsl_aux_sizeof_vector_complex
+  end function gsl_aux_sizeof_vector_complex
+  function gsl_aux_sizeof_matrix_complex() bind(c)
+    import :: c_size_t
+    integer(c_size_t) :: gsl_aux_sizeof_matrix_complex
+  end function gsl_aux_sizeof_matrix_complex

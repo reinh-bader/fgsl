@@ -1,0 +1,93 @@
+Changes in 0.9.5:
+
+* fixed bug in poly.f90 test (work space too small); thanks
+  to Tobias Burnus for pointing this out
+
+
+Changes in 0.9.4:
+~~~~~~~~~~~~~~~~~
+* added new calls from GSL 1.15, except gsl_pow_uint
+  (unsigned unsupported in C interop) and the gsl_vector_equal
+  and gsl_matrix_equal calls.
+* corrected PUBLICness for some fft calls. Thanks to 
+  Dave Allured for reporting this.
+* corrected bug in fgsl_odeiv_control_name
+* removed unnecessary auxiliary interp functions
+* documentation migrated from texi to doxygen-generated HTML.
+* Note: I've received files for doing autoconf builds, but
+  these have not been integrated yet.
+
+Changes in 0.9.3:
+~~~~~~~~~~~~~~~~~
+* added new calls from GSL 1.14
+* corrected accessibility of some sorting routines
+* added sort routines based on the fgsl_vector type.
+
+Changes in 0.9.2:
+~~~~~~~~~~~~~~~~~
+* fixed bug in multimin test. Thanks to Tobias Burnus for 
+  pointing this out.
+* fix for install target. Thanks to Kay Diederichs for
+  pointing this out.
+* added new calls from GSL 1.13, except for the VEGAS Monte
+  Carlo accessors for which there already was something in
+  place which does the job.
+
+Changes in 0.9.1:
+~~~~~~~~~~~~~~~~~
+* added examples for new APIs
+* fixed bug in fft API mapping (assumed shape dummies are
+  not interoperable) as well as a mistyped declaration
+  (half-caught by NAG 5.2)
+* introduced separate kind for complex handling
+* constants changed for consistency with GSL 1.12
+* added new features from GSL 1.11 and 1.12
+* added --debug flag to configure
+
+Changes in 0.9:
+~~~~~~~~~~~~~~~
+* added examples for error handling
+* added support for double precision complex vectors and matrices
+* added linear algebra and eigensystem APIs
+* added fourier transform API
+* Note: testing of added APIs is not yet complete
+* moved testing stuff to tests subdirectory
+
+Changes in 0.8.1:
+~~~~~~~~~~~~~~~~~
+* bug fixes
+* improved 32 vs. 64 bit handling (--bits switch for configure)
+* OS X on Intel support
+
+Fixes and new features in 0.8:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* added string constants describing version and GSL base
+* added new features from GSL 1.9 and 1.10 as far as deemed
+  necessary for FGSL coverage.
+
+Fixes and new features in first beta:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* augmented error treatment
+* additional compilers added to configure script
+* more fgsl_sizeof specifics
+* extended (but not finished) manual
+* testing much extended and many bugs/missing symbols fixed:
+  - special functions
+  - permutations and combinations
+  - integration
+  - permutations and combinations
+  - sorting
+  - random numbers (partially)
+  - histograms (partially)
+
+Fixes and new features in second alpha:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* statistics functions not exported, fixed
+* changed permutation/combination data access to return
+  a fortran pointer to enable referencing original data
+* added further examples, nearly all from C are now mirrored
+* added fgsl_sizeof generic, often needed for API calls with
+  C polymorphic arguments
+* the build process has been improved
+
+

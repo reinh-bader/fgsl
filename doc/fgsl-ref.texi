@@ -1,0 +1,315 @@
+\input texinfo @c -*-texinfo-*-
+@c This will be for the printing version of the manual
+@c @input config-local.texi
+@c %**start of header
+@setfilename fgsl-ref.info
+@settitle GNU Scientific Library -- Fortran Interface Manual
+@finalout
+@set frontcontents
+@ifset publish
+@setchapternewpage odd
+@end ifset
+@c %**end of header
+
+@dircategory Scientific software
+@direntry
+* fgsl-ref: (fgsl-ref).                   GNU Scientific Library -- Fortran Interface Manual
+@end direntry
+
+@c How to use the math macros
+@c ==========================
+@c 
+@c For simple expressions, simply use the @math{} command, e.g.
+@c
+@c     @math{\exp(x)/(1+x^2)}
+@c 
+@c but if the expression includes characters that need to be 'escaped'
+@c in texinfo, like '{' or '}', or needs different output for TeX and info,
+@c then use the following form,
+@c
+@c     blah blah blah @c{$y^{1+b} \le \pi$}
+@c     @math{y^@{1+b@} <= \pi}
+@c
+@c The first part using @c{} must appear at the end of a line (it reads
+@c up to the line end -- as far as texinfo is concerned it's actually
+@c a 'comment').  The comment command @c has been modified to capture
+@c a TeX expression which is output by the next @math.
+@c
+@c For ordinary comments use the @comment command.
+
+@tex
+% Mathematical macros taken from the GNU Calc Manual
+% ==================================================
+%
+% Some special kludges to make TeX formatting prettier.
+% Because makeinfo.c exists, we can't just define new commands.
+% So instead, we take over little-used existing commands.
+%
+% Redefine @cite{text} to act like $text$ in regular TeX.
+% Info will typeset this same as @samp{text}.
+\gdef\goodtex{\tex \let\rm\goodrm \let\t\ttfont \turnoffactive}
+\gdef\goodrm{\fam0\tenrm}
+\gdef\math{\goodtex$\mathxxx}
+\gdef\mathxxx#1{#1$\endgroup}
+\global\let\oldxrefX=\xrefX
+\gdef\xrefX[#1]{\begingroup\let\math=\dfn\oldxrefX[#1]\endgroup}
+%
+% Redefine @i{text} to be equivalent to @cite{text}, i.e., to use math mode.
+% This looks the same in TeX but omits the surrounding ` ' in Info.
+%\global\let\i=\cite
+%\global\let\math=\cite
+%
+% Redefine @c{tex-stuff} \n @whatever{info-stuff}.
+\gdef\c{\futurelet\next\mycxxx}
+\gdef\mycxxx{%
+  \ifx\next\bgroup \goodtex\let\next\mycxxy
+  \else\ifx\next\mindex \let\next\relax
+  \else\ifx\next\kindex \let\next\relax
+  \else\ifx\next\starindex \let\next\relax \else \let\next\comment
+  \fi\fi\fi\fi \next
+}
+\gdef\mycxxy#1#2{#1\endgroup\mycxxz}
+\gdef\mycxxz#1{}
+%
+% Define \Hat to take over from \hat as an accent
+\gdef\Hat{\mathaccent "705E}
+%
+%\gdef\beforedisplay{\vskip-10pt}
+%\gdef\afterdisplay{\vskip-5pt}
+\gdef\beforedisplay{}
+\gdef\afterdisplay{}
+{\globaldefs = 1
+\abovedisplayskip=7pt plus 2pt minus 1pt
+\belowdisplayskip=7pt plus 2pt minus 1pt
+\abovedisplayshortskip=7pt plus 2pt minus 1pt
+\belowdisplayshortskip=7pt plus 2pt minus 1pt}
+%\abovedisplayskip=12pt plus 3pt minus 3pt
+%\belowdisplayskip=12pt plus 3pt minus 3pt
+%\abovedisplayshortskip=7pt plus 1pt minus 1pt
+%\belowdisplayshortskip=7pt plus 1pt minus 1pt
+%\gdef\beforedisplayh{\vskip-25pt}
+%\gdef\afterdisplayh{\vskip-10pt}
+%
+\gdef\arcsec{\hbox{\rm arcsec}}
+\gdef\arccsc{\hbox{\rm arccsc}}
+\gdef\arccot{\hbox{\rm arccot}}
+\gdef\sech{\hbox{\rm sech}}
+\gdef\csch{\hbox{\rm csch}}
+\gdef\coth{\hbox{\rm coth}}
+\gdef\arcsinh{\hbox{\rm arcsinh}}
+\gdef\arccosh{\hbox{\rm arccosh}}
+\gdef\arctanh{\hbox{\rm arctanh}}
+\gdef\arcsech{\hbox{\rm arcsech}}
+\gdef\arccsch{\hbox{\rm arccsch}}
+\gdef\arccoth{\hbox{\rm arccoth}}
+%
+\gdef\Re{\hbox{\rm Re}}
+\gdef\Im{\hbox{\rm Im}}
+\gdef\Sin{\hbox{\rm Sin}}
+\gdef\Cos{\hbox{\rm Cos}}
+\gdef\Log{\hbox{\rm Log}}
+%
+\gdef\erf{\hbox{\rm erf}}
+\gdef\erfc{\hbox{\rm erfc}}
+\gdef\sinc{\hbox{\rm sinc}}
+\gdef\sgn{\hbox{\rm sgn}}
+\gdef\sign{\hbox{\rm sign}}
+\gdef\det{\hbox{\rm det}}
+\gdef\Var{\hbox{\rm Var}}
+\gdef\arg{\hbox{\rm arg}} % avoid temporary clobbering of arg in texinfo-4.8
+@end tex
+
+@include version-ref.texi
+@set GSL @i{GNU Scientific Library}
+
+@copying
+Copyright @copyright{} 2007 R. Bader.
+
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.2 or
+any later version published by the Free Software Foundation; with the
+Invariant Sections being ``GNU General Public License'' and ``Free Software
+Needs Free Documentation'', the Front-Cover text being ``A GNU Manual'',
+and with the Back-Cover Text being (a) (see below).  A copy of the
+license is included in the section entitled ``GNU Free Documentation
+License''.
+
+(a) The Back-Cover Text is: ``You have freedom to copy and modify this
+GNU Manual, like GNU software.''
+@end copying
+
+@titlepage
+@title FGSL: A GSL Fortran interface
+@subtitle Fortran Interface Manual
+@subtitle Edition @value{EDITION}, for GSL Version @value{VERSION}
+@subtitle @value{UPDATED}
+
+@author Reinhold Bader 
+Leibniz Computing Centre
+@comment @email{bader@@lrz.de}
+@sp 1
+
+
+@end titlepage
+
+@ifset frontcontents
+@contents
+@end ifset
+
+@ifnottex
+@node Top, Introduction, (dir), (dir)
+@top GSL
+
+This file documents edition @value{EDITION} of the Fortran interface
+to the @value{GSL} (FGSL). It corresponds to release
+@value{VERSION} of the library.  Please report any errors in this
+manual to @email{bader@@lrz.de}.
+
+More information about FGSL is available at 
+@uref{http://http://www.lrz-muenchen.de/services/software/mathematik/gsl/fortran/};
+the GSL project homepage is at,
+@uref{http://www.gnu.org/software/gsl/}.
+
+@insertcopying
+@sp 1
+@end ifnottex
+
+@menu
+* Introduction::                
+* Using the interface::
+* Error Handling::
+* Mathematical Functions::
+* Complex Numbers::
+* Polynomials::
+* Special Functions::
+* Vectors and Matrices::
+* Permutations and Combinations::
+* Sorting::
+* Numerical Integration::
+* Random Numbers::
+@end menu
+
+@node  Introduction, Using the interface, Top, Top
+@chapter Introduction
+@include intro.texi
+
+@node Using the interface, Error Handling, Introduction, Top
+@chapter Using the interface
+@cindex usage, compiling application programs
+@include usage.texi
+
+@node Error Handling, Mathematical Functions, Using the library, Top
+@chapter Error Handling
+@cindex Errors
+@include err.texi
+
+@node  Mathematical Functions, Complex Numbers, Error Handling, Top
+@chapter Mathematical Functions
+@include math.texi
+
+@node Complex Numbers, Polynomials, Mathematical Functions, Top
+@chapter Complex Numbers
+@include complex.texi
+
+@node Polynomials, Special Functions, Complex Numbers, Top
+@chapter Polynomials
+@include poly.texi
+
+@node Special Functions, Vectors and Matrices, Polynomials, Top
+@chapter Special Functions
+@include specfunc.texi
+
+@node Vectors and Matrices, Permutations and Combinations, Special Functions, Top
+@chapter Vectors and Matrices
+@include vectors.texi
+
+@node   Permutations and Combinations, Sorting, Vectors and Matrices, Top
+@chapter Permutations and Combinations
+@include permutation.texi
+
+@node  Sorting, Numerical Integration, Permutations and Combinations, Top
+@chapter Sorting
+@include sort.texi
+
+@node Numerical Integration, Random Number Generation, Sorting, Top
+@chapter Numerical Integration
+@include integration.texi
+
+@node Random Numbers, , Numerical Integration, Top
+@chapter Random Numbers
+@include random.texi
+
+@node Contributors to FGSL, Top
+@appendix Contributors to FGSL
+
+(See the AUTHORS file in the distribution for up-to-date information.)
+
+@table @strong
+@item Reinhold Bader
+
+@end table
+
+@c Thanks to XXX for help in proofreading the manual.
+
+@node GSL CBLAS Library, Free Software Needs Free Documentation, Autoconf Macros, Top
+
+@node  Free Software Needs Free Documentation, GNU General Public License, GSL CBLAS Library, Top
+@unnumbered Free Software Needs Free Documentation
+@include freemanuals.texi
+
+@node  GNU General Public License, GNU Free Documentation License, Free Software Needs Free Documentation, Top
+@unnumbered GNU General Public License
+@include gpl.texi
+
+@node GNU Free Documentation License, Function Index, GNU General Public License, Top
+@unnumbered GNU Free Documentation License
+@include fdl.texi
+
+
+@comment htmlhelp: @bye
+
+@iftex
+@normalbottom
+@end iftex
+
+@node Function Index, Variable Index, GNU Free Documentation License, Top
+@unnumbered Function Index
+
+@printindex fn
+
+@node Variable Index, Type Index, Function Index, Top
+@unnumbered Variable Index
+
+@printindex vr
+
+@node Type Index, Concept Index, Variable Index, Top
+@unnumbered Type Index
+
+@printindex tp
+
+@node Concept Index,  , Type Index, Top
+@unnumbered Concept Index
+
+@printindex cp
+
+@ifclear frontcontents
+@comment Use @setchapternewpage odd to ensure that the contents starts 
+@comment on an odd page so that it can always be moved to the front when 
+@comment printing two-up.
+@setchapternewpage odd
+@contents
+@end ifclear
+
+@ifset extrablankpages
+@comment final page must be blank for printed version
+@page
+@headings off
+@*
+@page
+@*
+@comment @page
+@comment @*
+@comment @page
+@comment @*
+@end ifset
+@bye

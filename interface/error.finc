@@ -1,0 +1,24 @@
+!-*-f90-*-
+!
+!  Interfaces: Error treatment
+!
+     function gsl_set_error_handler(new_handler) bind(c)
+       import
+       type(c_funptr), value :: new_handler
+       type(c_funptr) :: gsl_set_error_handler
+     end function gsl_set_error_handler
+     function gsl_set_error_handler_off() bind(c)
+       import
+       type(c_funptr) :: gsl_set_error_handler_off
+     end function gsl_set_error_handler_off
+     function gsl_strerror(errno) bind(c)
+       import
+       integer(c_int), value :: errno
+       type(c_ptr) :: gsl_strerror
+     end function gsl_strerror
+     subroutine gsl_error(reason, file, line, gsl_errno) bind(c)
+       import
+       character(c_char), dimension(*) :: reason, file
+       integer(c_int), value :: line
+       integer(c_int), value :: gsl_errno
+     end subroutine gsl_error

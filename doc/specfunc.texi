@@ -1,0 +1,101 @@
+@cindex special functions
+
+The GSL special functions have been completely mapped. All function names are 
+mapped to Fortran uniform (usually lower) case.
+Functions for which two identical names
+would result  have been assigned new names given in
+the following table. The additional letters ``c'' viz ``s'' are used to denote
+cylindrical and spherical Bessel functions, respectively.
+
+
+
+@example
+      C name                        Fortran name
+-------------------------------------------------------------------
+   gsl_sf_bessel_J0                fgsl_sf_bessel_jc0
+   gsl_sf_bessel_J0_e              fgsl_sf_bessel_jc0_e
+   gsl_sf_bessel_J1                fgsl_sf_bessel_jc1
+   gsl_sf_bessel_J1_e              fgsl_sf_bessel_jc1_e
+   gsl_sf_bessel_Jn                fgsl_sf_bessel_jcn
+   gsl_sf_bessel_Jn_e              fgsl_sf_bessel_jcn_e
+   gsl_sf_bessel_Jn_array          fgsl_sf_bessel_jcn_array
+   gsl_sf_bessel_Y0                fgsl_sf_bessel_yc0
+   gsl_sf_bessel_Y0_e              fgsl_sf_bessel_yc0_e
+   gsl_sf_bessel_Y1                fgsl_sf_bessel_yc1
+   gsl_sf_bessel_Y1_e              fgsl_sf_bessel_yc1_e
+   gsl_sf_bessel_Yn                fgsl_sf_bessel_ycn
+   gsl_sf_bessel_Yn_e              fgsl_sf_bessel_ycn_e
+   gsl_sf_bessel_Yn_array          fgsl_sf_bessel_ycn_array
+   gsl_sf_bessel_I0                fgsl_sf_bessel_ic0
+   gsl_sf_bessel_I0_e              fgsl_sf_bessel_ic0_e
+   gsl_sf_bessel_I1                fgsl_sf_bessel_ic1
+   gsl_sf_bessel_I1_e              fgsl_sf_bessel_ic1_e
+   gsl_sf_bessel_In                fgsl_sf_bessel_icn
+   gsl_sf_bessel_In_e              fgsl_sf_bessel_icn_e
+   gsl_sf_bessel_In_array          fgsl_sf_bessel_icn_array
+   gsl_sf_bessel_I0_scaled         fgsl_sf_bessel_ic0_scaled
+   gsl_sf_bessel_I0_scaled_e       fgsl_sf_bessel_ic0_scaled_e
+   gsl_sf_bessel_I1_scaled         fgsl_sf_bessel_ic1_scaled
+   gsl_sf_bessel_I1_scaled_e       fgsl_sf_bessel_ic1_scaled_e
+   gsl_sf_bessel_In_scaled         fgsl_sf_bessel_icn_scaled
+   gsl_sf_bessel_In_scaled_e       fgsl_sf_bessel_icn_scaled_e
+   gsl_sf_bessel_In_scaled_array   fgsl_sf_bessel_icn_scaled_array
+   gsl_sf_bessel_K0                fgsl_sf_bessel_kc0
+   gsl_sf_bessel_K0_e              fgsl_sf_bessel_kc0_e
+   gsl_sf_bessel_K1                fgsl_sf_bessel_kc1
+   gsl_sf_bessel_K1_e              fgsl_sf_bessel_kc1_e
+   gsl_sf_bessel_Kn                fgsl_sf_bessel_kcn
+   gsl_sf_bessel_Kn_e              fgsl_sf_bessel_kcn_e
+   gsl_sf_bessel_Kn_array          fgsl_sf_bessel_kcn_array
+   gsl_sf_bessel_K0_scaled         fgsl_sf_bessel_kc0_scaled
+   gsl_sf_bessel_K0_scaled_e       fgsl_sf_bessel_kc0_scaled_e
+   gsl_sf_bessel_K1_scaled         fgsl_sf_bessel_kc1_scaled
+   gsl_sf_bessel_K1_scaled_e       fgsl_sf_bessel_kc1_scaled_e
+   gsl_sf_bessel_Kn_scaled         fgsl_sf_bessel_kcn_scaled
+   gsl_sf_bessel_Kn_scaled_e       fgsl_sf_bessel_kcn_scaled_e
+   gsl_sf_bessel_Kn_scaled_array   fgsl_sf_bessel_kcn_scaled_array
+   gsl_sf_bessel_j0                fgsl_sf_bessel_js0
+   gsl_sf_bessel_j0_e              fgsl_sf_bessel_js0_e
+   gsl_sf_bessel_j1                fgsl_sf_bessel_js1
+   gsl_sf_bessel_j1_e              fgsl_sf_bessel_js1_e
+   gsl_sf_bessel_j2                fgsl_sf_bessel_js2
+   gsl_sf_bessel_j2_e              fgsl_sf_bessel_js2_e
+   gsl_sf_bessel_jl                fgsl_sf_bessel_jsl
+   gsl_sf_bessel_jl_e              fgsl_sf_bessel_jsl_e
+   gsl_sf_bessel_jl_array          fgsl_sf_bessel_jsl_array
+   gsl_sf_bessel_jl_steed_array    fgsl_sf_bessel_jsl_steed_array
+   gsl_sf_bessel_y0                fgsl_sf_bessel_ys0
+   gsl_sf_bessel_y0_e              fgsl_sf_bessel_ys0_e
+   gsl_sf_bessel_y1                fgsl_sf_bessel_ys1
+   gsl_sf_bessel_y1_e              fgsl_sf_bessel_ys1_e
+   gsl_sf_bessel_y2                fgsl_sf_bessel_ys2
+   gsl_sf_bessel_y2_e              fgsl_sf_bessel_ys2_e
+   gsl_sf_bessel_yl                fgsl_sf_bessel_ysl
+   gsl_sf_bessel_yl_e              fgsl_sf_bessel_ysl_e
+   gsl_sf_bessel_yl_array          fgsl_sf_bessel_ysl_array
+   gsl_sf_bessel_i0_scaled         fgsl_sf_bessel_is0_scaled
+   gsl_sf_bessel_i0_scaled_e       fgsl_sf_bessel_is0_scaled_e
+   gsl_sf_bessel_i1_scaled         fgsl_sf_bessel_is1_scaled
+   gsl_sf_bessel_i1_scaled_e       fgsl_sf_bessel_is1_scaled_e
+   gsl_sf_bessel_i2_scaled         fgsl_sf_bessel_is2_scaled
+   gsl_sf_bessel_i2_scaled_e       fgsl_sf_bessel_is2_scaled_e
+   gsl_sf_bessel_il_scaled         fgsl_sf_bessel_isl_scaled
+   gsl_sf_bessel_il_scaled_e       fgsl_sf_bessel_isl_scaled_e
+   gsl_sf_bessel_il_scaled_array   fgsl_sf_bessel_isl_scaled_array
+   gsl_sf_bessel_k0_scaled         fgsl_sf_bessel_ks0_scaled
+   gsl_sf_bessel_k0_scaled_e       fgsl_sf_bessel_ks0_scaled_e
+   gsl_sf_bessel_k1_scaled         fgsl_sf_bessel_ks1_scaled
+   gsl_sf_bessel_k1_scaled_e       fgsl_sf_bessel_ks1_scaled_e
+   gsl_sf_bessel_k2_scaled         fgsl_sf_bessel_ks2_scaled
+   gsl_sf_bessel_k2_scaled_e       fgsl_sf_bessel_ks2_scaled_e
+   gsl_sf_bessel_kl_scaled         fgsl_sf_bessel_ksl_scaled
+   gsl_sf_bessel_kl_scaled_e       fgsl_sf_bessel_ksl_scaled_e
+   gsl_sf_bessel_kl_scaled_array   fgsl_sf_bessel_ksl_scaled_array
+   gsl_sf_bessel_zero_J0           fgsl_sf_bessel_zero_jc0
+   gsl_sf_bessel_zero_J0_e         fgsl_sf_bessel_zero_jc0_e
+   gsl_sf_bessel_zero_J1           fgsl_sf_bessel_zero_jc1
+   gsl_sf_bessel_zero_J1_e         fgsl_sf_bessel_zero_jc1_e
+   gsl_sf_bessel_zero_Jnu          fgsl_sf_bessel_zero_jcnu
+   gsl_sf_bessel_zero_Jnu_e        fgsl_sf_bessel_zero_jcnu_e
+-------------------------------------------------------------------
+@end example

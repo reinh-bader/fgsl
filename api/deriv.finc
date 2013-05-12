@@ -1,0 +1,28 @@
+!-*-f90-*-
+!
+! API: Numerical Differentiation
+!
+!> \page "Comments on numerical derivatives"
+!> Please go to api/deriv.finc for the API documentation.
+
+  function fgsl_deriv_central(f, x, h, result, abserr) 
+    type(fgsl_function), intent(in) :: f
+    real(fgsl_double), intent(in) :: x, h
+    real(fgsl_double), intent(out) :: result, abserr
+    integer(fgsl_int) :: fgsl_deriv_central
+    fgsl_deriv_central = gsl_deriv_central(f%gsl_function, x, h, result, abserr) 
+  end function fgsl_deriv_central
+  function fgsl_deriv_forward(f, x, h, result, abserr) 
+    type(fgsl_function), intent(in) :: f
+    real(fgsl_double), intent(in) :: x, h
+    real(fgsl_double), intent(out) :: result, abserr
+    integer(fgsl_int) :: fgsl_deriv_forward
+    fgsl_deriv_forward = gsl_deriv_forward(f%gsl_function, x, h, result, abserr) 
+  end function fgsl_deriv_forward
+  function fgsl_deriv_backward(f, x, h, result, abserr) 
+    type(fgsl_function), intent(in) :: f
+    real(fgsl_double), intent(in) :: x, h
+    real(fgsl_double), intent(out) :: result, abserr
+    integer(fgsl_int) :: fgsl_deriv_backward
+    fgsl_deriv_backward = gsl_deriv_backward(f%gsl_function, x, h, result, abserr) 
+  end function fgsl_deriv_backward

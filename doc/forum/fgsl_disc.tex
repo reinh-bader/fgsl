@@ -1,0 +1,622 @@
+\documentclass{article}
+\usepackage{graphicx}
+%\usepackage{epsfig}
+
+\textwidth16cm
+\textheight20.5cm
+\oddsidemargin0.7cm
+\setcounter{secnumdepth}{0}
+
+
+\begin{document}
+
+\title{A Fortran binding for the GNU Scientific Library}
+
+\author{Reinhold Bader \\ Leibniz Computing Centre Munich \\
+    {\small Boltzmannstr. 1, 85748 Garching, Germany } 
+    \\ {\small Email: Bader@lrz.de}}
+
+\date{\today}
+\maketitle
+
+\begin{abstract}
+\noindent The GNU scientific library is a collection of numerical routines for scientific computing.
+This article discusses some aspects of the design of a 
+fully standard-conforming Fortran binding for
+GSL via incremental usage of Fortran 2003
+features, in particular C interoperation. Suggestions are made
+on  how to deal with
+function dummy arguments and polymorphic C objects of type \texttt{void *}.
+\end{abstract}
+
+\subsection{Why a separate Fortran binding?}
+The C interoperation features available in Fortran 2003 allow access to 
+C library routines by simply specifying an explicit interface with the
+\texttt{bind(c)} attribute. However, making direct use of this in a client
+program does lead to a number of problems, especially for APIs with object
+based designs.
+For example, consider the GSL call for allocating an interpolation object:
+\texttt{
+  \begin{tabbing}
+    gsl\_interp *gsl\_interp\_alloc (const gsl\_interp\_type *T, size\_t size);
+  \end{tabbing}
+}
+\noindent
+This call is mapped by the following Fortran explicit interface: 
+\texttt{
+  \begin{tabbing}
+  fun\=ction gsl\_interp\_alloc(interp\_type, size) bind(c) \\
+  \>      use, intrinsic :: iso\_c\_binding \\
+  \>      type(c\_ptr), value :: interp\_type \\
+  \>      integer(c\_size\_t), value :: size \\
+  \>      type(c\_ptr) :: gsl\_interp\_alloc \\
+     end function gsl\_interp\_alloc 
+  \end{tabbing}
+}
+\noindent
+From inspection of this, the following difficulties can be identified:
+\begin{description}
+\item[No type safety for objects of abstract C type:] 
+ The opaque type \texttt{c\_ptr} does not allow the compiler to distinguish
+ between objects of different abstract C types. For large-scale usage of 
+ the library the resulting programming errors can be difficult to diagnose,
+ although in the future improved debugging capability may become available. 
+\item[Access to C object parameters:] There exist only a small number of
+ objects of type \texttt{gsl\_interp\_type *}, namely the various
+ implemented 
+ interpolation methods. These (at least the ones used by a given client)
+ need to be explicitly
+ added as global variables bound to C in the Fortran code. Again, for 
+ large-scale usage the additional lines needed constitute an annoying
+ programming overhead as well as a potential source of bugs. 
+\end{description}
+Furthermore one needs to consider the issue of
+\begin{description}
+\item[Limitations on C interoperable types:] 
+Even when a derived type is used which can be exactly mapped
+to an interoperable Fortran derived type, the requirement of using the
+\texttt{bind(c)} attribute and the interoperable C intrinsic types
+imposes the limitation of the type not being
+extensible. Finally, using the C interoperable kind numbers
+one loses the flexibility of providing a Fortran-only 
+implementation of some subset based on arbitrary \texttt{kind} numbers, which
+can simply be plugged in as a replacement, while remaining able to use C
+interoperation for other purposes.
+\end{description}
+\noindent
+ For these reasons (and in contrast to interfacing with ``simple'' APIs as
+described in \cite{donev}), implementation
+of a "thick" binding is advocated, some features of which are described 
+in the following sections.
+
+\subsection{Basic FGSL design and usage}
+The Fortran interface to the GNU scientific library (FGSL) consists of a 
+module \texttt{fgsl} into which all the above issues are encapsulated, and
+a C source file which contains a number of auxiliary routines. The module
+maps all \texttt{gsl\_*} routines, derived types and constants to 
+corresponding \texttt{fgsl\_*} names. GSL macros defining constant
+values are converted to Fortran objects with the \texttt{parameter} attribute.
+Only the \texttt{fgsl\_*} names are actually
+available to entities using the module. For example, to perform a spline
+interpolation of a set of (x, y) points, the client program will do the
+following: 
+\texttt{
+  \begin{tabbing}
+  xxx\=xxx\=\kill
+  use fgsl\\
+  implicit none\\
+  integer(fgsl\_size\_t), parameter :: nmax=10 \\
+  real(fgsl\_double) :: x(nmax), y(nmax), x\_val, y\_val\\
+  integer(fgsl\_int) :: status\\
+  type(fgsl\_interp\_accel) :: acc\\
+  type(fgsl\_interp) :: interp\\
+  : ! set array values x, y\\
+  interp = fgsl\_interp\_alloc(FGSL\_INTERP\_CSPLINE,nmax) \\
+  status = fgsl\_interp\_init(interp,x,y,nmax)\\
+  : \\  
+  acc = fgsl\_interp\_accel\_alloc() ! required evaluation accelerator \\
+  ! Now perform function evaluation from interpolation \\
+  do ... \\
+  \>  y\_val = fgsl\_interp\_eval(interp, x, y, x\_val, acc)\\
+  end do\\
+  : ! deallocation of GSL resources once done
+  \end{tabbing}
+}
+\noindent
+From the above code, it is obvious how the intrinsic C-interoperable 
+types are mapped to achieve improved abstraction. Furthermore, distinguishable 
+derived types have been introduced. At this level of usage, 
+the client program does not have {\it any need at all} to access the
+\texttt{iso\_c\_binding} intrinsic module for the purpose of exploiting GSL
+functionality. 
+
+\subsubsection{Implementation of a typical API call}
+The implementation of e.g., the \texttt{fgsl\_interp\_alloc} call within the 
+\texttt{fgsl} module involves
+the definition of two opaque, non-interoperable types:
+\texttt{
+  \begin{tabbing}
+  xxx\=xxx\=\kill
+  type, public :: fgsl\_interp\_type \\
+  \>   private \\
+  \>   integer(fgsl\_int) :: which = 0\\
+  end type fgsl\_interp\_type\\
+  type(fgsl\_interp\_type), parameter, public :: \&\\
+  \>\> fgsl\_interp\_cspline = fgsl\_interp\_type(3)\\
+  : ! other available interpolation variants omitted\\
+  type, public :: fgsl\_interp\\
+  \> private \\
+  \> type(c\_ptr) :: gsl\_interp = c\_null\_ptr  \\
+  end type fgsl\_interp 
+  \end{tabbing}
+}
+\noindent
+Only a few instantiations of type  \texttt{fgsl\_interp\_type} exist, 
+corresponding to the available interpolation methods. In the example above,  
+C spline interpolation was used. 
+The module procedure implementing the API call is written as follows:
+\texttt{
+  \begin{tabbing}
+  xxx\=xxx\=\kill
+  function fgsl\_interp\_alloc(interp\_type, size)\\
+ \> type(fgsl\_interp) :: fgsl\_interp\_alloc \\
+ \> type(fgsl\_interp\_type), intent(in) :: interp\_type \\
+ \> integer(fgsl\_size\_t), intent(in) :: size\\
+ \> type(c\_ptr) :: itp\\
+! \\
+ \> itp = fgsl\_aux\_interp\_alloc(interp\_type\%which) \\
+ \> if (c\_associated(itp)) then\\
+ \>\> fgsl\_interp\_alloc\%gsl\_interp = gsl\_interp\_alloc(itp, size) \\
+ \> else\\
+ \>\> fgsl\_interp\_alloc\%gsl\_interp =  c\_null\_ptr\\
+ \> end if\\
+  end function fgsl\_interp\_alloc
+  \end{tabbing}
+}
+\noindent
+The auxiliary C call \texttt{fgsl\_aux\_interp\_alloc} 
+provides the actual pointer to the interpolation type:
+\texttt{
+  \begin{tabbing}
+  xxx\=xxx\=xxx\=\kill
+  const gsl\_interp\_type *fgsl\_aux\_interp\_alloc(int i) \{ \\
+  \> const gsl\_interp\_type *res; \\
+  \> switch(i) \{ \\
+    /* cases 1, 2, 4, 5, 6 omitted here */ \\
+    \>\> case 3: \\
+    \>\>\> res = gsl\_interp\_cspline; \\
+    \>\>\> break; \\
+    \>\> default: \\
+    \>\>\> res = NULL; \\
+    \>\>\> break; \\
+    \> \} \\
+    \> return res; \\
+  \}
+  \end{tabbing}
+}
+\noindent
+All calls from FGSL to C routines use a \texttt{bind(c)} interface which is available
+by host association (but not made public).
+
+\subsubsection{Error treatment}
+
+GSL functions commonly return errors as \texttt{integer(c\_int)} values; the
+basic error handling API for this is also available in FGSL. However,
+if a GSL routine which returns a pointer to a derived-type object fails, 
+this can only be diagnosed by checking the result for being a null pointer. 
+To map this facility to Fortran, a generic call \texttt{fgsl\_well\_defined}
+with result of type  \texttt{logical} has been introduced, which takes an 
+abstract FGSL object as its only argument. This function returns 
+\texttt{.false.} if the argument's encapsulated C pointer is the null pointer, 
+due either to omitting an FGSL allocation call, or to failure of
+an allocation call to provide the requested resource. Otherwise, 
+\texttt{.true.} is returned.
+
+
+\subsection{Function arguments and C polymorphism}
+%\subsubsection{The \texttt{gsl\_function*} types}
+The \texttt{gsl\_math.h} include file defines a number of standard data types
+which contain pointers to functions. For a number of functionality areas e.g.,
+numerical integration or root finding, using these types is then prescribed
+for the API calls. In order to describe how FGSL handles this situation, the
+numerical differentiation API call
+\texttt{
+  \begin{tabbing}
+    int gsl\_deriv\_central (\=const gsl\_function *f, double x, double h,  \\
+    \> double *result, double *abserr);
+  \end{tabbing}
+}
+\noindent shall serve as an example; the type definition for the 
+dummy argument reads
+\texttt{
+  \begin{tabbing}
+str\=uct gsl\_function\_struct\\
+\{\\
+\>  double (*function) (double x, void *params);\\
+\>  void *params;\\
+\};\\
+typedef struct gsl\_function\_struct gsl\_function;
+  \end{tabbing}
+}
+\noindent
+Within FGSL, an opaque type \texttt{fgsl\_function} is again introduced:
+\texttt{
+  \begin{tabbing}
+  xxx\=xxx\=\kill
+  type, public :: fgsl\_function \\
+  \> private \\
+  \> type(c\_ptr) :: gsl\_function = c\_null\_ptr  \\
+  end type fgsl\_function
+  \end{tabbing}
+}
+\noindent
+To provide an object of this type with the necessary 
+information, an additional constructor call is available in the FGSL API:
+  \texttt{
+    \begin{tabbing}
+      xxx\=xxx\=xxx\=\kill
+      function fgsl\_function\_init(func, params) \\
+      \> type(fgsl\_function) :: fgsl\_function\_init\\
+      \> interface\\
+      \>\>  function func(x, params) bind(c)\\
+      \>\>\>  use, intrinsic :: iso\_c\_binding \\
+      \>\>\>  real(c\_double), value :: x\\
+      \>\>\>  type(c\_ptr), value :: params\\
+      \>\>\>  real(c\_double) :: func\\
+      \>\>  end function func\\
+      \> end interface\\
+      \> type(c\_ptr) :: params \\
+      \>:\\ 
+      end function fgsl\_function\_init
+    \end{tabbing}
+  }
+\noindent
+An auxiliary C routine is called within the body of the constructor 
+to actually perform the necessary pointer assignment, and \texttt{c\_funloc} is
+used to generate the C address of the function argument previous to this
+call. 
+The example call to
+ \texttt{gsl\_deriv\_central} can 
+now easily be mapped to Fortran in the same manner as described in the previous
+section; for brevity only the interface is displayed:
+  \texttt{
+    \begin{tabbing}
+      xxx\=xxx\=xxx\=\kill
+      function fgsl\_deriv\_central(f, x, h, result, abserr)\\
+      \> integer(fgsl\_int) :: fgsl\_deriv\_central\\
+      \> type(fgsl\_function), intent(in) :: f\\
+      \> real(fgsl\_double), intent(in) :: x, h\\
+      \> real(fgsl\_double), intent(out) :: result, abserr\\
+      end function fgsl\_deriv\_central
+    \end{tabbing}
+  }
+\noindent
+A call to \texttt{fgsl\_deriv\_central} must be preceded with a constructor call to 
+\texttt{fgsl\_function\_init} if the argument function or its parameters
+change\footnote{Changes to parameter values may not require the constructor
+call if occurring within the memory area already pointed at by the 
+\texttt{c\_ptr} object.}. This example also
+indicates how C-type polymorphism (using \texttt{void *})
+is handled.
+However the solution described above also has drawbacks: The client
+API is no longer decoupled from the \texttt{iso\_c\_binding} module. 
+In more detail, 
+\begin{itemize}
+\item the function argument must be interoperable. This in itself is
+not a too serious constraint, since the interface needs to be prescribed
+in any case; furthermore there may be need to implement the argument function
+in C anyway.
+\item the use of a \texttt{c\_ptr} argument  (\texttt{params}) re-introduces the type safety
+issue. It requires the
+client to convert its own parameters by using \texttt{c\_loc}, at
+the very least, which again increases the probability of programming errors.
+\end{itemize}
+Also note that the above concept of using an abstract type to encapsulate
+function arguments is not consistently used throughout the GSL; in some 
+functionality areas explicit function arguments are required.
+
+\subsection{Non-interoperable function arguments and Fortran polymorphism}
+
+In this section a method is suggested which intends to solve the
+problems indicated above. It makes use of additional Fortran 2003
+features, namely polymorphism (in its simplest form), abstract interfaces
+and procedure pointers.
+ To keep things simple, the following C prototype is assumed \footnote{The
+   situation described in the previous section, 
+where a derived type is used to encapsulate
+the function and its parameters can be handled in an analogous manner.}: 
+\texttt{
+  \begin{tabbing}
+    double gsl\_somecall(double (*func)(double x, void *params), void *params);
+  \end{tabbing}
+}
+\noindent
+C-type polymorphism is again used to provide the function with additional 
+parameters.
+
+\subsubsection{Defining the Fortran interface}
+
+The Fortran interface call is defined by the following implementation:
+  \texttt{
+    \begin{tabbing}
+      xxx\=xxx\=xxx\=\kill
+      function fgsl\_somecall(func, params)\\
+      \> use, intrinsic :: iso\_c\_binding \hspace{2cm} ! will be needed later\\
+      \> procedure(fgsl\_function\_poly) :: func\\
+      \> class(fgsl\_void), target :: params\\
+      \> real(fgsl\_double) :: fgsl\_somecall\\
+      \> : ! details of implementation displayed below\\ 
+      end function fgsl\_somecall
+  \end{tabbing}
+}
+\noindent
+It has the  \texttt{public} attribute, and requires an abstract type
+\texttt{
+  \begin{tabbing}
+    xxx\=xxx\=xxx\=\kill
+    type, abstract, public :: fgsl\_void \\
+    end type\\
+    abstract interface\\
+    \>  function fgsl\_function\_poly(x, params)\\
+    \>\> real(fgsl\_double) :: fgsl\_function\_poly\\
+    \>\> real(fgsl\_double), intent(in) :: x\\
+    \>\> class(fgsl\_void) :: params\\ 
+    \>  end function fgsl\_function\_poly\\
+    end interface, 
+  \end{tabbing}
+}
+\noindent
+together with an abstract interface describing the function argument, 
+giving the user the possibility to provide any additional data 
+by polymorphic extension of \texttt{fgsl\_void}.
+If both the C-interoperable and the non-interoperable
+interfaces are to be supported,
+ generic disambiguation can be
+performed via the second argument of \texttt{fgsl\_somecall}. With the above
+definition, the
+client-side API is now fully decoupled from \texttt{iso\_c\_binding}.
+
+\subsubsection{Usage: Contrasting Fortran and C}
+
+To give an impression of the differences in usage between Fortran and C, 
+both variants of setting up and using the interface calls are here
+illustrated.
+
+\texttt{
+  \begin{tabbing}
+    xxx\=xxx\=xxx\=xxx\=ssssssssssssssssssssssssssssss\=xxx\=xxx\=\=xxx\=xxx\=xxx\=\kill
+    \>\>\>Fortran \>\>|\>\>\> C \\
+    ------------------------------------------+-------------------------------------------\\
+    type, extends(fgsl\_void) :: my\_void \>\>\>\>\> | \> \\
+    \> real(fgsl\_double) \& \>\>\>\> | \>  \\
+    \>\>\> allocatable :: d(:) \>\> | \>\\
+    end type my\_void \>\>\>\>\> | \> \\
+    type(my\_void) :: params \>\>\>\>\> | \> \\
+    real(fgsl\_double) :: res \>\>\>\>\> | \> double res; \\
+    : \>\>\>\>\> | \> : \\
+    params\%d(1:5) = (/ ... /) \>\>\>\>\> | \>  double data[5] = \{ ... \}; \\
+    res = fgsl\_somecall(my\_fun,params) \>\>\>\>\> | \> res = gsl\_somecall(\&my\_fun,(void *)data); \\
+    ------------------------------------------+-------------------------------------------
+  \end{tabbing}
+}
+\noindent
+with the argument function defined e.g., as:
+\texttt{
+  \begin{tabbing}
+    xxx\=xxx\=xxx\=xxx\=ssssssssssssssssssssssssssssss\=xxx\=xxx\=\=xxx\=xxx\=xxx\=\kill
+    ------------------------------------------+-------------------------------------------\\
+    function my\_fun(x,params) \>\>\>\>\> | \> double my\_fun(double x,void *params)  \\
+    \> real(fgsl\_double) :: my\_fun \>\>\>\> | \> \{ \\
+    \> real(fgsl\_double), intent(in) :: x \>\>\>\> | \> \\
+    \> class(my\_void) :: params \>\>\>\> |    \>\> double *data = (double *)params;\\
+    \> my\_fun = params\%d(1)+ \&  \>\>\>\> | \> \> return data[0] +  \\
+    \>\>\>\> x*(params\%d(2) + ...)))) \> | \> \>\>\> x*(data[1] + ...)))); \\
+    end function my\_fun\>\>\>\>\> | \> \} \\
+    ------------------------------------------+-------------------------------------------
+  \end{tabbing}
+}
+\noindent
+As usual, more declarative code is needed in Fortran; this disadvantage is offset 
+by the type safety provided in the handover of the parameter data in \texttt{params}. 
+
+
+\subsubsection{Internals: handing through data and functions}
+
+An explanation on how the non-interoperable entities above are 
+handed through to the C API calls is now given. An internal handle type
+is used to aggregate the polymorphic data, since the latter cannot themselves 
+be converted to a C address via \texttt{c\_loc}:
+\texttt{
+  \begin{tabbing}
+    xxx\=xxx\=xxx\=\kill
+    type, private :: fgsl\_void\_handle\\
+    \> class(fgsl\_void), pointer :: data => null()\\
+    \> procedure(fgsl\_function\_poly), pointer, nopass :: func => null()\\
+    end type
+  \end{tabbing}
+}
+\noindent
+The handle also holds a reference to a procedure with explicit
+ interface\footnote{I suspect an implicit interface is not allowed here due
+to the polymorphic arguments of the function. None of the available
+compilers supports all features needed at this point, so this aspect has not yet
+been tested.}. The implementation details of 
+\texttt{fgsl\_somecall} hinted at above can now be provided:
+\texttt{
+  \begin{tabbing}
+    xxx\=xxx\=xxx\=\kill
+    ! first we need some local variables ... \\
+    \> type(fgsl\_void\_handle), target :: p\_handle\\
+    \> type(c\_ptr) :: c\_handle\\
+    \> type(c\_funptr) :: c\_fun\_handle\\
+    ! ... and now we start processing: \\
+    \> p\_handle\%data => params\\
+    \> p\_handle\%func => func\\
+    \> c\_handle = c\_loc(p\_handle)\\
+    \> c\_fun\_handle = c\_funloc(fgsl\_function\_poly\_c)\\
+    \> fgsl\_somecall = gsl\_somecall(c\_fun\_handle,c\_handle)
+  \end{tabbing}
+}
+\noindent
+This wraps objects up so as to be able to perform the GSL API call, 
+in particular by making use of a C-interoperable 
+function with \texttt{private} attribute
+\texttt{
+  \begin{tabbing}
+    xxx\=xxx\=xxx\=\kill
+    function fgsl\_function\_poly\_c(x, params) bind(c)\\
+    \> use, intrinsic :: iso\_c\_binding \\
+    \> real(c\_double), value :: x\\
+    \> type(c\_ptr), value :: params\\
+    \> real(c\_double) :: fgsl\_function\_poly\_c\\
+    \> type(fgsl\_void\_handle), pointer :: p\_handle\\
+    \> call c\_f\_pointer(params, p\_handle)\\
+    \> fgsl\_function\_poly\_c = p\_handle\%func(x, p\_handle\%data)\\
+    end function fgsl\_function\_poly\_c,
+  \end{tabbing}
+}
+\noindent
+which unwraps the non-interoperable entities before performing the user-implemented
+function call. The \texttt{target} attribute is required for both
+the \texttt{params} dummy argument of \texttt{fgsl\_somecall} (since a pointer 
+component wants to point at it) and the internal handle object (since
+\texttt{c\_loc} 
+is used on it, and it will later be pointed at by a Fortran pointer).
+ The cost for decoupling the user interface from \texttt{iso\_c\_binding}
+hence essentially consists in additional function call overhead.
+
+\subsection{Array handling}
+
+Due to the poor support for array processing in C the GSL contains a number of 
+routines which augment this area of functionality. FGSL here focuses not on implementation
+of the GSL interface, but instead on leveraging Fortran-style array processing
+for those GSL routines which require arguments of type \texttt{fgsl\_vector}
+or \texttt{fgsl\_matrix}. 
+
+\subsubsection{Rank 1 arrays}
+
+An object of type \texttt{fgsl\_vector} needs to be initialized and aligned
+with a rank 1 Fortran array before it can be used as a dummy argument in a FGSL call:
+\texttt{
+  \begin{tabbing}
+    xxx\=xxx\=xxx\=\kill
+    integer(fgsl\_size\_t), parameter :: ndim = 10 \\
+    integer(fgsl\_size\_t) :: nmax \\
+    real(fgsl\_double), target :: fvec(ndim) \\
+    type(fgsl\_vector) :: vec \\
+    : \\
+    fvec(1:nmax) = (/ ... /)\\
+    vec = fgsl\_vector\_init(type = 1.0\_fgsl\_double)\\
+    : ! initialize size, offset, stride \\
+    call fgsl\_vector\_align(fvec, nmax, vec, size, offset, stride) \\
+    : ! now do FGSL call with vec argument \\
+    call fgsl\_vector\_free(vec)
+  \end{tabbing}
+}
+\noindent
+Two newly added API calls are displayed here. 
+The \texttt{fgsl\_vector\_init} call provides an empty container object; the argument
+indicates the type and kind of array entry and is used for generic
+resolution. Within GSL, the object is flagged as unmanaged since memory
+management is performed from Fortran. The \texttt{fgsl\_vector\_align} call
+then maps the array slice \texttt{fvec(offset+1:offset+stride*size:stride)} to 
+the FGSL object \texttt{vec}; any operations on \texttt{vec} directly 
+access the memory area occupied by \texttt{fvec}. The \texttt{target}
+attribute on \texttt{fvec}
+ensures that no copy-in/copy-out is performed upon calling the alignment
+routine; in any case only a contiguous array should be provided.
+The data referenced by the  object \texttt{vec} can be subsequently
+accessed using a Fortran pointer, for example from a subroutine for 
+which \texttt{vec} is supplied as an actual argument:
+\texttt{
+  \begin{tabbing}
+    xxx\=xxx\=xxx\=\kill
+    type(fgsl\_vector), intent(inout) :: vec\_dummy \\
+    ! local entities \\
+    real(fgsl\_double), pointer :: fptr(:) \\
+    : \\
+    call fgsl\_vector\_align(fptr, vec\_dummy) \\
+    : ! now can use fptr(1:size) to directly operate on data 
+  \end{tabbing}
+}
+\noindent
+The assignment operator has been overloaded to enable 
+copying of the content of an \texttt{fgsl\_vector} object into a 
+Fortran array. If the Fortran array is larger than the
+\texttt{fgsl\_vector} object, it is padded with zeros; if it
+is smaller, a truncated data set is transferred.\\
+Finally, it must be remarked that some GSL routines return
+objects of type \texttt{gsl\_vector}. These objects are 
+usually persistent; they are for the most part subobjects
+of other GSL objects. No initialization is needed for them, and 
+a Fortran pointer aligned with such an object will be automatically
+up-to-date throughout the objects' lifetime.
+
+\subsubsection{Rank 2 arrays}
+
+Usage of \texttt{fgsl\_matrix} objects is implemented along similar 
+lines as for \texttt{fgsl\_vector}. 
+The alignment routine
+\texttt{
+  \begin{tabbing}
+    xxx\=xxx\=xxx\=\kill
+    function fgsl\_matrix\_align(array, lda, n, m, fmat)\\
+    \> integer(fgsl\_size\_t), intent(in) :: lda, n, m\\
+    \> real(fgsl\_double), dimension(lda, m), target, intent(in) :: array\\
+    \> type(fgsl\_matrix), intent(inout) :: fmat\\
+    \> integer(fgsl\_int) :: fgsl\_matrix\_align\\
+    \> :\\
+    end function fgsl\_matrix\_align
+  \end{tabbing}
+}
+\noindent    
+requires the leading
+dimension \texttt{lda} of the Fortran array, as well as the actual array sizes
+ \texttt{n, m} in each dimension. A complete array with \texttt{target} attribute
+must be provided to this routine. Subsequent access to the data
+is again possible via a rank 2 array pointer, which enables direct
+manipulation of the data, or by copying data out of the 
+\texttt{fgsl\_matrix} object via overloaded assignment.
+
+\subsection{Availability and Limitations}
+
+The source code of the FGSL package is available on the LRZ web server
+via the URL
+\begin{center}
+ \texttt{http://www.lrz.de/services/software/mathematik/gsl/fortran}
+\end{center}
+A large subset of GSL functionality has been leveraged for FGSL, based on 
+version 1.8 of GSL. More than 1200 API calls are available; the interface
+consists of more than 16000 lines of Fortran and more than 1000 lines of C code.
+Those areas where Fortran's strengths lie (complex types, 
+vectors and arrays) are not covered, and well-established APIs like
+LAPACK, BLAS and FFT are also considered outside the purview of FGSL.
+Finally, features
+requiring Fortran 2003 procedure pointers and polymorphism will only appear once generally
+available in the most commonly-used compilers.
+
+
+{\small
+\subsection{Acknowledgments}
+\noindent
+The author wishes to thank Andy Vaught for making available many of the 
+necessary Fortran 2003 features in the \texttt{g95} compiler, as well as
+for providing low-latency bug fixes. Testing some features involving 
+Fortran 2003 polymorphism was conducted with release 5.1 of the
+NAG Fortran compiler. Thanks are due to Dr. Matthias Brehm for extensive
+discussions and suggestions for improvement.
+}
+
+{\small
+\begin{thebibliography}{99}
+  \bibitem{donev} A. Donev, Interoperability with C in Fortran 2003,
+  ACM SIGPLAN Fortran Forum, Vol. 25, issue 1, April 2006.
+\end{thebibliography}
+}
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

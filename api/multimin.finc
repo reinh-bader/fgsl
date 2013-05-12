@@ -1,0 +1,204 @@
+!-*-f90-*-
+!
+!  API: multi-dimensional minimization
+!
+!> \page "Comments on multidimensional minimization"
+!> Please go to api/multimin.finc for the API documentation.
+
+  function fgsl_multimin_function_init(func, ndim, params)
+    interface
+       function func(x, params) bind(c)
+         import :: c_ptr, c_double
+         type(c_ptr), value :: x, params
+         real(c_double) :: func
+       end function func
+    end interface
+    integer(fgsl_size_t), intent(in) :: ndim
+    type(c_ptr), intent(in) :: params
+    type(fgsl_multimin_function) :: fgsl_multimin_function_init
+!
+    type(c_funptr) :: fp
+    fp = c_funloc(func)
+    fgsl_multimin_function_init%gsl_multimin_function = &
+         fgsl_multimin_function_cinit(fp, ndim, params)
+  end function fgsl_multimin_function_init
+  function fgsl_multimin_function_fdf_init(func, dfunc, fdfunc, ndim, params)
+    interface
+       function func(x, params) bind(c)
+         import :: c_ptr, c_double
+         type(c_ptr), value :: x, params
+         real(c_double) :: func
+       end function func
+       subroutine dfunc(x, params, df) bind(c)
+         import :: c_ptr
+         type(c_ptr), value :: x, params, df
+       end subroutine  dfunc
+       subroutine fdfunc(x, params, f, df) bind(c)
+         import :: c_ptr, c_double
+         real(c_double) :: f
+         type(c_ptr), value :: x, params, df
+       end subroutine fdfunc
+    end interface
+    integer(fgsl_size_t), intent(in) :: ndim
+    type(c_ptr), intent(in) :: params
+    type(fgsl_multimin_function_fdf) :: fgsl_multimin_function_fdf_init
+!
+    type(c_funptr) :: fp, dfp, fdfp
+    fp = c_funloc(func)
+    dfp = c_funloc(dfunc)
+    fdfp = c_funloc(fdfunc)
+    fgsl_multimin_function_fdf_init%gsl_multimin_function_fdf = &
+         fgsl_multimin_function_fdf_cinit(fp, dfp, fdfp, ndim, params)
+  end function fgsl_multimin_function_fdf_init
+  subroutine fgsl_multimin_function_free(fun) 
+    type(fgsl_multimin_function), intent(inout) :: fun
+    call fgsl_multimin_function_cfree(fun%gsl_multimin_function)
+  end subroutine fgsl_multimin_function_free
+  subroutine fgsl_multimin_function_fdf_free(fun) 
+    type(fgsl_multimin_function_fdf), intent(inout) :: fun
+    call fgsl_multimin_function_fdf_cfree(fun%gsl_multimin_function_fdf)
+  end subroutine fgsl_multimin_function_fdf_free
+  function fgsl_multimin_fminimizer_alloc(t, n) 
+    type(fgsl_multimin_fminimizer_type), intent(in) :: t
+    integer(fgsl_size_t), intent(in) :: n
+    type(fgsl_multimin_fminimizer) :: fgsl_multimin_fminimizer_alloc
+! 
+    type(c_ptr) :: ftype
+    ftype = fgsl_aux_multimin_fminimizer_alloc(t%which)
+    fgsl_multimin_fminimizer_alloc%gsl_multimin_fminimizer = &
+         gsl_multimin_fminimizer_alloc(ftype,n)
+  end function fgsl_multimin_fminimizer_alloc
+  function fgsl_multimin_fdfminimizer_alloc(t, n) 
+    type(fgsl_multimin_fdfminimizer_type), intent(in) :: t
+    integer(fgsl_size_t), intent(in) :: n
+    type(fgsl_multimin_fdfminimizer) :: fgsl_multimin_fdfminimizer_alloc
+! 
+    type(c_ptr) :: ftype
+    ftype = fgsl_aux_multimin_fdfminimizer_alloc(t%which)
+    fgsl_multimin_fdfminimizer_alloc%gsl_multimin_fdfminimizer = &
+         gsl_multimin_fdfminimizer_alloc(ftype,n)
+  end function fgsl_multimin_fdfminimizer_alloc
+  subroutine fgsl_multimin_fminimizer_free(s) 
+    type(fgsl_multimin_fminimizer), intent(inout) :: s
+    call gsl_multimin_fminimizer_free(s%gsl_multimin_fminimizer)
+  end subroutine fgsl_multimin_fminimizer_free
+  subroutine fgsl_multimin_fdfminimizer_free(s) 
+    type(fgsl_multimin_fdfminimizer), intent(inout) :: s
+    call gsl_multimin_fdfminimizer_free(s%gsl_multimin_fdfminimizer)
+  end subroutine fgsl_multimin_fdfminimizer_free
+  function fgsl_multimin_fminimizer_set(s, f, x, step)
+    type(fgsl_multimin_fminimizer), intent(inout) :: s
+    type(fgsl_multimin_function), intent(in)  :: f
+    type(fgsl_vector), intent(in)  :: x, step
+    integer(fgsl_int) :: fgsl_multimin_fminimizer_set
+    fgsl_multimin_fminimizer_set = gsl_multimin_fminimizer_set(s%gsl_multimin_fminimizer, &
+         f%gsl_multimin_function, x%gsl_vector, step%gsl_vector)
+  end function fgsl_multimin_fminimizer_set
+  function fgsl_multimin_fdfminimizer_set(s, fdf, x, step, tol)
+    type(fgsl_multimin_fdfminimizer), intent(inout) :: s
+    type(fgsl_multimin_function_fdf), intent(in)  :: fdf
+    type(fgsl_vector), intent(in)  :: x
+    real(fgsl_double), intent(in) :: step, tol
+    integer(fgsl_int) :: fgsl_multimin_fdfminimizer_set
+    fgsl_multimin_fdfminimizer_set = gsl_multimin_fdfminimizer_set(s%gsl_multimin_fdfminimizer, &
+         fdf%gsl_multimin_function_fdf, x%gsl_vector, step, tol)
+  end function fgsl_multimin_fdfminimizer_set
+  function fgsl_multimin_fminimizer_name(s)
+    type(fgsl_multimin_fminimizer), intent(in) :: s
+    character(kind=fgsl_char,len=fgsl_strmax) :: fgsl_multimin_fminimizer_name
+!
+    type(c_ptr) :: name
+!
+    name = gsl_multimin_fminimizer_name(s%gsl_multimin_fminimizer)
+    fgsl_multimin_fminimizer_name = fgsl_name(name)
+  end function fgsl_multimin_fminimizer_name
+  function fgsl_multimin_fdfminimizer_name(s)
+    type(fgsl_multimin_fdfminimizer), intent(in) :: s
+    character(kind=fgsl_char,len=fgsl_strmax) :: fgsl_multimin_fdfminimizer_name
+!
+    type(c_ptr) :: name
+!
+    name = gsl_multimin_fdfminimizer_name(s%gsl_multimin_fdfminimizer)
+    fgsl_multimin_fdfminimizer_name = fgsl_name(name)
+  end function fgsl_multimin_fdfminimizer_name
+  function fgsl_multimin_fminimizer_iterate(s)
+    type(fgsl_multimin_fminimizer), intent(in) :: s
+    integer(fgsl_int) :: fgsl_multimin_fminimizer_iterate
+    fgsl_multimin_fminimizer_iterate = &
+         gsl_multimin_fminimizer_iterate(s%gsl_multimin_fminimizer)
+  end function fgsl_multimin_fminimizer_iterate
+  function fgsl_multimin_fdfminimizer_iterate(s)
+    type(fgsl_multimin_fdfminimizer), intent(in) :: s
+    integer(fgsl_int) :: fgsl_multimin_fdfminimizer_iterate
+    fgsl_multimin_fdfminimizer_iterate = &
+         gsl_multimin_fdfminimizer_iterate(s%gsl_multimin_fdfminimizer)
+  end function fgsl_multimin_fdfminimizer_iterate
+  function fgsl_multimin_fminimizer_x(s)
+    type(fgsl_multimin_fminimizer), intent(in) :: s
+    type(fgsl_vector) :: fgsl_multimin_fminimizer_x
+    fgsl_multimin_fminimizer_x%gsl_vector = &
+         gsl_multimin_fminimizer_x(s%gsl_multimin_fminimizer)
+  end function fgsl_multimin_fminimizer_x
+  function fgsl_multimin_fdfminimizer_x(s)
+    type(fgsl_multimin_fdfminimizer), intent(in) :: s
+    type(fgsl_vector) :: fgsl_multimin_fdfminimizer_x
+    fgsl_multimin_fdfminimizer_x%gsl_vector = &
+         gsl_multimin_fdfminimizer_x(s%gsl_multimin_fdfminimizer)
+  end function fgsl_multimin_fdfminimizer_x
+  function fgsl_multimin_fminimizer_minimum(s)
+    type(fgsl_multimin_fminimizer), intent(in) :: s
+    real(fgsl_double) :: fgsl_multimin_fminimizer_minimum
+    fgsl_multimin_fminimizer_minimum = &
+         gsl_multimin_fminimizer_minimum(s%gsl_multimin_fminimizer)
+  end function fgsl_multimin_fminimizer_minimum
+  function fgsl_multimin_fdfminimizer_minimum(s)
+    type(fgsl_multimin_fdfminimizer), intent(in) :: s
+    real(fgsl_double) :: fgsl_multimin_fdfminimizer_minimum
+    fgsl_multimin_fdfminimizer_minimum = &
+         gsl_multimin_fdfminimizer_minimum(s%gsl_multimin_fdfminimizer)
+  end function fgsl_multimin_fdfminimizer_minimum
+  function fgsl_multimin_fdfminimizer_gradient(s)
+    type(fgsl_multimin_fdfminimizer), intent(in) :: s
+    type(fgsl_vector) :: fgsl_multimin_fdfminimizer_gradient
+    fgsl_multimin_fdfminimizer_gradient%gsl_vector = &
+         gsl_multimin_fdfminimizer_gradient(s%gsl_multimin_fdfminimizer)
+  end function fgsl_multimin_fdfminimizer_gradient
+  function fgsl_multimin_fminimizer_size(s)
+    type(fgsl_multimin_fminimizer), intent(in) :: s
+    real(fgsl_double) :: fgsl_multimin_fminimizer_size
+    fgsl_multimin_fminimizer_size = &
+         gsl_multimin_fminimizer_size(s%gsl_multimin_fminimizer)
+  end function fgsl_multimin_fminimizer_size
+  function fgsl_multimin_fdfminimizer_restart(s)
+    type(fgsl_multimin_fdfminimizer), intent(in) :: s
+    integer(fgsl_int) :: fgsl_multimin_fdfminimizer_restart
+    fgsl_multimin_fdfminimizer_restart = &
+         gsl_multimin_fdfminimizer_restart(s%gsl_multimin_fdfminimizer)
+  end function fgsl_multimin_fdfminimizer_restart
+  function fgsl_multimin_test_gradient(g, epsabs) 
+    type(fgsl_vector), intent(in) :: g
+    real(fgsl_double), intent(in) :: epsabs
+    integer(fgsl_int) :: fgsl_multimin_test_gradient
+    fgsl_multimin_test_gradient = gsl_multimin_test_gradient(g%gsl_vector, epsabs)
+  end function fgsl_multimin_test_gradient
+  function fgsl_multimin_test_size(size, epsabs) 
+    real(fgsl_double), intent(in) :: size, epsabs
+    integer(fgsl_int) :: fgsl_multimin_test_size
+    fgsl_multimin_test_size = &
+         gsl_multimin_test_size(size, epsabs)
+  end function fgsl_multimin_test_size
+  function fgsl_multimin_fminimizer_status(s)
+    type(fgsl_multimin_fminimizer), intent(in) :: s
+    logical :: fgsl_multimin_fminimizer_status
+    fgsl_multimin_fminimizer_status = .false.
+    if (c_associated(s%gsl_multimin_fminimizer)) &
+         fgsl_multimin_fminimizer_status = .true.
+  end function fgsl_multimin_fminimizer_status
+  function fgsl_multimin_fdfminimizer_status(s)
+    type(fgsl_multimin_fdfminimizer), intent(in) :: s
+    logical :: fgsl_multimin_fdfminimizer_status
+    fgsl_multimin_fdfminimizer_status = .false.
+    if (c_associated(s%gsl_multimin_fdfminimizer)) &
+         fgsl_multimin_fdfminimizer_status = .true.
+  end function fgsl_multimin_fdfminimizer_status
+  

@@ -1,0 +1,163 @@
+!-*-f90-*-
+!
+!  API: Fitting
+!
+!> \page "Comments on fitting of functions"
+!> Please go to api/fit.finc for the API documentation.
+
+  function fgsl_fit_linear(x, xstride, y, ystride, n, c0, c1, &
+       cov00, cov01, cov11, sumsq)
+    real(fgsl_double), intent(in) :: x(:), y(:)
+    integer(fgsl_size_t), intent(in) :: xstride, ystride, n
+    real(fgsl_double), intent(out) :: c0, c1, cov00, cov01, cov11, sumsq
+    integer(fgsl_int) :: fgsl_fit_linear
+    fgsl_fit_linear = gsl_fit_linear(x, xstride, y, ystride, n, c0, c1, &
+       cov00, cov01, cov11, sumsq)
+  end function fgsl_fit_linear
+  function fgsl_fit_wlinear(x, xstride, w, wstride, y, ystride, n, c0, c1, &
+       cov00, cov01, cov11, chisq)
+    real(fgsl_double), intent(in) :: x(:), y(:), w(:)
+    integer(fgsl_size_t), intent(in) :: xstride, ystride, wstride, n
+    real(fgsl_double), intent(out) :: c0, c1, cov00, cov01, cov11, chisq
+    integer(fgsl_int) :: fgsl_fit_wlinear
+    fgsl_fit_wlinear = gsl_fit_wlinear(x, xstride, w, wstride, y, ystride, n, c0, c1, &
+       cov00, cov01, cov11, chisq)
+  end function fgsl_fit_wlinear
+  function fgsl_fit_linear_est(x, c0, c1, cov00, cov01, cov11, y, y_err)
+    real(fgsl_double), intent(in) :: x, c0, c1, cov00, cov01, cov11
+    real(fgsl_double), intent(out) ::  y, y_err
+    integer(fgsl_int) :: fgsl_fit_linear_est
+    fgsl_fit_linear_est = gsl_fit_linear_est(x, c0, c1, cov00, cov01, cov11, y, y_err)
+  end function fgsl_fit_linear_est
+  function fgsl_fit_mul(x, xstride, y, ystride, n, c1, &
+        cov11, sumsq)
+    real(fgsl_double), intent(in) :: x(:), y(:)
+    integer(fgsl_size_t), intent(in) :: xstride, ystride, n
+    real(fgsl_double), intent(out) :: c1,  cov11, sumsq
+    integer(fgsl_int) :: fgsl_fit_mul
+    fgsl_fit_mul = gsl_fit_mul(x, xstride, y, ystride, n, c1, &
+        cov11, sumsq)
+  end function fgsl_fit_mul
+  function fgsl_fit_wmul(x, xstride, w, wstride, y, ystride, n, c1, &
+        cov11, chisq)
+    real(fgsl_double), intent(in) :: x(:), y(:), w(:)
+    integer(fgsl_size_t), intent(in) :: xstride, ystride, wstride, n
+    real(fgsl_double), intent(out) :: c1, cov11, chisq
+    integer(fgsl_int) :: fgsl_fit_wmul
+    fgsl_fit_wmul = gsl_fit_wmul(x, xstride, w, wstride, y, ystride, n, c1, &
+        cov11, chisq)
+  end function fgsl_fit_wmul
+  function fgsl_fit_mul_est(x, c1, cov11, y, y_err)
+    real(fgsl_double), intent(in) :: x, c1, cov11
+    real(fgsl_double), intent(out) ::  y, y_err
+    integer(fgsl_int) :: fgsl_fit_mul_est
+    fgsl_fit_mul_est = gsl_fit_mul_est(x, c1, cov11, y, y_err)
+  end function fgsl_fit_mul_est
+  function fgsl_multifit_linear_alloc(n, p) 
+    integer(fgsl_size_t), intent(in) :: n, p
+    type(fgsl_multifit_linear_workspace) :: fgsl_multifit_linear_alloc
+    fgsl_multifit_linear_alloc%gsl_multifit_linear_workspace = &
+         gsl_multifit_linear_alloc(n, p) 
+  end function fgsl_multifit_linear_alloc
+  subroutine fgsl_multifit_linear_free(w) 
+    type(fgsl_multifit_linear_workspace), intent(inout) :: w
+    call gsl_multifit_linear_free(w%gsl_multifit_linear_workspace) 
+  end subroutine fgsl_multifit_linear_free
+  function fgsl_multifit_linear(x, y, c, cov, chisq, work)
+    type(fgsl_matrix), intent(in) :: x
+    type(fgsl_vector), intent(in) :: y
+    type(fgsl_vector), intent(inout) :: c
+    type(fgsl_matrix), intent(inout) :: cov
+    type(fgsl_multifit_linear_workspace), intent(inout) :: work
+    real(fgsl_double), intent(inout) :: chisq
+    integer(fgsl_int) :: fgsl_multifit_linear
+    fgsl_multifit_linear = gsl_multifit_linear(x%gsl_matrix, y%gsl_vector, &
+         c%gsl_vector, cov%gsl_matrix, chisq, work%gsl_multifit_linear_workspace)
+  end function fgsl_multifit_linear
+  function fgsl_multifit_linear_svd(x, y, tol, rank, c, cov, chisq, work)
+    type(fgsl_matrix), intent(in) :: x
+    type(fgsl_vector), intent(in) :: y
+    real(fgsl_double), intent(in) :: tol
+    integer(fgsl_size_t), intent(inout) :: rank
+    type(fgsl_vector), intent(inout) :: c
+    type(fgsl_matrix), intent(inout) :: cov
+    type(fgsl_multifit_linear_workspace), intent(inout) :: work
+    real(fgsl_double), intent(inout) :: chisq
+    integer(fgsl_int) :: fgsl_multifit_linear_svd
+    fgsl_multifit_linear_svd = gsl_multifit_linear_svd(x%gsl_matrix, y%gsl_vector, tol, rank, &
+         c%gsl_vector, cov%gsl_matrix, chisq, work%gsl_multifit_linear_workspace)
+  end function fgsl_multifit_linear_svd
+  function fgsl_multifit_linear_usvd(x, y, tol, rank, c, cov, chisq, work)
+    type(fgsl_matrix), intent(in) :: x
+    type(fgsl_vector), intent(in) :: y
+    real(fgsl_double), intent(in) :: tol
+    integer(fgsl_size_t), intent(inout) :: rank
+    type(fgsl_vector), intent(inout) :: c
+    type(fgsl_matrix), intent(inout) :: cov
+    type(fgsl_multifit_linear_workspace), intent(inout) :: work
+    real(fgsl_double), intent(inout) :: chisq
+    integer(fgsl_int) :: fgsl_multifit_linear_usvd
+    fgsl_multifit_linear_usvd = gsl_multifit_linear_usvd(x%gsl_matrix, y%gsl_vector, tol, rank, &
+         c%gsl_vector, cov%gsl_matrix, chisq, work%gsl_multifit_linear_workspace)
+  end function fgsl_multifit_linear_usvd
+  function fgsl_multifit_wlinear(x, w, y, c, cov, chisq, work)
+    type(fgsl_matrix), intent(in) :: x
+    type(fgsl_vector), intent(in) :: w, y
+    type(fgsl_vector), intent(inout) :: c
+    type(fgsl_matrix), intent(inout) :: cov
+    type(fgsl_multifit_linear_workspace), intent(inout) :: work
+    real(fgsl_double), intent(inout) :: chisq
+    integer(fgsl_int) :: fgsl_multifit_wlinear
+    fgsl_multifit_wlinear = gsl_multifit_wlinear(x%gsl_matrix, w%gsl_vector, y%gsl_vector, &
+         c%gsl_vector, cov%gsl_matrix, chisq, work%gsl_multifit_linear_workspace)
+  end function fgsl_multifit_wlinear
+  function fgsl_multifit_wlinear_svd(x, w, y, tol, rank, c, cov, chisq, work)
+    type(fgsl_matrix), intent(in) :: x
+    type(fgsl_vector), intent(in) :: w, y
+    real(fgsl_double), intent(in) :: tol
+    integer(fgsl_size_t), intent(inout) :: rank
+    type(fgsl_vector), intent(inout) :: c
+    type(fgsl_matrix), intent(inout) :: cov
+    type(fgsl_multifit_linear_workspace), intent(inout) :: work
+    real(fgsl_double), intent(inout) :: chisq
+    integer(fgsl_int) :: fgsl_multifit_wlinear_svd
+    fgsl_multifit_wlinear_svd = gsl_multifit_wlinear_svd(x%gsl_matrix, w%gsl_vector, &
+         y%gsl_vector, tol, rank, c%gsl_vector, cov%gsl_matrix, chisq, &
+         work%gsl_multifit_linear_workspace)
+  end function fgsl_multifit_wlinear_svd
+  function fgsl_multifit_wlinear_usvd(x, w, y, tol, rank, c, cov, chisq, work)
+    type(fgsl_matrix), intent(in) :: x
+    type(fgsl_vector), intent(in) :: w, y
+    real(fgsl_double), intent(in) :: tol
+    integer(fgsl_size_t), intent(inout) :: rank
+    type(fgsl_vector), intent(inout) :: c
+    type(fgsl_matrix), intent(inout) :: cov
+    type(fgsl_multifit_linear_workspace), intent(inout) :: work
+    real(fgsl_double), intent(inout) :: chisq
+    integer(fgsl_int) :: fgsl_multifit_wlinear_usvd
+    fgsl_multifit_wlinear_usvd = gsl_multifit_wlinear_usvd(x%gsl_matrix, w%gsl_vector, &
+         y%gsl_vector, tol, rank, c%gsl_vector, cov%gsl_matrix, chisq, &
+         work%gsl_multifit_linear_workspace)
+  end function fgsl_multifit_wlinear_usvd
+  function fgsl_multifit_linear_est(x, c, cov, y, y_err)
+    type(fgsl_vector), intent(in) :: x, c
+    type(fgsl_matrix), intent(in) :: cov
+    real(fgsl_double), intent(inout) :: y, y_err
+    integer(fgsl_int) :: fgsl_multifit_linear_est
+    fgsl_multifit_linear_est = gsl_multifit_linear_est(x%gsl_vector, c%gsl_vector, &
+         cov%gsl_matrix, y, y_err)
+  end function fgsl_multifit_linear_est
+  function fgsl_multifit_linear_residuals(x, y, c, r)
+    type(fgsl_matrix), intent(in) :: x
+    type(fgsl_vector), intent(in) :: y, c
+    type(fgsl_vector), intent(inout) :: r
+    integer(fgsl_int) :: fgsl_multifit_linear_residuals
+    fgsl_multifit_linear_residuals = gsl_multifit_linear_residuals( &
+         x%gsl_matrix, y%gsl_vector, c%gsl_vector, r%gsl_vector)
+  end function fgsl_multifit_linear_residuals
+  function fgsl_multifit_status(multifit)
+    type(fgsl_multifit_linear_workspace), intent(in) :: multifit
+    logical :: fgsl_multifit_status
+    fgsl_multifit_status = .true.
+    if (.not. c_associated(multifit%gsl_multifit_linear_workspace)) fgsl_multifit_status = .false.
+  end function fgsl_multifit_status

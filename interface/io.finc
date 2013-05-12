@@ -1,0 +1,31 @@
+!-*-f90-*-
+!
+!  Interfaces: I/O Add-ons
+!
+  function fopen(path, mode) bind(c)
+    import :: c_char, c_ptr
+    character(kind=c_char), dimension(*) :: path, mode
+    type(c_ptr) :: fopen
+  end function fopen
+  function fclose(fd) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: fd
+    integer(c_int) :: fclose
+  end function fclose
+  function fgsl_cstdin() bind(c)
+    import :: c_ptr
+    type(c_ptr) :: fgsl_cstdin
+  end function fgsl_cstdin
+  function fgsl_cstdout() bind(c)
+    import :: c_ptr
+    type(c_ptr) :: fgsl_cstdout
+  end function fgsl_cstdout
+  function fgsl_cstderr() bind(c)
+    import :: c_ptr
+    type(c_ptr) :: fgsl_cstderr
+  end function fgsl_cstderr
+  function fflush(stream) bind(c)
+    import :: c_int, c_ptr
+    type(c_ptr), value :: stream
+    integer(c_int) :: fflush
+  end function fflush

@@ -1,0 +1,311 @@
+@cindex standards conformance, ISO/ANSI Fortran
+@cindex Fortran, use of
+@cindex compatibility
+This chapter describes how to compile programs that use GSL, and
+introduces its conventions.  
+
+@menu
+* An Example Program::          
+* Compiling and Linking::       
+* Fortran Standards Compliance::           
+* Inline functions::            
+* Long double::                 
+* Alternative optimized functions::  
+* Support for different numeric types::  
+* Aliasing of arrays::     
+* Character strings::     
+* I/O routines::
+* Abstract objects::
+* Thread-safety::               
+@end menu
+
+@node   An Example Program
+@section An Example Program
+
+The following short program demonstrates the use of the library by
+computing the value of the cylindrical Bessel function
+@math{J_0(x)} for @math{x=5},
+
+@example
+@verbatiminclude examples/intro.f90
+@end example
+
+@noindent
+The output is shown below, and should be correct to double-precision
+accuracy,
+
+@example
+@verbatiminclude examples/intro.out
+@end example
+
+@noindent
+The steps needed to compile this program are described in the following
+sections.
+
+@node Compiling and Linking
+@section Compiling and Linking
+@cindex compiling programs, include paths
+@cindex using the FGSL module
+@cindex module, using
+The module information file (typically called @file{gsl.mod}) is
+installed in a compiler dependent directory below the standard 
+GSL include path @file{gsl}. Within the Fortran code, the module is
+referenced in the usual way via
+
+@example
+use fgsl
+@end example
+
+@noindent
+Since the directory is normally not included in the standard search
+path of Fortran
+compiler you will also need to provide its location 
+as a command line flag. A typical compilation
+command for a source file @file{example.f90} with the @code{g95} compiler
+is,
+
+@example
+$ g95 -Wall -I/usr/local/include/g95 -c example.c
+@end example
+
+@noindent
+This results in an object file @file{example.o}.  
+
+@menu
+* Linking programs with the FGSL and GSL libraries::  
+* Linking with an alternative BLAS library::  
+@end menu
+
+@node Linking programs with the FGSL and GSL libraries
+@subsection Linking programs with the FGSL and GSL libraries
+@cindex compiling programs, library paths
+@cindex linking with FGSL and GSL libraries
+@cindex libraries, linking with
+The FGSL is installed as a single file, e.g., @file{libfgsl_g95.a} when
+using the @code{g95} compiler.  A shared
+version of the library @file{libfgsl_g95.so} is also installed on systems
+that support shared libraries.  The default location of these files is
+@file{/usr/local/lib/}.  If this directory is not on the standard search
+path of your linker you will also need to provide its location as a
+command line flag.
+
+To link against the library you need to specify
+both the FGSL library, the GSL main library and a
+supporting @sc{cblas} library, which
+provides standard basic linear algebra subroutines.  A suitable
+@sc{cblas} implementation is provided in the library
+@file{libgslcblas.a} if your system does not provide one.  The following
+example shows how to link an application with the library,
+
+@example
+$ g95 -L/usr/local/lib example.o -lfgsl_g95 -lgsl -lgslcblas -lm
+@end example
+
+@noindent
+The default library path for @code{g95} searches @file{/usr/local/lib}
+automatically so the @code{-L} option can be omitted when FGSL and GSL are
+installed in the default location.
+
+@node Linking with an alternative BLAS library
+@subsection Linking with an alternative BLAS library
+
+The following command line shows how you would link the same application
+with an alternative @sc{blas} library called @file{libblas},
+
+@example
+$ g95 example.o -lfgsl_g95 -lgsl -lblas -lm
+@end example
+
+@noindent
+At minimum, the C BLAS symbols must be available in @file{libblas};
+if your own Fortran Code also uses BLAS calls, the Fortran BLAS symbols
+must also be included.
+
+@noindent
+For the best performance an optimized platform-specific @sc{blas}
+library should be used for @code{-lblas}. The @sc{atlas} package provides
+a portable high-performance @sc{blas} library with a @sc{cblas} interface.  It is
+free software and should be installed for any work requiring fast vector
+and matrix operations.  The following command line will link with the
+@sc{atlas} library and its @sc{cblas} interface,
+
+@example
+$ g95 -o example  example.o -lfgsl_g95 -lgsl -lcblas -latlas -lm
+@end example
+
+@noindent
+For more information see the section @sc{BLAS Support} in the GSL documentation.
+
+
+@node Fortran Standards Compliance
+@section Fortran Standards Compliance
+
+The interface conforms to the Fortran 2003 standard. Since most
+compilers do not support the full standard at the time of this
+writing, here is a list of the features required to build and
+use the FGSL:
+
+@itemize @bullet
+@item
+C Interoperability: Most of this must be implemented, with exception
+of  @code{c_f_procpointer}. A table of required C datatypes for which
+an interoperable Fortran type must be available is given below.
+@item
+Import: Interfaces defined in modules must be able to access symbols
+from the host.
+@item
+Length of names up to 63 characters: Some of the FGSL names are longer
+than 31 characters, the maximum allowed in Fortran 95.
+@end itemize
+@noindent
+The library does not rely on any non-standard extensions in the interface it
+exports to the user.  Programs you write using FGSL can be standard
+compliant. 
+@noindent
+To avoid namespace conflicts all exported function names and variables
+have the prefix @code{fgsl_}. Macros are not supported in the FGSL.
+
+@node Inline functions
+@section Inline functions
+
+@cindex inline functions
+
+Inlining of GSL routines into Fortran code is naturally not possible.
+
+
+@node Long double
+@section Long double
+@cindex long double
+Even if the extended numerical type @code{long double} is supported
+in the C library, an interoperable Fortran type is typically not
+available.
+
+@node Alternative optimized functions
+@section Alternative optimized functions
+
+@cindex alternative optimized functions
+@cindex optimized functions, alternatives
+
+Alternative optimized functions are presently not supported; all
+linkage will be performed to the main implementations. Enabling
+alternative function support
+would involve adding or modifying C binding labels in the
+interface files by suitable preprocessing.
+
+
+@node Support for different numeric types
+@section Support for different numeric types
+
+In contrast to the GSL, generic calls are used to resolve for
+varying numeric types. However, most of the non-standard
+specifics are not implemented in this release. Only a subset
+will ever be implemented in future releases since there usually
+is an overlap in kind numbers which cannot be mapped to Fortran
+generics.
+
+
+@node Aliasing of arrays
+@section Aliasing of arrays
+@cindex aliasing of arrays
+The library assumes that arrays, vectors and matrices passed as
+modifiable arguments are not aliased and do not overlap with each other.
+This removes the need for the library to handle overlapping memory
+regions as a special case, and allows additional optimizations to be
+used.  If overlapping memory regions are passed as modifiable arguments
+then the results of such functions will be undefined.  If the arguments
+will not be modified (for example, if a function prototype declares them
+as @code{const} arguments) then overlapping or aliased memory regions
+can be safely used.
+
+@node Character strings
+@section Character strings 
+@cindex character strings
+
+Since allocatable scalars are not yet supported by most compilers, two
+parameters, @code{fgsl_strmax} and @code{fgsl_pathmax} are defined
+which are used for fixed length strings, typically defined as e.g.,
+
+@code{character(kind=fgsl_char,len=fgsl_strmax) :: string}
+
+@noindent Results from functions returning strings may require the use of the
+@code{TRIM} intrinsic so as to suppress the empty spaces.
+It may in particular be
+necessary to increase the value of @code{fgsl_pathmax} in the FGSL
+source if very long path names are to be used.
+
+@node I/O routines
+@section I/O routines
+@cindex I/O routines
+
+A number of GSL routines require a file handle, 
+an object of type @code{FILE *}. For this purpose, the type
+@code{fgsl_file} has been defined in FGSL. The following constructors 
+are available for objects of this type:
+@example
+  function fgsl_open(path, mode)
+    character(kind=fgsl_char, len=*), intent(in) :: path, mode
+    type(fgsl_file) :: fgsl_open   
+  end function fgsl_open
+@end example
+@noindent This call maps the @code{fopen (3)} ANSI C interface. 
+@example
+  function fgsl_close(fd)
+    type(fgsl_file), intent(in) :: fd
+    integer(fgsl_int) :: fgsl_close
+  end function fgsl_close
+@end example
+@noindent This call maps the @code{fclose (3)} ANSI C interface.
+@example
+  function fgsl_stdin()
+    type(fgsl_file) :: fgsl_stdin
+  end function fgsl_stdin
+  function fgsl_stdout()
+    type(fgsl_file) :: fgsl_stdout
+  end function fgsl_stdout
+  function fgsl_stderr()
+    type(fgsl_file) :: fgsl_stderr
+  end function fgsl_stderr
+@end example
+@noindent These calls provide the standard input, output, and error
+streams, respectively as Fortran objects. Note that 
+interleaving Fortran and C output to stdout or stderr is not covered
+by any standard, and may hence deliver unexpected results (use of 
+@code{ADVANCE='NO'} or @code{FLUSH} notwithstanding). For some compilers,
+replacing @code{ADVANCE='NO'} with a suitable @code{$} (nonstandard)
+edit descriptor may help.
+@example
+  function fgsl_flush(fd)
+    type(fgsl_file), intent(in) :: fd
+    integer(fgsl_int) :: fgsl_flush
+  end function fgsl_flush
+@end example
+@noindent This call maps the @code{fflush (3)} ANSI C interface.
+
+@node Abstract objects
+@section Abstract objects
+Since abstract GSL objects are opaque, there is no direct way to
+check whether a FGSL factory method returns a valid object. For this
+reason the generic call @code{fgsl_well_defined} is available. It
+takes any derived GSL type as its only argument, and returns a
+logical value of @code{.true.} if the object is valid, and
+@code{.false.} otherwise.
+
+@node Thread-safety
+@section Thread-safety
+The library can be used in multi-threaded programs.  All the functions
+are thread-safe, in the sense that they do not use static variables.
+Memory is always associated with objects and not with functions.  For
+functions which use @dfn{workspace} objects as temporary storage the
+workspaces should be allocated on a per-thread basis.  For functions
+which use @dfn{table} objects as read-only memory the tables can be used
+by multiple threads simultaneously.  Table arguments are always declared
+@code{const} in function prototypes, to indicate that they may be
+safely accessed by different threads.
+
+There are a small number of static global variables which are used to
+control the overall behavior of the library (e.g. whether to use
+range-checking, the function to call on fatal error, the algorithm
+choice settings etc).  These
+variables are set directly by the user, so they should be initialized
+once at program startup and not modified by different threads.
+

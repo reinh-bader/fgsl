@@ -1,0 +1,383 @@
+#!/bin/bash 
+#
+# set up build process for FGSL
+#
+# FIXME: 
+#  add debug switch with appropriate flags
+#  add compiler case constructs to properly treat bits and debug
+#-------------------------------------------------------------------------------
+usage() {
+    echo "configure can take the following switches:"
+    echo "          --prefix <dirname>"
+    echo "          --f90 <f90_compiler>"
+    echo "          --cc  <c_compiler>"
+    echo "          --gsl <path_to_gsl>"
+    echo "          --bits [32|64]"
+    echo "          --debug"
+    echo "          --help "
+}    
+#
+# Default settings
+#
+#set -vx
+gsl_root="/usr"
+prefix=""
+bits=""
+debug=""
+#
+# Process argument list
+#
+while [ ! -z "$1" ] ; do
+    case $1 in
+	--prefix ) 
+	    prefix=$2
+	    shift
+	    ;;
+	--f90 )
+	    f90_comp="$2"
+	    shift
+	    ;;
+	--cc )
+	    c_comp="$2"
+	    shift
+	    ;;
+	--gsl )
+	    gsl_root="$2"
+	    PATH=$gsl_root/bin:$PATH
+	    shift
+	    ;;
+	--bits )
+	    bits="$2"
+	    shift
+	    ;;
+	--debug )
+	    debug=yes
+	    ;;
+	--help )
+	    usage
+	    exit 0
+	    ;;
+	* )
+	    usage
+	    exit 1
+	    ;;
+    esac
+    shift
+done
+#
+# differentiate by OS
+#
+os=$(uname -s)
+gh=$(which gsl-histogram 2>/dev/null)
+if [ "$(basename $gh)" != "gsl-histogram" ] ; then
+    echo "GSL installation not found. Aborting"
+    exit 1
+fi
+case $os in
+    Linux) 
+	f90_comp=${f90_comp:-"g95 ifort gfortran nagfor"}
+	c_comp=${c_comp:-"gcc icc"}
+	arflags="-crsv"
+	if [ "$bits" == "" ] ; then
+	    file $gh | grep 64 > /dev/null 2>&1
+	    if [ $? == 0 ] ; then
+		bits=64
+	    else
+		bits=32
+	    fi
+	fi
+	;;
+    AIX)
+	f90_comp=${f90_comp:-"xlf_r g95"}
+	c_comp=${c_comp:-"xlc_r gcc"}
+	arflags="-crsv -Xany"
+	if [ "$bits" == "" ] ; then
+	    file $gh | grep 64 > /dev/null 2>&1
+	    if [ $? == 0 ] ; then
+		bits=64
+	    else
+		bits=32
+	    fi
+	fi
+	;;
+    Darwin)
+	f90_comp=${f90_comp:-"g95 ifort"}
+	c_comp=${c_comp:-"gcc icc"}
+	arflags="-crsv"
+	if [ $bits == "" ] ; then
+	    file $gh | grep 64 > /dev/null 2>&1
+	    if [ $? == 0 ] ; then
+		bits=64
+	    else
+		bits=32
+	    fi
+	fi
+	;;
+    *)
+	f90_comp=${f90_comp:-"g95"}
+	c_comp=${c_comp:-"gcc"}
+	arflags="-crsv"
+	if [ "$bits" == "" ] ; then
+	    bits=32
+	fi
+	;;
+esac
+#
+# Check required functionality
+#
+dir=d.s$$
+mkdir $dir
+cd $dir
+f90=""
+for xx in $f90_comp; do
+    if [ ! -x $(which $xx 2> /dev/null) ] ; then
+	continue
+    fi
+    cat > t.f90 <<EOF
+module mod_foo
+  use, intrinsic :: iso_c_binding
+  implicit none
+  interface 
+!    function fsub(x) bind(c, name='bar')
+    function bar(x) bind(c)
+      use, intrinsic :: iso_c_binding
+!      import :: c_float, c_int
+      real(c_float), value :: x
+      integer(c_int) :: bar
+!      integer(c_int) :: fsub
+    end function
+  end interface
+end module
+function bar(x) bind(c)
+  use, intrinsic :: iso_c_binding
+  real(c_float), value :: x
+  integer(c_int) :: bar
+  bar = int(bar) + 1
+end function
+program foo
+  use mod_foo
+  integer(c_int) :: ic
+  integer(c_size_t) :: is
+  character(c_char) :: cc
+  real(c_float) :: rc
+  real(c_double) :: dc
+  real(c_double), pointer :: p(:)
+  complex(c_double_complex), target :: zc
+  type(c_ptr) :: ptr = c_null_ptr
+  type(c_funptr) :: fptr = c_null_funptr
+  is = 1; cc = c_char_'h'; rc = 1.0_c_float
+  dc = 1.0_c_double; zc = (1.0_c_double_complex, 1.0_c_double_complex) 
+!  ic = fsub(2.01_c_float)
+  ic = bar(2.01_c_float)
+  ptr = c_loc(zc)
+  is = 1_c_size_t
+  call c_f_pointer(ptr, p, (/ is /))
+end program
+EOF
+    $xx -c t.f90 
+    if [ $? == 0 ] ; then
+	f90=$xx
+	echo "  Using $(which $f90) as Fortran compiler"
+	break
+    else
+	echo "  Compiler $xx does not (properly) support ISO_C_BINDING"
+    fi
+done
+cd ..
+rm -rf $dir
+cc=""
+for xx in $c_comp; do
+    if [ -x $(which $xx 2> /dev/null) ] ; then
+	cc=$xx
+	echo "  Using $(which $cc) as C compiler"
+	break
+    fi
+done
+if [ "$bits" != "" ] ; then
+    case $bits in
+	32 | 64 )
+	    case $cc in 
+		gcc)
+		    if [ $(uname -i) == "x86_64" ] ; then 
+                       CFLAGS="-m${bits} $CFLAGS"
+		       CDEB="-g"
+                    fi
+		    ;;
+		xlc|xlc_r)
+		    CFLAGS="-q${bits} $CFLAGS"
+		    CDEB="-g"
+		    ;;
+		*) 
+		    echo "  >>>Warning>>> May need to specify $cc compiler flag for $bits bit build in CFLAGS"
+		    ;;
+	    esac
+	    ;;
+	*)  
+	    usage
+	    exit 1;
+	    ;;
+    esac
+fi
+#
+# numeric models
+#
+rm -f checktypes.exe
+$cc $CFLAGS -o checktypes.exe ./checktypes.c > /dev/null 2>&1
+if [ -x ./checktypes.exe ] ; then
+    int=$(./checktypes.exe | grep int)
+    flt=$(./checktypes.exe | grep flt)
+else
+    echo " Could not determine numeric model. Aborting ..."
+    exit 1
+fi
+rm -f checktypes.exe
+case $int in
+    int_2_4_4_4)
+	rm -f integer.finc
+	ln -s interface/integer_ilp32.finc integer.finc
+	;;
+    int_2_4_8_8)
+	rm -f integer.finc
+	ln -s interface/integer_ilp64.finc integer.finc
+	;;
+    *)  
+	echo "Unsupported integer model. Aborting ..."
+	exit 1
+	;;
+esac
+case $flt in
+    flt_4_8)
+	;;
+    *)  
+	echo "Unsupported numerical floating point model. Aborting ..."
+	exit 1
+	;;
+esac
+#
+# differentiate by compiler
+#
+case $f90 in
+    g95)
+	if [ "$bits" == "" ] ; then
+	    FFLAGS="$FFLAGS"
+	else
+            if [ $(uname -i) == "x86_64" ] ; then 
+	       FFLAGS="-m$bits $FFLAGS"
+            fi
+	fi
+	FPP=-cpp
+	DEB="-g -C"
+	;;
+    gfortran)
+	if [ "$bits" == "" ] ; then
+	    FFLAGS="$FFLAGS"
+	else
+            if [ $(uname -i) == "x86_64" ] ; then 
+	        FFLAGS="-m$bits $FFLAGS"
+            fi
+	fi
+# does not work any more - FPP="-x f95-cpp-input"
+	FPP="-cpp"
+	DEB="-g -C"
+	;;
+# NAG. potential FIXME: other compilers of same name need differentiator
+    f95|nagfor)
+	FFLAGS="$FFLAGS -ieee=full -f2003"
+	FPP=-fpp
+	DEB="-g -C"
+	;;
+    sunf95)
+	FFLAGS="$FFLAGS -I." 
+	FPP=-fpp
+	;;
+    ifort)
+	FFLAGS="$FFLAGS"
+	FPP=-fpp
+	DEB="-g -check all"
+	;;
+    pgf90)
+	FFLAGS="$FFLAGS"
+	FPP=-Mpreprocess
+	DEB="-g -C"
+	;;
+# CRAY Fortran
+    ftn)
+        FFLAGS="$FFLAGS -I."
+        FPP="-e Z"
+        DEB="-g -C"
+        ;;
+     xlf90|xlf90_r|xlf95|xlf95_r|xlf2003|xlf2003_r)
+	if [ "$bits" == "" ] ; then
+	    FFLAGS="$FFLAGS"
+	else
+	    FFLAGS="-q$bits $FFLAGS"
+	fi
+	FPP="-qsuffix=cpp=f90"
+	DEB="-g -C"
+	;;
+    *) 
+	echo "Unsupported Fortran compiler. Aborting ..."
+	exit 1
+	;;
+esac
+gsl=""
+lib="lib"
+for xx in $gsl_root; do
+#    echo "Trying $xx"
+    if [ -d $xx/include/gsl ] ; then
+	gsl_lib=""
+	if [ -s $xx/lib/libgsl.a -a -s $xx/lib/libgslcblas.a -o \
+             -s $xx/lib/libgsl.so -a -s $xx/lib/libgslcblas.so ] ; then
+	    gsl=$xx
+	    gsl_lib="-L$xx/lib -lgsl -lgslcblas"
+	fi
+	if [ -s $xx/lib64/libgsl.a -a -s $xx/lib64/libgslcblas.a -o \
+             -s $xx/lib64/libgsl.so -a -s $xx/lib64/libgslcblas.so ] ; then
+	    gsl=$xx
+	    gsl_lib="-L$xx/lib64 -lgsl -lgslcblas"
+	    lib=lib64
+	fi
+	if [ "$gsl_lib" != "" ] ; then
+	    echo "  Using GSL library located in $gsl/$lib"
+	    break
+	else
+	    echo "  No valid GSL installation found in $xx. Aborting ..."
+	    exit 1
+	fi
+    else
+        echo "  No valid GSL installation found in $xx. Aborting ..."
+        exit 1
+    fi
+done
+if [ "$prefix" == "" ] ; then
+    prefix=$gsl
+fi
+echo "  Installation target path is $prefix."
+rm -rf $dir
+
+#
+# Write configuration for make
+#
+rm -f make.inc
+if [ "$f90" == "" -o "$gsl" == "" -o "$cc" == "" ] ; then
+    echo "Configuration unsuccessful. make.inc not written."
+    exit 1
+else
+    echo F90 = $f90 >> make.inc
+    echo CC = $cc >> make.inc
+    echo GSL_LIB = $gsl_lib >> make.inc
+    echo GSL_INC = -I$gsl/include >> make.inc
+    echo LDFLAGS = $LDFLAGS >> make.inc
+    echo FFLAGS = $FFLAGS >> make.inc
+    if [ "$debug" == "yes" ] ; then
+	echo DEBUG = $DEB >> make.inc
+	echo CDEBUG = $CDEB >> make.inc
+    fi
+    echo CFLAGS = $CFLAGS >> make.inc
+    echo PREFIX = $prefix >> make.inc
+    echo ARFLAGS = $arflags >> make.inc
+    echo FPP = $FPP >> make.inc
+    echo LIB = $lib >> make.inc
+    echo "Configuration successful. Now run make to build,"
+    echo "or make test to run test suite. Enjoy!"
+fi

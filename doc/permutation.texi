@@ -1,0 +1,38 @@
+@cindex permutations
+@cindex combinations
+
+The permutation and combination routines have been completely mapped
+in FGSL. Please refer to the section @sc{I/O routines} for information
+on how to generate and handle objects of type @code{fgsl_file}.
+A special note must be made concerning the API calls
+@example
+  function fgsl_permutation_data(p)
+    type(fgsl_permutation), intent(in) :: p
+    integer(fgsl_size_t), pointer :: fgsl_permutation_data(:)
+  end function fgsl_permutation_data
+@end example
+@noindent and 
+@example
+  function fgsl_combination_data(p)
+    type(fgsl_combination), intent(in) :: p
+    integer(fgsl_size_t), pointer :: fgsl_combination_data(:)
+  end function fgsl_combination_data
+@end example
+@noindent These return array pointers and hence enable the user to either do
+e.g., 
+@example
+  integer, pointer :: ptr(:)
+  :
+  ptr => fgsl_permutation_data(p)
+@end example
+@noindent thereby accessing the object internal data via
+@code{ptr} for as long as the object @code{p} exists, or
+@example
+  integer, allocatable :: copy(:)
+  :
+  allocate(copy(fgsl_permutation_size(p)))
+  copy = fgsl_permutation_data(p)
+@end example
+@noindent  providing a copy of the data contained in @code{p} at the
+point of the call.
+

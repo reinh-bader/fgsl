@@ -1,0 +1,2712 @@
+!-*-f90-*-
+!
+!  Interfaces: Special Functions
+!
+     function gsl_sf_airy_ai(x, mode) bind(c, name='gsl_sf_airy_Ai')
+       import
+       real(c_double), value :: x
+       integer(c_int), value :: mode
+       real(c_double) :: gsl_sf_airy_ai
+     end function gsl_sf_airy_ai
+     function gsl_sf_airy_ai_e(x, mode, result) bind(c, name='gsl_sf_airy_Ai_e')
+       import
+       real(c_double), value :: x
+       integer(c_int), value :: mode
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_airy_ai_e
+     end function gsl_sf_airy_ai_e
+     function gsl_sf_airy_bi(x, mode) bind(c, name='gsl_sf_airy_Bi')
+       import
+       real(c_double), value :: x
+       integer(c_int), value :: mode
+       real(c_double) :: gsl_sf_airy_bi
+     end function gsl_sf_airy_bi
+     function gsl_sf_airy_bi_e(x, mode, result) bind(c, name='gsl_sf_airy_Bi_e')
+       import
+       real(c_double), value :: x
+       integer(c_int), value :: mode
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_airy_bi_e
+     end function gsl_sf_airy_bi_e
+     function gsl_sf_airy_ai_scaled(x, mode) bind(c, name='gsl_sf_airy_Ai_scaled')
+       import
+       real(c_double), value :: x
+       integer(c_int), value :: mode
+       real(c_double) :: gsl_sf_airy_ai_scaled
+     end function gsl_sf_airy_ai_scaled
+     function gsl_sf_airy_ai_scaled_e(x, mode, result) bind(c, name='gsl_sf_airy_Ai_scaled_e')
+       import
+       real(c_double), value :: x
+       integer(c_int), value :: mode
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_airy_ai_scaled_e
+     end function gsl_sf_airy_ai_scaled_e
+     function gsl_sf_airy_bi_scaled(x, mode) bind(c, name='gsl_sf_airy_Bi_scaled')
+       import
+       real(c_double), value :: x
+       integer(c_int), value :: mode
+       real(c_double) :: gsl_sf_airy_bi_scaled
+     end function gsl_sf_airy_bi_scaled
+     function gsl_sf_airy_bi_scaled_e(x, mode, result) bind(c, name='gsl_sf_airy_Bi_scaled_e')
+       import
+       real(c_double), value :: x
+       integer(c_int), value :: mode
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_airy_bi_scaled_e
+     end function gsl_sf_airy_bi_scaled_e
+!!!!!
+     function gsl_sf_airy_ai_deriv(x, mode) bind(c, name='gsl_sf_airy_Ai_deriv')
+       import
+       real(c_double), value :: x
+       integer(c_int), value :: mode
+       real(c_double) :: gsl_sf_airy_ai_deriv
+     end function gsl_sf_airy_ai_deriv
+     function gsl_sf_airy_ai_deriv_e(x, mode, result) bind(c, name='gsl_sf_airy_Ai_deriv_e')
+       import
+       real(c_double), value :: x
+       integer(c_int), value :: mode
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_airy_ai_deriv_e
+     end function gsl_sf_airy_ai_deriv_e
+     function gsl_sf_airy_bi_deriv(x, mode) bind(c, name='gsl_sf_airy_Bi_deriv')
+       import
+       real(c_double), value :: x
+       integer(c_int), value :: mode
+       real(c_double) :: gsl_sf_airy_bi_deriv
+     end function gsl_sf_airy_bi_deriv
+     function gsl_sf_airy_bi_deriv_e(x, mode, result) bind(c, name='gsl_sf_airy_Bi_deriv_e')
+       import
+       real(c_double), value :: x
+       integer(c_int), value :: mode
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_airy_bi_deriv_e
+     end function gsl_sf_airy_bi_deriv_e
+     function gsl_sf_airy_ai_deriv_scaled(x, mode) bind(c, name='gsl_sf_airy_Ai_deriv_scaled')
+       import
+       real(c_double), value :: x
+       integer(c_int), value :: mode
+       real(c_double) :: gsl_sf_airy_ai_deriv_scaled
+     end function gsl_sf_airy_ai_deriv_scaled
+     function gsl_sf_airy_ai_deriv_scaled_e(x, mode, result) bind(c, name='gsl_sf_airy_Ai_deriv_scaled_e')
+       import
+       real(c_double), value :: x
+       integer(c_int), value :: mode
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_airy_ai_deriv_scaled_e
+     end function gsl_sf_airy_ai_deriv_scaled_e
+     function gsl_sf_airy_bi_deriv_scaled(x, mode) bind(c, name='gsl_sf_airy_Bi_deriv_scaled')
+       import
+       real(c_double), value :: x
+       integer(c_int), value :: mode
+       real(c_double) :: gsl_sf_airy_bi_deriv_scaled
+     end function gsl_sf_airy_bi_deriv_scaled
+     function gsl_sf_airy_bi_deriv_scaled_e(x, mode, result) bind(c, name='gsl_sf_airy_Bi_deriv_scaled_e')
+       import
+       real(c_double), value :: x
+       integer(c_int), value :: mode
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_airy_bi_deriv_scaled_e
+     end function gsl_sf_airy_bi_deriv_scaled_e
+     function gsl_sf_airy_zero_ai(s)  bind(c, name='gsl_sf_airy_zero_Ai')
+       import
+       integer(c_int), value :: s
+       real(c_double) :: gsl_sf_airy_zero_ai
+     end function gsl_sf_airy_zero_ai
+     function gsl_sf_airy_zero_ai_e(s, result) bind(c, name='gsl_sf_airy_zero_Ai_e')
+       import
+       integer(c_int), value :: s
+       integer(c_int) :: gsl_sf_airy_zero_ai_e
+       type(gsl_sf_result), intent(out) :: result
+     end function gsl_sf_airy_zero_ai_e
+     function gsl_sf_airy_zero_bi(s)  bind(c, name='gsl_sf_airy_zero_Bi')
+       import
+       integer(c_int), value :: s
+       real(c_double) :: gsl_sf_airy_zero_bi
+     end function gsl_sf_airy_zero_bi
+     function gsl_sf_airy_zero_bi_e (s, result) bind(c, name='gsl_sf_airy_zero_Bi_e')
+       import
+       integer(c_int), value :: s
+       integer(c_int) :: gsl_sf_airy_zero_bi_e
+       type(gsl_sf_result), intent(out) :: result
+     end function gsl_sf_airy_zero_bi_e
+     function gsl_sf_airy_zero_ai_deriv(s)  bind(c, name='gsl_sf_airy_zero_Ai_deriv')
+       import
+       integer(c_int), value :: s
+       real(c_double) :: gsl_sf_airy_zero_ai_deriv
+     end function gsl_sf_airy_zero_ai_deriv
+     function gsl_sf_airy_zero_ai_deriv_e (s, result) bind(c, name='gsl_sf_airy_zero_Ai_deriv_e')
+       import
+       integer(c_int), value :: s
+       integer(c_int) :: gsl_sf_airy_zero_ai_deriv_e
+       type(gsl_sf_result), intent(out) :: result
+     end function gsl_sf_airy_zero_ai_deriv_e
+     function gsl_sf_airy_zero_bi_deriv(s)  bind(c, name='gsl_sf_airy_zero_Bi_deriv')
+       import
+       integer(c_int), value :: s
+       real(c_double) :: gsl_sf_airy_zero_bi_deriv
+     end function gsl_sf_airy_zero_bi_deriv
+     function gsl_sf_airy_zero_bi_deriv_e (s, result) bind(c, name='gsl_sf_airy_zero_Bi_deriv_e')
+       import
+       integer(c_int), value :: s
+       integer(c_int) :: gsl_sf_airy_zero_bi_deriv_e
+       type(gsl_sf_result), intent(out) :: result
+     end function gsl_sf_airy_zero_bi_deriv_e
+!     function gsl_sf_bessel_jc0(x) bind(c, name='gsl_sf_bessel_J0')
+     function gsl_sf_bessel_jc0(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_jc0
+     end function gsl_sf_bessel_jc0
+!     function gsl_sf_bessel_jc0_e(x, result) bind(c, name='gsl_sf_bessel_J0_e')
+     function gsl_sf_bessel_jc0_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_jc0_e
+     end function gsl_sf_bessel_jc0_e
+!     function gsl_sf_bessel_jc1(x) bind(c, name='gsl_sf_bessel_J1')
+     function gsl_sf_bessel_jc1(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_jc1
+     end function gsl_sf_bessel_jc1
+!     function gsl_sf_bessel_jc1_e(x, result) bind(c, name='gsl_sf_bessel_J1_e')
+     function gsl_sf_bessel_jc1_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_jc1_e
+     end function gsl_sf_bessel_jc1_e
+!     function gsl_sf_bessel_jcn(n,x) bind(c, name='gsl_sf_bessel_Jn')
+     function gsl_sf_bessel_jcn(n,x) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_jcn
+     end function gsl_sf_bessel_jcn
+!     function gsl_sf_bessel_jcn_e(n, x, result) bind(c, name='gsl_sf_bessel_Jn_e')
+     function gsl_sf_bessel_jcn_e(n, x, result) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_jcn_e
+     end function gsl_sf_bessel_jcn_e
+!     function gsl_sf_bessel_jcn_array(nmin, nmax, x, result) bind(c, name='gsl_sf_bessel_Jn_array')
+     function gsl_sf_bessel_jcn_array(nmin, nmax, x, result) bind(c)
+       import
+       integer(c_int), value :: nmin, nmax
+       real(c_double), value :: x
+       real(c_double), dimension(*), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_jcn_array
+     end function gsl_sf_bessel_jcn_array
+!     function gsl_sf_bessel_yc0(x) bind(c, name='gsl_sf_bessel_Y0')
+     function gsl_sf_bessel_yc0(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_yc0
+     end function gsl_sf_bessel_yc0
+!     function gsl_sf_bessel_yc0_e(x, result) bind(c, name='gsl_sf_bessel_Y0_e')
+     function gsl_sf_bessel_yc0_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_yc0_e
+     end function gsl_sf_bessel_yc0_e
+!     function gsl_sf_bessel_yc1(x) bind(c, name='gsl_sf_bessel_Y1')
+     function gsl_sf_bessel_yc1(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_yc1
+     end function gsl_sf_bessel_yc1
+!     function gsl_sf_bessel_yc1_e(x, result) bind(c, name='gsl_sf_bessel_Y1_e')
+     function gsl_sf_bessel_yc1_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_yc1_e
+     end function gsl_sf_bessel_yc1_e
+!     function gsl_sf_bessel_ycn(n,x) bind(c, name='gsl_sf_bessel_Yn')
+     function gsl_sf_bessel_ycn(n,x) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_ycn
+     end function gsl_sf_bessel_ycn
+!     function gsl_sf_bessel_ycn_e(n, x, result) bind(c, name='gsl_sf_bessel_Yn_e')
+     function gsl_sf_bessel_ycn_e(n, x, result) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_ycn_e
+     end function gsl_sf_bessel_ycn_e
+!     function gsl_sf_bessel_ycn_array(nmin, nmax, x, result) bind(c, name='gsl_sf_bessel_Yn_array')
+     function gsl_sf_bessel_ycn_array(nmin, nmax, x, result) bind(c)
+       import
+       integer(c_int), value :: nmin, nmax
+       real(c_double), value :: x
+       real(c_double), dimension(*), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_ycn_array
+     end function gsl_sf_bessel_ycn_array
+!     function gsl_sf_bessel_ic0(x) bind(c, name='gsl_sf_bessel_I0')
+     function gsl_sf_bessel_ic0(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_ic0
+     end function gsl_sf_bessel_ic0
+!     function gsl_sf_bessel_ic0_e(x, result) bind(c, name='gsl_sf_bessel_I0_e')
+     function gsl_sf_bessel_ic0_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_ic0_e
+     end function gsl_sf_bessel_ic0_e
+!     function gsl_sf_bessel_ic1(x) bind(c, name='gsl_sf_bessel_I1')
+     function gsl_sf_bessel_ic1(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_ic1
+     end function gsl_sf_bessel_ic1
+!     function gsl_sf_bessel_ic1_e(x, result) bind(c, name='gsl_sf_bessel_I1_e')
+     function gsl_sf_bessel_ic1_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_ic1_e
+     end function gsl_sf_bessel_ic1_e
+!     function gsl_sf_bessel_icn(n,x) bind(c, name='gsl_sf_bessel_In')
+     function gsl_sf_bessel_icn(n,x) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_icn
+     end function gsl_sf_bessel_icn
+!     function gsl_sf_bessel_icn_e(n, x, result) bind(c, name='gsl_sf_bessel_In_e')
+     function gsl_sf_bessel_icn_e(n, x, result) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_icn_e
+     end function gsl_sf_bessel_icn_e
+!     function gsl_sf_bessel_icn_array(nmin, nmax, x, result) bind(c, name='gsl_sf_bessel_In_array')
+     function gsl_sf_bessel_icn_array(nmin, nmax, x, result) bind(c)
+       import
+       integer(c_int), value :: nmin, nmax
+       real(c_double), value :: x
+       real(c_double), dimension(*), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_icn_array
+     end function gsl_sf_bessel_icn_array
+!     function gsl_sf_bessel_ic0_scaled(x) bind(c, name='gsl_sf_bessel_I0_scaled')
+     function gsl_sf_bessel_ic0_scaled(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_ic0_scaled
+     end function gsl_sf_bessel_ic0_scaled
+!     function gsl_sf_bessel_ic0_scaled_e(x, result) bind(c, name='gsl_sf_bessel_I0_scaled_e')
+     function gsl_sf_bessel_ic0_scaled_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_ic0_scaled_e
+     end function gsl_sf_bessel_ic0_scaled_e
+!     function gsl_sf_bessel_ic1_scaled(x) bind(c, name='gsl_sf_bessel_I1_scaled')
+     function gsl_sf_bessel_ic1_scaled(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_ic1_scaled
+     end function gsl_sf_bessel_ic1_scaled
+!     function gsl_sf_bessel_ic1_scaled_e(x, result) bind(c, name='gsl_sf_bessel_I1_scaled_e')
+     function gsl_sf_bessel_ic1_scaled_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_ic1_scaled_e
+     end function gsl_sf_bessel_ic1_scaled_e
+!     function gsl_sf_bessel_icn_scaled(n,x) bind(c, name='gsl_sf_bessel_In_scaled')
+     function gsl_sf_bessel_icn_scaled(n,x) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_icn_scaled
+     end function gsl_sf_bessel_icn_scaled
+!     function gsl_sf_bessel_icn_scaled_e(n, x, result) bind(c, name='gsl_sf_bessel_In_scaled_e')
+     function gsl_sf_bessel_icn_scaled_e(n, x, result) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_icn_scaled_e
+     end function gsl_sf_bessel_icn_scaled_e
+!     function gsl_sf_bessel_icn_scaled_array(nmin, nmax, x, result) bind(c, name='gsl_sf_bessel_In_scaled_array')
+     function gsl_sf_bessel_icn_scaled_array(nmin, nmax, x, result) bind(c)
+       import
+       integer(c_int), value :: nmin, nmax
+       real(c_double), value :: x
+       real(c_double), dimension(*), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_icn_scaled_array
+     end function gsl_sf_bessel_icn_scaled_array
+!     function gsl_sf_bessel_kc0(x) bind(c, name='gsl_sf_bessel_K0')
+     function gsl_sf_bessel_kc0(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_kc0
+     end function gsl_sf_bessel_kc0
+!     function gsl_sf_bessel_kc0_e(x, result) bind(c, name='gsl_sf_bessel_K0_e')
+     function gsl_sf_bessel_kc0_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_kc0_e
+     end function gsl_sf_bessel_kc0_e
+!     function gsl_sf_bessel_kc1(x) bind(c, name='gsl_sf_bessel_K1')
+     function gsl_sf_bessel_kc1(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_kc1
+     end function gsl_sf_bessel_kc1
+!     function gsl_sf_bessel_kc1_e(x, result) bind(c, name='gsl_sf_bessel_K1_e')
+     function gsl_sf_bessel_kc1_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_kc1_e
+     end function gsl_sf_bessel_kc1_e
+!     function gsl_sf_bessel_kcn(n,x) bind(c, name='gsl_sf_bessel_Kn')
+     function gsl_sf_bessel_kcn(n,x) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_kcn
+     end function gsl_sf_bessel_kcn
+!     function gsl_sf_bessel_kcn_e(n, x, result) bind(c, name='gsl_sf_bessel_Kn_e')
+     function gsl_sf_bessel_kcn_e(n, x, result) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_kcn_e
+     end function gsl_sf_bessel_kcn_e
+!     function gsl_sf_bessel_kcn_array(nmin, nmax, x, result) bind(c, name='gsl_sf_bessel_Kn_array')
+     function gsl_sf_bessel_kcn_array(nmin, nmax, x, result) bind(c)
+       import
+       integer(c_int), value :: nmin, nmax
+       real(c_double), value :: x
+       real(c_double), dimension(*), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_kcn_array
+     end function gsl_sf_bessel_kcn_array
+!     function gsl_sf_bessel_kc0_scaled(x) bind(c, name='gsl_sf_bessel_K0_scaled')
+     function gsl_sf_bessel_kc0_scaled(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_kc0_scaled
+     end function gsl_sf_bessel_kc0_scaled
+!     function gsl_sf_bessel_kc0_scaled_e(x, result) bind(c, name='gsl_sf_bessel_K0_scaled_e')
+     function gsl_sf_bessel_kc0_scaled_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_kc0_scaled_e
+     end function gsl_sf_bessel_kc0_scaled_e
+!     function gsl_sf_bessel_kc1_scaled(x) bind(c, name='gsl_sf_bessel_K1_scaled')
+     function gsl_sf_bessel_kc1_scaled(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_kc1_scaled
+     end function gsl_sf_bessel_kc1_scaled
+!     function gsl_sf_bessel_kc1_scaled_e(x, result) bind(c, name='gsl_sf_bessel_K1_scaled_e')
+     function gsl_sf_bessel_kc1_scaled_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_kc1_scaled_e
+     end function gsl_sf_bessel_kc1_scaled_e
+!     function gsl_sf_bessel_kcn_scaled(n,x) bind(c, name='gsl_sf_bessel_Kn_scaled')
+     function gsl_sf_bessel_kcn_scaled(n,x) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_kcn_scaled
+     end function gsl_sf_bessel_kcn_scaled
+!     function gsl_sf_bessel_kcn_scaled_e(n, x, result) bind(c, name='gsl_sf_bessel_Kn_scaled_e')
+     function gsl_sf_bessel_kcn_scaled_e(n, x, result) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_kcn_scaled_e
+     end function gsl_sf_bessel_kcn_scaled_e
+!     function gsl_sf_bessel_kcn_scaled_array(nmin, nmax, x, result) bind(c, name='gsl_sf_bessel_Kn_scaled_array')
+     function gsl_sf_bessel_kcn_scaled_array(nmin, nmax, x, result) bind(c)
+       import
+       integer(c_int), value :: nmin, nmax
+       real(c_double), value :: x
+       real(c_double), dimension(*), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_kcn_scaled_array
+     end function gsl_sf_bessel_kcn_scaled_array
+!    spherical bessel functions
+     function gsl_sf_bessel_js0(x) bind(c, name='gsl_sf_bessel_j0')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_js0
+     end function gsl_sf_bessel_js0
+     function gsl_sf_bessel_js0_e(x, result) bind(c, name='gsl_sf_bessel_j0_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_js0_e
+     end function gsl_sf_bessel_js0_e
+     function gsl_sf_bessel_js1(x) bind(c, name='gsl_sf_bessel_j1')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_js1
+     end function gsl_sf_bessel_js1
+     function gsl_sf_bessel_js1_e(x, result) bind(c, name='gsl_sf_bessel_j1_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_js1_e
+     end function gsl_sf_bessel_js1_e
+     function gsl_sf_bessel_js2(x) bind(c, name='gsl_sf_bessel_j2')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_js2
+     end function gsl_sf_bessel_js2
+     function gsl_sf_bessel_js2_e(x, result) bind(c, name='gsl_sf_bessel_j2_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_js2_e
+     end function gsl_sf_bessel_js2_e
+     function gsl_sf_bessel_jsl(n,x) bind(c, name='gsl_sf_bessel_jl')
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_jsl
+     end function gsl_sf_bessel_jsl
+     function gsl_sf_bessel_jsl_e(n, x, result) bind(c, name='gsl_sf_bessel_jl_e')
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_jsl_e
+     end function gsl_sf_bessel_jsl_e
+     function gsl_sf_bessel_jsl_array(lmax, x, result) bind(c, name='gsl_sf_bessel_jl_array')
+       import
+       integer(c_int), value :: lmax
+       real(c_double), value :: x
+       real(c_double), dimension(*), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_jsl_array
+     end function gsl_sf_bessel_jsl_array
+     function gsl_sf_bessel_jsl_steed_array(lmax, x, result) bind(c, name='gsl_sf_bessel_jl_steed_array')
+       import
+       integer(c_int), value :: lmax
+       real(c_double), value :: x
+       real(c_double), dimension(*), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_jsl_steed_array
+     end function gsl_sf_bessel_jsl_steed_array
+     function gsl_sf_bessel_ys0(x) bind(c, name='gsl_sf_bessel_y0')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_ys0
+     end function gsl_sf_bessel_ys0
+     function gsl_sf_bessel_ys0_e(x, result) bind(c, name='gsl_sf_bessel_y0_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_ys0_e
+     end function gsl_sf_bessel_ys0_e
+     function gsl_sf_bessel_ys1(x) bind(c, name='gsl_sf_bessel_y1')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_ys1
+     end function gsl_sf_bessel_ys1
+     function gsl_sf_bessel_ys1_e(x, result) bind(c, name='gsl_sf_bessel_y1_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_ys1_e
+     end function gsl_sf_bessel_ys1_e
+     function gsl_sf_bessel_ys2(x) bind(c, name='gsl_sf_bessel_y2')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_ys2
+     end function gsl_sf_bessel_ys2
+     function gsl_sf_bessel_ys2_e(x, result) bind(c, name='gsl_sf_bessel_y2_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_ys2_e
+     end function gsl_sf_bessel_ys2_e
+     function gsl_sf_bessel_ysl(n,x) bind(c, name='gsl_sf_bessel_yl')
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_ysl
+     end function gsl_sf_bessel_ysl
+     function gsl_sf_bessel_ysl_e(n, x, result) bind(c, name='gsl_sf_bessel_yl_e')
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_ysl_e
+     end function gsl_sf_bessel_ysl_e
+     function gsl_sf_bessel_ysl_array(lmax, x, result) bind(c, name='gsl_sf_bessel_yl_array')
+       import
+       integer(c_int), value :: lmax
+       real(c_double), value :: x
+       real(c_double), dimension(*), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_ysl_array
+     end function gsl_sf_bessel_ysl_array
+     function gsl_sf_bessel_is0_scaled(x) bind(c, name='gsl_sf_bessel_i0_scaled')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_is0_scaled
+     end function gsl_sf_bessel_is0_scaled
+     function gsl_sf_bessel_is0_scaled_e(x, result) bind(c, name='gsl_sf_bessel_i0_scaled_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_is0_scaled_e
+     end function gsl_sf_bessel_is0_scaled_e
+     function gsl_sf_bessel_is1_scaled(x) bind(c, name='gsl_sf_bessel_i1_scaled')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_is1_scaled
+     end function gsl_sf_bessel_is1_scaled
+     function gsl_sf_bessel_is1_scaled_e(x, result) bind(c, name='gsl_sf_bessel_i1_scaled_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_is1_scaled_e
+     end function gsl_sf_bessel_is1_scaled_e
+     function gsl_sf_bessel_is2_scaled(x) bind(c, name='gsl_sf_bessel_i2_scaled')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_is2_scaled
+     end function gsl_sf_bessel_is2_scaled
+     function gsl_sf_bessel_is2_scaled_e(x, result) bind(c, name='gsl_sf_bessel_i2_scaled_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_is2_scaled_e
+     end function gsl_sf_bessel_is2_scaled_e
+     function gsl_sf_bessel_isl_scaled(n,x) bind(c, name='gsl_sf_bessel_il_scaled')
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_isl_scaled
+     end function gsl_sf_bessel_isl_scaled
+     function gsl_sf_bessel_isl_scaled_e(n, x, result) bind(c, name='gsl_sf_bessel_il_scaled_e')
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_isl_scaled_e
+     end function gsl_sf_bessel_isl_scaled_e
+     function gsl_sf_bessel_isl_scaled_array(lmax, x, result) bind(c, name='gsl_sf_bessel_il_scaled_array')
+       import
+       integer(c_int), value :: lmax
+       real(c_double), value :: x
+       real(c_double), dimension(*), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_isl_scaled_array
+     end function gsl_sf_bessel_isl_scaled_array
+     function gsl_sf_bessel_ks0_scaled(x) bind(c, name='gsl_sf_bessel_k0_scaled')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_ks0_scaled
+     end function gsl_sf_bessel_ks0_scaled
+     function gsl_sf_bessel_ks0_scaled_e(x, result) bind(c, name='gsl_sf_bessel_k0_scaled_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_ks0_scaled_e
+     end function gsl_sf_bessel_ks0_scaled_e
+     function gsl_sf_bessel_ks1_scaled(x) bind(c, name='gsl_sf_bessel_k1_scaled')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_ks1_scaled
+     end function gsl_sf_bessel_ks1_scaled
+     function gsl_sf_bessel_ks1_scaled_e(x, result) bind(c, name='gsl_sf_bessel_k1_scaled_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_ks1_scaled_e
+     end function gsl_sf_bessel_ks1_scaled_e
+     function gsl_sf_bessel_ks2_scaled(x) bind(c, name='gsl_sf_bessel_k2_scaled')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_ks2_scaled
+     end function gsl_sf_bessel_ks2_scaled
+     function gsl_sf_bessel_ks2_scaled_e(x, result) bind(c, name='gsl_sf_bessel_k2_scaled_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_ks2_scaled_e
+     end function gsl_sf_bessel_ks2_scaled_e
+     function gsl_sf_bessel_ksl_scaled(n,x) bind(c, name='gsl_sf_bessel_kl_scaled')
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_ksl_scaled
+     end function gsl_sf_bessel_ksl_scaled
+     function gsl_sf_bessel_ksl_scaled_e(n, x, result) bind(c, name='gsl_sf_bessel_kl_scaled_e')
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_ksl_scaled_e
+     end function gsl_sf_bessel_ksl_scaled_e
+     function gsl_sf_bessel_ksl_scaled_array(lmax, x, result) bind(c, name='gsl_sf_bessel_kl_scaled_array')
+       import
+       integer(c_int), value :: lmax
+       real(c_double), value :: x
+       real(c_double), dimension(*), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_ksl_scaled_array
+     end function gsl_sf_bessel_ksl_scaled_array
+!  fractional order bessel functions
+     function gsl_sf_bessel_jnu(n,x) bind(c, name='gsl_sf_bessel_Jnu')
+       import
+       real(c_double), value :: n
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_jnu
+     end function gsl_sf_bessel_jnu
+     function gsl_sf_bessel_jnu_e(n, x, result) bind(c, name='gsl_sf_bessel_Jnu_e')
+       import
+       real(c_double), value :: n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_jnu_e
+     end function gsl_sf_bessel_jnu_e
+     function gsl_sf_bessel_sequence_jnu_e(nu, mode, size, v) bind(c, name='gsl_sf_bessel_sequence_Jnu_e')
+       import
+       real(c_double), value :: nu
+       integer(c_int), value :: mode
+       integer(c_size_t), value :: size
+       real(c_double), dimension(*), intent(inout) :: v
+       integer(c_int) :: gsl_sf_bessel_sequence_jnu_e
+     end function gsl_sf_bessel_sequence_jnu_e
+     function gsl_sf_bessel_ynu(n,x) bind(c, name='gsl_sf_bessel_Ynu')
+       import
+       real(c_double), value :: n
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_ynu
+     end function gsl_sf_bessel_ynu
+     function gsl_sf_bessel_ynu_e(n, x, result) bind(c, name='gsl_sf_bessel_Ynu_e')
+       import
+       real(c_double), value :: n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_ynu_e
+     end function gsl_sf_bessel_ynu_e
+     function gsl_sf_bessel_inu(n,x) bind(c, name='gsl_sf_bessel_Inu')
+       import
+       real(c_double), value :: n
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_inu
+     end function gsl_sf_bessel_inu
+     function gsl_sf_bessel_inu_e(n, x, result) bind(c, name='gsl_sf_bessel_Inu_e')
+       import
+       real(c_double), value :: n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_inu_e
+     end function gsl_sf_bessel_inu_e
+     function gsl_sf_bessel_inu_scaled(n,x) bind(c, name='gsl_sf_bessel_Inu_scaled')
+       import
+       real(c_double), value :: n
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_inu_scaled
+     end function gsl_sf_bessel_inu_scaled
+     function gsl_sf_bessel_inu_scaled_e(n, x, result) bind(c, name='gsl_sf_bessel_Inu_scaled_e')
+       import
+       real(c_double), value :: n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_inu_scaled_e
+     end function gsl_sf_bessel_inu_scaled_e
+     function gsl_sf_bessel_knu(n,x) bind(c, name='gsl_sf_bessel_Knu')
+       import
+       real(c_double), value :: n
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_knu
+     end function gsl_sf_bessel_knu
+     function gsl_sf_bessel_knu_e(n, x, result) bind(c, name='gsl_sf_bessel_Knu_e')
+       import
+       real(c_double), value :: n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_knu_e
+     end function gsl_sf_bessel_knu_e
+     function gsl_sf_bessel_lnknu(n,x) bind(c, name='gsl_sf_bessel_lnKnu')
+       import
+       real(c_double), value :: n
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_lnknu
+     end function gsl_sf_bessel_lnknu
+     function gsl_sf_bessel_lnknu_e(n, x, result) bind(c, name='gsl_sf_bessel_lnKnu_e')
+       import
+       real(c_double), value :: n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_lnknu_e
+     end function gsl_sf_bessel_lnknu_e
+     function gsl_sf_bessel_knu_scaled(n,x) bind(c, name='gsl_sf_bessel_Knu_scaled')
+       import
+       real(c_double), value :: n
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_bessel_knu_scaled
+     end function gsl_sf_bessel_knu_scaled
+     function gsl_sf_bessel_knu_scaled_e(n, x, result) bind(c, name='gsl_sf_bessel_Knu_scaled_e')
+       import
+       real(c_double), value :: n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_knu_scaled_e
+     end function gsl_sf_bessel_knu_scaled_e
+     function gsl_sf_bessel_zero_jc0 (s) bind(c, name='gsl_sf_bessel_zero_J0')
+       import
+       integer(c_int), value :: s
+       real(c_double) :: gsl_sf_bessel_zero_jc0
+     end function gsl_sf_bessel_zero_jc0
+     function gsl_sf_bessel_zero_jc0_e (s, result) bind(c, name='gsl_sf_bessel_zero_J0_e')
+       import
+       integer(c_int), value :: s
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_zero_jc0_e
+     end function gsl_sf_bessel_zero_jc0_e
+     function gsl_sf_bessel_zero_jc1 (s) bind(c, name='gsl_sf_bessel_zero_J1')
+       import
+       integer(c_int), value :: s
+       real(c_double) :: gsl_sf_bessel_zero_jc1
+     end function gsl_sf_bessel_zero_jc1
+     function gsl_sf_bessel_zero_jc1_e (s, result) bind(c, name='gsl_sf_bessel_zero_J1_e')
+       import
+       integer(c_int), value :: s
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_zero_jc1_e
+     end function gsl_sf_bessel_zero_jc1_e
+     function gsl_sf_bessel_zero_jnu(nu, s) bind(c, name='gsl_sf_bessel_zero_Jnu')
+       import
+       real(c_double), value :: nu
+       integer(c_int), value :: s
+       real(c_double) :: gsl_sf_bessel_zero_jnu
+     end function gsl_sf_bessel_zero_jnu
+     function gsl_sf_bessel_zero_jnu_e (nu, s, result) bind(c, name='gsl_sf_bessel_zero_Jnu_e')
+       import
+       real(c_double), value :: nu
+       integer(c_int), value :: s
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_bessel_zero_jnu_e
+     end function gsl_sf_bessel_zero_jnu_e
+!
+     function gsl_sf_clausen(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_clausen
+     end function gsl_sf_clausen
+     function gsl_sf_clausen_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_clausen_e
+     end function gsl_sf_clausen_e
+     function gsl_sf_hydrogenicr_1(z, r) bind(c, name='gsl_sf_hydrogenicR_1')
+       import
+       real(c_double), value :: z, r
+       real(c_double) :: gsl_sf_hydrogenicr_1
+     end function gsl_sf_hydrogenicr_1
+     function gsl_sf_hydrogenicr_1_e(z, r, result) bind(c, name='gsl_sf_hydrogenicR_1_e')
+       import
+       real(c_double), value :: z, r
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_hydrogenicr_1_e
+     end function gsl_sf_hydrogenicr_1_e
+     function gsl_sf_hydrogenicr(n, l, z, r) bind(c, name='gsl_sf_hydrogenicR')
+       import
+       integer(c_int), value :: n, l
+       real(c_double), value :: z, r
+       real(c_double) :: gsl_sf_hydrogenicr
+     end function gsl_sf_hydrogenicr
+     function gsl_sf_hydrogenicr_e(n, l, z, r, result) &
+          bind(c, name='gsl_sf_hydrogenicR_e')
+       import
+       integer(c_int), value :: n, l
+       real(c_double), value :: z, r
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_hydrogenicr_e
+     end function gsl_sf_hydrogenicr_e
+     function gsl_sf_coulomb_wave_fg_e(eta, x, l_f, k, f, fp, g, gp, exp_f, exp_g) &
+          bind(c, name='gsl_sf_coulomb_wave_FG_e')
+       import
+       real(c_double), value :: eta, x, l_f
+       integer(c_int), value :: k
+       type(gsl_sf_result), intent(out) :: f, fp, g, gp
+       real(c_double), intent(out) :: exp_f, exp_g
+       integer(c_int) :: gsl_sf_coulomb_wave_fg_e
+     end function gsl_sf_coulomb_wave_fg_e
+     function gsl_sf_coulomb_wave_f_array (l_min, kmax, eta, x, fc_array, &
+          f_exponent) bind(c, name='gsl_sf_coulomb_wave_F_array') 
+       import
+       real(c_double), value :: l_min, eta, x
+       integer(c_int), value :: kmax
+       real(c_double), dimension(*), intent(out) :: fc_array
+       real(c_double), intent(out) :: f_exponent
+       integer(c_int) :: gsl_sf_coulomb_wave_f_array
+     end function gsl_sf_coulomb_wave_f_array
+     function gsl_sf_coulomb_wave_fg_array (l_min, kmax, eta, x, fc_array, &
+          gc_array, f_exponent, g_exponent) bind(c, name='gsl_sf_coulomb_wave_FG_array') 
+       import
+       real(c_double), value :: l_min, eta, x
+       integer(c_int), value :: kmax
+       real(c_double), dimension(*), intent(out) :: fc_array, gc_array
+       real(c_double), intent(out) :: f_exponent, g_exponent
+       integer(c_int) :: gsl_sf_coulomb_wave_fg_array
+     end function gsl_sf_coulomb_wave_fg_array
+     function gsl_sf_coulomb_wave_fgp_array (l_min, kmax, eta, x, fc_array, fcp_array, &
+          gc_array, gcp_array, f_exponent, g_exponent) &
+          bind(c, name='gsl_sf_coulomb_wave_FGp_array') 
+       import
+       real(c_double), value :: l_min, eta, x
+       integer(c_int), value :: kmax
+       real(c_double), dimension(*), intent(out) :: fc_array, gc_array, &
+            fcp_array, gcp_array
+       real(c_double), intent(out) :: f_exponent, g_exponent
+       integer(c_int) :: gsl_sf_coulomb_wave_fgp_array
+     end function gsl_sf_coulomb_wave_fgp_array
+     function gsl_sf_coulomb_wave_sphf_array (l_min, kmax, eta, x, fc_array, &
+          f_exponent) bind(c, name='gsl_sf_coulomb_wave_sphF_array') 
+       import
+       real(c_double), value :: l_min, eta, x
+       integer(c_int), value :: kmax
+       real(c_double), dimension(*), intent(out) :: fc_array
+       real(c_double), intent(out) :: f_exponent
+       integer(c_int) :: gsl_sf_coulomb_wave_sphf_array
+     end function gsl_sf_coulomb_wave_sphf_array
+     function gsl_sf_coulomb_cl_e(l, eta, result) bind(c, name='gsl_sf_coulomb_CL_e')
+       import
+       real(c_double), value :: eta, l
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_coulomb_cl_e
+     end function gsl_sf_coulomb_cl_e
+     function gsl_sf_coulomb_cl_array (l_min, kmax, eta, cl) &
+          bind(c, name='gsl_sf_coulomb_CL_array')
+       import
+       real(c_double), value :: l_min, eta
+       integer(c_int), value :: kmax
+       real(c_double), dimension(*), intent(out) :: cl
+       integer(c_int) :: gsl_sf_coulomb_cl_array
+     end function gsl_sf_coulomb_cl_array
+     function gsl_sf_coupling_3j(two_ja, two_jb, two_jc, two_ma, two_mb, two_mc) bind(c)
+       import
+       integer(c_int), value :: two_ja, two_jb, two_jc, two_ma, two_mb, two_mc
+       real(c_double) :: gsl_sf_coupling_3j
+     end function gsl_sf_coupling_3j
+     function gsl_sf_coupling_3j_e(two_ja, two_jb, two_jc, two_ma, two_mb, two_mc, result) &
+          bind(c)
+       import
+       integer(c_int), value :: two_ja, two_jb, two_jc, two_ma, two_mb, two_mc
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_coupling_3j_e
+     end function gsl_sf_coupling_3j_e
+     function gsl_sf_coupling_6j(two_ja, two_jb, two_jc, two_jd, two_je, two_jf) bind(c)
+       import
+       integer(c_int), value :: two_ja, two_jb, two_jc, two_jd, two_je, two_jf
+       real(c_double) :: gsl_sf_coupling_6j
+     end function gsl_sf_coupling_6j
+     function gsl_sf_coupling_6j_e(two_ja, two_jb, two_jc, two_jd, two_je, two_jf, result) &
+          bind(c)
+       import
+       integer(c_int), value :: two_ja, two_jb, two_jc, two_jd, two_je, two_jf
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_coupling_6j_e
+     end function gsl_sf_coupling_6j_e
+     function gsl_sf_coupling_9j(two_ja, two_jb, two_jc, two_jd, two_je, two_jf, &
+          two_jg, two_jh, two_ji) bind(c)
+       import
+       integer(c_int), value :: two_ja, two_jb, two_jc, two_jd, two_je, two_jf, &
+            two_jg, two_jh, two_ji
+       real(c_double) :: gsl_sf_coupling_9j
+     end function gsl_sf_coupling_9j
+     function gsl_sf_coupling_9j_e(two_ja, two_jb, two_jc, two_jd, two_je, two_jf, &
+          two_jg, two_jh, two_ji, result) bind(c)
+       import
+       integer(c_int), value :: two_ja, two_jb, two_jc, two_jd, two_je, two_jf, &
+            two_jg, two_jh, two_ji
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_coupling_9j_e
+     end function gsl_sf_coupling_9j_e
+     function gsl_sf_dawson(x) bind(c, name='gsl_sf_dawson')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_dawson
+     end function gsl_sf_dawson
+     function gsl_sf_dawson_e(x, result) bind(c, name='gsl_sf_dawson_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_dawson_e
+     end function gsl_sf_dawson_e
+     function gsl_sf_debye_1(x) bind(c, name='gsl_sf_debye_1')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_debye_1
+     end function gsl_sf_debye_1
+     function gsl_sf_debye_1_e(x, result) bind(c, name='gsl_sf_debye_1_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_debye_1_e
+     end function gsl_sf_debye_1_e
+     function gsl_sf_debye_2(x) bind(c, name='gsl_sf_debye_2')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_debye_2
+     end function gsl_sf_debye_2
+     function gsl_sf_debye_2_e(x, result) bind(c, name='gsl_sf_debye_2_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_debye_2_e
+     end function gsl_sf_debye_2_e
+     function gsl_sf_debye_3(x) bind(c, name='gsl_sf_debye_3')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_debye_3
+     end function gsl_sf_debye_3
+     function gsl_sf_debye_3_e(x, result) bind(c, name='gsl_sf_debye_3_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_debye_3_e
+     end function gsl_sf_debye_3_e
+     function gsl_sf_debye_4(x) bind(c, name='gsl_sf_debye_4')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_debye_4
+     end function gsl_sf_debye_4
+     function gsl_sf_debye_4_e(x, result) bind(c, name='gsl_sf_debye_4_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_debye_4_e
+     end function gsl_sf_debye_4_e
+     function gsl_sf_debye_5(x) bind(c, name='gsl_sf_debye_5')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_debye_5
+     end function gsl_sf_debye_5
+     function gsl_sf_debye_5_e(x, result) bind(c, name='gsl_sf_debye_5_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_debye_5_e
+     end function gsl_sf_debye_5_e
+     function gsl_sf_debye_6(x) bind(c, name='gsl_sf_debye_6')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_debye_6
+     end function gsl_sf_debye_6
+     function gsl_sf_debye_6_e(x, result) bind(c, name='gsl_sf_debye_6_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_debye_6_e
+     end function gsl_sf_debye_6_e
+     function gsl_sf_dilog(x) bind(c, name='gsl_sf_dilog')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_dilog
+     end function gsl_sf_dilog
+     function gsl_sf_dilog_e(x, result) bind(c, name='gsl_sf_dilog_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_dilog_e
+     end function gsl_sf_dilog_e
+     function gsl_sf_complex_dilog_e(r, theta, result_re, result_im) bind(c) 
+       import
+       real(c_double), value :: r, theta
+       type(gsl_sf_result), intent(out) :: result_re, result_im
+       integer(c_int) :: gsl_sf_complex_dilog_e
+     end function gsl_sf_complex_dilog_e
+     function gsl_sf_multiply_e(x, y, result) bind(c)
+       import
+       real(c_double), value :: x, y
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_multiply_e       
+     end function gsl_sf_multiply_e
+     function gsl_sf_multiply_err_e(x, dx, y, dy, result) bind(c)
+       import
+       real(c_double), value :: x, y, dx, dy
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_multiply_err_e       
+     end function gsl_sf_multiply_err_e
+     function gsl_sf_ellint_kcomp(k, mode) bind(c, name='gsl_sf_ellint_Kcomp')
+       import
+       real(c_double), value :: k
+       integer(c_int), value :: mode
+       real(c_double) :: gsl_sf_ellint_kcomp
+     end function gsl_sf_ellint_kcomp
+     function gsl_sf_ellint_kcomp_e(k, mode, result) bind(c, name='gsl_sf_ellint_Kcomp_e')
+       import
+       real(c_double), value :: k
+       integer(c_int), value :: mode
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_ellint_kcomp_e
+     end function gsl_sf_ellint_kcomp_e
+     function gsl_sf_ellint_ecomp(k, mode) bind(c, name='gsl_sf_ellint_Ecomp')
+       import
+       real(c_double), value :: k
+       integer(c_int), value :: mode
+       real(c_double) :: gsl_sf_ellint_ecomp
+     end function gsl_sf_ellint_ecomp
+     function gsl_sf_ellint_ecomp_e(k, mode, result) bind(c, name='gsl_sf_ellint_Ecomp_e')
+       import
+       real(c_double), value :: k
+       integer(c_int), value :: mode
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_ellint_ecomp_e
+     end function gsl_sf_ellint_ecomp_e
+     function gsl_sf_ellint_pcomp(k, n, mode) bind(c, name='gsl_sf_ellint_Pcomp')
+       import
+       real(c_double), value :: k, n
+       integer(c_int), value :: mode
+       real(c_double) :: gsl_sf_ellint_pcomp
+     end function gsl_sf_ellint_pcomp
+     function gsl_sf_ellint_pcomp_e(k, n, mode, result) bind(c, name='gsl_sf_ellint_Pcomp_e')
+       import
+       real(c_double), value :: k, n
+       integer(c_int), value :: mode
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_ellint_pcomp_e
+     end function gsl_sf_ellint_pcomp_e
+     function gsl_sf_ellint_f(phi, k, mode) bind(c, name='gsl_sf_ellint_F')
+       import
+       real(c_double), value :: phi, k
+       integer(c_int), value :: mode
+       real(c_double) :: gsl_sf_ellint_f
+     end function gsl_sf_ellint_f
+     function gsl_sf_ellint_f_e(phi, k, mode, result) bind(c, name='gsl_sf_ellint_F_e')
+       import
+       real(c_double), value :: phi, k
+       integer(c_int), value :: mode
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_ellint_f_e
+     end function gsl_sf_ellint_f_e
+     function gsl_sf_ellint_e(phi, k, mode) bind(c, name='gsl_sf_ellint_E')
+       import
+       real(c_double), value :: phi, k
+       integer(c_int), value :: mode
+       real(c_double) :: gsl_sf_ellint_e
+     end function gsl_sf_ellint_e
+     function gsl_sf_ellint_e_e(phi, k, mode, result) bind(c, name='gsl_sf_ellint_E_e')
+       import
+       real(c_double), value :: phi, k
+       integer(c_int), value :: mode
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_ellint_e_e
+     end function gsl_sf_ellint_e_e
+     function gsl_sf_ellint_p(phi, k, n, mode) bind(c, name='gsl_sf_ellint_P')
+       import
+       real(c_double), value :: phi, k, n
+       integer(c_int), value :: mode
+       real(c_double) :: gsl_sf_ellint_p
+     end function gsl_sf_ellint_p
+     function gsl_sf_ellint_p_e(phi, k, n, mode, result) bind(c, name='gsl_sf_ellint_P_e')
+       import
+       real(c_double), value :: phi, k, n
+       integer(c_int), value :: mode
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_ellint_p_e
+     end function gsl_sf_ellint_p_e
+     function gsl_sf_ellint_d(phi, k, n, mode) bind(c, name='gsl_sf_ellint_D')
+       import
+       real(c_double), value :: phi, k, n
+       integer(c_int), value :: mode
+       real(c_double) :: gsl_sf_ellint_d
+     end function gsl_sf_ellint_d
+     function gsl_sf_ellint_d_e(phi, k, n, mode, result) bind(c, name='gsl_sf_ellint_D_e')
+       import
+       real(c_double), value :: phi, k, n
+       integer(c_int), value :: mode
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_ellint_d_e
+     end function gsl_sf_ellint_d_e
+     function gsl_sf_ellint_rc(x, y, mode) bind(c, name='gsl_sf_ellint_RC')
+       import
+       real(c_double), value :: x, y
+       integer(c_int), value :: mode
+       real(c_double) :: gsl_sf_ellint_rc
+     end function gsl_sf_ellint_rc
+     function gsl_sf_ellint_rc_e(x, y, mode, result) bind(c, name='gsl_sf_ellint_RC_e')
+       import
+       real(c_double), value :: x, y
+       integer(c_int), value :: mode
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_ellint_rc_e
+     end function gsl_sf_ellint_rc_e
+     function gsl_sf_ellint_rd(x, y, z, mode) bind(c, name='gsl_sf_ellint_RD')
+       import
+       real(c_double), value :: x, y, z
+       integer(c_int), value :: mode
+       real(c_double) :: gsl_sf_ellint_rd
+     end function gsl_sf_ellint_rd
+     function gsl_sf_ellint_rd_e(x, y, z, mode, result) bind(c, name='gsl_sf_ellint_RD_e')
+       import
+       real(c_double), value :: x, y, z
+       integer(c_int), value :: mode
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_ellint_rd_e
+     end function gsl_sf_ellint_rd_e
+     function gsl_sf_ellint_rf(x, y, z, mode) bind(c, name='gsl_sf_ellint_RF')
+       import
+       real(c_double), value :: x, y, z
+       integer(c_int), value :: mode
+       real(c_double) :: gsl_sf_ellint_rf
+     end function gsl_sf_ellint_rf
+     function gsl_sf_ellint_rf_e(x, y, z, mode, result) bind(c, name='gsl_sf_ellint_RF_e')
+       import
+       real(c_double), value :: x, y, z
+       integer(c_int), value :: mode
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_ellint_rf_e
+     end function gsl_sf_ellint_rf_e
+     function gsl_sf_ellint_rj(x, y, z, p, mode) bind(c, name='gsl_sf_ellint_RJ')
+       import
+       real(c_double), value :: x, y, z, p
+       integer(c_int), value :: mode
+       real(c_double) :: gsl_sf_ellint_rj
+     end function gsl_sf_ellint_rj
+     function gsl_sf_ellint_rj_e(x, y, z, p, mode, result) bind(c, name='gsl_sf_ellint_RJ_e')
+       import
+       real(c_double), value :: x, y, z, p
+       integer(c_int), value :: mode
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_ellint_rj_e
+     end function gsl_sf_ellint_rj_e
+     function gsl_sf_elljac_e(u, m, sn, cn, dn) bind(c)
+       import
+       real(c_double), value :: u, m
+       real(c_double), intent(out) :: sn, cn, dn
+       integer(c_int) :: gsl_sf_elljac_e
+     end function gsl_sf_elljac_e
+     function gsl_sf_erf(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_erf
+     end function gsl_sf_erf
+     function gsl_sf_erf_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_erf_e
+     end function gsl_sf_erf_e
+     function gsl_sf_erfc(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_erfc
+     end function gsl_sf_erfc
+     function gsl_sf_erfc_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_erfc_e
+     end function gsl_sf_erfc_e
+     function gsl_sf_log_erfc(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_log_erfc
+     end function gsl_sf_log_erfc
+     function gsl_sf_log_erfc_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_log_erfc_e
+     end function gsl_sf_log_erfc_e
+     function gsl_sf_erf_z(x) bind(c, name='gsl_sf_erf_Z')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_erf_Z
+     end function gsl_sf_erf_z
+     function gsl_sf_erf_z_e(x, result) bind(c, name='gsl_sf_erf_Z_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_erf_z_e
+     end function gsl_sf_erf_z_e
+     function gsl_sf_erf_q(x) bind(c, name='gsl_sf_erf_Q')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_erf_q
+     end function gsl_sf_erf_q
+     function gsl_sf_erf_q_e(x, result) bind(c, name='gsl_sf_erf_Q_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_erf_q_e
+     end function gsl_sf_erf_q_e
+     function gsl_sf_hazard(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_hazard
+     end function gsl_sf_hazard
+     function gsl_sf_hazard_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_hazard_e
+     end function gsl_sf_hazard_e
+     function gsl_sf_exp(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_exp
+     end function gsl_sf_exp
+     function gsl_sf_exp_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_exp_e
+     end function gsl_sf_exp_e
+     function gsl_sf_exp_e10_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result_e10), intent(out) :: result
+       integer(c_int) :: gsl_sf_exp_e10_e
+     end function gsl_sf_exp_e10_e
+     function gsl_sf_exp_mult(x, y) bind(c)
+       import
+       real(c_double), value :: x, y
+       real(c_double) :: gsl_sf_exp_mult
+     end function gsl_sf_exp_mult
+     function gsl_sf_exp_mult_e(x, y, result) bind(c)
+       import
+       real(c_double), value :: x, y
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_exp_mult_e
+     end function gsl_sf_exp_mult_e
+     function gsl_sf_exp_mult_e10_e(x, y, result) bind(c)
+       import
+       real(c_double), value :: x, y
+       type(gsl_sf_result_e10), intent(out) :: result
+       integer(c_int) :: gsl_sf_exp_mult_e10_e
+     end function gsl_sf_exp_mult_e10_e
+     function gsl_sf_expm1(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_expm1
+     end function gsl_sf_expm1
+     function gsl_sf_expm1_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_expm1_e
+     end function gsl_sf_expm1_e
+     function gsl_sf_exprel(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_exprel
+     end function gsl_sf_exprel
+     function gsl_sf_exprel_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_exprel_e
+     end function gsl_sf_exprel_e
+     function gsl_sf_exprel_2(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_exprel_2
+     end function gsl_sf_exprel_2
+     function gsl_sf_exprel_2_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_exprel_2_e
+     end function gsl_sf_exprel_2_e
+     function gsl_sf_exprel_n(n, x) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_exprel_n
+     end function gsl_sf_exprel_n
+     function gsl_sf_exprel_n_e(n, x, result) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_exprel_n_e
+     end function gsl_sf_exprel_n_e
+     function gsl_sf_exp_err_e(x, dx, result) bind(c)
+       import
+       real(c_double), value :: x, dx
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_exp_err_e
+     end function gsl_sf_exp_err_e
+     function gsl_sf_exp_err_e10_e(x, dx, result) bind(c)
+       import
+       real(c_double), value :: x, dx
+       type(gsl_sf_result_e10), intent(out) :: result
+       integer(c_int) :: gsl_sf_exp_err_e10_e
+     end function gsl_sf_exp_err_e10_e
+     function gsl_sf_exp_mult_err_e(x, dx, y, dy, result) bind(c)
+       import
+       real(c_double), value :: x, dx, y, dy
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_exp_mult_err_e
+     end function gsl_sf_exp_mult_err_e
+     function gsl_sf_exp_mult_err_e10_e(x, dx, y, dy, result) bind(c)
+       import
+       real(c_double), value :: x, dx, y, dy
+       type(gsl_sf_result_e10), intent(out) :: result
+       integer(c_int) :: gsl_sf_exp_mult_err_e10_e
+     end function gsl_sf_exp_mult_err_e10_e
+     function gsl_sf_expint_e1(x) bind(c, name='gsl_sf_expint_E1')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_expint_e1
+     end function gsl_sf_expint_e1
+     function gsl_sf_expint_e1_e(x, result) bind(c, name='gsl_sf_expint_E1_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_expint_e1_e
+     end function gsl_sf_expint_e1_e
+     function gsl_sf_expint_e2(x) bind(c, name='gsl_sf_expint_E2')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_expint_e2
+     end function gsl_sf_expint_e2
+     function gsl_sf_expint_e2_e(x, result) bind(c, name='gsl_sf_expint_E2_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_expint_e2_e
+     end function gsl_sf_expint_e2_e
+     function gsl_sf_expint_en(n, x) bind(c, name='gsl_sf_expint_En')
+       import 
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_expint_en
+     end function gsl_sf_expint_en
+     function gsl_sf_expint_en_e(n, x, result) bind(c, name='gsl_sf_expint_En_e')
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_expint_en_e
+     end function gsl_sf_expint_en_e
+      function gsl_sf_expint_ei(x) bind(c, name='gsl_sf_expint_Ei')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_expint_ei
+     end function gsl_sf_expint_ei
+     function gsl_sf_expint_ei_e(x, result) bind(c, name='gsl_sf_expint_Ei_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_expint_ei_e
+     end function gsl_sf_expint_ei_e
+     function gsl_sf_shi(x) bind(c, name='gsl_sf_Shi')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_shi
+     end function gsl_sf_shi
+     function gsl_sf_shi_e(x, result) bind(c, name='gsl_sf_Shi_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_shi_e
+     end function gsl_sf_shi_e
+     function gsl_sf_chi(x) bind(c, name='gsl_sf_Chi')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_chi
+     end function gsl_sf_chi
+     function gsl_sf_chi_e(x, result) bind(c, name='gsl_sf_Chi_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_chi_e
+     end function gsl_sf_chi_e
+     function gsl_sf_expint_3(x) bind(c, name='gsl_sf_expint_3')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_expint_3
+     end function gsl_sf_expint_3
+     function gsl_sf_expint_3_e(x, result) bind(c, name='gsl_sf_expint_3_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_expint_3_e
+     end function gsl_sf_expint_3_e
+     function gsl_sf_si(x) bind(c, name='gsl_sf_Si')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_si
+     end function gsl_sf_si
+     function gsl_sf_si_e(x, result) bind(c, name='gsl_sf_Si_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_si_e
+     end function gsl_sf_si_e
+     function gsl_sf_ci(x) bind(c, name='gsl_sf_Ci')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_ci
+     end function gsl_sf_ci
+     function gsl_sf_ci_e(x, result) bind(c, name='gsl_sf_Ci_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_ci_e
+     end function gsl_sf_ci_e
+     function gsl_sf_atanint(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_atanint
+     end function gsl_sf_atanint
+     function gsl_sf_atanint_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_atanint_e
+     end function gsl_sf_atanint_e
+     function gsl_sf_fermi_dirac_m1(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_fermi_dirac_m1
+     end function gsl_sf_fermi_dirac_m1
+     function gsl_sf_fermi_dirac_m1_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_fermi_dirac_m1_e
+     end function gsl_sf_fermi_dirac_m1_e
+     function gsl_sf_fermi_dirac_0(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_fermi_dirac_0
+     end function gsl_sf_fermi_dirac_0
+     function gsl_sf_fermi_dirac_0_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_fermi_dirac_0_e
+     end function gsl_sf_fermi_dirac_0_e
+     function gsl_sf_fermi_dirac_1(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_fermi_dirac_1
+     end function gsl_sf_fermi_dirac_1
+     function gsl_sf_fermi_dirac_1_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_fermi_dirac_1_e
+     end function gsl_sf_fermi_dirac_1_e
+     function gsl_sf_fermi_dirac_2(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_fermi_dirac_2
+     end function gsl_sf_fermi_dirac_2
+     function gsl_sf_fermi_dirac_2_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_fermi_dirac_2_e
+     end function gsl_sf_fermi_dirac_2_e
+     function gsl_sf_fermi_dirac_int(i, x) bind(c)
+       import
+       integer(c_int), value :: i
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_fermi_dirac_int
+     end function gsl_sf_fermi_dirac_int
+     function gsl_sf_fermi_dirac_int_e(i, x, result) bind(c)
+       import
+       integer(c_int), value :: i
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_fermi_dirac_int_e
+     end function gsl_sf_fermi_dirac_int_e
+     function gsl_sf_fermi_dirac_mhalf(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_fermi_dirac_mhalf
+     end function gsl_sf_fermi_dirac_mhalf
+     function gsl_sf_fermi_dirac_mhalf_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_fermi_dirac_mhalf_e
+     end function gsl_sf_fermi_dirac_mhalf_e
+     function gsl_sf_fermi_dirac_half(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_fermi_dirac_half
+     end function gsl_sf_fermi_dirac_half
+     function gsl_sf_fermi_dirac_half_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_fermi_dirac_half_e
+     end function gsl_sf_fermi_dirac_half_e
+     function gsl_sf_fermi_dirac_3half(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_fermi_dirac_3half
+     end function gsl_sf_fermi_dirac_3half
+     function gsl_sf_fermi_dirac_3half_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_fermi_dirac_3half_e
+     end function gsl_sf_fermi_dirac_3half_e
+     function gsl_sf_fermi_dirac_inc_0(x, b) bind(c)
+       import
+       real(c_double), value :: x, b
+       real(c_double) :: gsl_sf_fermi_dirac_inc_0
+     end function gsl_sf_fermi_dirac_inc_0
+     function gsl_sf_fermi_dirac_inc_0_e(x, b, result) bind(c)
+       import
+       real(c_double), value :: x, b
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_fermi_dirac_inc_0_e
+     end function gsl_sf_fermi_dirac_inc_0_e
+     function gsl_sf_gamma(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_gamma
+     end function gsl_sf_gamma
+     function gsl_sf_gamma_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_gamma_e
+     end function gsl_sf_gamma_e
+     function gsl_sf_lngamma(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_lngamma
+     end function gsl_sf_lngamma
+     function gsl_sf_lngamma_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_lngamma_e
+     end function gsl_sf_lngamma_e
+     function gsl_sf_lngamma_sgn_e(x, result_lg, sgn) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result_lg
+       real(c_double), intent(out) :: sgn
+       integer(c_int) :: gsl_sf_lngamma_sgn_e
+     end function gsl_sf_lngamma_sgn_e
+     function gsl_sf_gammastar(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_gammastar
+     end function gsl_sf_gammastar
+     function gsl_sf_gammastar_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_gammastar_e
+     end function gsl_sf_gammastar_e
+     function gsl_sf_gammainv(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_gammainv
+     end function gsl_sf_gammainv
+     function gsl_sf_gammainv_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_gammainv_e
+     end function gsl_sf_gammainv_e
+     function gsl_sf_lngamma_complex_e(zr, zi, lnr, arg) bind(c)
+       import
+       real(c_double), value :: zr, zi
+       type(gsl_sf_result), intent(out) :: lnr, arg
+       integer(c_int) :: gsl_sf_lngamma_complex_e
+     end function gsl_sf_lngamma_complex_e
+     function gsl_sf_fact(n) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double) :: gsl_sf_fact
+     end function gsl_sf_fact
+     function gsl_sf_fact_e(n, result) bind(c)
+       import
+       integer(c_int), value :: n
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_fact_e
+     end function gsl_sf_fact_e
+     function gsl_sf_doublefact(n) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double) :: gsl_sf_doublefact
+     end function gsl_sf_doublefact
+     function gsl_sf_doublefact_e(n, result) bind(c)
+       import
+       integer(c_int), value :: n
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_doublefact_e
+     end function gsl_sf_doublefact_e
+     function gsl_sf_lnfact(n) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double) :: gsl_sf_lnfact
+     end function gsl_sf_lnfact
+     function gsl_sf_lnfact_e(n, result) bind(c)
+       import
+       integer(c_int), value :: n
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_lnfact_e
+     end function gsl_sf_lnfact_e
+     function gsl_sf_lndoublefact(n) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double) :: gsl_sf_lndoublefact
+     end function gsl_sf_lndoublefact
+     function gsl_sf_lndoublefact_e(n, result) bind(c)
+       import
+       integer(c_int), value :: n
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_lndoublefact_e
+     end function gsl_sf_lndoublefact_e
+     function gsl_sf_choose(n, m) bind(c)
+       import
+       integer(c_int), value :: n, m
+       real(c_double) :: gsl_sf_choose
+     end function gsl_sf_choose
+     function gsl_sf_choose_e(n, m, result) bind(c)
+       import
+       integer(c_int), value :: n, m
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_choose_e
+     end function gsl_sf_choose_e
+     function gsl_sf_lnchoose(n, m) bind(c)
+       import
+       integer(c_int), value :: n, m
+       real(c_double) :: gsl_sf_lnchoose
+     end function gsl_sf_lnchoose
+     function gsl_sf_lnchoose_e(n, m, result) bind(c)
+       import
+       integer(c_int), value :: n, m
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_lnchoose_e
+     end function gsl_sf_lnchoose_e
+     function gsl_sf_taylorcoeff(n, x) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_taylorcoeff
+     end function gsl_sf_taylorcoeff
+     function gsl_sf_taylorcoeff_e(n, x, result) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_taylorcoeff_e
+     end function gsl_sf_taylorcoeff_e
+     function gsl_sf_poch(a, x) bind(c)
+       import
+       real(c_double), value :: a, x
+       real(c_double) :: gsl_sf_poch
+     end function gsl_sf_poch
+     function gsl_sf_poch_e(a, x, result) bind(c)
+       import
+       real(c_double), value :: a, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_poch_e
+     end function gsl_sf_poch_e
+     function gsl_sf_lnpoch(a, x) bind(c)
+       import
+       real(c_double), value :: a, x
+       real(c_double) :: gsl_sf_lnpoch
+     end function gsl_sf_lnpoch
+     function gsl_sf_lnpoch_e(a, x, result) bind(c)
+       import
+       real(c_double), value :: a, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_lnpoch_e
+     end function gsl_sf_lnpoch_e
+     function gsl_sf_lnpoch_sgn_e(a, x, result_lg, sgn) bind(c)
+       import
+       real(c_double), value :: a, x
+       type(gsl_sf_result), intent(out) :: result_lg
+       real(c_double), intent(out) :: sgn
+       integer(c_int) :: gsl_sf_lnpoch_sgn_e
+     end function gsl_sf_lnpoch_sgn_e
+     function gsl_sf_pochrel(a, x) bind(c)
+       import
+       real(c_double), value :: a, x
+       real(c_double) :: gsl_sf_pochrel
+     end function gsl_sf_pochrel
+     function gsl_sf_pochrel_e(a, x, result) bind(c)
+       import
+       real(c_double), value :: a, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_pochrel_e
+     end function gsl_sf_pochrel_e
+     function gsl_sf_gamma_inc(a, x) bind(c)
+       import
+       real(c_double), value :: a, x
+       real(c_double) :: gsl_sf_gamma_inc
+     end function gsl_sf_gamma_inc
+     function gsl_sf_gamma_inc_e(a, x, result) bind(c)
+       import
+       real(c_double), value :: a, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_gamma_inc_e
+     end function gsl_sf_gamma_inc_e
+     function gsl_sf_gamma_inc_q(a, x) bind(c, name='gsl_sf_gamma_inc_Q')
+       import
+       real(c_double), value :: a, x
+       real(c_double) :: gsl_sf_gamma_inc_q
+     end function gsl_sf_gamma_inc_q
+     function gsl_sf_gamma_inc_q_e(a, x, result) bind(c, name='gsl_sf_gamma_inc_Q_e')
+       import
+       real(c_double), value :: a, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_gamma_inc_q_e
+     end function gsl_sf_gamma_inc_q_e
+     function gsl_sf_gamma_inc_p(a, x) bind(c, name='gsl_sf_gamma_inc_P')
+       import
+       real(c_double), value :: a, x
+       real(c_double) :: gsl_sf_gamma_inc_p
+     end function gsl_sf_gamma_inc_p
+     function gsl_sf_gamma_inc_p_e(a, x, result) bind(c, name='gsl_sf_gamma_inc_P_e')
+       import
+       real(c_double), value :: a, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_gamma_inc_p_e
+     end function gsl_sf_gamma_inc_p_e
+     function gsl_sf_beta(a, b) bind(c)
+       import
+       real(c_double), value :: a, b
+       real(c_double) :: gsl_sf_beta
+     end function gsl_sf_beta
+     function gsl_sf_beta_e(a, b, result) bind(c)
+       import
+       real(c_double), value :: a, b
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_beta_e
+     end function gsl_sf_beta_e
+     function gsl_sf_lnbeta(a, b) bind(c)
+       import
+       real(c_double), value :: a, b
+       real(c_double) :: gsl_sf_lnbeta
+     end function gsl_sf_lnbeta
+     function gsl_sf_lnbeta_e(a, b, result) bind(c)
+       import
+       real(c_double), value :: a, b
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_lnbeta_e
+     end function gsl_sf_lnbeta_e
+     function gsl_sf_beta_inc(a, b, x) bind(c)
+       import
+       real(c_double), value :: a, b, x
+       real(c_double) :: gsl_sf_beta_inc
+     end function gsl_sf_beta_inc
+     function gsl_sf_beta_inc_e(a, b, x, result) bind(c)
+       import
+       real(c_double), value :: a, b, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_beta_inc_e
+     end function gsl_sf_beta_inc_e
+     function gsl_sf_gegenpoly_1(lambda, x) bind(c)
+       import
+       real(c_double), value :: lambda, x
+       real(c_double) :: gsl_sf_gegenpoly_1
+     end function gsl_sf_gegenpoly_1
+     function gsl_sf_gegenpoly_1_e(lambda, x, result) bind(c)
+       import
+       real(c_double), value :: lambda, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_gegenpoly_1_e
+     end function gsl_sf_gegenpoly_1_e
+     function gsl_sf_gegenpoly_2(lambda, x) bind(c)
+       import
+       real(c_double), value :: lambda, x
+       real(c_double) :: gsl_sf_gegenpoly_2
+     end function gsl_sf_gegenpoly_2
+     function gsl_sf_gegenpoly_2_e(lambda, x, result) bind(c)
+       import
+       real(c_double), value :: lambda, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_gegenpoly_2_e
+     end function gsl_sf_gegenpoly_2_e
+     function gsl_sf_gegenpoly_3(lambda, x) bind(c)
+       import
+       real(c_double), value :: lambda, x
+       real(c_double) :: gsl_sf_gegenpoly_3
+     end function gsl_sf_gegenpoly_3
+     function gsl_sf_gegenpoly_3_e(lambda, x, result) bind(c)
+       import
+       real(c_double), value :: lambda, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_gegenpoly_3_e
+     end function gsl_sf_gegenpoly_3_e
+     function gsl_sf_gegenpoly_n(n, lambda, x) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: lambda, x
+       real(c_double) :: gsl_sf_gegenpoly_n
+     end function gsl_sf_gegenpoly_n
+     function gsl_sf_gegenpoly_n_e(n, lambda, x, result) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: lambda, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_gegenpoly_n_e
+     end function gsl_sf_gegenpoly_n_e
+     function gsl_sf_gegenpoly_array(nmax, lambda, x, result_array) bind(c)
+       import
+       integer(c_int), value :: nmax
+       real(c_double), value :: lambda, x
+       real(c_double), dimension(*), intent(out) :: result_array
+       integer(c_int) :: gsl_sf_gegenpoly_array
+     end function gsl_sf_gegenpoly_array
+     function gsl_sf_hyperg_0f1(c, x) bind(c, name='gsl_sf_hyperg_0F1')
+       import
+       real(c_double), value :: c, x
+       real(c_double) :: gsl_sf_hyperg_0F1
+     end function gsl_sf_hyperg_0f1
+     function gsl_sf_hyperg_0f1_e(c, x, result) bind(c, name='gsl_sf_hyperg_0F1_e')
+       import
+       real(c_double), value :: c, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_hyperg_0F1_e
+     end function gsl_sf_hyperg_0f1_e
+     function gsl_sf_hyperg_1f1_int(m, n, x) bind(c, name='gsl_sf_hyperg_1F1_int')
+       import
+       integer(c_int), value :: m, n
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_hyperg_1F1_int
+     end function gsl_sf_hyperg_1f1_int
+     function gsl_sf_hyperg_1f1_int_e(m, n, x, result) bind(c, name='gsl_sf_hyperg_1F1_int_e')
+       import
+       integer(c_int), value :: m, n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_hyperg_1F1_int_e
+     end function gsl_sf_hyperg_1f1_int_e
+     function gsl_sf_hyperg_1f1(a, b, x) bind(c, name='gsl_sf_hyperg_1F1')
+       import
+       real(c_double), value :: a, b, x
+       real(c_double) :: gsl_sf_hyperg_1f1
+     end function gsl_sf_hyperg_1f1
+     function gsl_sf_hyperg_1f1_e(a, b, x, result) bind(c, name='gsl_sf_hyperg_1F1_e')
+       import
+       real(c_double), value :: a, b, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_hyperg_1f1_e
+     end function gsl_sf_hyperg_1f1_e
+     function gsl_sf_hyperg_u_int(m, n, x) bind(c, name='gsl_sf_hyperg_U_int')
+       import
+       integer(c_int), value :: m, n
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_hyperg_u_int
+     end function gsl_sf_hyperg_u_int
+     function gsl_sf_hyperg_u_int_e(m, n, x, result) bind(c, name='gsl_sf_hyperg_U_int_e')
+       import
+       integer(c_int), value :: m, n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_hyperg_u_int_e
+     end function gsl_sf_hyperg_u_int_e
+     function gsl_sf_hyperg_u_int_e10_e(m, n, x, result) bind(c, name='gsl_sf_hyperg_U_int_e10_e')
+       import
+       integer(c_int), value :: m, n
+       real(c_double), value :: x
+       type(gsl_sf_result_e10), intent(out) :: result
+       integer(c_int) :: gsl_sf_hyperg_u_int_e10_e
+     end function gsl_sf_hyperg_u_int_e10_e
+     function gsl_sf_hyperg_u(a, b, x) bind(c, name='gsl_sf_hyperg_U')
+       import
+       real(c_double), value :: a, b, x
+       real(c_double) :: gsl_sf_hyperg_u
+     end function gsl_sf_hyperg_u
+     function gsl_sf_hyperg_u_e(a, b, x, result) bind(c, name='gsl_sf_hyperg_U_e')
+       import
+       real(c_double), value :: a, b, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_hyperg_u_e
+     end function gsl_sf_hyperg_u_e
+     function gsl_sf_hyperg_u_e10_e(a, b, x, result) bind(c, name='gsl_sf_hyperg_U_e10_e')
+       import
+       real(c_double), value :: a, b, x
+       type(gsl_sf_result_e10), intent(out) :: result
+       integer(c_int) :: gsl_sf_hyperg_u_e10_e
+     end function gsl_sf_hyperg_u_e10_e
+     function gsl_sf_hyperg_2f1(a, b, c, x) bind(c, name='gsl_sf_hyperg_2F1')
+       import
+       real(c_double), value :: a, b, c, x
+       real(c_double) :: gsl_sf_hyperg_2f1
+     end function gsl_sf_hyperg_2f1
+     function gsl_sf_hyperg_2f1_e(a, b, c, x, result) bind(c, name='gsl_sf_hyperg_2F1_e')
+       import
+       real(c_double), value :: a, b, c, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_hyperg_2f1_e
+     end function gsl_sf_hyperg_2f1_e
+     function gsl_sf_hyperg_2f1_conj(ar, ai, c, x) bind(c, name='gsl_sf_hyperg_2F1_conj')
+       import
+       real(c_double), value :: ar, ai, c, x
+       real(c_double) :: gsl_sf_hyperg_2f1_conj
+     end function gsl_sf_hyperg_2f1_conj
+     function gsl_sf_hyperg_2f1_conj_e(ar, ai, c, x, result) &
+          bind(c, name='gsl_sf_hyperg_2F1_conj_e')
+       import
+       real(c_double), value :: ar, ai, c, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_hyperg_2f1_conj_e
+     end function gsl_sf_hyperg_2f1_conj_e
+     function gsl_sf_hyperg_2f1_renorm(a, b, c, x) bind(c, name='gsl_sf_hyperg_2F1_renorm')
+       import
+       real(c_double), value :: a, b, c, x
+       real(c_double) :: gsl_sf_hyperg_2f1_renorm
+     end function gsl_sf_hyperg_2f1_renorm
+     function gsl_sf_hyperg_2f1_renorm_e(a, b, c, x, result) &
+          bind(c, name='gsl_sf_hyperg_2F1_renorm_e')
+       import
+       real(c_double), value :: a, b, c, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_hyperg_2f1_renorm_e
+     end function gsl_sf_hyperg_2f1_renorm_e
+     function gsl_sf_hyperg_2f1_conj_renorm(ar, ai, c, x) &
+          bind(c, name='gsl_sf_hyperg_2F1_conj_renorm')
+       import
+       real(c_double), value :: ar, ai, c, x
+       real(c_double) :: gsl_sf_hyperg_2f1_conj_renorm
+     end function gsl_sf_hyperg_2f1_conj_renorm
+     function gsl_sf_hyperg_2f1_conj_renorm_e(ar, ai, c, x, result) &
+          bind(c, name='gsl_sf_hyperg_2F1_conj_renorm_e')
+       import
+       real(c_double), value :: ar, ai, c, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_hyperg_2f1_conj_renorm_e
+     end function gsl_sf_hyperg_2f1_conj_renorm_e
+     function gsl_sf_hyperg_2f0(a, b, x) bind(c, name='gsl_sf_hyperg_2F0')
+       import
+       real(c_double), value :: a, b, x
+       real(c_double) :: gsl_sf_hyperg_2f0
+     end function gsl_sf_hyperg_2f0
+     function gsl_sf_hyperg_2f0_e(a, b, x, result) bind(c, name='gsl_sf_hyperg_2F0_e')
+       import
+       real(c_double), value :: a, b, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_hyperg_2f0_e
+     end function gsl_sf_hyperg_2f0_e
+     function gsl_sf_laguerre_1(a, x) bind(c)
+       import
+       real(c_double), value :: a, x
+       real(c_double) :: gsl_sf_laguerre_1
+     end function gsl_sf_laguerre_1
+     function gsl_sf_laguerre_1_e(a, x, result) bind(c)
+       import
+       real(c_double), value :: a, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_laguerre_1_e
+     end function gsl_sf_laguerre_1_e
+     function gsl_sf_laguerre_2(a, x) bind(c)
+       import
+       real(c_double), value :: a, x
+       real(c_double) :: gsl_sf_laguerre_2
+     end function gsl_sf_laguerre_2
+     function gsl_sf_laguerre_2_e(a, x, result) bind(c)
+       import
+       real(c_double), value :: a, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_laguerre_2_e
+     end function gsl_sf_laguerre_2_e
+     function gsl_sf_laguerre_3(a, x) bind(c)
+       import
+       real(c_double), value :: a, x
+       real(c_double) :: gsl_sf_laguerre_3
+     end function gsl_sf_laguerre_3
+     function gsl_sf_laguerre_3_e(a, x, result) bind(c)
+       import
+       real(c_double), value :: a, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_laguerre_3_e
+     end function gsl_sf_laguerre_3_e
+     function gsl_sf_laguerre_n(n, a, x) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: a, x
+       real(c_double) :: gsl_sf_laguerre_n
+     end function gsl_sf_laguerre_n
+     function gsl_sf_laguerre_n_e(n, a, x, result) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: a, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_laguerre_n_e
+     end function gsl_sf_laguerre_n_e
+     function gsl_sf_lambert_w0(x) bind(c, name='gsl_sf_lambert_W0')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_lambert_w0
+     end function gsl_sf_lambert_w0
+     function gsl_sf_lambert_w0_e(x, result) bind(c, name='gsl_sf_lambert_W0_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_lambert_w0_e
+     end function gsl_sf_lambert_w0_e
+     function gsl_sf_lambert_wm1(x) bind(c, name='gsl_sf_lambert_Wm1')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_lambert_wm1
+     end function gsl_sf_lambert_wm1
+     function gsl_sf_lambert_wm1_e(x, result) bind(c, name='gsl_sf_lambert_Wm1_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_lambert_wm1_e
+     end function gsl_sf_lambert_wm1_e
+     function gsl_sf_legendre_p1(x) bind(c, name='gsl_sf_legendre_P1')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_legendre_p1
+     end function gsl_sf_legendre_p1
+     function gsl_sf_legendre_p1_e(x, result) bind(c, name='gsl_sf_legendre_P1_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_legendre_p1_e
+     end function gsl_sf_legendre_p1_e
+     function gsl_sf_legendre_p2(x) bind(c, name='gsl_sf_legendre_P2')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_legendre_p2
+     end function gsl_sf_legendre_p2
+     function gsl_sf_legendre_p2_e(x, result) bind(c, name='gsl_sf_legendre_P2_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_legendre_p2_e
+     end function gsl_sf_legendre_p2_e
+     function gsl_sf_legendre_p3(x) bind(c, name='gsl_sf_legendre_P3')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_legendre_p3
+     end function gsl_sf_legendre_p3
+     function gsl_sf_legendre_p3_e(x, result) bind(c, name='gsl_sf_legendre_P3_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_legendre_p3_e
+     end function gsl_sf_legendre_p3_e
+     function gsl_sf_legendre_pl(l, x) bind(c, name='gsl_sf_legendre_Pl')
+       import
+       integer(c_int), value :: l
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_legendre_pl
+     end function gsl_sf_legendre_pl
+     function gsl_sf_legendre_pl_e(l, x, result) bind(c, name='gsl_sf_legendre_Pl_e')
+       import
+       integer(c_int), value :: l
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_legendre_pl_e
+     end function gsl_sf_legendre_pl_e
+     function gsl_sf_legendre_pl_array(lmax, x, res_arr) bind(c, name='gsl_sf_legendre_Pl_array')
+       import
+       integer(c_int), value :: lmax
+       real(c_double), value :: x
+       real(c_double), dimension(*), intent(out) :: res_arr
+       integer(c_int) :: gsl_sf_legendre_pl_array
+     end function gsl_sf_legendre_pl_array
+     function gsl_sf_legendre_pl_deriv_array(lmax, x, res_arr, der_arr) &
+          bind(c, name='gsl_sf_legendre_Pl_deriv_array')
+       import
+       integer(c_int), value :: lmax
+       real(c_double), value :: x
+       real(c_double), dimension(*), intent(out) :: res_arr, der_arr
+       integer(c_int) :: gsl_sf_legendre_pl_deriv_array
+     end function gsl_sf_legendre_pl_deriv_array
+     function gsl_sf_legendre_q0(x) bind(c, name='gsl_sf_legendre_Q0')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_legendre_q0
+     end function gsl_sf_legendre_q0
+     function gsl_sf_legendre_q0_e(x, result) bind(c, name='gsl_sf_legendre_Q0_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_legendre_q0_e
+     end function gsl_sf_legendre_q0_e
+     function gsl_sf_legendre_q1(x) bind(c, name='gsl_sf_legendre_Q1')
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_legendre_q1
+     end function gsl_sf_legendre_q1
+     function gsl_sf_legendre_q1_e(x, result) bind(c, name='gsl_sf_legendre_Q1_e')
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_legendre_q1_e
+     end function gsl_sf_legendre_q1_e
+     function gsl_sf_legendre_ql(l, x) bind(c, name='gsl_sf_legendre_Ql')
+       import
+       integer(c_int), value :: l
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_legendre_ql
+     end function gsl_sf_legendre_ql
+     function gsl_sf_legendre_ql_e(l, x, result) bind(c, name='gsl_sf_legendre_Ql_e')
+       import
+       integer(c_int), value :: l
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_legendre_ql_e
+     end function gsl_sf_legendre_ql_e
+     function gsl_sf_legendre_plm(l, m, x) bind(c, name='gsl_sf_legendre_Plm')
+       import
+       integer(c_int), value :: l, m
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_legendre_plm
+     end function gsl_sf_legendre_plm
+     function gsl_sf_legendre_plm_e(l, m, x, result) bind(c, name='gsl_sf_legendre_Plm_e')
+       import
+       integer(c_int), value :: l, m
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_legendre_plm_e
+     end function gsl_sf_legendre_plm_e
+     function gsl_sf_legendre_plm_array(lmax, m, x, res_arr) &
+          bind(c, name='gsl_sf_legendre_Plm_array')
+       import
+       integer(c_int), value :: lmax, m
+       real(c_double), value :: x
+       real(c_double), dimension(*), intent(out) :: res_arr
+       integer(c_int) :: gsl_sf_legendre_plm_array
+     end function gsl_sf_legendre_plm_array
+     function gsl_sf_legendre_plm_deriv_array(lmax, m, x, res_arr, der_arr) &
+          bind(c, name='gsl_sf_legendre_Plm_deriv_array')
+       import
+       integer(c_int), value :: lmax, m
+       real(c_double), value :: x
+       real(c_double), dimension(*), intent(out) :: res_arr, der_arr
+       integer(c_int) :: gsl_sf_legendre_plm_deriv_array
+     end function gsl_sf_legendre_plm_deriv_array
+     function gsl_sf_legendre_sphplm(l, m, x) bind(c, name='gsl_sf_legendre_sphPlm')
+       import
+       integer(c_int), value :: l, m
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_legendre_sphplm
+     end function gsl_sf_legendre_sphplm
+     function gsl_sf_legendre_sphplm_e(l, m, x, result) bind(c, name='gsl_sf_legendre_sphPlm_e')
+       import
+       integer(c_int), value :: l, m
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_legendre_sphplm_e
+     end function gsl_sf_legendre_sphplm_e
+     function gsl_sf_legendre_sphplm_array(lmax, m, x, res_arr) &
+          bind(c, name='gsl_sf_legendre_sphPlm_array')
+       import
+       integer(c_int), value :: lmax, m
+       real(c_double), value :: x
+       real(c_double), dimension(*), intent(out) :: res_arr
+       integer(c_int) :: gsl_sf_legendre_sphplm_array
+     end function gsl_sf_legendre_sphplm_array
+     function gsl_sf_legendre_sphplm_deriv_array(lmax, m, x, res_arr, der_arr) &
+          bind(c, name='gsl_sf_legendre_sphPlm_deriv_array')
+       import
+       integer(c_int), value :: lmax, m
+       real(c_double), value :: x
+       real(c_double), dimension(*), intent(out) :: res_arr, der_arr
+       integer(c_int) :: gsl_sf_legendre_sphplm_deriv_array
+     end function gsl_sf_legendre_sphplm_deriv_array
+     function gsl_sf_legendre_array_size(lmax, m) bind(c)
+       import
+       integer(c_int), value :: lmax, m
+       integer(c_int) :: gsl_sf_legendre_array_size
+     end function gsl_sf_legendre_array_size
+     function gsl_sf_conicalp_half(lambda, x) bind(c, name='gsl_sf_conicalP_half')
+       import
+       real(c_double), value :: lambda, x
+       real(c_double) :: gsl_sf_conicalp_half
+     end function gsl_sf_conicalp_half
+     function gsl_sf_conicalp_half_e(lambda, x, result) bind(c, name='gsl_sf_conicalP_half_e')
+       import
+       real(c_double), value :: lambda, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_conicalp_half_e
+     end function gsl_sf_conicalp_half_e
+     function gsl_sf_conicalp_mhalf(lambda, x) bind(c, name='gsl_sf_conicalP_mhalf')
+       import
+       real(c_double), value :: lambda, x
+       real(c_double) :: gsl_sf_conicalp_mhalf
+     end function gsl_sf_conicalp_mhalf
+     function gsl_sf_conicalp_mhalf_e(lambda, x, result) bind(c, name='gsl_sf_conicalP_mhalf_e')
+       import
+       real(c_double), value :: lambda, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_conicalp_mhalf_e
+     end function gsl_sf_conicalp_mhalf_e
+     function gsl_sf_conicalp_0(lambda, x) bind(c, name='gsl_sf_conicalP_0')
+       import
+       real(c_double), value :: lambda, x
+       real(c_double) :: gsl_sf_conicalp_0
+     end function gsl_sf_conicalp_0
+     function gsl_sf_conicalp_0_e(lambda, x, result) bind(c, name='gsl_sf_conicalP_0_e')
+       import
+       real(c_double), value :: lambda, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_conicalp_0_e
+     end function gsl_sf_conicalp_0_e
+     function gsl_sf_conicalp_1(lambda, x) bind(c, name='gsl_sf_conicalP_1')
+       import
+       real(c_double), value :: lambda, x
+       real(c_double) :: gsl_sf_conicalp_1
+     end function gsl_sf_conicalp_1
+     function gsl_sf_conicalp_1_e(lambda, x, result) bind(c, name='gsl_sf_conicalP_1_e')
+       import
+       real(c_double), value :: lambda, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_conicalp_1_e
+     end function gsl_sf_conicalp_1_e
+     function gsl_sf_conicalp_sph_reg(l, lambda, x) bind(c, name='gsl_sf_conicalP_sph_reg')
+       import
+       integer(c_int), value :: l
+       real(c_double), value :: lambda, x
+       real(c_double) :: gsl_sf_conicalp_sph_reg
+     end function gsl_sf_conicalp_sph_reg
+     function gsl_sf_conicalp_sph_reg_e(l, lambda, x, result) &
+          bind(c, name='gsl_sf_conicalP_sph_reg_e')
+       import
+       integer(c_int), value :: l
+       real(c_double), value :: lambda, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_conicalp_sph_reg_e
+     end function gsl_sf_conicalp_sph_reg_e
+     function gsl_sf_conicalp_cyl_reg(l, lambda, x) bind(c, name='gsl_sf_conicalP_cyl_reg')
+       import
+       integer(c_int), value :: l
+       real(c_double), value :: lambda, x
+       real(c_double) :: gsl_sf_conicalp_cyl_reg
+     end function gsl_sf_conicalp_cyl_reg
+     function gsl_sf_conicalp_cyl_reg_e(l, lambda, x, result) &
+          bind(c, name='gsl_sf_conicalP_cyl_reg_e')
+       import
+       integer(c_int), value :: l
+       real(c_double), value :: lambda, x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_conicalp_cyl_reg_e
+     end function gsl_sf_conicalp_cyl_reg_e
+     function gsl_sf_legendre_h3d_0(lambda, eta) bind(c, name='gsl_sf_legendre_H3d_0')
+       import
+       real(c_double), value :: lambda, eta
+       real(c_double) :: gsl_sf_legendre_h3d_0
+     end function gsl_sf_legendre_h3d_0
+     function gsl_sf_legendre_h3d_0_e(lambda, eta, result) bind(c, name='gsl_sf_legendre_H3d_0_e')
+       import
+       real(c_double), value :: lambda, eta
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_legendre_h3d_0_e
+     end function gsl_sf_legendre_h3d_0_e
+     function gsl_sf_legendre_h3d_1(lambda, eta) bind(c, name='gsl_sf_legendre_H3d_1')
+       import
+       real(c_double), value :: lambda, eta
+       real(c_double) :: gsl_sf_legendre_h3d_1
+     end function gsl_sf_legendre_h3d_1
+     function gsl_sf_legendre_h3d_1_e(lambda, eta, result) bind(c, name='gsl_sf_legendre_H3d_1_e')
+       import
+       real(c_double), value :: lambda, eta
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_legendre_h3d_1_e
+     end function gsl_sf_legendre_h3d_1_e
+     function gsl_sf_legendre_h3d(l, lambda, eta) bind(c, name='gsl_sf_legendre_H3d')
+       import
+       integer(c_int), value :: l
+       real(c_double), value :: lambda, eta
+       real(c_double) :: gsl_sf_legendre_h3d
+     end function gsl_sf_legendre_h3d
+     function gsl_sf_legendre_h3d_e(l, lambda, eta, result) bind(c, name='gsl_sf_legendre_H3d_e')
+       import
+       integer(c_int), value :: l
+       real(c_double), value :: lambda, eta
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_legendre_h3d_e
+     end function gsl_sf_legendre_h3d_e
+     function gsl_sf_legendre_h3d_array(lmax, lambda, eta, res_arr) &
+          bind(c, name='gsl_sf_legendre_H3d_array')
+       import
+       integer(c_int), value :: lmax
+       real(c_double), value :: lambda, eta
+       real(c_double), dimension(*), intent(out) :: res_arr
+       integer(c_int) :: gsl_sf_legendre_h3d_array
+     end function gsl_sf_legendre_h3d_array
+     function gsl_sf_log(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_log
+     end function gsl_sf_log
+     function gsl_sf_log_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_log_e
+     end function gsl_sf_log_e
+     function gsl_sf_log_abs(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_log_abs
+     end function gsl_sf_log_abs
+     function gsl_sf_log_abs_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_log_abs_e
+     end function gsl_sf_log_abs_e
+     function gsl_sf_complex_log_e(zr, zi, lnr, theta) bind(c)
+       import
+       real(c_double), value :: zr, zi
+       type(gsl_sf_result), intent(out) :: lnr, theta
+       integer(c_int) :: gsl_sf_complex_log_e
+     end function gsl_sf_complex_log_e
+     function gsl_sf_log_1plusx(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_log_1plusx
+     end function gsl_sf_log_1plusx
+     function gsl_sf_log_1plusx_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_log_1plusx_e
+     end function gsl_sf_log_1plusx_e
+     function gsl_sf_log_1plusx_mx(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_log_1plusx_mx
+     end function gsl_sf_log_1plusx_mx
+     function gsl_sf_log_1plusx_mx_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_log_1plusx_mx_e
+     end function gsl_sf_log_1plusx_mx_e
+     function gsl_sf_psi_int(n) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double) :: gsl_sf_psi_int
+     end function gsl_sf_psi_int
+     function gsl_sf_psi_int_e(n, result) bind(c)
+       import
+       integer(c_int), value :: n
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_psi_int_e
+     end function gsl_sf_psi_int_e
+     function gsl_sf_psi(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_psi
+     end function gsl_sf_psi
+     function gsl_sf_psi_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_psi_e
+     end function gsl_sf_psi_e
+     function gsl_sf_psi_1_int(n) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double) :: gsl_sf_psi_1_int
+     end function gsl_sf_psi_1_int
+     function gsl_sf_psi_1_int_e(n, result) bind(c)
+       import
+       integer(c_int), value :: n
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_psi_1_int_e
+     end function gsl_sf_psi_1_int_e
+     function gsl_sf_psi_1(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_psi_1
+     end function gsl_sf_psi_1
+     function gsl_sf_psi_1_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_psi_1_e
+     end function gsl_sf_psi_1_e
+     function gsl_sf_psi_n(m, x) bind(c)
+       import
+       integer(c_int), value :: m
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_psi_n
+     end function gsl_sf_psi_n
+     function gsl_sf_psi_n_e(m, x, result) bind(c)
+       import
+       integer(c_int), value :: m
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_psi_n_e
+     end function gsl_sf_psi_n_e
+     function gsl_sf_psi_1piy(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_psi_1piy
+     end function gsl_sf_psi_1piy
+     function gsl_sf_psi_1piy_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_psi_1piy_e
+     end function gsl_sf_psi_1piy_e
+     function gsl_sf_synchrotron_1(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_synchrotron_1
+     end function gsl_sf_synchrotron_1
+     function gsl_sf_synchrotron_1_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_synchrotron_1_e
+     end function gsl_sf_synchrotron_1_e
+     function gsl_sf_synchrotron_2(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_synchrotron_2
+     end function gsl_sf_synchrotron_2
+     function gsl_sf_synchrotron_2_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_synchrotron_2_e
+     end function gsl_sf_synchrotron_2_e
+     function gsl_sf_transport_2(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_transport_2
+     end function gsl_sf_transport_2
+     function gsl_sf_transport_2_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_transport_2_e
+     end function gsl_sf_transport_2_e
+     function gsl_sf_transport_3(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_transport_3
+     end function gsl_sf_transport_3
+     function gsl_sf_transport_3_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_transport_3_e
+     end function gsl_sf_transport_3_e
+     function gsl_sf_transport_4(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_transport_4
+     end function gsl_sf_transport_4
+     function gsl_sf_transport_4_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_transport_4_e
+     end function gsl_sf_transport_4_e
+     function gsl_sf_transport_5(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_transport_5
+     end function gsl_sf_transport_5
+     function gsl_sf_transport_5_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_transport_5_e
+     end function gsl_sf_transport_5_e
+     function gsl_sf_hypot(x, y) bind(c)
+       import
+       real(c_double), value :: x, y
+       real(c_double) :: gsl_sf_hypot
+     end function gsl_sf_hypot
+     function gsl_sf_hypot_e(x, y, result) bind(c)
+       import
+       real(c_double), value :: x, y
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_hypot_e
+     end function gsl_sf_hypot_e
+     function gsl_sf_sinc(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_sinc
+     end function gsl_sf_sinc
+     function gsl_sf_sinc_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_sinc_e
+     end function gsl_sf_sinc_e
+     function gsl_sf_complex_sin_e(zr, zi, szr, szi) bind(c)
+       import
+       real(c_double), value :: zr, zi
+       type(gsl_sf_result), intent(out) :: szr, szi
+       integer(c_int) :: gsl_sf_complex_sin_e
+     end function gsl_sf_complex_sin_e
+     function gsl_sf_complex_cos_e(zr, zi, czr, czi) bind(c)
+       import
+       real(c_double), value :: zr, zi
+       type(gsl_sf_result), intent(out) :: czr, czi
+       integer(c_int) :: gsl_sf_complex_cos_e
+     end function gsl_sf_complex_cos_e
+     function gsl_sf_complex_logsin_e(zr, zi, lszr, lszi) bind(c)
+       import
+       real(c_double), value :: zr, zi
+       type(gsl_sf_result), intent(out) :: lszr, lszi
+       integer(c_int) :: gsl_sf_complex_logsin_e
+     end function gsl_sf_complex_logsin_e
+     function gsl_sf_lnsinh(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_lnsinh
+     end function gsl_sf_lnsinh
+     function gsl_sf_lnsinh_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_lnsinh_e
+     end function gsl_sf_lnsinh_e
+     function gsl_sf_lncosh(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_lncosh
+     end function gsl_sf_lncosh
+     function gsl_sf_lncosh_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_lncosh_e
+     end function gsl_sf_lncosh_e
+     function gsl_sf_polar_to_rect(r, theta, x, y) bind(c)
+       import
+       real(c_double), value :: r, theta
+       type(gsl_sf_result), intent(out) :: x, y
+       integer(c_int) :: gsl_sf_polar_to_rect
+     end function gsl_sf_polar_to_rect
+     function gsl_sf_rect_to_polar(x, y, r, theta) bind(c)
+       import
+       real(c_double), value :: x, y
+       type(gsl_sf_result), intent(out) :: r, theta
+       integer(c_int) :: gsl_sf_rect_to_polar
+     end function gsl_sf_rect_to_polar
+     function gsl_sf_angle_restrict_symm(theta) bind(c)
+       import
+       real(c_double), value :: theta
+       real(c_double) :: gsl_sf_angle_restrict_symm
+     end function gsl_sf_angle_restrict_symm
+     function gsl_sf_angle_restrict_symm_e(theta) bind(c)
+       import
+       real(c_double), intent(inout) :: theta
+       integer(c_int) :: gsl_sf_angle_restrict_symm_e
+     end function gsl_sf_angle_restrict_symm_e
+     function gsl_sf_angle_restrict_pos(theta) bind(c)
+       import
+       real(c_double), value :: theta
+       real(c_double) :: gsl_sf_angle_restrict_pos
+     end function gsl_sf_angle_restrict_pos
+     function gsl_sf_angle_restrict_pos_e(theta) bind(c)
+       import
+       real(c_double), intent(inout) :: theta
+       integer(c_int) :: gsl_sf_angle_restrict_pos_e
+     end function gsl_sf_angle_restrict_pos_e
+     function gsl_sf_sin_err_e(x, dx, result) bind(c)
+       import
+       real(c_double), value :: x, dx
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_sin_err_e
+     end function gsl_sf_sin_err_e
+     function gsl_sf_cos_err_e(x, dx, result) bind(c)
+       import
+       real(c_double), value :: x, dx
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_cos_err_e
+     end function gsl_sf_cos_err_e
+     function gsl_sf_zeta_int(n) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double) :: gsl_sf_zeta_int
+     end function gsl_sf_zeta_int
+     function gsl_sf_zeta_int_e(n, result) bind(c)
+       import
+       integer(c_int), value :: n
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_zeta_int_e
+     end function gsl_sf_zeta_int_e
+     function gsl_sf_zeta(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_zeta
+     end function gsl_sf_zeta
+     function gsl_sf_zeta_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_zeta_e
+     end function gsl_sf_zeta_e
+     function gsl_sf_zetam1_int(n) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double) :: gsl_sf_zetam1_int
+     end function gsl_sf_zetam1_int
+     function gsl_sf_zetam1_int_e(n, result) bind(c)
+       import
+       integer(c_int), value :: n
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_zetam1_int_e
+     end function gsl_sf_zetam1_int_e
+     function gsl_sf_zetam1(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_zetam1
+     end function gsl_sf_zetam1
+     function gsl_sf_zetam1_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_zetam1_e
+     end function gsl_sf_zetam1_e
+     function gsl_sf_hzeta(s, q) bind(c)
+       import
+       real(c_double), value :: s, q
+       real(c_double) :: gsl_sf_hzeta
+     end function gsl_sf_hzeta
+     function gsl_sf_hzeta_e(s, q, result) bind(c)
+       import
+       real(c_double), value :: s, q
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_hzeta_e
+     end function gsl_sf_hzeta_e
+     function gsl_sf_eta_int(n) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double) :: gsl_sf_eta_int
+     end function gsl_sf_eta_int
+     function gsl_sf_eta_int_e(n, result) bind(c)
+       import
+       integer(c_int), value :: n
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_eta_int_e
+     end function gsl_sf_eta_int_e
+     function gsl_sf_eta(x) bind(c)
+       import
+       real(c_double), value :: x
+       real(c_double) :: gsl_sf_eta
+     end function gsl_sf_eta
+     function gsl_sf_eta_e(x, result) bind(c)
+       import
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(out) :: result
+       integer(c_int) :: gsl_sf_eta_e
+     end function gsl_sf_eta_e

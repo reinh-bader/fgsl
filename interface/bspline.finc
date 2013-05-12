@@ -1,0 +1,73 @@
+!-*-f90-*-
+!
+!  Interfaces: Basis splines
+!
+function gsl_bspline_alloc(k, nbreak) bind(c)
+  import :: c_size_t, c_ptr
+  integer(c_size_t), value :: k, nbreak
+  type(c_ptr) :: gsl_bspline_alloc
+end function gsl_bspline_alloc
+subroutine gsl_bspline_free (w) bind(c)
+  import :: c_ptr
+  type(c_ptr), value :: w
+end subroutine gsl_bspline_free
+function gsl_bspline_deriv_alloc(k) bind(c)
+  import :: c_size_t, c_ptr
+  integer(c_size_t), value :: k
+  type(c_ptr) :: gsl_bspline_deriv_alloc
+end function gsl_bspline_deriv_alloc
+subroutine gsl_bspline_deriv_free (w) bind(c)
+  import :: c_ptr
+  type(c_ptr), value :: w
+end subroutine gsl_bspline_deriv_free
+function gsl_bspline_knots(breakpts, w) bind(c)
+  import :: c_int, c_ptr
+  integer(c_int) :: gsl_bspline_knots
+  type(c_ptr), value :: breakpts, w
+end function gsl_bspline_knots
+function gsl_bspline_knots_uniform(a, b, w) bind(c)
+  import :: c_int, c_ptr, c_double
+  integer(c_int) :: gsl_bspline_knots_uniform
+  real(c_double), value :: a, b
+  type(c_ptr), value :: w
+end function gsl_bspline_knots_uniform
+function gsl_bspline_eval(x, b, w) bind(c)
+  import :: c_int, c_ptr, c_double
+  integer(c_int) :: gsl_bspline_eval
+  real(c_double), value :: x
+  type(c_ptr), value :: b, w
+end function gsl_bspline_eval
+function gsl_bspline_eval_nonzero(x, b, istart, iend, w) bind(c)
+  import :: c_int, c_ptr, c_double, c_size_t
+  integer(c_int) :: gsl_bspline_eval_nonzero
+  real(c_double), value :: x
+  integer(c_size_t) :: istart, iend
+  type(c_ptr), value :: b, w
+end function gsl_bspline_eval_nonzero
+function gsl_bspline_deriv_eval(x, nderiv, b, w, dw) bind(c)
+  import :: c_int, c_ptr, c_double, c_size_t
+  integer(c_int) :: gsl_bspline_deriv_eval
+  integer(c_size_t), value :: nderiv
+  real(c_double), value :: x
+  type(c_ptr), value :: b, w, dw
+end function gsl_bspline_deriv_eval
+function gsl_bspline_deriv_eval_nonzero(x, nderiv, b, istart, &
+     iend, w, dw) bind(c)
+  import :: c_int, c_ptr, c_double, c_size_t
+  integer(c_int) :: gsl_bspline_deriv_eval_nonzero
+  real(c_double), value :: x
+  integer(c_size_t), value :: nderiv
+  integer(c_size_t) :: istart, iend
+  type(c_ptr), value :: b, w, dw
+end function gsl_bspline_deriv_eval_nonzero
+function gsl_bspline_ncoeffs(w) bind(c)
+  import :: c_size_t, c_ptr
+  integer(c_size_t) :: gsl_bspline_ncoeffs
+  type(c_ptr), value :: w
+end function gsl_bspline_ncoeffs
+function gsl_bspline_greville_abscissa(i, w) bind(c)
+  import :: c_size_t, c_double, c_ptr
+  real(c_double) :: gsl_bspline_greville_abscissa
+  integer(c_size_t) :: i
+  type(c_ptr), value :: w
+end function gsl_bspline_greville_abscissa

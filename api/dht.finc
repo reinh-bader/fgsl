@@ -1,0 +1,53 @@
+!-*-f90-*-
+!
+! API: Hankel transforms
+! 
+!> \page "Comments on Hankel transforms"
+!> Please go to api/dht.finc for the API documentation.
+
+  function fgsl_dht_alloc(size) 
+    integer(fgsl_size_t), intent(in) :: size
+    type(fgsl_dht) :: fgsl_dht_alloc
+    fgsl_dht_alloc%gsl_dht = gsl_dht_alloc(size)
+  end function fgsl_dht_alloc
+  function fgsl_dht_init(t, nu, xmax) 
+    type(fgsl_dht), intent(inout) :: t
+    real(fgsl_double), intent(in) :: nu, xmax
+    integer(fgsl_int) :: fgsl_dht_init
+    fgsl_dht_init = gsl_dht_init(t%gsl_dht, nu, xmax) 
+  end function fgsl_dht_init
+  function fgsl_dht_new(size, nu, xmax) 
+    integer(fgsl_size_t), intent(in) :: size
+    real(fgsl_double), intent(in) :: nu, xmax
+    type(fgsl_dht) :: fgsl_dht_new
+    fgsl_dht_new%gsl_dht = gsl_dht_new(size, nu, xmax)
+  end function fgsl_dht_new
+  subroutine fgsl_dht_free(t)
+    type(fgsl_dht), intent(inout) :: t
+    call gsl_dht_free(t%gsl_dht)
+  end subroutine fgsl_dht_free
+  function fgsl_dht_apply(t, f_in, f_out)
+    type(fgsl_dht), intent(in) :: t
+    real(fgsl_double), intent(in) :: f_in(:)
+    real(fgsl_double), intent(out) :: f_out(:)
+    integer(fgsl_int) :: fgsl_dht_apply
+    fgsl_dht_apply = gsl_dht_apply(t%gsl_dht, f_in, f_out)
+  end function fgsl_dht_apply
+  function fgsl_dht_x_sample(t, n)
+    type(fgsl_dht), intent(in) :: t
+    integer(fgsl_int), intent(in) :: n
+    real(fgsl_double) :: fgsl_dht_x_sample
+    fgsl_dht_x_sample = gsl_dht_x_sample(t%gsl_dht, n)
+  end function fgsl_dht_x_sample
+  function fgsl_dht_k_sample(t, n)
+    type(fgsl_dht), intent(in) :: t
+    integer(fgsl_int), intent(in) :: n
+    real(fgsl_double) :: fgsl_dht_k_sample
+    fgsl_dht_k_sample = gsl_dht_k_sample(t%gsl_dht, n)
+  end function fgsl_dht_k_sample
+  function fgsl_dht_status(dht)
+    type(fgsl_dht), intent(in) :: dht
+    logical :: fgsl_dht_status
+    fgsl_dht_status = .true.
+    if (.not. c_associated(dht%gsl_dht)) fgsl_dht_status = .false.
+  end function fgsl_dht_status

@@ -1,0 +1,14 @@
+!-*-f90-*-
+!
+!  Interfaces:  Simulated annealing
+!
+  subroutine gsl_siman_solve(rng, x0_p, ef, take_step, distance, &
+       print_position, copy_func, copy_constructor, destructor, &
+       element_size, params) bind(c)
+    import :: c_size_t, c_ptr, c_funptr, gsl_siman_params_t
+    type(c_funptr), value :: ef, take_step, distance, print_position, &
+         copy_func, copy_constructor, destructor
+    type(c_ptr), value :: rng, x0_p
+    integer(c_size_t), value :: element_size
+    type(gsl_siman_params_t), value :: params
+  end subroutine gsl_siman_solve

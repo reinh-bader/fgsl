@@ -1,0 +1,134 @@
+!-*-f90-*-
+!
+!  Interfaces: Sorting
+!
+  subroutine gsl_heapsort(array, count, size, compare) bind(c)
+    import
+    type(c_ptr), value :: array
+    integer(c_size_t), value :: count, size
+    type(c_funptr), value :: compare
+  end subroutine gsl_heapsort
+  function gsl_heapsort_index(p, array, count, size, compare) bind(c)
+    import
+    type(c_ptr), value :: array
+    integer(c_size_t), value :: count, size
+    integer(c_size_t), intent(out) :: p(count)
+    type(c_funptr), value :: compare
+    integer(c_int) :: gsl_heapsort_index
+  end function gsl_heapsort_index
+  subroutine gsl_sort(data, stride, n) bind(c)
+    import
+    real(c_double), dimension(*), intent(inout) :: data
+    integer(c_size_t), value :: stride, n
+  end subroutine gsl_sort
+  subroutine gsl_sort_index(p, data, stride, n) bind(c)
+    import
+    integer(c_size_t), dimension(*), intent(out) :: p
+    real(c_double), dimension(*), intent(in) :: data
+    integer(c_size_t), value :: stride, n
+  end subroutine gsl_sort_index
+  function gsl_sort_smallest(dest, k, src, stride, n) bind(c)
+    import
+    integer(c_size_t), value :: k, stride, n
+    real(c_double), intent(out) :: dest(k)
+    real(c_double), dimension(*), intent(in) :: src
+    integer(c_int) :: gsl_sort_smallest
+  end function gsl_sort_smallest
+  function gsl_sort_smallest_index(p, k, src, stride, n) bind(c)
+    import
+    integer(c_size_t), value :: k, stride, n
+    integer(c_size_t), intent(out) :: p(k)
+    real(c_double), dimension(*), intent(in) :: src
+    integer(c_int) :: gsl_sort_smallest_index
+  end function gsl_sort_smallest_index
+  function gsl_sort_largest(dest, k, src, stride, n) bind(c)
+    import
+    integer(c_size_t), value :: k, stride, n
+    real(c_double), intent(out) :: dest(k)
+    real(c_double), dimension(*), intent(in) :: src
+    integer(c_int) :: gsl_sort_largest
+  end function gsl_sort_largest
+  function gsl_sort_largest_index(p, k, src, stride, n) bind(c)
+    import
+    integer(c_size_t), value :: k, stride, n
+    integer(c_size_t), intent(out) :: p(k)
+    real(c_double), dimension(*), intent(in) :: src
+    integer(c_int) :: gsl_sort_largest_index
+  end function gsl_sort_largest_index
+  subroutine gsl_sort_long(data, stride, n) bind(c)
+    import
+    integer(c_long), dimension(*), intent(inout) :: data
+    integer(c_size_t), value :: stride, n
+  end subroutine gsl_sort_long
+  subroutine gsl_sort_long_index(p, data, stride, n) bind(c)
+    import
+    integer(c_size_t), dimension(*), intent(out) :: p
+    integer(c_long), dimension(*), intent(in) :: data
+    integer(c_size_t), value :: stride, n
+  end subroutine gsl_sort_long_index
+  function gsl_sort_long_smallest(dest, k, src, stride, n) bind(c)
+    import
+    integer(c_size_t), value :: k, stride, n
+    integer(c_long), intent(out) :: dest(k)
+    integer(c_long), dimension(*), intent(in) :: src
+    integer(c_int) :: gsl_sort_long_smallest
+  end function gsl_sort_long_smallest
+  function gsl_sort_long_smallest_index(p, k, src, stride, n) bind(c)
+    import
+    integer(c_size_t), value :: k, stride, n
+    integer(c_size_t), intent(out) :: p(k)
+    integer(c_long), dimension(*), intent(in) :: src
+    integer(c_int) :: gsl_sort_long_smallest_index
+  end function gsl_sort_long_smallest_index
+  function gsl_sort_long_largest(dest, k, src, stride, n) bind(c)
+    import
+    integer(c_size_t), value :: k, stride, n
+    integer(c_long), intent(out) :: dest(k)
+    integer(c_long), dimension(*), intent(in) :: src
+    integer(c_int) :: gsl_sort_long_largest
+  end function gsl_sort_long_largest
+  function gsl_sort_long_largest_index(p, k, src, stride, n) bind(c)
+    import
+    integer(c_size_t), value :: k, stride, n
+    integer(c_size_t), intent(out) :: p(k)
+    integer(c_long), dimension(*), intent(in) :: src
+    integer(c_int) :: gsl_sort_long_largest_index
+  end function gsl_sort_long_largest_index
+  subroutine gsl_sort_vector(v) bind(c)
+    import :: c_ptr
+    type(c_ptr), value :: v
+  end subroutine gsl_sort_vector
+  function gsl_sort_vector_index(p,v) bind(c)
+    import :: c_ptr, c_int
+    integer(c_int) :: gsl_sort_vector_index
+    type(c_ptr), value :: p,v
+  end function gsl_sort_vector_index
+  function gsl_sort_vector_smallest(dest, k, v) bind(c)
+    import :: c_ptr, c_double, c_size_t, c_int
+    integer(c_int) :: gsl_sort_vector_smallest
+    integer(c_size_t), value :: k
+    real(c_double) :: dest(k)
+    type(c_ptr), value :: v
+  end function gsl_sort_vector_smallest
+  function gsl_sort_vector_largest(dest, k, v) bind(c)
+    import :: c_ptr, c_double, c_size_t, c_int
+    integer(c_int) :: gsl_sort_vector_largest
+    integer(c_size_t), value :: k
+    real(c_double) :: dest(k)
+    type(c_ptr), value :: v
+  end function gsl_sort_vector_largest
+  function gsl_sort_vector_smallest_index(p, k, v) bind(c)
+    import :: c_ptr, c_double, c_size_t, c_int
+    integer(c_int) :: gsl_sort_vector_smallest_index
+    integer(c_size_t), value :: k
+    integer(c_size_t) :: p(k)
+    type(c_ptr), value :: v
+  end function gsl_sort_vector_smallest_index
+  function gsl_sort_vector_largest_index(p, k, v) bind(c)
+    import :: c_ptr, c_double, c_size_t, c_int
+    integer(c_int) :: gsl_sort_vector_largest_index
+    integer(c_size_t), value :: k
+    integer(c_size_t) :: p(k)
+    type(c_ptr), value :: v
+  end function gsl_sort_vector_largest_index
+

@@ -1,0 +1,24 @@
+!-*-f90-*-
+!
+!  Interfaces: IEEE
+!
+  subroutine gsl_ieee_fprintf_float(stream, x) bind(c)
+    import :: c_ptr, c_float
+    type(c_ptr), value :: stream
+    real(c_float) :: x
+  end subroutine gsl_ieee_fprintf_float
+  subroutine gsl_ieee_fprintf_double(stream, x) bind(c)
+    import :: c_ptr, c_double
+    type(c_ptr), value :: stream
+    real(c_double) :: x
+  end subroutine gsl_ieee_fprintf_double
+  subroutine gsl_ieee_printf_float(x) bind(c)
+    import :: c_float
+    real(c_float) :: x
+  end subroutine gsl_ieee_printf_float
+  subroutine gsl_ieee_printf_double(x) bind(c)
+    import :: c_double
+    real(c_double) :: x
+  end subroutine gsl_ieee_printf_double
+  subroutine gsl_ieee_env_setup() bind(c)
+  end subroutine gsl_ieee_env_setup

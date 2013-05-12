@@ -1,0 +1,274 @@
+!-*-f90-*-
+!
+! API: Interpolation
+!
+!> \page "Comments on interpolation routines"
+!> Please go to api/interp.finc for the API documentation.
+
+  function fgsl_interp_alloc(interp_type, size)
+    type(fgsl_interp_type), intent(in) :: interp_type
+    integer(fgsl_size_t), intent(in) :: size
+    type(fgsl_interp) :: fgsl_interp_alloc
+!
+    type(c_ptr) :: it
+    integer(c_int) :: i
+    integer(c_size_t) :: sz
+!
+    i = interp_type%which
+    sz = size
+    it = fgsl_aux_interp_alloc(i)
+!       write(6, *) 'DEBUG: alloc size is ',sz
+       fgsl_interp_alloc%gsl_interp = gsl_interp_alloc(it, sz)
+  end function fgsl_interp_alloc
+  subroutine fgsl_interp_free(interp)
+    type(fgsl_interp), intent(inout) :: interp
+    call gsl_interp_free(interp%gsl_interp)
+  end subroutine fgsl_interp_free
+  function fgsl_interp_accel_alloc()
+    type(fgsl_interp_accel) :: fgsl_interp_accel_alloc
+    fgsl_interp_accel_alloc%gsl_interp_accel = gsl_interp_accel_alloc()
+  end function fgsl_interp_accel_alloc
+  subroutine fgsl_interp_accel_free(acc)
+    type(fgsl_interp_accel), intent(inout) :: acc
+    call gsl_interp_accel_free(acc%gsl_interp_accel)
+  end subroutine fgsl_interp_accel_free
+  function fgsl_interp_status(interp)
+    type(fgsl_interp), intent(in) :: interp
+    logical :: fgsl_interp_status
+    fgsl_interp_status = .true.
+    if (.not. c_associated(interp%gsl_interp)) fgsl_interp_status = .false.
+  end function fgsl_interp_status
+  function fgsl_interp_accel_status(acc)
+    type(fgsl_interp_accel), intent(in) :: acc
+    logical :: fgsl_interp_accel_status
+    fgsl_interp_accel_status = .true.
+    if (.not. c_associated(acc%gsl_interp_accel)) fgsl_interp_accel_status = .false.
+  end function fgsl_interp_accel_status
+  function fgsl_interp_init(interp, xa, ya, size)
+    type(fgsl_interp), intent(inout) :: interp
+    integer(fgsl_size_t), intent(in) :: size
+    real(fgsl_double), intent(in) :: xa(size), ya(size)
+    integer(fgsl_int) :: fgsl_interp_init
+    fgsl_interp_init = gsl_interp_init(interp%gsl_interp, xa, ya, size)
+  end function fgsl_interp_init
+  function fgsl_interp_eval(interp, xa, ya, x, acc)
+    type(fgsl_interp), intent(in) :: interp
+    type(fgsl_interp_accel), intent(inout) :: acc
+    real(fgsl_double), intent(in) :: xa(:), ya(:), x
+    real(fgsl_double) :: fgsl_interp_eval
+    fgsl_interp_eval = gsl_interp_eval(interp%gsl_interp, xa, ya, x, &
+         acc%gsl_interp_accel)
+  end function fgsl_interp_eval
+  function fgsl_interp_eval_e(interp, xa, ya, x, acc, y)
+    type(fgsl_interp), intent(in) :: interp
+    type(fgsl_interp_accel), intent(inout) :: acc
+    real(fgsl_double), intent(in) :: xa(:), ya(:), x
+    real(fgsl_double), intent(out) :: y
+    integer(fgsl_int) :: fgsl_interp_eval_e
+    fgsl_interp_eval_e = gsl_interp_eval_e(interp%gsl_interp, xa, ya, x, &
+         acc%gsl_interp_accel, y)
+  end function fgsl_interp_eval_e
+  function fgsl_interp_eval_integ(interp, xa, ya, a, b, acc)
+    type(fgsl_interp), intent(in) :: interp
+    type(fgsl_interp_accel), intent(inout) :: acc
+    real(fgsl_double), intent(in) :: xa(:), ya(:), a, b
+    real(fgsl_double) :: fgsl_interp_eval_integ
+    fgsl_interp_eval_integ = gsl_interp_eval_integ(interp%gsl_interp, xa, ya, a, b, &
+         acc%gsl_interp_accel)
+  end function fgsl_interp_eval_integ
+  function fgsl_interp_eval_integ_e(interp, xa, ya, a, b, acc, result)
+    type(fgsl_interp), intent(in) :: interp
+    type(fgsl_interp_accel), intent(inout) :: acc
+    real(fgsl_double), intent(in) :: xa(:), ya(:), a, b
+    real(fgsl_double), intent(out) :: result
+    integer(fgsl_int) :: fgsl_interp_eval_integ_e
+    fgsl_interp_eval_integ_e = gsl_interp_eval_integ_e(interp%gsl_interp, xa, ya, a, b, &
+         acc%gsl_interp_accel, result)
+  end function fgsl_interp_eval_integ_e
+  function fgsl_interp_eval_deriv(interp, xa, ya, x, acc)
+    type(fgsl_interp), intent(in) :: interp
+    type(fgsl_interp_accel), intent(inout) :: acc
+    real(fgsl_double), intent(in) :: xa(:), ya(:), x
+    real(fgsl_double) :: fgsl_interp_eval_deriv
+    fgsl_interp_eval_deriv = gsl_interp_eval_deriv(interp%gsl_interp, xa, ya, x, &
+         acc%gsl_interp_accel)
+  end function fgsl_interp_eval_deriv
+  function fgsl_interp_eval_deriv_e(interp, xa, ya, x, acc, d)
+    type(fgsl_interp), intent(in) :: interp
+    type(fgsl_interp_accel), intent(inout) :: acc
+    real(fgsl_double), intent(in) :: xa(:), ya(:), x
+    real(fgsl_double), intent(out) :: d
+    integer(fgsl_int) :: fgsl_interp_eval_deriv_e
+    fgsl_interp_eval_deriv_e = gsl_interp_eval_deriv_e(interp%gsl_interp, xa, ya, x, &
+         acc%gsl_interp_accel, d)
+  end function fgsl_interp_eval_deriv_e
+  function fgsl_interp_eval_deriv2(interp, xa, ya, x, acc)
+    type(fgsl_interp), intent(in) :: interp
+    type(fgsl_interp_accel), intent(inout) :: acc
+    real(fgsl_double), intent(in) :: xa(:), ya(:), x
+    real(fgsl_double) :: fgsl_interp_eval_deriv2
+    fgsl_interp_eval_deriv2 = gsl_interp_eval_deriv2(interp%gsl_interp, xa, ya, x, &
+         acc%gsl_interp_accel)
+  end function fgsl_interp_eval_deriv2
+  function fgsl_interp_eval_deriv2_e(interp, xa, ya, x, acc, d2)
+    type(fgsl_interp), intent(in) :: interp
+    type(fgsl_interp_accel), intent(inout) :: acc
+    real(fgsl_double), intent(in) :: xa(:), ya(:), x
+    real(fgsl_double), intent(out) :: d2
+    integer(fgsl_int) :: fgsl_interp_eval_deriv2_e
+    fgsl_interp_eval_deriv2_e = gsl_interp_eval_deriv2_e(interp%gsl_interp, xa, ya, x, &
+         acc%gsl_interp_accel, d2)
+  end function fgsl_interp_eval_deriv2_e
+  function fgsl_interp_name(interp)
+    type(fgsl_interp), intent(in) :: interp
+    character(kind=fgsl_char,len=fgsl_strmax) :: fgsl_interp_name
+!
+    type(c_ptr) :: name
+!
+    name = gsl_interp_name(interp%gsl_interp)
+    fgsl_interp_name = fgsl_name(name)
+  end function fgsl_interp_name
+  function fgsl_interp_min_size(interp)
+    type(fgsl_interp), intent(in) :: interp
+    integer(fgsl_long) :: fgsl_interp_min_size
+    fgsl_interp_min_size = gsl_interp_min_size(interp%gsl_interp)
+  end function fgsl_interp_min_size
+  function fgsl_interp_type_min_size(interp)
+    type(fgsl_interp_type), intent(in) :: interp
+    integer(fgsl_long) :: fgsl_interp_type_min_size
+    type(c_ptr) :: it
+    it = fgsl_aux_interp_alloc(interp%which)
+    fgsl_interp_type_min_size = gsl_interp_type_min_size(it)
+  end function fgsl_interp_type_min_size
+  function fgsl_interp_bsearch(xa, x, index_lo, index_hi)
+    real(fgsl_double), intent(in) :: xa(:)
+    real(fgsl_double), intent(in) :: x
+    integer(fgsl_size_t), intent(in) :: index_lo, index_hi
+    integer(fgsl_size_t) ::  fgsl_interp_bsearch
+    fgsl_interp_bsearch = gsl_interp_bsearch(xa, x, index_lo, index_hi) + 1
+  end function fgsl_interp_bsearch
+  function fgsl_interp_accel_find(acc, xa, size, x)
+    type(fgsl_interp_accel), intent(inout) :: acc
+    real(fgsl_double), dimension(*), intent(in) :: xa
+    integer(fgsl_size_t), intent(in) :: size
+    real(fgsl_double), intent(in) :: x
+    integer(fgsl_size_t) ::  fgsl_interp_accel_find
+    fgsl_interp_accel_find = gsl_interp_accel_find(acc%gsl_interp_accel, xa, size, x) + 1
+  end function fgsl_interp_accel_find
+  function fgsl_spline_alloc(interp_type, size)
+    type(fgsl_interp_type), intent(in) :: interp_type
+    integer(fgsl_size_t), intent(in) :: size
+    type(fgsl_spline) :: fgsl_spline_alloc
+!
+    type(c_ptr) :: it
+    integer(c_int) :: i
+    integer(c_size_t) :: sz
+!
+    i = interp_type%which
+    sz = size
+    it = fgsl_aux_interp_alloc(i)
+    fgsl_spline_alloc%gsl_spline = gsl_spline_alloc(it, sz)
+  end function fgsl_spline_alloc
+  subroutine fgsl_spline_free(spline)
+    type(fgsl_spline), intent(inout) :: spline
+!
+    call gsl_spline_free(spline%gsl_spline)
+  end subroutine fgsl_spline_free
+  function fgsl_spline_init(spline, xa, ya, size)
+    type(fgsl_spline), intent(inout) :: spline
+    integer(fgsl_size_t), intent(in) :: size
+    real(fgsl_double), intent(in) :: xa(size), ya(size)
+    integer(fgsl_int) :: fgsl_spline_init
+    fgsl_spline_init = gsl_spline_init(spline%gsl_spline, xa, ya, size)
+  end function fgsl_spline_init
+  function fgsl_spline_name(spline)
+    type(fgsl_spline), intent(in) :: spline
+    character(len=fgsl_strmax) :: fgsl_spline_name
+    type(c_ptr) :: name
+    name = gsl_spline_name(spline%gsl_spline)
+    fgsl_spline_name = fgsl_name(name)
+  end function fgsl_spline_name
+  function fgsl_spline_min_size(spline)
+    type(fgsl_spline), intent(in) :: spline
+    integer(fgsl_long) :: fgsl_spline_min_size
+    fgsl_spline_min_size = gsl_spline_min_size(spline%gsl_spline)
+  end function fgsl_spline_min_size
+  function fgsl_spline_eval(spline, x, acc)
+    type(fgsl_spline), intent(in) :: spline
+    type(fgsl_interp_accel), intent(inout) :: acc
+    real(fgsl_double), intent(in) ::  x
+    real(fgsl_double) :: fgsl_spline_eval
+    fgsl_spline_eval = gsl_spline_eval(spline%gsl_spline, x, &
+         acc%gsl_interp_accel)
+  end function fgsl_spline_eval
+  function fgsl_spline_eval_e(spline, x, acc, y)
+    type(fgsl_spline), intent(in) :: spline
+    type(fgsl_interp_accel), intent(inout) :: acc
+    real(fgsl_double), intent(in) ::  x
+    real(fgsl_double), intent(out) :: y
+    integer(fgsl_int) :: fgsl_spline_eval_e
+    fgsl_spline_eval_e = gsl_spline_eval_e(spline%gsl_spline, x, &
+         acc%gsl_interp_accel, y)
+  end function fgsl_spline_eval_e
+  function fgsl_spline_eval_deriv(spline, x, acc)
+    type(fgsl_spline), intent(in) :: spline
+    type(fgsl_interp_accel), intent(inout) :: acc
+    real(fgsl_double), intent(in) ::  x
+    real(fgsl_double) :: fgsl_spline_eval_deriv
+    fgsl_spline_eval_deriv = gsl_spline_eval_deriv(spline%gsl_spline, x, &
+         acc%gsl_interp_accel)
+  end function fgsl_spline_eval_deriv
+  function fgsl_spline_eval_deriv_e(spline, x, acc, y)
+    type(fgsl_spline), intent(in) :: spline
+    type(fgsl_interp_accel), intent(inout) :: acc
+    real(fgsl_double), intent(in) ::  x
+    real(fgsl_double), intent(out) :: y
+    integer(fgsl_int) :: fgsl_spline_eval_deriv_e
+    fgsl_spline_eval_deriv_e = gsl_spline_eval_deriv_e(spline%gsl_spline, x, &
+         acc%gsl_interp_accel, y)
+  end function fgsl_spline_eval_deriv_e
+  function fgsl_spline_eval_deriv2(spline, x, acc)
+    type(fgsl_spline), intent(in) :: spline
+    type(fgsl_interp_accel), intent(inout) :: acc
+    real(fgsl_double), intent(in) ::  x
+    real(fgsl_double) :: fgsl_spline_eval_deriv2
+    fgsl_spline_eval_deriv2 = gsl_spline_eval_deriv2(spline%gsl_spline, x, &
+         acc%gsl_interp_accel)
+  end function fgsl_spline_eval_deriv2
+  function fgsl_spline_eval_deriv2_e(spline, x, acc, y)
+    type(fgsl_spline), intent(in) :: spline
+    type(fgsl_interp_accel), intent(inout) :: acc
+    real(fgsl_double), intent(in) ::  x
+    real(fgsl_double), intent(out) :: y
+    integer(fgsl_int) :: fgsl_spline_eval_deriv2_e
+    fgsl_spline_eval_deriv2_e = gsl_spline_eval_deriv2_e(spline%gsl_spline, x, &
+         acc%gsl_interp_accel, y)
+  end function fgsl_spline_eval_deriv2_e
+  function fgsl_spline_eval_integ(spline, a, b, acc)
+    type(fgsl_spline), intent(in) :: spline
+    type(fgsl_interp_accel), intent(inout) :: acc
+    real(fgsl_double), intent(in) :: a, b
+    real(fgsl_double) :: fgsl_spline_eval_integ
+    fgsl_spline_eval_integ = gsl_spline_eval_integ(spline%gsl_spline, a, b, &
+         acc%gsl_interp_accel)
+  end function fgsl_spline_eval_integ
+  function fgsl_spline_eval_integ_e(spline, a, b, acc, y)
+    type(fgsl_spline), intent(in) :: spline
+    type(fgsl_interp_accel), intent(inout) :: acc
+    real(fgsl_double), intent(in) :: a, b
+    real(fgsl_double), intent(out) :: y
+    integer(fgsl_int) :: fgsl_spline_eval_integ_e
+    fgsl_spline_eval_integ_e = gsl_spline_eval_integ_e(spline%gsl_spline, a, b, &
+         acc%gsl_interp_accel, y)
+  end function fgsl_spline_eval_integ_e
+  function fgsl_spline_status(spline)
+    type(fgsl_spline), intent(in) :: spline
+    logical :: fgsl_spline_status
+    fgsl_spline_status = .true.
+    if (.not. c_associated(spline%gsl_spline)) fgsl_spline_status = .false.
+  end function fgsl_spline_status
+  function fgsl_sizeof_interp(w)
+    type(fgsl_interp), intent(in) :: w
+    integer(fgsl_size_t) :: fgsl_sizeof_interp
+    fgsl_sizeof_interp = gsl_aux_sizeof_interp()
+  end function fgsl_sizeof_interp

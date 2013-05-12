@@ -1,0 +1,10 @@
+@cindex polynomials, roots of
+
+The GSL API is completely mapped. Again, complex arguments use the 
+standard Fortran @code{complex(fgsl_double)} type instead of
+@code{gsl_complex}. In particular, the routine
+@code{fgsl_poly_complex_solve} uses a @code{complex(fgsl_double)} array; however
+additional working space of @code{n fgsl_double} words is needed
+internally. In the present FGSL release, no reliance is put upon the 
+identical memory layout for Fortran complex numbers and GSL compressed
+complex pointer storage. This may change in future releases.

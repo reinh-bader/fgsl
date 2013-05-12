@@ -1,0 +1,36 @@
+@cindex Sorting
+
+@menu
+* General Heapsort::
+* Implemented Specifics::
+@end menu
+
+@node General Heapsort
+@section General Heapsort
+The general heapsort routine has not been implemented in a type safe
+manner; its interface reads
+@example
+  subroutine fgsl_heapsort(array, count, size, compare)
+    type(c_ptr) :: array
+    integer(fgsl_size_t), intent(in) :: count, size
+    interface
+       function compare(x, y) bind(c)
+         import
+         type(c_ptr), value :: x, y
+         integer(c_int) :: compare
+       end function compare
+    end interface
+  end subroutine fgsl_heapsort
+@end example
+@noindent The data to be sorted must explicitly be converted to type
+@code{c_ptr}; and back again if the comparison function is
+implemented in Fortran. The latter is necessary if there is no
+possibility to access the transferred data from within C.
+Analogous considerations apply for @code{fgsl_heapsort_index}.
+
+@node Implemented Specifics
+@section Implemented Specifics
+
+For the sorting routines on intrinsic types, the
+@code{real(fgsl_double)} and @code{integer(fgsl_long)} specifics are
+available under the same generic name.

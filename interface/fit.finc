@@ -1,0 +1,114 @@
+!-*-f90-*-
+!
+!  Interfaces: Fitting
+!
+  function gsl_fit_linear(x, xstride, y, ystride, n, c0, c1, &
+       cov00, cov01, cov11, sumsq) bind(c)
+    import
+    real(c_double), dimension(*), intent(in) :: x, y
+    integer(c_size_t), value :: xstride, ystride, n
+    real(c_double), intent(out) :: c0, c1, cov00, cov01, cov11, sumsq
+    integer(c_int) :: gsl_fit_linear
+  end function gsl_fit_linear
+  function gsl_fit_wlinear(x, xstride, w, wstride, y, ystride, n, c0, c1, &
+       cov00, cov01, cov11, chisq) bind(c)
+    import
+    real(c_double), dimension(*), intent(in) :: x, y, w
+    integer(c_size_t), value :: xstride, ystride, wstride, n
+    real(c_double), intent(out) :: c0, c1, cov00, cov01, cov11, chisq
+    integer(c_int) :: gsl_fit_wlinear
+  end function gsl_fit_wlinear
+  function gsl_fit_linear_est(x, c0, c1, cov00, cov01, cov11, y, y_err) bind(c)
+    import
+    real(c_double), value :: x, c0, c1, cov00, cov01, cov11
+    real(c_double), intent(out) ::  y, y_err
+    integer(c_int) :: gsl_fit_linear_est
+  end function gsl_fit_linear_est
+  function gsl_fit_mul(x, xstride, y, ystride, n, c1, &
+        cov11, sumsq) bind(c)
+    import
+    real(c_double), dimension(*), intent(in) :: x, y
+    integer(c_size_t), value :: xstride, ystride, n
+    real(c_double), intent(out) :: c1, cov11, sumsq
+    integer(c_int) :: gsl_fit_mul
+  end function gsl_fit_mul
+  function gsl_fit_wmul(x, xstride, w, wstride, y, ystride, n, c1, &
+        cov11, chisq) bind(c)
+    import
+    real(c_double), dimension(*), intent(in) :: x, y, w
+    integer(c_size_t), value :: xstride, ystride, wstride, n
+    real(c_double), intent(out) :: c1, cov11, chisq
+    integer(c_int) :: gsl_fit_wmul
+  end function gsl_fit_wmul
+  function gsl_fit_mul_est(x, c1, cov11, y, y_err) bind(c)
+    import
+    real(c_double), value :: x, c1, cov11
+    real(c_double), intent(out) ::  y, y_err
+    integer(c_int) :: gsl_fit_mul_est
+  end function gsl_fit_mul_est
+  function gsl_multifit_linear_alloc(n, p) bind(c)
+    import
+    integer(c_size_t), value :: n, p
+    type(c_ptr) :: gsl_multifit_linear_alloc
+  end function gsl_multifit_linear_alloc
+  subroutine gsl_multifit_linear_free(w) bind(c)
+    import
+    type(c_ptr), value :: w
+  end subroutine gsl_multifit_linear_free
+  function gsl_multifit_linear(x, y, c, cov, chisq, work) bind(c)
+    import :: c_ptr, c_int, c_double
+    type(c_ptr), value :: x, y, c, cov, work
+    real(c_double) :: chisq
+    integer(c_int) :: gsl_multifit_linear
+  end function gsl_multifit_linear
+  function gsl_multifit_linear_svd(x, y, tol, rank, c, cov, chisq, work) bind(c)
+    import :: c_ptr, c_int, c_double, c_size_t
+    type(c_ptr), value :: x, y, c, cov, work
+    real(c_double), value :: tol
+    integer(c_size_t) :: rank
+    real(c_double) :: chisq
+    integer(c_int) :: gsl_multifit_linear_svd
+  end function gsl_multifit_linear_svd
+  function gsl_multifit_linear_usvd(x, y, tol, rank, c, cov, chisq, work) bind(c)
+    import :: c_ptr, c_int, c_double, c_size_t
+    type(c_ptr), value :: x, y, c, cov, work
+    real(c_double), value :: tol
+    integer(c_size_t) :: rank
+    real(c_double) :: chisq
+    integer(c_int) :: gsl_multifit_linear_usvd
+  end function gsl_multifit_linear_usvd
+  function gsl_multifit_wlinear(x, w, y, c, cov, chisq, work) bind(c)
+    import :: c_ptr, c_int, c_double
+    type(c_ptr), value :: x, w, y, c, cov, work
+    real(c_double) :: chisq
+    integer(c_int) :: gsl_multifit_wlinear
+  end function gsl_multifit_wlinear
+  function gsl_multifit_wlinear_svd(x, w, y, tol, rank, c, cov, chisq, work) bind(c)
+    import :: c_ptr, c_int, c_double, c_size_t
+    type(c_ptr), value :: x, w, y, c, cov, work
+    real(c_double), value :: tol
+    integer(c_size_t) :: rank
+    real(c_double) :: chisq
+    integer(c_int) :: gsl_multifit_wlinear_svd
+  end function gsl_multifit_wlinear_svd
+  function gsl_multifit_wlinear_usvd(x, w, y, tol, rank, c, cov, chisq, work) bind(c)
+    import :: c_ptr, c_int, c_double, c_size_t
+    type(c_ptr), value :: x, w, y, c, cov, work
+    real(c_double), value :: tol
+    integer(c_size_t) :: rank
+    real(c_double) :: chisq
+    integer(c_int) :: gsl_multifit_wlinear_usvd
+  end function gsl_multifit_wlinear_usvd
+  function gsl_multifit_linear_est(x, c, cov, y, y_err) bind(c)
+    import :: c_ptr, c_double, c_int
+    type(c_ptr), value :: x, c, cov
+    real(c_double) :: y, y_err
+    integer(c_int) :: gsl_multifit_linear_est
+  end function gsl_multifit_linear_est
+  function gsl_multifit_linear_residuals(x, y, c, r) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: x
+    type(c_ptr), value :: y, c
+    type(c_ptr), value :: r
+    integer(c_int) :: gsl_multifit_linear_residuals
+  end function gsl_multifit_linear_residuals

@@ -1,0 +1,213 @@
+!-*-f90-*-
+!
+! API: wavelet transforms
+! 
+!
+!> \page "Comments on wavelet transforms"
+!> Please go to api/wavelet.finc for the API documentation.
+
+  function fgsl_wavelet_alloc(t, k)
+    type(fgsl_wavelet_type), intent(in) :: t
+    integer(fgsl_size_t), intent(in) :: k
+    type(fgsl_wavelet) :: fgsl_wavelet_alloc
+!
+    type(c_ptr) :: cp
+    integer(c_int) :: i
+    i = t%which
+    cp = fgsl_aux_wavelet_alloc(i)
+    fgsl_wavelet_alloc%gsl_wavelet = gsl_wavelet_alloc(cp, k)
+  end function fgsl_wavelet_alloc
+  function fgsl_wavelet_name(wavelet)
+    type(fgsl_wavelet), intent(in) :: wavelet
+    character(kind=fgsl_char,len=fgsl_strmax) :: fgsl_wavelet_name
+!
+    type(c_ptr) :: name
+!
+    name = gsl_wavelet_name(wavelet%gsl_wavelet)
+    fgsl_wavelet_name = fgsl_name(name)
+  end function fgsl_wavelet_name
+  subroutine fgsl_wavelet_free(w) 
+    type(fgsl_wavelet), intent(inout) :: w
+    call gsl_wavelet_free(w%gsl_wavelet)
+  end subroutine fgsl_wavelet_free
+  function fgsl_wavelet_workspace_alloc(n) 
+    integer(fgsl_size_t), intent(in) :: n
+    type(fgsl_wavelet_workspace) :: fgsl_wavelet_workspace_alloc
+    fgsl_wavelet_workspace_alloc%gsl_wavelet_workspace = &
+         gsl_wavelet_workspace_alloc(n) 
+  end function fgsl_wavelet_workspace_alloc
+  subroutine fgsl_wavelet_workspace_free(w) 
+    type(fgsl_wavelet_workspace), intent(inout) :: w
+    call gsl_wavelet_workspace_free(w%gsl_wavelet_workspace)
+  end subroutine fgsl_wavelet_workspace_free
+  function fgsl_wavelet_transform(w, data, stride, n, dir, work) 
+    type(fgsl_wavelet), intent(in) :: w
+    real(fgsl_double), intent(inout) :: data(:)
+    integer(fgsl_size_t), intent(in) :: stride, n
+    integer(fgsl_int), intent(in) :: dir
+    type(fgsl_wavelet_workspace), intent(inout) :: work
+    integer(fgsl_int) :: fgsl_wavelet_transform
+    fgsl_wavelet_transform = gsl_wavelet_transform(w%gsl_wavelet, data, &
+         stride, n, dir, work%gsl_wavelet_workspace) 
+  end function fgsl_wavelet_transform
+  function fgsl_wavelet_transform_forward(w, data, stride, n, work) 
+    type(fgsl_wavelet), intent(in) :: w
+    real(fgsl_double), intent(inout) :: data(:)
+    integer(fgsl_size_t), intent(in) :: stride, n
+    type(fgsl_wavelet_workspace), intent(inout) :: work
+    integer(fgsl_int) :: fgsl_wavelet_transform_forward
+    fgsl_wavelet_transform_forward = gsl_wavelet_transform_forward(w%gsl_wavelet, data, &
+         stride, n, work%gsl_wavelet_workspace) 
+  end function fgsl_wavelet_transform_forward
+  function fgsl_wavelet_transform_inverse(w, data, stride, n, work) 
+    type(fgsl_wavelet), intent(in) :: w
+    real(fgsl_double), intent(inout) :: data(:)
+    integer(fgsl_size_t), intent(in) :: stride, n
+    type(fgsl_wavelet_workspace), intent(inout) :: work
+    integer(fgsl_int) :: fgsl_wavelet_transform_inverse
+    fgsl_wavelet_transform_inverse = gsl_wavelet_transform_inverse(w%gsl_wavelet, data, &
+         stride, n, work%gsl_wavelet_workspace) 
+  end function fgsl_wavelet_transform_inverse
+  function fgsl_wavelet2d_transform(w, data, tda, size1, size2, dir, work) 
+    type(fgsl_wavelet), intent(in) :: w
+    real(fgsl_double), intent(inout) :: data(:)
+    integer(fgsl_size_t), intent(in) :: tda, size1, size2
+    integer(fgsl_int), intent(in) :: dir
+    type(fgsl_wavelet_workspace), intent(inout) :: work
+    integer(fgsl_int) :: fgsl_wavelet2d_transform
+    fgsl_wavelet2d_transform = gsl_wavelet2d_transform(w%gsl_wavelet, data, &
+         tda, size1, size2, dir, work%gsl_wavelet_workspace) 
+  end function fgsl_wavelet2d_transform
+  function fgsl_wavelet2d_transform_forward(w, data, tda, size1, size2, work) 
+    type(fgsl_wavelet), intent(in) :: w
+    real(fgsl_double), intent(inout) :: data(:)
+    integer(fgsl_size_t), intent(in) :: tda, size1, size2
+    type(fgsl_wavelet_workspace), intent(inout) :: work
+    integer(fgsl_int) :: fgsl_wavelet2d_transform_forward
+    fgsl_wavelet2d_transform_forward = &
+         gsl_wavelet2d_transform_forward(w%gsl_wavelet, data, &
+         tda, size1, size2, work%gsl_wavelet_workspace) 
+  end function fgsl_wavelet2d_transform_forward
+  function fgsl_wavelet2d_transform_inverse(w, data, tda, size1, size2, work) 
+    type(fgsl_wavelet), intent(in) :: w
+    real(fgsl_double), intent(inout) :: data(:)
+    integer(fgsl_size_t), intent(in) :: tda, size1, size2
+    type(fgsl_wavelet_workspace), intent(inout) :: work
+    integer(fgsl_int) :: fgsl_wavelet2d_transform_inverse
+    fgsl_wavelet2d_transform_inverse = &
+         gsl_wavelet2d_transform_inverse(w%gsl_wavelet, data, &
+         tda, size1, size2, work%gsl_wavelet_workspace) 
+  end function fgsl_wavelet2d_transform_inverse
+  function fgsl_wavelet2d_transform_matrix(w, m, dir, work)
+    type(fgsl_wavelet), intent(in) :: w
+    type(fgsl_matrix), intent(inout) :: m
+    type(fgsl_wavelet_workspace) :: work
+    integer(fgsl_int), intent(in) :: dir
+    integer(fgsl_int) :: fgsl_wavelet2d_transform_matrix
+    fgsl_wavelet2d_transform_matrix = &
+         gsl_wavelet2d_transform_matrix(w%gsl_wavelet, m%gsl_matrix, dir, &
+         work%gsl_wavelet_workspace)
+  end function fgsl_wavelet2d_transform_matrix
+  function fgsl_wavelet2d_transform_matrix_forward(w, m, work)
+    type(fgsl_wavelet), intent(in) :: w
+    type(fgsl_matrix), intent(inout) :: m
+    type(fgsl_wavelet_workspace) :: work
+    integer(fgsl_int) :: fgsl_wavelet2d_transform_matrix_forward
+    fgsl_wavelet2d_transform_matrix_forward = &
+         gsl_wavelet2d_transform_matrix_forward(w%gsl_wavelet, m%gsl_matrix, &
+         work%gsl_wavelet_workspace)
+  end function fgsl_wavelet2d_transform_matrix_forward
+  function fgsl_wavelet2d_transform_matrix_inverse(w, m, work)
+    type(fgsl_wavelet), intent(in) :: w
+    type(fgsl_matrix), intent(inout) :: m
+    type(fgsl_wavelet_workspace) :: work
+    integer(fgsl_int) :: fgsl_wavelet2d_transform_matrix_inverse
+    fgsl_wavelet2d_transform_matrix_inverse = &
+         gsl_wavelet2d_transform_matrix_inverse(w%gsl_wavelet, m%gsl_matrix, &
+         work%gsl_wavelet_workspace)
+  end function fgsl_wavelet2d_transform_matrix_inverse
+  function fgsl_wavelet2d_nstransform(w, data, tda, size1, size2, dir, work) 
+    type(fgsl_wavelet), intent(in) :: w
+    real(fgsl_double), intent(inout) :: data(:)
+    integer(fgsl_size_t), intent(in) :: tda, size1, size2
+    integer(fgsl_int), intent(in) :: dir
+    type(fgsl_wavelet_workspace), intent(inout) :: work
+    integer(fgsl_int) :: fgsl_wavelet2d_nstransform
+    fgsl_wavelet2d_nstransform = gsl_wavelet2d_nstransform(w%gsl_wavelet, data, &
+         tda, size1, size2, dir, work%gsl_wavelet_workspace) 
+  end function fgsl_wavelet2d_nstransform
+  function fgsl_wavelet2d_nstransform_forward(w, data, tda, size1, size2, work) 
+    type(fgsl_wavelet), intent(in) :: w
+    real(fgsl_double), intent(inout) :: data(:)
+    integer(fgsl_size_t), intent(in) :: tda, size1, size2
+    type(fgsl_wavelet_workspace), intent(inout) :: work
+    integer(fgsl_int) :: fgsl_wavelet2d_nstransform_forward
+    fgsl_wavelet2d_nstransform_forward = &
+         gsl_wavelet2d_nstransform_forward(w%gsl_wavelet, data, &
+         tda, size1, size2, work%gsl_wavelet_workspace) 
+  end function fgsl_wavelet2d_nstransform_forward
+  function fgsl_wavelet2d_nstransform_inverse(w, data, tda, size1, size2, work) 
+    type(fgsl_wavelet), intent(in) :: w
+    real(fgsl_double), intent(inout) :: data(:)
+    integer(fgsl_size_t), intent(in) :: tda, size1, size2
+    type(fgsl_wavelet_workspace), intent(inout) :: work
+    integer(fgsl_int) :: fgsl_wavelet2d_nstransform_inverse
+    fgsl_wavelet2d_nstransform_inverse = &
+         gsl_wavelet2d_nstransform_inverse(w%gsl_wavelet, data, &
+         tda, size1, size2, work%gsl_wavelet_workspace) 
+  end function fgsl_wavelet2d_nstransform_inverse
+  function fgsl_wavelet2d_nstransform_matrix(w, m, dir, work)
+    type(fgsl_wavelet), intent(in) :: w
+    type(fgsl_matrix), intent(inout) :: m
+    type(fgsl_wavelet_workspace) :: work
+    integer(fgsl_int), intent(in) :: dir
+    integer(fgsl_int) :: fgsl_wavelet2d_nstransform_matrix
+    fgsl_wavelet2d_nstransform_matrix = &
+         gsl_wavelet2d_nstransform_matrix(w%gsl_wavelet, m%gsl_matrix, dir, &
+         work%gsl_wavelet_workspace)
+  end function fgsl_wavelet2d_nstransform_matrix
+  function fgsl_wavelet2d_nstransform_matrix_forward(w, m, work)
+    type(fgsl_wavelet), intent(in) :: w
+    type(fgsl_matrix), intent(inout) :: m
+    type(fgsl_wavelet_workspace) :: work
+    integer(fgsl_int) :: fgsl_wavelet2d_nstransform_matrix_forward
+    fgsl_wavelet2d_nstransform_matrix_forward = &
+         gsl_wavelet2d_nstransform_matrix_forward(w%gsl_wavelet, m%gsl_matrix, &
+         work%gsl_wavelet_workspace)
+  end function fgsl_wavelet2d_nstransform_matrix_forward
+  function fgsl_wavelet2d_nstransform_matrix_inverse(w, m, work)
+    type(fgsl_wavelet), intent(in) :: w
+    type(fgsl_matrix), intent(inout) :: m
+    type(fgsl_wavelet_workspace) :: work
+    integer(fgsl_int) :: fgsl_wavelet2d_nstransform_matrix_inverse
+    fgsl_wavelet2d_nstransform_matrix_inverse = &
+         gsl_wavelet2d_nstransform_matrix_inverse(w%gsl_wavelet, m%gsl_matrix, &
+         work%gsl_wavelet_workspace)
+  end function fgsl_wavelet2d_nstransform_matrix_inverse
+  function fgsl_wavelet_status(wavelet)
+    type(fgsl_wavelet), intent(in) :: wavelet
+    logical :: fgsl_wavelet_status
+    fgsl_wavelet_status = .true.
+    if (.not. c_associated(wavelet%gsl_wavelet)) fgsl_wavelet_status = .false.
+  end function fgsl_wavelet_status
+  function fgsl_wavelet_workspace_status(wavelet_workspace)
+    type(fgsl_wavelet_workspace), intent(in) :: wavelet_workspace
+    logical :: fgsl_wavelet_workspace_status
+    fgsl_wavelet_workspace_status = .true.
+    if (.not. c_associated(wavelet_workspace%gsl_wavelet_workspace)) &
+         fgsl_wavelet_workspace_status = .false.
+  end function fgsl_wavelet_workspace_status
+  function fgsl_sizeof_wavelet(w)
+    type(fgsl_wavelet), intent(in) :: w
+    integer(fgsl_size_t) :: fgsl_sizeof_wavelet
+    fgsl_sizeof_wavelet = gsl_aux_sizeof_wavelet()
+  end function fgsl_sizeof_wavelet
+  function fgsl_sizeof_wavelet_workspace(w)
+    type(fgsl_wavelet_workspace), intent(in) :: w
+    integer(fgsl_size_t) :: fgsl_sizeof_wavelet_workspace
+    fgsl_sizeof_wavelet_workspace = gsl_aux_sizeof_wavelet_workspace()
+  end function fgsl_sizeof_wavelet_workspace
+ 
+ 
+ 
+ 
