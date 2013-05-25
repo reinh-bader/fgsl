@@ -2,6 +2,7 @@
 !
 !  Interfaces: Ordinary differential equations
 !
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
      function fgsl_odeiv2_system_cinit(func, dimension, params, jacobian) bind(c)
        import
        type(c_funptr), value :: func
@@ -226,7 +227,7 @@
        import
        type(c_ptr), value :: d
      end subroutine gsl_odeiv2_driver_free
-
+#endif
 
 !  obsolescent legacy interface
      function gsl_odeiv_step_alloc(t, dim) bind(c)

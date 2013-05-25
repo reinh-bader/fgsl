@@ -5,7 +5,7 @@ program poly
   real(fgsl_double), parameter :: eps10 = 1.0E-10_fgsl_double
   integer(fgsl_int) :: status
   real(fgsl_double) :: ra, ri, ro, &
-       d(3), xa(10), ya(10), da(10), di(10)
+       d(2), xa(10), ya(10), da(10), di(10)
   complex(fgsl_double) :: z0, z1, z2, &
        z(10)
   type(fgsl_poly_complex_workspace) :: wk

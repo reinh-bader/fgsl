@@ -8,7 +8,6 @@ program fft
   real(fgsl_double) :: rdata(4)
   type(fgsl_fft_complex_wavetable) :: wavetable
   type(fgsl_fft_complex_workspace) :: work
-  type(fgsl_fft_real_workspace) :: rwork
   integer(fgsl_int) :: status
   type(fgsl_error_handler_t) :: std
 !
@@ -54,11 +53,8 @@ program fft
        fgsl_success,status)
   call unit_assert_equal_within('fgsl_gsl_fft_complex_radix2_transform:data',&
        (/3.0d0*ui, ui, -ui, ui /),data,eps10)
-!
-!
   wavetable = fgsl_fft_complex_wavetable_alloc(4_fgsl_size_t)
   work = fgsl_fft_complex_workspace_alloc(4_fgsl_size_t)
-  rwork = fgsl_fft_real_workspace_alloc(4_fgsl_size_t)
   data(1) = 1.0d0*ui
   data(2) = 1.0d0*ui
   data(3) = 0.0d0*ui
@@ -116,7 +112,6 @@ program fft
   
 !
   call fgsl_fft_complex_workspace_free(work)
-  call fgsl_fft_real_workspace_free(rwork)
   call fgsl_fft_complex_wavetable_free(wavetable) 
 ! 
 ! Done

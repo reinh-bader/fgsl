@@ -314,11 +314,13 @@
     integer(c_int) :: gsl_linalg_cholesky_invert
     type(c_ptr), value :: chol
   end function gsl_linalg_cholesky_invert
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
   function gsl_linalg_complex_cholesky_invert (chol) bind(c)
     import :: c_ptr, c_int
     integer(c_int) :: gsl_linalg_complex_cholesky_invert
     type(c_ptr), value :: chol
   end function gsl_linalg_complex_cholesky_invert
+#endif
 !
 ! Tridiag
 !

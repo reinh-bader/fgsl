@@ -133,6 +133,7 @@
     integer(fgsl_long) :: fgsl_interp_min_size
     fgsl_interp_min_size = gsl_interp_min_size(interp%gsl_interp)
   end function fgsl_interp_min_size
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
   function fgsl_interp_type_min_size(interp)
     type(fgsl_interp_type), intent(in) :: interp
     integer(fgsl_long) :: fgsl_interp_type_min_size
@@ -140,6 +141,7 @@
     it = fgsl_aux_interp_alloc(interp%which)
     fgsl_interp_type_min_size = gsl_interp_type_min_size(it)
   end function fgsl_interp_type_min_size
+#endif
   function fgsl_interp_bsearch(xa, x, index_lo, index_hi)
     real(fgsl_double), intent(in) :: xa(:)
     real(fgsl_double), intent(in) :: x

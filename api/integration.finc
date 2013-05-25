@@ -199,6 +199,7 @@
          workspace%gsl_integration_workspace, cyc_workspace%gsl_integration_workspace, &
          wf%gsl_integration_qawo_table, result, abserr) 
   end function fgsl_integration_qawf
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
   function fgsl_integration_cquad_workspace_alloc(n) 
     integer(fgsl_size_t), intent(in) :: n
     type(fgsl_integration_cquad_workspace) :: fgsl_integration_cquad_workspace_alloc
@@ -221,6 +222,8 @@
          a, b, epsabs, epsrel, workspace%gsl_integration_cquad_workspace, &
          result, abserr, nevals) 
   end function fgsl_integration_cquad
+#endif
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
   function fgsl_integration_glfixed_table_alloc(n)
     integer(fgsl_size_t), intent(in) :: n
     type(fgsl_integration_glfixed_table) :: fgsl_integration_glfixed_table_alloc
@@ -239,6 +242,8 @@
     fgsl_integration_glfixed = gsl_integration_glfixed(f%gsl_function, a, b, &
          t%gsl_integration_glfixed_table)
   end function fgsl_integration_glfixed
+#endif
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
   function fgsl_integration_glfixed_point(a, b, i, xi, wi, t)
     integer(fgsl_int) :: fgsl_integration_glfixed_point
     real(fgsl_double), intent(in) :: a, b
@@ -248,6 +253,7 @@
     fgsl_integration_glfixed_point = gsl_integration_glfixed_point(a, b, i, &
          xi, wi, t%gsl_integration_glfixed_table)
   end function fgsl_integration_glfixed_point
+#endif
 !
 ! additional utilities
 !

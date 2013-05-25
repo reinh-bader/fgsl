@@ -1,0 +1,14 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@/fgsl
+
+Name: fgsl
+Description: Fortran bindings for the GNU Scientific Library
+Version: @VERSION@
+Requires: gsl >= @GSL_VERSION@
+Conflicts:
+Libs: -L${libdir} -lfgsl
+Cflags: -I${includedir}
+
+

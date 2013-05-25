@@ -164,6 +164,7 @@
       real(c_double), intent(out) :: result, abserr
       integer(c_int) :: gsl_integration_qawf
     end function gsl_integration_qawf
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
     function gsl_integration_cquad_workspace_alloc (n) bind(c)
       import
       integer(c_size_t), value :: n
@@ -183,6 +184,8 @@
       integer(c_size_t) :: nevals
       integer(c_int) :: gsl_integration_cquad
     end function gsl_integration_cquad
+#endif
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
     function gsl_integration_glfixed_table_alloc(n) bind(c)
       import :: c_size_t, c_ptr
       integer(c_size_t), value :: n
@@ -199,6 +202,8 @@
       real(c_double), value :: a, b
       type(c_ptr), value :: t
     end function gsl_integration_glfixed
+#endif
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
     function gsl_integration_glfixed_point(a, b, i, xi, wi, t) bind(c)
       import :: c_double, c_ptr, c_size_t, c_int
       integer(c_int) :: gsl_integration_glfixed_point
@@ -207,6 +212,7 @@
       real(c_double) :: xi, wi
       type(c_ptr), value :: t
     end function gsl_integration_glfixed_point
+#endif
 !
     function gsl_aux_sizeof_integration_workspace() bind(c)
       import :: c_size_t

@@ -40,12 +40,7 @@ contains
   subroutine unit_assert_equal_integer(description, ival_target, ival_check)
     character(len=*), intent(in) :: description
     integer(kind=ik), intent(in) :: ival_target, ival_check
-    if (ival_target /= ival_check) then
-       write(6,fmt='(a,4x,2(I0,2X))') description,ival_target,ival_check
-       call unit_toggle(description, .false.)
-    else
-       call unit_toggle(description, .true.)
-    end if
+    call unit_toggle(description, ival_target == ival_check)
   end subroutine unit_assert_equal_integer
   subroutine unit_assert_equal_integer_array(description, &
        ival_target, ival_check)
@@ -63,19 +58,15 @@ contains
     call unit_toggle(description, ok)
     if (unit_debug .and. .not. ok) then
        do i=1,min(size(ival_target),size(ival_check))
-          write(*,fmt='(a,4x,2(i0,2x))') description,ival_target(i),ival_check(i)
+          write(6,fmt='(a,4x,2(I0,2X))') description,ival_target(i),ival_check(i)
        end do
     end if
   end subroutine unit_assert_equal_integer_array
   subroutine unit_assert_equal_string(description, ival_target, ival_check)
     character(len=*), intent(in) :: description
     character(len=*), intent(in) :: ival_target, ival_check
-    if (ival_target == ival_check) then
-       call unit_toggle(description,.true.)
-    else
-       write(*,fmt='(a,4x,2(a,2x))') description, ival_target, ival_check
-       call unit_toggle(description,.false.)
-    end if
+    call unit_toggle(description, lge(ival_target,ival_check) .and. &
+         lle(ival_target,ival_check))
   end subroutine unit_assert_equal_string
   subroutine unit_assert_equal_within_double(description, &
        val_target, val_check, eps)

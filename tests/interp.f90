@@ -16,7 +16,7 @@ program interp
 !
 ! Test interpolation API
 !
-  call unit_init(20)
+  call unit_init(15)
 !
   do i=1,nmax
      xa(i) = dble(i-1)
@@ -52,10 +52,6 @@ program interp
 !     write(6, fmt='(2(1pd20.13,1x))') xa(i),ya(i)
   end do
   call unit_assert_equal_within('fgsl_interp_eval',0.0d0,dmx,eps10)
-  index = fgsl_interp_min_size(a_interp)
-  call unit_assert_equal('fgsl_interp_min_size',3,index)
-  index = fgsl_interp_type_min_size(fgsl_interp_cspline)
-  call unit_assert_equal('fgsl_interp_min_size',3,index)
   call fgsl_interp_free(a_interp)
 !
   spline = fgsl_spline_alloc(fgsl_interp_cspline,nmax)

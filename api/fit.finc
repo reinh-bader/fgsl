@@ -87,6 +87,7 @@
     fgsl_multifit_linear_svd = gsl_multifit_linear_svd(x%gsl_matrix, y%gsl_vector, tol, rank, &
          c%gsl_vector, cov%gsl_matrix, chisq, work%gsl_multifit_linear_workspace)
   end function fgsl_multifit_linear_svd
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
   function fgsl_multifit_linear_usvd(x, y, tol, rank, c, cov, chisq, work)
     type(fgsl_matrix), intent(in) :: x
     type(fgsl_vector), intent(in) :: y
@@ -100,6 +101,7 @@
     fgsl_multifit_linear_usvd = gsl_multifit_linear_usvd(x%gsl_matrix, y%gsl_vector, tol, rank, &
          c%gsl_vector, cov%gsl_matrix, chisq, work%gsl_multifit_linear_workspace)
   end function fgsl_multifit_linear_usvd
+#endif
   function fgsl_multifit_wlinear(x, w, y, c, cov, chisq, work)
     type(fgsl_matrix), intent(in) :: x
     type(fgsl_vector), intent(in) :: w, y
@@ -125,6 +127,7 @@
          y%gsl_vector, tol, rank, c%gsl_vector, cov%gsl_matrix, chisq, &
          work%gsl_multifit_linear_workspace)
   end function fgsl_multifit_wlinear_svd
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
   function fgsl_multifit_wlinear_usvd(x, w, y, tol, rank, c, cov, chisq, work)
     type(fgsl_matrix), intent(in) :: x
     type(fgsl_vector), intent(in) :: w, y
@@ -139,6 +142,7 @@
          y%gsl_vector, tol, rank, c%gsl_vector, cov%gsl_matrix, chisq, &
          work%gsl_multifit_linear_workspace)
   end function fgsl_multifit_wlinear_usvd
+#endif
   function fgsl_multifit_linear_est(x, c, cov, y, y_err)
     type(fgsl_vector), intent(in) :: x, c
     type(fgsl_matrix), intent(in) :: cov

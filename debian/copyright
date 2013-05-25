@@ -1,0 +1,30 @@
+This work was packaged for Debian by:
+
+    Tom Schoonjans <Tom.Schoonjans@me.com> on Mon, 15 Apr 2013 16:53:56 +0200
+
+It was downloaded from:
+
+    http://www.lrz.de/services/software/mathematik/gsl/fortran/
+
+Upstream Author(s):
+
+	Reinhold Bader <Reinhold.Bader@lrz.de>
+
+Copyright:
+
+License:
+ Copyright (2009-2013) Reinhold Bader <Reinhold.Bader@lrz.de>
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 2 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/> or
+ /usr/share/common-licenses.

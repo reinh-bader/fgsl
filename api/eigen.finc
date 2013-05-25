@@ -115,12 +115,14 @@ subroutine fgsl_eigen_nonsymmv_free(w)
   type(fgsl_eigen_nonsymmv_workspace) :: w
   call gsl_eigen_nonsymmv_free(w%gsl_eigen_nonsymmv_workspace)
 end subroutine fgsl_eigen_nonsymmv_free
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
 subroutine fgsl_eigen_nonsymmv_params (balance, w) 
   integer(fgsl_int), intent(in) :: balance
   type(fgsl_eigen_nonsymm_workspace), intent(inout) :: w
   call gsl_eigen_nonsymmv_params (balance, &
        w%gsl_eigen_nonsymm_workspace)
 end subroutine fgsl_eigen_nonsymmv_params
+#endif
 function fgsl_eigen_nonsymmv(a, eval, evec, w) 
   type(fgsl_matrix), intent(inout) :: a
   type(fgsl_vector_complex), intent(inout) :: eval

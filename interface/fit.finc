@@ -69,6 +69,7 @@
     real(c_double) :: chisq
     integer(c_int) :: gsl_multifit_linear_svd
   end function gsl_multifit_linear_svd
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
   function gsl_multifit_linear_usvd(x, y, tol, rank, c, cov, chisq, work) bind(c)
     import :: c_ptr, c_int, c_double, c_size_t
     type(c_ptr), value :: x, y, c, cov, work
@@ -77,6 +78,7 @@
     real(c_double) :: chisq
     integer(c_int) :: gsl_multifit_linear_usvd
   end function gsl_multifit_linear_usvd
+#endif
   function gsl_multifit_wlinear(x, w, y, c, cov, chisq, work) bind(c)
     import :: c_ptr, c_int, c_double
     type(c_ptr), value :: x, w, y, c, cov, work
@@ -91,6 +93,7 @@
     real(c_double) :: chisq
     integer(c_int) :: gsl_multifit_wlinear_svd
   end function gsl_multifit_wlinear_svd
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
   function gsl_multifit_wlinear_usvd(x, w, y, tol, rank, c, cov, chisq, work) bind(c)
     import :: c_ptr, c_int, c_double, c_size_t
     type(c_ptr), value :: x, w, y, c, cov, work
@@ -99,6 +102,7 @@
     real(c_double) :: chisq
     integer(c_int) :: gsl_multifit_wlinear_usvd
   end function gsl_multifit_wlinear_usvd
+#endif
   function gsl_multifit_linear_est(x, c, cov, y, y_err) bind(c)
     import :: c_ptr, c_double, c_int
     type(c_ptr), value :: x, c, cov

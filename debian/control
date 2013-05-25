@@ -1,0 +1,27 @@
+Source: fgsl
+Section: science
+Priority: extra
+Maintainer: Tom Schoonjans <Tom.Schoonjans@me.com>
+Build-Depends: debhelper (>= 7.0.50~), autotools-dev, gcc (>= 4.4.0), gfortran (>= 4.4), libgsl0-dev
+Standards-Version: 3.9.1
+Homepage: http://www.lrz.de/services/software/mathematik/gsl/fortran
+
+Package: libfgsl0
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libgsl0ldbl, gfortran (>= 4.4.0)
+Description: Fortran 2003 bindings for the GNU Scientific Library -- core
+
+
+Package: libfgsl0-dev
+Architecture: any
+Section: libdevel
+Depends: ${shlibs:Depends}, ${misc:Depends}, libfgsl0 (= ${binary:Version})
+Description:  Fortran 2003 bindings for the GNU Scientific Library -- SDK
+
+
+
+Package: libfgsl0-dbg
+Section: debug
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libfgsl0 (= ${binary:Version})
+Description:  Fortran 2003 bindings for the GNU Scientific Library -- debug symbols

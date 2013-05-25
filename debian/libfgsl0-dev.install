@@ -1,0 +1,4 @@
+usr/lib/libfgsl.so
+usr/lib/libfgsl.a
+usr/include/fgsl/fgsl.mod
+usr/lib/pkgconfig/fgsl.pc

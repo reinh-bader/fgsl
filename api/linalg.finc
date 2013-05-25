@@ -401,11 +401,13 @@
     type(fgsl_matrix), intent(inout) :: chol
     fgsl_linalg_cholesky_invert = gsl_linalg_cholesky_invert(chol%gsl_matrix)
   end function fgsl_linalg_cholesky_invert
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
   function fgsl_linalg_complex_cholesky_invert (chol)
     integer(fgsl_int) :: fgsl_linalg_complex_cholesky_invert
     type(fgsl_matrix_complex), intent(inout) :: chol
     fgsl_linalg_complex_cholesky_invert = gsl_linalg_complex_cholesky_invert(chol%gsl_matrix_complex)
   end function fgsl_linalg_complex_cholesky_invert
+#endif
 !
 ! Tridiag
 !

@@ -1,4 +1,5 @@
 module fgsl
+#include "config.h"
 !-------------------------------------------------------------------------------
 !>  \mainpage
 !>  \brief Interface module for use of GSL from Fortran
@@ -252,7 +253,11 @@ module fgsl
        fgsl_interp_eval_deriv, fgsl_interp_eval_deriv_e, &
        fgsl_interp_eval_deriv2, fgsl_interp_eval_deriv2_e, &
        fgsl_interp_eval_integ, fgsl_interp_eval_integ_e, &
-       fgsl_interp_min_size, fgsl_interp_type_min_size, fgsl_interp_name
+       fgsl_interp_min_size, &
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
+       fgsl_interp_type_min_size,&
+#endif
+       fgsl_interp_name
   public :: fgsl_spline_alloc, fgsl_spline_init, fgsl_spline_free, & 
        fgsl_spline_name, fgsl_spline_min_size, fgsl_spline_eval, &
        fgsl_spline_eval_e, fgsl_spline_eval_deriv, fgsl_spline_eval_deriv_e, &
@@ -272,19 +277,23 @@ module fgsl
        fgsl_permutation_inversions, fgsl_permutation_linear_cycles, &
        fgsl_permutation_canonical_cycles, fgsl_permutation_fwrite, &
        fgsl_permutation_fread, fgsl_permutation_fprintf, &
-       fgsl_permutation_fscanf, fgsl_combination_alloc, &
-       fgsl_combination_calloc, fgsl_combination_init_first, fgsl_combination_init_last, &
-       fgsl_combination_free, fgsl_combination_memcpy, fgsl_combination_get, &
-       fgsl_combination_n, fgsl_combination_k, fgsl_combination_data, &
-       fgsl_combination_valid, fgsl_combination_next, &
-       fgsl_combination_prev, fgsl_combination_fwrite, fgsl_combination_fread, &
-       fgsl_combination_fprintf, fgsl_combination_fscanf, fgsl_multiset_alloc, &
+       fgsl_permutation_fscanf, &
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
+       fgsl_multiset_alloc, &
        fgsl_multiset_calloc, fgsl_multiset_init_first, fgsl_multiset_init_last, &
        fgsl_multiset_free, fgsl_multiset_memcpy, fgsl_multiset_get, &
        fgsl_multiset_n, fgsl_multiset_k, fgsl_multiset_data, &
        fgsl_multiset_valid, fgsl_multiset_next, &
        fgsl_multiset_prev, fgsl_multiset_fwrite, fgsl_multiset_fread, &
-       fgsl_multiset_fprintf, fgsl_multiset_fscanf
+       fgsl_multiset_fprintf, fgsl_multiset_fscanf, &
+#endif
+       fgsl_combination_alloc, &
+       fgsl_combination_calloc, fgsl_combination_init_first, fgsl_combination_init_last, &
+       fgsl_combination_free, fgsl_combination_memcpy, fgsl_combination_get, &
+       fgsl_combination_n, fgsl_combination_k, fgsl_combination_data, &
+       fgsl_combination_valid, fgsl_combination_next, &
+       fgsl_combination_prev, fgsl_combination_fwrite, fgsl_combination_fread, &
+       fgsl_combination_fprintf, fgsl_combination_fscanf
 ! sorting
   public :: fgsl_heapsort, fgsl_heapsort_index, fgsl_sort, fgsl_sort_index, &
        fgsl_sort_smallest, fgsl_sort_smallest_index, &
@@ -313,7 +322,10 @@ module fgsl
        fgsl_linalg_cholesky_decomp, fgsl_linalg_complex_cholesky_decomp, &
        fgsl_linalg_cholesky_solve, fgsl_linalg_complex_cholesky_solve, &
        fgsl_linalg_cholesky_svx, fgsl_linalg_complex_cholesky_svx, &
-       fgsl_linalg_cholesky_invert, fgsl_linalg_complex_cholesky_invert, &
+       fgsl_linalg_cholesky_invert, &
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
+       fgsl_linalg_complex_cholesky_invert, &
+#endif
        fgsl_linalg_symmtd_decomp, fgsl_linalg_symmtd_unpack, &
        fgsl_linalg_symmtd_unpack_t, fgsl_linalg_hermtd_decomp, &
        fgsl_linalg_hermtd_unpack, fgsl_linalg_hermtd_unpack_t, &
@@ -336,7 +348,10 @@ module fgsl
        fgsl_eigen_herm_alloc, fgsl_eigen_herm_free, fgsl_eigen_herm, &
        fgsl_eigen_hermv_alloc, fgsl_eigen_hermv_free, fgsl_eigen_hermv, &
        fgsl_eigen_nonsymm_alloc, fgsl_eigen_nonsymm_free, fgsl_eigen_nonsymm, &
-       fgsl_eigen_nonsymm_params, fgsl_eigen_nonsymmv_params, &
+       fgsl_eigen_nonsymm_params, &
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
+        fgsl_eigen_nonsymmv_params, &
+#endif
        fgsl_eigen_nonsymmv_alloc, fgsl_eigen_nonsymmv_free, fgsl_eigen_nonsymmv, &
        fgsl_eigen_nonsymm_z, fgsl_eigen_nonsymmv_z, &
        fgsl_eigen_gensymm_alloc, fgsl_eigen_gensymm_free, fgsl_eigen_gensymm, &
@@ -375,11 +390,19 @@ module fgsl
        fgsl_integration_qaws, &
        fgsl_integration_qawo_table_alloc, fgsl_integration_qawo_table_set, &
        fgsl_integration_qawo_table_set_length, fgsl_integration_qawo, &
-       fgsl_integration_qawo_table_free, fgsl_integration_qawf, &
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
        fgsl_integration_cquad_workspace_alloc, fgsl_integration_cquad_workspace_free, &
        fgsl_integration_cquad, &
+#endif
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
+       fgsl_integration_glfixed_point,&
+#endif
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
+       fgsl_integration_glfixed, &
        fgsl_integration_glfixed_table_alloc, fgsl_integration_glfixed_table_free, &
-       fgsl_integration_glfixed, fgsl_integration_glfixed_point
+#endif
+       fgsl_integration_qawo_table_free, fgsl_integration_qawf
+
 ! random numbers, quasi-random numbers, distribution functions
   public :: fgsl_rng_alloc, fgsl_rng_set, fgsl_rng_free, fgsl_rng_get, fgsl_rng_uniform, &
        fgsl_rng_uniform_pos, fgsl_rng_uniform_int, fgsl_rng_name, fgsl_rng_max, &
@@ -442,6 +465,7 @@ module fgsl
 ! simulated annealing
   public :: fgsl_siman_params_init, fgsl_siman_params_free, fgsl_siman_solve
 ! ordinary differential equations
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
   public :: fgsl_odeiv2_system_init, fgsl_odeiv2_system_free, &
        fgsl_odeiv2_step_alloc, fgsl_odeiv2_step_status, fgsl_odeiv2_system_status, &
        fgsl_odeiv2_step_reset, fgsl_odeiv2_step_free, fgsl_odeiv2_step_name, &
@@ -457,6 +481,7 @@ module fgsl
        fgsl_odeiv2_driver_set_hmin, fgsl_odeiv2_driver_set_hmax, fgsl_odeiv2_driver_set_nmax, &
        fgsl_odeiv2_driver_apply, fgsl_odeiv2_driver_apply_fixed_step, &
        fgsl_odeiv2_driver_reset, fgsl_odeiv2_driver_free
+#endif
 !      legacy calls  
   public :: fgsl_odeiv_system_init, fgsl_odeiv_system_free, &
        fgsl_odeiv_step_alloc, fgsl_odeiv_step_status, fgsl_odeiv_system_status, &
@@ -573,8 +598,12 @@ module fgsl
   public :: fgsl_fit_linear, fgsl_fit_wlinear, fgsl_fit_linear_est, fgsl_fit_mul, &
        fgsl_fit_wmul, fgsl_fit_mul_est, fgsl_multifit_linear_alloc, fgsl_multifit_linear_free, &
        fgsl_multifit_linear, fgsl_multifit_linear_svd, &
-       fgsl_multifit_linear_usvd, fgsl_multifit_wlinear, fgsl_multifit_wlinear_svd, &
-       fgsl_multifit_wlinear_usvd, fgsl_multifit_linear_est, fgsl_multifit_linear_residuals 
+       fgsl_multifit_wlinear, fgsl_multifit_wlinear_svd, &
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
+       fgsl_multifit_linear_usvd, fgsl_multifit_wlinear_usvd, & 
+#endif
+       fgsl_multifit_linear_est, &
+       fgsl_multifit_linear_residuals 
   public :: fgsl_multifit_function_init, fgsl_multifit_function_fdf_init, &
        fgsl_multifit_function_free, fgsl_multifit_function_fdf_free, fgsl_multifit_fsolver_alloc, &
        fgsl_multifit_fdfsolver_alloc, fgsl_multifit_fsolver_free, fgsl_multifit_fdfsolver_free, &
@@ -628,8 +657,10 @@ module fgsl
 !
 ! Version strings
 !
-  character(kind=fgsl_char, len=*), public, parameter :: fgsl_version='0.9.4'
-  character(kind=fgsl_char, len=*), public, parameter :: fgsl_gslbase='1.15'
+  character(kind=fgsl_char, len=*), public, parameter ::&
+  fgsl_version=PACKAGE_VERSION
+  character(kind=fgsl_char, len=*), public, parameter ::&
+  fgsl_gslbase=GSL_VERSION
 !
 ! Error codes
 !
@@ -1611,77 +1642,77 @@ module fgsl
 ! FGSL names occurring here are auxiliary routines
 ! needed to transfer static C information to the Fortran subsystem
   interface
-     include "interface/error.finc"
-     include "interface/misc.finc"
-     include "interface/io.finc"
-     include "interface/math.finc"
-     include "interface/complex.finc"
-     include "interface/poly.finc"
-     include "interface/specfunc.finc"
-     include "interface/array.finc"
-     include "interface/interp.finc"
-     include "interface/permutation.finc"
-     include "interface/sort.finc"
-     include "interface/linalg.finc"
-     include "interface/eigen.finc"
-     include "interface/fft.finc"
-     include "interface/integration.finc"
-     include "interface/rng.finc"
-     include "interface/statistics.finc"
-     include "interface/histogram.finc"
-     include "interface/ntuple.finc"
-     include "interface/montecarlo.finc"
-     include "interface/siman.finc"
-     include "interface/ode.finc"
-     include "interface/deriv.finc"
-     include "interface/chebyshev.finc"
-     include "interface/sum_levin.finc"
-     include "interface/wavelet.finc"
-     include "interface/dht.finc"
-     include "interface/roots.finc"
-     include "interface/min.finc"
-     include "interface/multiroots.finc"
-     include "interface/multimin.finc"
-     include "interface/fit.finc"
-     include "interface/multifit.finc"
-     include "interface/bspline.finc"
-     include "interface/ieee.finc"
+#include "interface/error.finc"
+#include "interface/misc.finc"
+#include "interface/io.finc"
+#include "interface/math.finc"
+#include "interface/complex.finc"
+#include "interface/poly.finc"
+#include "interface/specfunc.finc"
+#include "interface/array.finc"
+#include "interface/interp.finc"
+#include "interface/permutation.finc"
+#include "interface/sort.finc"
+#include "interface/linalg.finc"
+#include "interface/eigen.finc"
+#include "interface/fft.finc"
+#include "interface/integration.finc"
+#include "interface/rng.finc"
+#include "interface/statistics.finc"
+#include "interface/histogram.finc"
+#include "interface/ntuple.finc"
+#include "interface/montecarlo.finc"
+#include "interface/siman.finc"
+#include "interface/ode.finc"
+#include "interface/deriv.finc"
+#include "interface/chebyshev.finc"
+#include "interface/sum_levin.finc"
+#include "interface/wavelet.finc"
+#include "interface/dht.finc"
+#include "interface/roots.finc"
+#include "interface/min.finc"
+#include "interface/multiroots.finc"
+#include "interface/multimin.finc"
+#include "interface/fit.finc"
+#include "interface/multifit.finc"
+#include "interface/bspline.finc"
+#include "interface/ieee.finc"
   end interface
-  include "interface/generics.finc"
+#include "interface/generics.finc"
 contains
-  include "api/error.finc"
-  include "api/misc.finc"
-  include "api/io.finc"
-  include "api/math.finc"
-  include "api/complex.finc"
-  include "api/poly.finc"
-  include "api/specfunc.finc"
-  include "api/array.finc"
-  include "api/interp.finc"
-  include "api/permutation.finc"
-  include "api/sort.finc"
-  include "api/linalg.finc"
-  include "api/eigen.finc"
-  include "api/fft.finc"
-  include "api/integration.finc"
-  include "api/rng.finc"
-  include "api/statistics.finc"
-  include "api/histogram.finc"
-  include "api/ntuple.finc"
-  include "api/montecarlo.finc"
-  include "api/siman.finc"
-  include "api/ode.finc"
-  include "api/deriv.finc"
-  include "api/chebyshev.finc"
-  include "api/sum_levin.finc"
-  include "api/wavelet.finc"
-  include "api/dht.finc"
-  include "api/roots.finc"
-  include "api/min.finc"
-  include "api/multiroots.finc"
-  include "api/multimin.finc"
-  include "api/fit.finc"
-  include "api/multifit.finc"
-  include "api/bspline.finc"
-  include "api/ieee.finc"
+#include "api/error.finc"
+#include "api/misc.finc"
+#include "api/io.finc"
+#include "api/math.finc"
+#include "api/complex.finc"
+#include "api/poly.finc"
+#include "api/specfunc.finc"
+#include "api/array.finc"
+#include "api/interp.finc"
+#include "api/permutation.finc"
+#include "api/sort.finc"
+#include "api/linalg.finc"
+#include "api/eigen.finc"
+#include "api/fft.finc"
+#include "api/integration.finc"
+#include "api/rng.finc"
+#include "api/statistics.finc"
+#include "api/histogram.finc"
+#include "api/ntuple.finc"
+#include "api/montecarlo.finc"
+#include "api/siman.finc"
+#include "api/ode.finc"
+#include "api/deriv.finc"
+#include "api/chebyshev.finc"
+#include "api/sum_levin.finc"
+#include "api/wavelet.finc"
+#include "api/dht.finc"
+#include "api/roots.finc"
+#include "api/min.finc"
+#include "api/multiroots.finc"
+#include "api/multimin.finc"
+#include "api/fit.finc"
+#include "api/multifit.finc"
+#include "api/bspline.finc"
+#include "api/ieee.finc"
 end module fgsl

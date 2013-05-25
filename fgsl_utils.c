@@ -1,3 +1,4 @@
+#include "config.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
@@ -6,7 +7,9 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_odeiv.h>
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
 #include <gsl/gsl_odeiv2.h>
+#endif
 #include <gsl/gsl_rng.h>
 #include <gsl/gsl_qrng.h>
 #include <gsl/gsl_integration.h>
@@ -24,7 +27,9 @@
 #include <gsl/gsl_monte_vegas.h>
 #include <gsl/gsl_permutation.h>
 #include <gsl/gsl_combination.h>
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
 #include <gsl/gsl_multiset.h>
+#endif
 #include <gsl/gsl_wavelet.h>
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_matrix.h>
@@ -303,6 +308,7 @@ gsl_odeiv_system *fgsl_odeiv_system_cinit(
     return result;
 }
 
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
 gsl_odeiv2_system *fgsl_odeiv2_system_cinit( 
 			     int (*func)(double t, const double y[], double dydt[], void * params), 
 			     size_t dimension, void *params, 
@@ -315,14 +321,17 @@ gsl_odeiv2_system *fgsl_odeiv2_system_cinit(
     result->dimension = dimension;
     return result;
 }
+#endif
 
 void fgsl_odeiv_system_cfree(gsl_odeiv_system *system) {
     free(system);
 }
 
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
 void fgsl_odeiv2_system_cfree(gsl_odeiv2_system *system) {
     free(system);
 }
+#endif
 
 
 const gsl_odeiv_step_type *fgsl_aux_odeiv_step_alloc(int i) {
@@ -368,6 +377,7 @@ const gsl_odeiv_step_type *fgsl_aux_odeiv_step_alloc(int i) {
     return res;
 }
 
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
 const gsl_odeiv2_step_type *fgsl_aux_odeiv2_step_alloc(int i) {
     const gsl_odeiv2_step_type *res;
     switch(i) {
@@ -410,6 +420,7 @@ const gsl_odeiv2_step_type *fgsl_aux_odeiv2_step_alloc(int i) {
     }
     return res;
 }
+#endif
 
 const gsl_rng_type *fgsl_aux_rng_assign(int i) {
     const gsl_rng_type *res;
@@ -1222,9 +1233,13 @@ size_t gsl_aux_sizeof_permutation() {
 size_t gsl_aux_sizeof_combination() {
     return sizeof(gsl_combination);
 }
+
+
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
 size_t gsl_aux_sizeof_multiset() {
     return sizeof(gsl_multiset);
 }
+#endif
 size_t gsl_aux_sizeof_vector() {
     return sizeof(gsl_vector);
 }

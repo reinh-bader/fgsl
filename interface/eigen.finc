@@ -91,11 +91,13 @@ subroutine gsl_eigen_nonsymmv_free(w) bind(c)
   import :: c_ptr
   type(c_ptr), value :: w
 end subroutine gsl_eigen_nonsymmv_free
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
 subroutine  gsl_eigen_nonsymmv_params (balance, w) bind(c)
   import :: c_int, c_ptr
   integer(c_int), value :: balance
   type(c_ptr), value :: w
 end subroutine gsl_eigen_nonsymmv_params
+#endif
 function gsl_eigen_nonsymmv(a, eval, evec, w) bind(c)
   import :: c_int, c_ptr
   type(c_ptr), value :: a, eval, evec, w

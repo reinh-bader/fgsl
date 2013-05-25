@@ -321,6 +321,7 @@
 !
 !
 !
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
   function fgsl_multiset_alloc(n, k)
     integer(fgsl_size_t), intent(in) :: n, k
     type(fgsl_multiset) :: fgsl_multiset_alloc
@@ -431,6 +432,7 @@
     fgsl_multiset_fscanf = gsl_multiset_fscanf(stream%gsl_file, &
          c%gsl_multiset)
   end function fgsl_multiset_fscanf
+#endif
 
 !
 ! additional utilities
@@ -466,11 +468,13 @@
     integer(fgsl_size_t) :: fgsl_sizeof_combination
     fgsl_sizeof_combination = gsl_aux_sizeof_combination()
   end function fgsl_sizeof_combination
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
   function fgsl_sizeof_multiset(c)
     type(fgsl_multiset), intent(in) :: c
     integer(fgsl_size_t) :: fgsl_sizeof_multiset
     fgsl_sizeof_multiset = gsl_aux_sizeof_multiset()
   end function fgsl_sizeof_multiset
+#endif
 
 
 
