@@ -2,6 +2,8 @@ prefix=@prefix@
 exec_prefix=@exec_prefix@
 libdir=@libdir@
 includedir=@includedir@/fgsl
+fc_compiler=@FC@
+gsl_version=@GSL_VERSION@
 
 Name: fgsl
 Description: Fortran bindings for the GNU Scientific Library
