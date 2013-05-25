@@ -461,7 +461,8 @@ module fgsl
        fgsl_cdf_geometric_p, fgsl_cdf_geometric_q, fgsl_ran_hypergeometric, &
        fgsl_ran_hypergeometric_pdf, fgsl_cdf_hypergeometric_p, fgsl_cdf_hypergeometric_q, &
        fgsl_ran_logarithmic, fgsl_ran_logarithmic_pdf, &
-       fgsl_ran_shuffle, fgsl_ran_choose, fgsl_ran_sample
+       fgsl_ran_shuffle, fgsl_ran_choose, fgsl_ran_sample, &
+       fgsl_ran_discrete_free
 ! simulated annealing
   public :: fgsl_siman_params_init, fgsl_siman_params_free, fgsl_siman_solve
 ! ordinary differential equations
