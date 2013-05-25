@@ -119,7 +119,7 @@
 \gdef\arg{\hbox{\rm arg}} % avoid temporary clobbering of arg in texinfo-4.8
 @end tex
 
-@include version-ref.texi
+@include version.texi
 @set GSL @i{GNU Scientific Library}
 
 @copying
@@ -141,7 +141,7 @@ GNU Manual, like GNU software.''
 @titlepage
 @title FGSL: A GSL Fortran interface
 @subtitle Fortran Interface Manual
-@subtitle Edition @value{EDITION}, for GSL Version @value{VERSION}
+@subtitle Edition @value{EDITION}, for GSL Version 1.15
 @subtitle @value{UPDATED}
 
 @author Reinhold Bader 
@@ -157,8 +157,8 @@ Leibniz Computing Centre
 @end ifset
 
 @ifnottex
-@node Top, Introduction, (dir), (dir)
-@top GSL
+@node Top
+@top FGSL
 
 This file documents edition @value{EDITION} of the Fortran interface
 to the @value{GSL} (FGSL). It corresponds to release
@@ -187,6 +187,14 @@ the GSL project homepage is at,
 * Sorting::
 * Numerical Integration::
 * Random Numbers::
+* Concept Index::
+* Type Index::
+* Variable Index::
+* Function Index::
+* Contributors to FGSL::
+* GNU Free Documentation License::
+* GNU General Public License::
+* Free Software Needs Free Documentation::
 @end menu
 
 @node  Introduction, Using the interface, Top, Top
@@ -198,7 +206,7 @@ the GSL project homepage is at,
 @cindex usage, compiling application programs
 @include usage.texi
 
-@node Error Handling, Mathematical Functions, Using the library, Top
+@node Error Handling, Mathematical Functions, Using the interface, Top
 @chapter Error Handling
 @cindex Errors
 @include err.texi
@@ -231,15 +239,15 @@ the GSL project homepage is at,
 @chapter Sorting
 @include sort.texi
 
-@node Numerical Integration, Random Number Generation, Sorting, Top
+@node Numerical Integration, Random Numbers, Sorting, Top
 @chapter Numerical Integration
 @include integration.texi
 
-@node Random Numbers, , Numerical Integration, Top
+@node Random Numbers, Contributors to FGSL, Numerical Integration, Top
 @chapter Random Numbers
 @include random.texi
 
-@node Contributors to FGSL, Top
+@node Contributors to FGSL, Free Software Needs Free Documentation, Random Numbers, Top
 @appendix Contributors to FGSL
 
 (See the AUTHORS file in the distribution for up-to-date information.)
@@ -251,9 +259,9 @@ the GSL project homepage is at,
 
 @c Thanks to XXX for help in proofreading the manual.
 
-@node GSL CBLAS Library, Free Software Needs Free Documentation, Autoconf Macros, Top
+@c @node GSL CBLAS Library, Free Software Needs Free Documentation, Autoconf Macros, Top
 
-@node  Free Software Needs Free Documentation, GNU General Public License, GSL CBLAS Library, Top
+@node  Free Software Needs Free Documentation, GNU General Public License, Contributors to FGSL, Top
 @unnumbered Free Software Needs Free Documentation
 @include freemanuals.texi
 

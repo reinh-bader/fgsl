@@ -93,7 +93,9 @@ paid or pay the authors to work on it.
 The Free Software Foundation maintains a list of free documentation
 published by other publishers:
 
-@itemize @asis
+@itemize
 @item
 @uref{http://www.fsf.org/doc/other-free-books.html}
 @end itemize
+
+

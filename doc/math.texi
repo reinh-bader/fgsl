@@ -22,7 +22,7 @@ are Fortran entities with the @code{PARAMETER} attribute.
 
 Of the mathematical functions, only those are interfaced which do 
 not map to a Fortran intrinsic:
-@itemize @asis
+@itemize
 @item @code{fgsl_isnan, fgsl_isinf, fgsl_finite}
 @item @code{fgsl_log1p, fgsl_expm1, fgsl_ldexp, fgsl_frexp}
 @item @code{fgsl_hypot, fgsl_acosh, fgsl_asinh, fgsl_atanh}

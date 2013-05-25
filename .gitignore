@@ -21,3 +21,6 @@ build2
 .DS_Store
 *.app
 *.zip
+stamp-vti
+fgsl-ref.info
+version.texi

@@ -58,7 +58,7 @@ AC_DEFINE_UNQUOTED([GSL_VERSION_MINOR_FORTRAN],[$gsl_version_minor_fortran],[gsl
 
 
 
-AC_CONFIG_FILES([Makefile api/Makefile interface/Makefile tests/Makefile fgsl.pc fgsl.spec])
+AC_CONFIG_FILES([Makefile api/Makefile interface/Makefile tests/Makefile fgsl.pc fgsl.spec doc/Makefile])
 AC_CONFIG_HEADERS([config.h])
 
 AC_OUTPUT

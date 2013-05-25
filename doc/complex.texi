@@ -6,7 +6,7 @@ available are mapped in FGSL. Instead of an argument
 of type @code{gsl_complex}, a standard Fortran
 @code{complex(fgsl_double}) is used for all mapped functions.
 Here's the list of mapped functions:
-@itemize @asis
+@itemize
 @item @code{fgsl_complex_arg, fgsl_complex_logabs, fgsl_complex_log10}
 @item @code{fgsl_complex_log_b, fgsl_complex_arcsin, fgsl_complex_arcsin_real}
 @item @code{fgsl_complex_arccos, fgsl_complex_arccos_real, fgsl_complex_arctan}

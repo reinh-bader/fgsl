@@ -70,7 +70,7 @@ FGSL are found in the GNU General Public License
 license is available from the GNU Project webpage @cite{Frequently Asked
 Questions about the GNU GPL},
 
-@itemize @asis
+@itemize 
 @item 
 @uref{http://www.gnu.org/copyleft/gpl-faq.html}
 @end itemize
@@ -86,7 +86,7 @@ service for commercial users (contact details available from
 @cindex downloading FGSL
 The source code for the library can be obtained by downloading it
 from the internet. The URL is
-@itemize @asis
+@itemize
 @item 
 @uref{http://www.lrz-muenchen.de/services/software/mathematik/gsl/fortran/}
 @end itemize
