@@ -9,7 +9,7 @@ program dwt
 !
   w = fgsl_wavelet_alloc(fgsl_wavelet_daubechies, 4_fgsl_size_t)
   work = fgsl_wavelet_workspace_alloc (N)
-  open(unit=20, file='dwt.dat', form='FORMATTED', status='OLD')
+  open(unit=20, file=DWT_DAT, form='FORMATTED', status='OLD')
   do i=1,N
      read(20, fmt=*) data(i)
   end do

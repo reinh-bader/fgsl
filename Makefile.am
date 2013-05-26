@@ -1,4 +1,4 @@
-SUBDIRS = tests api interface doc
+SUBDIRS = . tests api interface doc
 ACLOCAL_AMFLAGS = -I m4
 AM_CPPFLAGS = -I${top_srcdir} -I${top_builddir}
 

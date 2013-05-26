@@ -35,7 +35,7 @@ The output is shown below, and should be correct to double-precision
 accuracy,
 
 @example
-@verbatiminclude examples/intro.out
+@verbatiminclude examples/intro.txt
 @end example
 
 @noindent

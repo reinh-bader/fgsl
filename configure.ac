@@ -1,5 +1,5 @@
 AC_INIT([fgsl],[1.0.0],[Bader.Reinhold@lrz.de])
-AC_PREREQ([2.60])
+AC_PREREQ([2.69])
 
 AC_CONFIG_AUX_DIR([build-aux])
 
@@ -23,8 +23,7 @@ m4_ifdef([AM_PROG_AR],[AM_PROG_AR])
 
 
 LT_PREREQ([2.0.0])
-LT_INIT()
-AC_PROG_LIBTOOL
+LT_INIT([win32-dll])
 
 AC_PROG_CC
 if test -z $CC ; then
@@ -51,14 +50,28 @@ AC_CHECK_SIZEOF([size_t])
 
 AC_PROG_SED
 
-gsl_version_major_fortran=`echo $local_gsl_version | $SED -e 's/\([[[:digit:]]]\+\)\.\([[[:digit:]]]\+\)/\1/'`
-gsl_version_minor_fortran=`echo $local_gsl_version | $SED -e 's/\([[[:digit:]]]\+\)\.\([[[:digit:]]]\+\)/\2/'`
+gsl_version_major_fortran=`echo $local_gsl_version | $SED -e 's/\([[[:digit:]]]\{1,\}\)\.\([[[:digit:]]]\{1,\}\)/\1/'`
+gsl_version_minor_fortran=`echo $local_gsl_version | $SED -e 's/\([[[:digit:]]]\{1,\}\)\.\([[[:digit:]]]\{1,\}\)/\2/'`
 AC_DEFINE_UNQUOTED([GSL_VERSION_MAJOR_FORTRAN],[$gsl_version_major_fortran],[gsl version major for fortran code])
 AC_DEFINE_UNQUOTED([GSL_VERSION_MINOR_FORTRAN],[$gsl_version_minor_fortran],[gsl version minor for fortran code])
 
+AC_LANG_PUSH(Fortran)
+AC_OPENMP
+AC_LANG_POP(Fortran)
 
 
-AC_CONFIG_FILES([Makefile api/Makefile interface/Makefile tests/Makefile fgsl.pc fgsl.spec doc/Makefile])
+
+AC_CONFIG_FILES([Makefile api/Makefile interface/Makefile tests/Makefile fgsl.pc fgsl.spec doc/Makefile doc/examples/Makefile])
 AC_CONFIG_HEADERS([config.h])
+
+abs_top_builddir=`pwd -P`
+AC_SUBST(abs_top_builddir)
+abs_top_srcdir=`AS_DIRNAME([$0])`
+cd $abs_top_srcdir
+abs_top_srcdir=`pwd -P`
+cd $abs_top_builddir
+AC_SUBST(abs_top_srcdir)
+
+AM_CONDITIONAL([ABS_SRC_BUILD_EQUAL],[test x$abs_top_builddir = x$abs_top_srcdir])
 
 AC_OUTPUT
