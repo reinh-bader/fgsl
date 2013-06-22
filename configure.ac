@@ -43,7 +43,38 @@ AC_PROG_FC
 if test -z $FC ; then
         AC_MSG_ERROR([Fortran 2003 compiler was not found])
 fi
-AC_FC_SRCEXT(f90)
+
+
+#check for ieee_exceptions support
+AC_FC_SRCEXT([F90],[
+	AC_MSG_CHECKING([whether the fortran compiler supports the 2003 feature: ieee_exceptions])
+	AC_LANG_PUSH(Fortran)
+	AC_COMPILE_IFELSE([[
+PROGRAM main
+USE, INTRINSIC :: ieee_exceptions
+IMPLICIT NONE
+INTEGER :: i = 0
+
+	i = i+1
+	
+
+ENDPROGRAM
+	]], [IEEE_EXCEPTIONS=yes], [IEEE_EXCEPTIONS=no])
+	AC_LANG_POP(Fortran)
+	AC_MSG_RESULT([$IEEE_EXCEPTIONS])
+])
+
+if test "x$IEEE_EXCEPTIONS" = xyes ; then
+	AC_DEFINE([IEEE_EXCEPTIONS],[],[Fortran 2003 ieee_exceptions intrinsic module found])
+fi
+
+case "$host" in
+	*mingw*)
+		FGSL_LDFLAGS="-no-undefined"
+		AC_SUBST(FGSL_LDFLAGS)
+		;;
+esac
+
 
 AC_CHECK_SIZEOF([long])
 AC_CHECK_SIZEOF([size_t])

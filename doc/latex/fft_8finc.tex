@@ -1,0 +1,338 @@
+\hypertarget{fft_8finc}{\section{api/fft.finc File Reference}
+\label{fft_8finc}\index{api/fft.\-finc@{api/fft.\-finc}}
+}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=138pt]{fft_8finc__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions/\-Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{fft_8finc_a6d6765aceb1cb89aa378e657277cb60e}{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-forward} (data, stride, n)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{fft_8finc_adb683798dd4ccce52cc209e16deac0ab}{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-transform} (data, stride, n, sign)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{fft_8finc_ac9dfd334102aed6b1833e9b6b936ee38}{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-backward} (data, stride, n)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{fft_8finc_a2976591bd53bebb217c69c16b9cb36b4}{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-inverse} (data, stride, n)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{fft_8finc_ab346147a5eba7237163db01403bd96e7}{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-forward} (data, stride, n)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{fft_8finc_ae161490fa787f0b7b2d7aae171abb2fe}{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-transform} (data, stride, n, sign)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{fft_8finc_a288d6bc95e5d5a7c2d0c0787ed77493a}{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-backward} (data, stride, n)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{fft_8finc_aa5abc4b2da983c0197e3612ca15f700b}{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-inverse} (data, stride, n)
+\item 
+type(fgsl\-\_\-fft\-\_\-complex\-\_\-wavetable) \\*
+function \hyperlink{fft_8finc_afd1a11147328bddf936a7d414f796490}{fgsl\-\_\-fft\-\_\-complex\-\_\-wavetable\-\_\-alloc} (n)
+\item 
+subroutine \hyperlink{fft_8finc_a8b3b35a0490b49010d2f096a2117e1b0}{fgsl\-\_\-fft\-\_\-complex\-\_\-wavetable\-\_\-free} (w)
+\item 
+type(fgsl\-\_\-fft\-\_\-complex\-\_\-workspace) \\*
+function \hyperlink{fft_8finc_a1ab14d22f845afbded031591ff898b56}{fgsl\-\_\-fft\-\_\-complex\-\_\-workspace\-\_\-alloc} (n)
+\item 
+subroutine \hyperlink{fft_8finc_a349930160b7e3aa8c2d622086c18cc9f}{fgsl\-\_\-fft\-\_\-complex\-\_\-workspace\-\_\-free} (w)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{fft_8finc_a93cd04b58e8404ebe91398ddf33ac2ee}{fgsl\-\_\-fft\-\_\-complex\-\_\-forward} (data, stride, n, wavetable, work)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{fft_8finc_a376d447a1955ebc92b2e87a5712185b1}{fgsl\-\_\-fft\-\_\-complex\-\_\-transform} (data, stride, n, wavetable, work, sign)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{fft_8finc_a5d26359427318351552aa35ba54fe56a}{fgsl\-\_\-fft\-\_\-complex\-\_\-backward} (data, stride, n, wavetable, work)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{fft_8finc_ad553e482847f3d81c3f4bb7f43e68053}{fgsl\-\_\-fft\-\_\-complex\-\_\-inverse} (data, stride, n, wavetable, work)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{fft_8finc_a83d3ca22179c1492451233146284096e}{fgsl\-\_\-fft\-\_\-real\-\_\-radix2\-\_\-transform} (data, stride, n)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{fft_8finc_a221b77aa4c793385e078efff48b05b78}{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-radix2\-\_\-inverse} (data, stride, n)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{fft_8finc_aa85ca51ea5f1e86190979008004c3e90}{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-radix2\-\_\-backward} (data, stride, n)
+\item 
+type(fgsl\-\_\-fft\-\_\-real\-\_\-wavetable) \\*
+function \hyperlink{fft_8finc_a2d6bd839e5cea8c45db50f3f39250daf}{fgsl\-\_\-fft\-\_\-real\-\_\-wavetable\-\_\-alloc} (n)
+\item 
+subroutine \hyperlink{fft_8finc_a1a476c3a23eb0379cce21b6796c38f26}{fgsl\-\_\-fft\-\_\-real\-\_\-wavetable\-\_\-free} (w)
+\item 
+type(fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-wavetable) \\*
+function \hyperlink{fft_8finc_a8d7b46f387eaaf4045a2ae2a8e71acee}{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-wavetable\-\_\-alloc} (n)
+\item 
+subroutine \hyperlink{fft_8finc_aea9fde2535cade327c22905e9507060b}{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-wavetable\-\_\-free} (w)
+\item 
+type(fgsl\-\_\-fft\-\_\-real\-\_\-workspace) \\*
+function \hyperlink{fft_8finc_adbcc56de7ecc248fc58056203f453b5f}{fgsl\-\_\-fft\-\_\-real\-\_\-workspace\-\_\-alloc} (n)
+\item 
+subroutine \hyperlink{fft_8finc_a70c81dda8b45ee196cb1b6e60416e71c}{fgsl\-\_\-fft\-\_\-real\-\_\-workspace\-\_\-free} (w)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{fft_8finc_a85bb82277112471d93ff981547ca5f85}{fgsl\-\_\-fft\-\_\-real\-\_\-transform} (data, stride, n, wavetable, work)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{fft_8finc_ac7b50d9cadbbbcb90263686390ef2bc7}{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-transform} (data, stride, n, wavetable, work)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{fft_8finc_a26adedfb325d69561a2d1261f377c652}{fgsl\-\_\-fft\-\_\-real\-\_\-unpack} (real\-\_\-coefficient, complex\-\_\-coefficient, stride, n)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{fft_8finc_a31d71847a61aa5b87c60b8498494358f}{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-unpack} (halfcomplex\-\_\-coefficient, complex\-\_\-coefficient, stride, n)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function/\-Subroutine Documentation}
+\hypertarget{fft_8finc_a5d26359427318351552aa35ba54fe56a}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-complex\-\_\-backward@{fgsl\-\_\-fft\-\_\-complex\-\_\-backward}}
+\index{fgsl\-\_\-fft\-\_\-complex\-\_\-backward@{fgsl\-\_\-fft\-\_\-complex\-\_\-backward}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-complex\-\_\-backward}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-fft\-\_\-complex\-\_\-backward (
+\begin{DoxyParamCaption}
+\item[{complex(fgsl\-\_\-double\-\_\-complex), dimension($\ast$), intent(inout), target}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{type(fgsl\-\_\-fft\-\_\-complex\-\_\-wavetable), intent(in)}]{wavetable, }
+\item[{type(fgsl\-\_\-fft\-\_\-complex\-\_\-workspace)}]{work}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_a5d26359427318351552aa35ba54fe56a}
+\hypertarget{fft_8finc_a93cd04b58e8404ebe91398ddf33ac2ee}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-complex\-\_\-forward@{fgsl\-\_\-fft\-\_\-complex\-\_\-forward}}
+\index{fgsl\-\_\-fft\-\_\-complex\-\_\-forward@{fgsl\-\_\-fft\-\_\-complex\-\_\-forward}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-complex\-\_\-forward}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-fft\-\_\-complex\-\_\-forward (
+\begin{DoxyParamCaption}
+\item[{complex(fgsl\-\_\-double\-\_\-complex), dimension($\ast$), intent(inout), target}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{type(fgsl\-\_\-fft\-\_\-complex\-\_\-wavetable), intent(in)}]{wavetable, }
+\item[{type(fgsl\-\_\-fft\-\_\-complex\-\_\-workspace)}]{work}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_a93cd04b58e8404ebe91398ddf33ac2ee}
+\hypertarget{fft_8finc_ad553e482847f3d81c3f4bb7f43e68053}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-complex\-\_\-inverse@{fgsl\-\_\-fft\-\_\-complex\-\_\-inverse}}
+\index{fgsl\-\_\-fft\-\_\-complex\-\_\-inverse@{fgsl\-\_\-fft\-\_\-complex\-\_\-inverse}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-complex\-\_\-inverse}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-fft\-\_\-complex\-\_\-inverse (
+\begin{DoxyParamCaption}
+\item[{complex(fgsl\-\_\-double\-\_\-complex), dimension($\ast$), intent(inout), target}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{type(fgsl\-\_\-fft\-\_\-complex\-\_\-wavetable), intent(in)}]{wavetable, }
+\item[{type(fgsl\-\_\-fft\-\_\-complex\-\_\-workspace)}]{work}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_ad553e482847f3d81c3f4bb7f43e68053}
+\hypertarget{fft_8finc_ac9dfd334102aed6b1833e9b6b936ee38}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-backward@{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-backward}}
+\index{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-backward@{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-backward}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-backward}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-backward (
+\begin{DoxyParamCaption}
+\item[{complex(fgsl\-\_\-double\-\_\-complex), dimension($\ast$), intent(inout), target}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_ac9dfd334102aed6b1833e9b6b936ee38}
+\hypertarget{fft_8finc_a288d6bc95e5d5a7c2d0c0787ed77493a}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-backward@{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-backward}}
+\index{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-backward@{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-backward}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-backward}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-backward (
+\begin{DoxyParamCaption}
+\item[{complex(fgsl\-\_\-double\-\_\-complex), dimension($\ast$), intent(inout), target}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_a288d6bc95e5d5a7c2d0c0787ed77493a}
+\hypertarget{fft_8finc_ab346147a5eba7237163db01403bd96e7}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-forward@{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-forward}}
+\index{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-forward@{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-forward}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-forward}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-forward (
+\begin{DoxyParamCaption}
+\item[{complex(fgsl\-\_\-double\-\_\-complex), dimension($\ast$), intent(inout), target}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_ab346147a5eba7237163db01403bd96e7}
+\hypertarget{fft_8finc_aa5abc4b2da983c0197e3612ca15f700b}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-inverse@{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-inverse}}
+\index{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-inverse@{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-inverse}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-inverse}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-inverse (
+\begin{DoxyParamCaption}
+\item[{complex(fgsl\-\_\-double\-\_\-complex), dimension($\ast$), intent(inout), target}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_aa5abc4b2da983c0197e3612ca15f700b}
+\hypertarget{fft_8finc_ae161490fa787f0b7b2d7aae171abb2fe}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-transform@{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-transform}}
+\index{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-transform@{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-transform}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-transform}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-dif\-\_\-transform (
+\begin{DoxyParamCaption}
+\item[{complex(fgsl\-\_\-double\-\_\-complex), dimension($\ast$), intent(inout), target}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{integer(fgsl\-\_\-int), intent(in)}]{sign}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_ae161490fa787f0b7b2d7aae171abb2fe}
+\hypertarget{fft_8finc_a6d6765aceb1cb89aa378e657277cb60e}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-forward@{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-forward}}
+\index{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-forward@{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-forward}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-forward}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-forward (
+\begin{DoxyParamCaption}
+\item[{complex(fgsl\-\_\-double\-\_\-complex), dimension($\ast$), intent(inout), target}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_a6d6765aceb1cb89aa378e657277cb60e}
+\hypertarget{fft_8finc_a2976591bd53bebb217c69c16b9cb36b4}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-inverse@{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-inverse}}
+\index{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-inverse@{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-inverse}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-inverse}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-inverse (
+\begin{DoxyParamCaption}
+\item[{complex(fgsl\-\_\-double\-\_\-complex), dimension($\ast$), intent(inout), target}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_a2976591bd53bebb217c69c16b9cb36b4}
+\hypertarget{fft_8finc_adb683798dd4ccce52cc209e16deac0ab}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-transform@{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-transform}}
+\index{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-transform@{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-transform}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-transform}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-fft\-\_\-complex\-\_\-radix2\-\_\-transform (
+\begin{DoxyParamCaption}
+\item[{complex(fgsl\-\_\-double\-\_\-complex), dimension($\ast$), intent(inout), target}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{integer(fgsl\-\_\-int), intent(in)}]{sign}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_adb683798dd4ccce52cc209e16deac0ab}
+\hypertarget{fft_8finc_a376d447a1955ebc92b2e87a5712185b1}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-complex\-\_\-transform@{fgsl\-\_\-fft\-\_\-complex\-\_\-transform}}
+\index{fgsl\-\_\-fft\-\_\-complex\-\_\-transform@{fgsl\-\_\-fft\-\_\-complex\-\_\-transform}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-complex\-\_\-transform}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-fft\-\_\-complex\-\_\-transform (
+\begin{DoxyParamCaption}
+\item[{complex(fgsl\-\_\-double\-\_\-complex), dimension($\ast$), intent(inout), target}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{type(fgsl\-\_\-fft\-\_\-complex\-\_\-wavetable), intent(in)}]{wavetable, }
+\item[{type(fgsl\-\_\-fft\-\_\-complex\-\_\-workspace)}]{work, }
+\item[{integer(fgsl\-\_\-int), intent(in)}]{sign}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_a376d447a1955ebc92b2e87a5712185b1}
+\hypertarget{fft_8finc_afd1a11147328bddf936a7d414f796490}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-complex\-\_\-wavetable\-\_\-alloc@{fgsl\-\_\-fft\-\_\-complex\-\_\-wavetable\-\_\-alloc}}
+\index{fgsl\-\_\-fft\-\_\-complex\-\_\-wavetable\-\_\-alloc@{fgsl\-\_\-fft\-\_\-complex\-\_\-wavetable\-\_\-alloc}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-complex\-\_\-wavetable\-\_\-alloc}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-fft\-\_\-complex\-\_\-wavetable) function fgsl\-\_\-fft\-\_\-complex\-\_\-wavetable\-\_\-alloc (
+\begin{DoxyParamCaption}
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_afd1a11147328bddf936a7d414f796490}
+\hypertarget{fft_8finc_a8b3b35a0490b49010d2f096a2117e1b0}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-complex\-\_\-wavetable\-\_\-free@{fgsl\-\_\-fft\-\_\-complex\-\_\-wavetable\-\_\-free}}
+\index{fgsl\-\_\-fft\-\_\-complex\-\_\-wavetable\-\_\-free@{fgsl\-\_\-fft\-\_\-complex\-\_\-wavetable\-\_\-free}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-complex\-\_\-wavetable\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-fft\-\_\-complex\-\_\-wavetable\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-fft\-\_\-complex\-\_\-wavetable)}]{w}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_a8b3b35a0490b49010d2f096a2117e1b0}
+\hypertarget{fft_8finc_a1ab14d22f845afbded031591ff898b56}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-complex\-\_\-workspace\-\_\-alloc@{fgsl\-\_\-fft\-\_\-complex\-\_\-workspace\-\_\-alloc}}
+\index{fgsl\-\_\-fft\-\_\-complex\-\_\-workspace\-\_\-alloc@{fgsl\-\_\-fft\-\_\-complex\-\_\-workspace\-\_\-alloc}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-complex\-\_\-workspace\-\_\-alloc}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-fft\-\_\-complex\-\_\-workspace) function fgsl\-\_\-fft\-\_\-complex\-\_\-workspace\-\_\-alloc (
+\begin{DoxyParamCaption}
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_a1ab14d22f845afbded031591ff898b56}
+\hypertarget{fft_8finc_a349930160b7e3aa8c2d622086c18cc9f}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-complex\-\_\-workspace\-\_\-free@{fgsl\-\_\-fft\-\_\-complex\-\_\-workspace\-\_\-free}}
+\index{fgsl\-\_\-fft\-\_\-complex\-\_\-workspace\-\_\-free@{fgsl\-\_\-fft\-\_\-complex\-\_\-workspace\-\_\-free}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-complex\-\_\-workspace\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-fft\-\_\-complex\-\_\-workspace\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-fft\-\_\-complex\-\_\-workspace)}]{w}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_a349930160b7e3aa8c2d622086c18cc9f}
+\hypertarget{fft_8finc_aa85ca51ea5f1e86190979008004c3e90}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-radix2\-\_\-backward@{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-radix2\-\_\-backward}}
+\index{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-radix2\-\_\-backward@{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-radix2\-\_\-backward}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-radix2\-\_\-backward}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-radix2\-\_\-backward (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension($\ast$), intent(inout), target}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_aa85ca51ea5f1e86190979008004c3e90}
+\hypertarget{fft_8finc_a221b77aa4c793385e078efff48b05b78}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-radix2\-\_\-inverse@{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-radix2\-\_\-inverse}}
+\index{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-radix2\-\_\-inverse@{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-radix2\-\_\-inverse}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-radix2\-\_\-inverse}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-radix2\-\_\-inverse (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension($\ast$), intent(inout), target}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_a221b77aa4c793385e078efff48b05b78}
+\hypertarget{fft_8finc_ac7b50d9cadbbbcb90263686390ef2bc7}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-transform@{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-transform}}
+\index{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-transform@{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-transform}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-transform}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-transform (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension($\ast$), intent(inout), target}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{type(fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-wavetable), intent(in)}]{wavetable, }
+\item[{type(fgsl\-\_\-fft\-\_\-real\-\_\-workspace)}]{work}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_ac7b50d9cadbbbcb90263686390ef2bc7}
+\hypertarget{fft_8finc_a31d71847a61aa5b87c60b8498494358f}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-unpack@{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-unpack}}
+\index{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-unpack@{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-unpack}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-unpack}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-unpack (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension($\ast$), intent(in), target}]{halfcomplex\-\_\-coefficient, }
+\item[{complex(fgsl\-\_\-double\-\_\-complex), dimension($\ast$), intent(inout), target}]{complex\-\_\-coefficient, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_a31d71847a61aa5b87c60b8498494358f}
+\hypertarget{fft_8finc_a8d7b46f387eaaf4045a2ae2a8e71acee}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-wavetable\-\_\-alloc@{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-wavetable\-\_\-alloc}}
+\index{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-wavetable\-\_\-alloc@{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-wavetable\-\_\-alloc}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-wavetable\-\_\-alloc}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-wavetable) function fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-wavetable\-\_\-alloc (
+\begin{DoxyParamCaption}
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_a8d7b46f387eaaf4045a2ae2a8e71acee}
+\hypertarget{fft_8finc_aea9fde2535cade327c22905e9507060b}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-wavetable\-\_\-free@{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-wavetable\-\_\-free}}
+\index{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-wavetable\-\_\-free@{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-wavetable\-\_\-free}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-wavetable\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-wavetable\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-wavetable)}]{w}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_aea9fde2535cade327c22905e9507060b}
+\hypertarget{fft_8finc_a83d3ca22179c1492451233146284096e}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-real\-\_\-radix2\-\_\-transform@{fgsl\-\_\-fft\-\_\-real\-\_\-radix2\-\_\-transform}}
+\index{fgsl\-\_\-fft\-\_\-real\-\_\-radix2\-\_\-transform@{fgsl\-\_\-fft\-\_\-real\-\_\-radix2\-\_\-transform}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-real\-\_\-radix2\-\_\-transform}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-fft\-\_\-real\-\_\-radix2\-\_\-transform (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension($\ast$), intent(inout), target}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_a83d3ca22179c1492451233146284096e}
+\hypertarget{fft_8finc_a85bb82277112471d93ff981547ca5f85}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-real\-\_\-transform@{fgsl\-\_\-fft\-\_\-real\-\_\-transform}}
+\index{fgsl\-\_\-fft\-\_\-real\-\_\-transform@{fgsl\-\_\-fft\-\_\-real\-\_\-transform}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-real\-\_\-transform}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-fft\-\_\-real\-\_\-transform (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension($\ast$), intent(inout), target}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{type(fgsl\-\_\-fft\-\_\-real\-\_\-wavetable), intent(in)}]{wavetable, }
+\item[{type(fgsl\-\_\-fft\-\_\-real\-\_\-workspace)}]{work}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_a85bb82277112471d93ff981547ca5f85}
+\hypertarget{fft_8finc_a26adedfb325d69561a2d1261f377c652}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-real\-\_\-unpack@{fgsl\-\_\-fft\-\_\-real\-\_\-unpack}}
+\index{fgsl\-\_\-fft\-\_\-real\-\_\-unpack@{fgsl\-\_\-fft\-\_\-real\-\_\-unpack}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-real\-\_\-unpack}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-fft\-\_\-real\-\_\-unpack (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension($\ast$), intent(in), target}]{real\-\_\-coefficient, }
+\item[{complex(fgsl\-\_\-double\-\_\-complex), dimension($\ast$), intent(inout), target}]{complex\-\_\-coefficient, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_a26adedfb325d69561a2d1261f377c652}
+\hypertarget{fft_8finc_a2d6bd839e5cea8c45db50f3f39250daf}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-real\-\_\-wavetable\-\_\-alloc@{fgsl\-\_\-fft\-\_\-real\-\_\-wavetable\-\_\-alloc}}
+\index{fgsl\-\_\-fft\-\_\-real\-\_\-wavetable\-\_\-alloc@{fgsl\-\_\-fft\-\_\-real\-\_\-wavetable\-\_\-alloc}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-real\-\_\-wavetable\-\_\-alloc}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-fft\-\_\-real\-\_\-wavetable) function fgsl\-\_\-fft\-\_\-real\-\_\-wavetable\-\_\-alloc (
+\begin{DoxyParamCaption}
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_a2d6bd839e5cea8c45db50f3f39250daf}
+\hypertarget{fft_8finc_a1a476c3a23eb0379cce21b6796c38f26}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-real\-\_\-wavetable\-\_\-free@{fgsl\-\_\-fft\-\_\-real\-\_\-wavetable\-\_\-free}}
+\index{fgsl\-\_\-fft\-\_\-real\-\_\-wavetable\-\_\-free@{fgsl\-\_\-fft\-\_\-real\-\_\-wavetable\-\_\-free}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-real\-\_\-wavetable\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-fft\-\_\-real\-\_\-wavetable\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-fft\-\_\-real\-\_\-wavetable)}]{w}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_a1a476c3a23eb0379cce21b6796c38f26}
+\hypertarget{fft_8finc_adbcc56de7ecc248fc58056203f453b5f}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-real\-\_\-workspace\-\_\-alloc@{fgsl\-\_\-fft\-\_\-real\-\_\-workspace\-\_\-alloc}}
+\index{fgsl\-\_\-fft\-\_\-real\-\_\-workspace\-\_\-alloc@{fgsl\-\_\-fft\-\_\-real\-\_\-workspace\-\_\-alloc}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-real\-\_\-workspace\-\_\-alloc}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-fft\-\_\-real\-\_\-workspace) function fgsl\-\_\-fft\-\_\-real\-\_\-workspace\-\_\-alloc (
+\begin{DoxyParamCaption}
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_adbcc56de7ecc248fc58056203f453b5f}
+\hypertarget{fft_8finc_a70c81dda8b45ee196cb1b6e60416e71c}{\index{fft.\-finc@{fft.\-finc}!fgsl\-\_\-fft\-\_\-real\-\_\-workspace\-\_\-free@{fgsl\-\_\-fft\-\_\-real\-\_\-workspace\-\_\-free}}
+\index{fgsl\-\_\-fft\-\_\-real\-\_\-workspace\-\_\-free@{fgsl\-\_\-fft\-\_\-real\-\_\-workspace\-\_\-free}!fft.finc@{fft.\-finc}}
+\subsubsection[{fgsl\-\_\-fft\-\_\-real\-\_\-workspace\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-fft\-\_\-real\-\_\-workspace\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-fft\-\_\-real\-\_\-workspace)}]{w}
+\end{DoxyParamCaption}
+)}}\label{fft_8finc_a70c81dda8b45ee196cb1b6e60416e71c}

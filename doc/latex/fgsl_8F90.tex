@@ -1,0 +1,304 @@
+\hypertarget{fgsl_8F90}{\section{fgsl.\-F90 File Reference}
+\label{fgsl_8F90}\index{fgsl.\-F90@{fgsl.\-F90}}
+}
+{\ttfamily \#include \char`\"{}config.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/error.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/misc.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/io.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/math.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/complex.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/poly.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/specfunc.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/array.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/interp.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/permutation.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/sort.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/linalg.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/eigen.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/fft.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/integration.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/rng.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/statistics.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/histogram.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/ntuple.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/montecarlo.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/siman.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/ode.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/deriv.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/chebyshev.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/sum\-\_\-levin.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/wavelet.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/dht.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/roots.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/min.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/multiroots.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/multimin.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/fit.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/multifit.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/bspline.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/ieee.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interface/generics.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/error.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/misc.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/io.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/math.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/complex.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/poly.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/specfunc.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/array.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/interp.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/permutation.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/sort.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/linalg.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/eigen.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/fft.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/integration.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/rng.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/statistics.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/histogram.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/ntuple.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/montecarlo.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/siman.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/ode.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/deriv.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/chebyshev.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/sum\-\_\-levin.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/wavelet.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/dht.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/roots.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/min.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/multiroots.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/multimin.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/fit.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/multifit.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/bspline.\-finc\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}api/ieee.\-finc\char`\"{}}\\*
+Include dependency graph for fgsl.\-F90\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{fgsl_8F90__incl}
+\end{center}
+\end{figure}
+\subsection*{Data Types}
+\begin{DoxyCompactItemize}
+\item 
+module \hyperlink{classfgsl}{fgsl}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__error__handler__t}{fgsl\-::fgsl\-\_\-error\-\_\-handler\-\_\-t}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__file}{fgsl\-::fgsl\-\_\-file}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__function}{fgsl\-::fgsl\-\_\-function}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__function__fdf}{fgsl\-::fgsl\-\_\-function\-\_\-fdf}
+\item 
+type \hyperlink{structfgsl_1_1gsl__complex}{fgsl\-::gsl\-\_\-complex}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__poly__complex__workspace}{fgsl\-::fgsl\-\_\-poly\-\_\-complex\-\_\-workspace}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__sf__result}{fgsl\-::fgsl\-\_\-sf\-\_\-result}
+\item 
+type \hyperlink{structfgsl_1_1gsl__sf__result}{fgsl\-::gsl\-\_\-sf\-\_\-result}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__sf__result__e10}{fgsl\-::fgsl\-\_\-sf\-\_\-result\-\_\-e10}
+\item 
+type \hyperlink{structfgsl_1_1gsl__sf__result__e10}{fgsl\-::gsl\-\_\-sf\-\_\-result\-\_\-e10}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__mode__t}{fgsl\-::fgsl\-\_\-mode\-\_\-t}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__vector}{fgsl\-::fgsl\-\_\-vector}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__matrix}{fgsl\-::fgsl\-\_\-matrix}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__vector__complex}{fgsl\-::fgsl\-\_\-vector\-\_\-complex}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__matrix__complex}{fgsl\-::fgsl\-\_\-matrix\-\_\-complex}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__interp__type}{fgsl\-::fgsl\-\_\-interp\-\_\-type}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__interp}{fgsl\-::fgsl\-\_\-interp}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__interp__accel}{fgsl\-::fgsl\-\_\-interp\-\_\-accel}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__spline}{fgsl\-::fgsl\-\_\-spline}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__permutation}{fgsl\-::fgsl\-\_\-permutation}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__combination}{fgsl\-::fgsl\-\_\-combination}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__multiset}{fgsl\-::fgsl\-\_\-multiset}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__eigen__symm__workspace}{fgsl\-::fgsl\-\_\-eigen\-\_\-symm\-\_\-workspace}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__eigen__symmv__workspace}{fgsl\-::fgsl\-\_\-eigen\-\_\-symmv\-\_\-workspace}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__eigen__herm__workspace}{fgsl\-::fgsl\-\_\-eigen\-\_\-herm\-\_\-workspace}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__eigen__hermv__workspace}{fgsl\-::fgsl\-\_\-eigen\-\_\-hermv\-\_\-workspace}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__eigen__nonsymm__workspace}{fgsl\-::fgsl\-\_\-eigen\-\_\-nonsymm\-\_\-workspace}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__eigen__nonsymmv__workspace}{fgsl\-::fgsl\-\_\-eigen\-\_\-nonsymmv\-\_\-workspace}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__eigen__gensymm__workspace}{fgsl\-::fgsl\-\_\-eigen\-\_\-gensymm\-\_\-workspace}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__eigen__gensymmv__workspace}{fgsl\-::fgsl\-\_\-eigen\-\_\-gensymmv\-\_\-workspace}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__eigen__genherm__workspace}{fgsl\-::fgsl\-\_\-eigen\-\_\-genherm\-\_\-workspace}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__eigen__genhermv__workspace}{fgsl\-::fgsl\-\_\-eigen\-\_\-genhermv\-\_\-workspace}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__eigen__gen__workspace}{fgsl\-::fgsl\-\_\-eigen\-\_\-gen\-\_\-workspace}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__eigen__genv__workspace}{fgsl\-::fgsl\-\_\-eigen\-\_\-genv\-\_\-workspace}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__fft__complex__wavetable}{fgsl\-::fgsl\-\_\-fft\-\_\-complex\-\_\-wavetable}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__fft__real__wavetable}{fgsl\-::fgsl\-\_\-fft\-\_\-real\-\_\-wavetable}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__fft__halfcomplex__wavetable}{fgsl\-::fgsl\-\_\-fft\-\_\-halfcomplex\-\_\-wavetable}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__fft__complex__workspace}{fgsl\-::fgsl\-\_\-fft\-\_\-complex\-\_\-workspace}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__fft__real__workspace}{fgsl\-::fgsl\-\_\-fft\-\_\-real\-\_\-workspace}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__integration__workspace}{fgsl\-::fgsl\-\_\-integration\-\_\-workspace}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__integration__qaws__table}{fgsl\-::fgsl\-\_\-integration\-\_\-qaws\-\_\-table}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__integration__qawo__table}{fgsl\-::fgsl\-\_\-integration\-\_\-qawo\-\_\-table}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__integration__cquad__workspace}{fgsl\-::fgsl\-\_\-integration\-\_\-cquad\-\_\-workspace}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__integration__glfixed__table}{fgsl\-::fgsl\-\_\-integration\-\_\-glfixed\-\_\-table}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__rng}{fgsl\-::fgsl\-\_\-rng}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__rng__type}{fgsl\-::fgsl\-\_\-rng\-\_\-type}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__qrng}{fgsl\-::fgsl\-\_\-qrng}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__qrng__type}{fgsl\-::fgsl\-\_\-qrng\-\_\-type}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__ran__discrete__t}{fgsl\-::fgsl\-\_\-ran\-\_\-discrete\-\_\-t}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__histogram}{fgsl\-::fgsl\-\_\-histogram}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__histogram__pdf}{fgsl\-::fgsl\-\_\-histogram\-\_\-pdf}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__histogram2d}{fgsl\-::fgsl\-\_\-histogram2d}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__histogram2d__pdf}{fgsl\-::fgsl\-\_\-histogram2d\-\_\-pdf}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__ntuple}{fgsl\-::fgsl\-\_\-ntuple}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__ntuple__select__fn}{fgsl\-::fgsl\-\_\-ntuple\-\_\-select\-\_\-fn}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__ntuple__value__fn}{fgsl\-::fgsl\-\_\-ntuple\-\_\-value\-\_\-fn}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__monte__function}{fgsl\-::fgsl\-\_\-monte\-\_\-function}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__monte__plain__state}{fgsl\-::fgsl\-\_\-monte\-\_\-plain\-\_\-state}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__monte__miser__state}{fgsl\-::fgsl\-\_\-monte\-\_\-miser\-\_\-state}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__monte__vegas__state}{fgsl\-::fgsl\-\_\-monte\-\_\-vegas\-\_\-state}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__siman__params__t}{fgsl\-::fgsl\-\_\-siman\-\_\-params\-\_\-t}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__odeiv2__system}{fgsl\-::fgsl\-\_\-odeiv2\-\_\-system}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__odeiv2__step__type}{fgsl\-::fgsl\-\_\-odeiv2\-\_\-step\-\_\-type}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__odeiv2__step}{fgsl\-::fgsl\-\_\-odeiv2\-\_\-step}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__odeiv2__driver}{fgsl\-::fgsl\-\_\-odeiv2\-\_\-driver}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__odeiv2__control__type}{fgsl\-::fgsl\-\_\-odeiv2\-\_\-control\-\_\-type}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__odeiv2__control}{fgsl\-::fgsl\-\_\-odeiv2\-\_\-control}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__odeiv2__evolve}{fgsl\-::fgsl\-\_\-odeiv2\-\_\-evolve}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__odeiv__system}{fgsl\-::fgsl\-\_\-odeiv\-\_\-system}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__odeiv__step__type}{fgsl\-::fgsl\-\_\-odeiv\-\_\-step\-\_\-type}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__odeiv__step}{fgsl\-::fgsl\-\_\-odeiv\-\_\-step}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__odeiv__control}{fgsl\-::fgsl\-\_\-odeiv\-\_\-control}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__odeiv__control__type}{fgsl\-::fgsl\-\_\-odeiv\-\_\-control\-\_\-type}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__odeiv__evolve}{fgsl\-::fgsl\-\_\-odeiv\-\_\-evolve}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__cheb__series}{fgsl\-::fgsl\-\_\-cheb\-\_\-series}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__sum__levin__u__workspace}{fgsl\-::fgsl\-\_\-sum\-\_\-levin\-\_\-u\-\_\-workspace}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__sum__levin__utrunc__workspace}{fgsl\-::fgsl\-\_\-sum\-\_\-levin\-\_\-utrunc\-\_\-workspace}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__wavelet}{fgsl\-::fgsl\-\_\-wavelet}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__wavelet__type}{fgsl\-::fgsl\-\_\-wavelet\-\_\-type}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__wavelet__workspace}{fgsl\-::fgsl\-\_\-wavelet\-\_\-workspace}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__dht}{fgsl\-::fgsl\-\_\-dht}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__root__fsolver__type}{fgsl\-::fgsl\-\_\-root\-\_\-fsolver\-\_\-type}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__root__fdfsolver__type}{fgsl\-::fgsl\-\_\-root\-\_\-fdfsolver\-\_\-type}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__root__fsolver}{fgsl\-::fgsl\-\_\-root\-\_\-fsolver}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__root__fdfsolver}{fgsl\-::fgsl\-\_\-root\-\_\-fdfsolver}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__min__fminimizer__type}{fgsl\-::fgsl\-\_\-min\-\_\-fminimizer\-\_\-type}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__min__fminimizer}{fgsl\-::fgsl\-\_\-min\-\_\-fminimizer}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__multiroot__function}{fgsl\-::fgsl\-\_\-multiroot\-\_\-function}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__multiroot__function__fdf}{fgsl\-::fgsl\-\_\-multiroot\-\_\-function\-\_\-fdf}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__multiroot__fsolver}{fgsl\-::fgsl\-\_\-multiroot\-\_\-fsolver}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__multiroot__fsolver__type}{fgsl\-::fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-type}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__multiroot__fdfsolver}{fgsl\-::fgsl\-\_\-multiroot\-\_\-fdfsolver}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__multiroot__fdfsolver__type}{fgsl\-::fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-type}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__multimin__function}{fgsl\-::fgsl\-\_\-multimin\-\_\-function}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__multimin__function__fdf}{fgsl\-::fgsl\-\_\-multimin\-\_\-function\-\_\-fdf}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__multimin__fminimizer}{fgsl\-::fgsl\-\_\-multimin\-\_\-fminimizer}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__multimin__fminimizer__type}{fgsl\-::fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-type}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__multimin__fdfminimizer}{fgsl\-::fgsl\-\_\-multimin\-\_\-fdfminimizer}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__multimin__fdfminimizer__type}{fgsl\-::fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-type}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__multifit__linear__workspace}{fgsl\-::fgsl\-\_\-multifit\-\_\-linear\-\_\-workspace}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__multifit__function}{fgsl\-::fgsl\-\_\-multifit\-\_\-function}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__multifit__function__fdf}{fgsl\-::fgsl\-\_\-multifit\-\_\-function\-\_\-fdf}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__multifit__fsolver}{fgsl\-::fgsl\-\_\-multifit\-\_\-fsolver}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__multifit__fsolver__type}{fgsl\-::fgsl\-\_\-multifit\-\_\-fsolver\-\_\-type}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__multifit__fdfsolver}{fgsl\-::fgsl\-\_\-multifit\-\_\-fdfsolver}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__multifit__fdfsolver__type}{fgsl\-::fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-type}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__bspline__workspace}{fgsl\-::fgsl\-\_\-bspline\-\_\-workspace}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__bspline__deriv__workspace}{fgsl\-::fgsl\-\_\-bspline\-\_\-deriv\-\_\-workspace}
+\end{DoxyCompactItemize}

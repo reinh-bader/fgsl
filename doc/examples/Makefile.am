@@ -16,7 +16,7 @@ check_PROGRAMS = cdf cheb combination diff dwt \
 		 ode-initval permutation permshuffle \
 		 polyroots qrng randpoisson randwalk \
 		 rng rngunif roots siman stat statsort \
-		 sum vector integration_omp
+		 sum vector 
 
 cdf_SOURCES = cdf.f90
 
@@ -31,7 +31,7 @@ dwt_FCFLAGS = -DDWT_DAT="'$(srcdir)/dwt.dat'"
 
 error_1_SOURCES = error_1.f90
 error_2_SOURCES = error_2.f90
-error_3_SOURCES = error_3.f90
+error_3_SOURCES = error_3.F90
 error_4_SOURCES = error_4.f90
 
 fitting_SOURCES = fitting.f90
@@ -106,14 +106,14 @@ sum_SOURCES = sum.f90
 
 vector_SOURCES = vector.f90
 
-integration_omp_SOURCES = integration_omp.f90
-integration_omp_FCFLAGS = @OPENMP_FCFLAGS@ -I${top_srcdir} -I${top_builddir}
-integration_omp_LDADD =  ${top_builddir}/libfgsl.la
+#integration_omp_SOURCES = integration_omp.f90
+#integration_omp_FCFLAGS = @OPENMP_FCFLAGS@ -I${top_srcdir} -I${top_builddir}
+#integration_omp_LDADD =  ${top_builddir}/libfgsl.la
 
 data_files = dwt.dat histogram.dat cauchy.dat
 
 dist_fgsl_example_DATA = $(data_files) cdf.f90 cheb.f90 combination.F90 diff.f90 dwt.F90 \
-			error_1.f90 error_2.f90 error_3.f90 error_4.f90 \
+			error_1.f90 error_2.f90 error_3.F90 error_4.f90 \
 			fitting.f90 fitting3.f90 fitting2.f90 histogram.F90 \
 			histogram2d.f90 ieee.f90 ieeeround.f90 integration.f90 \
 			interp.f90 interpp.f90 intro.f90 matrix.f90 min.f90 monte.f90 \

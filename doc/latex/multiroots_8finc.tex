@@ -1,0 +1,255 @@
+\hypertarget{multiroots_8finc}{\section{api/multiroots.finc File Reference}
+\label{multiroots_8finc}\index{api/multiroots.\-finc@{api/multiroots.\-finc}}
+}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=174pt]{multiroots_8finc__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions/\-Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+type(fgsl\-\_\-multiroot\-\_\-function) \\*
+function \hyperlink{multiroots_8finc_a78b20b390717ee23f7939615cbe93ff5}{fgsl\-\_\-multiroot\-\_\-function\-\_\-init} (func, ndim, params)
+\item 
+type(fgsl\-\_\-multiroot\-\_\-function\-\_\-fdf) \\*
+function \hyperlink{multiroots_8finc_aa6562b8729129576adc2644344af1d82}{fgsl\-\_\-multiroot\-\_\-function\-\_\-fdf\-\_\-init} (func, dfunc, fdfunc, ndim, params)
+\item 
+subroutine \hyperlink{multiroots_8finc_a9b0beb12d58e735ed7597de7271439fc}{fgsl\-\_\-multiroot\-\_\-function\-\_\-free} (fun)
+\item 
+subroutine \hyperlink{multiroots_8finc_ab1e9265827f89cd911c898df0eb8657d}{fgsl\-\_\-multiroot\-\_\-function\-\_\-fdf\-\_\-free} (fun)
+\item 
+type(fgsl\-\_\-multiroot\-\_\-fsolver) \\*
+function \hyperlink{multiroots_8finc_a9967caceee0113037f46962e830a3d7d}{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-alloc} (t, n)
+\item 
+type(fgsl\-\_\-multiroot\-\_\-fdfsolver) \\*
+function \hyperlink{multiroots_8finc_ab89adde0a73d47f7bcc272997b3f6c8d}{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-alloc} (t, n)
+\item 
+subroutine \hyperlink{multiroots_8finc_a062ba1ccc85350d3089b310296166e7c}{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-free} (s)
+\item 
+subroutine \hyperlink{multiroots_8finc_aee27003f4d58d412ebbde4d72eace13e}{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-free} (s)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{multiroots_8finc_a85ec239778cc40c12c0cdda378b3f704}{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-set} (s, f, x)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{multiroots_8finc_a11f98af2f96332f471fa4cdcce719b0a}{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-set} (s, fdf, x)
+\item 
+character(kind=fgsl\-\_\-char, len=fgsl\-\_\-strmax) \\*
+function \hyperlink{multiroots_8finc_aa0ce2f798740b7d41bed54676c414514}{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-name} (s)
+\item 
+character(kind=fgsl\-\_\-char, len=fgsl\-\_\-strmax) \\*
+function \hyperlink{multiroots_8finc_abc59e0be63f6c4126420aeab1c20081c}{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-name} (s)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{multiroots_8finc_ad1d089816977209d88134f95979c2726}{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-iterate} (s)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{multiroots_8finc_a7c2d7b128df269454d93454e6d4117f2}{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-iterate} (s)
+\item 
+type(fgsl\-\_\-vector) function \hyperlink{multiroots_8finc_a756becbde20557aeffb366a0bbcf8177}{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-root} (s)
+\item 
+type(fgsl\-\_\-vector) function \hyperlink{multiroots_8finc_a5b98f55eae83d12a4c0d70b7b6c26508}{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-root} (s)
+\item 
+type(fgsl\-\_\-vector) function \hyperlink{multiroots_8finc_a7a1a3c9bbcec3621cad66f2a87608bd5}{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-f} (s)
+\item 
+type(fgsl\-\_\-vector) function \hyperlink{multiroots_8finc_a3d551eb292c92b30f9628ea8e1d6d251}{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-f} (s)
+\item 
+type(fgsl\-\_\-vector) function \hyperlink{multiroots_8finc_af5cd6b1ed7e6cb7589c2e64cd4ff22e9}{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-dx} (s)
+\item 
+type(fgsl\-\_\-vector) function \hyperlink{multiroots_8finc_a6fa2ba8b4311978a0a28d45afacffeaf}{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-dx} (s)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{multiroots_8finc_ad67125d3ae3d333fa1211fdb9ee6c58a}{fgsl\-\_\-multiroot\-\_\-test\-\_\-delta} (dx, x, epsabs, epsrel)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{multiroots_8finc_a112c4005ac06aedd7bf4233dbad69244}{fgsl\-\_\-multiroot\-\_\-test\-\_\-residual} (f, epsabs)
+\item 
+logical function \hyperlink{multiroots_8finc_a1c59daa00ab109e098aab62bc3377912}{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-status} (s)
+\item 
+logical function \hyperlink{multiroots_8finc_aa39ce86a033dc3df2cdabd8c2c98215f}{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-status} (s)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function/\-Subroutine Documentation}
+\hypertarget{multiroots_8finc_ab89adde0a73d47f7bcc272997b3f6c8d}{\index{multiroots.\-finc@{multiroots.\-finc}!fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-alloc@{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-alloc}}
+\index{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-alloc@{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-alloc}!multiroots.finc@{multiroots.\-finc}}
+\subsubsection[{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-alloc}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-multiroot\-\_\-fdfsolver) function fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-alloc (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-type), intent(in)}]{t, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{multiroots_8finc_ab89adde0a73d47f7bcc272997b3f6c8d}
+\hypertarget{multiroots_8finc_a6fa2ba8b4311978a0a28d45afacffeaf}{\index{multiroots.\-finc@{multiroots.\-finc}!fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-dx@{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-dx}}
+\index{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-dx@{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-dx}!multiroots.finc@{multiroots.\-finc}}
+\subsubsection[{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-dx}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-vector) function fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-dx (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multiroot\-\_\-fdfsolver), intent(in)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multiroots_8finc_a6fa2ba8b4311978a0a28d45afacffeaf}
+\hypertarget{multiroots_8finc_a3d551eb292c92b30f9628ea8e1d6d251}{\index{multiroots.\-finc@{multiroots.\-finc}!fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-f@{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-f}}
+\index{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-f@{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-f}!multiroots.finc@{multiroots.\-finc}}
+\subsubsection[{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-f}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-vector) function fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-f (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multiroot\-\_\-fdfsolver), intent(in)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multiroots_8finc_a3d551eb292c92b30f9628ea8e1d6d251}
+\hypertarget{multiroots_8finc_aee27003f4d58d412ebbde4d72eace13e}{\index{multiroots.\-finc@{multiroots.\-finc}!fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-free@{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-free}}
+\index{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-free@{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-free}!multiroots.finc@{multiroots.\-finc}}
+\subsubsection[{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multiroot\-\_\-fdfsolver), intent(inout)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multiroots_8finc_aee27003f4d58d412ebbde4d72eace13e}
+\hypertarget{multiroots_8finc_a7c2d7b128df269454d93454e6d4117f2}{\index{multiroots.\-finc@{multiroots.\-finc}!fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-iterate@{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-iterate}}
+\index{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-iterate@{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-iterate}!multiroots.finc@{multiroots.\-finc}}
+\subsubsection[{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-iterate}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-iterate (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multiroot\-\_\-fdfsolver), intent(in)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multiroots_8finc_a7c2d7b128df269454d93454e6d4117f2}
+\hypertarget{multiroots_8finc_abc59e0be63f6c4126420aeab1c20081c}{\index{multiroots.\-finc@{multiroots.\-finc}!fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-name@{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-name}}
+\index{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-name@{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-name}!multiroots.finc@{multiroots.\-finc}}
+\subsubsection[{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}character(kind=fgsl\-\_\-char,len=fgsl\-\_\-strmax) function fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-name (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multiroot\-\_\-fdfsolver), intent(in)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multiroots_8finc_abc59e0be63f6c4126420aeab1c20081c}
+\hypertarget{multiroots_8finc_a5b98f55eae83d12a4c0d70b7b6c26508}{\index{multiroots.\-finc@{multiroots.\-finc}!fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-root@{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-root}}
+\index{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-root@{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-root}!multiroots.finc@{multiroots.\-finc}}
+\subsubsection[{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-root}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-vector) function fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-root (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multiroot\-\_\-fdfsolver), intent(in)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multiroots_8finc_a5b98f55eae83d12a4c0d70b7b6c26508}
+\hypertarget{multiroots_8finc_a11f98af2f96332f471fa4cdcce719b0a}{\index{multiroots.\-finc@{multiroots.\-finc}!fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-set@{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-set}}
+\index{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-set@{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-set}!multiroots.finc@{multiroots.\-finc}}
+\subsubsection[{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-set (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multiroot\-\_\-fdfsolver), intent(inout)}]{s, }
+\item[{type(fgsl\-\_\-multiroot\-\_\-function\-\_\-fdf), intent(in)}]{fdf, }
+\item[{type(fgsl\-\_\-vector), intent(in)}]{x}
+\end{DoxyParamCaption}
+)}}\label{multiroots_8finc_a11f98af2f96332f471fa4cdcce719b0a}
+\hypertarget{multiroots_8finc_aa39ce86a033dc3df2cdabd8c2c98215f}{\index{multiroots.\-finc@{multiroots.\-finc}!fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-status@{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-status}}
+\index{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-status@{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-status}!multiroots.finc@{multiroots.\-finc}}
+\subsubsection[{fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-status}]{\setlength{\rightskip}{0pt plus 5cm}logical function fgsl\-\_\-multiroot\-\_\-fdfsolver\-\_\-status (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multiroot\-\_\-fdfsolver), intent(in)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multiroots_8finc_aa39ce86a033dc3df2cdabd8c2c98215f}
+\hypertarget{multiroots_8finc_a9967caceee0113037f46962e830a3d7d}{\index{multiroots.\-finc@{multiroots.\-finc}!fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-alloc@{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-alloc}}
+\index{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-alloc@{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-alloc}!multiroots.finc@{multiroots.\-finc}}
+\subsubsection[{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-alloc}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-multiroot\-\_\-fsolver) function fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-alloc (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-type), intent(in)}]{t, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{multiroots_8finc_a9967caceee0113037f46962e830a3d7d}
+\hypertarget{multiroots_8finc_af5cd6b1ed7e6cb7589c2e64cd4ff22e9}{\index{multiroots.\-finc@{multiroots.\-finc}!fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-dx@{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-dx}}
+\index{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-dx@{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-dx}!multiroots.finc@{multiroots.\-finc}}
+\subsubsection[{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-dx}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-vector) function fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-dx (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multiroot\-\_\-fsolver), intent(in)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multiroots_8finc_af5cd6b1ed7e6cb7589c2e64cd4ff22e9}
+\hypertarget{multiroots_8finc_a7a1a3c9bbcec3621cad66f2a87608bd5}{\index{multiroots.\-finc@{multiroots.\-finc}!fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-f@{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-f}}
+\index{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-f@{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-f}!multiroots.finc@{multiroots.\-finc}}
+\subsubsection[{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-f}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-vector) function fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-f (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multiroot\-\_\-fsolver), intent(in)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multiroots_8finc_a7a1a3c9bbcec3621cad66f2a87608bd5}
+\hypertarget{multiroots_8finc_a062ba1ccc85350d3089b310296166e7c}{\index{multiroots.\-finc@{multiroots.\-finc}!fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-free@{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-free}}
+\index{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-free@{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-free}!multiroots.finc@{multiroots.\-finc}}
+\subsubsection[{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multiroot\-\_\-fsolver), intent(inout)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multiroots_8finc_a062ba1ccc85350d3089b310296166e7c}
+\hypertarget{multiroots_8finc_ad1d089816977209d88134f95979c2726}{\index{multiroots.\-finc@{multiroots.\-finc}!fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-iterate@{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-iterate}}
+\index{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-iterate@{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-iterate}!multiroots.finc@{multiroots.\-finc}}
+\subsubsection[{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-iterate}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-iterate (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multiroot\-\_\-fsolver), intent(in)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multiroots_8finc_ad1d089816977209d88134f95979c2726}
+\hypertarget{multiroots_8finc_aa0ce2f798740b7d41bed54676c414514}{\index{multiroots.\-finc@{multiroots.\-finc}!fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-name@{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-name}}
+\index{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-name@{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-name}!multiroots.finc@{multiroots.\-finc}}
+\subsubsection[{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}character(kind=fgsl\-\_\-char,len=fgsl\-\_\-strmax) function fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-name (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multiroot\-\_\-fsolver), intent(in)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multiroots_8finc_aa0ce2f798740b7d41bed54676c414514}
+\hypertarget{multiroots_8finc_a756becbde20557aeffb366a0bbcf8177}{\index{multiroots.\-finc@{multiroots.\-finc}!fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-root@{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-root}}
+\index{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-root@{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-root}!multiroots.finc@{multiroots.\-finc}}
+\subsubsection[{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-root}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-vector) function fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-root (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multiroot\-\_\-fsolver), intent(in)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multiroots_8finc_a756becbde20557aeffb366a0bbcf8177}
+\hypertarget{multiroots_8finc_a85ec239778cc40c12c0cdda378b3f704}{\index{multiroots.\-finc@{multiroots.\-finc}!fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-set@{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-set}}
+\index{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-set@{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-set}!multiroots.finc@{multiroots.\-finc}}
+\subsubsection[{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-set (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multiroot\-\_\-fsolver), intent(inout)}]{s, }
+\item[{type(fgsl\-\_\-multiroot\-\_\-function), intent(in)}]{f, }
+\item[{type(fgsl\-\_\-vector), intent(in)}]{x}
+\end{DoxyParamCaption}
+)}}\label{multiroots_8finc_a85ec239778cc40c12c0cdda378b3f704}
+\hypertarget{multiroots_8finc_a1c59daa00ab109e098aab62bc3377912}{\index{multiroots.\-finc@{multiroots.\-finc}!fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-status@{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-status}}
+\index{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-status@{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-status}!multiroots.finc@{multiroots.\-finc}}
+\subsubsection[{fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-status}]{\setlength{\rightskip}{0pt plus 5cm}logical function fgsl\-\_\-multiroot\-\_\-fsolver\-\_\-status (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multiroot\-\_\-fsolver), intent(in)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multiroots_8finc_a1c59daa00ab109e098aab62bc3377912}
+\hypertarget{multiroots_8finc_ab1e9265827f89cd911c898df0eb8657d}{\index{multiroots.\-finc@{multiroots.\-finc}!fgsl\-\_\-multiroot\-\_\-function\-\_\-fdf\-\_\-free@{fgsl\-\_\-multiroot\-\_\-function\-\_\-fdf\-\_\-free}}
+\index{fgsl\-\_\-multiroot\-\_\-function\-\_\-fdf\-\_\-free@{fgsl\-\_\-multiroot\-\_\-function\-\_\-fdf\-\_\-free}!multiroots.finc@{multiroots.\-finc}}
+\subsubsection[{fgsl\-\_\-multiroot\-\_\-function\-\_\-fdf\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-multiroot\-\_\-function\-\_\-fdf\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multiroot\-\_\-function\-\_\-fdf), intent(inout)}]{fun}
+\end{DoxyParamCaption}
+)}}\label{multiroots_8finc_ab1e9265827f89cd911c898df0eb8657d}
+\hypertarget{multiroots_8finc_aa6562b8729129576adc2644344af1d82}{\index{multiroots.\-finc@{multiroots.\-finc}!fgsl\-\_\-multiroot\-\_\-function\-\_\-fdf\-\_\-init@{fgsl\-\_\-multiroot\-\_\-function\-\_\-fdf\-\_\-init}}
+\index{fgsl\-\_\-multiroot\-\_\-function\-\_\-fdf\-\_\-init@{fgsl\-\_\-multiroot\-\_\-function\-\_\-fdf\-\_\-init}!multiroots.finc@{multiroots.\-finc}}
+\subsubsection[{fgsl\-\_\-multiroot\-\_\-function\-\_\-fdf\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-multiroot\-\_\-function\-\_\-fdf) function fgsl\-\_\-multiroot\-\_\-function\-\_\-fdf\-\_\-init (
+\begin{DoxyParamCaption}
+\item[{}]{func, }
+\item[{}]{dfunc, }
+\item[{}]{fdfunc, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{ndim, }
+\item[{type(c\-\_\-ptr), intent(in)}]{params}
+\end{DoxyParamCaption}
+)}}\label{multiroots_8finc_aa6562b8729129576adc2644344af1d82}
+\hypertarget{multiroots_8finc_a9b0beb12d58e735ed7597de7271439fc}{\index{multiroots.\-finc@{multiroots.\-finc}!fgsl\-\_\-multiroot\-\_\-function\-\_\-free@{fgsl\-\_\-multiroot\-\_\-function\-\_\-free}}
+\index{fgsl\-\_\-multiroot\-\_\-function\-\_\-free@{fgsl\-\_\-multiroot\-\_\-function\-\_\-free}!multiroots.finc@{multiroots.\-finc}}
+\subsubsection[{fgsl\-\_\-multiroot\-\_\-function\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-multiroot\-\_\-function\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multiroot\-\_\-function), intent(inout)}]{fun}
+\end{DoxyParamCaption}
+)}}\label{multiroots_8finc_a9b0beb12d58e735ed7597de7271439fc}
+\hypertarget{multiroots_8finc_a78b20b390717ee23f7939615cbe93ff5}{\index{multiroots.\-finc@{multiroots.\-finc}!fgsl\-\_\-multiroot\-\_\-function\-\_\-init@{fgsl\-\_\-multiroot\-\_\-function\-\_\-init}}
+\index{fgsl\-\_\-multiroot\-\_\-function\-\_\-init@{fgsl\-\_\-multiroot\-\_\-function\-\_\-init}!multiroots.finc@{multiroots.\-finc}}
+\subsubsection[{fgsl\-\_\-multiroot\-\_\-function\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-multiroot\-\_\-function) function fgsl\-\_\-multiroot\-\_\-function\-\_\-init (
+\begin{DoxyParamCaption}
+\item[{}]{func, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{ndim, }
+\item[{type(c\-\_\-ptr), intent(in)}]{params}
+\end{DoxyParamCaption}
+)}}\label{multiroots_8finc_a78b20b390717ee23f7939615cbe93ff5}
+\hypertarget{multiroots_8finc_ad67125d3ae3d333fa1211fdb9ee6c58a}{\index{multiroots.\-finc@{multiroots.\-finc}!fgsl\-\_\-multiroot\-\_\-test\-\_\-delta@{fgsl\-\_\-multiroot\-\_\-test\-\_\-delta}}
+\index{fgsl\-\_\-multiroot\-\_\-test\-\_\-delta@{fgsl\-\_\-multiroot\-\_\-test\-\_\-delta}!multiroots.finc@{multiroots.\-finc}}
+\subsubsection[{fgsl\-\_\-multiroot\-\_\-test\-\_\-delta}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-multiroot\-\_\-test\-\_\-delta (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-vector), intent(in)}]{dx, }
+\item[{type(fgsl\-\_\-vector), intent(in)}]{x, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{epsabs, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{epsrel}
+\end{DoxyParamCaption}
+)}}\label{multiroots_8finc_ad67125d3ae3d333fa1211fdb9ee6c58a}
+\hypertarget{multiroots_8finc_a112c4005ac06aedd7bf4233dbad69244}{\index{multiroots.\-finc@{multiroots.\-finc}!fgsl\-\_\-multiroot\-\_\-test\-\_\-residual@{fgsl\-\_\-multiroot\-\_\-test\-\_\-residual}}
+\index{fgsl\-\_\-multiroot\-\_\-test\-\_\-residual@{fgsl\-\_\-multiroot\-\_\-test\-\_\-residual}!multiroots.finc@{multiroots.\-finc}}
+\subsubsection[{fgsl\-\_\-multiroot\-\_\-test\-\_\-residual}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-multiroot\-\_\-test\-\_\-residual (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-vector), intent(in)}]{f, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{epsabs}
+\end{DoxyParamCaption}
+)}}\label{multiroots_8finc_a112c4005ac06aedd7bf4233dbad69244}

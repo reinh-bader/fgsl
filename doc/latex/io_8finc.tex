@@ -1,0 +1,123 @@
+\hypertarget{io_8finc}{\section{api/io.finc File Reference}
+\label{io_8finc}\index{api/io.\-finc@{api/io.\-finc}}
+}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=138pt]{io_8finc__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions/\-Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+type(fgsl\-\_\-file) function \hyperlink{io_8finc_a77bd6a72b0526ae80735b42131e5f23d}{fgsl\-\_\-open} (path, mode)
+\begin{DoxyCompactList}\small\item\em fgsl\-\_\-open maps the P\-O\-S\-I\-X call fopen() to Fortran \end{DoxyCompactList}\item 
+integer(fgsl\-\_\-int) function \hyperlink{io_8finc_a40f28148c9160079e35fde25fa42b7b4}{fgsl\-\_\-close} (fd)
+\begin{DoxyCompactList}\small\item\em fgsl\-\_\-open maps the P\-O\-S\-I\-X call fclose() to Fortran \end{DoxyCompactList}\item 
+type(fgsl\-\_\-file) function \hyperlink{io_8finc_ae31ece191109b9e7e7af13fb320e4026}{fgsl\-\_\-stdin} ()
+\begin{DoxyCompactList}\small\item\em fgsl\-\_\-stdin produces a fgsl\-\_\-file object corresponding to C standard input \end{DoxyCompactList}\item 
+type(fgsl\-\_\-file) function \hyperlink{io_8finc_a2fbf2a6da186b942be9b477883bc5177}{fgsl\-\_\-stdout} ()
+\begin{DoxyCompactList}\small\item\em fgsl\-\_\-stdout produces a fgsl\-\_\-file object corresponding to C standard output \end{DoxyCompactList}\item 
+type(fgsl\-\_\-file) function \hyperlink{io_8finc_ababc632a183fbe488d528fa35ce74908}{fgsl\-\_\-stderr} ()
+\begin{DoxyCompactList}\small\item\em fgsl\-\_\-stderr produces a fgsl\-\_\-file object corresponding to C standard error \end{DoxyCompactList}\item 
+integer(fgsl\-\_\-int) function \hyperlink{io_8finc_a0f001ee314f4f0881ee4c415e9d19b1b}{fgsl\-\_\-flush} (file)
+\begin{DoxyCompactList}\small\item\em fgsl\-\_\-flush flushes a fgsl\-\_\-file object \end{DoxyCompactList}\item 
+logical function \hyperlink{io_8finc_ace454d2aea45384f2f7adf4bc7386c27}{fgsl\-\_\-file\-\_\-status} (file)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function/\-Subroutine Documentation}
+\hypertarget{io_8finc_a40f28148c9160079e35fde25fa42b7b4}{\index{io.\-finc@{io.\-finc}!fgsl\-\_\-close@{fgsl\-\_\-close}}
+\index{fgsl\-\_\-close@{fgsl\-\_\-close}!io.finc@{io.\-finc}}
+\subsubsection[{fgsl\-\_\-close}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-close (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-file), intent(inout)}]{fd}
+\end{DoxyParamCaption}
+)}}\label{io_8finc_a40f28148c9160079e35fde25fa42b7b4}
+
+
+fgsl\-\_\-open maps the P\-O\-S\-I\-X call fclose() to Fortran 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fd} & -\/ on entry\-: open file object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status. 
+\end{DoxyReturn}
+\hypertarget{io_8finc_ace454d2aea45384f2f7adf4bc7386c27}{\index{io.\-finc@{io.\-finc}!fgsl\-\_\-file\-\_\-status@{fgsl\-\_\-file\-\_\-status}}
+\index{fgsl\-\_\-file\-\_\-status@{fgsl\-\_\-file\-\_\-status}!io.finc@{io.\-finc}}
+\subsubsection[{fgsl\-\_\-file\-\_\-status}]{\setlength{\rightskip}{0pt plus 5cm}logical function fgsl\-\_\-file\-\_\-status (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-file), intent(in)}]{file}
+\end{DoxyParamCaption}
+)}}\label{io_8finc_ace454d2aea45384f2f7adf4bc7386c27}
+\hypertarget{io_8finc_a0f001ee314f4f0881ee4c415e9d19b1b}{\index{io.\-finc@{io.\-finc}!fgsl\-\_\-flush@{fgsl\-\_\-flush}}
+\index{fgsl\-\_\-flush@{fgsl\-\_\-flush}!io.finc@{io.\-finc}}
+\subsubsection[{fgsl\-\_\-flush}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-flush (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-file), intent(in)}]{file}
+\end{DoxyParamCaption}
+)}}\label{io_8finc_a0f001ee314f4f0881ee4c415e9d19b1b}
+
+
+fgsl\-\_\-flush flushes a fgsl\-\_\-file object 
+
+\hypertarget{io_8finc_a77bd6a72b0526ae80735b42131e5f23d}{\index{io.\-finc@{io.\-finc}!fgsl\-\_\-open@{fgsl\-\_\-open}}
+\index{fgsl\-\_\-open@{fgsl\-\_\-open}!io.finc@{io.\-finc}}
+\subsubsection[{fgsl\-\_\-open}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-file) function fgsl\-\_\-open (
+\begin{DoxyParamCaption}
+\item[{character(kind=fgsl\-\_\-char, len=$\ast$), intent(in)}]{path, }
+\item[{character(kind=fgsl\-\_\-char, len=$\ast$), intent(in)}]{mode}
+\end{DoxyParamCaption}
+)}}\label{io_8finc_a77bd6a72b0526ae80735b42131e5f23d}
+
+
+fgsl\-\_\-open maps the P\-O\-S\-I\-X call fopen() to Fortran 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & -\/ string specifying the path name of the file to be opened \\
+\hline
+{\em mode} & -\/ string containing the opening mode \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+object of type fgsl\-\_\-file which can be used in other I/\-O calls. 
+\end{DoxyReturn}
+\hypertarget{io_8finc_ababc632a183fbe488d528fa35ce74908}{\index{io.\-finc@{io.\-finc}!fgsl\-\_\-stderr@{fgsl\-\_\-stderr}}
+\index{fgsl\-\_\-stderr@{fgsl\-\_\-stderr}!io.finc@{io.\-finc}}
+\subsubsection[{fgsl\-\_\-stderr}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-file) function fgsl\-\_\-stderr (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{io_8finc_ababc632a183fbe488d528fa35ce74908}
+
+
+fgsl\-\_\-stderr produces a fgsl\-\_\-file object corresponding to C standard error 
+
+\hypertarget{io_8finc_ae31ece191109b9e7e7af13fb320e4026}{\index{io.\-finc@{io.\-finc}!fgsl\-\_\-stdin@{fgsl\-\_\-stdin}}
+\index{fgsl\-\_\-stdin@{fgsl\-\_\-stdin}!io.finc@{io.\-finc}}
+\subsubsection[{fgsl\-\_\-stdin}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-file) function fgsl\-\_\-stdin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{io_8finc_ae31ece191109b9e7e7af13fb320e4026}
+
+
+fgsl\-\_\-stdin produces a fgsl\-\_\-file object corresponding to C standard input 
+
+\hypertarget{io_8finc_a2fbf2a6da186b942be9b477883bc5177}{\index{io.\-finc@{io.\-finc}!fgsl\-\_\-stdout@{fgsl\-\_\-stdout}}
+\index{fgsl\-\_\-stdout@{fgsl\-\_\-stdout}!io.finc@{io.\-finc}}
+\subsubsection[{fgsl\-\_\-stdout}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-file) function fgsl\-\_\-stdout (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{io_8finc_a2fbf2a6da186b942be9b477883bc5177}
+
+
+fgsl\-\_\-stdout produces a fgsl\-\_\-file object corresponding to C standard output 
+

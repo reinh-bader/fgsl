@@ -1,0 +1,571 @@
+\hypertarget{array_8finc}{\section{api/array.finc File Reference}
+\label{array_8finc}\index{api/array.\-finc@{api/array.\-finc}}
+}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=154pt]{array_8finc__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions/\-Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+type(fgsl\-\_\-vector) function \hyperlink{array_8finc_a0b6fe341146fbb3dfb27386e73c5d042}{fgsl\-\_\-vector\-\_\-init} (type)
+\begin{DoxyCompactList}\small\item\em Initialize a G\-S\-L vector object. This is invoked via the generic \hyperlink{interfacefgsl__vector__init}{fgsl\-\_\-vector\-\_\-init}. \end{DoxyCompactList}\item 
+integer(fgsl\-\_\-int) function \hyperlink{array_8finc_aa6c28c6cc37d807bc8bc0fcf4ab7ad57}{fgsl\-\_\-vector\-\_\-align} (array, len, fvec, size, offset, stride)
+\begin{DoxyCompactList}\small\item\em Wrap a rank 1 Fortran array slice inside a double precision real G\-S\-L vector object. This is invoked via the generic \hyperlink{interfacefgsl__vector__align}{fgsl\-\_\-vector\-\_\-align}. \end{DoxyCompactList}\item 
+integer(fgsl\-\_\-int) function \hyperlink{array_8finc_a3f528d8f3b1aa8218339bc8fdb41497c}{fgsl\-\_\-vector\-\_\-pointer\-\_\-align} (ptr, fvec)
+\begin{DoxyCompactList}\small\item\em Associate a Fortran pointer with the data stored inside a G\-S\-L vector object. This is invoked via the generic \hyperlink{interfacefgsl__vector__align}{fgsl\-\_\-vector\-\_\-align}. Objects of type {\ttfamily gsl\-\_\-vector} which are returned by G\-S\-L routines often are persistent subobjects of other G\-S\-L objects. A Fortran pointer aligned with a subobject hence will remain up-\/to-\/date throughout the lifetime of the object; it may become undefined once the object ceases to exist. \end{DoxyCompactList}\item 
+subroutine \hyperlink{array_8finc_a740b61c719ee64b92abc804915115255}{fgsl\-\_\-vector\-\_\-to\-\_\-array} (result, source)
+\begin{DoxyCompactList}\small\item\em The assignment operator (see \hyperlink{generics_8finc}{interface/generics.\-finc}) is overloaded to enable copying of the content of a G\-S\-L vector into a Fortran array. \end{DoxyCompactList}\item 
+subroutine \hyperlink{array_8finc_a900770fc4f4831abf928959477ba663f}{fgsl\-\_\-vector\-\_\-free} (fvec)
+\begin{DoxyCompactList}\small\item\em Free the resources inside a G\-S\-L vector object previously established by a call to \hyperlink{array_8finc_a0b6fe341146fbb3dfb27386e73c5d042}{fgsl\-\_\-vector\-\_\-init()}. This is invoked via the generic \hyperlink{interfacefgsl__vector__free}{fgsl\-\_\-vector\-\_\-free}. \end{DoxyCompactList}\item 
+subroutine \hyperlink{array_8finc_a8e80ad86d191ff87ae459b78822d468d}{fgsl\-\_\-vector\-\_\-c\-\_\-ptr} (res, src)
+\item 
+logical function \hyperlink{array_8finc_a804073922a322c29cd5be43410581ba4}{fgsl\-\_\-vector\-\_\-status} (vector)
+\item 
+integer(fgsl\-\_\-size\-\_\-t) function \hyperlink{array_8finc_a35a09f656acc547c7613501889490fc0}{fgsl\-\_\-sizeof\-\_\-vector} (w)
+\begin{DoxyCompactList}\small\item\em Inquire the size of a double precision real G\-S\-L vector object. \end{DoxyCompactList}\item 
+type(fgsl\-\_\-vector\-\_\-complex) function \hyperlink{array_8finc_a71c83c0b1de4b3965b6b8d6efb28cf13}{fgsl\-\_\-vector\-\_\-complex\-\_\-init} (type)
+\begin{DoxyCompactList}\small\item\em Initialize a complex G\-S\-L vector object. This is invoked via the generic \hyperlink{interfacefgsl__vector__init}{fgsl\-\_\-vector\-\_\-init}. \end{DoxyCompactList}\item 
+integer(fgsl\-\_\-int) function \hyperlink{array_8finc_ad91319661b892e978cfc3da52b15b500}{fgsl\-\_\-vector\-\_\-complex\-\_\-align} (array, len, fvec, size, offset, stride)
+\begin{DoxyCompactList}\small\item\em Wrap a rank 1 Fortran array slice inside a double precision complex real G\-S\-L vector object. This is invoked via the generic \hyperlink{interfacefgsl__vector__align}{fgsl\-\_\-vector\-\_\-align}. \end{DoxyCompactList}\item 
+integer(fgsl\-\_\-int) function \hyperlink{array_8finc_a0299f0feb175c085408bffdc001cb680}{fgsl\-\_\-vector\-\_\-complex\-\_\-pointer\-\_\-align} (ptr, fvec)
+\begin{DoxyCompactList}\small\item\em Associate a Fortran pointer with the data stored inside a G\-S\-L vector object. This is invoked via the generic \hyperlink{interfacefgsl__vector__align}{fgsl\-\_\-vector\-\_\-align}. Objects of type {\ttfamily gsl\-\_\-vector\-\_\-complex} which are returned by G\-S\-L routines often are persistent subobjects of other G\-S\-L objects. A Fortran pointer aligned with a subobject hence will remain up-\/to-\/date throughout the lifetime of the object; it may become undefined once the object ceases to exist. \end{DoxyCompactList}\item 
+subroutine \hyperlink{array_8finc_ad9bc465224323cc4ecdcf56589bdfdbb}{fgsl\-\_\-vector\-\_\-complex\-\_\-to\-\_\-array} (result, source)
+\begin{DoxyCompactList}\small\item\em The assignment operator (see \hyperlink{generics_8finc}{interface/generics.\-finc}) is overloaded to enable copying of the content of a complex G\-S\-L vector into a Fortran array. \end{DoxyCompactList}\item 
+subroutine \hyperlink{array_8finc_a3a8d76f2fe0bb4c9687f06e5e33671b8}{fgsl\-\_\-vector\-\_\-complex\-\_\-free} (fvec)
+\begin{DoxyCompactList}\small\item\em Free the resources inside a complex G\-S\-L vector object previously established by a call to \hyperlink{array_8finc_a71c83c0b1de4b3965b6b8d6efb28cf13}{fgsl\-\_\-vector\-\_\-complex\-\_\-init()}. This is invoked via the generic \hyperlink{interfacefgsl__vector__free}{fgsl\-\_\-vector\-\_\-free}. \end{DoxyCompactList}\item 
+subroutine \hyperlink{array_8finc_a07419ff1eb431e5a8bf628d31099e9a7}{fgsl\-\_\-vector\-\_\-complex\-\_\-c\-\_\-ptr} (res, src)
+\item 
+logical function \hyperlink{array_8finc_a04dbf95001922f560a73333ca3d00f81}{fgsl\-\_\-vector\-\_\-complex\-\_\-status} (vector\-\_\-complex)
+\item 
+integer(fgsl\-\_\-size\-\_\-t) function \hyperlink{array_8finc_af8cb8c5be9be9e6604200da0845dc18d}{fgsl\-\_\-sizeof\-\_\-vector\-\_\-complex} (w)
+\begin{DoxyCompactList}\small\item\em Inquire the size of a double precision complex G\-S\-L vector object. \end{DoxyCompactList}\item 
+type(fgsl\-\_\-matrix) function \hyperlink{array_8finc_af93d762ccde0b58b767c72579cbfb3cb}{fgsl\-\_\-matrix\-\_\-init} (type)
+\begin{DoxyCompactList}\small\item\em Initialize a G\-S\-L matrix object. This is invoked via the generic \hyperlink{interfacefgsl__matrix__init}{fgsl\-\_\-matrix\-\_\-init}. \end{DoxyCompactList}\item 
+integer(fgsl\-\_\-int) function \hyperlink{array_8finc_ae0c19c4453ce18db5e6415a047c3a59e}{fgsl\-\_\-matrix\-\_\-align} (array, lda, n, m, fmat)
+\begin{DoxyCompactList}\small\item\em Wrap a rank 2 Fortran array inside a double precision real G\-S\-L matrix object. This is invoked via the generic \hyperlink{interfacefgsl__matrix__align}{fgsl\-\_\-matrix\-\_\-align}. \end{DoxyCompactList}\item 
+integer(fgsl\-\_\-int) function \hyperlink{array_8finc_a54b17f056b272b74ae425a588e4653d5}{fgsl\-\_\-matrix\-\_\-pointer\-\_\-align} (ptr, fmat)
+\begin{DoxyCompactList}\small\item\em Associate a Fortran pointer with the data stored inside a G\-S\-L matrix object. This is invoked via the generic \hyperlink{interfacefgsl__matrix__align}{fgsl\-\_\-matrix\-\_\-align}. Objects of type {\ttfamily gsl\-\_\-matrix} which are returned by G\-S\-L routines often are persistent subobjects of other G\-S\-L objects. A Fortran pointer aligned with a subobject hence will remain up-\/to-\/date throughout the lifetime of the object; it may become undefined once the object ceases to exist. \end{DoxyCompactList}\item 
+subroutine \hyperlink{array_8finc_a44e06325d8b322997dcf6ab28417dd4f}{fgsl\-\_\-matrix\-\_\-to\-\_\-array} (result, source)
+\begin{DoxyCompactList}\small\item\em The assignment operator (see \hyperlink{generics_8finc}{interface/generics.\-finc}) is overloaded to enable copying of the content of a G\-S\-L matrix into a rank 2 Fortran array. \end{DoxyCompactList}\item 
+subroutine \hyperlink{array_8finc_a0b551f436f076593a8a828cd266e372d}{fgsl\-\_\-matrix\-\_\-free} (fvec)
+\begin{DoxyCompactList}\small\item\em Free the resources inside a G\-S\-L matrix object previously established by a call to \hyperlink{array_8finc_af93d762ccde0b58b767c72579cbfb3cb}{fgsl\-\_\-matrix\-\_\-init()}. This is invoked via the generic \hyperlink{interfacefgsl__matrix__free}{fgsl\-\_\-matrix\-\_\-free}. \end{DoxyCompactList}\item 
+subroutine \hyperlink{array_8finc_ae039428ac81fb123a5223c7676b1b687}{fgsl\-\_\-matrix\-\_\-c\-\_\-ptr} (res, src)
+\item 
+logical function \hyperlink{array_8finc_a5d41e00e4a2ec9c3b0594ec77ff02c5e}{fgsl\-\_\-matrix\-\_\-status} (matrix)
+\item 
+integer(fgsl\-\_\-size\-\_\-t) function \hyperlink{array_8finc_addcfbdff17fa7ce904b853ed793bb1d9}{fgsl\-\_\-sizeof\-\_\-matrix} (w)
+\begin{DoxyCompactList}\small\item\em Inquire the number of elements in a double precision real G\-S\-L matrix object. \end{DoxyCompactList}\item 
+type(fgsl\-\_\-matrix\-\_\-complex) function \hyperlink{array_8finc_af7461bad6c35fe6dde17e9c06bbc5cd0}{fgsl\-\_\-matrix\-\_\-complex\-\_\-init} (type)
+\begin{DoxyCompactList}\small\item\em Initialize a G\-S\-L matrix object. This is invoked via the generic \hyperlink{interfacefgsl__matrix__init}{fgsl\-\_\-matrix\-\_\-init}. \end{DoxyCompactList}\item 
+integer(fgsl\-\_\-int) function \hyperlink{array_8finc_ada029e69fd21da1d81472a285f1269a2}{fgsl\-\_\-matrix\-\_\-complex\-\_\-align} (array, lda, n, m, fmat)
+\begin{DoxyCompactList}\small\item\em Wrap a rank 2 Fortran array inside a double precision complex G\-S\-L matrix object. This is invoked via the generic \hyperlink{interfacefgsl__matrix__align}{fgsl\-\_\-matrix\-\_\-align}. \end{DoxyCompactList}\item 
+integer(fgsl\-\_\-int) function \hyperlink{array_8finc_a000f8ca7f88b4dfb7a5cc700ccf3b868}{fgsl\-\_\-matrix\-\_\-complex\-\_\-pointer\-\_\-align} (ptr, fmat)
+\begin{DoxyCompactList}\small\item\em Associate a Fortran pointer with the data stored inside a complex G\-S\-L matrix object. This is invoked via the generic \hyperlink{interfacefgsl__matrix__align}{fgsl\-\_\-matrix\-\_\-align}. Objects of type {\ttfamily gsl\-\_\-matrix\-\_\-complex} which are returned by G\-S\-L routines often are persistent subobjects of other G\-S\-L objects. A Fortran pointer aligned with a subobject hence will remain up-\/to-\/date throughout the lifetime of the object; it may become undefined once the object ceases to exist. \end{DoxyCompactList}\item 
+subroutine \hyperlink{array_8finc_a4b17724c0c305144fdec66507f8638f7}{fgsl\-\_\-matrix\-\_\-complex\-\_\-to\-\_\-array} (result, source)
+\begin{DoxyCompactList}\small\item\em The assignment operator (see \hyperlink{generics_8finc}{interface/generics.\-finc}) is overloaded to enable copying of the content of a complex G\-S\-L matrix into a rank 2 Fortran array. \end{DoxyCompactList}\item 
+subroutine \hyperlink{array_8finc_aa26219798c626c7bf6a0a85403f3dbcf}{fgsl\-\_\-matrix\-\_\-complex\-\_\-free} (fvec)
+\begin{DoxyCompactList}\small\item\em Free the resources inside a complex G\-S\-L matrix object previously established by a call to \hyperlink{array_8finc_af7461bad6c35fe6dde17e9c06bbc5cd0}{fgsl\-\_\-matrix\-\_\-complex\-\_\-init()}. This is invoked via the generic \hyperlink{interfacefgsl__matrix__free}{fgsl\-\_\-matrix\-\_\-free}. \end{DoxyCompactList}\item 
+subroutine \hyperlink{array_8finc_a9f0f952485ef9707174a52c5af21a9a2}{fgsl\-\_\-matrix\-\_\-complex\-\_\-c\-\_\-ptr} (res, src)
+\item 
+logical function \hyperlink{array_8finc_a3fa8db2b747286e805d60065f6d16640}{fgsl\-\_\-matrix\-\_\-complex\-\_\-status} (matrix\-\_\-complex)
+\item 
+integer(fgsl\-\_\-size\-\_\-t) function \hyperlink{array_8finc_a14d82675b93fa2b453caf33df1e567a1}{fgsl\-\_\-sizeof\-\_\-matrix\-\_\-complex} (w)
+\begin{DoxyCompactList}\small\item\em Inquire the number of elements in a double precision complex G\-S\-L matrix object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function/\-Subroutine Documentation}
+\hypertarget{array_8finc_ae0c19c4453ce18db5e6415a047c3a59e}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-matrix\-\_\-align@{fgsl\-\_\-matrix\-\_\-align}}
+\index{fgsl\-\_\-matrix\-\_\-align@{fgsl\-\_\-matrix\-\_\-align}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-matrix\-\_\-align}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function {\bf fgsl\-\_\-matrix\-\_\-align} (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(lda, m), intent(in), target}]{array, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{lda, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{m, }
+\item[{type(fgsl\-\_\-matrix), intent(inout)}]{fmat}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_ae0c19c4453ce18db5e6415a047c3a59e}
+
+
+Wrap a rank 2 Fortran array inside a double precision real G\-S\-L matrix object. This is invoked via the generic \hyperlink{interfacefgsl__matrix__align}{fgsl\-\_\-matrix\-\_\-align}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em array} & -\/ requires the actual argument to have the T\-A\-R\-G\-E\-T attribute. Otherwise being passed by reference is not guaranteed by the Fortran standard. \\
+\hline
+{\em lda} & -\/ leading dimension of the rank 2 array \\
+\hline
+{\em n} & -\/ number of rows in array \\
+\hline
+{\em m} & -\/ number of columns in array \\
+\hline
+{\em fmat} & -\/ previously initialized double precision G\-S\-L matrix object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status 
+\end{DoxyReturn}
+\hypertarget{array_8finc_ae039428ac81fb123a5223c7676b1b687}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-matrix\-\_\-c\-\_\-ptr@{fgsl\-\_\-matrix\-\_\-c\-\_\-ptr}}
+\index{fgsl\-\_\-matrix\-\_\-c\-\_\-ptr@{fgsl\-\_\-matrix\-\_\-c\-\_\-ptr}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-matrix\-\_\-c\-\_\-ptr}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-matrix\-\_\-c\-\_\-ptr (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-matrix), intent(out)}]{res, }
+\item[{type(c\-\_\-ptr), intent(in)}]{src}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_ae039428ac81fb123a5223c7676b1b687}
+\hypertarget{array_8finc_ada029e69fd21da1d81472a285f1269a2}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-matrix\-\_\-complex\-\_\-align@{fgsl\-\_\-matrix\-\_\-complex\-\_\-align}}
+\index{fgsl\-\_\-matrix\-\_\-complex\-\_\-align@{fgsl\-\_\-matrix\-\_\-complex\-\_\-align}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-matrix\-\_\-complex\-\_\-align}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-matrix\-\_\-complex\-\_\-align (
+\begin{DoxyParamCaption}
+\item[{complex(fgsl\-\_\-double\-\_\-complex), dimension(lda, m), intent(in), target}]{array, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{lda, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{m, }
+\item[{type(fgsl\-\_\-matrix\-\_\-complex), intent(inout)}]{fmat}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_ada029e69fd21da1d81472a285f1269a2}
+
+
+Wrap a rank 2 Fortran array inside a double precision complex G\-S\-L matrix object. This is invoked via the generic \hyperlink{interfacefgsl__matrix__align}{fgsl\-\_\-matrix\-\_\-align}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em array} & -\/ requires the actual argument to have the T\-A\-R\-G\-E\-T attribute. Otherwise being passed by reference is not guaranteed by the Fortran standard. \\
+\hline
+{\em lda} & -\/ leading dimension of the rank 2 array \\
+\hline
+{\em n} & -\/ number of rows in array \\
+\hline
+{\em m} & -\/ number of columns in array \\
+\hline
+{\em fmat} & -\/ previously initialized double precision complex G\-S\-L matrix object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status 
+\end{DoxyReturn}
+\hypertarget{array_8finc_a9f0f952485ef9707174a52c5af21a9a2}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-matrix\-\_\-complex\-\_\-c\-\_\-ptr@{fgsl\-\_\-matrix\-\_\-complex\-\_\-c\-\_\-ptr}}
+\index{fgsl\-\_\-matrix\-\_\-complex\-\_\-c\-\_\-ptr@{fgsl\-\_\-matrix\-\_\-complex\-\_\-c\-\_\-ptr}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-matrix\-\_\-complex\-\_\-c\-\_\-ptr}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-matrix\-\_\-complex\-\_\-c\-\_\-ptr (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-matrix\-\_\-complex), intent(out)}]{res, }
+\item[{type(c\-\_\-ptr), intent(in)}]{src}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_a9f0f952485ef9707174a52c5af21a9a2}
+\hypertarget{array_8finc_aa26219798c626c7bf6a0a85403f3dbcf}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-matrix\-\_\-complex\-\_\-free@{fgsl\-\_\-matrix\-\_\-complex\-\_\-free}}
+\index{fgsl\-\_\-matrix\-\_\-complex\-\_\-free@{fgsl\-\_\-matrix\-\_\-complex\-\_\-free}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-matrix\-\_\-complex\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-matrix\-\_\-complex\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-matrix\-\_\-complex), intent(inout)}]{fvec}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_aa26219798c626c7bf6a0a85403f3dbcf}
+
+
+Free the resources inside a complex G\-S\-L matrix object previously established by a call to \hyperlink{array_8finc_af7461bad6c35fe6dde17e9c06bbc5cd0}{fgsl\-\_\-matrix\-\_\-complex\-\_\-init()}. This is invoked via the generic \hyperlink{interfacefgsl__matrix__free}{fgsl\-\_\-matrix\-\_\-free}. 
+
+\hypertarget{array_8finc_af7461bad6c35fe6dde17e9c06bbc5cd0}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-matrix\-\_\-complex\-\_\-init@{fgsl\-\_\-matrix\-\_\-complex\-\_\-init}}
+\index{fgsl\-\_\-matrix\-\_\-complex\-\_\-init@{fgsl\-\_\-matrix\-\_\-complex\-\_\-init}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-matrix\-\_\-complex\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-matrix\-\_\-complex) function fgsl\-\_\-matrix\-\_\-complex\-\_\-init (
+\begin{DoxyParamCaption}
+\item[{complex(fgsl\-\_\-double\-\_\-complex), intent(in)}]{type}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_af7461bad6c35fe6dde17e9c06bbc5cd0}
+
+
+Initialize a G\-S\-L matrix object. This is invoked via the generic \hyperlink{interfacefgsl__matrix__init}{fgsl\-\_\-matrix\-\_\-init}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & -\/ determine intrinsic type of vector object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+new object of type fgsl\-\_\-matrix. 
+\end{DoxyReturn}
+\hypertarget{array_8finc_a000f8ca7f88b4dfb7a5cc700ccf3b868}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-matrix\-\_\-complex\-\_\-pointer\-\_\-align@{fgsl\-\_\-matrix\-\_\-complex\-\_\-pointer\-\_\-align}}
+\index{fgsl\-\_\-matrix\-\_\-complex\-\_\-pointer\-\_\-align@{fgsl\-\_\-matrix\-\_\-complex\-\_\-pointer\-\_\-align}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-matrix\-\_\-complex\-\_\-pointer\-\_\-align}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-matrix\-\_\-complex\-\_\-pointer\-\_\-align (
+\begin{DoxyParamCaption}
+\item[{complex(fgsl\-\_\-double\-\_\-complex), dimension(\-:,\-:), intent(out), pointer}]{ptr, }
+\item[{type(fgsl\-\_\-matrix\-\_\-complex), intent(in)}]{fmat}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_a000f8ca7f88b4dfb7a5cc700ccf3b868}
+
+
+Associate a Fortran pointer with the data stored inside a complex G\-S\-L matrix object. This is invoked via the generic \hyperlink{interfacefgsl__matrix__align}{fgsl\-\_\-matrix\-\_\-align}. Objects of type {\ttfamily gsl\-\_\-matrix\-\_\-complex} which are returned by G\-S\-L routines often are persistent subobjects of other G\-S\-L objects. A Fortran pointer aligned with a subobject hence will remain up-\/to-\/date throughout the lifetime of the object; it may become undefined once the object ceases to exist. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ptr} & -\/ rank 2 Fortran pointer \\
+\hline
+{\em fmat} & -\/ double precision complex G\-S\-L matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status 
+\end{DoxyReturn}
+\hypertarget{array_8finc_a3fa8db2b747286e805d60065f6d16640}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-matrix\-\_\-complex\-\_\-status@{fgsl\-\_\-matrix\-\_\-complex\-\_\-status}}
+\index{fgsl\-\_\-matrix\-\_\-complex\-\_\-status@{fgsl\-\_\-matrix\-\_\-complex\-\_\-status}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-matrix\-\_\-complex\-\_\-status}]{\setlength{\rightskip}{0pt plus 5cm}logical function fgsl\-\_\-matrix\-\_\-complex\-\_\-status (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-matrix\-\_\-complex), intent(in)}]{matrix\-\_\-complex}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_a3fa8db2b747286e805d60065f6d16640}
+\hypertarget{array_8finc_a4b17724c0c305144fdec66507f8638f7}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-matrix\-\_\-complex\-\_\-to\-\_\-array@{fgsl\-\_\-matrix\-\_\-complex\-\_\-to\-\_\-array}}
+\index{fgsl\-\_\-matrix\-\_\-complex\-\_\-to\-\_\-array@{fgsl\-\_\-matrix\-\_\-complex\-\_\-to\-\_\-array}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-matrix\-\_\-complex\-\_\-to\-\_\-array}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-matrix\-\_\-complex\-\_\-to\-\_\-array (
+\begin{DoxyParamCaption}
+\item[{complex(fgsl\-\_\-double\-\_\-complex), dimension(\-:,\-:), intent(inout)}]{result, }
+\item[{type(fgsl\-\_\-matrix\-\_\-complex), intent(in)}]{source}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_a4b17724c0c305144fdec66507f8638f7}
+
+
+The assignment operator (see \hyperlink{generics_8finc}{interface/generics.\-finc}) is overloaded to enable copying of the content of a complex G\-S\-L matrix into a rank 2 Fortran array. 
+
+\hypertarget{array_8finc_a0b551f436f076593a8a828cd266e372d}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-matrix\-\_\-free@{fgsl\-\_\-matrix\-\_\-free}}
+\index{fgsl\-\_\-matrix\-\_\-free@{fgsl\-\_\-matrix\-\_\-free}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-matrix\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine {\bf fgsl\-\_\-matrix\-\_\-free} (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-matrix), intent(inout)}]{fvec}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_a0b551f436f076593a8a828cd266e372d}
+
+
+Free the resources inside a G\-S\-L matrix object previously established by a call to \hyperlink{array_8finc_af93d762ccde0b58b767c72579cbfb3cb}{fgsl\-\_\-matrix\-\_\-init()}. This is invoked via the generic \hyperlink{interfacefgsl__matrix__free}{fgsl\-\_\-matrix\-\_\-free}. 
+
+\hypertarget{array_8finc_af93d762ccde0b58b767c72579cbfb3cb}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-matrix\-\_\-init@{fgsl\-\_\-matrix\-\_\-init}}
+\index{fgsl\-\_\-matrix\-\_\-init@{fgsl\-\_\-matrix\-\_\-init}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-matrix\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-matrix) function {\bf fgsl\-\_\-matrix\-\_\-init} (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), intent(in)}]{type}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_af93d762ccde0b58b767c72579cbfb3cb}
+
+
+Initialize a G\-S\-L matrix object. This is invoked via the generic \hyperlink{interfacefgsl__matrix__init}{fgsl\-\_\-matrix\-\_\-init}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & -\/ determine intrinsic type of vector object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+new object of type fgsl\-\_\-matrix. 
+\end{DoxyReturn}
+\hypertarget{array_8finc_a54b17f056b272b74ae425a588e4653d5}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-matrix\-\_\-pointer\-\_\-align@{fgsl\-\_\-matrix\-\_\-pointer\-\_\-align}}
+\index{fgsl\-\_\-matrix\-\_\-pointer\-\_\-align@{fgsl\-\_\-matrix\-\_\-pointer\-\_\-align}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-matrix\-\_\-pointer\-\_\-align}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-matrix\-\_\-pointer\-\_\-align (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:,\-:), intent(out), pointer}]{ptr, }
+\item[{type(fgsl\-\_\-matrix), intent(in)}]{fmat}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_a54b17f056b272b74ae425a588e4653d5}
+
+
+Associate a Fortran pointer with the data stored inside a G\-S\-L matrix object. This is invoked via the generic \hyperlink{interfacefgsl__matrix__align}{fgsl\-\_\-matrix\-\_\-align}. Objects of type {\ttfamily gsl\-\_\-matrix} which are returned by G\-S\-L routines often are persistent subobjects of other G\-S\-L objects. A Fortran pointer aligned with a subobject hence will remain up-\/to-\/date throughout the lifetime of the object; it may become undefined once the object ceases to exist. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ptr} & -\/ rank 2 Fortran pointer \\
+\hline
+{\em fmat} & -\/ double precision real G\-S\-L matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status 
+\end{DoxyReturn}
+\hypertarget{array_8finc_a5d41e00e4a2ec9c3b0594ec77ff02c5e}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-matrix\-\_\-status@{fgsl\-\_\-matrix\-\_\-status}}
+\index{fgsl\-\_\-matrix\-\_\-status@{fgsl\-\_\-matrix\-\_\-status}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-matrix\-\_\-status}]{\setlength{\rightskip}{0pt plus 5cm}logical function fgsl\-\_\-matrix\-\_\-status (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-matrix), intent(in)}]{matrix}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_a5d41e00e4a2ec9c3b0594ec77ff02c5e}
+\hypertarget{array_8finc_a44e06325d8b322997dcf6ab28417dd4f}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-matrix\-\_\-to\-\_\-array@{fgsl\-\_\-matrix\-\_\-to\-\_\-array}}
+\index{fgsl\-\_\-matrix\-\_\-to\-\_\-array@{fgsl\-\_\-matrix\-\_\-to\-\_\-array}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-matrix\-\_\-to\-\_\-array}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-matrix\-\_\-to\-\_\-array (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:,\-:), intent(inout)}]{result, }
+\item[{type(fgsl\-\_\-matrix), intent(in)}]{source}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_a44e06325d8b322997dcf6ab28417dd4f}
+
+
+The assignment operator (see \hyperlink{generics_8finc}{interface/generics.\-finc}) is overloaded to enable copying of the content of a G\-S\-L matrix into a rank 2 Fortran array. 
+
+\hypertarget{array_8finc_addcfbdff17fa7ce904b853ed793bb1d9}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-sizeof\-\_\-matrix@{fgsl\-\_\-sizeof\-\_\-matrix}}
+\index{fgsl\-\_\-sizeof\-\_\-matrix@{fgsl\-\_\-sizeof\-\_\-matrix}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-sizeof\-\_\-matrix}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-size\-\_\-t) function fgsl\-\_\-sizeof\-\_\-matrix (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-matrix), intent(in)}]{w}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_addcfbdff17fa7ce904b853ed793bb1d9}
+
+
+Inquire the number of elements in a double precision real G\-S\-L matrix object. 
+
+\hypertarget{array_8finc_a14d82675b93fa2b453caf33df1e567a1}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-sizeof\-\_\-matrix\-\_\-complex@{fgsl\-\_\-sizeof\-\_\-matrix\-\_\-complex}}
+\index{fgsl\-\_\-sizeof\-\_\-matrix\-\_\-complex@{fgsl\-\_\-sizeof\-\_\-matrix\-\_\-complex}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-sizeof\-\_\-matrix\-\_\-complex}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-size\-\_\-t) function fgsl\-\_\-sizeof\-\_\-matrix\-\_\-complex (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-matrix\-\_\-complex), intent(in)}]{w}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_a14d82675b93fa2b453caf33df1e567a1}
+
+
+Inquire the number of elements in a double precision complex G\-S\-L matrix object. 
+
+\hypertarget{array_8finc_a35a09f656acc547c7613501889490fc0}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-sizeof\-\_\-vector@{fgsl\-\_\-sizeof\-\_\-vector}}
+\index{fgsl\-\_\-sizeof\-\_\-vector@{fgsl\-\_\-sizeof\-\_\-vector}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-sizeof\-\_\-vector}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-size\-\_\-t) function fgsl\-\_\-sizeof\-\_\-vector (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-vector), intent(in)}]{w}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_a35a09f656acc547c7613501889490fc0}
+
+
+Inquire the size of a double precision real G\-S\-L vector object. 
+
+\hypertarget{array_8finc_af8cb8c5be9be9e6604200da0845dc18d}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-sizeof\-\_\-vector\-\_\-complex@{fgsl\-\_\-sizeof\-\_\-vector\-\_\-complex}}
+\index{fgsl\-\_\-sizeof\-\_\-vector\-\_\-complex@{fgsl\-\_\-sizeof\-\_\-vector\-\_\-complex}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-sizeof\-\_\-vector\-\_\-complex}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-size\-\_\-t) function fgsl\-\_\-sizeof\-\_\-vector\-\_\-complex (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-vector\-\_\-complex), intent(in)}]{w}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_af8cb8c5be9be9e6604200da0845dc18d}
+
+
+Inquire the size of a double precision complex G\-S\-L vector object. 
+
+\hypertarget{array_8finc_aa6c28c6cc37d807bc8bc0fcf4ab7ad57}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-vector\-\_\-align@{fgsl\-\_\-vector\-\_\-align}}
+\index{fgsl\-\_\-vector\-\_\-align@{fgsl\-\_\-vector\-\_\-align}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-vector\-\_\-align}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function {\bf fgsl\-\_\-vector\-\_\-align} (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(len), intent(in), target}]{array, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{len, }
+\item[{type(fgsl\-\_\-vector), intent(inout)}]{fvec, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{size, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{offset, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_aa6c28c6cc37d807bc8bc0fcf4ab7ad57}
+
+
+Wrap a rank 1 Fortran array slice inside a double precision real G\-S\-L vector object. This is invoked via the generic \hyperlink{interfacefgsl__vector__align}{fgsl\-\_\-vector\-\_\-align}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em array} & -\/ requires the actual argument to have the T\-A\-R\-G\-E\-T attribute. Otherwise being passed by reference is not guaranteed by the Fortran standard. \\
+\hline
+{\em len} & -\/ number of elements of the rank 1 array \\
+\hline
+{\em fvec} & -\/ previously initialized G\-S\-L vector object \\
+\hline
+{\em size} & -\/ number of elements from array wrapped inside fvec \\
+\hline
+{\em offset} & -\/ index of first element of array to be mapped to fvec \\
+\hline
+{\em stride} & -\/ stride in array for successive elements of fvec \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status 
+\end{DoxyReturn}
+\hypertarget{array_8finc_a8e80ad86d191ff87ae459b78822d468d}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-vector\-\_\-c\-\_\-ptr@{fgsl\-\_\-vector\-\_\-c\-\_\-ptr}}
+\index{fgsl\-\_\-vector\-\_\-c\-\_\-ptr@{fgsl\-\_\-vector\-\_\-c\-\_\-ptr}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-vector\-\_\-c\-\_\-ptr}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-vector\-\_\-c\-\_\-ptr (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-vector), intent(out)}]{res, }
+\item[{type(c\-\_\-ptr), intent(in)}]{src}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_a8e80ad86d191ff87ae459b78822d468d}
+\hypertarget{array_8finc_ad91319661b892e978cfc3da52b15b500}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-vector\-\_\-complex\-\_\-align@{fgsl\-\_\-vector\-\_\-complex\-\_\-align}}
+\index{fgsl\-\_\-vector\-\_\-complex\-\_\-align@{fgsl\-\_\-vector\-\_\-complex\-\_\-align}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-vector\-\_\-complex\-\_\-align}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-vector\-\_\-complex\-\_\-align (
+\begin{DoxyParamCaption}
+\item[{complex(fgsl\-\_\-double\-\_\-complex), dimension(len), intent(in), target}]{array, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{len, }
+\item[{type(fgsl\-\_\-vector\-\_\-complex), intent(inout)}]{fvec, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{size, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{offset, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_ad91319661b892e978cfc3da52b15b500}
+
+
+Wrap a rank 1 Fortran array slice inside a double precision complex real G\-S\-L vector object. This is invoked via the generic \hyperlink{interfacefgsl__vector__align}{fgsl\-\_\-vector\-\_\-align}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em array} & -\/ requires the actual argument to have the T\-A\-R\-G\-E\-T attribute. Otherwise being passed by reference is not guaranteed by the Fortran standard. \\
+\hline
+{\em len} & -\/ number of elements of the rank 1 array \\
+\hline
+{\em fvec} & -\/ previously initialized complex G\-S\-L vector object \\
+\hline
+{\em size} & -\/ number of elements from array wrapped inside fvec \\
+\hline
+{\em offset} & -\/ index of first element of array to be mapped to fvec \\
+\hline
+{\em stride} & -\/ stride in array for successive elements of fvec \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status 
+\end{DoxyReturn}
+\hypertarget{array_8finc_a07419ff1eb431e5a8bf628d31099e9a7}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-vector\-\_\-complex\-\_\-c\-\_\-ptr@{fgsl\-\_\-vector\-\_\-complex\-\_\-c\-\_\-ptr}}
+\index{fgsl\-\_\-vector\-\_\-complex\-\_\-c\-\_\-ptr@{fgsl\-\_\-vector\-\_\-complex\-\_\-c\-\_\-ptr}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-vector\-\_\-complex\-\_\-c\-\_\-ptr}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-vector\-\_\-complex\-\_\-c\-\_\-ptr (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-vector\-\_\-complex), intent(out)}]{res, }
+\item[{type(c\-\_\-ptr), intent(in)}]{src}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_a07419ff1eb431e5a8bf628d31099e9a7}
+\hypertarget{array_8finc_a3a8d76f2fe0bb4c9687f06e5e33671b8}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-vector\-\_\-complex\-\_\-free@{fgsl\-\_\-vector\-\_\-complex\-\_\-free}}
+\index{fgsl\-\_\-vector\-\_\-complex\-\_\-free@{fgsl\-\_\-vector\-\_\-complex\-\_\-free}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-vector\-\_\-complex\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-vector\-\_\-complex\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-vector\-\_\-complex), intent(inout)}]{fvec}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_a3a8d76f2fe0bb4c9687f06e5e33671b8}
+
+
+Free the resources inside a complex G\-S\-L vector object previously established by a call to \hyperlink{array_8finc_a71c83c0b1de4b3965b6b8d6efb28cf13}{fgsl\-\_\-vector\-\_\-complex\-\_\-init()}. This is invoked via the generic \hyperlink{interfacefgsl__vector__free}{fgsl\-\_\-vector\-\_\-free}. 
+
+\hypertarget{array_8finc_a71c83c0b1de4b3965b6b8d6efb28cf13}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-vector\-\_\-complex\-\_\-init@{fgsl\-\_\-vector\-\_\-complex\-\_\-init}}
+\index{fgsl\-\_\-vector\-\_\-complex\-\_\-init@{fgsl\-\_\-vector\-\_\-complex\-\_\-init}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-vector\-\_\-complex\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-vector\-\_\-complex) function fgsl\-\_\-vector\-\_\-complex\-\_\-init (
+\begin{DoxyParamCaption}
+\item[{complex(fgsl\-\_\-double\-\_\-complex), intent(in)}]{type}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_a71c83c0b1de4b3965b6b8d6efb28cf13}
+
+
+Initialize a complex G\-S\-L vector object. This is invoked via the generic \hyperlink{interfacefgsl__vector__init}{fgsl\-\_\-vector\-\_\-init}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & -\/ determine intrinsic type of vector object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+new object of type fgsl\-\_\-vector 
+\end{DoxyReturn}
+\hypertarget{array_8finc_a0299f0feb175c085408bffdc001cb680}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-vector\-\_\-complex\-\_\-pointer\-\_\-align@{fgsl\-\_\-vector\-\_\-complex\-\_\-pointer\-\_\-align}}
+\index{fgsl\-\_\-vector\-\_\-complex\-\_\-pointer\-\_\-align@{fgsl\-\_\-vector\-\_\-complex\-\_\-pointer\-\_\-align}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-vector\-\_\-complex\-\_\-pointer\-\_\-align}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-vector\-\_\-complex\-\_\-pointer\-\_\-align (
+\begin{DoxyParamCaption}
+\item[{complex(fgsl\-\_\-double\-\_\-complex), dimension(\-:), intent(out), pointer}]{ptr, }
+\item[{type(fgsl\-\_\-vector\-\_\-complex), intent(in)}]{fvec}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_a0299f0feb175c085408bffdc001cb680}
+
+
+Associate a Fortran pointer with the data stored inside a G\-S\-L vector object. This is invoked via the generic \hyperlink{interfacefgsl__vector__align}{fgsl\-\_\-vector\-\_\-align}. Objects of type {\ttfamily gsl\-\_\-vector\-\_\-complex} which are returned by G\-S\-L routines often are persistent subobjects of other G\-S\-L objects. A Fortran pointer aligned with a subobject hence will remain up-\/to-\/date throughout the lifetime of the object; it may become undefined once the object ceases to exist. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ptr} & -\/ rank 1 Fortran pointer \\
+\hline
+{\em fvec} & -\/ double precision complex G\-S\-L vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status 
+\end{DoxyReturn}
+\hypertarget{array_8finc_a04dbf95001922f560a73333ca3d00f81}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-vector\-\_\-complex\-\_\-status@{fgsl\-\_\-vector\-\_\-complex\-\_\-status}}
+\index{fgsl\-\_\-vector\-\_\-complex\-\_\-status@{fgsl\-\_\-vector\-\_\-complex\-\_\-status}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-vector\-\_\-complex\-\_\-status}]{\setlength{\rightskip}{0pt plus 5cm}logical function fgsl\-\_\-vector\-\_\-complex\-\_\-status (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-vector\-\_\-complex), intent(in)}]{vector\-\_\-complex}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_a04dbf95001922f560a73333ca3d00f81}
+\hypertarget{array_8finc_ad9bc465224323cc4ecdcf56589bdfdbb}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-vector\-\_\-complex\-\_\-to\-\_\-array@{fgsl\-\_\-vector\-\_\-complex\-\_\-to\-\_\-array}}
+\index{fgsl\-\_\-vector\-\_\-complex\-\_\-to\-\_\-array@{fgsl\-\_\-vector\-\_\-complex\-\_\-to\-\_\-array}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-vector\-\_\-complex\-\_\-to\-\_\-array}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-vector\-\_\-complex\-\_\-to\-\_\-array (
+\begin{DoxyParamCaption}
+\item[{complex(fgsl\-\_\-double\-\_\-complex), dimension(\-:), intent(inout)}]{result, }
+\item[{type(fgsl\-\_\-vector\-\_\-complex), intent(in)}]{source}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_ad9bc465224323cc4ecdcf56589bdfdbb}
+
+
+The assignment operator (see \hyperlink{generics_8finc}{interface/generics.\-finc}) is overloaded to enable copying of the content of a complex G\-S\-L vector into a Fortran array. 
+
+\hypertarget{array_8finc_a900770fc4f4831abf928959477ba663f}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-vector\-\_\-free@{fgsl\-\_\-vector\-\_\-free}}
+\index{fgsl\-\_\-vector\-\_\-free@{fgsl\-\_\-vector\-\_\-free}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-vector\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine {\bf fgsl\-\_\-vector\-\_\-free} (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-vector), intent(inout)}]{fvec}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_a900770fc4f4831abf928959477ba663f}
+
+
+Free the resources inside a G\-S\-L vector object previously established by a call to \hyperlink{array_8finc_a0b6fe341146fbb3dfb27386e73c5d042}{fgsl\-\_\-vector\-\_\-init()}. This is invoked via the generic \hyperlink{interfacefgsl__vector__free}{fgsl\-\_\-vector\-\_\-free}. 
+
+\hypertarget{array_8finc_a0b6fe341146fbb3dfb27386e73c5d042}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-vector\-\_\-init@{fgsl\-\_\-vector\-\_\-init}}
+\index{fgsl\-\_\-vector\-\_\-init@{fgsl\-\_\-vector\-\_\-init}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-vector\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-vector) function {\bf fgsl\-\_\-vector\-\_\-init} (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), intent(in)}]{type}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_a0b6fe341146fbb3dfb27386e73c5d042}
+
+
+Initialize a G\-S\-L vector object. This is invoked via the generic \hyperlink{interfacefgsl__vector__init}{fgsl\-\_\-vector\-\_\-init}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & -\/ determine intrinsic type of vector object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+new object of type fgsl\-\_\-vector 
+\end{DoxyReturn}
+\hypertarget{array_8finc_a3f528d8f3b1aa8218339bc8fdb41497c}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-vector\-\_\-pointer\-\_\-align@{fgsl\-\_\-vector\-\_\-pointer\-\_\-align}}
+\index{fgsl\-\_\-vector\-\_\-pointer\-\_\-align@{fgsl\-\_\-vector\-\_\-pointer\-\_\-align}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-vector\-\_\-pointer\-\_\-align}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-vector\-\_\-pointer\-\_\-align (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(out), pointer}]{ptr, }
+\item[{type(fgsl\-\_\-vector), intent(in)}]{fvec}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_a3f528d8f3b1aa8218339bc8fdb41497c}
+
+
+Associate a Fortran pointer with the data stored inside a G\-S\-L vector object. This is invoked via the generic \hyperlink{interfacefgsl__vector__align}{fgsl\-\_\-vector\-\_\-align}. Objects of type {\ttfamily gsl\-\_\-vector} which are returned by G\-S\-L routines often are persistent subobjects of other G\-S\-L objects. A Fortran pointer aligned with a subobject hence will remain up-\/to-\/date throughout the lifetime of the object; it may become undefined once the object ceases to exist. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ptr} & -\/ rank 1 Fortran pointer \\
+\hline
+{\em fvec} & -\/ double precision real G\-S\-L vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status 
+\end{DoxyReturn}
+\hypertarget{array_8finc_a804073922a322c29cd5be43410581ba4}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-vector\-\_\-status@{fgsl\-\_\-vector\-\_\-status}}
+\index{fgsl\-\_\-vector\-\_\-status@{fgsl\-\_\-vector\-\_\-status}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-vector\-\_\-status}]{\setlength{\rightskip}{0pt plus 5cm}logical function fgsl\-\_\-vector\-\_\-status (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-vector), intent(in)}]{vector}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_a804073922a322c29cd5be43410581ba4}
+\hypertarget{array_8finc_a740b61c719ee64b92abc804915115255}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-vector\-\_\-to\-\_\-array@{fgsl\-\_\-vector\-\_\-to\-\_\-array}}
+\index{fgsl\-\_\-vector\-\_\-to\-\_\-array@{fgsl\-\_\-vector\-\_\-to\-\_\-array}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-vector\-\_\-to\-\_\-array}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-vector\-\_\-to\-\_\-array (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(inout)}]{result, }
+\item[{type(fgsl\-\_\-vector), intent(in)}]{source}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_a740b61c719ee64b92abc804915115255}
+
+
+The assignment operator (see \hyperlink{generics_8finc}{interface/generics.\-finc}) is overloaded to enable copying of the content of a G\-S\-L vector into a Fortran array. 
+

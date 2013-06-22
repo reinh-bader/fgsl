@@ -67,10 +67,9 @@
   interface fgsl_sizeof
      module procedure fgsl_sizeof_double
      module procedure fgsl_sizeof_float
+     module procedure fgsl_sizeof_int
 #if SIZEOF_LONG == 4 && SIZEOF_SIZE_T == 4
-     module procedure fgsl_sizeof_int
 #elif SIZEOF_LONG == 8 && SIZEOF_SIZE_T == 8
-     module procedure fgsl_sizeof_int
      module procedure fgsl_sizeof_size_t
 #else
 #error Unknown architecture detected

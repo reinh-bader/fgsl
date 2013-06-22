@@ -1,0 +1,265 @@
+\hypertarget{multimin_8finc}{\section{api/multimin.finc File Reference}
+\label{multimin_8finc}\index{api/multimin.\-finc@{api/multimin.\-finc}}
+}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=168pt]{multimin_8finc__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions/\-Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+type(fgsl\-\_\-multimin\-\_\-function) \\*
+function \hyperlink{multimin_8finc_a1b777bbc4aa79d172caa92121222b5db}{fgsl\-\_\-multimin\-\_\-function\-\_\-init} (func, ndim, params)
+\item 
+type(fgsl\-\_\-multimin\-\_\-function\-\_\-fdf) \\*
+function \hyperlink{multimin_8finc_a38c9b041ca068595cd096fb565b8b84b}{fgsl\-\_\-multimin\-\_\-function\-\_\-fdf\-\_\-init} (func, dfunc, fdfunc, ndim, params)
+\item 
+subroutine \hyperlink{multimin_8finc_a20359c7761d29e39ee1edbb1a7499814}{fgsl\-\_\-multimin\-\_\-function\-\_\-free} (fun)
+\item 
+subroutine \hyperlink{multimin_8finc_acf20d19ee20fdd349f2cb779761e15dd}{fgsl\-\_\-multimin\-\_\-function\-\_\-fdf\-\_\-free} (fun)
+\item 
+type(fgsl\-\_\-multimin\-\_\-fminimizer) \\*
+function \hyperlink{multimin_8finc_a9572fe1c742b37999c9dfff7a0ca7ca9}{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-alloc} (t, n)
+\item 
+type(fgsl\-\_\-multimin\-\_\-fdfminimizer) \\*
+function \hyperlink{multimin_8finc_a4e93d6fb4c774ef02bc0e256fc74f3cf}{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-alloc} (t, n)
+\item 
+subroutine \hyperlink{multimin_8finc_ab3a786c5c952d55af8c14d3197682c50}{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-free} (s)
+\item 
+subroutine \hyperlink{multimin_8finc_a87a418eae01978bd53b1b3d120bd7808}{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-free} (s)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{multimin_8finc_acb48fd9d43a274bac09933d5600439bf}{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-set} (s, f, x, step)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{multimin_8finc_a48d15a5b27f8afaf450743f443a6b4e0}{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-set} (s, fdf, x, step, tol)
+\item 
+character(kind=fgsl\-\_\-char, len=fgsl\-\_\-strmax) \\*
+function \hyperlink{multimin_8finc_ac0081b18d8d21a731ab07186254e6421}{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-name} (s)
+\item 
+character(kind=fgsl\-\_\-char, len=fgsl\-\_\-strmax) \\*
+function \hyperlink{multimin_8finc_add7aec7d233afa06b916d2b936274c41}{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-name} (s)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{multimin_8finc_a3197995b850d60e0de902fe245d48bbf}{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-iterate} (s)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{multimin_8finc_ae967ca17e87c39eb2a545c1d710fe3d2}{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-iterate} (s)
+\item 
+type(fgsl\-\_\-vector) function \hyperlink{multimin_8finc_aa4a9a06fe53544147e23f4c398ea2e3b}{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-x} (s)
+\item 
+type(fgsl\-\_\-vector) function \hyperlink{multimin_8finc_a649ffffde4ac9b8567d02ebb30c679b4}{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-x} (s)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{multimin_8finc_ad82b7976f803bf75a8b762911897a91d}{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-minimum} (s)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{multimin_8finc_af074a3128839c747e32a80d7f76ced48}{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-minimum} (s)
+\item 
+type(fgsl\-\_\-vector) function \hyperlink{multimin_8finc_a831cbe6619ed7b76ae8fe07a2ab3f40b}{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-gradient} (s)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{multimin_8finc_a78f3abf88b0093e4ca69305e85a78253}{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-size} (s)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{multimin_8finc_ad3a5ccbcbb3cc2029b4790950badeace}{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-restart} (s)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{multimin_8finc_ad819b0b49a64995965d3abd7f66f4847}{fgsl\-\_\-multimin\-\_\-test\-\_\-gradient} (g, epsabs)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{multimin_8finc_ad9f121a576bee6afbab5fa3c6f8ab5b4}{fgsl\-\_\-multimin\-\_\-test\-\_\-size} (size, epsabs)
+\item 
+logical function \hyperlink{multimin_8finc_a1a6c440240f101bf70933e5f7a7338ba}{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-status} (s)
+\item 
+logical function \hyperlink{multimin_8finc_a39893d424d6495e73046ec17b1c58e69}{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-status} (s)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function/\-Subroutine Documentation}
+\hypertarget{multimin_8finc_a4e93d6fb4c774ef02bc0e256fc74f3cf}{\index{multimin.\-finc@{multimin.\-finc}!fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-alloc@{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-alloc}}
+\index{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-alloc@{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-alloc}!multimin.finc@{multimin.\-finc}}
+\subsubsection[{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-alloc}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-multimin\-\_\-fdfminimizer) function fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-alloc (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-type), intent(in)}]{t, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{multimin_8finc_a4e93d6fb4c774ef02bc0e256fc74f3cf}
+\hypertarget{multimin_8finc_a87a418eae01978bd53b1b3d120bd7808}{\index{multimin.\-finc@{multimin.\-finc}!fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-free@{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-free}}
+\index{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-free@{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-free}!multimin.finc@{multimin.\-finc}}
+\subsubsection[{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multimin\-\_\-fdfminimizer), intent(inout)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multimin_8finc_a87a418eae01978bd53b1b3d120bd7808}
+\hypertarget{multimin_8finc_a831cbe6619ed7b76ae8fe07a2ab3f40b}{\index{multimin.\-finc@{multimin.\-finc}!fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-gradient@{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-gradient}}
+\index{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-gradient@{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-gradient}!multimin.finc@{multimin.\-finc}}
+\subsubsection[{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-gradient}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-vector) function fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-gradient (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multimin\-\_\-fdfminimizer), intent(in)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multimin_8finc_a831cbe6619ed7b76ae8fe07a2ab3f40b}
+\hypertarget{multimin_8finc_ae967ca17e87c39eb2a545c1d710fe3d2}{\index{multimin.\-finc@{multimin.\-finc}!fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-iterate@{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-iterate}}
+\index{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-iterate@{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-iterate}!multimin.finc@{multimin.\-finc}}
+\subsubsection[{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-iterate}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-iterate (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multimin\-\_\-fdfminimizer), intent(in)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multimin_8finc_ae967ca17e87c39eb2a545c1d710fe3d2}
+\hypertarget{multimin_8finc_af074a3128839c747e32a80d7f76ced48}{\index{multimin.\-finc@{multimin.\-finc}!fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-minimum@{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-minimum}}
+\index{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-minimum@{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-minimum}!multimin.finc@{multimin.\-finc}}
+\subsubsection[{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-minimum}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-minimum (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multimin\-\_\-fdfminimizer), intent(in)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multimin_8finc_af074a3128839c747e32a80d7f76ced48}
+\hypertarget{multimin_8finc_add7aec7d233afa06b916d2b936274c41}{\index{multimin.\-finc@{multimin.\-finc}!fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-name@{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-name}}
+\index{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-name@{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-name}!multimin.finc@{multimin.\-finc}}
+\subsubsection[{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}character(kind=fgsl\-\_\-char,len=fgsl\-\_\-strmax) function fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-name (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multimin\-\_\-fdfminimizer), intent(in)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multimin_8finc_add7aec7d233afa06b916d2b936274c41}
+\hypertarget{multimin_8finc_ad3a5ccbcbb3cc2029b4790950badeace}{\index{multimin.\-finc@{multimin.\-finc}!fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-restart@{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-restart}}
+\index{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-restart@{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-restart}!multimin.finc@{multimin.\-finc}}
+\subsubsection[{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-restart}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-restart (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multimin\-\_\-fdfminimizer), intent(in)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multimin_8finc_ad3a5ccbcbb3cc2029b4790950badeace}
+\hypertarget{multimin_8finc_a48d15a5b27f8afaf450743f443a6b4e0}{\index{multimin.\-finc@{multimin.\-finc}!fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-set@{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-set}}
+\index{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-set@{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-set}!multimin.finc@{multimin.\-finc}}
+\subsubsection[{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-set (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multimin\-\_\-fdfminimizer), intent(inout)}]{s, }
+\item[{type(fgsl\-\_\-multimin\-\_\-function\-\_\-fdf), intent(in)}]{fdf, }
+\item[{type(fgsl\-\_\-vector), intent(in)}]{x, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{step, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{tol}
+\end{DoxyParamCaption}
+)}}\label{multimin_8finc_a48d15a5b27f8afaf450743f443a6b4e0}
+\hypertarget{multimin_8finc_a39893d424d6495e73046ec17b1c58e69}{\index{multimin.\-finc@{multimin.\-finc}!fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-status@{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-status}}
+\index{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-status@{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-status}!multimin.finc@{multimin.\-finc}}
+\subsubsection[{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-status}]{\setlength{\rightskip}{0pt plus 5cm}logical function fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-status (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multimin\-\_\-fdfminimizer), intent(in)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multimin_8finc_a39893d424d6495e73046ec17b1c58e69}
+\hypertarget{multimin_8finc_a649ffffde4ac9b8567d02ebb30c679b4}{\index{multimin.\-finc@{multimin.\-finc}!fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-x@{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-x}}
+\index{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-x@{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-x}!multimin.finc@{multimin.\-finc}}
+\subsubsection[{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-x}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-vector) function fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-x (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multimin\-\_\-fdfminimizer), intent(in)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multimin_8finc_a649ffffde4ac9b8567d02ebb30c679b4}
+\hypertarget{multimin_8finc_a9572fe1c742b37999c9dfff7a0ca7ca9}{\index{multimin.\-finc@{multimin.\-finc}!fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-alloc@{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-alloc}}
+\index{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-alloc@{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-alloc}!multimin.finc@{multimin.\-finc}}
+\subsubsection[{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-alloc}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-multimin\-\_\-fminimizer) function fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-alloc (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-type), intent(in)}]{t, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{multimin_8finc_a9572fe1c742b37999c9dfff7a0ca7ca9}
+\hypertarget{multimin_8finc_ab3a786c5c952d55af8c14d3197682c50}{\index{multimin.\-finc@{multimin.\-finc}!fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-free@{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-free}}
+\index{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-free@{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-free}!multimin.finc@{multimin.\-finc}}
+\subsubsection[{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multimin\-\_\-fminimizer), intent(inout)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multimin_8finc_ab3a786c5c952d55af8c14d3197682c50}
+\hypertarget{multimin_8finc_a3197995b850d60e0de902fe245d48bbf}{\index{multimin.\-finc@{multimin.\-finc}!fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-iterate@{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-iterate}}
+\index{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-iterate@{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-iterate}!multimin.finc@{multimin.\-finc}}
+\subsubsection[{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-iterate}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-iterate (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multimin\-\_\-fminimizer), intent(in)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multimin_8finc_a3197995b850d60e0de902fe245d48bbf}
+\hypertarget{multimin_8finc_ad82b7976f803bf75a8b762911897a91d}{\index{multimin.\-finc@{multimin.\-finc}!fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-minimum@{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-minimum}}
+\index{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-minimum@{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-minimum}!multimin.finc@{multimin.\-finc}}
+\subsubsection[{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-minimum}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-minimum (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multimin\-\_\-fminimizer), intent(in)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multimin_8finc_ad82b7976f803bf75a8b762911897a91d}
+\hypertarget{multimin_8finc_ac0081b18d8d21a731ab07186254e6421}{\index{multimin.\-finc@{multimin.\-finc}!fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-name@{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-name}}
+\index{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-name@{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-name}!multimin.finc@{multimin.\-finc}}
+\subsubsection[{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}character(kind=fgsl\-\_\-char,len=fgsl\-\_\-strmax) function fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-name (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multimin\-\_\-fminimizer), intent(in)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multimin_8finc_ac0081b18d8d21a731ab07186254e6421}
+\hypertarget{multimin_8finc_acb48fd9d43a274bac09933d5600439bf}{\index{multimin.\-finc@{multimin.\-finc}!fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-set@{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-set}}
+\index{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-set@{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-set}!multimin.finc@{multimin.\-finc}}
+\subsubsection[{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-set (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multimin\-\_\-fminimizer), intent(inout)}]{s, }
+\item[{type(fgsl\-\_\-multimin\-\_\-function), intent(in)}]{f, }
+\item[{type(fgsl\-\_\-vector), intent(in)}]{x, }
+\item[{type(fgsl\-\_\-vector), intent(in)}]{step}
+\end{DoxyParamCaption}
+)}}\label{multimin_8finc_acb48fd9d43a274bac09933d5600439bf}
+\hypertarget{multimin_8finc_a78f3abf88b0093e4ca69305e85a78253}{\index{multimin.\-finc@{multimin.\-finc}!fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-size@{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-size}}
+\index{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-size@{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-size}!multimin.finc@{multimin.\-finc}}
+\subsubsection[{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-size (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multimin\-\_\-fminimizer), intent(in)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multimin_8finc_a78f3abf88b0093e4ca69305e85a78253}
+\hypertarget{multimin_8finc_a1a6c440240f101bf70933e5f7a7338ba}{\index{multimin.\-finc@{multimin.\-finc}!fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-status@{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-status}}
+\index{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-status@{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-status}!multimin.finc@{multimin.\-finc}}
+\subsubsection[{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-status}]{\setlength{\rightskip}{0pt plus 5cm}logical function fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-status (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multimin\-\_\-fminimizer), intent(in)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multimin_8finc_a1a6c440240f101bf70933e5f7a7338ba}
+\hypertarget{multimin_8finc_aa4a9a06fe53544147e23f4c398ea2e3b}{\index{multimin.\-finc@{multimin.\-finc}!fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-x@{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-x}}
+\index{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-x@{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-x}!multimin.finc@{multimin.\-finc}}
+\subsubsection[{fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-x}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-vector) function fgsl\-\_\-multimin\-\_\-fminimizer\-\_\-x (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multimin\-\_\-fminimizer), intent(in)}]{s}
+\end{DoxyParamCaption}
+)}}\label{multimin_8finc_aa4a9a06fe53544147e23f4c398ea2e3b}
+\hypertarget{multimin_8finc_acf20d19ee20fdd349f2cb779761e15dd}{\index{multimin.\-finc@{multimin.\-finc}!fgsl\-\_\-multimin\-\_\-function\-\_\-fdf\-\_\-free@{fgsl\-\_\-multimin\-\_\-function\-\_\-fdf\-\_\-free}}
+\index{fgsl\-\_\-multimin\-\_\-function\-\_\-fdf\-\_\-free@{fgsl\-\_\-multimin\-\_\-function\-\_\-fdf\-\_\-free}!multimin.finc@{multimin.\-finc}}
+\subsubsection[{fgsl\-\_\-multimin\-\_\-function\-\_\-fdf\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-multimin\-\_\-function\-\_\-fdf\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multimin\-\_\-function\-\_\-fdf), intent(inout)}]{fun}
+\end{DoxyParamCaption}
+)}}\label{multimin_8finc_acf20d19ee20fdd349f2cb779761e15dd}
+\hypertarget{multimin_8finc_a38c9b041ca068595cd096fb565b8b84b}{\index{multimin.\-finc@{multimin.\-finc}!fgsl\-\_\-multimin\-\_\-function\-\_\-fdf\-\_\-init@{fgsl\-\_\-multimin\-\_\-function\-\_\-fdf\-\_\-init}}
+\index{fgsl\-\_\-multimin\-\_\-function\-\_\-fdf\-\_\-init@{fgsl\-\_\-multimin\-\_\-function\-\_\-fdf\-\_\-init}!multimin.finc@{multimin.\-finc}}
+\subsubsection[{fgsl\-\_\-multimin\-\_\-function\-\_\-fdf\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-multimin\-\_\-function\-\_\-fdf) function fgsl\-\_\-multimin\-\_\-function\-\_\-fdf\-\_\-init (
+\begin{DoxyParamCaption}
+\item[{}]{func, }
+\item[{}]{dfunc, }
+\item[{}]{fdfunc, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{ndim, }
+\item[{type(c\-\_\-ptr), intent(in)}]{params}
+\end{DoxyParamCaption}
+)}}\label{multimin_8finc_a38c9b041ca068595cd096fb565b8b84b}
+\hypertarget{multimin_8finc_a20359c7761d29e39ee1edbb1a7499814}{\index{multimin.\-finc@{multimin.\-finc}!fgsl\-\_\-multimin\-\_\-function\-\_\-free@{fgsl\-\_\-multimin\-\_\-function\-\_\-free}}
+\index{fgsl\-\_\-multimin\-\_\-function\-\_\-free@{fgsl\-\_\-multimin\-\_\-function\-\_\-free}!multimin.finc@{multimin.\-finc}}
+\subsubsection[{fgsl\-\_\-multimin\-\_\-function\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-multimin\-\_\-function\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multimin\-\_\-function), intent(inout)}]{fun}
+\end{DoxyParamCaption}
+)}}\label{multimin_8finc_a20359c7761d29e39ee1edbb1a7499814}
+\hypertarget{multimin_8finc_a1b777bbc4aa79d172caa92121222b5db}{\index{multimin.\-finc@{multimin.\-finc}!fgsl\-\_\-multimin\-\_\-function\-\_\-init@{fgsl\-\_\-multimin\-\_\-function\-\_\-init}}
+\index{fgsl\-\_\-multimin\-\_\-function\-\_\-init@{fgsl\-\_\-multimin\-\_\-function\-\_\-init}!multimin.finc@{multimin.\-finc}}
+\subsubsection[{fgsl\-\_\-multimin\-\_\-function\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-multimin\-\_\-function) function fgsl\-\_\-multimin\-\_\-function\-\_\-init (
+\begin{DoxyParamCaption}
+\item[{}]{func, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{ndim, }
+\item[{type(c\-\_\-ptr), intent(in)}]{params}
+\end{DoxyParamCaption}
+)}}\label{multimin_8finc_a1b777bbc4aa79d172caa92121222b5db}
+\hypertarget{multimin_8finc_ad819b0b49a64995965d3abd7f66f4847}{\index{multimin.\-finc@{multimin.\-finc}!fgsl\-\_\-multimin\-\_\-test\-\_\-gradient@{fgsl\-\_\-multimin\-\_\-test\-\_\-gradient}}
+\index{fgsl\-\_\-multimin\-\_\-test\-\_\-gradient@{fgsl\-\_\-multimin\-\_\-test\-\_\-gradient}!multimin.finc@{multimin.\-finc}}
+\subsubsection[{fgsl\-\_\-multimin\-\_\-test\-\_\-gradient}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-multimin\-\_\-test\-\_\-gradient (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-vector), intent(in)}]{g, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{epsabs}
+\end{DoxyParamCaption}
+)}}\label{multimin_8finc_ad819b0b49a64995965d3abd7f66f4847}
+\hypertarget{multimin_8finc_ad9f121a576bee6afbab5fa3c6f8ab5b4}{\index{multimin.\-finc@{multimin.\-finc}!fgsl\-\_\-multimin\-\_\-test\-\_\-size@{fgsl\-\_\-multimin\-\_\-test\-\_\-size}}
+\index{fgsl\-\_\-multimin\-\_\-test\-\_\-size@{fgsl\-\_\-multimin\-\_\-test\-\_\-size}!multimin.finc@{multimin.\-finc}}
+\subsubsection[{fgsl\-\_\-multimin\-\_\-test\-\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-multimin\-\_\-test\-\_\-size (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), intent(in)}]{size, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{epsabs}
+\end{DoxyParamCaption}
+)}}\label{multimin_8finc_ad9f121a576bee6afbab5fa3c6f8ab5b4}

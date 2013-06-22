@@ -1,9 +1,0 @@
-@cindex quadrature
-@cindex numerical integration (quadrature)
-@cindex integration, numerical (quadrature)
-
-
-All integration routines from GSL have been mapped. Note that 
-function objects as described in chapter @sc{Using the interface}, 
-(@pxref{Parametrized function types})
-are required for using the interface.

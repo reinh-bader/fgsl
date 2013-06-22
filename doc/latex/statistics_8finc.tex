@@ -1,0 +1,504 @@
+\hypertarget{statistics_8finc}{\section{api/statistics.finc File Reference}
+\label{statistics_8finc}\index{api/statistics.\-finc@{api/statistics.\-finc}}
+}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=168pt]{statistics_8finc__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions/\-Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_a13ad6bf10a4daeba24e77b90512a2e04}{fgsl\-\_\-stats\-\_\-mean} (data, stride, n)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_abd5a6101ce9b7e8278e6b9843c92e121}{fgsl\-\_\-stats\-\_\-variance} (data, stride, n)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_a82ebcf08a4a62d8acd2cd4516e655092}{fgsl\-\_\-stats\-\_\-variance\-\_\-m} (data, stride, n, mean)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_ad6a8382d4b0eaf033302a684a19c48d7}{fgsl\-\_\-stats\-\_\-sd} (data, stride, n)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_a2b705cc724e72bbfaab255052b08b4aa}{fgsl\-\_\-stats\-\_\-sd\-\_\-m} (data, stride, n, mean)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_a6b816113373329675a28ef28d833fda2}{fgsl\-\_\-stats\-\_\-variance\-\_\-with\-\_\-fixed\-\_\-mean} (data, stride, n, mean)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_a940f39032c1dcf2fc8ec83114169ded5}{fgsl\-\_\-stats\-\_\-sd\-\_\-with\-\_\-fixed\-\_\-mean} (data, stride, n, mean)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_a63ca760a17cd6d3109ff5cfd2c0c0fc1}{fgsl\-\_\-stats\-\_\-absdev} (data, stride, n)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_a776af1d0102b9c73f4839963012a066f}{fgsl\-\_\-stats\-\_\-absdev\-\_\-m} (data, stride, n, mean)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_afa3dfb29e31d3a70b48eb755419ff252}{fgsl\-\_\-stats\-\_\-skew} (data, stride, n)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_abe7a2765433ae6d8d5b01871079bc214}{fgsl\-\_\-stats\-\_\-skew\-\_\-m\-\_\-sd} (data, stride, n, mean, sd)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_ab717a41e26eca4a329a3b1ba8ad49e36}{fgsl\-\_\-stats\-\_\-kurtosis} (data, stride, n)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_a73f37fa7fc26bbc32b2ec4f430ff4237}{fgsl\-\_\-stats\-\_\-kurtosis\-\_\-m\-\_\-sd} (data, stride, n, mean, sd)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_aec9e1868404363cdd4071d759452dffa}{fgsl\-\_\-stats\-\_\-lag1\-\_\-autocorrelation} (data, stride, n)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_ab2de33bfbff99ba0e1519a92ffc2a198}{fgsl\-\_\-stats\-\_\-lag1\-\_\-autocorrelation\-\_\-m} (data, stride, n, mean)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_abe8b984e22ce9662518b3058c5ed3fc9}{fgsl\-\_\-stats\-\_\-covariance} (data1, stride1, data2, stride2, n)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_a022a3337d746efe8ba47bb7b790978a9}{fgsl\-\_\-stats\-\_\-covariance\-\_\-m} (data1, stride1, data2, stride2, n, mean1, mean2)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_ad641fcad25f9ad39af269073822f3700}{fgsl\-\_\-stats\-\_\-correlation} (data1, stride1, data2, stride2, n)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_ac44e8f61b5d6ece8de2c7859c7324df9}{fgsl\-\_\-stats\-\_\-wmean} (w, wstride, data, stride, n)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_a7369e6ff86c963b93045d041e0318b37}{fgsl\-\_\-stats\-\_\-wvariance} (w, wstride, data, stride, n)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_a58b0acc505557f72f2cfc2813e945666}{fgsl\-\_\-stats\-\_\-wvariance\-\_\-m} (w, wstride, data, stride, n, mean)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_a07bed243844c213b933de5274daa9116}{fgsl\-\_\-stats\-\_\-wsd} (w, wstride, data, stride, n)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_a9be620d1825095d70f5a3eb93f1e8304}{fgsl\-\_\-stats\-\_\-wsd\-\_\-m} (w, wstride, data, stride, n, mean)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_a6106f2ae69fddefef4d5e233e54a8df0}{fgsl\-\_\-stats\-\_\-wvariance\-\_\-with\-\_\-fixed\-\_\-mean} (w, wstride, data, stride, n, mean)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_af3b6967068ce44444a8278bff7faddb0}{fgsl\-\_\-stats\-\_\-wsd\-\_\-with\-\_\-fixed\-\_\-mean} (w, wstride, data, stride, n, mean)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_afcfaf0a75c6ace9379598604ff9b43a2}{fgsl\-\_\-stats\-\_\-wabsdev} (w, wstride, data, stride, n)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_afa3b19f786f2175102a537cb331bc106}{fgsl\-\_\-stats\-\_\-wabsdev\-\_\-m} (w, wstride, data, stride, n, mean)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_a0b7db46a9119ac52cf72617363432d06}{fgsl\-\_\-stats\-\_\-wskew} (w, wstride, data, stride, n)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_af0bb94b056828ffa447fabaf8063709d}{fgsl\-\_\-stats\-\_\-wskew\-\_\-m\-\_\-sd} (w, wstride, data, stride, n, mean, sd)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_ae618234938730cd9600050ccf92948b2}{fgsl\-\_\-stats\-\_\-wkurtosis} (w, wstride, data, stride, n)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_a87a18e52ff4740838de69e55f3104845}{fgsl\-\_\-stats\-\_\-wkurtosis\-\_\-m\-\_\-sd} (w, wstride, data, stride, n, mean, sd)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_acd520fe9c06f6a23888dd0ed36579cde}{fgsl\-\_\-stats\-\_\-max} (data, stride, n)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_a7f2c953b9cd6539cbb324ba19040a590}{fgsl\-\_\-stats\-\_\-min} (data, stride, n)
+\item 
+subroutine \hyperlink{statistics_8finc_aafd29d9a05b0e4bd19f0b7a8dc420ef4}{fgsl\-\_\-stats\-\_\-minmax} (min, max, data, stride, n)
+\item 
+integer(fgsl\-\_\-size\-\_\-t) function \hyperlink{statistics_8finc_a1e72fff24ca3d2df17beaf579d12c450}{fgsl\-\_\-stats\-\_\-max\-\_\-index} (data, stride, n)
+\item 
+integer(fgsl\-\_\-size\-\_\-t) function \hyperlink{statistics_8finc_a24e500a11c59d3ec7bb0ce2f61b4f649}{fgsl\-\_\-stats\-\_\-min\-\_\-index} (data, stride, n)
+\item 
+subroutine \hyperlink{statistics_8finc_add4224c7bb957c91f26f69441bf81190}{fgsl\-\_\-stats\-\_\-minmax\-\_\-index} (min\-\_\-index, max\-\_\-index, data, stride, n)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_a8dbecd85911d5151cd08f93e7510cf6c}{fgsl\-\_\-stats\-\_\-median\-\_\-from\-\_\-sorted\-\_\-data} (data, stride, n)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_acedbc5cc1b4c8b4389c5011d15e75122}{fgsl\-\_\-stats\-\_\-quantile\-\_\-from\-\_\-sorted\-\_\-data} (data, stride, n, f)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function/\-Subroutine Documentation}
+\hypertarget{statistics_8finc_a63ca760a17cd6d3109ff5cfd2c0c0fc1}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-absdev@{fgsl\-\_\-stats\-\_\-absdev}}
+\index{fgsl\-\_\-stats\-\_\-absdev@{fgsl\-\_\-stats\-\_\-absdev}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-absdev}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-absdev (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_a63ca760a17cd6d3109ff5cfd2c0c0fc1}
+\hypertarget{statistics_8finc_a776af1d0102b9c73f4839963012a066f}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-absdev\-\_\-m@{fgsl\-\_\-stats\-\_\-absdev\-\_\-m}}
+\index{fgsl\-\_\-stats\-\_\-absdev\-\_\-m@{fgsl\-\_\-stats\-\_\-absdev\-\_\-m}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-absdev\-\_\-m}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-absdev\-\_\-m (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{mean}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_a776af1d0102b9c73f4839963012a066f}
+\hypertarget{statistics_8finc_ad641fcad25f9ad39af269073822f3700}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-correlation@{fgsl\-\_\-stats\-\_\-correlation}}
+\index{fgsl\-\_\-stats\-\_\-correlation@{fgsl\-\_\-stats\-\_\-correlation}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-correlation}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-correlation (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data1, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride1, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data2, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride2, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_ad641fcad25f9ad39af269073822f3700}
+\hypertarget{statistics_8finc_abe8b984e22ce9662518b3058c5ed3fc9}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-covariance@{fgsl\-\_\-stats\-\_\-covariance}}
+\index{fgsl\-\_\-stats\-\_\-covariance@{fgsl\-\_\-stats\-\_\-covariance}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-covariance}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-covariance (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data1, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride1, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data2, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride2, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_abe8b984e22ce9662518b3058c5ed3fc9}
+\hypertarget{statistics_8finc_a022a3337d746efe8ba47bb7b790978a9}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-covariance\-\_\-m@{fgsl\-\_\-stats\-\_\-covariance\-\_\-m}}
+\index{fgsl\-\_\-stats\-\_\-covariance\-\_\-m@{fgsl\-\_\-stats\-\_\-covariance\-\_\-m}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-covariance\-\_\-m}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-covariance\-\_\-m (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data1, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride1, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data2, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride2, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{mean1, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{mean2}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_a022a3337d746efe8ba47bb7b790978a9}
+\hypertarget{statistics_8finc_ab717a41e26eca4a329a3b1ba8ad49e36}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-kurtosis@{fgsl\-\_\-stats\-\_\-kurtosis}}
+\index{fgsl\-\_\-stats\-\_\-kurtosis@{fgsl\-\_\-stats\-\_\-kurtosis}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-kurtosis}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-kurtosis (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_ab717a41e26eca4a329a3b1ba8ad49e36}
+\hypertarget{statistics_8finc_a73f37fa7fc26bbc32b2ec4f430ff4237}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-kurtosis\-\_\-m\-\_\-sd@{fgsl\-\_\-stats\-\_\-kurtosis\-\_\-m\-\_\-sd}}
+\index{fgsl\-\_\-stats\-\_\-kurtosis\-\_\-m\-\_\-sd@{fgsl\-\_\-stats\-\_\-kurtosis\-\_\-m\-\_\-sd}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-kurtosis\-\_\-m\-\_\-sd}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-kurtosis\-\_\-m\-\_\-sd (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{mean, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{sd}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_a73f37fa7fc26bbc32b2ec4f430ff4237}
+\hypertarget{statistics_8finc_aec9e1868404363cdd4071d759452dffa}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-lag1\-\_\-autocorrelation@{fgsl\-\_\-stats\-\_\-lag1\-\_\-autocorrelation}}
+\index{fgsl\-\_\-stats\-\_\-lag1\-\_\-autocorrelation@{fgsl\-\_\-stats\-\_\-lag1\-\_\-autocorrelation}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-lag1\-\_\-autocorrelation}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-lag1\-\_\-autocorrelation (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_aec9e1868404363cdd4071d759452dffa}
+\hypertarget{statistics_8finc_ab2de33bfbff99ba0e1519a92ffc2a198}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-lag1\-\_\-autocorrelation\-\_\-m@{fgsl\-\_\-stats\-\_\-lag1\-\_\-autocorrelation\-\_\-m}}
+\index{fgsl\-\_\-stats\-\_\-lag1\-\_\-autocorrelation\-\_\-m@{fgsl\-\_\-stats\-\_\-lag1\-\_\-autocorrelation\-\_\-m}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-lag1\-\_\-autocorrelation\-\_\-m}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-lag1\-\_\-autocorrelation\-\_\-m (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{mean}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_ab2de33bfbff99ba0e1519a92ffc2a198}
+\hypertarget{statistics_8finc_acd520fe9c06f6a23888dd0ed36579cde}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-max@{fgsl\-\_\-stats\-\_\-max}}
+\index{fgsl\-\_\-stats\-\_\-max@{fgsl\-\_\-stats\-\_\-max}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-max}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-max (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_acd520fe9c06f6a23888dd0ed36579cde}
+\hypertarget{statistics_8finc_a1e72fff24ca3d2df17beaf579d12c450}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-max\-\_\-index@{fgsl\-\_\-stats\-\_\-max\-\_\-index}}
+\index{fgsl\-\_\-stats\-\_\-max\-\_\-index@{fgsl\-\_\-stats\-\_\-max\-\_\-index}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-max\-\_\-index}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-size\-\_\-t) function fgsl\-\_\-stats\-\_\-max\-\_\-index (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_a1e72fff24ca3d2df17beaf579d12c450}
+\hypertarget{statistics_8finc_a13ad6bf10a4daeba24e77b90512a2e04}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-mean@{fgsl\-\_\-stats\-\_\-mean}}
+\index{fgsl\-\_\-stats\-\_\-mean@{fgsl\-\_\-stats\-\_\-mean}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-mean}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-mean (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_a13ad6bf10a4daeba24e77b90512a2e04}
+\hypertarget{statistics_8finc_a8dbecd85911d5151cd08f93e7510cf6c}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-median\-\_\-from\-\_\-sorted\-\_\-data@{fgsl\-\_\-stats\-\_\-median\-\_\-from\-\_\-sorted\-\_\-data}}
+\index{fgsl\-\_\-stats\-\_\-median\-\_\-from\-\_\-sorted\-\_\-data@{fgsl\-\_\-stats\-\_\-median\-\_\-from\-\_\-sorted\-\_\-data}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-median\-\_\-from\-\_\-sorted\-\_\-data}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-median\-\_\-from\-\_\-sorted\-\_\-data (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_a8dbecd85911d5151cd08f93e7510cf6c}
+\hypertarget{statistics_8finc_a7f2c953b9cd6539cbb324ba19040a590}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-min@{fgsl\-\_\-stats\-\_\-min}}
+\index{fgsl\-\_\-stats\-\_\-min@{fgsl\-\_\-stats\-\_\-min}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-min}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-min (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_a7f2c953b9cd6539cbb324ba19040a590}
+\hypertarget{statistics_8finc_a24e500a11c59d3ec7bb0ce2f61b4f649}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-min\-\_\-index@{fgsl\-\_\-stats\-\_\-min\-\_\-index}}
+\index{fgsl\-\_\-stats\-\_\-min\-\_\-index@{fgsl\-\_\-stats\-\_\-min\-\_\-index}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-min\-\_\-index}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-size\-\_\-t) function fgsl\-\_\-stats\-\_\-min\-\_\-index (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_a24e500a11c59d3ec7bb0ce2f61b4f649}
+\hypertarget{statistics_8finc_aafd29d9a05b0e4bd19f0b7a8dc420ef4}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-minmax@{fgsl\-\_\-stats\-\_\-minmax}}
+\index{fgsl\-\_\-stats\-\_\-minmax@{fgsl\-\_\-stats\-\_\-minmax}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-minmax}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-stats\-\_\-minmax (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), intent(out)}]{min, }
+\item[{real(fgsl\-\_\-double), intent(out)}]{max, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_aafd29d9a05b0e4bd19f0b7a8dc420ef4}
+\hypertarget{statistics_8finc_add4224c7bb957c91f26f69441bf81190}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-minmax\-\_\-index@{fgsl\-\_\-stats\-\_\-minmax\-\_\-index}}
+\index{fgsl\-\_\-stats\-\_\-minmax\-\_\-index@{fgsl\-\_\-stats\-\_\-minmax\-\_\-index}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-minmax\-\_\-index}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-stats\-\_\-minmax\-\_\-index (
+\begin{DoxyParamCaption}
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(out)}]{min\-\_\-index, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(out)}]{max\-\_\-index, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_add4224c7bb957c91f26f69441bf81190}
+\hypertarget{statistics_8finc_acedbc5cc1b4c8b4389c5011d15e75122}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-quantile\-\_\-from\-\_\-sorted\-\_\-data@{fgsl\-\_\-stats\-\_\-quantile\-\_\-from\-\_\-sorted\-\_\-data}}
+\index{fgsl\-\_\-stats\-\_\-quantile\-\_\-from\-\_\-sorted\-\_\-data@{fgsl\-\_\-stats\-\_\-quantile\-\_\-from\-\_\-sorted\-\_\-data}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-quantile\-\_\-from\-\_\-sorted\-\_\-data}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-quantile\-\_\-from\-\_\-sorted\-\_\-data (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{f}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_acedbc5cc1b4c8b4389c5011d15e75122}
+\hypertarget{statistics_8finc_ad6a8382d4b0eaf033302a684a19c48d7}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-sd@{fgsl\-\_\-stats\-\_\-sd}}
+\index{fgsl\-\_\-stats\-\_\-sd@{fgsl\-\_\-stats\-\_\-sd}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-sd}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-sd (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_ad6a8382d4b0eaf033302a684a19c48d7}
+\hypertarget{statistics_8finc_a2b705cc724e72bbfaab255052b08b4aa}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-sd\-\_\-m@{fgsl\-\_\-stats\-\_\-sd\-\_\-m}}
+\index{fgsl\-\_\-stats\-\_\-sd\-\_\-m@{fgsl\-\_\-stats\-\_\-sd\-\_\-m}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-sd\-\_\-m}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-sd\-\_\-m (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{mean}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_a2b705cc724e72bbfaab255052b08b4aa}
+\hypertarget{statistics_8finc_a940f39032c1dcf2fc8ec83114169ded5}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-sd\-\_\-with\-\_\-fixed\-\_\-mean@{fgsl\-\_\-stats\-\_\-sd\-\_\-with\-\_\-fixed\-\_\-mean}}
+\index{fgsl\-\_\-stats\-\_\-sd\-\_\-with\-\_\-fixed\-\_\-mean@{fgsl\-\_\-stats\-\_\-sd\-\_\-with\-\_\-fixed\-\_\-mean}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-sd\-\_\-with\-\_\-fixed\-\_\-mean}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-sd\-\_\-with\-\_\-fixed\-\_\-mean (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{mean}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_a940f39032c1dcf2fc8ec83114169ded5}
+\hypertarget{statistics_8finc_afa3dfb29e31d3a70b48eb755419ff252}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-skew@{fgsl\-\_\-stats\-\_\-skew}}
+\index{fgsl\-\_\-stats\-\_\-skew@{fgsl\-\_\-stats\-\_\-skew}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-skew}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-skew (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_afa3dfb29e31d3a70b48eb755419ff252}
+\hypertarget{statistics_8finc_abe7a2765433ae6d8d5b01871079bc214}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-skew\-\_\-m\-\_\-sd@{fgsl\-\_\-stats\-\_\-skew\-\_\-m\-\_\-sd}}
+\index{fgsl\-\_\-stats\-\_\-skew\-\_\-m\-\_\-sd@{fgsl\-\_\-stats\-\_\-skew\-\_\-m\-\_\-sd}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-skew\-\_\-m\-\_\-sd}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-skew\-\_\-m\-\_\-sd (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{mean, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{sd}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_abe7a2765433ae6d8d5b01871079bc214}
+\hypertarget{statistics_8finc_abd5a6101ce9b7e8278e6b9843c92e121}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-variance@{fgsl\-\_\-stats\-\_\-variance}}
+\index{fgsl\-\_\-stats\-\_\-variance@{fgsl\-\_\-stats\-\_\-variance}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-variance}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-variance (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_abd5a6101ce9b7e8278e6b9843c92e121}
+\hypertarget{statistics_8finc_a82ebcf08a4a62d8acd2cd4516e655092}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-variance\-\_\-m@{fgsl\-\_\-stats\-\_\-variance\-\_\-m}}
+\index{fgsl\-\_\-stats\-\_\-variance\-\_\-m@{fgsl\-\_\-stats\-\_\-variance\-\_\-m}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-variance\-\_\-m}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-variance\-\_\-m (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{mean}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_a82ebcf08a4a62d8acd2cd4516e655092}
+\hypertarget{statistics_8finc_a6b816113373329675a28ef28d833fda2}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-variance\-\_\-with\-\_\-fixed\-\_\-mean@{fgsl\-\_\-stats\-\_\-variance\-\_\-with\-\_\-fixed\-\_\-mean}}
+\index{fgsl\-\_\-stats\-\_\-variance\-\_\-with\-\_\-fixed\-\_\-mean@{fgsl\-\_\-stats\-\_\-variance\-\_\-with\-\_\-fixed\-\_\-mean}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-variance\-\_\-with\-\_\-fixed\-\_\-mean}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-variance\-\_\-with\-\_\-fixed\-\_\-mean (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{mean}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_a6b816113373329675a28ef28d833fda2}
+\hypertarget{statistics_8finc_afcfaf0a75c6ace9379598604ff9b43a2}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-wabsdev@{fgsl\-\_\-stats\-\_\-wabsdev}}
+\index{fgsl\-\_\-stats\-\_\-wabsdev@{fgsl\-\_\-stats\-\_\-wabsdev}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-wabsdev}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-wabsdev (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{w, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{wstride, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_afcfaf0a75c6ace9379598604ff9b43a2}
+\hypertarget{statistics_8finc_afa3b19f786f2175102a537cb331bc106}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-wabsdev\-\_\-m@{fgsl\-\_\-stats\-\_\-wabsdev\-\_\-m}}
+\index{fgsl\-\_\-stats\-\_\-wabsdev\-\_\-m@{fgsl\-\_\-stats\-\_\-wabsdev\-\_\-m}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-wabsdev\-\_\-m}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-wabsdev\-\_\-m (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{w, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{wstride, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{mean}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_afa3b19f786f2175102a537cb331bc106}
+\hypertarget{statistics_8finc_ae618234938730cd9600050ccf92948b2}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-wkurtosis@{fgsl\-\_\-stats\-\_\-wkurtosis}}
+\index{fgsl\-\_\-stats\-\_\-wkurtosis@{fgsl\-\_\-stats\-\_\-wkurtosis}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-wkurtosis}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-wkurtosis (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{w, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{wstride, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_ae618234938730cd9600050ccf92948b2}
+\hypertarget{statistics_8finc_a87a18e52ff4740838de69e55f3104845}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-wkurtosis\-\_\-m\-\_\-sd@{fgsl\-\_\-stats\-\_\-wkurtosis\-\_\-m\-\_\-sd}}
+\index{fgsl\-\_\-stats\-\_\-wkurtosis\-\_\-m\-\_\-sd@{fgsl\-\_\-stats\-\_\-wkurtosis\-\_\-m\-\_\-sd}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-wkurtosis\-\_\-m\-\_\-sd}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-wkurtosis\-\_\-m\-\_\-sd (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{w, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{wstride, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{mean, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{sd}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_a87a18e52ff4740838de69e55f3104845}
+\hypertarget{statistics_8finc_ac44e8f61b5d6ece8de2c7859c7324df9}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-wmean@{fgsl\-\_\-stats\-\_\-wmean}}
+\index{fgsl\-\_\-stats\-\_\-wmean@{fgsl\-\_\-stats\-\_\-wmean}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-wmean}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-wmean (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{w, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{wstride, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_ac44e8f61b5d6ece8de2c7859c7324df9}
+\hypertarget{statistics_8finc_a07bed243844c213b933de5274daa9116}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-wsd@{fgsl\-\_\-stats\-\_\-wsd}}
+\index{fgsl\-\_\-stats\-\_\-wsd@{fgsl\-\_\-stats\-\_\-wsd}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-wsd}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-wsd (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{w, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{wstride, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_a07bed243844c213b933de5274daa9116}
+\hypertarget{statistics_8finc_a9be620d1825095d70f5a3eb93f1e8304}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-wsd\-\_\-m@{fgsl\-\_\-stats\-\_\-wsd\-\_\-m}}
+\index{fgsl\-\_\-stats\-\_\-wsd\-\_\-m@{fgsl\-\_\-stats\-\_\-wsd\-\_\-m}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-wsd\-\_\-m}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-wsd\-\_\-m (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{w, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{wstride, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{mean}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_a9be620d1825095d70f5a3eb93f1e8304}
+\hypertarget{statistics_8finc_af3b6967068ce44444a8278bff7faddb0}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-wsd\-\_\-with\-\_\-fixed\-\_\-mean@{fgsl\-\_\-stats\-\_\-wsd\-\_\-with\-\_\-fixed\-\_\-mean}}
+\index{fgsl\-\_\-stats\-\_\-wsd\-\_\-with\-\_\-fixed\-\_\-mean@{fgsl\-\_\-stats\-\_\-wsd\-\_\-with\-\_\-fixed\-\_\-mean}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-wsd\-\_\-with\-\_\-fixed\-\_\-mean}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-wsd\-\_\-with\-\_\-fixed\-\_\-mean (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{w, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{wstride, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{mean}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_af3b6967068ce44444a8278bff7faddb0}
+\hypertarget{statistics_8finc_a0b7db46a9119ac52cf72617363432d06}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-wskew@{fgsl\-\_\-stats\-\_\-wskew}}
+\index{fgsl\-\_\-stats\-\_\-wskew@{fgsl\-\_\-stats\-\_\-wskew}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-wskew}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-wskew (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{w, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{wstride, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_a0b7db46a9119ac52cf72617363432d06}
+\hypertarget{statistics_8finc_af0bb94b056828ffa447fabaf8063709d}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-wskew\-\_\-m\-\_\-sd@{fgsl\-\_\-stats\-\_\-wskew\-\_\-m\-\_\-sd}}
+\index{fgsl\-\_\-stats\-\_\-wskew\-\_\-m\-\_\-sd@{fgsl\-\_\-stats\-\_\-wskew\-\_\-m\-\_\-sd}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-wskew\-\_\-m\-\_\-sd}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-wskew\-\_\-m\-\_\-sd (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{w, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{wstride, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{mean, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{sd}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_af0bb94b056828ffa447fabaf8063709d}
+\hypertarget{statistics_8finc_a7369e6ff86c963b93045d041e0318b37}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-wvariance@{fgsl\-\_\-stats\-\_\-wvariance}}
+\index{fgsl\-\_\-stats\-\_\-wvariance@{fgsl\-\_\-stats\-\_\-wvariance}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-wvariance}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-wvariance (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{w, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{wstride, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_a7369e6ff86c963b93045d041e0318b37}
+\hypertarget{statistics_8finc_a58b0acc505557f72f2cfc2813e945666}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-wvariance\-\_\-m@{fgsl\-\_\-stats\-\_\-wvariance\-\_\-m}}
+\index{fgsl\-\_\-stats\-\_\-wvariance\-\_\-m@{fgsl\-\_\-stats\-\_\-wvariance\-\_\-m}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-wvariance\-\_\-m}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-wvariance\-\_\-m (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{w, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{wstride, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{mean}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_a58b0acc505557f72f2cfc2813e945666}
+\hypertarget{statistics_8finc_a6106f2ae69fddefef4d5e233e54a8df0}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-wvariance\-\_\-with\-\_\-fixed\-\_\-mean@{fgsl\-\_\-stats\-\_\-wvariance\-\_\-with\-\_\-fixed\-\_\-mean}}
+\index{fgsl\-\_\-stats\-\_\-wvariance\-\_\-with\-\_\-fixed\-\_\-mean@{fgsl\-\_\-stats\-\_\-wvariance\-\_\-with\-\_\-fixed\-\_\-mean}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-wvariance\-\_\-with\-\_\-fixed\-\_\-mean}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-wvariance\-\_\-with\-\_\-fixed\-\_\-mean (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{w, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{wstride, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{mean}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_a6106f2ae69fddefef4d5e233e54a8df0}

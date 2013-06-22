@@ -1,0 +1,295 @@
+\hypertarget{wavelet_8finc}{\section{api/wavelet.finc File Reference}
+\label{wavelet_8finc}\index{api/wavelet.\-finc@{api/wavelet.\-finc}}
+}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=164pt]{wavelet_8finc__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions/\-Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+type(fgsl\-\_\-wavelet) function \hyperlink{wavelet_8finc_a0534f5b9d5db58fc98d3996bf7eefc20}{fgsl\-\_\-wavelet\-\_\-alloc} (t, k)
+\item 
+character(kind=fgsl\-\_\-char, len=fgsl\-\_\-strmax) \\*
+function \hyperlink{wavelet_8finc_a2ff5880cd29c1fa264f815fda096f4ab}{fgsl\-\_\-wavelet\-\_\-name} (wavelet)
+\item 
+subroutine \hyperlink{wavelet_8finc_af843924a1fcec19d66e6c2aa89b6fb71}{fgsl\-\_\-wavelet\-\_\-free} (w)
+\item 
+type(fgsl\-\_\-wavelet\-\_\-workspace) \\*
+function \hyperlink{wavelet_8finc_aa120476a77ed63c701cb8cf8fc575409}{fgsl\-\_\-wavelet\-\_\-workspace\-\_\-alloc} (n)
+\item 
+subroutine \hyperlink{wavelet_8finc_a8877c7b5815c334ab195f6517273a91e}{fgsl\-\_\-wavelet\-\_\-workspace\-\_\-free} (w)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{wavelet_8finc_a3dd1ffd5ce0dd32861b9221f6afae511}{fgsl\-\_\-wavelet\-\_\-transform} (w, data, stride, n, dir, work)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{wavelet_8finc_a70c8c242811e478cebb88eb3b27788ab}{fgsl\-\_\-wavelet\-\_\-transform\-\_\-forward} (w, data, stride, n, work)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{wavelet_8finc_a34094547d54cf81dc906fff09ceb1a44}{fgsl\-\_\-wavelet\-\_\-transform\-\_\-inverse} (w, data, stride, n, work)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{wavelet_8finc_ae721627d9553cf0c2d1396e45d1fb146}{fgsl\-\_\-wavelet2d\-\_\-transform} (w, data, tda, size1, size2, dir, work)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{wavelet_8finc_a0ae200617e842d153159591b59cc56b5}{fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-forward} (w, data, tda, size1, size2, work)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{wavelet_8finc_a05d7bb6ada598550a9df3b0a0cdfdb05}{fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-inverse} (w, data, tda, size1, size2, work)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{wavelet_8finc_abbe205405ba63a585d68d1e3f5db5903}{fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-matrix} (w, m, dir, work)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{wavelet_8finc_a96ce5dd5582a999b163f947e95a1ae40}{fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-matrix\-\_\-forward} (w, m, work)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{wavelet_8finc_a9d0bcdfff907e1c19166cddf01fdc15d}{fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-matrix\-\_\-inverse} (w, m, work)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{wavelet_8finc_a488377ebb90c0a2cbfddd028be2dc41b}{fgsl\-\_\-wavelet2d\-\_\-nstransform} (w, data, tda, size1, size2, dir, work)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{wavelet_8finc_afa1e0433033a7898a4cb3992ac848f88}{fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-forward} (w, data, tda, size1, size2, work)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{wavelet_8finc_a3424c04dfbf288aebc2d8e5e9164565f}{fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-inverse} (w, data, tda, size1, size2, work)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{wavelet_8finc_a22dbfeae87b11490a8ecebe3254f85fe}{fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-matrix} (w, m, dir, work)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{wavelet_8finc_a82cc729239d174d054777ed3b7477260}{fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-matrix\-\_\-forward} (w, m, work)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{wavelet_8finc_a68e1cc4b337ecb5fef13dbea1b47b33a}{fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-matrix\-\_\-inverse} (w, m, work)
+\item 
+logical function \hyperlink{wavelet_8finc_ae806a3d76e07c7169657aa6541928766}{fgsl\-\_\-wavelet\-\_\-status} (wavelet)
+\item 
+logical function \hyperlink{wavelet_8finc_abb974e06092a14e00e8d4ad2601c012a}{fgsl\-\_\-wavelet\-\_\-workspace\-\_\-status} (wavelet\-\_\-workspace)
+\item 
+integer(fgsl\-\_\-size\-\_\-t) function \hyperlink{wavelet_8finc_aa94fb05c91cf6594b1afe524d87ce40e}{fgsl\-\_\-sizeof\-\_\-wavelet} (w)
+\item 
+integer(fgsl\-\_\-size\-\_\-t) function \hyperlink{wavelet_8finc_a709a83f8f0d23fc64a4933894f474ae1}{fgsl\-\_\-sizeof\-\_\-wavelet\-\_\-workspace} (w)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function/\-Subroutine Documentation}
+\hypertarget{wavelet_8finc_aa94fb05c91cf6594b1afe524d87ce40e}{\index{wavelet.\-finc@{wavelet.\-finc}!fgsl\-\_\-sizeof\-\_\-wavelet@{fgsl\-\_\-sizeof\-\_\-wavelet}}
+\index{fgsl\-\_\-sizeof\-\_\-wavelet@{fgsl\-\_\-sizeof\-\_\-wavelet}!wavelet.finc@{wavelet.\-finc}}
+\subsubsection[{fgsl\-\_\-sizeof\-\_\-wavelet}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-size\-\_\-t) function fgsl\-\_\-sizeof\-\_\-wavelet (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-wavelet), intent(in)}]{w}
+\end{DoxyParamCaption}
+)}}\label{wavelet_8finc_aa94fb05c91cf6594b1afe524d87ce40e}
+\hypertarget{wavelet_8finc_a709a83f8f0d23fc64a4933894f474ae1}{\index{wavelet.\-finc@{wavelet.\-finc}!fgsl\-\_\-sizeof\-\_\-wavelet\-\_\-workspace@{fgsl\-\_\-sizeof\-\_\-wavelet\-\_\-workspace}}
+\index{fgsl\-\_\-sizeof\-\_\-wavelet\-\_\-workspace@{fgsl\-\_\-sizeof\-\_\-wavelet\-\_\-workspace}!wavelet.finc@{wavelet.\-finc}}
+\subsubsection[{fgsl\-\_\-sizeof\-\_\-wavelet\-\_\-workspace}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-size\-\_\-t) function fgsl\-\_\-sizeof\-\_\-wavelet\-\_\-workspace (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-wavelet\-\_\-workspace), intent(in)}]{w}
+\end{DoxyParamCaption}
+)}}\label{wavelet_8finc_a709a83f8f0d23fc64a4933894f474ae1}
+\hypertarget{wavelet_8finc_a488377ebb90c0a2cbfddd028be2dc41b}{\index{wavelet.\-finc@{wavelet.\-finc}!fgsl\-\_\-wavelet2d\-\_\-nstransform@{fgsl\-\_\-wavelet2d\-\_\-nstransform}}
+\index{fgsl\-\_\-wavelet2d\-\_\-nstransform@{fgsl\-\_\-wavelet2d\-\_\-nstransform}!wavelet.finc@{wavelet.\-finc}}
+\subsubsection[{fgsl\-\_\-wavelet2d\-\_\-nstransform}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-wavelet2d\-\_\-nstransform (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-wavelet), intent(in)}]{w, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(inout)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{tda, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{size1, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{size2, }
+\item[{integer(fgsl\-\_\-int), intent(in)}]{dir, }
+\item[{type(fgsl\-\_\-wavelet\-\_\-workspace), intent(inout)}]{work}
+\end{DoxyParamCaption}
+)}}\label{wavelet_8finc_a488377ebb90c0a2cbfddd028be2dc41b}
+\hypertarget{wavelet_8finc_afa1e0433033a7898a4cb3992ac848f88}{\index{wavelet.\-finc@{wavelet.\-finc}!fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-forward@{fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-forward}}
+\index{fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-forward@{fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-forward}!wavelet.finc@{wavelet.\-finc}}
+\subsubsection[{fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-forward}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-forward (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-wavelet), intent(in)}]{w, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(inout)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{tda, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{size1, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{size2, }
+\item[{type(fgsl\-\_\-wavelet\-\_\-workspace), intent(inout)}]{work}
+\end{DoxyParamCaption}
+)}}\label{wavelet_8finc_afa1e0433033a7898a4cb3992ac848f88}
+\hypertarget{wavelet_8finc_a3424c04dfbf288aebc2d8e5e9164565f}{\index{wavelet.\-finc@{wavelet.\-finc}!fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-inverse@{fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-inverse}}
+\index{fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-inverse@{fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-inverse}!wavelet.finc@{wavelet.\-finc}}
+\subsubsection[{fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-inverse}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-inverse (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-wavelet), intent(in)}]{w, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(inout)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{tda, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{size1, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{size2, }
+\item[{type(fgsl\-\_\-wavelet\-\_\-workspace), intent(inout)}]{work}
+\end{DoxyParamCaption}
+)}}\label{wavelet_8finc_a3424c04dfbf288aebc2d8e5e9164565f}
+\hypertarget{wavelet_8finc_a22dbfeae87b11490a8ecebe3254f85fe}{\index{wavelet.\-finc@{wavelet.\-finc}!fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-matrix@{fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-matrix}}
+\index{fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-matrix@{fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-matrix}!wavelet.finc@{wavelet.\-finc}}
+\subsubsection[{fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-matrix}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-matrix (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-wavelet), intent(in)}]{w, }
+\item[{type(fgsl\-\_\-matrix), intent(inout)}]{m, }
+\item[{integer(fgsl\-\_\-int), intent(in)}]{dir, }
+\item[{type(fgsl\-\_\-wavelet\-\_\-workspace)}]{work}
+\end{DoxyParamCaption}
+)}}\label{wavelet_8finc_a22dbfeae87b11490a8ecebe3254f85fe}
+\hypertarget{wavelet_8finc_a82cc729239d174d054777ed3b7477260}{\index{wavelet.\-finc@{wavelet.\-finc}!fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-matrix\-\_\-forward@{fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-matrix\-\_\-forward}}
+\index{fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-matrix\-\_\-forward@{fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-matrix\-\_\-forward}!wavelet.finc@{wavelet.\-finc}}
+\subsubsection[{fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-matrix\-\_\-forward}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-matrix\-\_\-forward (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-wavelet), intent(in)}]{w, }
+\item[{type(fgsl\-\_\-matrix), intent(inout)}]{m, }
+\item[{type(fgsl\-\_\-wavelet\-\_\-workspace)}]{work}
+\end{DoxyParamCaption}
+)}}\label{wavelet_8finc_a82cc729239d174d054777ed3b7477260}
+\hypertarget{wavelet_8finc_a68e1cc4b337ecb5fef13dbea1b47b33a}{\index{wavelet.\-finc@{wavelet.\-finc}!fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-matrix\-\_\-inverse@{fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-matrix\-\_\-inverse}}
+\index{fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-matrix\-\_\-inverse@{fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-matrix\-\_\-inverse}!wavelet.finc@{wavelet.\-finc}}
+\subsubsection[{fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-matrix\-\_\-inverse}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-wavelet2d\-\_\-nstransform\-\_\-matrix\-\_\-inverse (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-wavelet), intent(in)}]{w, }
+\item[{type(fgsl\-\_\-matrix), intent(inout)}]{m, }
+\item[{type(fgsl\-\_\-wavelet\-\_\-workspace)}]{work}
+\end{DoxyParamCaption}
+)}}\label{wavelet_8finc_a68e1cc4b337ecb5fef13dbea1b47b33a}
+\hypertarget{wavelet_8finc_ae721627d9553cf0c2d1396e45d1fb146}{\index{wavelet.\-finc@{wavelet.\-finc}!fgsl\-\_\-wavelet2d\-\_\-transform@{fgsl\-\_\-wavelet2d\-\_\-transform}}
+\index{fgsl\-\_\-wavelet2d\-\_\-transform@{fgsl\-\_\-wavelet2d\-\_\-transform}!wavelet.finc@{wavelet.\-finc}}
+\subsubsection[{fgsl\-\_\-wavelet2d\-\_\-transform}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-wavelet2d\-\_\-transform (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-wavelet), intent(in)}]{w, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(inout)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{tda, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{size1, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{size2, }
+\item[{integer(fgsl\-\_\-int), intent(in)}]{dir, }
+\item[{type(fgsl\-\_\-wavelet\-\_\-workspace), intent(inout)}]{work}
+\end{DoxyParamCaption}
+)}}\label{wavelet_8finc_ae721627d9553cf0c2d1396e45d1fb146}
+\hypertarget{wavelet_8finc_a0ae200617e842d153159591b59cc56b5}{\index{wavelet.\-finc@{wavelet.\-finc}!fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-forward@{fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-forward}}
+\index{fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-forward@{fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-forward}!wavelet.finc@{wavelet.\-finc}}
+\subsubsection[{fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-forward}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-forward (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-wavelet), intent(in)}]{w, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(inout)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{tda, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{size1, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{size2, }
+\item[{type(fgsl\-\_\-wavelet\-\_\-workspace), intent(inout)}]{work}
+\end{DoxyParamCaption}
+)}}\label{wavelet_8finc_a0ae200617e842d153159591b59cc56b5}
+\hypertarget{wavelet_8finc_a05d7bb6ada598550a9df3b0a0cdfdb05}{\index{wavelet.\-finc@{wavelet.\-finc}!fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-inverse@{fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-inverse}}
+\index{fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-inverse@{fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-inverse}!wavelet.finc@{wavelet.\-finc}}
+\subsubsection[{fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-inverse}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-inverse (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-wavelet), intent(in)}]{w, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(inout)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{tda, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{size1, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{size2, }
+\item[{type(fgsl\-\_\-wavelet\-\_\-workspace), intent(inout)}]{work}
+\end{DoxyParamCaption}
+)}}\label{wavelet_8finc_a05d7bb6ada598550a9df3b0a0cdfdb05}
+\hypertarget{wavelet_8finc_abbe205405ba63a585d68d1e3f5db5903}{\index{wavelet.\-finc@{wavelet.\-finc}!fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-matrix@{fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-matrix}}
+\index{fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-matrix@{fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-matrix}!wavelet.finc@{wavelet.\-finc}}
+\subsubsection[{fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-matrix}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-matrix (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-wavelet), intent(in)}]{w, }
+\item[{type(fgsl\-\_\-matrix), intent(inout)}]{m, }
+\item[{integer(fgsl\-\_\-int), intent(in)}]{dir, }
+\item[{type(fgsl\-\_\-wavelet\-\_\-workspace)}]{work}
+\end{DoxyParamCaption}
+)}}\label{wavelet_8finc_abbe205405ba63a585d68d1e3f5db5903}
+\hypertarget{wavelet_8finc_a96ce5dd5582a999b163f947e95a1ae40}{\index{wavelet.\-finc@{wavelet.\-finc}!fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-matrix\-\_\-forward@{fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-matrix\-\_\-forward}}
+\index{fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-matrix\-\_\-forward@{fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-matrix\-\_\-forward}!wavelet.finc@{wavelet.\-finc}}
+\subsubsection[{fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-matrix\-\_\-forward}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-matrix\-\_\-forward (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-wavelet), intent(in)}]{w, }
+\item[{type(fgsl\-\_\-matrix), intent(inout)}]{m, }
+\item[{type(fgsl\-\_\-wavelet\-\_\-workspace)}]{work}
+\end{DoxyParamCaption}
+)}}\label{wavelet_8finc_a96ce5dd5582a999b163f947e95a1ae40}
+\hypertarget{wavelet_8finc_a9d0bcdfff907e1c19166cddf01fdc15d}{\index{wavelet.\-finc@{wavelet.\-finc}!fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-matrix\-\_\-inverse@{fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-matrix\-\_\-inverse}}
+\index{fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-matrix\-\_\-inverse@{fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-matrix\-\_\-inverse}!wavelet.finc@{wavelet.\-finc}}
+\subsubsection[{fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-matrix\-\_\-inverse}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-wavelet2d\-\_\-transform\-\_\-matrix\-\_\-inverse (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-wavelet), intent(in)}]{w, }
+\item[{type(fgsl\-\_\-matrix), intent(inout)}]{m, }
+\item[{type(fgsl\-\_\-wavelet\-\_\-workspace)}]{work}
+\end{DoxyParamCaption}
+)}}\label{wavelet_8finc_a9d0bcdfff907e1c19166cddf01fdc15d}
+\hypertarget{wavelet_8finc_a0534f5b9d5db58fc98d3996bf7eefc20}{\index{wavelet.\-finc@{wavelet.\-finc}!fgsl\-\_\-wavelet\-\_\-alloc@{fgsl\-\_\-wavelet\-\_\-alloc}}
+\index{fgsl\-\_\-wavelet\-\_\-alloc@{fgsl\-\_\-wavelet\-\_\-alloc}!wavelet.finc@{wavelet.\-finc}}
+\subsubsection[{fgsl\-\_\-wavelet\-\_\-alloc}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-wavelet) function fgsl\-\_\-wavelet\-\_\-alloc (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-wavelet\-\_\-type), intent(in)}]{t, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{k}
+\end{DoxyParamCaption}
+)}}\label{wavelet_8finc_a0534f5b9d5db58fc98d3996bf7eefc20}
+\hypertarget{wavelet_8finc_af843924a1fcec19d66e6c2aa89b6fb71}{\index{wavelet.\-finc@{wavelet.\-finc}!fgsl\-\_\-wavelet\-\_\-free@{fgsl\-\_\-wavelet\-\_\-free}}
+\index{fgsl\-\_\-wavelet\-\_\-free@{fgsl\-\_\-wavelet\-\_\-free}!wavelet.finc@{wavelet.\-finc}}
+\subsubsection[{fgsl\-\_\-wavelet\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-wavelet\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-wavelet), intent(inout)}]{w}
+\end{DoxyParamCaption}
+)}}\label{wavelet_8finc_af843924a1fcec19d66e6c2aa89b6fb71}
+\hypertarget{wavelet_8finc_a2ff5880cd29c1fa264f815fda096f4ab}{\index{wavelet.\-finc@{wavelet.\-finc}!fgsl\-\_\-wavelet\-\_\-name@{fgsl\-\_\-wavelet\-\_\-name}}
+\index{fgsl\-\_\-wavelet\-\_\-name@{fgsl\-\_\-wavelet\-\_\-name}!wavelet.finc@{wavelet.\-finc}}
+\subsubsection[{fgsl\-\_\-wavelet\-\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}character(kind=fgsl\-\_\-char,len=fgsl\-\_\-strmax) function fgsl\-\_\-wavelet\-\_\-name (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-wavelet), intent(in)}]{wavelet}
+\end{DoxyParamCaption}
+)}}\label{wavelet_8finc_a2ff5880cd29c1fa264f815fda096f4ab}
+\hypertarget{wavelet_8finc_ae806a3d76e07c7169657aa6541928766}{\index{wavelet.\-finc@{wavelet.\-finc}!fgsl\-\_\-wavelet\-\_\-status@{fgsl\-\_\-wavelet\-\_\-status}}
+\index{fgsl\-\_\-wavelet\-\_\-status@{fgsl\-\_\-wavelet\-\_\-status}!wavelet.finc@{wavelet.\-finc}}
+\subsubsection[{fgsl\-\_\-wavelet\-\_\-status}]{\setlength{\rightskip}{0pt plus 5cm}logical function fgsl\-\_\-wavelet\-\_\-status (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-wavelet), intent(in)}]{wavelet}
+\end{DoxyParamCaption}
+)}}\label{wavelet_8finc_ae806a3d76e07c7169657aa6541928766}
+\hypertarget{wavelet_8finc_a3dd1ffd5ce0dd32861b9221f6afae511}{\index{wavelet.\-finc@{wavelet.\-finc}!fgsl\-\_\-wavelet\-\_\-transform@{fgsl\-\_\-wavelet\-\_\-transform}}
+\index{fgsl\-\_\-wavelet\-\_\-transform@{fgsl\-\_\-wavelet\-\_\-transform}!wavelet.finc@{wavelet.\-finc}}
+\subsubsection[{fgsl\-\_\-wavelet\-\_\-transform}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-wavelet\-\_\-transform (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-wavelet), intent(in)}]{w, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(inout)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{integer(fgsl\-\_\-int), intent(in)}]{dir, }
+\item[{type(fgsl\-\_\-wavelet\-\_\-workspace), intent(inout)}]{work}
+\end{DoxyParamCaption}
+)}}\label{wavelet_8finc_a3dd1ffd5ce0dd32861b9221f6afae511}
+\hypertarget{wavelet_8finc_a70c8c242811e478cebb88eb3b27788ab}{\index{wavelet.\-finc@{wavelet.\-finc}!fgsl\-\_\-wavelet\-\_\-transform\-\_\-forward@{fgsl\-\_\-wavelet\-\_\-transform\-\_\-forward}}
+\index{fgsl\-\_\-wavelet\-\_\-transform\-\_\-forward@{fgsl\-\_\-wavelet\-\_\-transform\-\_\-forward}!wavelet.finc@{wavelet.\-finc}}
+\subsubsection[{fgsl\-\_\-wavelet\-\_\-transform\-\_\-forward}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-wavelet\-\_\-transform\-\_\-forward (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-wavelet), intent(in)}]{w, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(inout)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{type(fgsl\-\_\-wavelet\-\_\-workspace), intent(inout)}]{work}
+\end{DoxyParamCaption}
+)}}\label{wavelet_8finc_a70c8c242811e478cebb88eb3b27788ab}
+\hypertarget{wavelet_8finc_a34094547d54cf81dc906fff09ceb1a44}{\index{wavelet.\-finc@{wavelet.\-finc}!fgsl\-\_\-wavelet\-\_\-transform\-\_\-inverse@{fgsl\-\_\-wavelet\-\_\-transform\-\_\-inverse}}
+\index{fgsl\-\_\-wavelet\-\_\-transform\-\_\-inverse@{fgsl\-\_\-wavelet\-\_\-transform\-\_\-inverse}!wavelet.finc@{wavelet.\-finc}}
+\subsubsection[{fgsl\-\_\-wavelet\-\_\-transform\-\_\-inverse}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-wavelet\-\_\-transform\-\_\-inverse (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-wavelet), intent(in)}]{w, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(inout)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{type(fgsl\-\_\-wavelet\-\_\-workspace), intent(inout)}]{work}
+\end{DoxyParamCaption}
+)}}\label{wavelet_8finc_a34094547d54cf81dc906fff09ceb1a44}
+\hypertarget{wavelet_8finc_aa120476a77ed63c701cb8cf8fc575409}{\index{wavelet.\-finc@{wavelet.\-finc}!fgsl\-\_\-wavelet\-\_\-workspace\-\_\-alloc@{fgsl\-\_\-wavelet\-\_\-workspace\-\_\-alloc}}
+\index{fgsl\-\_\-wavelet\-\_\-workspace\-\_\-alloc@{fgsl\-\_\-wavelet\-\_\-workspace\-\_\-alloc}!wavelet.finc@{wavelet.\-finc}}
+\subsubsection[{fgsl\-\_\-wavelet\-\_\-workspace\-\_\-alloc}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-wavelet\-\_\-workspace) function fgsl\-\_\-wavelet\-\_\-workspace\-\_\-alloc (
+\begin{DoxyParamCaption}
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{wavelet_8finc_aa120476a77ed63c701cb8cf8fc575409}
+\hypertarget{wavelet_8finc_a8877c7b5815c334ab195f6517273a91e}{\index{wavelet.\-finc@{wavelet.\-finc}!fgsl\-\_\-wavelet\-\_\-workspace\-\_\-free@{fgsl\-\_\-wavelet\-\_\-workspace\-\_\-free}}
+\index{fgsl\-\_\-wavelet\-\_\-workspace\-\_\-free@{fgsl\-\_\-wavelet\-\_\-workspace\-\_\-free}!wavelet.finc@{wavelet.\-finc}}
+\subsubsection[{fgsl\-\_\-wavelet\-\_\-workspace\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-wavelet\-\_\-workspace\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-wavelet\-\_\-workspace), intent(inout)}]{w}
+\end{DoxyParamCaption}
+)}}\label{wavelet_8finc_a8877c7b5815c334ab195f6517273a91e}
+\hypertarget{wavelet_8finc_abb974e06092a14e00e8d4ad2601c012a}{\index{wavelet.\-finc@{wavelet.\-finc}!fgsl\-\_\-wavelet\-\_\-workspace\-\_\-status@{fgsl\-\_\-wavelet\-\_\-workspace\-\_\-status}}
+\index{fgsl\-\_\-wavelet\-\_\-workspace\-\_\-status@{fgsl\-\_\-wavelet\-\_\-workspace\-\_\-status}!wavelet.finc@{wavelet.\-finc}}
+\subsubsection[{fgsl\-\_\-wavelet\-\_\-workspace\-\_\-status}]{\setlength{\rightskip}{0pt plus 5cm}logical function fgsl\-\_\-wavelet\-\_\-workspace\-\_\-status (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-wavelet\-\_\-workspace), intent(in)}]{wavelet\-\_\-workspace}
+\end{DoxyParamCaption}
+)}}\label{wavelet_8finc_abb974e06092a14e00e8d4ad2601c012a}

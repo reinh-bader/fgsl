@@ -1,16 +1,26 @@
 SUBDIRS = examples
 
-info_TEXINFOS = fgsl-ref.texi
-fgsl_ref_TEXINFOS = intro.texi usage.texi err.texi math.texi complex.texi poly.texi \
-			specfunc.texi vectors.texi permutation.texi sort.texi \
-			integration.texi random.texi freemanuals.texi gpl.texi \
-			fdl.texi
 
-examples_src = codefrags/errhand.f90 codefrags/math_1.f90 codefrags/math_2.f90 \
-		codefrags/math_3.f90 codefrags/math_4.f90 examples/intro.f90 \
-		examples/intro.txt
+fgsl_docdir = $(datadir)/doc/fgsl
+fgsl_doc2dir = $(datadir)/doc/fgsl/html
+dist_fgsl_doc_DATA = latex/refman.pdf 
 
 
+install-data-local:
+	$(MKDIR_P) $(DESTDIR)$(fgsl_doc2dir)
+	$(MKDIR_P) $(DESTDIR)$(fgsl_doc2dir)/search
+	$(INSTALL_DATA) $(srcdir)/html/*.css $(DESTDIR)$(fgsl_doc2dir)
+	$(INSTALL_DATA) $(srcdir)/html/*.html $(DESTDIR)$(fgsl_doc2dir)
+	$(INSTALL_DATA) $(srcdir)/html/*.js $(DESTDIR)$(fgsl_doc2dir)
+	$(INSTALL_DATA) $(srcdir)/html/*.map $(DESTDIR)$(fgsl_doc2dir)
+	$(INSTALL_DATA) $(srcdir)/html/*.md5 $(DESTDIR)$(fgsl_doc2dir)
+	$(INSTALL_DATA) $(srcdir)/html/*.png $(DESTDIR)$(fgsl_doc2dir)
+	$(INSTALL_DATA) $(srcdir)/html/search/*.css $(DESTDIR)$(fgsl_doc2dir)/search
+	$(INSTALL_DATA) $(srcdir)/html/search/*.html $(DESTDIR)$(fgsl_doc2dir)/search
+	$(INSTALL_DATA) $(srcdir)/html/search/*.js $(DESTDIR)$(fgsl_doc2dir)/search
+	$(INSTALL_DATA) $(srcdir)/html/search/*.png $(DESTDIR)$(fgsl_doc2dir)/search
 
-noinst_DATA = $(examples_src)
-EXTRA_DIST = $(noinst_DATA)
+uninstall-local:
+	rm -rf $(DESTDIR)$(fgsl_doc2dir)
+
+EXTRA_DIST = html

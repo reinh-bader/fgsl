@@ -1,0 +1,171 @@
+\hypertarget{ntuple_8finc}{\section{api/ntuple.finc File Reference}
+\label{ntuple_8finc}\index{api/ntuple.\-finc@{api/ntuple.\-finc}}
+}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=158pt]{ntuple_8finc__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions/\-Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+type(fgsl\-\_\-ntuple) function \hyperlink{ntuple_8finc_a53e8e8c2b59e9996577478079aec392a}{fgsl\-\_\-ntuple\-\_\-create} (fname, data, size)
+\item 
+type(fgsl\-\_\-ntuple) function \hyperlink{ntuple_8finc_a825ef23e9dc1d74ff1a263191c490bd0}{fgsl\-\_\-ntuple\-\_\-open} (fname, data, size)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{ntuple_8finc_a356af99564ad1459930057c34017e161}{fgsl\-\_\-ntuple\-\_\-write} (ntuple)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{ntuple_8finc_a88cfeaf087d36f1e4e6a0d81ac04bdb3}{fgsl\-\_\-ntuple\-\_\-bookdata} (ntuple)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{ntuple_8finc_a479c00a78c57f2b3b14cc9f12a514b6b}{fgsl\-\_\-ntuple\-\_\-read} (ntuple)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{ntuple_8finc_a1a996c87696028b62352cd43a82a6879}{fgsl\-\_\-ntuple\-\_\-close} (ntuple)
+\item 
+type(fgsl\-\_\-ntuple\-\_\-select\-\_\-fn) \\*
+function \hyperlink{ntuple_8finc_aa04c4dfcb377f33a3a63fc7415cb3e3f}{fgsl\-\_\-ntuple\-\_\-select\-\_\-fn\-\_\-init} (func, params)
+\item 
+type(fgsl\-\_\-ntuple\-\_\-value\-\_\-fn) function \hyperlink{ntuple_8finc_a5672a466c45b2c1eaf5cf76209e6d282}{fgsl\-\_\-ntuple\-\_\-value\-\_\-fn\-\_\-init} (func, params)
+\item 
+subroutine \hyperlink{ntuple_8finc_ad8dde1fb48951e3df2ed85fdd4dbe928}{fgsl\-\_\-ntuple\-\_\-select\-\_\-fn\-\_\-free} (sfunc)
+\item 
+subroutine \hyperlink{ntuple_8finc_a79a22db8b1a4e150923981198b5c7aab}{fgsl\-\_\-ntuple\-\_\-value\-\_\-fn\-\_\-free} (sfunc)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{ntuple_8finc_ac2d58b11f74188b4b684a7e1bb701042}{fgsl\-\_\-ntuple\-\_\-project} (h, ntuple, value\-\_\-func, select\-\_\-func)
+\item 
+type(c\-\_\-ptr) function \hyperlink{ntuple_8finc_a6fd6e5da6139dffa2f6f61aa8aceafb1}{fgsl\-\_\-ntuple\-\_\-data} (ntuple)
+\item 
+integer(fgsl\-\_\-size\-\_\-t) function \hyperlink{ntuple_8finc_a4c85f3d692fd5e14aadd2ffd1ddd7c0a}{fgsl\-\_\-ntuple\-\_\-size} (ntuple)
+\item 
+logical function \hyperlink{ntuple_8finc_acb6eee4253ad2f01ea71e4c1c9392ed0}{fgsl\-\_\-ntuple\-\_\-status} (ntuple)
+\item 
+logical function \hyperlink{ntuple_8finc_a62c72f68341a457467ae7f0ceecf9911}{fgsl\-\_\-ntuple\-\_\-value\-\_\-fn\-\_\-status} (ntuple\-\_\-value\-\_\-fn)
+\item 
+logical function \hyperlink{ntuple_8finc_a7e638d180dad856d12938578ae718601}{fgsl\-\_\-ntuple\-\_\-select\-\_\-fn\-\_\-status} (ntuple\-\_\-select\-\_\-fn)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function/\-Subroutine Documentation}
+\hypertarget{ntuple_8finc_a88cfeaf087d36f1e4e6a0d81ac04bdb3}{\index{ntuple.\-finc@{ntuple.\-finc}!fgsl\-\_\-ntuple\-\_\-bookdata@{fgsl\-\_\-ntuple\-\_\-bookdata}}
+\index{fgsl\-\_\-ntuple\-\_\-bookdata@{fgsl\-\_\-ntuple\-\_\-bookdata}!ntuple.finc@{ntuple.\-finc}}
+\subsubsection[{fgsl\-\_\-ntuple\-\_\-bookdata}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-ntuple\-\_\-bookdata (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-ntuple), intent(in)}]{ntuple}
+\end{DoxyParamCaption}
+)}}\label{ntuple_8finc_a88cfeaf087d36f1e4e6a0d81ac04bdb3}
+\hypertarget{ntuple_8finc_a1a996c87696028b62352cd43a82a6879}{\index{ntuple.\-finc@{ntuple.\-finc}!fgsl\-\_\-ntuple\-\_\-close@{fgsl\-\_\-ntuple\-\_\-close}}
+\index{fgsl\-\_\-ntuple\-\_\-close@{fgsl\-\_\-ntuple\-\_\-close}!ntuple.finc@{ntuple.\-finc}}
+\subsubsection[{fgsl\-\_\-ntuple\-\_\-close}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-ntuple\-\_\-close (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-ntuple), intent(inout)}]{ntuple}
+\end{DoxyParamCaption}
+)}}\label{ntuple_8finc_a1a996c87696028b62352cd43a82a6879}
+\hypertarget{ntuple_8finc_a53e8e8c2b59e9996577478079aec392a}{\index{ntuple.\-finc@{ntuple.\-finc}!fgsl\-\_\-ntuple\-\_\-create@{fgsl\-\_\-ntuple\-\_\-create}}
+\index{fgsl\-\_\-ntuple\-\_\-create@{fgsl\-\_\-ntuple\-\_\-create}!ntuple.finc@{ntuple.\-finc}}
+\subsubsection[{fgsl\-\_\-ntuple\-\_\-create}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-ntuple) function fgsl\-\_\-ntuple\-\_\-create (
+\begin{DoxyParamCaption}
+\item[{character(kind=fgsl\-\_\-char, len=$\ast$), intent(in)}]{fname, }
+\item[{type(c\-\_\-ptr), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{size}
+\end{DoxyParamCaption}
+)}}\label{ntuple_8finc_a53e8e8c2b59e9996577478079aec392a}
+\hypertarget{ntuple_8finc_a6fd6e5da6139dffa2f6f61aa8aceafb1}{\index{ntuple.\-finc@{ntuple.\-finc}!fgsl\-\_\-ntuple\-\_\-data@{fgsl\-\_\-ntuple\-\_\-data}}
+\index{fgsl\-\_\-ntuple\-\_\-data@{fgsl\-\_\-ntuple\-\_\-data}!ntuple.finc@{ntuple.\-finc}}
+\subsubsection[{fgsl\-\_\-ntuple\-\_\-data}]{\setlength{\rightskip}{0pt plus 5cm}type(c\-\_\-ptr) function fgsl\-\_\-ntuple\-\_\-data (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-ntuple), intent(in)}]{ntuple}
+\end{DoxyParamCaption}
+)}}\label{ntuple_8finc_a6fd6e5da6139dffa2f6f61aa8aceafb1}
+\hypertarget{ntuple_8finc_a825ef23e9dc1d74ff1a263191c490bd0}{\index{ntuple.\-finc@{ntuple.\-finc}!fgsl\-\_\-ntuple\-\_\-open@{fgsl\-\_\-ntuple\-\_\-open}}
+\index{fgsl\-\_\-ntuple\-\_\-open@{fgsl\-\_\-ntuple\-\_\-open}!ntuple.finc@{ntuple.\-finc}}
+\subsubsection[{fgsl\-\_\-ntuple\-\_\-open}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-ntuple) function fgsl\-\_\-ntuple\-\_\-open (
+\begin{DoxyParamCaption}
+\item[{character(kind=fgsl\-\_\-char, len=$\ast$), intent(in)}]{fname, }
+\item[{type(c\-\_\-ptr), intent(in)}]{data, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{size}
+\end{DoxyParamCaption}
+)}}\label{ntuple_8finc_a825ef23e9dc1d74ff1a263191c490bd0}
+\hypertarget{ntuple_8finc_ac2d58b11f74188b4b684a7e1bb701042}{\index{ntuple.\-finc@{ntuple.\-finc}!fgsl\-\_\-ntuple\-\_\-project@{fgsl\-\_\-ntuple\-\_\-project}}
+\index{fgsl\-\_\-ntuple\-\_\-project@{fgsl\-\_\-ntuple\-\_\-project}!ntuple.finc@{ntuple.\-finc}}
+\subsubsection[{fgsl\-\_\-ntuple\-\_\-project}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-ntuple\-\_\-project (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(inout)}]{h, }
+\item[{type(fgsl\-\_\-ntuple), intent(in)}]{ntuple, }
+\item[{type(fgsl\-\_\-ntuple\-\_\-value\-\_\-fn), intent(in)}]{value\-\_\-func, }
+\item[{type(fgsl\-\_\-ntuple\-\_\-select\-\_\-fn), intent(in)}]{select\-\_\-func}
+\end{DoxyParamCaption}
+)}}\label{ntuple_8finc_ac2d58b11f74188b4b684a7e1bb701042}
+\hypertarget{ntuple_8finc_a479c00a78c57f2b3b14cc9f12a514b6b}{\index{ntuple.\-finc@{ntuple.\-finc}!fgsl\-\_\-ntuple\-\_\-read@{fgsl\-\_\-ntuple\-\_\-read}}
+\index{fgsl\-\_\-ntuple\-\_\-read@{fgsl\-\_\-ntuple\-\_\-read}!ntuple.finc@{ntuple.\-finc}}
+\subsubsection[{fgsl\-\_\-ntuple\-\_\-read}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-ntuple\-\_\-read (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-ntuple), intent(inout)}]{ntuple}
+\end{DoxyParamCaption}
+)}}\label{ntuple_8finc_a479c00a78c57f2b3b14cc9f12a514b6b}
+\hypertarget{ntuple_8finc_ad8dde1fb48951e3df2ed85fdd4dbe928}{\index{ntuple.\-finc@{ntuple.\-finc}!fgsl\-\_\-ntuple\-\_\-select\-\_\-fn\-\_\-free@{fgsl\-\_\-ntuple\-\_\-select\-\_\-fn\-\_\-free}}
+\index{fgsl\-\_\-ntuple\-\_\-select\-\_\-fn\-\_\-free@{fgsl\-\_\-ntuple\-\_\-select\-\_\-fn\-\_\-free}!ntuple.finc@{ntuple.\-finc}}
+\subsubsection[{fgsl\-\_\-ntuple\-\_\-select\-\_\-fn\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-ntuple\-\_\-select\-\_\-fn\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-ntuple\-\_\-select\-\_\-fn), intent(inout)}]{sfunc}
+\end{DoxyParamCaption}
+)}}\label{ntuple_8finc_ad8dde1fb48951e3df2ed85fdd4dbe928}
+\hypertarget{ntuple_8finc_aa04c4dfcb377f33a3a63fc7415cb3e3f}{\index{ntuple.\-finc@{ntuple.\-finc}!fgsl\-\_\-ntuple\-\_\-select\-\_\-fn\-\_\-init@{fgsl\-\_\-ntuple\-\_\-select\-\_\-fn\-\_\-init}}
+\index{fgsl\-\_\-ntuple\-\_\-select\-\_\-fn\-\_\-init@{fgsl\-\_\-ntuple\-\_\-select\-\_\-fn\-\_\-init}!ntuple.finc@{ntuple.\-finc}}
+\subsubsection[{fgsl\-\_\-ntuple\-\_\-select\-\_\-fn\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-ntuple\-\_\-select\-\_\-fn) function fgsl\-\_\-ntuple\-\_\-select\-\_\-fn\-\_\-init (
+\begin{DoxyParamCaption}
+\item[{}]{func, }
+\item[{type(c\-\_\-ptr), intent(in)}]{params}
+\end{DoxyParamCaption}
+)}}\label{ntuple_8finc_aa04c4dfcb377f33a3a63fc7415cb3e3f}
+\hypertarget{ntuple_8finc_a7e638d180dad856d12938578ae718601}{\index{ntuple.\-finc@{ntuple.\-finc}!fgsl\-\_\-ntuple\-\_\-select\-\_\-fn\-\_\-status@{fgsl\-\_\-ntuple\-\_\-select\-\_\-fn\-\_\-status}}
+\index{fgsl\-\_\-ntuple\-\_\-select\-\_\-fn\-\_\-status@{fgsl\-\_\-ntuple\-\_\-select\-\_\-fn\-\_\-status}!ntuple.finc@{ntuple.\-finc}}
+\subsubsection[{fgsl\-\_\-ntuple\-\_\-select\-\_\-fn\-\_\-status}]{\setlength{\rightskip}{0pt plus 5cm}logical function fgsl\-\_\-ntuple\-\_\-select\-\_\-fn\-\_\-status (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-ntuple\-\_\-select\-\_\-fn), intent(in)}]{ntuple\-\_\-select\-\_\-fn}
+\end{DoxyParamCaption}
+)}}\label{ntuple_8finc_a7e638d180dad856d12938578ae718601}
+\hypertarget{ntuple_8finc_a4c85f3d692fd5e14aadd2ffd1ddd7c0a}{\index{ntuple.\-finc@{ntuple.\-finc}!fgsl\-\_\-ntuple\-\_\-size@{fgsl\-\_\-ntuple\-\_\-size}}
+\index{fgsl\-\_\-ntuple\-\_\-size@{fgsl\-\_\-ntuple\-\_\-size}!ntuple.finc@{ntuple.\-finc}}
+\subsubsection[{fgsl\-\_\-ntuple\-\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-size\-\_\-t) function fgsl\-\_\-ntuple\-\_\-size (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-ntuple), intent(in)}]{ntuple}
+\end{DoxyParamCaption}
+)}}\label{ntuple_8finc_a4c85f3d692fd5e14aadd2ffd1ddd7c0a}
+\hypertarget{ntuple_8finc_acb6eee4253ad2f01ea71e4c1c9392ed0}{\index{ntuple.\-finc@{ntuple.\-finc}!fgsl\-\_\-ntuple\-\_\-status@{fgsl\-\_\-ntuple\-\_\-status}}
+\index{fgsl\-\_\-ntuple\-\_\-status@{fgsl\-\_\-ntuple\-\_\-status}!ntuple.finc@{ntuple.\-finc}}
+\subsubsection[{fgsl\-\_\-ntuple\-\_\-status}]{\setlength{\rightskip}{0pt plus 5cm}logical function fgsl\-\_\-ntuple\-\_\-status (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-ntuple), intent(in)}]{ntuple}
+\end{DoxyParamCaption}
+)}}\label{ntuple_8finc_acb6eee4253ad2f01ea71e4c1c9392ed0}
+\hypertarget{ntuple_8finc_a79a22db8b1a4e150923981198b5c7aab}{\index{ntuple.\-finc@{ntuple.\-finc}!fgsl\-\_\-ntuple\-\_\-value\-\_\-fn\-\_\-free@{fgsl\-\_\-ntuple\-\_\-value\-\_\-fn\-\_\-free}}
+\index{fgsl\-\_\-ntuple\-\_\-value\-\_\-fn\-\_\-free@{fgsl\-\_\-ntuple\-\_\-value\-\_\-fn\-\_\-free}!ntuple.finc@{ntuple.\-finc}}
+\subsubsection[{fgsl\-\_\-ntuple\-\_\-value\-\_\-fn\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-ntuple\-\_\-value\-\_\-fn\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-ntuple\-\_\-value\-\_\-fn), intent(inout)}]{sfunc}
+\end{DoxyParamCaption}
+)}}\label{ntuple_8finc_a79a22db8b1a4e150923981198b5c7aab}
+\hypertarget{ntuple_8finc_a5672a466c45b2c1eaf5cf76209e6d282}{\index{ntuple.\-finc@{ntuple.\-finc}!fgsl\-\_\-ntuple\-\_\-value\-\_\-fn\-\_\-init@{fgsl\-\_\-ntuple\-\_\-value\-\_\-fn\-\_\-init}}
+\index{fgsl\-\_\-ntuple\-\_\-value\-\_\-fn\-\_\-init@{fgsl\-\_\-ntuple\-\_\-value\-\_\-fn\-\_\-init}!ntuple.finc@{ntuple.\-finc}}
+\subsubsection[{fgsl\-\_\-ntuple\-\_\-value\-\_\-fn\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-ntuple\-\_\-value\-\_\-fn) function fgsl\-\_\-ntuple\-\_\-value\-\_\-fn\-\_\-init (
+\begin{DoxyParamCaption}
+\item[{}]{func, }
+\item[{type(c\-\_\-ptr), intent(in)}]{params}
+\end{DoxyParamCaption}
+)}}\label{ntuple_8finc_a5672a466c45b2c1eaf5cf76209e6d282}
+\hypertarget{ntuple_8finc_a62c72f68341a457467ae7f0ceecf9911}{\index{ntuple.\-finc@{ntuple.\-finc}!fgsl\-\_\-ntuple\-\_\-value\-\_\-fn\-\_\-status@{fgsl\-\_\-ntuple\-\_\-value\-\_\-fn\-\_\-status}}
+\index{fgsl\-\_\-ntuple\-\_\-value\-\_\-fn\-\_\-status@{fgsl\-\_\-ntuple\-\_\-value\-\_\-fn\-\_\-status}!ntuple.finc@{ntuple.\-finc}}
+\subsubsection[{fgsl\-\_\-ntuple\-\_\-value\-\_\-fn\-\_\-status}]{\setlength{\rightskip}{0pt plus 5cm}logical function fgsl\-\_\-ntuple\-\_\-value\-\_\-fn\-\_\-status (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-ntuple\-\_\-value\-\_\-fn), intent(in)}]{ntuple\-\_\-value\-\_\-fn}
+\end{DoxyParamCaption}
+)}}\label{ntuple_8finc_a62c72f68341a457467ae7f0ceecf9911}
+\hypertarget{ntuple_8finc_a356af99564ad1459930057c34017e161}{\index{ntuple.\-finc@{ntuple.\-finc}!fgsl\-\_\-ntuple\-\_\-write@{fgsl\-\_\-ntuple\-\_\-write}}
+\index{fgsl\-\_\-ntuple\-\_\-write@{fgsl\-\_\-ntuple\-\_\-write}!ntuple.finc@{ntuple.\-finc}}
+\subsubsection[{fgsl\-\_\-ntuple\-\_\-write}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-ntuple\-\_\-write (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-ntuple), intent(in)}]{ntuple}
+\end{DoxyParamCaption}
+)}}\label{ntuple_8finc_a356af99564ad1459930057c34017e161}

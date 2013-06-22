@@ -1,0 +1,834 @@
+\hypertarget{histogram_8finc}{\section{api/histogram.finc File Reference}
+\label{histogram_8finc}\index{api/histogram.\-finc@{api/histogram.\-finc}}
+}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=174pt]{histogram_8finc__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions/\-Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+type(fgsl\-\_\-histogram) function \hyperlink{histogram_8finc_a75325ebef92592eba65abd29b6cfadc7}{fgsl\-\_\-histogram\-\_\-alloc} (n)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_a3d8e7578c7b72642e1d10dad2dca905c}{fgsl\-\_\-histogram\-\_\-set\-\_\-ranges} (h, range, size)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_a258b134c27c43ac2108a948c55cf54b7}{fgsl\-\_\-histogram\-\_\-set\-\_\-ranges\-\_\-uniform} (h, xmin, xmax)
+\item 
+subroutine \hyperlink{histogram_8finc_a34c352dbcdd897703aee1a66777208fe}{fgsl\-\_\-histogram\-\_\-free} (h)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_a67a6d98e7d1b4186a4b56131eb87bc3c}{fgsl\-\_\-histogram\-\_\-memcpy} (dest, src)
+\item 
+type(fgsl\-\_\-histogram) function \hyperlink{histogram_8finc_a5a9a45aebea2e21a98f95a561bbc0efe}{fgsl\-\_\-histogram\-\_\-clone} (src)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_ae8981d30687002aad3dce8c9a029e230}{fgsl\-\_\-histogram\-\_\-increment} (h, x)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_ac400179f5587a3dbf384fedd0651f354}{fgsl\-\_\-histogram\-\_\-accumulate} (h, x, weight)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_adce52371beeafdc26321bc2c1aa2fcea}{fgsl\-\_\-histogram\-\_\-get} (h, i)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_a8095fb527d62852e016fec06e1aeeffd}{fgsl\-\_\-histogram\-\_\-get\-\_\-range} (h, i, lower, upper)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_a27016b45c9d32860d6bea50edb523b9a}{fgsl\-\_\-histogram\-\_\-max} (h)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_a703b22dce40bb880886ebed5a1e25269}{fgsl\-\_\-histogram\-\_\-min} (h)
+\item 
+integer(fgsl\-\_\-size\-\_\-t) function \hyperlink{histogram_8finc_a106c810b7ef3935d89ea6a2fda4f9ac2}{fgsl\-\_\-histogram\-\_\-bins} (h)
+\item 
+subroutine \hyperlink{histogram_8finc_a49fea1a4cd3aea567784135c870153c1}{fgsl\-\_\-histogram\-\_\-reset} (h)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_a8c4b14ac540a9a068900fd3e35ee7159}{fgsl\-\_\-histogram\-\_\-find} (h, x, i)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_aa210e74511fada1333cf9a7a4d8b2557}{fgsl\-\_\-histogram\-\_\-max\-\_\-val} (h)
+\item 
+integer(fgsl\-\_\-size\-\_\-t) function \hyperlink{histogram_8finc_ac32e63df5114b7157f1616e659988426}{fgsl\-\_\-histogram\-\_\-max\-\_\-bin} (h)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_ab0fb2cc0ccc968ef2810a13320e08a0b}{fgsl\-\_\-histogram\-\_\-min\-\_\-val} (h)
+\item 
+integer(fgsl\-\_\-size\-\_\-t) function \hyperlink{histogram_8finc_a36924510341b52382469d95253f64918}{fgsl\-\_\-histogram\-\_\-min\-\_\-bin} (h)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_a03754e56f78dcc887273fab1e8ac0b98}{fgsl\-\_\-histogram\-\_\-mean} (h)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_a507669e9246974308454e7fa641a9211}{fgsl\-\_\-histogram\-\_\-sigma} (h)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_a11059753ca12bf2c8f77900c47f3eb75}{fgsl\-\_\-histogram\-\_\-sum} (h)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_a593970dbd233b22cc063121a4664ea41}{fgsl\-\_\-histogram\-\_\-equal\-\_\-bins\-\_\-p} (h1, h2)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_ab700a51e118baabdd3fe4589a0083157}{fgsl\-\_\-histogram\-\_\-add} (h1, h2)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_abac617a60f5a51da9555b6f2a8cedc87}{fgsl\-\_\-histogram\-\_\-sub} (h1, h2)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_a1712b526a7c62831c9891515dd2193cd}{fgsl\-\_\-histogram\-\_\-mul} (h1, h2)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_a28f472750d348b24111cf4090e079838}{fgsl\-\_\-histogram\-\_\-div} (h1, h2)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_a0d549e18c22aae049e46dae9417c90f0}{fgsl\-\_\-histogram\-\_\-scale} (h, scale)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_a9be390cc9127a6ad9c43f1174f6921a3}{fgsl\-\_\-histogram\-\_\-shift} (h, offset)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_a9cd60d2b4a8975dbc59173525df57213}{fgsl\-\_\-histogram\-\_\-fwrite} (stream, h)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_ad4d6685a3377f33f0d5696e20d567c11}{fgsl\-\_\-histogram\-\_\-fread} (stream, h)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_ac04324f86720d5a8fb31ff67add1b52e}{fgsl\-\_\-histogram\-\_\-fprintf} (stream, h, range\-\_\-format, bin\-\_\-format)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_aaaba1318d1c622c34f72afd75f57255c}{fgsl\-\_\-histogram\-\_\-fscanf} (stream, h)
+\item 
+type(fgsl\-\_\-histogram\-\_\-pdf) function \hyperlink{histogram_8finc_ac81a0323bfb973e3f0e8bd98c3acf6b8}{fgsl\-\_\-histogram\-\_\-pdf\-\_\-alloc} (n)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_a49d1a7fc4dec06f53bb7251385c14d0f}{fgsl\-\_\-histogram\-\_\-pdf\-\_\-init} (p, h)
+\item 
+subroutine \hyperlink{histogram_8finc_afcdb14cb3224ee516b50ecee1d2bc9af}{fgsl\-\_\-histogram\-\_\-pdf\-\_\-free} (p)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_a6bfe5e29af3597cf776cc60d40950dbe}{fgsl\-\_\-histogram\-\_\-pdf\-\_\-sample} (p, r)
+\item 
+type(fgsl\-\_\-histogram2d) function \hyperlink{histogram_8finc_a58fa9efe4e0dd763ec4dae80d32248b8}{fgsl\-\_\-histogram2d\-\_\-alloc} (nx, ny)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_a789cf68e724daf4a465a8641e4285fe8}{fgsl\-\_\-histogram2d\-\_\-set\-\_\-ranges} (h, xrange, xsize, yrange, ysize)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_ae6a0e35aa839f06904e57a2dab500f4d}{fgsl\-\_\-histogram2d\-\_\-set\-\_\-ranges\-\_\-uniform} (h, xmin, xmax, ymin, ymax)
+\item 
+subroutine \hyperlink{histogram_8finc_a5ccc6ca92d7e8f566652b057ef620681}{fgsl\-\_\-histogram2d\-\_\-free} (h)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_ac856a8c737e7efa4fe4aed4e7741bf68}{fgsl\-\_\-histogram2d\-\_\-memcpy} (dest, src)
+\item 
+type(fgsl\-\_\-histogram2d) function \hyperlink{histogram_8finc_a9604948b71d92f4538af93c78e588094}{fgsl\-\_\-histogram2d\-\_\-clone} (src)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_a952f7e1fd0f3c40bd6a7e944b276a16e}{fgsl\-\_\-histogram2d\-\_\-increment} (h, x, y)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_a3a6eeec0c1b7597dbdf4d1ab4cafbeed}{fgsl\-\_\-histogram2d\-\_\-accumulate} (h, x, y, weight)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_a2bf0d6457cd1a1ea900d74e0a3eee4d6}{fgsl\-\_\-histogram2d\-\_\-get} (h, i, j)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_af5344e677a177dafbbae2dbeef296aec}{fgsl\-\_\-histogram2d\-\_\-get\-\_\-xrange} (h, i, xlower, xupper)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_ae8df4a522731cb9a11e12f5b67477d73}{fgsl\-\_\-histogram2d\-\_\-get\-\_\-yrange} (h, i, ylower, yupper)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_ad4a38fb97da9239b35d7cb87a5bfd317}{fgsl\-\_\-histogram2d\-\_\-xmax} (h)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_a9e077ca4a5ae72020dc7c4888686cf11}{fgsl\-\_\-histogram2d\-\_\-xmin} (h)
+\item 
+integer(fgsl\-\_\-size\-\_\-t) function \hyperlink{histogram_8finc_aaeab41d83342219214c6a491f1a787c1}{fgsl\-\_\-histogram2d\-\_\-nx} (h)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_adc8f77aa4dcb1669c67f89007d0dcd88}{fgsl\-\_\-histogram2d\-\_\-ymax} (h)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_ae0c415b04bd1b13d137b79cdf58c7bb4}{fgsl\-\_\-histogram2d\-\_\-ymin} (h)
+\item 
+integer(fgsl\-\_\-size\-\_\-t) function \hyperlink{histogram_8finc_a38af849a97c19f225fec10a9eafb2d7b}{fgsl\-\_\-histogram2d\-\_\-ny} (h)
+\item 
+subroutine \hyperlink{histogram_8finc_a386fdbb01672ba3530a25e570706a3da}{fgsl\-\_\-histogram2d\-\_\-reset} (h)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_a11b26e23f4e370a0c15abe24db476a71}{fgsl\-\_\-histogram2d\-\_\-find} (h, x, y, i, j)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_a19b8d36f12520581d0ba6d595068ed68}{fgsl\-\_\-histogram2d\-\_\-max\-\_\-val} (h)
+\item 
+subroutine \hyperlink{histogram_8finc_ab1b0844796b5273d68d1d5016712ed22}{fgsl\-\_\-histogram2d\-\_\-max\-\_\-bin} (h, i, j)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_a1ace6d2b9e54162300db8c0f6fc71a92}{fgsl\-\_\-histogram2d\-\_\-min\-\_\-val} (h)
+\item 
+subroutine \hyperlink{histogram_8finc_a3f4e17703f7235a66629f8c81dcd39ff}{fgsl\-\_\-histogram2d\-\_\-min\-\_\-bin} (h, i, j)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_abc89a40b479ad73436db4b6ee9559b93}{fgsl\-\_\-histogram2d\-\_\-xmean} (h)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_ad8cb782bcdc1619bf271be2898b9ea3a}{fgsl\-\_\-histogram2d\-\_\-ymean} (h)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_a23f05f7ca11815e90e37cb7bc6da9327}{fgsl\-\_\-histogram2d\-\_\-xsigma} (h)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_af14c3ceba9c1d8c6083c9514c74c9d4f}{fgsl\-\_\-histogram2d\-\_\-ysigma} (h)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_a2d7d95fedb019b36a58a11f1af3aeeae}{fgsl\-\_\-histogram2d\-\_\-cov} (h)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_a5063c665369dc777c289d8791e2ec53c}{fgsl\-\_\-histogram2d\-\_\-sum} (h)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_aa38976b1d582468ebee62cffa5365aea}{fgsl\-\_\-histogram2d\-\_\-equal\-\_\-bins\-\_\-p} (h1, h2)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_a48156dfaf1027f1683927780ecbc4fb0}{fgsl\-\_\-histogram2d\-\_\-add} (h1, h2)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_aaff0707aaf0428c8ccb419c1b9703802}{fgsl\-\_\-histogram2d\-\_\-sub} (h1, h2)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_a19b397da4b23893d47bc4d6aff3c9b82}{fgsl\-\_\-histogram2d\-\_\-mul} (h1, h2)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{histogram_8finc_ac3fdc9fdc419170016f188fad746516c}{fgsl\-\_\-histogram2d\-\_\-div} (h1, h2)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_aa3e922748f78a89e60704fd558b87bb4}{fgsl\-\_\-histogram2d\-\_\-scale} (h, scale)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_a525495f254a07ea2349b86f78102433f}{fgsl\-\_\-histogram2d\-\_\-shift} (h, offset)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_a3ef59b4b026ab698dc81ffff9220e157}{fgsl\-\_\-histogram2d\-\_\-fwrite} (stream, h)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_a758daf277e6d8a5227ac3d29d2e1210c}{fgsl\-\_\-histogram2d\-\_\-fread} (stream, h)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_a438e52004996aea464dd46febf6bd3eb}{fgsl\-\_\-histogram2d\-\_\-fprintf} (stream, h, range\-\_\-format, bin\-\_\-format)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_a70db145af8c4250a8cef0ed580eda1f8}{fgsl\-\_\-histogram2d\-\_\-fscanf} (stream, h)
+\item 
+type(fgsl\-\_\-histogram2d\-\_\-pdf) function \hyperlink{histogram_8finc_a3c05bd287a175450294a73d0b0602f79}{fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-alloc} (nx, ny)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_a2ab36a10d3cca3fcc3cc40e7ca494ac8}{fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-init} (p, h)
+\item 
+subroutine \hyperlink{histogram_8finc_a08916fd4863246e82d56e495a32140fc}{fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-free} (p)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{histogram_8finc_a49e8bf3ac9645218532bead7328c83ef}{fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-sample} (p, r1, r2, x, y)
+\item 
+logical function \hyperlink{histogram_8finc_afed1167e78d0e89d21237ab6fca7c662}{fgsl\-\_\-histogram\-\_\-status} (histogram)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function/\-Subroutine Documentation}
+\hypertarget{histogram_8finc_a3a6eeec0c1b7597dbdf4d1ab4cafbeed}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-accumulate@{fgsl\-\_\-histogram2d\-\_\-accumulate}}
+\index{fgsl\-\_\-histogram2d\-\_\-accumulate@{fgsl\-\_\-histogram2d\-\_\-accumulate}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-accumulate}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram2d\-\_\-accumulate (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(inout)}]{h, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{x, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{y, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{weight}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a3a6eeec0c1b7597dbdf4d1ab4cafbeed}
+\hypertarget{histogram_8finc_a48156dfaf1027f1683927780ecbc4fb0}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-add@{fgsl\-\_\-histogram2d\-\_\-add}}
+\index{fgsl\-\_\-histogram2d\-\_\-add@{fgsl\-\_\-histogram2d\-\_\-add}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-add}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram2d\-\_\-add (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(inout)}]{h1, }
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h2}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a48156dfaf1027f1683927780ecbc4fb0}
+\hypertarget{histogram_8finc_a58fa9efe4e0dd763ec4dae80d32248b8}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-alloc@{fgsl\-\_\-histogram2d\-\_\-alloc}}
+\index{fgsl\-\_\-histogram2d\-\_\-alloc@{fgsl\-\_\-histogram2d\-\_\-alloc}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-alloc}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-histogram2d) function fgsl\-\_\-histogram2d\-\_\-alloc (
+\begin{DoxyParamCaption}
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{nx, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{ny}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a58fa9efe4e0dd763ec4dae80d32248b8}
+\hypertarget{histogram_8finc_a9604948b71d92f4538af93c78e588094}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-clone@{fgsl\-\_\-histogram2d\-\_\-clone}}
+\index{fgsl\-\_\-histogram2d\-\_\-clone@{fgsl\-\_\-histogram2d\-\_\-clone}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-clone}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-histogram2d) function fgsl\-\_\-histogram2d\-\_\-clone (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{src}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a9604948b71d92f4538af93c78e588094}
+\hypertarget{histogram_8finc_a2d7d95fedb019b36a58a11f1af3aeeae}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-cov@{fgsl\-\_\-histogram2d\-\_\-cov}}
+\index{fgsl\-\_\-histogram2d\-\_\-cov@{fgsl\-\_\-histogram2d\-\_\-cov}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-cov}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram2d\-\_\-cov (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a2d7d95fedb019b36a58a11f1af3aeeae}
+\hypertarget{histogram_8finc_ac3fdc9fdc419170016f188fad746516c}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-div@{fgsl\-\_\-histogram2d\-\_\-div}}
+\index{fgsl\-\_\-histogram2d\-\_\-div@{fgsl\-\_\-histogram2d\-\_\-div}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-div}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram2d\-\_\-div (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(inout)}]{h1, }
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h2}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_ac3fdc9fdc419170016f188fad746516c}
+\hypertarget{histogram_8finc_aa38976b1d582468ebee62cffa5365aea}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-equal\-\_\-bins\-\_\-p@{fgsl\-\_\-histogram2d\-\_\-equal\-\_\-bins\-\_\-p}}
+\index{fgsl\-\_\-histogram2d\-\_\-equal\-\_\-bins\-\_\-p@{fgsl\-\_\-histogram2d\-\_\-equal\-\_\-bins\-\_\-p}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-equal\-\_\-bins\-\_\-p}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram2d\-\_\-equal\-\_\-bins\-\_\-p (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h1, }
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h2}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_aa38976b1d582468ebee62cffa5365aea}
+\hypertarget{histogram_8finc_a11b26e23f4e370a0c15abe24db476a71}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-find@{fgsl\-\_\-histogram2d\-\_\-find}}
+\index{fgsl\-\_\-histogram2d\-\_\-find@{fgsl\-\_\-histogram2d\-\_\-find}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-find}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram2d\-\_\-find (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{x, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{y, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(out)}]{i, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(out)}]{j}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a11b26e23f4e370a0c15abe24db476a71}
+\hypertarget{histogram_8finc_a438e52004996aea464dd46febf6bd3eb}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-fprintf@{fgsl\-\_\-histogram2d\-\_\-fprintf}}
+\index{fgsl\-\_\-histogram2d\-\_\-fprintf@{fgsl\-\_\-histogram2d\-\_\-fprintf}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-fprintf}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram2d\-\_\-fprintf (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-file), intent(in)}]{stream, }
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h, }
+\item[{character(kind=fgsl\-\_\-char, len=$\ast$), intent(in)}]{range\-\_\-format, }
+\item[{character(kind=fgsl\-\_\-char, len=$\ast$), intent(in)}]{bin\-\_\-format}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a438e52004996aea464dd46febf6bd3eb}
+\hypertarget{histogram_8finc_a758daf277e6d8a5227ac3d29d2e1210c}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-fread@{fgsl\-\_\-histogram2d\-\_\-fread}}
+\index{fgsl\-\_\-histogram2d\-\_\-fread@{fgsl\-\_\-histogram2d\-\_\-fread}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-fread}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram2d\-\_\-fread (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-file), intent(in)}]{stream, }
+\item[{type(fgsl\-\_\-histogram2d), intent(inout)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a758daf277e6d8a5227ac3d29d2e1210c}
+\hypertarget{histogram_8finc_a5ccc6ca92d7e8f566652b057ef620681}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-free@{fgsl\-\_\-histogram2d\-\_\-free}}
+\index{fgsl\-\_\-histogram2d\-\_\-free@{fgsl\-\_\-histogram2d\-\_\-free}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-histogram2d\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(inout)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a5ccc6ca92d7e8f566652b057ef620681}
+\hypertarget{histogram_8finc_a70db145af8c4250a8cef0ed580eda1f8}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-fscanf@{fgsl\-\_\-histogram2d\-\_\-fscanf}}
+\index{fgsl\-\_\-histogram2d\-\_\-fscanf@{fgsl\-\_\-histogram2d\-\_\-fscanf}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-fscanf}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram2d\-\_\-fscanf (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-file), intent(in)}]{stream, }
+\item[{type(fgsl\-\_\-histogram2d), intent(inout)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a70db145af8c4250a8cef0ed580eda1f8}
+\hypertarget{histogram_8finc_a3ef59b4b026ab698dc81ffff9220e157}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-fwrite@{fgsl\-\_\-histogram2d\-\_\-fwrite}}
+\index{fgsl\-\_\-histogram2d\-\_\-fwrite@{fgsl\-\_\-histogram2d\-\_\-fwrite}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-fwrite}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram2d\-\_\-fwrite (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-file), intent(in)}]{stream, }
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a3ef59b4b026ab698dc81ffff9220e157}
+\hypertarget{histogram_8finc_a2bf0d6457cd1a1ea900d74e0a3eee4d6}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-get@{fgsl\-\_\-histogram2d\-\_\-get}}
+\index{fgsl\-\_\-histogram2d\-\_\-get@{fgsl\-\_\-histogram2d\-\_\-get}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-get}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram2d\-\_\-get (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{i, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{j}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a2bf0d6457cd1a1ea900d74e0a3eee4d6}
+\hypertarget{histogram_8finc_af5344e677a177dafbbae2dbeef296aec}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-get\-\_\-xrange@{fgsl\-\_\-histogram2d\-\_\-get\-\_\-xrange}}
+\index{fgsl\-\_\-histogram2d\-\_\-get\-\_\-xrange@{fgsl\-\_\-histogram2d\-\_\-get\-\_\-xrange}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-get\-\_\-xrange}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram2d\-\_\-get\-\_\-xrange (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{i, }
+\item[{real(fgsl\-\_\-double), intent(out)}]{xlower, }
+\item[{real(fgsl\-\_\-double), intent(out)}]{xupper}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_af5344e677a177dafbbae2dbeef296aec}
+\hypertarget{histogram_8finc_ae8df4a522731cb9a11e12f5b67477d73}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-get\-\_\-yrange@{fgsl\-\_\-histogram2d\-\_\-get\-\_\-yrange}}
+\index{fgsl\-\_\-histogram2d\-\_\-get\-\_\-yrange@{fgsl\-\_\-histogram2d\-\_\-get\-\_\-yrange}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-get\-\_\-yrange}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram2d\-\_\-get\-\_\-yrange (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{i, }
+\item[{real(fgsl\-\_\-double), intent(out)}]{ylower, }
+\item[{real(fgsl\-\_\-double), intent(out)}]{yupper}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_ae8df4a522731cb9a11e12f5b67477d73}
+\hypertarget{histogram_8finc_a952f7e1fd0f3c40bd6a7e944b276a16e}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-increment@{fgsl\-\_\-histogram2d\-\_\-increment}}
+\index{fgsl\-\_\-histogram2d\-\_\-increment@{fgsl\-\_\-histogram2d\-\_\-increment}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-increment}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram2d\-\_\-increment (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(inout)}]{h, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{x, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{y}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a952f7e1fd0f3c40bd6a7e944b276a16e}
+\hypertarget{histogram_8finc_ab1b0844796b5273d68d1d5016712ed22}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-max\-\_\-bin@{fgsl\-\_\-histogram2d\-\_\-max\-\_\-bin}}
+\index{fgsl\-\_\-histogram2d\-\_\-max\-\_\-bin@{fgsl\-\_\-histogram2d\-\_\-max\-\_\-bin}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-max\-\_\-bin}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-histogram2d\-\_\-max\-\_\-bin (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(out)}]{i, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(out)}]{j}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_ab1b0844796b5273d68d1d5016712ed22}
+\hypertarget{histogram_8finc_a19b8d36f12520581d0ba6d595068ed68}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-max\-\_\-val@{fgsl\-\_\-histogram2d\-\_\-max\-\_\-val}}
+\index{fgsl\-\_\-histogram2d\-\_\-max\-\_\-val@{fgsl\-\_\-histogram2d\-\_\-max\-\_\-val}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-max\-\_\-val}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram2d\-\_\-max\-\_\-val (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a19b8d36f12520581d0ba6d595068ed68}
+\hypertarget{histogram_8finc_ac856a8c737e7efa4fe4aed4e7741bf68}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-memcpy@{fgsl\-\_\-histogram2d\-\_\-memcpy}}
+\index{fgsl\-\_\-histogram2d\-\_\-memcpy@{fgsl\-\_\-histogram2d\-\_\-memcpy}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-memcpy}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram2d\-\_\-memcpy (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(inout)}]{dest, }
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{src}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_ac856a8c737e7efa4fe4aed4e7741bf68}
+\hypertarget{histogram_8finc_a3f4e17703f7235a66629f8c81dcd39ff}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-min\-\_\-bin@{fgsl\-\_\-histogram2d\-\_\-min\-\_\-bin}}
+\index{fgsl\-\_\-histogram2d\-\_\-min\-\_\-bin@{fgsl\-\_\-histogram2d\-\_\-min\-\_\-bin}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-min\-\_\-bin}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-histogram2d\-\_\-min\-\_\-bin (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(out)}]{i, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(out)}]{j}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a3f4e17703f7235a66629f8c81dcd39ff}
+\hypertarget{histogram_8finc_a1ace6d2b9e54162300db8c0f6fc71a92}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-min\-\_\-val@{fgsl\-\_\-histogram2d\-\_\-min\-\_\-val}}
+\index{fgsl\-\_\-histogram2d\-\_\-min\-\_\-val@{fgsl\-\_\-histogram2d\-\_\-min\-\_\-val}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-min\-\_\-val}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram2d\-\_\-min\-\_\-val (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a1ace6d2b9e54162300db8c0f6fc71a92}
+\hypertarget{histogram_8finc_a19b397da4b23893d47bc4d6aff3c9b82}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-mul@{fgsl\-\_\-histogram2d\-\_\-mul}}
+\index{fgsl\-\_\-histogram2d\-\_\-mul@{fgsl\-\_\-histogram2d\-\_\-mul}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-mul}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram2d\-\_\-mul (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(inout)}]{h1, }
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h2}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a19b397da4b23893d47bc4d6aff3c9b82}
+\hypertarget{histogram_8finc_aaeab41d83342219214c6a491f1a787c1}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-nx@{fgsl\-\_\-histogram2d\-\_\-nx}}
+\index{fgsl\-\_\-histogram2d\-\_\-nx@{fgsl\-\_\-histogram2d\-\_\-nx}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-nx}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-size\-\_\-t) function fgsl\-\_\-histogram2d\-\_\-nx (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_aaeab41d83342219214c6a491f1a787c1}
+\hypertarget{histogram_8finc_a38af849a97c19f225fec10a9eafb2d7b}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-ny@{fgsl\-\_\-histogram2d\-\_\-ny}}
+\index{fgsl\-\_\-histogram2d\-\_\-ny@{fgsl\-\_\-histogram2d\-\_\-ny}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-ny}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-size\-\_\-t) function fgsl\-\_\-histogram2d\-\_\-ny (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a38af849a97c19f225fec10a9eafb2d7b}
+\hypertarget{histogram_8finc_a3c05bd287a175450294a73d0b0602f79}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-alloc@{fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-alloc}}
+\index{fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-alloc@{fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-alloc}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-alloc}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-histogram2d\-\_\-pdf) function fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-alloc (
+\begin{DoxyParamCaption}
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{nx, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{ny}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a3c05bd287a175450294a73d0b0602f79}
+\hypertarget{histogram_8finc_a08916fd4863246e82d56e495a32140fc}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-free@{fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-free}}
+\index{fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-free@{fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-free}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d\-\_\-pdf), intent(inout)}]{p}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a08916fd4863246e82d56e495a32140fc}
+\hypertarget{histogram_8finc_a2ab36a10d3cca3fcc3cc40e7ca494ac8}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-init@{fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-init}}
+\index{fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-init@{fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-init}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-init (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d\-\_\-pdf), intent(inout)}]{p, }
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a2ab36a10d3cca3fcc3cc40e7ca494ac8}
+\hypertarget{histogram_8finc_a49e8bf3ac9645218532bead7328c83ef}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-sample@{fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-sample}}
+\index{fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-sample@{fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-sample}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-sample}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram2d\-\_\-pdf\-\_\-sample (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d\-\_\-pdf), intent(in)}]{p, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{r1, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{r2, }
+\item[{real(fgsl\-\_\-double), intent(out)}]{x, }
+\item[{real(fgsl\-\_\-double), intent(out)}]{y}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a49e8bf3ac9645218532bead7328c83ef}
+\hypertarget{histogram_8finc_a386fdbb01672ba3530a25e570706a3da}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-reset@{fgsl\-\_\-histogram2d\-\_\-reset}}
+\index{fgsl\-\_\-histogram2d\-\_\-reset@{fgsl\-\_\-histogram2d\-\_\-reset}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-reset}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-histogram2d\-\_\-reset (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(inout)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a386fdbb01672ba3530a25e570706a3da}
+\hypertarget{histogram_8finc_aa3e922748f78a89e60704fd558b87bb4}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-scale@{fgsl\-\_\-histogram2d\-\_\-scale}}
+\index{fgsl\-\_\-histogram2d\-\_\-scale@{fgsl\-\_\-histogram2d\-\_\-scale}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-scale}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram2d\-\_\-scale (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(inout)}]{h, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{scale}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_aa3e922748f78a89e60704fd558b87bb4}
+\hypertarget{histogram_8finc_a789cf68e724daf4a465a8641e4285fe8}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-set\-\_\-ranges@{fgsl\-\_\-histogram2d\-\_\-set\-\_\-ranges}}
+\index{fgsl\-\_\-histogram2d\-\_\-set\-\_\-ranges@{fgsl\-\_\-histogram2d\-\_\-set\-\_\-ranges}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-set\-\_\-ranges}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram2d\-\_\-set\-\_\-ranges (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(inout)}]{h, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{xrange, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{xsize, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{yrange, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{ysize}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a789cf68e724daf4a465a8641e4285fe8}
+\hypertarget{histogram_8finc_ae6a0e35aa839f06904e57a2dab500f4d}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-set\-\_\-ranges\-\_\-uniform@{fgsl\-\_\-histogram2d\-\_\-set\-\_\-ranges\-\_\-uniform}}
+\index{fgsl\-\_\-histogram2d\-\_\-set\-\_\-ranges\-\_\-uniform@{fgsl\-\_\-histogram2d\-\_\-set\-\_\-ranges\-\_\-uniform}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-set\-\_\-ranges\-\_\-uniform}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram2d\-\_\-set\-\_\-ranges\-\_\-uniform (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(inout)}]{h, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{xmin, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{xmax, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{ymin, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{ymax}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_ae6a0e35aa839f06904e57a2dab500f4d}
+\hypertarget{histogram_8finc_a525495f254a07ea2349b86f78102433f}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-shift@{fgsl\-\_\-histogram2d\-\_\-shift}}
+\index{fgsl\-\_\-histogram2d\-\_\-shift@{fgsl\-\_\-histogram2d\-\_\-shift}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-shift}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram2d\-\_\-shift (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(inout)}]{h, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{offset}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a525495f254a07ea2349b86f78102433f}
+\hypertarget{histogram_8finc_aaff0707aaf0428c8ccb419c1b9703802}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-sub@{fgsl\-\_\-histogram2d\-\_\-sub}}
+\index{fgsl\-\_\-histogram2d\-\_\-sub@{fgsl\-\_\-histogram2d\-\_\-sub}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-sub}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram2d\-\_\-sub (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(inout)}]{h1, }
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h2}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_aaff0707aaf0428c8ccb419c1b9703802}
+\hypertarget{histogram_8finc_a5063c665369dc777c289d8791e2ec53c}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-sum@{fgsl\-\_\-histogram2d\-\_\-sum}}
+\index{fgsl\-\_\-histogram2d\-\_\-sum@{fgsl\-\_\-histogram2d\-\_\-sum}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-sum}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram2d\-\_\-sum (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a5063c665369dc777c289d8791e2ec53c}
+\hypertarget{histogram_8finc_ad4a38fb97da9239b35d7cb87a5bfd317}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-xmax@{fgsl\-\_\-histogram2d\-\_\-xmax}}
+\index{fgsl\-\_\-histogram2d\-\_\-xmax@{fgsl\-\_\-histogram2d\-\_\-xmax}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-xmax}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram2d\-\_\-xmax (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_ad4a38fb97da9239b35d7cb87a5bfd317}
+\hypertarget{histogram_8finc_abc89a40b479ad73436db4b6ee9559b93}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-xmean@{fgsl\-\_\-histogram2d\-\_\-xmean}}
+\index{fgsl\-\_\-histogram2d\-\_\-xmean@{fgsl\-\_\-histogram2d\-\_\-xmean}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-xmean}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram2d\-\_\-xmean (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_abc89a40b479ad73436db4b6ee9559b93}
+\hypertarget{histogram_8finc_a9e077ca4a5ae72020dc7c4888686cf11}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-xmin@{fgsl\-\_\-histogram2d\-\_\-xmin}}
+\index{fgsl\-\_\-histogram2d\-\_\-xmin@{fgsl\-\_\-histogram2d\-\_\-xmin}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-xmin}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram2d\-\_\-xmin (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a9e077ca4a5ae72020dc7c4888686cf11}
+\hypertarget{histogram_8finc_a23f05f7ca11815e90e37cb7bc6da9327}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-xsigma@{fgsl\-\_\-histogram2d\-\_\-xsigma}}
+\index{fgsl\-\_\-histogram2d\-\_\-xsigma@{fgsl\-\_\-histogram2d\-\_\-xsigma}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-xsigma}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram2d\-\_\-xsigma (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a23f05f7ca11815e90e37cb7bc6da9327}
+\hypertarget{histogram_8finc_adc8f77aa4dcb1669c67f89007d0dcd88}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-ymax@{fgsl\-\_\-histogram2d\-\_\-ymax}}
+\index{fgsl\-\_\-histogram2d\-\_\-ymax@{fgsl\-\_\-histogram2d\-\_\-ymax}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-ymax}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram2d\-\_\-ymax (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_adc8f77aa4dcb1669c67f89007d0dcd88}
+\hypertarget{histogram_8finc_ad8cb782bcdc1619bf271be2898b9ea3a}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-ymean@{fgsl\-\_\-histogram2d\-\_\-ymean}}
+\index{fgsl\-\_\-histogram2d\-\_\-ymean@{fgsl\-\_\-histogram2d\-\_\-ymean}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-ymean}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram2d\-\_\-ymean (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_ad8cb782bcdc1619bf271be2898b9ea3a}
+\hypertarget{histogram_8finc_ae0c415b04bd1b13d137b79cdf58c7bb4}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-ymin@{fgsl\-\_\-histogram2d\-\_\-ymin}}
+\index{fgsl\-\_\-histogram2d\-\_\-ymin@{fgsl\-\_\-histogram2d\-\_\-ymin}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-ymin}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram2d\-\_\-ymin (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_ae0c415b04bd1b13d137b79cdf58c7bb4}
+\hypertarget{histogram_8finc_af14c3ceba9c1d8c6083c9514c74c9d4f}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram2d\-\_\-ysigma@{fgsl\-\_\-histogram2d\-\_\-ysigma}}
+\index{fgsl\-\_\-histogram2d\-\_\-ysigma@{fgsl\-\_\-histogram2d\-\_\-ysigma}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram2d\-\_\-ysigma}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram2d\-\_\-ysigma (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram2d), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_af14c3ceba9c1d8c6083c9514c74c9d4f}
+\hypertarget{histogram_8finc_ac400179f5587a3dbf384fedd0651f354}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-accumulate@{fgsl\-\_\-histogram\-\_\-accumulate}}
+\index{fgsl\-\_\-histogram\-\_\-accumulate@{fgsl\-\_\-histogram\-\_\-accumulate}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-accumulate}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram\-\_\-accumulate (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(inout)}]{h, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{x, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{weight}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_ac400179f5587a3dbf384fedd0651f354}
+\hypertarget{histogram_8finc_ab700a51e118baabdd3fe4589a0083157}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-add@{fgsl\-\_\-histogram\-\_\-add}}
+\index{fgsl\-\_\-histogram\-\_\-add@{fgsl\-\_\-histogram\-\_\-add}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-add}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram\-\_\-add (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(inout)}]{h1, }
+\item[{type(fgsl\-\_\-histogram), intent(in)}]{h2}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_ab700a51e118baabdd3fe4589a0083157}
+\hypertarget{histogram_8finc_a75325ebef92592eba65abd29b6cfadc7}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-alloc@{fgsl\-\_\-histogram\-\_\-alloc}}
+\index{fgsl\-\_\-histogram\-\_\-alloc@{fgsl\-\_\-histogram\-\_\-alloc}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-alloc}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-histogram) function fgsl\-\_\-histogram\-\_\-alloc (
+\begin{DoxyParamCaption}
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a75325ebef92592eba65abd29b6cfadc7}
+\hypertarget{histogram_8finc_a106c810b7ef3935d89ea6a2fda4f9ac2}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-bins@{fgsl\-\_\-histogram\-\_\-bins}}
+\index{fgsl\-\_\-histogram\-\_\-bins@{fgsl\-\_\-histogram\-\_\-bins}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-bins}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-size\-\_\-t) function fgsl\-\_\-histogram\-\_\-bins (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a106c810b7ef3935d89ea6a2fda4f9ac2}
+\hypertarget{histogram_8finc_a5a9a45aebea2e21a98f95a561bbc0efe}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-clone@{fgsl\-\_\-histogram\-\_\-clone}}
+\index{fgsl\-\_\-histogram\-\_\-clone@{fgsl\-\_\-histogram\-\_\-clone}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-clone}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-histogram) function fgsl\-\_\-histogram\-\_\-clone (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(in)}]{src}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a5a9a45aebea2e21a98f95a561bbc0efe}
+\hypertarget{histogram_8finc_a28f472750d348b24111cf4090e079838}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-div@{fgsl\-\_\-histogram\-\_\-div}}
+\index{fgsl\-\_\-histogram\-\_\-div@{fgsl\-\_\-histogram\-\_\-div}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-div}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram\-\_\-div (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(inout)}]{h1, }
+\item[{type(fgsl\-\_\-histogram), intent(in)}]{h2}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a28f472750d348b24111cf4090e079838}
+\hypertarget{histogram_8finc_a593970dbd233b22cc063121a4664ea41}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-equal\-\_\-bins\-\_\-p@{fgsl\-\_\-histogram\-\_\-equal\-\_\-bins\-\_\-p}}
+\index{fgsl\-\_\-histogram\-\_\-equal\-\_\-bins\-\_\-p@{fgsl\-\_\-histogram\-\_\-equal\-\_\-bins\-\_\-p}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-equal\-\_\-bins\-\_\-p}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram\-\_\-equal\-\_\-bins\-\_\-p (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(in)}]{h1, }
+\item[{type(fgsl\-\_\-histogram), intent(in)}]{h2}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a593970dbd233b22cc063121a4664ea41}
+\hypertarget{histogram_8finc_a8c4b14ac540a9a068900fd3e35ee7159}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-find@{fgsl\-\_\-histogram\-\_\-find}}
+\index{fgsl\-\_\-histogram\-\_\-find@{fgsl\-\_\-histogram\-\_\-find}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-find}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram\-\_\-find (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(in)}]{h, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{x, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(out)}]{i}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a8c4b14ac540a9a068900fd3e35ee7159}
+\hypertarget{histogram_8finc_ac04324f86720d5a8fb31ff67add1b52e}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-fprintf@{fgsl\-\_\-histogram\-\_\-fprintf}}
+\index{fgsl\-\_\-histogram\-\_\-fprintf@{fgsl\-\_\-histogram\-\_\-fprintf}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-fprintf}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram\-\_\-fprintf (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-file), intent(in)}]{stream, }
+\item[{type(fgsl\-\_\-histogram), intent(in)}]{h, }
+\item[{character(kind=fgsl\-\_\-char, len=$\ast$), intent(in)}]{range\-\_\-format, }
+\item[{character(kind=fgsl\-\_\-char, len=$\ast$), intent(in)}]{bin\-\_\-format}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_ac04324f86720d5a8fb31ff67add1b52e}
+\hypertarget{histogram_8finc_ad4d6685a3377f33f0d5696e20d567c11}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-fread@{fgsl\-\_\-histogram\-\_\-fread}}
+\index{fgsl\-\_\-histogram\-\_\-fread@{fgsl\-\_\-histogram\-\_\-fread}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-fread}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram\-\_\-fread (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-file), intent(in)}]{stream, }
+\item[{type(fgsl\-\_\-histogram), intent(inout)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_ad4d6685a3377f33f0d5696e20d567c11}
+\hypertarget{histogram_8finc_a34c352dbcdd897703aee1a66777208fe}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-free@{fgsl\-\_\-histogram\-\_\-free}}
+\index{fgsl\-\_\-histogram\-\_\-free@{fgsl\-\_\-histogram\-\_\-free}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-histogram\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(inout)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a34c352dbcdd897703aee1a66777208fe}
+\hypertarget{histogram_8finc_aaaba1318d1c622c34f72afd75f57255c}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-fscanf@{fgsl\-\_\-histogram\-\_\-fscanf}}
+\index{fgsl\-\_\-histogram\-\_\-fscanf@{fgsl\-\_\-histogram\-\_\-fscanf}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-fscanf}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram\-\_\-fscanf (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-file), intent(in)}]{stream, }
+\item[{type(fgsl\-\_\-histogram), intent(inout)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_aaaba1318d1c622c34f72afd75f57255c}
+\hypertarget{histogram_8finc_a9cd60d2b4a8975dbc59173525df57213}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-fwrite@{fgsl\-\_\-histogram\-\_\-fwrite}}
+\index{fgsl\-\_\-histogram\-\_\-fwrite@{fgsl\-\_\-histogram\-\_\-fwrite}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-fwrite}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram\-\_\-fwrite (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-file), intent(in)}]{stream, }
+\item[{type(fgsl\-\_\-histogram), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a9cd60d2b4a8975dbc59173525df57213}
+\hypertarget{histogram_8finc_adce52371beeafdc26321bc2c1aa2fcea}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-get@{fgsl\-\_\-histogram\-\_\-get}}
+\index{fgsl\-\_\-histogram\-\_\-get@{fgsl\-\_\-histogram\-\_\-get}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-get}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram\-\_\-get (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(in)}]{h, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{i}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_adce52371beeafdc26321bc2c1aa2fcea}
+\hypertarget{histogram_8finc_a8095fb527d62852e016fec06e1aeeffd}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-get\-\_\-range@{fgsl\-\_\-histogram\-\_\-get\-\_\-range}}
+\index{fgsl\-\_\-histogram\-\_\-get\-\_\-range@{fgsl\-\_\-histogram\-\_\-get\-\_\-range}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-get\-\_\-range}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram\-\_\-get\-\_\-range (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(in)}]{h, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{i, }
+\item[{real(fgsl\-\_\-double), intent(out)}]{lower, }
+\item[{real(fgsl\-\_\-double), intent(out)}]{upper}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a8095fb527d62852e016fec06e1aeeffd}
+\hypertarget{histogram_8finc_ae8981d30687002aad3dce8c9a029e230}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-increment@{fgsl\-\_\-histogram\-\_\-increment}}
+\index{fgsl\-\_\-histogram\-\_\-increment@{fgsl\-\_\-histogram\-\_\-increment}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-increment}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram\-\_\-increment (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(inout)}]{h, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{x}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_ae8981d30687002aad3dce8c9a029e230}
+\hypertarget{histogram_8finc_a27016b45c9d32860d6bea50edb523b9a}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-max@{fgsl\-\_\-histogram\-\_\-max}}
+\index{fgsl\-\_\-histogram\-\_\-max@{fgsl\-\_\-histogram\-\_\-max}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-max}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram\-\_\-max (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a27016b45c9d32860d6bea50edb523b9a}
+\hypertarget{histogram_8finc_ac32e63df5114b7157f1616e659988426}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-max\-\_\-bin@{fgsl\-\_\-histogram\-\_\-max\-\_\-bin}}
+\index{fgsl\-\_\-histogram\-\_\-max\-\_\-bin@{fgsl\-\_\-histogram\-\_\-max\-\_\-bin}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-max\-\_\-bin}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-size\-\_\-t) function fgsl\-\_\-histogram\-\_\-max\-\_\-bin (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_ac32e63df5114b7157f1616e659988426}
+\hypertarget{histogram_8finc_aa210e74511fada1333cf9a7a4d8b2557}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-max\-\_\-val@{fgsl\-\_\-histogram\-\_\-max\-\_\-val}}
+\index{fgsl\-\_\-histogram\-\_\-max\-\_\-val@{fgsl\-\_\-histogram\-\_\-max\-\_\-val}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-max\-\_\-val}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram\-\_\-max\-\_\-val (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_aa210e74511fada1333cf9a7a4d8b2557}
+\hypertarget{histogram_8finc_a03754e56f78dcc887273fab1e8ac0b98}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-mean@{fgsl\-\_\-histogram\-\_\-mean}}
+\index{fgsl\-\_\-histogram\-\_\-mean@{fgsl\-\_\-histogram\-\_\-mean}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-mean}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram\-\_\-mean (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a03754e56f78dcc887273fab1e8ac0b98}
+\hypertarget{histogram_8finc_a67a6d98e7d1b4186a4b56131eb87bc3c}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-memcpy@{fgsl\-\_\-histogram\-\_\-memcpy}}
+\index{fgsl\-\_\-histogram\-\_\-memcpy@{fgsl\-\_\-histogram\-\_\-memcpy}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-memcpy}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram\-\_\-memcpy (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(inout)}]{dest, }
+\item[{type(fgsl\-\_\-histogram), intent(in)}]{src}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a67a6d98e7d1b4186a4b56131eb87bc3c}
+\hypertarget{histogram_8finc_a703b22dce40bb880886ebed5a1e25269}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-min@{fgsl\-\_\-histogram\-\_\-min}}
+\index{fgsl\-\_\-histogram\-\_\-min@{fgsl\-\_\-histogram\-\_\-min}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-min}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram\-\_\-min (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a703b22dce40bb880886ebed5a1e25269}
+\hypertarget{histogram_8finc_a36924510341b52382469d95253f64918}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-min\-\_\-bin@{fgsl\-\_\-histogram\-\_\-min\-\_\-bin}}
+\index{fgsl\-\_\-histogram\-\_\-min\-\_\-bin@{fgsl\-\_\-histogram\-\_\-min\-\_\-bin}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-min\-\_\-bin}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-size\-\_\-t) function fgsl\-\_\-histogram\-\_\-min\-\_\-bin (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a36924510341b52382469d95253f64918}
+\hypertarget{histogram_8finc_ab0fb2cc0ccc968ef2810a13320e08a0b}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-min\-\_\-val@{fgsl\-\_\-histogram\-\_\-min\-\_\-val}}
+\index{fgsl\-\_\-histogram\-\_\-min\-\_\-val@{fgsl\-\_\-histogram\-\_\-min\-\_\-val}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-min\-\_\-val}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram\-\_\-min\-\_\-val (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_ab0fb2cc0ccc968ef2810a13320e08a0b}
+\hypertarget{histogram_8finc_a1712b526a7c62831c9891515dd2193cd}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-mul@{fgsl\-\_\-histogram\-\_\-mul}}
+\index{fgsl\-\_\-histogram\-\_\-mul@{fgsl\-\_\-histogram\-\_\-mul}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-mul}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram\-\_\-mul (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(inout)}]{h1, }
+\item[{type(fgsl\-\_\-histogram), intent(in)}]{h2}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a1712b526a7c62831c9891515dd2193cd}
+\hypertarget{histogram_8finc_ac81a0323bfb973e3f0e8bd98c3acf6b8}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-pdf\-\_\-alloc@{fgsl\-\_\-histogram\-\_\-pdf\-\_\-alloc}}
+\index{fgsl\-\_\-histogram\-\_\-pdf\-\_\-alloc@{fgsl\-\_\-histogram\-\_\-pdf\-\_\-alloc}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-pdf\-\_\-alloc}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-histogram\-\_\-pdf) function fgsl\-\_\-histogram\-\_\-pdf\-\_\-alloc (
+\begin{DoxyParamCaption}
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_ac81a0323bfb973e3f0e8bd98c3acf6b8}
+\hypertarget{histogram_8finc_afcdb14cb3224ee516b50ecee1d2bc9af}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-pdf\-\_\-free@{fgsl\-\_\-histogram\-\_\-pdf\-\_\-free}}
+\index{fgsl\-\_\-histogram\-\_\-pdf\-\_\-free@{fgsl\-\_\-histogram\-\_\-pdf\-\_\-free}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-pdf\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-histogram\-\_\-pdf\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram\-\_\-pdf), intent(inout)}]{p}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_afcdb14cb3224ee516b50ecee1d2bc9af}
+\hypertarget{histogram_8finc_a49d1a7fc4dec06f53bb7251385c14d0f}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-pdf\-\_\-init@{fgsl\-\_\-histogram\-\_\-pdf\-\_\-init}}
+\index{fgsl\-\_\-histogram\-\_\-pdf\-\_\-init@{fgsl\-\_\-histogram\-\_\-pdf\-\_\-init}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-pdf\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram\-\_\-pdf\-\_\-init (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram\-\_\-pdf), intent(inout)}]{p, }
+\item[{type(fgsl\-\_\-histogram), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a49d1a7fc4dec06f53bb7251385c14d0f}
+\hypertarget{histogram_8finc_a6bfe5e29af3597cf776cc60d40950dbe}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-pdf\-\_\-sample@{fgsl\-\_\-histogram\-\_\-pdf\-\_\-sample}}
+\index{fgsl\-\_\-histogram\-\_\-pdf\-\_\-sample@{fgsl\-\_\-histogram\-\_\-pdf\-\_\-sample}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-pdf\-\_\-sample}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram\-\_\-pdf\-\_\-sample (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram\-\_\-pdf), intent(in)}]{p, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{r}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a6bfe5e29af3597cf776cc60d40950dbe}
+\hypertarget{histogram_8finc_a49fea1a4cd3aea567784135c870153c1}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-reset@{fgsl\-\_\-histogram\-\_\-reset}}
+\index{fgsl\-\_\-histogram\-\_\-reset@{fgsl\-\_\-histogram\-\_\-reset}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-reset}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-histogram\-\_\-reset (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(inout)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a49fea1a4cd3aea567784135c870153c1}
+\hypertarget{histogram_8finc_a0d549e18c22aae049e46dae9417c90f0}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-scale@{fgsl\-\_\-histogram\-\_\-scale}}
+\index{fgsl\-\_\-histogram\-\_\-scale@{fgsl\-\_\-histogram\-\_\-scale}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-scale}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram\-\_\-scale (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(inout)}]{h, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{scale}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a0d549e18c22aae049e46dae9417c90f0}
+\hypertarget{histogram_8finc_a3d8e7578c7b72642e1d10dad2dca905c}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-set\-\_\-ranges@{fgsl\-\_\-histogram\-\_\-set\-\_\-ranges}}
+\index{fgsl\-\_\-histogram\-\_\-set\-\_\-ranges@{fgsl\-\_\-histogram\-\_\-set\-\_\-ranges}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-set\-\_\-ranges}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram\-\_\-set\-\_\-ranges (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(inout)}]{h, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{range, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{size}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a3d8e7578c7b72642e1d10dad2dca905c}
+\hypertarget{histogram_8finc_a258b134c27c43ac2108a948c55cf54b7}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-set\-\_\-ranges\-\_\-uniform@{fgsl\-\_\-histogram\-\_\-set\-\_\-ranges\-\_\-uniform}}
+\index{fgsl\-\_\-histogram\-\_\-set\-\_\-ranges\-\_\-uniform@{fgsl\-\_\-histogram\-\_\-set\-\_\-ranges\-\_\-uniform}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-set\-\_\-ranges\-\_\-uniform}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram\-\_\-set\-\_\-ranges\-\_\-uniform (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(inout)}]{h, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{xmin, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{xmax}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a258b134c27c43ac2108a948c55cf54b7}
+\hypertarget{histogram_8finc_a9be390cc9127a6ad9c43f1174f6921a3}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-shift@{fgsl\-\_\-histogram\-\_\-shift}}
+\index{fgsl\-\_\-histogram\-\_\-shift@{fgsl\-\_\-histogram\-\_\-shift}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-shift}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-histogram\-\_\-shift (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(inout)}]{h, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{offset}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a9be390cc9127a6ad9c43f1174f6921a3}
+\hypertarget{histogram_8finc_a507669e9246974308454e7fa641a9211}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-sigma@{fgsl\-\_\-histogram\-\_\-sigma}}
+\index{fgsl\-\_\-histogram\-\_\-sigma@{fgsl\-\_\-histogram\-\_\-sigma}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-sigma}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram\-\_\-sigma (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a507669e9246974308454e7fa641a9211}
+\hypertarget{histogram_8finc_afed1167e78d0e89d21237ab6fca7c662}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-status@{fgsl\-\_\-histogram\-\_\-status}}
+\index{fgsl\-\_\-histogram\-\_\-status@{fgsl\-\_\-histogram\-\_\-status}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-status}]{\setlength{\rightskip}{0pt plus 5cm}logical function fgsl\-\_\-histogram\-\_\-status (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(in)}]{histogram}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_afed1167e78d0e89d21237ab6fca7c662}
+\hypertarget{histogram_8finc_abac617a60f5a51da9555b6f2a8cedc87}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-sub@{fgsl\-\_\-histogram\-\_\-sub}}
+\index{fgsl\-\_\-histogram\-\_\-sub@{fgsl\-\_\-histogram\-\_\-sub}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-sub}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram\-\_\-sub (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(inout)}]{h1, }
+\item[{type(fgsl\-\_\-histogram), intent(in)}]{h2}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_abac617a60f5a51da9555b6f2a8cedc87}
+\hypertarget{histogram_8finc_a11059753ca12bf2c8f77900c47f3eb75}{\index{histogram.\-finc@{histogram.\-finc}!fgsl\-\_\-histogram\-\_\-sum@{fgsl\-\_\-histogram\-\_\-sum}}
+\index{fgsl\-\_\-histogram\-\_\-sum@{fgsl\-\_\-histogram\-\_\-sum}!histogram.finc@{histogram.\-finc}}
+\subsubsection[{fgsl\-\_\-histogram\-\_\-sum}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-histogram\-\_\-sum (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-histogram), intent(in)}]{h}
+\end{DoxyParamCaption}
+)}}\label{histogram_8finc_a11059753ca12bf2c8f77900c47f3eb75}
