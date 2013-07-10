@@ -76,7 +76,7 @@ eigen_nonsymm_SOURCES = eigen_nonsymm.f90
 
 fft_SOURCES = fft.f90
 
-ode_initval_SOURCES = ode-initval.f90
+ode_initval_SOURCES = ode-initval.F90
 
 permutation_SOURCES = permutation.f90
 
@@ -119,7 +119,7 @@ dist_fgsl_example_DATA = $(data_files) cdf.f90 cheb.f90 combination.F90 diff.f90
 			interp.f90 interpp.f90 intro.f90 matrix.f90 min.f90 monte.f90 \
 			nlfit.f90 ntuplew.f90 ntupler.f90 \
 			linalglu.f90 eigen.f90 eigen_nonsymm.f90 fft.f90 \
-			ode-initval.f90 permutation.f90 permshuffle.f90 \
+			ode-initval.F90 permutation.f90 permshuffle.f90 \
 			polyroots.f90 qrng.f90 randpoisson.f90 randwalk.f90 \
 			rng.f90 rngunif.f90 roots.f90 siman.f90 siman_print.c \
 			stat.f90 statsort.f90 sum.f90 vector.f90 integration_omp.f90

@@ -1,4 +1,5 @@
 program fit
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
   use fgsl
   use mod_unit
   implicit none
@@ -145,4 +146,8 @@ program fit
 ! Done
 !
   call unit_finalize() 
+#else
+!skip test
+call exit (77)
+#endif
 end program fit
