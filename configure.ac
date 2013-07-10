@@ -79,6 +79,14 @@ esac
 AC_CHECK_SIZEOF([long])
 AC_CHECK_SIZEOF([size_t])
 
+if test "x$ac_cv_sizeof_long" = "x4" && test "x$ac_cv_sizeof_size_t" = "x4" ; then
+	AC_MSG_NOTICE([32 bit architecture detected])
+elif test "x$ac_cv_sizeof_long" = "x8" && test "x$ac_cv_sizeof_size_t" = "x8" ; then
+	AC_MSG_NOTICE([64 bit architecture detected])
+else
+	AC_MSG_ERROR([Unknown architecture detected])
+fi
+
 AC_PROG_SED
 
 gsl_version_major_fortran=`echo $local_gsl_version | $SED -e 's/\([[[:digit:]]]\{1,\}\)\.\([[[:digit:]]]\{1,\}\)/\1/'`
