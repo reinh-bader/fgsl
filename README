@@ -1,9 +1,10 @@
 
 
 This is release 1.0.0 of the Fortran interface 
-to the GNU Scientific Library. It is based on version 1.15 of GSL, 
-but should also work with later releases apart from missing API
-mappings.
+to the GNU Scientific Library. 
+Although based on version 1.15 of GSL, it maintains backward
+compatibility with versions 1.13 and 1.14.
+It should also work with future releases apart from missing API mappings.
 
 Please consult the NEWS file for a change log.
 
@@ -95,11 +96,19 @@ autoreconf
 this has changed due to introduction of an autoconf based system
 (thanks to Tom Schoonjans for contributing this)
 
-export FC=<name of Fortran compiler driver>
 export FCFLAGS=<additional Fortran flags>
 export gsl_LIBS=<gsl library link line>
 export PKG_CONFIG_PATH=<directory in which gsl.pc resides>
-./configure [--prefix <inst_path>]  
+./configure
+    If you have to explicitly select which Fortran compiler is
+    supposed to be used, add the following option to the configure script:
+    FC=<my_fortran_compiler>
+    Furthermore, the configure script allows the user to enable several
+    options, such as --prefix=<my_installation_location>, FCFLAGS=<additional
+    Fortran compiler flags> and
+    PKG_CONFIG_PATH=<path to gsl.pc>
+    For a list of all available options run:
+    ./configure --help
 make
     Builds the module information file and static as well
     as shared libraries.
@@ -121,12 +130,11 @@ make install
 
 (D) usage:
 
-With F90 denoting the Fortran compiler and GSL_INST_PATH the GSL installation
-path, and assuming GSL_INST_PATH was also chosen as installation prefix for
-FGSL:
+It is recommended that you obtain the necessary flags to compile with FGSL support
+through pkg-config:
 
-$F90 -o myprog.exe -I$GSL_INST_PATH/include/$F90 myprog.f90 \
-     -L$GSL_INST_PATH/lib -lfgsl_${F90} -lgsl -lgslcblas
+$F90 -o myprog.exe `pkg-config --cflags fgsl` myprog.f90 \
+	`pkg-config --libs fgsl`
 
 Alternatively, libtool can also be used to link the executables.
 
