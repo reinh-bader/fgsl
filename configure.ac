@@ -1,4 +1,4 @@
-AC_INIT([fgsl],[1.0.0],[Bader.Reinhold@lrz.de])
+AC_INIT([fgsl],[1.0.0],[Reinhold.Bader@lrz.de])
 AC_PREREQ([2.69])
 
 AC_CONFIG_AUX_DIR([build-aux])

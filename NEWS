@@ -1,7 +1,10 @@
-Changes in 0.9.5:
+Changes in 1.0.0:
+~~~~~~~~~~~~~~~~~
 
-* fixed bug in poly.f90 test (work space too small); thanks
-  to Tobias Burnus for pointing this out
+* fixed bug in poly.f90 test (work space too small, triggered
+  for gfortran > 4.5 if -O0 used for build); thanks to Tobias 
+  Burnus for pointing this out
+* converted to autotools/autoconf based system. 
 
 
 Changes in 0.9.4:
