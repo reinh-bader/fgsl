@@ -614,6 +614,9 @@ module fgsl
        fgsl_multifit_fdfsolver_dx, fgsl_multifit_fdfsolver_f, fgsl_multifit_fdfsolver_jac, &
        fgsl_multifit_test_delta, fgsl_multifit_test_gradient, fgsl_multifit_gradient, &
        fgsl_multifit_covar
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
+  public :: fgsl_multifit_fsolver_driver, fgsl_multifit_fdfsolver_driver
+#endif
 ! statistics
   public :: fgsl_stats_mean, fgsl_stats_variance, fgsl_stats_variance_m, &
        fgsl_stats_sd, fgsl_stats_sd_m, fgsl_stats_variance_with_fixed_mean, &

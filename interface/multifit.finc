@@ -100,6 +100,22 @@
     real(c_double), value :: epsrel
     integer(c_int) :: gsl_multifit_covar
   end function gsl_multifit_covar
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
+  function gsl_multifit_fsolver_driver(s, maxiter, epsabs, epsrel) bind(c)
+    import :: c_ptr, c_size_t, c_double, c_int
+    type(c_ptr), value :: s
+    integer(c_size_t), value :: maxiter
+    real(c_double), value :: epsabs, epsrel
+    integer(c_int) :: gsl_multifit_fsolver_driver
+  end function gsl_multifit_fsolver_driver
+  function gsl_multifit_fdfsolver_driver(s, maxiter, epsabs, epsrel) bind(c)
+    import :: c_ptr, c_size_t, c_double, c_int
+    type(c_ptr), value :: s
+    integer(c_size_t), value :: maxiter
+    real(c_double), value :: epsabs, epsrel
+    integer(c_int) :: gsl_multifit_fdfsolver_driver
+  end function gsl_multifit_fdfsolver_driver
+#endif
 !
   function fgsl_multifit_function_cinit(fp, ndim, p, params) bind(c)
     import 

@@ -207,3 +207,21 @@
          fgsl_multifit_fdfsolver_status = .true.
   end function fgsl_multifit_fdfsolver_status
   
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
+  function fgsl_multifit_fsolver_driver(s, maxiter, epsabs, epsrel)
+    type(fgsl_multifit_fsolver), intent(inout) :: s
+    integer(fgsl_size_t), intent(in) :: maxiter
+    real(fgsl_double), intent(in) :: epsabs, epsrel
+    integer(fgsl_int) :: fgsl_multifit_fsolver_driver
+    fgsl_multifit_fsolver_driver = gsl_multifit_fsolver_driver(&
+    	s%gsl_multifit_fsolver, maxiter, epsabs, epsrel)
+  end function fgsl_multifit_fsolver_driver
+  function fgsl_multifit_fdfsolver_driver(s, maxiter, epsabs, epsrel)
+    type(fgsl_multifit_fdfsolver), intent(inout) :: s
+    integer(fgsl_size_t), intent(in) :: maxiter
+    real(fgsl_double), intent(in) :: epsabs, epsrel
+    integer(fgsl_int) :: fgsl_multifit_fdfsolver_driver
+    fgsl_multifit_fdfsolver_driver = gsl_multifit_fdfsolver_driver(&
+    	s%gsl_multifit_fdfsolver, maxiter, epsabs, epsrel)
+  end function fgsl_multifit_fdfsolver_driver
+#endif

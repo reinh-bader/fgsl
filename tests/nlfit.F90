@@ -69,7 +69,7 @@ program nlfit
   use mod_nlfit
   implicit none
   integer(fgsl_size_t), parameter :: nmax = 10
-  integer(fgsl_int), parameter :: itmax_root = 50
+  integer(fgsl_size_t), parameter :: itmax_root = 50
   real(fgsl_double), parameter :: eps6 = 1.0d-6
   integer(fgsl_size_t) :: nrt
   integer(fgsl_int) :: i, status
@@ -126,6 +126,25 @@ program nlfit
   call fgsl_vector_free(xvec)
   call fgsl_multifit_fdfsolver_free(nlfit_slv)
   call fgsl_multifit_function_fdf_free(nlfit_fdf)
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
+  nlfit_fdf = fgsl_multifit_function_fdf_init(expb_f, expb_df, expb_fdf, nmax, nrt, ptr)
+  nlfit_slv = fgsl_multifit_fdfsolver_alloc(fgsl_multifit_fdfsolver_lmsder, nmax, nrt)
+  xv(1:3) = (/1.0_fgsl_double, 0.0_fgsl_double, 0.0_fgsl_double/)
+  xvec = fgsl_vector_init(1.0_fgsl_double)
+  status = fgsl_vector_align(xv,nrt,xvec,nrt,0_fgsl_size_t,1_fgsl_size_t)
+  call unit_assert_true('fgsl_multifit_fdfsolver_alloc', &
+       fgsl_well_defined(nlfit_slv), .true.)
+
+  status = fgsl_multifit_fdfsolver_set(nlfit_slv, nlfit_fdf, xvec)
+  call unit_assert_equal('fgsl_multifit_fdfsolver_set:status', &
+       fgsl_success,status)
+  status = fgsl_multifit_fdfsolver_driver(nlfit_slv, itmax_root, eps6, eps6)
+  call unit_assert_equal('fgsl_multifit_fdfsolver_driver:status', &
+       fgsl_success,status)
+  call fgsl_vector_free(xvec)
+  call fgsl_multifit_fdfsolver_free(nlfit_slv)
+  call fgsl_multifit_function_fdf_free(nlfit_fdf)
+#endif
   deallocate(fitdata%y,fitdata%sigma)
   call fgsl_rng_free(rng)
 !

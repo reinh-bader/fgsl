@@ -83,7 +83,7 @@ multimin_LDADD = ../libfgsl.la
 fit_SOURCES = fit.F90 mod_unit.f90 mod_unit.mod
 fit_LDADD = ../libfgsl.la
 
-nlfit_SOURCES = nlfit.f90 mod_unit.f90 mod_unit.mod
+nlfit_SOURCES = nlfit.F90 mod_unit.f90 mod_unit.mod
 nlfit_LDADD = ../libfgsl.la
 
 version_SOURCES = version.f90 mod_unit.f90 mod_unit.mod
