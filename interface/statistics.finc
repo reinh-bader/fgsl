@@ -120,6 +120,14 @@
     integer(c_size_t), value :: stride1, stride2, n
     real(c_double) :: gsl_stats_correlation
   end function gsl_stats_correlation
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
+  function gsl_stats_spearman(data1, stride1, data2, stride2, n, work) bind(c)
+    import
+    real(c_double), dimension(*), intent(in) :: data1, data2, work
+    integer(c_size_t), value :: stride1, stride2, n
+    real(c_double) :: gsl_stats_spearman
+  end function gsl_stats_spearman
+#endif
   function gsl_stats_wmean(w, wstride, data, stride, n) bind(c)
     import
     real(c_double), dimension(*), intent(in) :: w, data
