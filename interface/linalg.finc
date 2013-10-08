@@ -270,6 +270,14 @@
     integer(c_int) :: signum
     integer(c_int) :: gsl_linalg_sv_solve
   end function gsl_linalg_sv_solve
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
+  function gsl_linalg_sv_leverage(u, h) &
+       bind(c, name='gsl_linalg_SV_leverage')
+    import :: c_ptr, c_int
+    type(c_ptr), value :: u, h
+    integer(c_int) :: gsl_linalg_sv_leverage
+  end function gsl_linalg_sv_leverage
+#endif
 !
 ! Cholesky
 !

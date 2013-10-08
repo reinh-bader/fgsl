@@ -350,6 +350,14 @@
     fgsl_linalg_sv_solve = gsl_linalg_sv_solve(u%gsl_matrix, &
          v%gsl_matrix, s%gsl_vector, b%gsl_vector, x%gsl_vector)
   end function fgsl_linalg_sv_solve
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
+  function fgsl_linalg_sv_leverage(u, h)
+    type(fgsl_matrix), intent(in)  :: u
+    type(fgsl_vector), intent(inout) :: h
+    integer(fgsl_int) :: fgsl_linalg_sv_leverage
+    fgsl_linalg_sv_leverage = gsl_linalg_sv_leverage(u%gsl_matrix, h%gsl_vector)
+  end function fgsl_linalg_sv_leverage
+#endif
 !
 ! Cholesky
 !

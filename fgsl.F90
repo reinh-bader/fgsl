@@ -299,15 +299,9 @@ module fgsl
        fgsl_combination_fprintf, fgsl_combination_fscanf
 ! sorting
   public :: fgsl_heapsort, fgsl_heapsort_index, &
-       fgsl_sort_double_smallest, fgsl_sort_double_smallest_index, &
-       fgsl_sort_double_largest, fgsl_sort_double_largest_index, &
-       fgsl_sort_long_smallest, fgsl_sort_long_smallest_index, &
-       fgsl_sort_long_largest, fgsl_sort_long_largest_index, &
-       fgsl_sort_vector_smallest, fgsl_sort_vector_smallest_index, &
-       fgsl_sort_vector_largest, fgsl_sort_vector_largest_index, &
-       fgsl_sort_double, fgsl_sort_double_index, &
-       fgsl_sort_long, fgsl_sort_long_index, &
-       fgsl_sort_vector, fgsl_sort_vector_index
+       fgsl_sort_smallest, fgsl_sort_smallest_index, &
+       fgsl_sort_largest, fgsl_sort_largest_index, &
+       fgsl_sort, fgsl_sort_index
 #if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
   public :: fgsl_sort_vector2
 #endif
@@ -353,6 +347,9 @@ module fgsl
        fgsl_linalg_hh_solve, fgsl_linalg_hh_svx, fgsl_linalg_solve_tridiag, &
        fgsl_linalg_solve_symm_tridiag, fgsl_linalg_solve_cyc_tridiag, &
        fgsl_linalg_solve_symm_cyc_tridiag, fgsl_linalg_balance_matrix
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
+  public :: fgsl_linalg_sv_leverage
+#endif
 ! eigensystems
   public :: fgsl_eigen_symm_alloc, fgsl_eigen_symm_free, fgsl_eigen_symm, &
        fgsl_eigen_symmv_alloc, fgsl_eigen_symmv_free, fgsl_eigen_symmv, &
