@@ -128,8 +128,8 @@
   end function fgsl_stats_correlation
 #if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
   function fgsl_stats_spearman(data1, stride1, data2, stride2, n, work)
-    real(fgsl_double), intent(in) :: data1(:), data2(:), work(:)
-    target :: work
+    real(fgsl_double), intent(in) :: data1(:), data2(:)
+    real(fgsl_double), intent(inout) :: work(:)
     integer(fgsl_size_t), intent(in) :: stride1, stride2, n
     real(fgsl_double) :: fgsl_stats_spearman
     fgsl_stats_spearman = gsl_stats_spearman(data1, stride1, data2, stride2, n, work)

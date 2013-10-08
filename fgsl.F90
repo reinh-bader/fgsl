@@ -90,6 +90,9 @@ module fgsl
        fgsl_poly_solve_cubic, fgsl_poly_complex_solve_cubic, &
        fgsl_poly_complex_workspace_alloc, fgsl_poly_complex_workspace_free, &
        fgsl_poly_complex_solve
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
+  public :: fgsl_poly_dd_hermite_init
+#endif
 ! special functions
   public :: fgsl_sf_airy_ai, fgsl_sf_airy_ai_e, fgsl_sf_airy_bi, fgsl_sf_airy_bi_e, &
        fgsl_sf_airy_ai_scaled, fgsl_sf_airy_ai_scaled_e, fgsl_sf_airy_bi_scaled, &
@@ -295,11 +298,19 @@ module fgsl
        fgsl_combination_prev, fgsl_combination_fwrite, fgsl_combination_fread, &
        fgsl_combination_fprintf, fgsl_combination_fscanf
 ! sorting
-  public :: fgsl_heapsort, fgsl_heapsort_index, fgsl_sort, fgsl_sort_index, &
-       fgsl_sort_smallest, fgsl_sort_smallest_index, &
-       fgsl_sort_largest, fgsl_sort_largest_index, &
+  public :: fgsl_heapsort, fgsl_heapsort_index, &
+       fgsl_sort_double_smallest, fgsl_sort_double_smallest_index, &
+       fgsl_sort_double_largest, fgsl_sort_double_largest_index, &
+       fgsl_sort_long_smallest, fgsl_sort_long_smallest_index, &
+       fgsl_sort_long_largest, fgsl_sort_long_largest_index, &
+       fgsl_sort_vector_smallest, fgsl_sort_vector_smallest_index, &
+       fgsl_sort_vector_largest, fgsl_sort_vector_largest_index, &
        fgsl_sort_double, fgsl_sort_double_index, &
-       fgsl_sort_long, fgsl_sort_long_index
+       fgsl_sort_long, fgsl_sort_long_index, &
+       fgsl_sort_vector, fgsl_sort_vector_index
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
+  public :: fgsl_sort_vector2
+#endif
 ! linear algebra
   public :: fgsl_linalg_lu_decomp, fgsl_linalg_complex_lu_decomp, &
        fgsl_linalg_lu_solve, fgsl_linalg_complex_lu_solve, &
@@ -632,6 +643,9 @@ module fgsl
        fgsl_stats_min, fgsl_stats_minmax, fgsl_stats_max_index, &
        fgsl_stats_min_index, fgsl_stats_minmax_index, fgsl_stats_median_from_sorted_data, &
        fgsl_stats_quantile_from_sorted_data
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
+  public :: fgsl_stats_spearman      
+#endif
 ! B-splines
   public :: fgsl_bspline_alloc, fgsl_bspline_free, fgsl_bspline_knots, &
        fgsl_bspline_knots_uniform, fgsl_bspline_eval, & 

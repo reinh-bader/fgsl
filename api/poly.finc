@@ -62,6 +62,15 @@
     integer(fgsl_int) :: fgsl_poly_dd_taylor
     fgsl_poly_dd_taylor = gsl_poly_dd_taylor(c, xp, dd, x, size, w)
   end function fgsl_poly_dd_taylor
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
+  function fgsl_poly_dd_hermite_init(dd, z, xa, ya, dya, size)
+    real(fgsl_double), intent(inout) :: dd(:), z(:)
+    real(fgsl_double), intent(in) :: xa(:), ya(:), dya(:)
+    integer(fgsl_size_t), intent(in) :: size
+    integer(fgsl_int) :: fgsl_poly_dd_hermite_init
+    fgsl_poly_dd_hermite_init = gsl_poly_dd_hermite_init(dd, z, xa, ya, dya, size)
+  end function fgsl_poly_dd_hermite_init
+#endif
   function fgsl_poly_solve_quadratic(a, b, c, x0, x1) 
     real(fgsl_double), intent(in) :: a, b, c
     real(fgsl_double), intent(out) :: x0, x1
