@@ -228,6 +228,14 @@
        type(c_ptr), value :: d
      end subroutine gsl_odeiv2_driver_free
 #endif
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
+     function gsl_odeiv2_driver_reset_hstart(d, hstart) bind(c)
+       import
+       type(c_ptr), value :: d
+       real(c_double), value :: hstart
+       integer(c_int) :: gsl_odeiv2_driver_reset_hstart
+     end function gsl_odeiv2_driver_reset_hstart
+#endif
 
 !  obsolescent legacy interface
      function gsl_odeiv_step_alloc(t, dim) bind(c)

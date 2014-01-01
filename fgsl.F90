@@ -491,6 +491,9 @@ module fgsl
        fgsl_odeiv2_driver_apply, fgsl_odeiv2_driver_apply_fixed_step, &
        fgsl_odeiv2_driver_reset, fgsl_odeiv2_driver_free
 #endif
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
+  public :: gsl_odeiv2_driver_reset_hstart 
+#endif
 !      legacy calls  
   public :: fgsl_odeiv_system_init, fgsl_odeiv_system_free, &
        fgsl_odeiv_step_alloc, fgsl_odeiv_step_status, fgsl_odeiv_system_status, &

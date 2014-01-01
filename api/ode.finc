@@ -362,6 +362,15 @@
          fgsl_odeiv2_driver_status = .false.
   end function fgsl_odeiv2_driver_status
 #endif
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
+  function fgsl_odeiv2_driver_reset_hstart(d, hstart)
+    type(fgsl_odeiv2_driver), intent(inout) :: d
+    real(fgsl_double), intent(in) :: hstart
+    integer(fgsl_int) :: fgsl_odeiv2_driver_reset_hstart
+    fgsl_odeiv2_driver_reset_hstart = gsl_odeiv2_driver_reset_hstart(&
+    d%gsl_odeiv2_driver, hstart)
+  end function fgsl_odeiv2_driver_reset_hstart
+#endif
 !
 ! obsolescent legacy interface
 !
