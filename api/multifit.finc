@@ -224,4 +224,22 @@
     fgsl_multifit_fdfsolver_driver = gsl_multifit_fdfsolver_driver(&
     	s%gsl_multifit_fdfsolver, maxiter, epsabs, epsrel)
   end function fgsl_multifit_fdfsolver_driver
+  function fgsl_multifit_fdfsolver_dif_df(x, fdf, f, J)
+    type(fgsl_vector), intent(in) :: x, f
+    type(fgsl_multifit_function_fdf), intent(inout) :: fdf
+    type(fgsl_matrix), intent(inout) :: J
+    integer(fgsl_int) :: fgsl_multifit_fdfsolver_dif_df
+    fgsl_multifit_fdfsolver_dif_df = gsl_multifit_fdfsolver_dif_df(&
+        x%gsl_vector, fdf%gsl_multifit_function_fdf, f%gsl_vector,&
+        J%gsl_matrix)
+  end function fgsl_multifit_fdfsolver_dif_df
+  function fgsl_multifit_fdfsolver_dif_fdf(x, fdf, f, J)
+    type(fgsl_vector), intent(in) :: x, f
+    type(fgsl_multifit_function_fdf), intent(inout) :: fdf
+    type(fgsl_matrix), intent(inout) :: J
+    integer(fgsl_int) :: fgsl_multifit_fdfsolver_dif_fdf
+    fgsl_multifit_fdfsolver_dif_fdf = gsl_multifit_fdfsolver_dif_fdf(&
+        x%gsl_vector, fdf%gsl_multifit_function_fdf, f%gsl_vector,&
+        J%gsl_matrix)
+  end function fgsl_multifit_fdfsolver_dif_fdf
 #endif

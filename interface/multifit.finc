@@ -115,6 +115,16 @@
     real(c_double), value :: epsabs, epsrel
     integer(c_int) :: gsl_multifit_fdfsolver_driver
   end function gsl_multifit_fdfsolver_driver
+  function gsl_multifit_fdfsolver_dif_df(x, fdf, f, J) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: x, fdf, f, J
+    integer(c_int) :: gsl_multifit_fdfsolver_dif_df
+  end function gsl_multifit_fdfsolver_dif_df
+  function gsl_multifit_fdfsolver_dif_fdf(x, fdf, f, J) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: x, fdf, f, J
+    integer(c_int) :: gsl_multifit_fdfsolver_dif_fdf
+  end function gsl_multifit_fdfsolver_dif_fdf
 #endif
 !
   function fgsl_multifit_function_cinit(fp, ndim, p, params) bind(c)
