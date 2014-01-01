@@ -71,3 +71,11 @@ function gsl_bspline_greville_abscissa(i, w) bind(c)
   integer(c_size_t) :: i
   type(c_ptr), value :: w
 end function gsl_bspline_greville_abscissa
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
+function gsl_bspline_knots_greville(abscissae, w, abserr) bind(c)
+  import :: c_ptr, c_double, c_int
+  type(c_ptr), value :: abscissae, w
+  real(c_double) :: abserr
+  integer(c_int) :: gsl_bspline_knots_greville
+end function gsl_bspline_knots_greville
+#endif

@@ -651,6 +651,9 @@ module fgsl
        fgsl_bspline_deriv_alloc, fgsl_bspline_deriv_free, &
        fgsl_bspline_deriv_eval, fgsl_bspline_deriv_eval_nonzero, &
        fgsl_bspline_greville_abscissa
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
+  public :: fgsl_bspline_knots_greville
+#endif
        
 ! IEEE
   public :: fgsl_ieee_fprintf, fgsl_ieee_printf, fgsl_ieee_env_setup
