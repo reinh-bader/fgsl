@@ -36,6 +36,9 @@
 // FIXME: remove after IBM compiler fixed
 #include <gsl/gsl_sf.h>
 
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
+#include <gsl/gsl_multifit.h>
+#endif
 
 
 gsl_function *fgsl_function_cinit(double (*func)(double x, void *params), void *params) {
@@ -206,9 +209,12 @@ int fgsl_aux_matrix_double_align(double *a, size_t lda, size_t n, size_t m, gsl_
 }
 
 void fgsl_aux_matrix_double_size(gsl_matrix *fvec, size_t *lda, size_t *m, size_t *n) {
-    *m = fvec->size2;
-    *n = fvec->size1;
-    *lda = fvec->tda;
+    if (m != NULL)
+    	*m = fvec->size2;
+    if (n != NULL)
+    	*n = fvec->size1;
+    if (lda != NULL)
+    	*lda = fvec->tda;
 }
 
 gsl_matrix_complex *fgsl_aux_matrix_complex_init() {
@@ -246,9 +252,12 @@ int fgsl_aux_matrix_complex_align(double *a, size_t lda, size_t n,
 
 void fgsl_aux_matrix_complex_size(gsl_matrix_complex *fvec, 
 				  size_t *lda, size_t *m, size_t *n) {
-    *m = fvec->size2;
-    *n = fvec->size1;
-    *lda = fvec->tda;
+    if (m != NULL)
+    	*m = fvec->size2;
+    if (n != NULL)
+    	*n = fvec->size1;
+    if (lda != NULL)
+    	*lda = fvec->tda;
 }
 
 const gsl_interp_type *fgsl_aux_interp_alloc(int i) {
@@ -642,6 +651,39 @@ const gsl_qrng_type *fgsl_aux_qrng_assign(int i) {
     }
     return res;
 }
+
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
+const gsl_multifit_robust_type *fgsl_aux_multifit_robust_alloc(int i) {
+    const gsl_multifit_robust_type *res;
+    switch (i) {
+	case 1:
+	    res = gsl_multifit_robust_default;
+	    break;
+	case 2:
+	    res = gsl_multifit_robust_bisquare;
+	    break;
+	case 3:
+	    res = gsl_multifit_robust_cauchy;
+	    break;
+	case 4:
+	    res = gsl_multifit_robust_fair;
+	    break;
+	case 5:
+	    res = gsl_multifit_robust_huber;
+	    break;
+	case 6:
+	    res = gsl_multifit_robust_ols;
+	    break;
+	case 7:
+	    res = gsl_multifit_robust_welsch;
+	    break;
+	default :
+	    res = NULL;
+	    break;
+    }
+    return res;
+}
+#endif
 
 const gsl_wavelet_type *fgsl_aux_wavelet_alloc(int i) {
     const gsl_wavelet_type *res;

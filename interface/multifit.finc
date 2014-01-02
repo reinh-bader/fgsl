@@ -101,6 +101,11 @@
     integer(c_int) :: gsl_multifit_covar
   end function gsl_multifit_covar
 #if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
+  function fgsl_aux_multifit_robust_alloc(i) bind(c)
+    import :: c_int, c_ptr
+    type(c_ptr) :: fgsl_aux_multifit_robust_alloc
+    integer(c_int), value :: i
+  end function fgsl_aux_multifit_robust_alloc
   function gsl_multifit_fsolver_driver(s, maxiter, epsabs, epsrel) bind(c)
     import :: c_ptr, c_size_t, c_double, c_int
     type(c_ptr), value :: s
@@ -125,6 +130,43 @@
     type(c_ptr), value :: x, fdf, f, J
     integer(c_int) :: gsl_multifit_fdfsolver_dif_fdf
   end function gsl_multifit_fdfsolver_dif_fdf
+  function gsl_multifit_robust_alloc(T, n, p) bind(c)
+    import :: c_ptr, c_size_t
+    type(c_ptr), value :: T
+    integer(c_size_t), value :: n, p
+    type(c_ptr) :: gsl_multifit_robust_alloc
+  end function gsl_multifit_robust_alloc
+  subroutine gsl_multifit_robust_free(w) bind(c)
+    import :: c_ptr
+    type(c_ptr), value :: w
+  end subroutine gsl_multifit_robust_free
+  function gsl_multifit_robust_tune(tune, w) bind(c)
+    import :: c_ptr, c_double, c_int
+    real(c_double), value :: tune
+    type(c_ptr), value :: w
+    integer(c_int) :: gsl_multifit_robust_tune
+  end function gsl_multifit_robust_tune
+  function gsl_multifit_robust_name(w) bind(c)
+    import :: c_ptr
+    type(c_ptr), value :: w
+    type(c_ptr) :: gsl_multifit_robust_name
+  end function gsl_multifit_robust_name
+  function gsl_multifit_robust_statistics(w) bind(c)
+    import :: c_ptr, gsl_multifit_robust_stats
+    type(c_ptr), value :: w
+    type(gsl_multifit_robust_stats) :: gsl_multifit_robust_statistics
+  end function gsl_multifit_robust_statistics
+  function gsl_multifit_robust(X, y, c, cov, w) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: X, y, c, cov, w
+    integer(c_int) :: gsl_multifit_robust
+  end function gsl_multifit_robust
+  function gsl_multifit_robust_est(x, c, cov, y, y_err) bind(c)
+    import :: c_ptr, c_int, c_double
+    type(c_ptr), value :: x, c, cov
+    real(c_double), intent(out) :: y, y_err
+    integer(c_int) :: gsl_multifit_robust_est
+  end function gsl_multifit_robust_est
 #endif
 !
   function fgsl_multifit_function_cinit(fp, ndim, p, params) bind(c)

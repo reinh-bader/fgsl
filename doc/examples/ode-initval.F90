@@ -1,3 +1,4 @@
+#include "config.h"
 #if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
 module mod_ode
   use fgsl

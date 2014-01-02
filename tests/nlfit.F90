@@ -1,3 +1,4 @@
+#include "config.h"
 module mod_nlfit
   use, intrinsic :: iso_c_binding
   use fgsl

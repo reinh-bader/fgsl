@@ -453,3 +453,38 @@
     integer(fgsl_size_t) :: fgsl_sizeof_matrix_complex
     fgsl_sizeof_matrix_complex = gsl_aux_sizeof_matrix_complex()
   end function fgsl_sizeof_matrix_complex
+  function fgsl_vector_get_size(vec)
+    type(fgsl_vector), intent(in) :: vec
+    integer(fgsl_size_t) :: fgsl_vector_get_size
+    fgsl_vector_get_size = fgsl_aux_vector_double_size(vec%gsl_vector)
+  end function fgsl_vector_get_size
+  function fgsl_vector_get_stride(vec)
+    type(fgsl_vector), intent(in) :: vec
+    integer(fgsl_size_t) :: fgsl_vector_get_stride
+    fgsl_vector_get_stride = fgsl_aux_vector_double_stride(vec%gsl_vector)
+  end function fgsl_vector_get_stride
+  function fgsl_matrix_get_size1(matr)
+    type(fgsl_matrix), intent(in) :: matr
+    integer(fgsl_size_t) :: tda, size1, size2
+    integer(fgsl_size_t) :: fgsl_matrix_get_size1
+    call fgsl_aux_matrix_double_size(matr%gsl_matrix, tda, size2,&
+    size1)
+    fgsl_matrix_get_size1 = size1
+  end function fgsl_matrix_get_size1
+  function fgsl_matrix_get_size2(matr)
+    type(fgsl_matrix), intent(in) :: matr
+    integer(fgsl_size_t) :: tda, size1, size2
+    integer(fgsl_size_t) :: fgsl_matrix_get_size2
+    call fgsl_aux_matrix_double_size(matr%gsl_matrix, tda, size2,&
+    size1)
+    fgsl_matrix_get_size2 = size2
+  end function fgsl_matrix_get_size2
+  function fgsl_matrix_get_tda(matr)
+    type(fgsl_matrix), intent(in) :: matr
+    integer(fgsl_size_t) :: tda, size1, size2
+    integer(fgsl_size_t) :: fgsl_matrix_get_tda
+    call fgsl_aux_matrix_double_size(matr%gsl_matrix, tda, size2,&
+    size1)
+    fgsl_matrix_get_tda = tda
+  end function fgsl_matrix_get_tda
+

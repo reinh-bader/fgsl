@@ -242,4 +242,71 @@
         x%gsl_vector, fdf%gsl_multifit_function_fdf, f%gsl_vector,&
         J%gsl_matrix)
   end function fgsl_multifit_fdfsolver_dif_fdf
+  function fgsl_multifit_robust_alloc(t, n, p) 
+    type(fgsl_multifit_robust_type), intent(in) :: t
+    integer(fgsl_size_t), intent(in) :: n, p
+    type(fgsl_multifit_robust_workspace) :: fgsl_multifit_robust_alloc
+! 
+    type(c_ptr) :: ftype
+    ftype = fgsl_aux_multifit_robust_alloc(t%which)
+    fgsl_multifit_robust_alloc%gsl_multifit_robust_workspace = &
+         gsl_multifit_robust_alloc(ftype, n, p)
+  end function fgsl_multifit_robust_alloc
+  subroutine fgsl_multifit_robust_free(w)
+    type(fgsl_multifit_robust_workspace), intent(inout) :: w
+    call gsl_multifit_robust_free(w%gsl_multifit_robust_workspace)
+  end subroutine fgsl_multifit_robust_free
+  function fgsl_multifit_robust_tune(tune, w)
+    real(fgsl_double), intent(in) :: tune
+    type(fgsl_multifit_robust_workspace), intent(in) :: w
+    integer(fgsl_int) :: fgsl_multifit_robust_tune
+    fgsl_multifit_robust_tune = gsl_multifit_robust_tune(tune,&
+    w%gsl_multifit_robust_workspace)
+  end function fgsl_multifit_robust_tune
+  function fgsl_multifit_robust_name(w)
+    type(fgsl_multifit_robust_workspace), intent(in) :: w
+    character(kind=fgsl_char,len=fgsl_strmax) :: fgsl_multifit_robust_name
+    type(c_ptr) :: name
+    name = gsl_multifit_robust_name(w%gsl_multifit_robust_workspace)
+    fgsl_multifit_robust_name = fgsl_name(name)
+  end function fgsl_multifit_robust_name
+  function fgsl_multifit_robust_statistics(w)
+    type(fgsl_multifit_robust_workspace), intent(in) :: w
+    type(fgsl_multifit_robust_stats) :: fgsl_multifit_robust_statistics
+    type(gsl_multifit_robust_stats) :: stats
+
+    stats = gsl_multifit_robust_statistics(w%gsl_multifit_robust_workspace)
+    fgsl_multifit_robust_statistics%sigma_ols = stats%sigma_ols
+    fgsl_multifit_robust_statistics%sigma_mad = stats%sigma_mad
+    fgsl_multifit_robust_statistics%sigma_rob = stats%sigma_rob
+    fgsl_multifit_robust_statistics%sigma = stats%sigma
+    fgsl_multifit_robust_statistics%Rsq = stats%Rsq
+    fgsl_multifit_robust_statistics%adj_Rsq = stats%adj_Rsq
+    fgsl_multifit_robust_statistics%rmse = stats%rmse
+    fgsl_multifit_robust_statistics%sse = stats%sse
+    fgsl_multifit_robust_statistics%dof = stats%dof
+    fgsl_multifit_robust_statistics%numit = stats%numit
+    fgsl_multifit_robust_statistics%r%gsl_vector = stats%r
+    fgsl_multifit_robust_statistics%weights%gsl_vector = stats%weights
+  end function fgsl_multifit_robust_statistics
+  function fgsl_multifit_robust(X, y, c, cov, w)
+    type(fgsl_matrix), intent(in) :: X
+    type(fgsl_vector), intent(in) :: y
+    type(fgsl_vector), intent(inout) :: c
+    type(fgsl_matrix), intent(inout) :: cov
+    type(fgsl_multifit_robust_workspace), intent(inout) :: w
+    integer(c_int) :: fgsl_multifit_robust
+
+    fgsl_multifit_robust = gsl_multifit_robust(X%gsl_matrix,&
+    y%gsl_vector, c%gsl_vector,cov%gsl_matrix,&
+    w%gsl_multifit_robust_workspace)
+  end function fgsl_multifit_robust
+  function fgsl_multifit_robust_est(x, c, cov, y, y_err)
+    type(fgsl_vector), intent(in) :: x, c
+    type(fgsl_matrix), intent(in) :: cov
+    real(c_double), intent(out) :: y, y_err
+    integer(c_int) :: fgsl_multifit_robust_est
+    fgsl_multifit_robust_est = gsl_multifit_robust_est(x%gsl_vector, c%gsl_vector,&
+    cov%gsl_matrix, y, y_err)
+  end function fgsl_multifit_robust_est
 #endif

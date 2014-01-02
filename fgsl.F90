@@ -248,8 +248,10 @@ module fgsl
        fgsl_sf_zeta_e, fgsl_sf_zetam1_int, fgsl_sf_zetam1_int_e, fgsl_sf_zetam1, &
        fgsl_sf_zetam1_e, fgsl_sf_hzeta, fgsl_sf_hzeta_e, fgsl_sf_eta, fgsl_sf_eta_e
 ! array processing
-  public :: fgsl_vector_init, fgsl_vector_align, fgsl_vector_free
-  public :: fgsl_matrix_init, fgsl_matrix_align, fgsl_matrix_free
+  public :: fgsl_vector_init, fgsl_vector_align, fgsl_vector_free,&
+  fgsl_vector_get_size, fgsl_vector_get_stride
+  public :: fgsl_matrix_init, fgsl_matrix_align, fgsl_matrix_free,&
+  fgsl_matrix_get_size1, fgsl_matrix_get_size2, fgsl_matrix_get_tda
 ! interpolation
   public :: fgsl_interp_alloc, fgsl_interp_init, &
        fgsl_interp_free, fgsl_interp_eval, fgsl_interp_eval_e, &
@@ -628,6 +630,10 @@ module fgsl
 #if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
   public :: fgsl_multifit_fsolver_driver, fgsl_multifit_fdfsolver_driver, &
        fgsl_multifit_fdfsolver_dif_df, fgsl_multifit_fdfsolver_dif_fdf
+  public :: fgsl_multifit_robust_alloc, fgsl_multifit_robust_free, &
+       fgsl_multifit_robust_tune, fgsl_multifit_robust_name, &
+       fgsl_multifit_robust_statistics, fgsl_multifit_robust, &
+       fgsl_multifit_robust_est
 #endif
 ! statistics
   public :: fgsl_stats_mean, fgsl_stats_variance, fgsl_stats_variance_m, &
@@ -1095,6 +1101,55 @@ module fgsl
      private
      type(c_ptr) :: gsl_multiset = c_null_ptr
   end type fgsl_multiset
+#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
+!
+! Types: Robust multifit
+!
+  type, public :: fgsl_multifit_robust_type
+     private
+     integer(fgsl_int) :: which = 0
+  end type fgsl_multifit_robust_type
+  type(fgsl_multifit_robust_type), parameter, public :: &
+       fgsl_multifit_robust_default = fgsl_multifit_robust_type(1), &
+       fgsl_multifit_robust_bisquare = fgsl_multifit_robust_type(2), &
+       fgsl_multifit_robust_cauchy = fgsl_multifit_robust_type(3), &
+       fgsl_multifit_robust_fair = fgsl_multifit_robust_type(4), &
+       fgsl_multifit_robust_huber = fgsl_multifit_robust_type(5), &
+       fgsl_multifit_robust_ols = fgsl_multifit_robust_type(6), &
+       fgsl_multifit_robust_welsch = fgsl_multifit_robust_type(7)
+  type, public :: fgsl_multifit_robust_workspace
+       private
+       type(c_ptr) :: gsl_multifit_robust_workspace
+  end type fgsl_multifit_robust_workspace
+  type, public :: fgsl_multifit_robust_stats
+       real(fgsl_double) :: sigma_ols
+       real(fgsl_double) :: sigma_mad
+       real(fgsl_double) :: sigma_rob
+       real(fgsl_double) :: sigma
+       real(fgsl_double) :: Rsq
+       real(fgsl_double) :: adj_Rsq
+       real(fgsl_double) :: rmse
+       real(fgsl_double) :: sse
+       real(fgsl_double) :: dof
+       real(fgsl_double) :: numit
+       type(fgsl_vector) :: weights
+       type(fgsl_vector) :: r
+  end type fgsl_multifit_robust_stats
+  type, bind(c) :: gsl_multifit_robust_stats
+       real(c_double) :: sigma_ols
+       real(c_double) :: sigma_mad
+       real(c_double) :: sigma_rob
+       real(c_double) :: sigma
+       real(c_double) :: Rsq
+       real(c_double) :: adj_Rsq
+       real(c_double) :: rmse
+       real(c_double) :: sse
+       real(c_double) :: dof
+       real(c_double) :: numit
+       type(c_ptr) :: weights
+       type(c_ptr) :: r
+  end type gsl_multifit_robust_stats
+#endif
 !
 ! Types: Eigensystems
 !
