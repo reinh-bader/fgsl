@@ -1,3 +1,7 @@
+#include "config.h"
+
+!this needs a real fix!
+#if SIZEOF_LONG == SIZEOF_SIZE_T
 module mod_sort
   use fgsl
   use mod_unit
@@ -119,3 +123,8 @@ program sort
 !
   call unit_finalize()  
 end program sort
+#else
+program sort
+call exit(77)
+end program sort
+#endif

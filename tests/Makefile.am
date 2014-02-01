@@ -23,7 +23,7 @@ permutation_LDADD = ../libfgsl.la
 integration_SOURCES = integration.F90 mod_unit.f90 mod_unit.mod
 integration_LDADD = ../libfgsl.la
 
-sort_SOURCES = sort.f90 mod_unit.f90 mod_unit.mod
+sort_SOURCES = sort.F90 mod_unit.f90 mod_unit.mod
 sort_LDADD = ../libfgsl.la
 
 array_SOURCES = array.f90 mod_unit.f90 mod_unit.mod
