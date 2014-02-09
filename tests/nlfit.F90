@@ -4,6 +4,7 @@ module mod_nlfit
   use fgsl
   use mod_unit
   implicit none
+  real(fgsl_double), parameter :: eps10 = 1.0d-10
   type data 
      integer(fgsl_size_t) :: n
      real(fgsl_double), allocatable :: y(:), sigma(:)
@@ -74,13 +75,14 @@ program nlfit
   real(fgsl_double), parameter :: eps6 = 1.0d-6
   integer(fgsl_size_t) :: nrt
   integer(fgsl_int) :: i, status
-  real(fgsl_double) :: xv(3)
+  real(fgsl_double), target :: xv(3)
+  real(fgsl_double), pointer :: pv(:)
   type(c_ptr) :: ptr
   type(fgsl_rng) :: rng
 !  type(fgsl_nlfit_params_t) :: nlfit_params
   type(fgsl_multifit_function_fdf) :: nlfit_fdf
   type(fgsl_multifit_fdfsolver) :: nlfit_slv
-  type(fgsl_vector) :: xvec
+  type(fgsl_vector) :: xvec, pos
   type(data), target :: fitdata
 !
 ! Test simulated annealing routines
@@ -123,7 +125,12 @@ program nlfit
   end do
   call unit_assert_equal('fgsl_multifit_fdfsolver_iterate:status', &
        fgsl_success,status)
-! FIXME: result check
+
+  pos = fgsl_multifit_fdfsolver_position(nlfit_slv)
+  status = fgsl_vector_align(pv, pos)
+  call unit_assert_equal_within('fgsl_multifit_fdfsolver_position-1',&
+       (/4.8799966121990526d0,0.10993467064985155d0,1.1946651536729409d0/), &
+       pv, eps10) 
   call fgsl_vector_free(xvec)
   call fgsl_multifit_fdfsolver_free(nlfit_slv)
   call fgsl_multifit_function_fdf_free(nlfit_fdf)
@@ -142,6 +149,11 @@ program nlfit
   status = fgsl_multifit_fdfsolver_driver(nlfit_slv, itmax_root, eps6, eps6)
   call unit_assert_equal('fgsl_multifit_fdfsolver_driver:status', &
        fgsl_success,status)
+  pos = fgsl_multifit_fdfsolver_position(nlfit_slv)
+  status = fgsl_vector_align(pv, pos)
+  call unit_assert_equal_within('fgsl_multifit_fdfsolver_position-1',&
+       (/4.8799966121990526d0,0.10993467064985155d0,1.1946651536729409d0/), &
+       pv, eps10) 
   call fgsl_vector_free(xvec)
   call fgsl_multifit_fdfsolver_free(nlfit_slv)
   call fgsl_multifit_function_fdf_free(nlfit_fdf)
