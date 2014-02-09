@@ -26,7 +26,7 @@ program sort
   implicit none
   type(fgsl_error_handler_t) :: std
   type(fgsl_vector) :: v_array, v_array2
-  real(c_double), pointer :: pv
+  real(c_double), pointer :: pv(:)
   type(fgsl_permutation) :: p
   integer :: i, status
 !
@@ -116,19 +116,19 @@ program sort
   status = fgsl_sort_largest_index(p_array,dim,v_array)
   call unit_assert_equal('fgsl_sort_vector_largest_index',(/(i,i=0,dim-1)/),int(p_array))
 #if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
-  array = (/(dble(i),i=dim,1,-1)/)
-  array2 = array
-  call fgsl_sort2(array,1_fgsl_size_t,array2,1_fgsl_size_t,dim)
-  call unit_assert_equal_within('fgsl_sort2::array',(/(dble(i),i=1,dim)/),array,eps10)
-  call unit_assert_equal_within('fgsl_sort2::array2',(/(dble(i),i=1,dim)/),array2,eps10)
-  array = (/(dble(i),i=dim,1,-1)/)
-  array2 = array
-  call fgsl_sort2(v_array,v_array2)
-  status = fgsl_vector_align(pv, v_array)
-  call unit_assert_equal_within('fgsl_sort2::v_array',(/(dble(i),i=1,dim)/),pv,eps10)
-  status = fgsl_vector_align(pv, v_array2)
-  call unit_assert_equal_within('fgsl_sort2::v_array2',(/(dble(i),i=1,dim)/),pv,eps10)
-  nullify(pv)
+!  array = (/(dble(i),i=dim,1,-1)/)
+!  array2 = array
+!  call fgsl_sort2(array,1_fgsl_size_t,array2,1_fgsl_size_t,dim)
+!  call unit_assert_equal_within('fgsl_sort2::array',(/(dble(i),i=1,dim)/),array,eps10)
+!  call unit_assert_equal_within('fgsl_sort2::array2',(/(dble(i),i=1,dim)/),array2,eps10)
+!  array = (/(dble(i),i=dim,1,-1)/)
+!  array2 = array
+!  call fgsl_sort2(v_array,v_array2)
+!  status = fgsl_vector_align(pv, v_array)
+!  call unit_assert_equal_within('fgsl_sort2::v_array',(/(dble(i),i=1,dim)/),pv,eps10)
+!  status = fgsl_vector_align(pv, v_array2)
+!  call unit_assert_equal_within('fgsl_sort2::v_array2',(/(dble(i),i=1,dim)/),pv,eps10)
+!  nullify(pv)
 #endif
   call fgsl_permutation_free(p)
   call fgsl_vector_free(v_array)
