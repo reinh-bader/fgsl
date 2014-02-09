@@ -8,7 +8,7 @@ check_PROGRAMS = poly interp specfunc permutation integration \
 	multimin fit nlfit version \
 	chebyshev error ieee_utils
 
-poly_SOURCES = mod_unit.f90 mod_unit.mod poly.f90 
+poly_SOURCES = mod_unit.f90 mod_unit.mod poly.F90 
 poly_LDADD = ../libfgsl.la
 
 interp_SOURCES = mod_unit.f90 mod_unit.mod interp.f90 
@@ -29,7 +29,7 @@ sort_LDADD = ../libfgsl.la
 array_SOURCES = array.f90 mod_unit.f90 mod_unit.mod
 array_LDADD = ../libfgsl.la
 
-linalg_SOURCES = linalg.f90 mod_unit.f90 mod_unit.mod
+linalg_SOURCES = linalg.F90 mod_unit.f90 mod_unit.mod
 linalg_LDADD = ../libfgsl.la
 
 eigen_SOURCES = eigen.f90 mod_unit.f90 mod_unit.mod
@@ -44,7 +44,7 @@ rng_LDADD = ../libfgsl.la
 histogram_SOURCES = histogram.f90 mod_unit.f90 mod_unit.mod
 histogram_LDADD = ../libfgsl.la
 
-statistics_SOURCES = statistics.f90 mod_unit.f90 mod_unit.mod
+statistics_SOURCES = statistics.F90 mod_unit.f90 mod_unit.mod
 statistics_LDADD = ../libfgsl.la
 
 ntuple_SOURCES = ntuple.f90 mod_unit.f90 mod_unit.mod
