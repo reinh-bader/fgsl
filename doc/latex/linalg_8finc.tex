@@ -1,8 +1,7 @@
 \hypertarget{linalg_8finc}{\section{api/linalg.finc File Reference}
 \label{linalg_8finc}\index{api/linalg.\-finc@{api/linalg.\-finc}}
 }
-This graph shows which files directly or indirectly include this file\-:
-\nopagebreak
+This graph shows which files directly or indirectly include this file\-:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -97,6 +96,8 @@ integer(fgsl\-\_\-int) function \hyperlink{linalg_8finc_af9767f953466e17a78a835c
 integer(fgsl\-\_\-int) function \hyperlink{linalg_8finc_a523fe136a01c78b49531b7e0156b97b6}{fgsl\-\_\-linalg\-\_\-sv\-\_\-decomp\-\_\-jacobi} (a, v, s)
 \item 
 integer(fgsl\-\_\-int) function \hyperlink{linalg_8finc_a6d96a619a57aeb6a8713babe93a9b71b}{fgsl\-\_\-linalg\-\_\-sv\-\_\-solve} (u, v, s, b, x)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{linalg_8finc_a41dd0ef07e31a1e6d109e4d9a0ea8a13}{fgsl\-\_\-linalg\-\_\-sv\-\_\-leverage} (u, h)
 \item 
 integer(fgsl\-\_\-int) function \hyperlink{linalg_8finc_aa2fa70a59c49090e137f5df8c8c0100f}{fgsl\-\_\-linalg\-\_\-cholesky\-\_\-decomp} (a)
 \item 
@@ -877,6 +878,14 @@ integer(fgsl\-\_\-int) function \hyperlink{linalg_8finc_a82232b7f631cacda2a903f1
 \item[{type(fgsl\-\_\-vector), intent(inout)}]{work}
 \end{DoxyParamCaption}
 )}}\label{linalg_8finc_af9767f953466e17a78a835c1fb21e588}
+\hypertarget{linalg_8finc_a41dd0ef07e31a1e6d109e4d9a0ea8a13}{\index{linalg.\-finc@{linalg.\-finc}!fgsl\-\_\-linalg\-\_\-sv\-\_\-leverage@{fgsl\-\_\-linalg\-\_\-sv\-\_\-leverage}}
+\index{fgsl\-\_\-linalg\-\_\-sv\-\_\-leverage@{fgsl\-\_\-linalg\-\_\-sv\-\_\-leverage}!linalg.finc@{linalg.\-finc}}
+\subsubsection[{fgsl\-\_\-linalg\-\_\-sv\-\_\-leverage}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-linalg\-\_\-sv\-\_\-leverage (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-matrix), intent(in)}]{u, }
+\item[{type(fgsl\-\_\-vector), intent(inout)}]{h}
+\end{DoxyParamCaption}
+)}}\label{linalg_8finc_a41dd0ef07e31a1e6d109e4d9a0ea8a13}
 \hypertarget{linalg_8finc_a6d96a619a57aeb6a8713babe93a9b71b}{\index{linalg.\-finc@{linalg.\-finc}!fgsl\-\_\-linalg\-\_\-sv\-\_\-solve@{fgsl\-\_\-linalg\-\_\-sv\-\_\-solve}}
 \index{fgsl\-\_\-linalg\-\_\-sv\-\_\-solve@{fgsl\-\_\-linalg\-\_\-sv\-\_\-solve}!linalg.finc@{linalg.\-finc}}
 \subsubsection[{fgsl\-\_\-linalg\-\_\-sv\-\_\-solve}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-linalg\-\_\-sv\-\_\-solve (

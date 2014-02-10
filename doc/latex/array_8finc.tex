@@ -1,8 +1,7 @@
 \hypertarget{array_8finc}{\section{api/array.finc File Reference}
 \label{array_8finc}\index{api/array.\-finc@{api/array.\-finc}}
 }
-This graph shows which files directly or indirectly include this file\-:
-\nopagebreak
+This graph shows which files directly or indirectly include this file\-:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -75,7 +74,17 @@ subroutine \hyperlink{array_8finc_a9f0f952485ef9707174a52c5af21a9a2}{fgsl\-\_\-m
 logical function \hyperlink{array_8finc_a3fa8db2b747286e805d60065f6d16640}{fgsl\-\_\-matrix\-\_\-complex\-\_\-status} (matrix\-\_\-complex)
 \item 
 integer(fgsl\-\_\-size\-\_\-t) function \hyperlink{array_8finc_a14d82675b93fa2b453caf33df1e567a1}{fgsl\-\_\-sizeof\-\_\-matrix\-\_\-complex} (w)
-\begin{DoxyCompactList}\small\item\em Inquire the number of elements in a double precision complex G\-S\-L matrix object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Inquire the number of elements in a double precision complex G\-S\-L matrix object. \end{DoxyCompactList}\item 
+integer(fgsl\-\_\-size\-\_\-t) function \hyperlink{array_8finc_a77255b64802ca66a1ada52fd0a9ceaf6}{fgsl\-\_\-vector\-\_\-get\-\_\-size} (vec)
+\item 
+integer(fgsl\-\_\-size\-\_\-t) function \hyperlink{array_8finc_adb3b5d4e8f719f06d11479ee5c7ad380}{fgsl\-\_\-vector\-\_\-get\-\_\-stride} (vec)
+\item 
+integer(fgsl\-\_\-size\-\_\-t) function \hyperlink{array_8finc_a17354bcc1b817f078799391343eee7e4}{fgsl\-\_\-matrix\-\_\-get\-\_\-size1} (matr)
+\item 
+integer(fgsl\-\_\-size\-\_\-t) function \hyperlink{array_8finc_a14ea1256acfbe059e0ea8e631a470f64}{fgsl\-\_\-matrix\-\_\-get\-\_\-size2} (matr)
+\item 
+integer(fgsl\-\_\-size\-\_\-t) function \hyperlink{array_8finc_ae49791bd4fbcbd27b90f1cf665fcb008}{fgsl\-\_\-matrix\-\_\-get\-\_\-tda} (matr)
+\end{DoxyCompactItemize}
 
 
 \subsection{Function/\-Subroutine Documentation}
@@ -239,6 +248,27 @@ The assignment operator (see \hyperlink{generics_8finc}{interface/generics.\-fin
 
 Free the resources inside a G\-S\-L matrix object previously established by a call to \hyperlink{array_8finc_af93d762ccde0b58b767c72579cbfb3cb}{fgsl\-\_\-matrix\-\_\-init()}. This is invoked via the generic \hyperlink{interfacefgsl__matrix__free}{fgsl\-\_\-matrix\-\_\-free}. 
 
+\hypertarget{array_8finc_a17354bcc1b817f078799391343eee7e4}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-matrix\-\_\-get\-\_\-size1@{fgsl\-\_\-matrix\-\_\-get\-\_\-size1}}
+\index{fgsl\-\_\-matrix\-\_\-get\-\_\-size1@{fgsl\-\_\-matrix\-\_\-get\-\_\-size1}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-matrix\-\_\-get\-\_\-size1}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-size\-\_\-t) function fgsl\-\_\-matrix\-\_\-get\-\_\-size1 (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-matrix), intent(in)}]{matr}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_a17354bcc1b817f078799391343eee7e4}
+\hypertarget{array_8finc_a14ea1256acfbe059e0ea8e631a470f64}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-matrix\-\_\-get\-\_\-size2@{fgsl\-\_\-matrix\-\_\-get\-\_\-size2}}
+\index{fgsl\-\_\-matrix\-\_\-get\-\_\-size2@{fgsl\-\_\-matrix\-\_\-get\-\_\-size2}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-matrix\-\_\-get\-\_\-size2}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-size\-\_\-t) function fgsl\-\_\-matrix\-\_\-get\-\_\-size2 (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-matrix), intent(in)}]{matr}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_a14ea1256acfbe059e0ea8e631a470f64}
+\hypertarget{array_8finc_ae49791bd4fbcbd27b90f1cf665fcb008}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-matrix\-\_\-get\-\_\-tda@{fgsl\-\_\-matrix\-\_\-get\-\_\-tda}}
+\index{fgsl\-\_\-matrix\-\_\-get\-\_\-tda@{fgsl\-\_\-matrix\-\_\-get\-\_\-tda}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-matrix\-\_\-get\-\_\-tda}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-size\-\_\-t) function fgsl\-\_\-matrix\-\_\-get\-\_\-tda (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-matrix), intent(in)}]{matr}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_ae49791bd4fbcbd27b90f1cf665fcb008}
 \hypertarget{array_8finc_af93d762ccde0b58b767c72579cbfb3cb}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-matrix\-\_\-init@{fgsl\-\_\-matrix\-\_\-init}}
 \index{fgsl\-\_\-matrix\-\_\-init@{fgsl\-\_\-matrix\-\_\-init}!array.finc@{array.\-finc}}
 \subsubsection[{fgsl\-\_\-matrix\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-matrix) function {\bf fgsl\-\_\-matrix\-\_\-init} (
@@ -509,6 +539,20 @@ The assignment operator (see \hyperlink{generics_8finc}{interface/generics.\-fin
 
 Free the resources inside a G\-S\-L vector object previously established by a call to \hyperlink{array_8finc_a0b6fe341146fbb3dfb27386e73c5d042}{fgsl\-\_\-vector\-\_\-init()}. This is invoked via the generic \hyperlink{interfacefgsl__vector__free}{fgsl\-\_\-vector\-\_\-free}. 
 
+\hypertarget{array_8finc_a77255b64802ca66a1ada52fd0a9ceaf6}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-vector\-\_\-get\-\_\-size@{fgsl\-\_\-vector\-\_\-get\-\_\-size}}
+\index{fgsl\-\_\-vector\-\_\-get\-\_\-size@{fgsl\-\_\-vector\-\_\-get\-\_\-size}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-vector\-\_\-get\-\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-size\-\_\-t) function fgsl\-\_\-vector\-\_\-get\-\_\-size (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-vector), intent(in)}]{vec}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_a77255b64802ca66a1ada52fd0a9ceaf6}
+\hypertarget{array_8finc_adb3b5d4e8f719f06d11479ee5c7ad380}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-vector\-\_\-get\-\_\-stride@{fgsl\-\_\-vector\-\_\-get\-\_\-stride}}
+\index{fgsl\-\_\-vector\-\_\-get\-\_\-stride@{fgsl\-\_\-vector\-\_\-get\-\_\-stride}!array.finc@{array.\-finc}}
+\subsubsection[{fgsl\-\_\-vector\-\_\-get\-\_\-stride}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-size\-\_\-t) function fgsl\-\_\-vector\-\_\-get\-\_\-stride (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-vector), intent(in)}]{vec}
+\end{DoxyParamCaption}
+)}}\label{array_8finc_adb3b5d4e8f719f06d11479ee5c7ad380}
 \hypertarget{array_8finc_a0b6fe341146fbb3dfb27386e73c5d042}{\index{array.\-finc@{array.\-finc}!fgsl\-\_\-vector\-\_\-init@{fgsl\-\_\-vector\-\_\-init}}
 \index{fgsl\-\_\-vector\-\_\-init@{fgsl\-\_\-vector\-\_\-init}!array.finc@{array.\-finc}}
 \subsubsection[{fgsl\-\_\-vector\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-vector) function {\bf fgsl\-\_\-vector\-\_\-init} (

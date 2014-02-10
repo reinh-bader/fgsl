@@ -85,7 +85,7 @@ In particular, the following compilers FAIL to build and/or run FGSL:
 
 (B) autoconf setup:
 This section applies only if you have downloaded the sourceforge
-repository. Use of autoconf version 2.69 or higher and m4 1.16 or 
+repository. Use of autoconf version 2.69 or higher and m4 1.4.16 or 
 higher is recommended. Generate the configure script with
 mkdir m4
 autoreconf -i
@@ -97,6 +97,7 @@ autoreconf
 this has changed due to introduction of an autoconf based system
 (thanks to Tom Schoonjans for contributing this)
 
+export FC=<fortran compiler command>
 export FCFLAGS=<additional Fortran flags>
 export gsl_LIBS=<gsl library link line>
 export PKG_CONFIG_PATH=<directory in which gsl.pc resides>
@@ -105,11 +106,19 @@ export PKG_CONFIG_PATH=<directory in which gsl.pc resides>
     supposed to be used, add the following option to the configure script:
     FC=<my_fortran_compiler>
     Furthermore, the configure script allows the user to enable several
-    options, such as --prefix=<my_installation_location>, FCFLAGS=<additional
-    Fortran compiler flags> and
-    PKG_CONFIG_PATH=<path to gsl.pc>
+    options, such as --prefix=<my_installation_location>
+
     For a list of all available options run:
     ./configure --help
+
+    NOTE: for supporting different compilers with a single GSL 
+    installation it is recommended to specify the following
+
+    ./configure --prefix=<path to gsl install> \
+                --libdir=<path to gsl install>/lib/$FC \
+                --includedir=<path to gsl install>/include/$FC
+  
+  
 
 make
     Builds the module information file and static as well

@@ -1,8 +1,7 @@
 \hypertarget{multifit_8finc}{\section{api/multifit.finc File Reference}
 \label{multifit_8finc}\index{api/multifit.\-finc@{api/multifit.\-finc}}
 }
-This graph shows which files directly or indirectly include this file\-:
-\nopagebreak
+This graph shows which files directly or indirectly include this file\-:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -67,6 +66,31 @@ integer(fgsl\-\_\-int) function \hyperlink{multifit_8finc_a843fbc4d78a3e84e537c8
 logical function \hyperlink{multifit_8finc_a3945d89bd5d38c87bb6808ee41382e31}{fgsl\-\_\-multifit\-\_\-fsolver\-\_\-status} (s)
 \item 
 logical function \hyperlink{multifit_8finc_ae28da5d71114b0974e5da3acd305fe34}{fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-status} (s)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{multifit_8finc_a441635d79b414434f17d9e79d5e5e3bf}{fgsl\-\_\-multifit\-\_\-fsolver\-\_\-driver} (s, maxiter, epsabs, epsrel)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{multifit_8finc_a4bac0cd0093298664c6efd1af42e676a}{fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-driver} (s, maxiter, epsabs, epsrel)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{multifit_8finc_aa6720e02a7bfdea705f5efeaaf4f065c}{fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-dif\-\_\-df} (x, fdf, f, J)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{multifit_8finc_a20b830d4e502085fe3ae081e400a88c9}{fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-dif\-\_\-fdf} (x, fdf, f, J)
+\item 
+type(fgsl\-\_\-multifit\-\_\-robust\-\_\-workspace) \\*
+function \hyperlink{multifit_8finc_a3654cf72cc42ef37e8ffe3d6ae99d1b0}{fgsl\-\_\-multifit\-\_\-robust\-\_\-alloc} (t, n, p)
+\item 
+subroutine \hyperlink{multifit_8finc_ac11e8d149c1983ababeef2251b4a0e0f}{fgsl\-\_\-multifit\-\_\-robust\-\_\-free} (w)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{multifit_8finc_ab6c0101ec41f2a22cc3441476266d59d}{fgsl\-\_\-multifit\-\_\-robust\-\_\-tune} (tune, w)
+\item 
+character(kind=fgsl\-\_\-char, len=fgsl\-\_\-strmax) \\*
+function \hyperlink{multifit_8finc_a60a15f7b62aa2c94615909be755ddb56}{fgsl\-\_\-multifit\-\_\-robust\-\_\-name} (w)
+\item 
+type(fgsl\-\_\-multifit\-\_\-robust\-\_\-stats) \\*
+function \hyperlink{multifit_8finc_a75250ed81d817a7a428dd8ec8adc08dd}{fgsl\-\_\-multifit\-\_\-robust\-\_\-statistics} (w)
+\item 
+integer(c\-\_\-int) function \hyperlink{multifit_8finc_af06ff4c9c8558a30bdf902feb7052d92}{fgsl\-\_\-multifit\-\_\-robust} (X, y, c, cov, w)
+\item 
+integer(c\-\_\-int) function \hyperlink{multifit_8finc_add53db0407ecf7e59f5be47df7b6f6ed}{fgsl\-\_\-multifit\-\_\-robust\-\_\-est} (x, c, cov, y, y\-\_\-err)
 \end{DoxyCompactItemize}
 
 
@@ -89,6 +113,36 @@ logical function \hyperlink{multifit_8finc_ae28da5d71114b0974e5da3acd305fe34}{fg
 \item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{p}
 \end{DoxyParamCaption}
 )}}\label{multifit_8finc_ad6618c0ee5bef46ed5dedb9a15061e4d}
+\hypertarget{multifit_8finc_aa6720e02a7bfdea705f5efeaaf4f065c}{\index{multifit.\-finc@{multifit.\-finc}!fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-dif\-\_\-df@{fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-dif\-\_\-df}}
+\index{fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-dif\-\_\-df@{fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-dif\-\_\-df}!multifit.finc@{multifit.\-finc}}
+\subsubsection[{fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-dif\-\_\-df}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-dif\-\_\-df (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-vector), intent(in)}]{x, }
+\item[{type(fgsl\-\_\-multifit\-\_\-function\-\_\-fdf), intent(inout)}]{fdf, }
+\item[{type(fgsl\-\_\-vector), intent(in)}]{f, }
+\item[{type(fgsl\-\_\-matrix), intent(inout)}]{J}
+\end{DoxyParamCaption}
+)}}\label{multifit_8finc_aa6720e02a7bfdea705f5efeaaf4f065c}
+\hypertarget{multifit_8finc_a20b830d4e502085fe3ae081e400a88c9}{\index{multifit.\-finc@{multifit.\-finc}!fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-dif\-\_\-fdf@{fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-dif\-\_\-fdf}}
+\index{fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-dif\-\_\-fdf@{fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-dif\-\_\-fdf}!multifit.finc@{multifit.\-finc}}
+\subsubsection[{fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-dif\-\_\-fdf}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-dif\-\_\-fdf (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-vector), intent(in)}]{x, }
+\item[{type(fgsl\-\_\-multifit\-\_\-function\-\_\-fdf), intent(inout)}]{fdf, }
+\item[{type(fgsl\-\_\-vector), intent(in)}]{f, }
+\item[{type(fgsl\-\_\-matrix), intent(inout)}]{J}
+\end{DoxyParamCaption}
+)}}\label{multifit_8finc_a20b830d4e502085fe3ae081e400a88c9}
+\hypertarget{multifit_8finc_a4bac0cd0093298664c6efd1af42e676a}{\index{multifit.\-finc@{multifit.\-finc}!fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-driver@{fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-driver}}
+\index{fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-driver@{fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-driver}!multifit.finc@{multifit.\-finc}}
+\subsubsection[{fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-driver}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-driver (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multifit\-\_\-fdfsolver), intent(inout)}]{s, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{maxiter, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{epsabs, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{epsrel}
+\end{DoxyParamCaption}
+)}}\label{multifit_8finc_a4bac0cd0093298664c6efd1af42e676a}
 \hypertarget{multifit_8finc_a5d5d7621f0e81fd1eaf2c01119a9e9ee}{\index{multifit.\-finc@{multifit.\-finc}!fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-dx@{fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-dx}}
 \index{fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-dx@{fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-dx}!multifit.finc@{multifit.\-finc}}
 \subsubsection[{fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-dx}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-vector) function fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-dx (
@@ -163,6 +217,16 @@ logical function \hyperlink{multifit_8finc_ae28da5d71114b0974e5da3acd305fe34}{fg
 \item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{p}
 \end{DoxyParamCaption}
 )}}\label{multifit_8finc_ab65091d8504740c62c4e7524b9baf849}
+\hypertarget{multifit_8finc_a441635d79b414434f17d9e79d5e5e3bf}{\index{multifit.\-finc@{multifit.\-finc}!fgsl\-\_\-multifit\-\_\-fsolver\-\_\-driver@{fgsl\-\_\-multifit\-\_\-fsolver\-\_\-driver}}
+\index{fgsl\-\_\-multifit\-\_\-fsolver\-\_\-driver@{fgsl\-\_\-multifit\-\_\-fsolver\-\_\-driver}!multifit.finc@{multifit.\-finc}}
+\subsubsection[{fgsl\-\_\-multifit\-\_\-fsolver\-\_\-driver}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-multifit\-\_\-fsolver\-\_\-driver (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multifit\-\_\-fsolver), intent(inout)}]{s, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{maxiter, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{epsabs, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{epsrel}
+\end{DoxyParamCaption}
+)}}\label{multifit_8finc_a441635d79b414434f17d9e79d5e5e3bf}
 \hypertarget{multifit_8finc_a4edb3e095664b64c3d404361b85646b8}{\index{multifit.\-finc@{multifit.\-finc}!fgsl\-\_\-multifit\-\_\-fsolver\-\_\-free@{fgsl\-\_\-multifit\-\_\-fsolver\-\_\-free}}
 \index{fgsl\-\_\-multifit\-\_\-fsolver\-\_\-free@{fgsl\-\_\-multifit\-\_\-fsolver\-\_\-free}!multifit.finc@{multifit.\-finc}}
 \subsubsection[{fgsl\-\_\-multifit\-\_\-fsolver\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-multifit\-\_\-fsolver\-\_\-free (
@@ -252,6 +316,66 @@ logical function \hyperlink{multifit_8finc_ae28da5d71114b0974e5da3acd305fe34}{fg
 \item[{type(fgsl\-\_\-vector), intent(inout)}]{g}
 \end{DoxyParamCaption}
 )}}\label{multifit_8finc_a0451b9c85929c00cd7c5a6ad103dfea3}
+\hypertarget{multifit_8finc_af06ff4c9c8558a30bdf902feb7052d92}{\index{multifit.\-finc@{multifit.\-finc}!fgsl\-\_\-multifit\-\_\-robust@{fgsl\-\_\-multifit\-\_\-robust}}
+\index{fgsl\-\_\-multifit\-\_\-robust@{fgsl\-\_\-multifit\-\_\-robust}!multifit.finc@{multifit.\-finc}}
+\subsubsection[{fgsl\-\_\-multifit\-\_\-robust}]{\setlength{\rightskip}{0pt plus 5cm}integer(c\-\_\-int) function fgsl\-\_\-multifit\-\_\-robust (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-matrix), intent(in)}]{X, }
+\item[{type(fgsl\-\_\-vector), intent(in)}]{y, }
+\item[{type(fgsl\-\_\-vector), intent(inout)}]{c, }
+\item[{type(fgsl\-\_\-matrix), intent(inout)}]{cov, }
+\item[{type(fgsl\-\_\-multifit\-\_\-robust\-\_\-workspace), intent(inout)}]{w}
+\end{DoxyParamCaption}
+)}}\label{multifit_8finc_af06ff4c9c8558a30bdf902feb7052d92}
+\hypertarget{multifit_8finc_a3654cf72cc42ef37e8ffe3d6ae99d1b0}{\index{multifit.\-finc@{multifit.\-finc}!fgsl\-\_\-multifit\-\_\-robust\-\_\-alloc@{fgsl\-\_\-multifit\-\_\-robust\-\_\-alloc}}
+\index{fgsl\-\_\-multifit\-\_\-robust\-\_\-alloc@{fgsl\-\_\-multifit\-\_\-robust\-\_\-alloc}!multifit.finc@{multifit.\-finc}}
+\subsubsection[{fgsl\-\_\-multifit\-\_\-robust\-\_\-alloc}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-multifit\-\_\-robust\-\_\-workspace) function fgsl\-\_\-multifit\-\_\-robust\-\_\-alloc (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multifit\-\_\-robust\-\_\-type), intent(in)}]{t, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{p}
+\end{DoxyParamCaption}
+)}}\label{multifit_8finc_a3654cf72cc42ef37e8ffe3d6ae99d1b0}
+\hypertarget{multifit_8finc_add53db0407ecf7e59f5be47df7b6f6ed}{\index{multifit.\-finc@{multifit.\-finc}!fgsl\-\_\-multifit\-\_\-robust\-\_\-est@{fgsl\-\_\-multifit\-\_\-robust\-\_\-est}}
+\index{fgsl\-\_\-multifit\-\_\-robust\-\_\-est@{fgsl\-\_\-multifit\-\_\-robust\-\_\-est}!multifit.finc@{multifit.\-finc}}
+\subsubsection[{fgsl\-\_\-multifit\-\_\-robust\-\_\-est}]{\setlength{\rightskip}{0pt plus 5cm}integer(c\-\_\-int) function fgsl\-\_\-multifit\-\_\-robust\-\_\-est (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-vector), intent(in)}]{x, }
+\item[{type(fgsl\-\_\-vector), intent(in)}]{c, }
+\item[{type(fgsl\-\_\-matrix), intent(in)}]{cov, }
+\item[{real(c\-\_\-double), intent(out)}]{y, }
+\item[{real(c\-\_\-double), intent(out)}]{y\-\_\-err}
+\end{DoxyParamCaption}
+)}}\label{multifit_8finc_add53db0407ecf7e59f5be47df7b6f6ed}
+\hypertarget{multifit_8finc_ac11e8d149c1983ababeef2251b4a0e0f}{\index{multifit.\-finc@{multifit.\-finc}!fgsl\-\_\-multifit\-\_\-robust\-\_\-free@{fgsl\-\_\-multifit\-\_\-robust\-\_\-free}}
+\index{fgsl\-\_\-multifit\-\_\-robust\-\_\-free@{fgsl\-\_\-multifit\-\_\-robust\-\_\-free}!multifit.finc@{multifit.\-finc}}
+\subsubsection[{fgsl\-\_\-multifit\-\_\-robust\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-multifit\-\_\-robust\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multifit\-\_\-robust\-\_\-workspace), intent(inout)}]{w}
+\end{DoxyParamCaption}
+)}}\label{multifit_8finc_ac11e8d149c1983ababeef2251b4a0e0f}
+\hypertarget{multifit_8finc_a60a15f7b62aa2c94615909be755ddb56}{\index{multifit.\-finc@{multifit.\-finc}!fgsl\-\_\-multifit\-\_\-robust\-\_\-name@{fgsl\-\_\-multifit\-\_\-robust\-\_\-name}}
+\index{fgsl\-\_\-multifit\-\_\-robust\-\_\-name@{fgsl\-\_\-multifit\-\_\-robust\-\_\-name}!multifit.finc@{multifit.\-finc}}
+\subsubsection[{fgsl\-\_\-multifit\-\_\-robust\-\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}character(kind=fgsl\-\_\-char,len=fgsl\-\_\-strmax) function fgsl\-\_\-multifit\-\_\-robust\-\_\-name (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multifit\-\_\-robust\-\_\-workspace), intent(in)}]{w}
+\end{DoxyParamCaption}
+)}}\label{multifit_8finc_a60a15f7b62aa2c94615909be755ddb56}
+\hypertarget{multifit_8finc_a75250ed81d817a7a428dd8ec8adc08dd}{\index{multifit.\-finc@{multifit.\-finc}!fgsl\-\_\-multifit\-\_\-robust\-\_\-statistics@{fgsl\-\_\-multifit\-\_\-robust\-\_\-statistics}}
+\index{fgsl\-\_\-multifit\-\_\-robust\-\_\-statistics@{fgsl\-\_\-multifit\-\_\-robust\-\_\-statistics}!multifit.finc@{multifit.\-finc}}
+\subsubsection[{fgsl\-\_\-multifit\-\_\-robust\-\_\-statistics}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-multifit\-\_\-robust\-\_\-stats) function fgsl\-\_\-multifit\-\_\-robust\-\_\-statistics (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-multifit\-\_\-robust\-\_\-workspace), intent(in)}]{w}
+\end{DoxyParamCaption}
+)}}\label{multifit_8finc_a75250ed81d817a7a428dd8ec8adc08dd}
+\hypertarget{multifit_8finc_ab6c0101ec41f2a22cc3441476266d59d}{\index{multifit.\-finc@{multifit.\-finc}!fgsl\-\_\-multifit\-\_\-robust\-\_\-tune@{fgsl\-\_\-multifit\-\_\-robust\-\_\-tune}}
+\index{fgsl\-\_\-multifit\-\_\-robust\-\_\-tune@{fgsl\-\_\-multifit\-\_\-robust\-\_\-tune}!multifit.finc@{multifit.\-finc}}
+\subsubsection[{fgsl\-\_\-multifit\-\_\-robust\-\_\-tune}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-multifit\-\_\-robust\-\_\-tune (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), intent(in)}]{tune, }
+\item[{type(fgsl\-\_\-multifit\-\_\-robust\-\_\-workspace), intent(in)}]{w}
+\end{DoxyParamCaption}
+)}}\label{multifit_8finc_ab6c0101ec41f2a22cc3441476266d59d}
 \hypertarget{multifit_8finc_a32b6331d1e1c82610b617328dc3234cf}{\index{multifit.\-finc@{multifit.\-finc}!fgsl\-\_\-multifit\-\_\-test\-\_\-delta@{fgsl\-\_\-multifit\-\_\-test\-\_\-delta}}
 \index{fgsl\-\_\-multifit\-\_\-test\-\_\-delta@{fgsl\-\_\-multifit\-\_\-test\-\_\-delta}!multifit.finc@{multifit.\-finc}}
 \subsubsection[{fgsl\-\_\-multifit\-\_\-test\-\_\-delta}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-multifit\-\_\-test\-\_\-delta (

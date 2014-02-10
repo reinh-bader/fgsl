@@ -1,8 +1,7 @@
 \hypertarget{ode_8finc}{\section{api/ode.finc File Reference}
 \label{ode_8finc}\index{api/ode.\-finc@{api/ode.\-finc}}
 }
-This graph shows which files directly or indirectly include this file\-:
-\nopagebreak
+This graph shows which files directly or indirectly include this file\-:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -97,6 +96,8 @@ integer(fgsl\-\_\-int) function \hyperlink{ode_8finc_abf08671d0ef862295d6bf5fd2b
 subroutine \hyperlink{ode_8finc_a1bd2c2d5a3b6758b0a2bf84c64e14c49}{fgsl\-\_\-odeiv2\-\_\-driver\-\_\-free} (d)
 \item 
 logical function \hyperlink{ode_8finc_af058bdba2f220e7f306c7dac6fefc7e8}{fgsl\-\_\-odeiv2\-\_\-driver\-\_\-status} (s)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{ode_8finc_a8428de6bbc5fb897c3795b911a805435}{fgsl\-\_\-odeiv2\-\_\-driver\-\_\-reset\-\_\-hstart} (d, hstart)
 \item 
 type(fgsl\-\_\-odeiv\-\_\-system) function \hyperlink{ode_8finc_ac5419ee4b9617d0020895e1f452e0ec8}{fgsl\-\_\-odeiv\-\_\-system\-\_\-init} (func, dimension, params, jacobian)
 \begin{DoxyCompactList}\small\item\em Constructor for an O\-D\-E system object. \end{DoxyCompactList}\item 
@@ -350,6 +351,14 @@ Note\-: use of fgsl\-\_\-odeiv2\-\_\-control\-\_\-alloc requires an initializer 
 \item[{type(fgsl\-\_\-odeiv2\-\_\-driver), intent(inout)}]{d}
 \end{DoxyParamCaption}
 )}}\label{ode_8finc_abf08671d0ef862295d6bf5fd2b9733b2}
+\hypertarget{ode_8finc_a8428de6bbc5fb897c3795b911a805435}{\index{ode.\-finc@{ode.\-finc}!fgsl\-\_\-odeiv2\-\_\-driver\-\_\-reset\-\_\-hstart@{fgsl\-\_\-odeiv2\-\_\-driver\-\_\-reset\-\_\-hstart}}
+\index{fgsl\-\_\-odeiv2\-\_\-driver\-\_\-reset\-\_\-hstart@{fgsl\-\_\-odeiv2\-\_\-driver\-\_\-reset\-\_\-hstart}!ode.finc@{ode.\-finc}}
+\subsubsection[{fgsl\-\_\-odeiv2\-\_\-driver\-\_\-reset\-\_\-hstart}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-odeiv2\-\_\-driver\-\_\-reset\-\_\-hstart (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\-\_\-odeiv2\-\_\-driver), intent(inout)}]{d, }
+\item[{real(fgsl\-\_\-double), intent(in)}]{hstart}
+\end{DoxyParamCaption}
+)}}\label{ode_8finc_a8428de6bbc5fb897c3795b911a805435}
 \hypertarget{ode_8finc_a524a858cffa85f419e05e2da0a21f813}{\index{ode.\-finc@{ode.\-finc}!fgsl\-\_\-odeiv2\-\_\-driver\-\_\-set\-\_\-hmax@{fgsl\-\_\-odeiv2\-\_\-driver\-\_\-set\-\_\-hmax}}
 \index{fgsl\-\_\-odeiv2\-\_\-driver\-\_\-set\-\_\-hmax@{fgsl\-\_\-odeiv2\-\_\-driver\-\_\-set\-\_\-hmax}!ode.finc@{ode.\-finc}}
 \subsubsection[{fgsl\-\_\-odeiv2\-\_\-driver\-\_\-set\-\_\-hmax}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-odeiv2\-\_\-driver\-\_\-set\-\_\-hmax (

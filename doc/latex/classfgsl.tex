@@ -122,6 +122,12 @@ type \hyperlink{structfgsl_1_1fgsl__multifit__function__fdf}{fgsl\-\_\-multifit\
 \item 
 type \hyperlink{structfgsl_1_1fgsl__multifit__linear__workspace}{fgsl\-\_\-multifit\-\_\-linear\-\_\-workspace}
 \item 
+type \hyperlink{structfgsl_1_1fgsl__multifit__robust__stats}{fgsl\-\_\-multifit\-\_\-robust\-\_\-stats}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__multifit__robust__type}{fgsl\-\_\-multifit\-\_\-robust\-\_\-type}
+\item 
+type \hyperlink{structfgsl_1_1fgsl__multifit__robust__workspace}{fgsl\-\_\-multifit\-\_\-robust\-\_\-workspace}
+\item 
 type \hyperlink{structfgsl_1_1fgsl__multimin__fdfminimizer}{fgsl\-\_\-multimin\-\_\-fdfminimizer}
 \item 
 type \hyperlink{structfgsl_1_1fgsl__multimin__fdfminimizer__type}{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-type}
@@ -1089,6 +1095,27 @@ parameter, public \hyperlink{classfgsl_a7da81682e22860ff3f743dcf2e80b6e5}{fgsl\-
 \item 
 type(\hyperlink{structfgsl_1_1fgsl__interp__type}{fgsl\-\_\-interp\-\_\-type}), \\*
 parameter, public \hyperlink{classfgsl_ae51f422b992227f64fb8505b62335502}{fgsl\-\_\-interp\-\_\-akima\-\_\-periodic} = \hyperlink{structfgsl_1_1fgsl__interp__type}{fgsl\-\_\-interp\-\_\-type}(6)
+\item 
+type(\hyperlink{structfgsl_1_1fgsl__multifit__robust__type}{fgsl\-\_\-multifit\-\_\-robust\-\_\-type}), \\*
+parameter, public \hyperlink{classfgsl_ac1a0aa1e007066fb5ae50fcae0e1c885}{fgsl\-\_\-multifit\-\_\-robust\-\_\-default} = \hyperlink{structfgsl_1_1fgsl__multifit__robust__type}{fgsl\-\_\-multifit\-\_\-robust\-\_\-type}(1)
+\item 
+type(\hyperlink{structfgsl_1_1fgsl__multifit__robust__type}{fgsl\-\_\-multifit\-\_\-robust\-\_\-type}), \\*
+parameter, public \hyperlink{classfgsl_a36d1b09a0ed8ea4c5836ecc7e19e143a}{fgsl\-\_\-multifit\-\_\-robust\-\_\-bisquare} = \hyperlink{structfgsl_1_1fgsl__multifit__robust__type}{fgsl\-\_\-multifit\-\_\-robust\-\_\-type}(2)
+\item 
+type(\hyperlink{structfgsl_1_1fgsl__multifit__robust__type}{fgsl\-\_\-multifit\-\_\-robust\-\_\-type}), \\*
+parameter, public \hyperlink{classfgsl_a106b8dc39c3609e38744526153f66d25}{fgsl\-\_\-multifit\-\_\-robust\-\_\-cauchy} = \hyperlink{structfgsl_1_1fgsl__multifit__robust__type}{fgsl\-\_\-multifit\-\_\-robust\-\_\-type}(3)
+\item 
+type(\hyperlink{structfgsl_1_1fgsl__multifit__robust__type}{fgsl\-\_\-multifit\-\_\-robust\-\_\-type}), \\*
+parameter, public \hyperlink{classfgsl_a924cc37b78fb66006a7353005347bded}{fgsl\-\_\-multifit\-\_\-robust\-\_\-fair} = \hyperlink{structfgsl_1_1fgsl__multifit__robust__type}{fgsl\-\_\-multifit\-\_\-robust\-\_\-type}(4)
+\item 
+type(\hyperlink{structfgsl_1_1fgsl__multifit__robust__type}{fgsl\-\_\-multifit\-\_\-robust\-\_\-type}), \\*
+parameter, public \hyperlink{classfgsl_a3f232d8677261e46e3b90159cdbe985a}{fgsl\-\_\-multifit\-\_\-robust\-\_\-huber} = \hyperlink{structfgsl_1_1fgsl__multifit__robust__type}{fgsl\-\_\-multifit\-\_\-robust\-\_\-type}(5)
+\item 
+type(\hyperlink{structfgsl_1_1fgsl__multifit__robust__type}{fgsl\-\_\-multifit\-\_\-robust\-\_\-type}), \\*
+parameter, public \hyperlink{classfgsl_a21550651577589ca5adf0cdd17517848}{fgsl\-\_\-multifit\-\_\-robust\-\_\-ols} = \hyperlink{structfgsl_1_1fgsl__multifit__robust__type}{fgsl\-\_\-multifit\-\_\-robust\-\_\-type}(6)
+\item 
+type(\hyperlink{structfgsl_1_1fgsl__multifit__robust__type}{fgsl\-\_\-multifit\-\_\-robust\-\_\-type}), \\*
+parameter, public \hyperlink{classfgsl_a5d48e88448a37e7bdc7af12abc799a83}{fgsl\-\_\-multifit\-\_\-robust\-\_\-welsch} = \hyperlink{structfgsl_1_1fgsl__multifit__robust__type}{fgsl\-\_\-multifit\-\_\-robust\-\_\-type}(7)
 \item 
 integer(c\-\_\-int), parameter, public \hyperlink{classfgsl_ad37ba047f5c1bbd5e2621f94d81a5aa4}{fgsl\-\_\-eigen\-\_\-sort\-\_\-val\-\_\-asc} = 0
 \item 
@@ -2295,6 +2322,27 @@ parameter, public \hyperlink{classfgsl_a24b9409272a5a9556e295c38502b6dbc}{fgsl\-
 \hypertarget{classfgsl_a24b9409272a5a9556e295c38502b6dbc}{\index{fgsl@{fgsl}!fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-lmsder@{fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-lmsder}}
 \index{fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-lmsder@{fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-lmsder}!fgsl@{fgsl}}
 \subsubsection[{fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-lmsder}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-type}), parameter, public fgsl\-::fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-lmsder = {\bf fgsl\-\_\-multifit\-\_\-fdfsolver\-\_\-type}(2)}}\label{classfgsl_a24b9409272a5a9556e295c38502b6dbc}
+\hypertarget{classfgsl_a36d1b09a0ed8ea4c5836ecc7e19e143a}{\index{fgsl@{fgsl}!fgsl\-\_\-multifit\-\_\-robust\-\_\-bisquare@{fgsl\-\_\-multifit\-\_\-robust\-\_\-bisquare}}
+\index{fgsl\-\_\-multifit\-\_\-robust\-\_\-bisquare@{fgsl\-\_\-multifit\-\_\-robust\-\_\-bisquare}!fgsl@{fgsl}}
+\subsubsection[{fgsl\-\_\-multifit\-\_\-robust\-\_\-bisquare}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf fgsl\-\_\-multifit\-\_\-robust\-\_\-type}), parameter, public fgsl\-::fgsl\-\_\-multifit\-\_\-robust\-\_\-bisquare = {\bf fgsl\-\_\-multifit\-\_\-robust\-\_\-type}(2)}}\label{classfgsl_a36d1b09a0ed8ea4c5836ecc7e19e143a}
+\hypertarget{classfgsl_a106b8dc39c3609e38744526153f66d25}{\index{fgsl@{fgsl}!fgsl\-\_\-multifit\-\_\-robust\-\_\-cauchy@{fgsl\-\_\-multifit\-\_\-robust\-\_\-cauchy}}
+\index{fgsl\-\_\-multifit\-\_\-robust\-\_\-cauchy@{fgsl\-\_\-multifit\-\_\-robust\-\_\-cauchy}!fgsl@{fgsl}}
+\subsubsection[{fgsl\-\_\-multifit\-\_\-robust\-\_\-cauchy}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf fgsl\-\_\-multifit\-\_\-robust\-\_\-type}), parameter, public fgsl\-::fgsl\-\_\-multifit\-\_\-robust\-\_\-cauchy = {\bf fgsl\-\_\-multifit\-\_\-robust\-\_\-type}(3)}}\label{classfgsl_a106b8dc39c3609e38744526153f66d25}
+\hypertarget{classfgsl_ac1a0aa1e007066fb5ae50fcae0e1c885}{\index{fgsl@{fgsl}!fgsl\-\_\-multifit\-\_\-robust\-\_\-default@{fgsl\-\_\-multifit\-\_\-robust\-\_\-default}}
+\index{fgsl\-\_\-multifit\-\_\-robust\-\_\-default@{fgsl\-\_\-multifit\-\_\-robust\-\_\-default}!fgsl@{fgsl}}
+\subsubsection[{fgsl\-\_\-multifit\-\_\-robust\-\_\-default}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf fgsl\-\_\-multifit\-\_\-robust\-\_\-type}), parameter, public fgsl\-::fgsl\-\_\-multifit\-\_\-robust\-\_\-default = {\bf fgsl\-\_\-multifit\-\_\-robust\-\_\-type}(1)}}\label{classfgsl_ac1a0aa1e007066fb5ae50fcae0e1c885}
+\hypertarget{classfgsl_a924cc37b78fb66006a7353005347bded}{\index{fgsl@{fgsl}!fgsl\-\_\-multifit\-\_\-robust\-\_\-fair@{fgsl\-\_\-multifit\-\_\-robust\-\_\-fair}}
+\index{fgsl\-\_\-multifit\-\_\-robust\-\_\-fair@{fgsl\-\_\-multifit\-\_\-robust\-\_\-fair}!fgsl@{fgsl}}
+\subsubsection[{fgsl\-\_\-multifit\-\_\-robust\-\_\-fair}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf fgsl\-\_\-multifit\-\_\-robust\-\_\-type}), parameter, public fgsl\-::fgsl\-\_\-multifit\-\_\-robust\-\_\-fair = {\bf fgsl\-\_\-multifit\-\_\-robust\-\_\-type}(4)}}\label{classfgsl_a924cc37b78fb66006a7353005347bded}
+\hypertarget{classfgsl_a3f232d8677261e46e3b90159cdbe985a}{\index{fgsl@{fgsl}!fgsl\-\_\-multifit\-\_\-robust\-\_\-huber@{fgsl\-\_\-multifit\-\_\-robust\-\_\-huber}}
+\index{fgsl\-\_\-multifit\-\_\-robust\-\_\-huber@{fgsl\-\_\-multifit\-\_\-robust\-\_\-huber}!fgsl@{fgsl}}
+\subsubsection[{fgsl\-\_\-multifit\-\_\-robust\-\_\-huber}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf fgsl\-\_\-multifit\-\_\-robust\-\_\-type}), parameter, public fgsl\-::fgsl\-\_\-multifit\-\_\-robust\-\_\-huber = {\bf fgsl\-\_\-multifit\-\_\-robust\-\_\-type}(5)}}\label{classfgsl_a3f232d8677261e46e3b90159cdbe985a}
+\hypertarget{classfgsl_a21550651577589ca5adf0cdd17517848}{\index{fgsl@{fgsl}!fgsl\-\_\-multifit\-\_\-robust\-\_\-ols@{fgsl\-\_\-multifit\-\_\-robust\-\_\-ols}}
+\index{fgsl\-\_\-multifit\-\_\-robust\-\_\-ols@{fgsl\-\_\-multifit\-\_\-robust\-\_\-ols}!fgsl@{fgsl}}
+\subsubsection[{fgsl\-\_\-multifit\-\_\-robust\-\_\-ols}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf fgsl\-\_\-multifit\-\_\-robust\-\_\-type}), parameter, public fgsl\-::fgsl\-\_\-multifit\-\_\-robust\-\_\-ols = {\bf fgsl\-\_\-multifit\-\_\-robust\-\_\-type}(6)}}\label{classfgsl_a21550651577589ca5adf0cdd17517848}
+\hypertarget{classfgsl_a5d48e88448a37e7bdc7af12abc799a83}{\index{fgsl@{fgsl}!fgsl\-\_\-multifit\-\_\-robust\-\_\-welsch@{fgsl\-\_\-multifit\-\_\-robust\-\_\-welsch}}
+\index{fgsl\-\_\-multifit\-\_\-robust\-\_\-welsch@{fgsl\-\_\-multifit\-\_\-robust\-\_\-welsch}!fgsl@{fgsl}}
+\subsubsection[{fgsl\-\_\-multifit\-\_\-robust\-\_\-welsch}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf fgsl\-\_\-multifit\-\_\-robust\-\_\-type}), parameter, public fgsl\-::fgsl\-\_\-multifit\-\_\-robust\-\_\-welsch = {\bf fgsl\-\_\-multifit\-\_\-robust\-\_\-type}(7)}}\label{classfgsl_a5d48e88448a37e7bdc7af12abc799a83}
 \hypertarget{classfgsl_a94fc756d777c9358f808374b01e6a879}{\index{fgsl@{fgsl}!fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-conjugate\-\_\-fr@{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-conjugate\-\_\-fr}}
 \index{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-conjugate\-\_\-fr@{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-conjugate\-\_\-fr}!fgsl@{fgsl}}
 \subsubsection[{fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-conjugate\-\_\-fr}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-type}), parameter, public fgsl\-::fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-conjugate\-\_\-fr = {\bf fgsl\-\_\-multimin\-\_\-fdfminimizer\-\_\-type}(3)}}\label{classfgsl_a94fc756d777c9358f808374b01e6a879}

@@ -1,8 +1,7 @@
 \hypertarget{statistics_8finc}{\section{api/statistics.finc File Reference}
 \label{statistics_8finc}\index{api/statistics.\-finc@{api/statistics.\-finc}}
 }
-This graph shows which files directly or indirectly include this file\-:
-\nopagebreak
+This graph shows which files directly or indirectly include this file\-:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -47,6 +46,8 @@ real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_abe8b984e22ce9662518
 real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_a022a3337d746efe8ba47bb7b790978a9}{fgsl\-\_\-stats\-\_\-covariance\-\_\-m} (data1, stride1, data2, stride2, n, mean1, mean2)
 \item 
 real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_ad641fcad25f9ad39af269073822f3700}{fgsl\-\_\-stats\-\_\-correlation} (data1, stride1, data2, stride2, n)
+\item 
+real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_ad2978bbd93b93ac7bb5e47373546bbd6}{fgsl\-\_\-stats\-\_\-spearman} (data1, stride1, data2, stride2, n, work)
 \item 
 real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_ac44e8f61b5d6ece8de2c7859c7324df9}{fgsl\-\_\-stats\-\_\-wmean} (w, wstride, data, stride, n)
 \item 
@@ -321,6 +322,18 @@ real(fgsl\-\_\-double) function \hyperlink{statistics_8finc_acedbc5cc1b4c8b4389c
 \item[{real(fgsl\-\_\-double), intent(in)}]{sd}
 \end{DoxyParamCaption}
 )}}\label{statistics_8finc_abe7a2765433ae6d8d5b01871079bc214}
+\hypertarget{statistics_8finc_ad2978bbd93b93ac7bb5e47373546bbd6}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-spearman@{fgsl\-\_\-stats\-\_\-spearman}}
+\index{fgsl\-\_\-stats\-\_\-spearman@{fgsl\-\_\-stats\-\_\-spearman}!statistics.finc@{statistics.\-finc}}
+\subsubsection[{fgsl\-\_\-stats\-\_\-spearman}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-spearman (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data1, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride1, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{data2, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{stride2, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{n, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(inout)}]{work}
+\end{DoxyParamCaption}
+)}}\label{statistics_8finc_ad2978bbd93b93ac7bb5e47373546bbd6}
 \hypertarget{statistics_8finc_abd5a6101ce9b7e8278e6b9843c92e121}{\index{statistics.\-finc@{statistics.\-finc}!fgsl\-\_\-stats\-\_\-variance@{fgsl\-\_\-stats\-\_\-variance}}
 \index{fgsl\-\_\-stats\-\_\-variance@{fgsl\-\_\-stats\-\_\-variance}!statistics.finc@{statistics.\-finc}}
 \subsubsection[{fgsl\-\_\-stats\-\_\-variance}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-stats\-\_\-variance (

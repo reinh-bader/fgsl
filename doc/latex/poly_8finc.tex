@@ -1,8 +1,7 @@
 \hypertarget{poly_8finc}{\section{api/poly.finc File Reference}
 \label{poly_8finc}\index{api/poly.\-finc@{api/poly.\-finc}}
 }
-This graph shows which files directly or indirectly include this file\-:
-\nopagebreak
+This graph shows which files directly or indirectly include this file\-:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -27,6 +26,8 @@ integer(fgsl\-\_\-int) function \hyperlink{poly_8finc_a76d3df1330a37af57601ec448
 real(fgsl\-\_\-double) function \hyperlink{poly_8finc_ab036239b25d0a9bd95ac747d71c48b8b}{fgsl\-\_\-poly\-\_\-dd\-\_\-eval} (dd, xa, size, x)
 \item 
 integer(fgsl\-\_\-int) function \hyperlink{poly_8finc_ab629459414b3347907c9a0559b75bf64}{fgsl\-\_\-poly\-\_\-dd\-\_\-taylor} (c, xp, dd, x, size, w)
+\item 
+integer(fgsl\-\_\-int) function \hyperlink{poly_8finc_a22ee29152bd09e847e2d85a13ddf08ce}{fgsl\-\_\-poly\-\_\-dd\-\_\-hermite\-\_\-init} (dd, z, xa, ya, dya, size)
 \item 
 integer(fgsl\-\_\-int) function \hyperlink{poly_8finc_a21062b0907ae31ffc799938513ebae02}{fgsl\-\_\-poly\-\_\-solve\-\_\-quadratic} (a, b, c, x0, x1)
 \item 
@@ -130,6 +131,18 @@ integer(fgsl\-\_\-int) function \hyperlink{poly_8finc_a84ce53a3eccf9334e4f4266fb
 \item[{real(fgsl\-\_\-double), intent(in)}]{x}
 \end{DoxyParamCaption}
 )}}\label{poly_8finc_ab036239b25d0a9bd95ac747d71c48b8b}
+\hypertarget{poly_8finc_a22ee29152bd09e847e2d85a13ddf08ce}{\index{poly.\-finc@{poly.\-finc}!fgsl\-\_\-poly\-\_\-dd\-\_\-hermite\-\_\-init@{fgsl\-\_\-poly\-\_\-dd\-\_\-hermite\-\_\-init}}
+\index{fgsl\-\_\-poly\-\_\-dd\-\_\-hermite\-\_\-init@{fgsl\-\_\-poly\-\_\-dd\-\_\-hermite\-\_\-init}!poly.finc@{poly.\-finc}}
+\subsubsection[{fgsl\-\_\-poly\-\_\-dd\-\_\-hermite\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-poly\-\_\-dd\-\_\-hermite\-\_\-init (
+\begin{DoxyParamCaption}
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(inout)}]{dd, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(inout)}]{z, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{xa, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{ya, }
+\item[{real(fgsl\-\_\-double), dimension(\-:), intent(in)}]{dya, }
+\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{size}
+\end{DoxyParamCaption}
+)}}\label{poly_8finc_a22ee29152bd09e847e2d85a13ddf08ce}
 \hypertarget{poly_8finc_a76d3df1330a37af57601ec4480061f52}{\index{poly.\-finc@{poly.\-finc}!fgsl\-\_\-poly\-\_\-dd\-\_\-init@{fgsl\-\_\-poly\-\_\-dd\-\_\-init}}
 \index{fgsl\-\_\-poly\-\_\-dd\-\_\-init@{fgsl\-\_\-poly\-\_\-dd\-\_\-init}!poly.finc@{poly.\-finc}}
 \subsubsection[{fgsl\-\_\-poly\-\_\-dd\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-poly\-\_\-dd\-\_\-init (
