@@ -2,8 +2,8 @@
 
 This is release 1.0.0 of the Fortran interface 
 to the GNU Scientific Library. 
-Although based on version 1.15 of GSL, it maintains backward
-compatibility with versions 1.13 and 1.14.
+Although based on version 1.16 of GSL, it maintains backward
+compatibility with versions 1.13 to 1.15.
 It should also work with future releases apart from missing API mappings.
 
 Please consult the NEWS file for a change log.
@@ -180,5 +180,5 @@ Releases:
   * 0.9.3 May 01, 2010 (revision 4123)
   * 0.9.4 May 31, 2011 (revision 5233)
   --- Migrated to Sourceforge ---
-  * 1.0.0: February, 2014 (revision ???)
+  * 1.0.0: February 11, 2014 (revision 34)
   
