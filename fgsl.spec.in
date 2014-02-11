@@ -18,11 +18,17 @@ Fortran 2003 bindings for the GNU Scientific Library
 
 %package devel
 Summary: Development files for FGSL
-Requires: gsl-devel >= @GSL_VERSION@ pkgconfig
+Requires: gsl-devel >= @GSL_VERSION@ pkgconfig fgsl
 
 %description devel
 Development files for FGSL
 
+%package doc
+Summary: Documentation for FGSL
+Requires: fgsl-devel
+
+%description doc
+Documentation and examples for FGSL
 
 %prep
 %setup -q
@@ -65,9 +71,18 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/fgsl/fgsl.mod
 %{_libdir}/pkgconfig/fgsl.pc
 
+%files doc
+%defattr(-,root,root,-)
+%{_datadir}/doc/fgsl/*
+%{_datadir}/examples/fgsl/*
+
+
 
 
 %changelog
+* Tue Feb 11 2014 Tom Schoonjans
+- added doc package
+
 * Fri Nov 4 2011 Tom Schoonjans
 - gsl version requirement
 
