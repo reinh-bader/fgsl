@@ -1,3 +1,10 @@
+Changes in 1.0.1:
+~~~~~~~~~~~~~~~~~
+* fixed interface of fgsl_hypot and added that for fgsl_hypot3
+  (bug report from Kyle Gerheiser)
+
+
+
 Changes in 1.0.0:
 ~~~~~~~~~~~~~~~~~
 

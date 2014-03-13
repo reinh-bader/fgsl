@@ -31,11 +31,6 @@
     real(fgsl_double) :: fgsl_expm1
     fgsl_expm1 = gsl_expm1(x)
   end function fgsl_expm1
-  function fgsl_hypot(x) 
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_hypot
-    fgsl_hypot = gsl_hypot(x)
-  end function fgsl_hypot
   function fgsl_acosh(x) 
     real(fgsl_double), intent(in) :: x
     real(fgsl_double) :: fgsl_acosh

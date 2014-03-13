@@ -27,11 +27,16 @@
        real(c_double), value :: x
        real(c_double) :: gsl_expm1
      end function gsl_expm1
-     function gsl_hypot(x) bind(c)
+     function fgsl_hypot(x,y) bind(c, name='gsl_hypot')
        import
-       real(c_double), value :: x
-       real(c_double) :: gsl_hypot
-     end function gsl_hypot
+       real(c_double), value :: x, y
+       real(c_double) :: fgsl_hypot
+     end function fgsl_hypot
+     function fgsl_hypot3(x,y,z) bind(c, name='gsl_hypot3')
+       import
+       real(c_double), value :: x, y, z
+       real(c_double) :: fgsl_hypot3
+     end function fgsl_hypot3
      function gsl_acosh(x) bind(c)
        import
        real(c_double), value :: x

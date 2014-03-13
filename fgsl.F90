@@ -70,7 +70,7 @@ module fgsl
   public :: fgsl_open, fgsl_close, fgsl_stdin, fgsl_stdout, fgsl_stderr, fgsl_flush
   public :: assignment(=)
   public :: fgsl_isnan, fgsl_isinf, fgsl_finite, fgsl_log1p, fgsl_expm1, &
-       fgsl_hypot, fgsl_acosh, fgsl_asinh, fgsl_atanh, fgsl_ldexp, fgsl_frexp, &
+       fgsl_hypot, fgsl_hypot3, fgsl_acosh, fgsl_asinh, fgsl_atanh, fgsl_ldexp, fgsl_frexp, &
        fgsl_fcmp, fgsl_function_init, fgsl_function_fdf_init, fgsl_function_free, &
        fgsl_function_fdf_free, fgsl_fn_eval, fgsl_fn_fdf_eval_f, fgsl_fn_fdf_eval_df, &
        fgsl_fn_fdf_eval_f_df 
