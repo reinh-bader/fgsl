@@ -34,7 +34,7 @@ PKG_PROG_PKG_CONFIG
 
 PKG_CHECK_MODULES([gsl],gsl >= 1.13)
 
-local_gsl_version=`pkg-config --modversion gsl`
+local_gsl_version=`$PKG_CONFIG --modversion gsl`
 AC_SUBST(GSL_VERSION,$local_gsl_version)
 AC_DEFINE_UNQUOTED([GSL_VERSION],['$local_gsl_version'],[gsl version])
 AC_DEFINE_UNQUOTED([GSL_VERSION2],[$local_gsl_version],[gsl version without quotes])
