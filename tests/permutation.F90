@@ -1,4 +1,3 @@
-#include "config.h"
 program permutation
   use mod_unit
   use fgsl
@@ -6,9 +5,7 @@ program permutation
   real(fgsl_double), parameter :: eps10 = 1.0E-10_fgsl_double
   type(fgsl_permutation) :: p1, p2, p3
   type(fgsl_combination) :: c1, c2
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
-  type(fgsl_multiset) :: m1, m2 
-#endif
+  type(fgsl_multiset) :: m1, m2
   type(fgsl_error_handler_t) :: std
   type(fgsl_vector) :: vec
   type(fgsl_file) :: pfile
@@ -94,16 +91,16 @@ program permutation
   call unit_assert_equal('fgsl_permute_long_inverse',&
         (/7,2,5,4,3,6,1,8/),int(ida))
   da = (/1.0d0,2.0d0,3.0d0,4.0d0,5.0d0,6.0d0,7.0d0,8.0d0/)
-  vec = fgsl_vector_init(1.0_fgsl_double) 
+  vec = fgsl_vector_init(1.0_fgsl_double)
   status = fgsl_vector_align(da, 4_fgsl_size_t, vec, 4_fgsl_size_t, 0_fgsl_size_t, &
        1_fgsl_size_t)
   status = fgsl_permute_vector(p2,vec)
   call unit_assert_equal_within('fgsl_permute',&
-       (/4.0d0,3.0d0,2.0d0,1.0d0/),da(1:4),eps10)  
+       (/4.0d0,3.0d0,2.0d0,1.0d0/),da(1:4),eps10)
   da = (/1.0d0,2.0d0,3.0d0,4.0d0,5.0d0,6.0d0,7.0d0,8.0d0/)
   status = fgsl_permute_vector_inverse(p2,vec)
   call unit_assert_equal_within('fgsl_permute_inverse',&
-       (/4.0d0,3.0d0,2.0d0,1.0d0/),da(1:4),eps10)  
+       (/4.0d0,3.0d0,2.0d0,1.0d0/),da(1:4),eps10)
   call fgsl_vector_free(vec)
 ! multiply
   status = fgsl_permutation_mul(p3,p1,p2)
@@ -230,7 +227,6 @@ program permutation
 !
 ! Multisets
 !
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
   m1 = fgsl_multiset_alloc(4_fgsl_size_t,2_fgsl_size_t)
   m2 = fgsl_multiset_alloc(4_fgsl_size_t,2_fgsl_size_t)
   call unit_assert_true('fgsl_well_defined',fgsl_well_defined(m1),.true.)
@@ -295,7 +291,6 @@ program permutation
 !
   call fgsl_multiset_free(m1)
   call fgsl_multiset_free(m2)
-#endif
 !
 ! Done
 !

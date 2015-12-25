@@ -15,11 +15,11 @@
     type(fgsl_permutation) :: fgsl_permutation_calloc
     fgsl_permutation_calloc%gsl_permutation = gsl_permutation_calloc(n)
   end function fgsl_permutation_calloc
-  subroutine fgsl_permutation_init(p) 
+  subroutine fgsl_permutation_init(p)
     type(fgsl_permutation), intent(inout) :: p
     call gsl_permutation_init(p%gsl_permutation)
   end subroutine fgsl_permutation_init
-  subroutine fgsl_permutation_free(p) 
+  subroutine fgsl_permutation_free(p)
     type(fgsl_permutation), intent(inout) :: p
     call gsl_permutation_free(p%gsl_permutation)
   end subroutine fgsl_permutation_free
@@ -30,17 +30,17 @@
     fgsl_permutation_memcpy = gsl_permutation_memcpy(dest%gsl_permutation, &
          src%gsl_permutation)
   end function fgsl_permutation_memcpy
-  function fgsl_permutation_get(p, i) 
+  function fgsl_permutation_get(p, i)
     type(fgsl_permutation), intent(inout) :: p
     integer(fgsl_size_t), intent(in) :: i
     integer(fgsl_size_t) :: fgsl_permutation_get
     fgsl_permutation_get = gsl_permutation_get(p%gsl_permutation, i)
   end function fgsl_permutation_get
-  function fgsl_permutation_swap(p, i, j) 
+  function fgsl_permutation_swap(p, i, j)
     type(fgsl_permutation), intent(inout) :: p
     integer(fgsl_size_t), intent(in) :: i, j
     integer(fgsl_int) :: fgsl_permutation_swap
-    fgsl_permutation_swap = gsl_permutation_swap(p%gsl_permutation, i, j) 
+    fgsl_permutation_swap = gsl_permutation_swap(p%gsl_permutation, i, j)
   end function fgsl_permutation_swap
   function fgsl_permutation_size(p)
     type(fgsl_permutation), intent(in) :: p
@@ -61,12 +61,12 @@
        nullify(fgsl_permutation_data)
     end if
   end function fgsl_permutation_data
-  function fgsl_permutation_valid(p) 
+  function fgsl_permutation_valid(p)
     type(fgsl_permutation), intent(in) :: p
     integer(fgsl_int) :: fgsl_permutation_valid
     fgsl_permutation_valid = gsl_permutation_valid(p%gsl_permutation)
   end function fgsl_permutation_valid
-  subroutine fgsl_permutation_reverse(p) 
+  subroutine fgsl_permutation_reverse(p)
     type(fgsl_permutation), intent(inout) :: p
     call gsl_permutation_reverse(p%gsl_permutation)
   end subroutine fgsl_permutation_reverse
@@ -87,42 +87,42 @@
     integer(fgsl_int) :: fgsl_permutation_prev
     fgsl_permutation_prev = gsl_permutation_prev(p%gsl_permutation)
   end function fgsl_permutation_prev
-  function fgsl_permute(p, data, stride, n) 
+  function fgsl_permute(p, data, stride, n)
     integer(fgsl_size_t), intent(in) :: p(:)
     integer(fgsl_size_t), intent(in) :: stride, n
     real(fgsl_double), dimension(:), intent(inout) :: data
     integer(fgsl_int) :: fgsl_permute
     fgsl_permute = gsl_permute(p, data, stride, n)
   end function fgsl_permute
-  function fgsl_permute_long(p, data, stride, n) 
+  function fgsl_permute_long(p, data, stride, n)
     integer(fgsl_size_t), intent(in) :: p(:)
     integer(fgsl_size_t), intent(in) :: stride, n
     integer(fgsl_long), dimension(:), intent(inout) :: data
     integer(fgsl_int) :: fgsl_permute_long
     fgsl_permute_long = gsl_permute_long(p, data, stride, n)
   end function fgsl_permute_long
-  function fgsl_permute_inverse(p, data, stride, n) 
+  function fgsl_permute_inverse(p, data, stride, n)
     integer(fgsl_size_t), intent(in) :: p(:)
     integer(fgsl_size_t), intent(in) :: stride, n
     real(fgsl_double), dimension(:), intent(inout) :: data
     integer(fgsl_int) :: fgsl_permute_inverse
     fgsl_permute_inverse = gsl_permute_inverse(p, data, stride, n)
   end function fgsl_permute_inverse
-  function fgsl_permute_long_inverse(p, data, stride, n) 
+  function fgsl_permute_long_inverse(p, data, stride, n)
     integer(fgsl_size_t), intent(in) :: p(:)
     integer(fgsl_size_t), intent(in) :: stride, n
     integer(fgsl_long), dimension(:), intent(inout) :: data
     integer(fgsl_int) :: fgsl_permute_long_inverse
     fgsl_permute_long_inverse = gsl_permute_long_inverse(p, data, stride, n)
   end function fgsl_permute_long_inverse
-  function fgsl_permute_vector(p,v) 
+  function fgsl_permute_vector(p,v)
     type(fgsl_permutation), intent(in) :: p
     type(fgsl_vector), intent(inout) :: v
     integer(fgsl_int) :: fgsl_permute_vector
     fgsl_permute_vector = &
          gsl_permute_vector(p%gsl_permutation,v%gsl_vector)
   end function fgsl_permute_vector
-  function fgsl_permute_vector_inverse(p,v) 
+  function fgsl_permute_vector_inverse(p,v)
     type(fgsl_permutation), intent(in) :: p
     type(fgsl_vector), intent(inout) :: v
     integer(fgsl_int) :: fgsl_permute_vector_inverse
@@ -150,7 +150,7 @@
     fgsl_permutation_fread = gsl_permutation_fread(stream%gsl_file, &
          p%gsl_permutation)
   end function fgsl_permutation_fread
-  function fgsl_permutation_fprintf(stream, p, format) 
+  function fgsl_permutation_fprintf(stream, p, format)
     type(fgsl_file), intent(in) :: stream
     type(fgsl_permutation), intent(in) :: p
     character(kind=fgsl_char, len=*), intent(in) :: format
@@ -158,14 +158,14 @@
 !
     character(kind=fgsl_char,len=fgsl_strmax) :: lrf
     if (len(trim(format)) < fgsl_strmax) then
-       lrf = trim(format) // c_null_char 
+       lrf = trim(format) // c_null_char
        fgsl_permutation_fprintf = &
             gsl_permutation_fprintf(stream%gsl_file, p%gsl_permutation, lrf)
     else
        fgsl_permutation_fprintf = fgsl_failure
     end if
   end function fgsl_permutation_fprintf
-  function fgsl_permutation_fscanf(stream, p) 
+  function fgsl_permutation_fscanf(stream, p)
     type(fgsl_file), intent(in) :: stream
     type(fgsl_permutation), intent(inout) :: p
     integer(fgsl_int) :: fgsl_permutation_fscanf
@@ -207,7 +207,7 @@
   end function fgsl_permutation_canonical_cycles
 !
 !
-!  
+!
   function fgsl_combination_alloc(n, k)
     integer(fgsl_size_t), intent(in) :: n, k
     type(fgsl_combination) :: fgsl_combination_alloc
@@ -218,15 +218,15 @@
     type(fgsl_combination) :: fgsl_combination_calloc
     fgsl_combination_calloc%gsl_combination = gsl_combination_calloc(n, k)
   end function fgsl_combination_calloc
-  subroutine fgsl_combination_init_first(c) 
+  subroutine fgsl_combination_init_first(c)
     type(fgsl_combination), intent(inout) :: c
     call gsl_combination_init_first(c%gsl_combination)
   end subroutine fgsl_combination_init_first
-  subroutine fgsl_combination_init_last(c) 
+  subroutine fgsl_combination_init_last(c)
     type(fgsl_combination), intent(inout) :: c
     call gsl_combination_init_last(c%gsl_combination)
   end subroutine fgsl_combination_init_last
-  subroutine fgsl_combination_free(c) 
+  subroutine fgsl_combination_free(c)
     type(fgsl_combination), intent(inout) :: c
     call gsl_combination_free(c%gsl_combination)
   end subroutine fgsl_combination_free
@@ -237,7 +237,7 @@
     fgsl_combination_memcpy = gsl_combination_memcpy(dest%gsl_combination, &
          src%gsl_combination)
   end function fgsl_combination_memcpy
-  function fgsl_combination_get(c, i) 
+  function fgsl_combination_get(c, i)
     type(fgsl_combination), intent(inout) :: c
     integer(fgsl_size_t), intent(in) :: i
     integer(fgsl_size_t) :: fgsl_combination_get
@@ -267,7 +267,7 @@
        nullify(fgsl_combination_data)
     end if
   end function fgsl_combination_data
-  function fgsl_combination_valid(c) 
+  function fgsl_combination_valid(c)
     type(fgsl_combination), intent(in) :: c
     integer(fgsl_int) :: fgsl_combination_valid
     fgsl_combination_valid = gsl_combination_valid(c%gsl_combination)
@@ -296,7 +296,7 @@
     fgsl_combination_fread = gsl_combination_fread(stream%gsl_file, &
          c%gsl_combination)
   end function fgsl_combination_fread
-  function fgsl_combination_fprintf(stream, c, format) 
+  function fgsl_combination_fprintf(stream, c, format)
     type(fgsl_file), intent(in) :: stream
     type(fgsl_combination), intent(in) :: c
     character(kind=fgsl_char, len=*), intent(in) :: format
@@ -304,14 +304,14 @@
 !
     character(kind=fgsl_char,len=fgsl_strmax) :: lrf
     if (len(trim(format)) < fgsl_strmax) then
-       lrf = trim(format) // c_null_char 
+       lrf = trim(format) // c_null_char
        fgsl_combination_fprintf = &
             gsl_combination_fprintf(stream%gsl_file, c%gsl_combination, lrf)
     else
        fgsl_combination_fprintf = fgsl_failure
     end if
   end function fgsl_combination_fprintf
-  function fgsl_combination_fscanf(stream, c) 
+  function fgsl_combination_fscanf(stream, c)
     type(fgsl_file), intent(in) :: stream
     type(fgsl_combination), intent(inout) :: c
     integer(fgsl_int) :: fgsl_combination_fscanf
@@ -321,7 +321,6 @@
 !
 !
 !
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
   function fgsl_multiset_alloc(n, k)
     integer(fgsl_size_t), intent(in) :: n, k
     type(fgsl_multiset) :: fgsl_multiset_alloc
@@ -332,15 +331,15 @@
     type(fgsl_multiset) :: fgsl_multiset_calloc
     fgsl_multiset_calloc%gsl_multiset = gsl_multiset_calloc(n, k)
   end function fgsl_multiset_calloc
-  subroutine fgsl_multiset_init_first(c) 
+  subroutine fgsl_multiset_init_first(c)
     type(fgsl_multiset), intent(inout) :: c
     call gsl_multiset_init_first(c%gsl_multiset)
   end subroutine fgsl_multiset_init_first
-  subroutine fgsl_multiset_init_last(c) 
+  subroutine fgsl_multiset_init_last(c)
     type(fgsl_multiset), intent(inout) :: c
     call gsl_multiset_init_last(c%gsl_multiset)
   end subroutine fgsl_multiset_init_last
-  subroutine fgsl_multiset_free(c) 
+  subroutine fgsl_multiset_free(c)
     type(fgsl_multiset), intent(inout) :: c
     call gsl_multiset_free(c%gsl_multiset)
   end subroutine fgsl_multiset_free
@@ -351,7 +350,7 @@
     fgsl_multiset_memcpy = gsl_multiset_memcpy(dest%gsl_multiset, &
          src%gsl_multiset)
   end function fgsl_multiset_memcpy
-  function fgsl_multiset_get(c, i) 
+  function fgsl_multiset_get(c, i)
     type(fgsl_multiset), intent(inout) :: c
     integer(fgsl_size_t), intent(in) :: i
     integer(fgsl_size_t) :: fgsl_multiset_get
@@ -381,7 +380,7 @@
        nullify(fgsl_multiset_data)
     end if
   end function fgsl_multiset_data
-  function fgsl_multiset_valid(c) 
+  function fgsl_multiset_valid(c)
     type(fgsl_multiset), intent(in) :: c
     integer(fgsl_int) :: fgsl_multiset_valid
     fgsl_multiset_valid = gsl_multiset_valid(c%gsl_multiset)
@@ -410,7 +409,7 @@
     fgsl_multiset_fread = gsl_multiset_fread(stream%gsl_file, &
          c%gsl_multiset)
   end function fgsl_multiset_fread
-  function fgsl_multiset_fprintf(stream, c, format) 
+  function fgsl_multiset_fprintf(stream, c, format)
     type(fgsl_file), intent(in) :: stream
     type(fgsl_multiset), intent(in) :: c
     character(kind=fgsl_char, len=*), intent(in) :: format
@@ -418,21 +417,20 @@
 !
     character(kind=fgsl_char,len=fgsl_strmax) :: lrf
     if (len(trim(format)) < fgsl_strmax) then
-       lrf = trim(format) // c_null_char 
+       lrf = trim(format) // c_null_char
        fgsl_multiset_fprintf = &
             gsl_multiset_fprintf(stream%gsl_file, c%gsl_multiset, lrf)
     else
        fgsl_multiset_fprintf = fgsl_failure
     end if
   end function fgsl_multiset_fprintf
-  function fgsl_multiset_fscanf(stream, c) 
+  function fgsl_multiset_fscanf(stream, c)
     type(fgsl_file), intent(in) :: stream
     type(fgsl_multiset), intent(inout) :: c
     integer(fgsl_int) :: fgsl_multiset_fscanf
     fgsl_multiset_fscanf = gsl_multiset_fscanf(stream%gsl_file, &
          c%gsl_multiset)
   end function fgsl_multiset_fscanf
-#endif
 
 !
 ! additional utilities
@@ -468,13 +466,8 @@
     integer(fgsl_size_t) :: fgsl_sizeof_combination
     fgsl_sizeof_combination = gsl_aux_sizeof_combination()
   end function fgsl_sizeof_combination
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
   function fgsl_sizeof_multiset(c)
     type(fgsl_multiset), intent(in) :: c
     integer(fgsl_size_t) :: fgsl_sizeof_multiset
     fgsl_sizeof_multiset = gsl_aux_sizeof_multiset()
   end function fgsl_sizeof_multiset
-#endif
-
-
-

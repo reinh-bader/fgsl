@@ -1,4 +1,3 @@
-#include "config.h"
 program poly
   use mod_unit
   use fgsl
@@ -32,17 +31,15 @@ program poly
   ra = fgsl_poly_dd_eval(da, xa, 3_fgsl_size_t, 2.0_fgsl_double)
   call unit_assert_equal('fgsl_poly_dd_init',fgsl_success,status)
   call unit_assert_equal_within('fgsl_poly_dd_eval',8.0d0,ra,eps10)
-  status = fgsl_poly_dd_taylor(di, 0.0_fgsl_double, da, xa, 3_fgsl_size_t, d) 
+  status = fgsl_poly_dd_taylor(di, 0.0_fgsl_double, da, xa, 3_fgsl_size_t, d)
   ra = di(1) + 2.0d0 * di(2) + 4.0d0 * di(3)
   call unit_assert_equal('fgsl_poly_dd_taylor:status',fgsl_success,status)
   call unit_assert_equal_within('fgsl_poly_dd_taylor',8.0d0,ra,eps10)
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
   dya(1:3) =  (/4.5_fgsl_double, -11.0_fgsl_double, .6_fgsl_double/)
   status = fgsl_poly_dd_hermite_init(da, za, xa, ya, dya, 3_fgsl_size_t)
   ra = fgsl_poly_dd_eval(da, za, 6_fgsl_size_t, 2.0_fgsl_double)
 ! FIXME: unclear whether the constant 6 above is correct.
   call unit_assert_equal_within('fgsl_poly_dd_hermite_init',8.0d0,ra,eps10)
-#endif
   status = fgsl_poly_solve_quadratic(1.0_fgsl_double, -3.0_fgsl_double, &
        2.0_fgsl_double, ra, ri)
   call unit_assert_equal('fgsl_poly_solve_quadratic:status',2,status)

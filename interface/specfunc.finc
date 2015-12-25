@@ -847,7 +847,7 @@
        integer(c_int) :: gsl_sf_coulomb_wave_fg_e
      end function gsl_sf_coulomb_wave_fg_e
      function gsl_sf_coulomb_wave_f_array (l_min, kmax, eta, x, fc_array, &
-          f_exponent) bind(c, name='gsl_sf_coulomb_wave_F_array') 
+          f_exponent) bind(c, name='gsl_sf_coulomb_wave_F_array')
        import
        real(c_double), value :: l_min, eta, x
        integer(c_int), value :: kmax
@@ -856,7 +856,7 @@
        integer(c_int) :: gsl_sf_coulomb_wave_f_array
      end function gsl_sf_coulomb_wave_f_array
      function gsl_sf_coulomb_wave_fg_array (l_min, kmax, eta, x, fc_array, &
-          gc_array, f_exponent, g_exponent) bind(c, name='gsl_sf_coulomb_wave_FG_array') 
+          gc_array, f_exponent, g_exponent) bind(c, name='gsl_sf_coulomb_wave_FG_array')
        import
        real(c_double), value :: l_min, eta, x
        integer(c_int), value :: kmax
@@ -866,7 +866,7 @@
      end function gsl_sf_coulomb_wave_fg_array
      function gsl_sf_coulomb_wave_fgp_array (l_min, kmax, eta, x, fc_array, fcp_array, &
           gc_array, gcp_array, f_exponent, g_exponent) &
-          bind(c, name='gsl_sf_coulomb_wave_FGp_array') 
+          bind(c, name='gsl_sf_coulomb_wave_FGp_array')
        import
        real(c_double), value :: l_min, eta, x
        integer(c_int), value :: kmax
@@ -876,7 +876,7 @@
        integer(c_int) :: gsl_sf_coulomb_wave_fgp_array
      end function gsl_sf_coulomb_wave_fgp_array
      function gsl_sf_coulomb_wave_sphf_array (l_min, kmax, eta, x, fc_array, &
-          f_exponent) bind(c, name='gsl_sf_coulomb_wave_sphF_array') 
+          f_exponent) bind(c, name='gsl_sf_coulomb_wave_sphF_array')
        import
        real(c_double), value :: l_min, eta, x
        integer(c_int), value :: kmax
@@ -1025,7 +1025,7 @@
        type(gsl_sf_result), intent(out) :: result
        integer(c_int) :: gsl_sf_dilog_e
      end function gsl_sf_dilog_e
-     function gsl_sf_complex_dilog_e(r, theta, result_re, result_im) bind(c) 
+     function gsl_sf_complex_dilog_e(r, theta, result_re, result_im) bind(c)
        import
        real(c_double), value :: r, theta
        type(gsl_sf_result), intent(out) :: result_re, result_im
@@ -1035,13 +1035,13 @@
        import
        real(c_double), value :: x, y
        type(gsl_sf_result), intent(out) :: result
-       integer(c_int) :: gsl_sf_multiply_e       
+       integer(c_int) :: gsl_sf_multiply_e
      end function gsl_sf_multiply_e
      function gsl_sf_multiply_err_e(x, dx, y, dy, result) bind(c)
        import
        real(c_double), value :: x, y, dx, dy
        type(gsl_sf_result), intent(out) :: result
-       integer(c_int) :: gsl_sf_multiply_err_e       
+       integer(c_int) :: gsl_sf_multiply_err_e
      end function gsl_sf_multiply_err_e
      function gsl_sf_ellint_kcomp(k, mode) bind(c, name='gsl_sf_ellint_Kcomp')
        import
@@ -1121,9 +1121,9 @@
        type(gsl_sf_result), intent(out) :: result
        integer(c_int) :: gsl_sf_ellint_p_e
      end function gsl_sf_ellint_p_e
-     function gsl_sf_ellint_d(phi, k, n, mode) bind(c, name='gsl_sf_ellint_D')
+     function gsl_sf_ellint_d(phi, k, mode) bind(c, name='gsl_sf_ellint_D')
        import
-       real(c_double), value :: phi, k, n
+       real(c_double), value :: phi, k
        integer(c_int), value :: mode
        real(c_double) :: gsl_sf_ellint_d
      end function gsl_sf_ellint_d
@@ -1385,7 +1385,7 @@
        integer(c_int) :: gsl_sf_expint_e2_e
      end function gsl_sf_expint_e2_e
      function gsl_sf_expint_en(n, x) bind(c, name='gsl_sf_expint_En')
-       import 
+       import
        integer(c_int), value :: n
        real(c_double), value :: x
        real(c_double) :: gsl_sf_expint_en
@@ -2178,22 +2178,6 @@
        type(gsl_sf_result), intent(out) :: result
        integer(c_int) :: gsl_sf_legendre_plm_e
      end function gsl_sf_legendre_plm_e
-     function gsl_sf_legendre_plm_array(lmax, m, x, res_arr) &
-          bind(c, name='gsl_sf_legendre_Plm_array')
-       import
-       integer(c_int), value :: lmax, m
-       real(c_double), value :: x
-       real(c_double), dimension(*), intent(out) :: res_arr
-       integer(c_int) :: gsl_sf_legendre_plm_array
-     end function gsl_sf_legendre_plm_array
-     function gsl_sf_legendre_plm_deriv_array(lmax, m, x, res_arr, der_arr) &
-          bind(c, name='gsl_sf_legendre_Plm_deriv_array')
-       import
-       integer(c_int), value :: lmax, m
-       real(c_double), value :: x
-       real(c_double), dimension(*), intent(out) :: res_arr, der_arr
-       integer(c_int) :: gsl_sf_legendre_plm_deriv_array
-     end function gsl_sf_legendre_plm_deriv_array
      function gsl_sf_legendre_sphplm(l, m, x) bind(c, name='gsl_sf_legendre_sphPlm')
        import
        integer(c_int), value :: l, m
@@ -2207,27 +2191,6 @@
        type(gsl_sf_result), intent(out) :: result
        integer(c_int) :: gsl_sf_legendre_sphplm_e
      end function gsl_sf_legendre_sphplm_e
-     function gsl_sf_legendre_sphplm_array(lmax, m, x, res_arr) &
-          bind(c, name='gsl_sf_legendre_sphPlm_array')
-       import
-       integer(c_int), value :: lmax, m
-       real(c_double), value :: x
-       real(c_double), dimension(*), intent(out) :: res_arr
-       integer(c_int) :: gsl_sf_legendre_sphplm_array
-     end function gsl_sf_legendre_sphplm_array
-     function gsl_sf_legendre_sphplm_deriv_array(lmax, m, x, res_arr, der_arr) &
-          bind(c, name='gsl_sf_legendre_sphPlm_deriv_array')
-       import
-       integer(c_int), value :: lmax, m
-       real(c_double), value :: x
-       real(c_double), dimension(*), intent(out) :: res_arr, der_arr
-       integer(c_int) :: gsl_sf_legendre_sphplm_deriv_array
-     end function gsl_sf_legendre_sphplm_deriv_array
-     function gsl_sf_legendre_array_size(lmax, m) bind(c)
-       import
-       integer(c_int), value :: lmax, m
-       integer(c_int) :: gsl_sf_legendre_array_size
-     end function gsl_sf_legendre_array_size
      function gsl_sf_conicalp_half(lambda, x) bind(c, name='gsl_sf_conicalP_half')
        import
        real(c_double), value :: lambda, x

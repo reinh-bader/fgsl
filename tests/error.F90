@@ -22,7 +22,7 @@ program error
   integer(fgsl_size_t), parameter :: nmax=10
   type(fgsl_error_handler_t) :: std, off, mine
   type(fgsl_interp) :: interp
-  integer :: i 
+  integer :: i
   integer(fgsl_int) :: status
   character(kind=fgsl_char, len=fgsl_strmax) :: message
   real(fgsl_double), dimension(10) :: xa, ya
@@ -69,10 +69,10 @@ program error
 !
 ! Done
 !
-  call unit_finalize() 
+  call unit_finalize()
   flush(6)
 !
-! Copy back standard handler 
+! Copy back standard handler
 !
   call fgsl_interp_free(interp)
   off = fgsl_set_error_handler(std)
@@ -80,5 +80,5 @@ program error
 ! the following lines should not be reached
   call unit_init(1)
   call unit_assert_equal('fgsl_interp_alloc:nofail',0,1)
-  call unit_finalize() 
+  call unit_finalize()
 end program error

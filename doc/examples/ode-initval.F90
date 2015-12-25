@@ -1,5 +1,4 @@
 #include "config.h"
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
 module mod_ode
   use fgsl
   use, intrinsic :: iso_c_binding
@@ -74,10 +73,3 @@ program ode
   call fgsl_odeiv2_step_free (ode_step)
   call fgsl_odeiv2_system_free(ode_system)
 end program ode
-#else
-program ode
-implicit none
-!skip test
-call exit(77)
-endprogram ode
-#endif

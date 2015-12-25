@@ -5,14 +5,14 @@
 !> \page "Comments on polynomials"
 !> Please go to api/poly.finc for the API documentation.
 
-  function fgsl_poly_eval(c, len, x) 
+  function fgsl_poly_eval(c, len, x)
     real(fgsl_double), intent(in) :: c(:)
     integer(fgsl_int), intent(in) :: len
     real(fgsl_double), intent(in) :: x
     real(fgsl_double) :: fgsl_poly_eval
     fgsl_poly_eval = gsl_poly_eval(c, len, x)
   end function fgsl_poly_eval
-  function fgsl_poly_complex_eval(c, len, z) 
+  function fgsl_poly_complex_eval(c, len, z)
     real(fgsl_double), intent(in) :: c(:)
     integer(fgsl_int), intent(in) :: len
     complex(fgsl_double_complex), intent(in) :: z
@@ -21,7 +21,7 @@
     zz = z
     fgsl_poly_complex_eval = gsl_poly_complex_eval(c, len, zz)
   end function fgsl_poly_complex_eval
-  function fgsl_complex_poly_complex_eval(c, len, z) 
+  function fgsl_complex_poly_complex_eval(c, len, z)
     complex(fgsl_double_complex), intent(in) :: c(:)
     integer(fgsl_int), intent(in) :: len
     complex(fgsl_double_complex), intent(in) :: z
@@ -29,15 +29,15 @@
     type(gsl_complex) :: zz, cz(len)
     zz = z
     cz = c
-    fgsl_complex_poly_complex_eval = gsl_complex_poly_complex_eval(cz, len, zz) 
+    fgsl_complex_poly_complex_eval = gsl_complex_poly_complex_eval(cz, len, zz)
   end function fgsl_complex_poly_complex_eval
-  function fgsl_poly_eval_derivs(c, lenc, x, res, lenres) 
+  function fgsl_poly_eval_derivs(c, lenc, x, res, lenres)
     integer(fgsl_int) :: fgsl_poly_eval_derivs
     integer(fgsl_size_t), intent(in) :: lenc, lenres
     real(fgsl_double), dimension(:), intent(in) :: c
     real(fgsl_double), dimension(:) :: res
     real(fgsl_double), intent(in) :: x
-    fgsl_poly_eval_derivs = gsl_poly_eval_derivs(c, lenc, x, res, lenres) 
+    fgsl_poly_eval_derivs = gsl_poly_eval_derivs(c, lenc, x, res, lenres)
   end function fgsl_poly_eval_derivs
   function fgsl_poly_dd_init(dd, x, y, size)
     real(fgsl_double), intent(inout) :: dd(:)
@@ -46,14 +46,14 @@
     integer(fgsl_int) :: fgsl_poly_dd_init
     fgsl_poly_dd_init = gsl_poly_dd_init(dd, x, y, size)
   end function fgsl_poly_dd_init
-  function fgsl_poly_dd_eval(dd, xa, size, x) 
+  function fgsl_poly_dd_eval(dd, xa, size, x)
     real(fgsl_double), intent(in) :: dd(:), xa(:)
     real(fgsl_double), intent(in) :: x
     integer(fgsl_size_t), intent(in) :: size
     real(fgsl_double) :: fgsl_poly_dd_eval
     fgsl_poly_dd_eval = gsl_poly_dd_eval(dd, xa, size, x)
   end function fgsl_poly_dd_eval
-  function fgsl_poly_dd_taylor(c, xp, dd, x, size, w) 
+  function fgsl_poly_dd_taylor(c, xp, dd, x, size, w)
     real(fgsl_double), intent(inout) :: c(:)
     real(fgsl_double), intent(in) :: xp
     real(fgsl_double), intent(in) :: dd(:), x(:)
@@ -62,7 +62,6 @@
     integer(fgsl_int) :: fgsl_poly_dd_taylor
     fgsl_poly_dd_taylor = gsl_poly_dd_taylor(c, xp, dd, x, size, w)
   end function fgsl_poly_dd_taylor
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
   function fgsl_poly_dd_hermite_init(dd, z, xa, ya, dya, size)
     real(fgsl_double), intent(inout) :: dd(:), z(:)
     real(fgsl_double), intent(in) :: xa(:), ya(:), dya(:)
@@ -70,30 +69,29 @@
     integer(fgsl_int) :: fgsl_poly_dd_hermite_init
     fgsl_poly_dd_hermite_init = gsl_poly_dd_hermite_init(dd, z, xa, ya, dya, size)
   end function fgsl_poly_dd_hermite_init
-#endif
-  function fgsl_poly_solve_quadratic(a, b, c, x0, x1) 
+  function fgsl_poly_solve_quadratic(a, b, c, x0, x1)
     real(fgsl_double), intent(in) :: a, b, c
     real(fgsl_double), intent(out) :: x0, x1
     integer(fgsl_int) :: fgsl_poly_solve_quadratic
     fgsl_poly_solve_quadratic = gsl_poly_solve_quadratic(a, b, c, x0, x1)
   end function fgsl_poly_solve_quadratic
-  function fgsl_poly_complex_solve_quadratic(a, b, c, x0, x1) 
+  function fgsl_poly_complex_solve_quadratic(a, b, c, x0, x1)
     real(fgsl_double), intent(in) :: a, b, c
     complex(fgsl_double_complex), intent(out) :: x0, x1
     integer(fgsl_int) :: fgsl_poly_complex_solve_quadratic
 !
     type(gsl_complex) :: z0, z1
     fgsl_poly_complex_solve_quadratic = gsl_poly_complex_solve_quadratic(a, b, c, z0, z1)
-    x0 = z0 
+    x0 = z0
     x1 = z1
   end function fgsl_poly_complex_solve_quadratic
-  function fgsl_poly_solve_cubic(a, b, c, x0, x1, x2) 
+  function fgsl_poly_solve_cubic(a, b, c, x0, x1, x2)
     real(fgsl_double), intent(in) :: a, b, c
     real(fgsl_double), intent(out) :: x0, x1, x2
     integer(fgsl_int) :: fgsl_poly_solve_cubic
     fgsl_poly_solve_cubic = gsl_poly_solve_cubic(a, b, c, x0, x1, x2)
   end function fgsl_poly_solve_cubic
-  function fgsl_poly_complex_solve_cubic(a, b, c, x0, x1, x2) 
+  function fgsl_poly_complex_solve_cubic(a, b, c, x0, x1, x2)
     real(fgsl_double), intent(in) :: a, b, c
     complex(fgsl_double_complex), intent(out) :: x0, x1, x2
     integer(fgsl_int) :: fgsl_poly_complex_solve_cubic
@@ -104,12 +102,12 @@
     x1 = z1
     x2 = z2
   end function fgsl_poly_complex_solve_cubic
-  function fgsl_poly_complex_workspace_alloc(n) 
+  function fgsl_poly_complex_workspace_alloc(n)
     integer(fgsl_size_t), intent(in) :: n
     type(fgsl_poly_complex_workspace) :: fgsl_poly_complex_workspace_alloc
     fgsl_poly_complex_workspace_alloc%gsl_poly_complex_workspace = gsl_poly_complex_workspace_alloc(n)
   end function fgsl_poly_complex_workspace_alloc
-  subroutine fgsl_poly_complex_workspace_free(w) 
+  subroutine fgsl_poly_complex_workspace_free(w)
     type(fgsl_poly_complex_workspace), intent(inout) :: w
     call gsl_poly_complex_workspace_free(w%gsl_poly_complex_workspace)
   end subroutine fgsl_poly_complex_workspace_free
@@ -121,7 +119,7 @@
        fgsl_poly_complex_workspace_stat = .false.
     end if
   end function fgsl_poly_complex_workspace_stat
-  function fgsl_poly_complex_solve(a, n, w, z) 
+  function fgsl_poly_complex_solve(a, n, w, z)
     real(fgsl_double), intent(in) :: a(:)
     integer(fgsl_size_t), intent(in) :: n
     type(fgsl_poly_complex_workspace), intent(inout) :: w
@@ -129,12 +127,13 @@
     integer(fgsl_int) :: fgsl_poly_complex_solve
 !
     real(fgsl_double), allocatable :: zz(:)
-    integer :: istat, i
+    integer :: istat
+    integer(fgsl_size_t) :: i
     allocate(zz(2*n-2), stat=istat)
     if (istat /= 0) then
        fgsl_poly_complex_solve = fgsl_enomem
     else
-       fgsl_poly_complex_solve = gsl_poly_complex_solve(a, n, w%gsl_poly_complex_workspace, zz) 
+       fgsl_poly_complex_solve = gsl_poly_complex_solve(a, n, w%gsl_poly_complex_workspace, zz)
        do i=1,n-1
           z(i) = zz(2*i-1) + (0.0_fgsl_double, 1.0_fgsl_double) * zz(2*i)
        end do

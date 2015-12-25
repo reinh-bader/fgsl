@@ -98,12 +98,10 @@
     import :: c_ptr
     type(c_ptr), value :: v
   end subroutine gsl_sort_vector
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
   subroutine gsl_sort_vector2(v1, v2) bind(c)
     import :: c_ptr
     type(c_ptr), value :: v1, v2
   end subroutine gsl_sort_vector2
-#endif
   function gsl_sort_vector_index(p,v) bind(c)
     import :: c_ptr, c_int
     integer(c_int) :: gsl_sort_vector_index
@@ -137,4 +135,3 @@
     integer(c_size_t) :: p(k)
     type(c_ptr), value :: v
   end function gsl_sort_vector_largest_index
-

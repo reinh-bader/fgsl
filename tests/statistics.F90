@@ -1,4 +1,3 @@
-#include "config.h"
 program statistics
   use fgsl
   use mod_unit
@@ -55,7 +54,7 @@ program statistics
   do i=1,nsize
      xc = xc + ((dble(i)**2 - s_mean)/s_sd)**3
   end do
-  xc = xc/dble(nsize) 
+  xc = xc/dble(nsize)
   s_skew = fgsl_stats_skew(s_array,1_fgsl_size_t,nsize)
   call unit_assert_equal_within('fgsl_stats_skew',&
        xc,s_skew,eps10)
@@ -108,7 +107,6 @@ program statistics
   call unit_assert_equal_within('fgsl_stats_correlation',&
        0.9694696278887304786d0,s_cor,eps10)
 !
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
   s_array = (/ (cos(dble(i)), i=1, nsize) /)
   s_arr2 = (/ (dble(i)**1.2, i=1, nsize) /)
   s_spear = fgsl_stats_spearman(s_array,1_fgsl_size_t,s_arr2,1_fgsl_size_t, &
@@ -116,7 +114,6 @@ program statistics
   call unit_assert_equal_within('fgsl_stats_spearman',&
        4.5858343337334934D-02,s_spear,eps10)
 
-#endif
 !
   s_array = (/ (dble(i)**2, i=1, nsize) /)
   s_arr2 = (/ (dble(i), i=1, nsize) /)
@@ -158,7 +155,7 @@ program statistics
   do i=1,nsize
      xc = xc + ((dble(i)**2 - s_mean)/s_sd)**3
   end do
-  xc = xc/dble(nsize) 
+  xc = xc/dble(nsize)
   s_skew = fgsl_stats_wskew(w,1_fgsl_size_t,s_array,1_fgsl_size_t,nsize)
   call unit_assert_equal_within('fgsl_stats_wskew',&
        xc,s_skew,eps10)
@@ -211,5 +208,5 @@ program statistics
 !
 ! Done
 !
-  call unit_finalize() 
+  call unit_finalize()
 end program statistics

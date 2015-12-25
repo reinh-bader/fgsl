@@ -54,7 +54,6 @@
        integer(c_size_t), value :: size
        integer(c_int) :: gsl_poly_dd_taylor
      end function gsl_poly_dd_taylor
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
      function gsl_poly_dd_hermite_init(dd, z, xa, ya, dya, size) bind(c)
        import
        real(c_double), dimension(*), intent(inout) :: dd, z
@@ -62,7 +61,6 @@
        integer(c_size_t), value :: size
        integer(c_int) :: gsl_poly_dd_hermite_init
      end function gsl_poly_dd_hermite_init
-#endif
      function gsl_poly_solve_quadratic(a, b, c, x0, x1) bind(c)
        import
        real(c_double), value :: a, b, c

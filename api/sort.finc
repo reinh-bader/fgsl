@@ -123,12 +123,10 @@
     type(fgsl_vector), intent(inout) :: v
     call gsl_sort_vector(v%gsl_vector)
   end subroutine fgsl_sort_vector
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
   subroutine fgsl_sort_vector2(v1, v2)
     type(fgsl_vector), intent(inout) :: v1, v2
     call gsl_sort_vector2(v1%gsl_vector, v2%gsl_vector)
   end subroutine fgsl_sort_vector2
-#endif
   subroutine fgsl_sort_vector_index(p,v)
     type(fgsl_permutation), intent(inout) :: p
     type(fgsl_vector), intent(in) :: v
@@ -163,5 +161,3 @@
     type(fgsl_vector), intent(inout) :: v
     fgsl_sort_vector_largest_index = gsl_sort_vector_largest_index(p, k, v%gsl_vector)
   end function fgsl_sort_vector_largest_index
- 
-  

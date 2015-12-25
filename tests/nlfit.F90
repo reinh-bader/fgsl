@@ -1,11 +1,10 @@
-#include "config.h"
 module mod_nlfit
   use, intrinsic :: iso_c_binding
   use fgsl
   use mod_unit
   implicit none
   real(fgsl_double), parameter :: eps10 = 1.0d-10
-  type data 
+  type data
      integer(fgsl_size_t) :: n
      real(fgsl_double), allocatable :: y(:), sigma(:)
   end type data
@@ -84,6 +83,7 @@ program nlfit
   type(fgsl_multifit_fdfsolver) :: nlfit_slv
   type(fgsl_vector) :: xvec, pos
   type(data), target :: fitdata
+  integer(fgsl_int) :: info
 !
 ! Test simulated annealing routines
 !
@@ -119,7 +119,7 @@ program nlfit
      end if
      status = fgsl_multifit_test_delta(fgsl_multifit_fdfsolver_dx(nlfit_slv), &
           fgsl_multifit_fdfsolver_position(nlfit_slv), eps6, eps6)
-     if (status == fgsl_success) then 
+     if (status == fgsl_success) then
         exit
      end if
   end do
@@ -130,11 +130,10 @@ program nlfit
   status = fgsl_vector_align(pv, pos)
   call unit_assert_equal_within('fgsl_multifit_fdfsolver_position-1',&
        (/4.8799966121990526d0,0.10993467064985155d0,1.1946651536729409d0/), &
-       pv, eps10) 
+       pv, eps10)
   call fgsl_vector_free(xvec)
   call fgsl_multifit_fdfsolver_free(nlfit_slv)
   call fgsl_multifit_function_fdf_free(nlfit_fdf)
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
   nlfit_fdf = fgsl_multifit_function_fdf_init(expb_f, expb_df, expb_fdf, nmax, nrt, ptr)
   nlfit_slv = fgsl_multifit_fdfsolver_alloc(fgsl_multifit_fdfsolver_lmsder, nmax, nrt)
   xv(1:3) = (/1.0_fgsl_double, 0.0_fgsl_double, 0.0_fgsl_double/)
@@ -146,22 +145,22 @@ program nlfit
   status = fgsl_multifit_fdfsolver_set(nlfit_slv, nlfit_fdf, xvec)
   call unit_assert_equal('fgsl_multifit_fdfsolver_set:status', &
        fgsl_success,status)
-  status = fgsl_multifit_fdfsolver_driver(nlfit_slv, itmax_root, eps6, eps6)
+  status = fgsl_multifit_fdfsolver_driver(nlfit_slv, itmax_root, &
+  1e-8_fgsl_double, 1e-8_fgsl_double, 0.0_fgsl_double, info)
   call unit_assert_equal('fgsl_multifit_fdfsolver_driver:status', &
        fgsl_success,status)
   pos = fgsl_multifit_fdfsolver_position(nlfit_slv)
   status = fgsl_vector_align(pv, pos)
   call unit_assert_equal_within('fgsl_multifit_fdfsolver_position-1',&
        (/4.8799966121990526d0,0.10993467064985155d0,1.1946651536729409d0/), &
-       pv, eps10) 
+       pv, eps10)
   call fgsl_vector_free(xvec)
   call fgsl_multifit_fdfsolver_free(nlfit_slv)
   call fgsl_multifit_function_fdf_free(nlfit_fdf)
-#endif
   deallocate(fitdata%y,fitdata%sigma)
   call fgsl_rng_free(rng)
 !
 ! Done
 !
-  call unit_finalize() 
+  call unit_finalize()
 end program nlfit

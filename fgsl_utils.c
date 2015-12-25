@@ -7,9 +7,7 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_odeiv.h>
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
 #include <gsl/gsl_odeiv2.h>
-#endif
 #include <gsl/gsl_rng.h>
 #include <gsl/gsl_qrng.h>
 #include <gsl/gsl_integration.h>
@@ -27,18 +25,13 @@
 #include <gsl/gsl_monte_vegas.h>
 #include <gsl/gsl_permutation.h>
 #include <gsl/gsl_combination.h>
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
 #include <gsl/gsl_multiset.h>
-#endif
 #include <gsl/gsl_wavelet.h>
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_matrix.h>
 // FIXME: remove after IBM compiler fixed
 #include <gsl/gsl_sf.h>
-
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
 #include <gsl/gsl_multifit.h>
-#endif
 
 
 gsl_function *fgsl_function_cinit(double (*func)(double x, void *params), void *params) {
@@ -70,7 +63,7 @@ double fgsl_fn_fdf_eval_f_aux(gsl_function_fdf *f, double x) {
 double fgsl_fn_fdf_eval_df_aux(gsl_function_fdf *f, double x) {
     return GSL_FN_FDF_EVAL_DF(f,x);
 }
-void fgsl_fn_fdf_eval_f_df_aux(gsl_function_fdf *f, double x, double *y, 
+void fgsl_fn_fdf_eval_f_df_aux(gsl_function_fdf *f, double x, double *y,
 				double *dy) {
     GSL_FN_FDF_EVAL_F_DF(f,x,y,dy);
 }
@@ -107,12 +100,12 @@ void fgsl_aux_vector_double_free(gsl_vector *vec) {
     free(vec);
 }
 
-int fgsl_aux_vector_double_align(double *a, size_t len, gsl_vector *fvec, size_t size, 
+int fgsl_aux_vector_double_align(double *a, size_t len, gsl_vector *fvec, size_t size,
 				 size_t offset, size_t stride) {
-    
+
     if (fvec == NULL || fvec->block == NULL) {
 	return GSL_EFAULT;
-    } 
+    }
     if (offset + size*stride > len) {
 	return GSL_EINVAL;
     }
@@ -148,13 +141,13 @@ void fgsl_aux_vector_complex_free(gsl_vector_complex *vec) {
     free(vec);
 }
 
-int fgsl_aux_vector_complex_align(double *a, size_t len, 
-				  gsl_vector_complex *fvec, size_t size, 
+int fgsl_aux_vector_complex_align(double *a, size_t len,
+				  gsl_vector_complex *fvec, size_t size,
 				  size_t offset, size_t stride) {
-    
+
     if (fvec == NULL || fvec->block == NULL) {
 	return GSL_EFAULT;
-    } 
+    }
     if (offset + size*stride > len) {
 	return GSL_EINVAL;
     }
@@ -191,10 +184,10 @@ void fgsl_aux_matrix_double_free(gsl_matrix *mat) {
 }
 
 int fgsl_aux_matrix_double_align(double *a, size_t lda, size_t n, size_t m, gsl_matrix *fvec) {
-    
+
     if (fvec == NULL || fvec->block == NULL) {
 	return GSL_EFAULT;
-    } 
+    }
     if (n > lda) {
 	return GSL_EINVAL;
     }
@@ -231,12 +224,12 @@ void fgsl_aux_matrix_complex_free(gsl_matrix_complex *mat) {
     free(mat);
 }
 
-int fgsl_aux_matrix_complex_align(double *a, size_t lda, size_t n, 
+int fgsl_aux_matrix_complex_align(double *a, size_t lda, size_t n,
 				  size_t m, gsl_matrix_complex *fvec) {
-    
+
     if (fvec == NULL || fvec->block == NULL) {
 	return GSL_EFAULT;
-    } 
+    }
     if (n > lda) {
 	return GSL_EINVAL;
     }
@@ -250,7 +243,7 @@ int fgsl_aux_matrix_complex_align(double *a, size_t lda, size_t n,
     return GSL_SUCCESS;
 }
 
-void fgsl_aux_matrix_complex_size(gsl_matrix_complex *fvec, 
+void fgsl_aux_matrix_complex_size(gsl_matrix_complex *fvec,
 				  size_t *lda, size_t *m, size_t *n) {
     if (m != NULL)
     	*m = fvec->size2;
@@ -292,9 +285,9 @@ const gsl_interp_type *fgsl_aux_interp_alloc(int i) {
     return res;
 }
 
-gsl_odeiv_system *fgsl_odeiv_system_cinit( 
-			     int (*func)(double t, const double y[], double dydt[], void * params), 
-			     size_t dimension, void *params, 
+gsl_odeiv_system *fgsl_odeiv_system_cinit(
+			     int (*func)(double t, const double y[], double dydt[], void * params),
+			     size_t dimension, void *params,
 			     int (*jacobian)(double t, const double y[], double * dfdy, double dfdt[], void * params)) {
     gsl_odeiv_system *result;
 // debug
@@ -317,10 +310,9 @@ gsl_odeiv_system *fgsl_odeiv_system_cinit(
     return result;
 }
 
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
-gsl_odeiv2_system *fgsl_odeiv2_system_cinit( 
-			     int (*func)(double t, const double y[], double dydt[], void * params), 
-			     size_t dimension, void *params, 
+gsl_odeiv2_system *fgsl_odeiv2_system_cinit(
+			     int (*func)(double t, const double y[], double dydt[], void * params),
+			     size_t dimension, void *params,
 			     int (*jacobian)(double t, const double y[], double * dfdy, double dfdt[], void * params)) {
     gsl_odeiv2_system *result;
     result = (gsl_odeiv2_system *) malloc(sizeof(gsl_odeiv2_system));
@@ -330,18 +322,14 @@ gsl_odeiv2_system *fgsl_odeiv2_system_cinit(
     result->dimension = dimension;
     return result;
 }
-#endif
 
 void fgsl_odeiv_system_cfree(gsl_odeiv_system *system) {
     free(system);
 }
 
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
 void fgsl_odeiv2_system_cfree(gsl_odeiv2_system *system) {
     free(system);
 }
-#endif
-
 
 const gsl_odeiv_step_type *fgsl_aux_odeiv_step_alloc(int i) {
     const gsl_odeiv_step_type *res;
@@ -386,7 +374,6 @@ const gsl_odeiv_step_type *fgsl_aux_odeiv_step_alloc(int i) {
     return res;
 }
 
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
 const gsl_odeiv2_step_type *fgsl_aux_odeiv2_step_alloc(int i) {
     const gsl_odeiv2_step_type *res;
     switch(i) {
@@ -429,7 +416,6 @@ const gsl_odeiv2_step_type *fgsl_aux_odeiv2_step_alloc(int i) {
     }
     return res;
 }
-#endif
 
 const gsl_rng_type *fgsl_aux_rng_assign(int i) {
     const gsl_rng_type *res;
@@ -652,7 +638,6 @@ const gsl_qrng_type *fgsl_aux_qrng_assign(int i) {
     return res;
 }
 
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
 const gsl_multifit_robust_type *fgsl_aux_multifit_robust_alloc(int i) {
     const gsl_multifit_robust_type *res;
     switch (i) {
@@ -683,7 +668,6 @@ const gsl_multifit_robust_type *fgsl_aux_multifit_robust_alloc(int i) {
     }
     return res;
 }
-#endif
 
 const gsl_wavelet_type *fgsl_aux_wavelet_alloc(int i) {
     const gsl_wavelet_type *res;
@@ -746,9 +730,9 @@ void fgsl_monte_miser_cgetparams(gsl_monte_miser_state *s, double *estimate_frac
     *dither = s->dither;
 }
 
-void fgsl_monte_vegas_csetparams(gsl_monte_vegas_state *s, double result, 
-				 double sigma, double chisq, double alpha, 
-				 size_t iterations, int stage, int mode, 
+void fgsl_monte_vegas_csetparams(gsl_monte_vegas_state *s, double result,
+				 double sigma, double chisq, double alpha,
+				 size_t iterations, int stage, int mode,
 				 int verbose, FILE* ostream) {
     s->result = result;
     s->sigma = sigma;
@@ -760,9 +744,9 @@ void fgsl_monte_vegas_csetparams(gsl_monte_vegas_state *s, double result,
     s->verbose = verbose;
     s->ostream = ostream;
 }
-void fgsl_monte_vegas_cgetparams(gsl_monte_vegas_state *s, double *result, 
-				 double *sigma, double *chisq, double *alpha, 
-				 size_t *iterations, int *stage, int *mode, 
+void fgsl_monte_vegas_cgetparams(gsl_monte_vegas_state *s, double *result,
+				 double *sigma, double *chisq, double *alpha,
+				 size_t *iterations, int *stage, int *mode,
 				 int *verbose, FILE* ostream) {
     *result = s->result;
     *sigma = s->sigma;
@@ -833,7 +817,7 @@ const gsl_min_fminimizer_type *fgsl_aux_fminimizer_alloc(int i) {
     return res;
 }
 
-gsl_multiroot_function *fgsl_multiroot_function_cinit(int (*f)(const gsl_vector *x, void *params, 
+gsl_multiroot_function *fgsl_multiroot_function_cinit(int (*f)(const gsl_vector *x, void *params,
 							       gsl_vector *f), size_t n, void *params) {
     gsl_multiroot_function *result;
     result = (gsl_multiroot_function *) malloc(sizeof(gsl_multiroot_function));
@@ -885,7 +869,7 @@ const gsl_multiroot_fsolver_type *fgsl_aux_multiroot_fsolver_alloc(int i) {
 	    break;
     }
     return res;
-    
+
 }
 
 const gsl_multiroot_fdfsolver_type *fgsl_aux_multiroot_fdfsolver_alloc(int i) {
@@ -908,10 +892,10 @@ const gsl_multiroot_fdfsolver_type *fgsl_aux_multiroot_fdfsolver_alloc(int i) {
 	    break;
     }
     return res;
-    
+
 }
 
-gsl_multimin_function *fgsl_multimin_function_cinit(double (*f)(const gsl_vector *, void *), 
+gsl_multimin_function *fgsl_multimin_function_cinit(double (*f)(const gsl_vector *, void *),
 						    size_t n, void *params) {
     gsl_multimin_function *result;
     result = (gsl_multimin_function *) malloc(sizeof(gsl_multimin_function));
@@ -922,7 +906,7 @@ gsl_multimin_function *fgsl_multimin_function_cinit(double (*f)(const gsl_vector
 }
 
 gsl_multimin_function_fdf *fgsl_multimin_function_fdf_cinit(
-    double (*f)(const gsl_vector *, void *), 
+    double (*f)(const gsl_vector *, void *),
     void (*df)(const gsl_vector *, void *, gsl_vector *),
     void (*fdf)(const gsl_vector *, void *, double *, gsl_vector *),
     size_t n, void *params) {
@@ -984,11 +968,11 @@ const gsl_multimin_fdfminimizer_type *fgsl_aux_multimin_fdfminimizer_alloc(int i
 	    res = NULL;
 	    break;
     }
-    return res;   
+    return res;
 }
 
-gsl_multifit_function *fgsl_multifit_function_cinit(int (*f)(const gsl_vector *x, void *params, 
-							     gsl_vector *f), 
+gsl_multifit_function *fgsl_multifit_function_cinit(int (*f)(const gsl_vector *x, void *params,
+							     gsl_vector *f),
 						    size_t n, size_t p, void *params) {
     gsl_multifit_function *result;
     result = (gsl_multifit_function *) malloc(sizeof(gsl_multifit_function));
@@ -1022,7 +1006,6 @@ void fgsl_multifit_function_fdf_cfree(gsl_multifit_function_fdf *fun) {
     free(fun);
 }
 
-
 const gsl_multifit_fsolver_type *fgsl_aux_multifit_fsolver_alloc(int i) {
     const gsl_multifit_fsolver_type *res;
     switch(i) {
@@ -1031,7 +1014,7 @@ const gsl_multifit_fsolver_type *fgsl_aux_multifit_fsolver_alloc(int i) {
 	    break;
     }
     return res;
-    
+
 }
 
 const gsl_multifit_fdfsolver_type *fgsl_aux_multifit_fdfsolver_alloc(int i) {
@@ -1043,12 +1026,15 @@ const gsl_multifit_fdfsolver_type *fgsl_aux_multifit_fdfsolver_alloc(int i) {
 	case 2:
 	    res = gsl_multifit_fdfsolver_lmsder;
 	    break;
+	case 3:
+	    res = gsl_multifit_fdfsolver_lmniel;
+	    break;
 	default:
 	    res = NULL;
 	    break;
     }
     return res;
-    
+
 }
 
 
@@ -1087,9 +1073,9 @@ gsl_vector *gsl_multifit_fdfsolver_dx(gsl_multifit_fdfsolver *s) {
 gsl_vector *gsl_multifit_fdfsolver_f(gsl_multifit_fdfsolver *s) {
     return s->f;
 }
-gsl_matrix *gsl_multifit_fdfsolver_jac(gsl_multifit_fdfsolver *s) {
+/*gsl_matrix *gsl_multifit_fdfsolver_jac(gsl_multifit_fdfsolver *s) {
     return s->J;
-}
+}*/
 
 
 //FIXME: remove again once IBM compiler fixed
@@ -1242,7 +1228,7 @@ int gsl_sf_bessel_kcn_scaled_e(int n, const double x,  gsl_sf_result * result) {
 
 int gsl_sf_bessel_kcn_scaled_array(int nmin, int nmax, double x, double * result_array) {
     return gsl_sf_bessel_Kn_scaled_array(nmin, nmax, x, result_array);
-}    
+}
 
 
 size_t gsl_aux_sizeof_double() {
@@ -1277,11 +1263,9 @@ size_t gsl_aux_sizeof_combination() {
 }
 
 
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
 size_t gsl_aux_sizeof_multiset() {
     return sizeof(gsl_multiset);
 }
-#endif
 size_t gsl_aux_sizeof_vector() {
     return sizeof(gsl_vector);
 }

@@ -1,4 +1,4 @@
-AC_INIT([fgsl],[1.0.0],[Reinhold.Bader@lrz.de])
+AC_INIT([fgsl],[1.1.0],[Reinhold.Bader@lrz.de])
 AC_PREREQ([2.69])
 
 AC_CONFIG_AUX_DIR([build-aux])
@@ -7,7 +7,7 @@ AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 
 AC_CANONICAL_HOST
 
-LIB_CURRENT=0
+LIB_CURRENT=1
 LIB_REVISION=0
 LIB_AGE=0
 AC_SUBST(LIB_CURRENT)
@@ -32,7 +32,7 @@ fi
 #initialize pkg-config
 PKG_PROG_PKG_CONFIG
 
-PKG_CHECK_MODULES([gsl],gsl >= 1.13)
+PKG_CHECK_MODULES([gsl],gsl >= 2.1)
 
 local_gsl_version=`$PKG_CONFIG --modversion gsl`
 AC_SUBST(GSL_VERSION,$local_gsl_version)
@@ -100,7 +100,7 @@ AC_LANG_POP(Fortran)
 
 
 
-AC_CONFIG_FILES([Makefile api/Makefile interface/Makefile tests/Makefile fgsl.pc fgsl.spec doc/Makefile doc/examples/Makefile])
+AC_CONFIG_FILES([Makefile tests/Makefile fgsl.pc fgsl.spec doc/Makefile doc/examples/Makefile])
 AC_CONFIG_HEADERS([config.h])
 
 abs_top_builddir=`pwd -P`

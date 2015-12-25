@@ -26,7 +26,6 @@
      module procedure fgsl_permutation_status
      module procedure fgsl_combination_status
      module procedure fgsl_multiset_status
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
      module procedure fgsl_odeiv_control_status
      module procedure fgsl_odeiv_evolve_status
      module procedure fgsl_odeiv_step_status
@@ -36,7 +35,6 @@
      module procedure fgsl_odeiv2_step_status
      module procedure fgsl_odeiv2_system_status
      module procedure fgsl_odeiv2_driver_status
-#endif
      module procedure fgsl_poly_complex_workspace_stat
      module procedure fgsl_rng_status
      module procedure fgsl_qrng_status
@@ -80,9 +78,7 @@
      module procedure fgsl_sizeof_interp
      module procedure fgsl_sizeof_permutation
      module procedure fgsl_sizeof_combination
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
      module procedure fgsl_sizeof_multiset
-#endif
      module procedure fgsl_sizeof_integration_workspace
      module procedure fgsl_sizeof_integration_qaws_table
      module procedure fgsl_sizeof_integration_qawo_table
@@ -90,9 +86,9 @@
      module procedure fgsl_sizeof_wavelet_workspace
   end interface
   interface fgsl_obj_c_ptr
-     module procedure fgsl_rng_c_ptr 
-     module procedure fgsl_vector_c_ptr 
-     module procedure fgsl_matrix_c_ptr 
+     module procedure fgsl_rng_c_ptr
+     module procedure fgsl_vector_c_ptr
+     module procedure fgsl_matrix_c_ptr
   end interface
   interface assignment(=)
      module procedure fgsl_complex_to_complex
@@ -198,5 +194,3 @@
      module procedure fgsl_ieee_printf_float
      module procedure fgsl_ieee_printf_double
   end interface
-     
-     
