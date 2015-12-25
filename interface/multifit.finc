@@ -138,11 +138,6 @@
     type(c_ptr), value :: x, wts, fdf, f, J
     integer(c_int) :: gsl_multifit_fdfsolver_dif_df
   end function gsl_multifit_fdfsolver_dif_df
-  function gsl_multifit_fdfsolver_dif_fdf(x, fdf, f, J) bind(c)
-    import :: c_ptr, c_int
-    type(c_ptr), value :: x, fdf, f, J
-    integer(c_int) :: gsl_multifit_fdfsolver_dif_fdf
-  end function gsl_multifit_fdfsolver_dif_fdf
   function gsl_multifit_robust_alloc(T, n, p) bind(c)
     import :: c_ptr, c_size_t
     type(c_ptr), value :: T

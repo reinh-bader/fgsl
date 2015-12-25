@@ -617,7 +617,7 @@ module fgsl
        fgsl_multifit_fdfsolver_residual, fgsl_multifit_fdfsolver_niter, fgsl_multifit_eval_wf, &
        fgsl_multifit_eval_wdf, fgsl_multifit_fdfsolver_test
   public :: fgsl_multifit_fsolver_driver, fgsl_multifit_fdfsolver_driver, &
-       fgsl_multifit_fdfsolver_dif_df, fgsl_multifit_fdfsolver_dif_fdf
+       fgsl_multifit_fdfsolver_dif_df 
   public :: fgsl_multifit_robust_alloc, fgsl_multifit_robust_free, &
        fgsl_multifit_robust_tune, fgsl_multifit_robust_name, &
        fgsl_multifit_robust_statistics, fgsl_multifit_robust, &
