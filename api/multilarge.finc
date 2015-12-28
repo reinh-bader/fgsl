@@ -1,0 +1,146 @@
+!-*-f90-*-
+!
+!  API: large linear least squares systems
+!
+
+function fgsl_multilarge_linear_alloc(T, p)
+  type(fgsl_multilarge_linear_type), intent(in) :: T
+  integer(fgsl_size_t), intent(in) :: p
+  type(fgsl_multilarge_linear_workspace) :: fgsl_multilarge_linear_alloc
+  type(c_ptr) :: ftype
+  ftype = fgsl_aux_multilarge_linear_alloc(t%which)
+  fgsl_multilarge_linear_alloc%gsl_multilarge_linear_workspace = &
+  gsl_multilarge_linear_alloc(ftype, p)
+end function fgsl_multilarge_linear_alloc
+
+subroutine fgsl_multilarge_linear_free(w)
+  type(fgsl_multilarge_linear_workspace), intent(inout) :: w
+  call gsl_multilarge_linear_free(w%gsl_multilarge_linear_workspace)
+end subroutine fgsl_multilarge_linear_free
+
+function fgsl_multilarge_linear_name(w)
+  type(fgsl_multilarge_linear_workspace), intent(in) :: w
+  character(kind=fgsl_char,len=fgsl_strmax) :: fgsl_multilarge_linear_name
+  type(c_ptr) :: name
+  name = gsl_multilarge_linear_name(w%gsl_multilarge_linear_workspace)
+  fgsl_multilarge_linear_name = fgsl_name(name)
+end function fgsl_multilarge_linear_name
+
+function fgsl_multilarge_linear_reset(w)
+  type(fgsl_multilarge_linear_workspace), intent(in) :: w
+  integer(fgsl_int) :: fgsl_multilarge_linear_reset
+  fgsl_multilarge_linear_reset = gsl_multilarge_linear_reset(&
+  w%gsl_multilarge_linear_workspace)
+end function fgsl_multilarge_linear_reset
+
+function fgsl_multilarge_linear_accumulate(X, y, w)
+  type(fgsl_matrix), intent(inout) :: X
+  type(fgsl_vector), intent(inout) :: y
+  type(fgsl_multilarge_linear_workspace), intent(in) :: w
+  integer(fgsl_int) :: fgsl_multilarge_linear_accumulate
+  fgsl_multilarge_linear_accumulate = gsl_multilarge_linear_accumulate(&
+  X%gsl_matrix, y%gsl_vector, &
+  w%gsl_multilarge_linear_workspace)
+end function fgsl_multilarge_linear_accumulate
+
+function fgsl_multilarge_linear_solve(lambda, c, rnorm, snorm, w)
+  real(c_double), intent(in) :: lambda
+  type(fgsl_vector), intent(inout) :: c
+  real(c_double), intent(out) :: rnorm, snorm
+  type(fgsl_multilarge_linear_workspace), intent(inout) :: w
+  integer(fgsl_int) :: fgsl_multilarge_linear_solve
+  fgsl_multilarge_linear_solve = gsl_multilarge_linear_solve(&
+  lambda, c%gsl_vector, rnorm, snorm, w%gsl_multilarge_linear_workspace)
+end function fgsl_multilarge_linear_solve
+
+function fgsl_multilarge_linear_rcond(rcond, w)
+  real(c_double), intent(out) :: rcond
+  type(fgsl_multilarge_linear_workspace), intent(inout) :: w
+  integer(fgsl_int) :: fgsl_multilarge_linear_rcond
+  fgsl_multilarge_linear_rcond = gsl_multilarge_linear_rcond(rcond, &
+  w%gsl_multilarge_linear_workspace)
+end function fgsl_multilarge_linear_rcond
+
+function fgsl_multilarge_linear_lcurve(reg_param, rho, eta, w)
+  type(fgsl_vector), intent(inout) :: reg_param, rho, eta
+  type(fgsl_multilarge_linear_workspace), intent(inout) :: w
+  integer(fgsl_int) :: fgsl_multilarge_linear_lcurve
+  fgsl_multilarge_linear_lcurve = gsl_multilarge_linear_lcurve(&
+  reg_param%gsl_vector, rho%gsl_vector, eta%gsl_vector, &
+  w%gsl_multilarge_linear_workspace)
+end function fgsl_multilarge_linear_lcurve
+
+function fgsl_multilarge_linear_wstdform1(L, X, w, y, Xs, ys, work)
+  type(fgsl_vector), intent(in) :: L, X, w, y
+  type(fgsl_matrix), intent(inout) :: Xs
+  type(fgsl_vector), intent(inout) :: ys
+  type(fgsl_multilarge_linear_workspace), intent(inout) :: work
+  integer(fgsl_int) :: fgsl_multilarge_linear_wstdform1
+  fgsl_multilarge_linear_wstdform1 = gsl_multilarge_linear_wstdform1(&
+  L%gsl_vector, X%gsl_vector, w%gsl_vector, y%gsl_vector, &
+  Xs%gsl_matrix, ys%gsl_vector, work%gsl_multilarge_linear_workspace)
+end function fgsl_multilarge_linear_wstdform1
+
+function fgsl_multilarge_linear_stdform1(L, X, y, Xs, ys, work)
+  type(fgsl_vector), intent(in) :: L, X, y
+  type(fgsl_matrix), intent(inout) :: Xs
+  type(fgsl_vector), intent(inout) :: ys
+  type(fgsl_multilarge_linear_workspace), intent(inout) :: work
+  integer(fgsl_int) :: fgsl_multilarge_linear_stdform1
+  fgsl_multilarge_linear_stdform1 = gsl_multilarge_linear_stdform1(&
+  L%gsl_vector, X%gsl_vector, y%gsl_vector, &
+  Xs%gsl_matrix, ys%gsl_vector, work%gsl_multilarge_linear_workspace)
+end function fgsl_multilarge_linear_stdform1
+
+function fgsl_multilarge_linear_l_decomp(L, tau)
+  type(fgsl_matrix), intent(inout) :: L
+  type(fgsl_vector), intent(inout) :: tau
+  integer(fgsl_int) :: fgsl_multilarge_linear_l_decomp
+  fgsl_multilarge_linear_l_decomp = gsl_multilarge_linear_l_decomp(&
+  L%gsl_matrix, tau%gsl_vector)
+end function fgsl_multilarge_linear_l_decomp
+
+function fgsl_multilarge_linear_wstdform2(LQR, Ltau, X, w, y, Xs, ys, work)
+  type(fgsl_matrix), intent(in) :: LQR, X
+  type(fgsl_vector), intent(in) :: Ltau, w, y
+  type(fgsl_matrix), intent(inout) :: Xs
+  type(fgsl_vector), intent(inout) :: ys
+  type(fgsl_multilarge_linear_workspace), intent(inout) :: work
+  integer(fgsl_int) :: fgsl_multilarge_linear_wstdform2
+  fgsl_multilarge_linear_wstdform2 = gsl_multilarge_linear_wstdform2(&
+  LQR%gsl_matrix, Ltau%gsl_vector, X%gsl_matrix, w%gsl_vector, y%gsl_vector,&
+  Xs%gsl_matrix, ys%gsl_vector, work%gsl_multilarge_linear_workspace)
+end function fgsl_multilarge_linear_wstdform2
+
+function fgsl_multilarge_linear_stdform2(LQR, Ltau, X, y, Xs, ys, work)
+  type(fgsl_matrix), intent(in) :: LQR, X
+  type(fgsl_vector), intent(in) :: Ltau, y
+  type(fgsl_matrix), intent(inout) :: Xs
+  type(fgsl_vector), intent(inout) :: ys
+  type(fgsl_multilarge_linear_workspace), intent(inout) :: work
+  integer(fgsl_int) :: fgsl_multilarge_linear_stdform2
+  fgsl_multilarge_linear_stdform2 = gsl_multilarge_linear_stdform2(&
+  LQR%gsl_matrix, Ltau%gsl_vector, X%gsl_matrix, y%gsl_vector,&
+  Xs%gsl_matrix, ys%gsl_vector, work%gsl_multilarge_linear_workspace)
+end function fgsl_multilarge_linear_stdform2
+
+function fgsl_multilarge_linear_genform1(L, cs, c, work)
+  type(fgsl_vector), intent(in) :: L, cs
+  type(fgsl_vector), intent(inout) :: c
+  type(fgsl_multilarge_linear_workspace), intent(inout) :: work
+  integer(fgsl_int) :: fgsl_multilarge_linear_genform1
+  fgsl_multilarge_linear_genform1 = gsl_multilarge_linear_genform1(&
+  L%gsl_vector, cs%gsl_vector, c%gsl_vector, &
+  work%gsl_multilarge_linear_workspace)
+end function fgsl_multilarge_linear_genform1
+
+function fgsl_multilarge_linear_genform2(LQR, Ltau, cs, c, work)
+  type(fgsl_matrix), intent(in) :: LQR
+  type(fgsl_vector), intent(in) :: Ltau, cs
+  type(fgsl_vector), intent(inout) :: c
+  type(fgsl_multilarge_linear_workspace), intent(inout) :: work
+  integer(fgsl_int) :: fgsl_multilarge_linear_genform2
+  fgsl_multilarge_linear_genform2 = gsl_multilarge_linear_genform2(&
+  LQR%gsl_matrix, Ltau%gsl_vector, cs%gsl_vector, c%gsl_vector, &
+  work%gsl_multilarge_linear_workspace)
+end function fgsl_multilarge_linear_genform2

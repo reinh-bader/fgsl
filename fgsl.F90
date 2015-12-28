@@ -601,10 +601,6 @@ module fgsl
        fgsl_multifit_linear_rcond, fgsl_multifit_robust_maxiter, &
        fgsl_multifit_robust_weights, fgsl_multifit_robust_residuals
 
-
-
-!TODO: new gsl_multifit_linear functions
-
   public :: fgsl_multifit_function_init, fgsl_multifit_function_fdf_init, &
        fgsl_multifit_function_free, fgsl_multifit_function_fdf_free, fgsl_multifit_fsolver_alloc, &
        fgsl_multifit_fdfsolver_alloc, fgsl_multifit_fsolver_free, fgsl_multifit_fdfsolver_free, &
@@ -622,6 +618,17 @@ module fgsl
        fgsl_multifit_robust_tune, fgsl_multifit_robust_name, &
        fgsl_multifit_robust_statistics, fgsl_multifit_robust, &
        fgsl_multifit_robust_est
+
+! large linear least squares systems
+  public :: fgsl_multilarge_linear_alloc, fgsl_multilarge_linear_free, &
+       fgsl_multilarge_linear_name, fgsl_multilarge_linear_reset, &
+       fgsl_multilarge_linear_accumulate, fgsl_multilarge_linear_solve, &
+       fgsl_multilarge_linear_rcond, fgsl_multilarge_linear_lcurve, &
+       fgsl_multilarge_linear_wstdform1, fgsl_multilarge_linear_stdform1, &
+       fgsl_multilarge_linear_l_decomp, fgsl_multilarge_linear_wstdform2, &
+       fgsl_multilarge_linear_stdform2, fgsl_multilarge_linear_genform1, &
+       fgsl_multilarge_linear_genform2
+
 ! statistics
   public :: fgsl_stats_mean, fgsl_stats_variance, fgsl_stats_variance_m, &
        fgsl_stats_sd, fgsl_stats_sd_m, fgsl_stats_variance_with_fixed_mean, &
@@ -1041,6 +1048,21 @@ module fgsl
      private
      type(c_ptr) :: gsl_matrix_complex = c_null_ptr
   end type fgsl_matrix_complex
+!
+! Types: large linear least squares systems
+!
+  type, public :: fgsl_multilarge_linear_type
+    private
+    integer(fgsl_int) :: which = 0
+  end type fgsl_multilarge_linear_type
+  type(fgsl_multilarge_linear_type), parameter, public :: &
+    fgsl_multilarge_linear_normal = fgsl_multilarge_linear_type(1), &
+    fgsl_multilarge_linear_tsqr = fgsl_multilarge_linear_type(2)
+
+  type, public :: fgsl_multilarge_linear_workspace
+    private
+    type(c_ptr) :: gsl_multilarge_linear_workspace
+  end type fgsl_multilarge_linear_workspace
 !
 ! Types : Interpolation
 !
@@ -1731,6 +1753,7 @@ module fgsl
 #include "interface/multifit.finc"
 #include "interface/bspline.finc"
 #include "interface/ieee.finc"
+#include "interface/multilarge.finc"
   end interface
 #include "interface/generics.finc"
 contains
@@ -1769,4 +1792,5 @@ contains
 #include "api/multifit.finc"
 #include "api/bspline.finc"
 #include "api/ieee.finc"
+#include "api/multilarge.finc"
 end module fgsl

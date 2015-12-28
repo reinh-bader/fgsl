@@ -32,6 +32,7 @@
 // FIXME: remove after IBM compiler fixed
 #include <gsl/gsl_sf.h>
 #include <gsl/gsl_multifit.h>
+#include <gsl/gsl_multilarge.h>
 
 
 gsl_function *fgsl_function_cinit(double (*func)(double x, void *params), void *params) {
@@ -893,6 +894,22 @@ const gsl_multiroot_fdfsolver_type *fgsl_aux_multiroot_fdfsolver_alloc(int i) {
     }
     return res;
 
+}
+
+const gsl_multilarge_linear_type *fgsl_aux_multilarge_linear_alloc(int i) {
+  const gsl_multilarge_linear_type *res;
+  switch (i) {
+    case 1:
+      res = gsl_multilarge_linear_normal;
+      break;
+    case 2:
+      res = gsl_multilarge_linear_tsqr;
+      break;
+    default:
+      res = NULL;
+      break;
+  }
+  return res;
 }
 
 gsl_multimin_function *fgsl_multimin_function_cinit(double (*f)(const gsl_vector *, void *),
