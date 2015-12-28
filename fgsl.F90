@@ -613,7 +613,7 @@ module fgsl
        fgsl_multifit_fdfsolver_residual, fgsl_multifit_fdfsolver_niter, fgsl_multifit_eval_wf, &
        fgsl_multifit_eval_wdf, fgsl_multifit_fdfsolver_test
   public :: fgsl_multifit_fsolver_driver, fgsl_multifit_fdfsolver_driver, &
-       fgsl_multifit_fdfsolver_dif_df 
+       fgsl_multifit_fdfsolver_dif_df
   public :: fgsl_multifit_robust_alloc, fgsl_multifit_robust_free, &
        fgsl_multifit_robust_tune, fgsl_multifit_robust_name, &
        fgsl_multifit_robust_statistics, fgsl_multifit_robust, &
@@ -1066,7 +1066,6 @@ module fgsl
 !
 ! Types : Interpolation
 !
-!  integer, parameter :: interp_maxnum = 6
   type, public :: fgsl_interp_type
      private
      integer(fgsl_int) :: which = 0
@@ -1077,7 +1076,8 @@ module fgsl
        fgsl_interp_cspline = fgsl_interp_type(3), &
        fgsl_interp_cspline_periodic = fgsl_interp_type(4), &
        fgsl_interp_akima = fgsl_interp_type(5), &
-       fgsl_interp_akima_periodic = fgsl_interp_type(6)
+       fgsl_interp_akima_periodic = fgsl_interp_type(6), &
+       fgsl_interp_steffen = fgsl_interp_type(7)
   type, public :: fgsl_interp
      private
      type(c_ptr) :: gsl_interp = c_null_ptr

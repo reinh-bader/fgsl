@@ -276,6 +276,9 @@ const gsl_interp_type *fgsl_aux_interp_alloc(int i) {
 	case 6:
 	    res = gsl_interp_akima_periodic;
 	    break;
+	case 7:
+	    res = gsl_interp_steffen;
+	    break;
 	default:
 	    res = NULL;
 	    break;
