@@ -44,79 +44,92 @@
     fgsl_interp_accel_status = .true.
     if (.not. c_associated(acc%gsl_interp_accel)) fgsl_interp_accel_status = .false.
   end function fgsl_interp_accel_status
-  function fgsl_interp_init(interp, xa, ya, size)
+  function fgsl_interp_init(interp, xa, ya)
     type(fgsl_interp), intent(inout) :: interp
-    integer(fgsl_size_t), intent(in) :: size
-    real(fgsl_double), intent(in) :: xa(size), ya(size)
+    real(fgsl_double), dimension(:), intent(in), target :: xa, ya
     integer(fgsl_int) :: fgsl_interp_init
-    fgsl_interp_init = gsl_interp_init(interp%gsl_interp, xa, ya, size)
+    !check that the array dimensions match
+    if (size(xa, dim=1, kind=fgsl_size_t) /= size(ya, dim=1, kind=fgsl_size_t)) then
+      call fgsl_error('xa and ya dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      fgsl_interp_init = fgsl_ebadlen
+      return
+    endif
+    fgsl_interp_init = gsl_interp_init(interp%gsl_interp, c_loc(xa), c_loc(ya), size(xa, dim=1, kind=fgsl_size_t))
   end function fgsl_interp_init
   function fgsl_interp_eval(interp, xa, ya, x, acc)
     type(fgsl_interp), intent(in) :: interp
     type(fgsl_interp_accel), intent(inout) :: acc
-    real(fgsl_double), intent(in) :: xa(:), ya(:), x
+    real(fgsl_double), dimension(:), intent(in), target :: xa, ya
+    real(fgsl_double), intent(in) :: x
     real(fgsl_double) :: fgsl_interp_eval
-    fgsl_interp_eval = gsl_interp_eval(interp%gsl_interp, xa, ya, x, &
+    fgsl_interp_eval = gsl_interp_eval(interp%gsl_interp, c_loc(xa), c_loc(ya), x, &
          acc%gsl_interp_accel)
   end function fgsl_interp_eval
   function fgsl_interp_eval_e(interp, xa, ya, x, acc, y)
     type(fgsl_interp), intent(in) :: interp
     type(fgsl_interp_accel), intent(inout) :: acc
-    real(fgsl_double), intent(in) :: xa(:), ya(:), x
+    real(fgsl_double), dimension(:), intent(in), target :: xa, ya
+    real(fgsl_double), intent(in) :: x
     real(fgsl_double), intent(out) :: y
     integer(fgsl_int) :: fgsl_interp_eval_e
-    fgsl_interp_eval_e = gsl_interp_eval_e(interp%gsl_interp, xa, ya, x, &
+    fgsl_interp_eval_e = gsl_interp_eval_e(interp%gsl_interp, c_loc(xa), c_loc(ya), x, &
          acc%gsl_interp_accel, y)
   end function fgsl_interp_eval_e
   function fgsl_interp_eval_integ(interp, xa, ya, a, b, acc)
     type(fgsl_interp), intent(in) :: interp
     type(fgsl_interp_accel), intent(inout) :: acc
-    real(fgsl_double), intent(in) :: xa(:), ya(:), a, b
+    real(fgsl_double), dimension(:), intent(in), target :: xa, ya
+    real(fgsl_double), intent(in) :: a, b
     real(fgsl_double) :: fgsl_interp_eval_integ
-    fgsl_interp_eval_integ = gsl_interp_eval_integ(interp%gsl_interp, xa, ya, a, b, &
+    fgsl_interp_eval_integ = gsl_interp_eval_integ(interp%gsl_interp, c_loc(xa), c_loc(ya), a, b, &
          acc%gsl_interp_accel)
   end function fgsl_interp_eval_integ
   function fgsl_interp_eval_integ_e(interp, xa, ya, a, b, acc, result)
     type(fgsl_interp), intent(in) :: interp
     type(fgsl_interp_accel), intent(inout) :: acc
-    real(fgsl_double), intent(in) :: xa(:), ya(:), a, b
+    real(fgsl_double), dimension(:), intent(in), target :: xa, ya
+    real(fgsl_double), intent(in) :: a, b
     real(fgsl_double), intent(out) :: result
     integer(fgsl_int) :: fgsl_interp_eval_integ_e
-    fgsl_interp_eval_integ_e = gsl_interp_eval_integ_e(interp%gsl_interp, xa, ya, a, b, &
+    fgsl_interp_eval_integ_e = gsl_interp_eval_integ_e(interp%gsl_interp, c_loc(xa), c_loc(ya), a, b, &
          acc%gsl_interp_accel, result)
   end function fgsl_interp_eval_integ_e
   function fgsl_interp_eval_deriv(interp, xa, ya, x, acc)
     type(fgsl_interp), intent(in) :: interp
     type(fgsl_interp_accel), intent(inout) :: acc
-    real(fgsl_double), intent(in) :: xa(:), ya(:), x
+    real(fgsl_double), dimension(:), intent(in), target :: xa, ya
+    real(fgsl_double), intent(in) :: x
     real(fgsl_double) :: fgsl_interp_eval_deriv
-    fgsl_interp_eval_deriv = gsl_interp_eval_deriv(interp%gsl_interp, xa, ya, x, &
+    fgsl_interp_eval_deriv = gsl_interp_eval_deriv(interp%gsl_interp, c_loc(xa), c_loc(ya), x, &
          acc%gsl_interp_accel)
   end function fgsl_interp_eval_deriv
   function fgsl_interp_eval_deriv_e(interp, xa, ya, x, acc, d)
     type(fgsl_interp), intent(in) :: interp
     type(fgsl_interp_accel), intent(inout) :: acc
-    real(fgsl_double), intent(in) :: xa(:), ya(:), x
+    real(fgsl_double), dimension(:), intent(in), target :: xa, ya
+    real(fgsl_double), intent(in) :: x
     real(fgsl_double), intent(out) :: d
     integer(fgsl_int) :: fgsl_interp_eval_deriv_e
-    fgsl_interp_eval_deriv_e = gsl_interp_eval_deriv_e(interp%gsl_interp, xa, ya, x, &
+    fgsl_interp_eval_deriv_e = gsl_interp_eval_deriv_e(interp%gsl_interp, c_loc(xa), c_loc(ya), x, &
          acc%gsl_interp_accel, d)
   end function fgsl_interp_eval_deriv_e
   function fgsl_interp_eval_deriv2(interp, xa, ya, x, acc)
     type(fgsl_interp), intent(in) :: interp
     type(fgsl_interp_accel), intent(inout) :: acc
-    real(fgsl_double), intent(in) :: xa(:), ya(:), x
+    real(fgsl_double), dimension(:), intent(in), target :: xa, ya
+    real(fgsl_double), intent(in) :: x
     real(fgsl_double) :: fgsl_interp_eval_deriv2
-    fgsl_interp_eval_deriv2 = gsl_interp_eval_deriv2(interp%gsl_interp, xa, ya, x, &
+    fgsl_interp_eval_deriv2 = gsl_interp_eval_deriv2(interp%gsl_interp, c_loc(xa), c_loc(ya), x, &
          acc%gsl_interp_accel)
   end function fgsl_interp_eval_deriv2
   function fgsl_interp_eval_deriv2_e(interp, xa, ya, x, acc, d2)
     type(fgsl_interp), intent(in) :: interp
     type(fgsl_interp_accel), intent(inout) :: acc
-    real(fgsl_double), intent(in) :: xa(:), ya(:), x
+    real(fgsl_double), dimension(:), intent(in), target :: xa, ya
+    real(fgsl_double), intent(in) :: x
     real(fgsl_double), intent(out) :: d2
     integer(fgsl_int) :: fgsl_interp_eval_deriv2_e
-    fgsl_interp_eval_deriv2_e = gsl_interp_eval_deriv2_e(interp%gsl_interp, xa, ya, x, &
+    fgsl_interp_eval_deriv2_e = gsl_interp_eval_deriv2_e(interp%gsl_interp, c_loc(xa), c_loc(ya), x, &
          acc%gsl_interp_accel, d2)
   end function fgsl_interp_eval_deriv2_e
   function fgsl_interp_name(interp)
@@ -141,19 +154,20 @@
     fgsl_interp_type_min_size = gsl_interp_type_min_size(it)
   end function fgsl_interp_type_min_size
   function fgsl_interp_bsearch(xa, x, index_lo, index_hi)
-    real(fgsl_double), intent(in) :: xa(:)
+    real(fgsl_double), dimension(:), intent(in), target :: xa
     real(fgsl_double), intent(in) :: x
     integer(fgsl_size_t), intent(in) :: index_lo, index_hi
     integer(fgsl_size_t) ::  fgsl_interp_bsearch
-    fgsl_interp_bsearch = gsl_interp_bsearch(xa, x, index_lo, index_hi) + 1
+    fgsl_interp_bsearch = gsl_interp_bsearch(c_loc(xa), x, index_lo, index_hi) &
+    + lbound(xa, dim=1, kind=fgsl_size_t)
   end function fgsl_interp_bsearch
-  function fgsl_interp_accel_find(acc, xa, size, x)
+  function fgsl_interp_accel_find(acc, xa, x)
     type(fgsl_interp_accel), intent(inout) :: acc
-    real(fgsl_double), dimension(*), intent(in) :: xa
-    integer(fgsl_size_t), intent(in) :: size
+    real(fgsl_double), dimension(:), intent(in), target :: xa
     real(fgsl_double), intent(in) :: x
     integer(fgsl_size_t) ::  fgsl_interp_accel_find
-    fgsl_interp_accel_find = gsl_interp_accel_find(acc%gsl_interp_accel, xa, size, x) + 1
+    fgsl_interp_accel_find = gsl_interp_accel_find(acc%gsl_interp_accel, c_loc(xa), &
+    size(xa, kind=fgsl_size_t), x) + lbound(xa, dim=1, kind=fgsl_size_t)
   end function fgsl_interp_accel_find
   function fgsl_spline_alloc(interp_type, size)
     type(fgsl_interp_type), intent(in) :: interp_type
@@ -162,7 +176,7 @@
 !
     type(c_ptr) :: it
     integer(c_int) :: i
-    integer(c_size_t) :: sz
+    integer(fgsl_size_t) :: sz
 !
     i = interp_type%which
     sz = size
@@ -174,12 +188,17 @@
 !
     call gsl_spline_free(spline%gsl_spline)
   end subroutine fgsl_spline_free
-  function fgsl_spline_init(spline, xa, ya, size)
+  function fgsl_spline_init(spline, xa, ya)
     type(fgsl_spline), intent(inout) :: spline
-    integer(fgsl_size_t), intent(in) :: size
-    real(fgsl_double), intent(in) :: xa(size), ya(size)
+    real(fgsl_double), dimension(:), intent(in), target :: xa, ya
     integer(fgsl_int) :: fgsl_spline_init
-    fgsl_spline_init = gsl_spline_init(spline%gsl_spline, xa, ya, size)
+    !check if dimenions match
+    if (size(xa, dim=1, kind=fgsl_size_t) /= size(ya, dim=1, kind=fgsl_size_t)) then
+      call fgsl_error('xa and ya dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      fgsl_spline_init = fgsl_ebadlen
+      return
+    endif
+    fgsl_spline_init = gsl_spline_init(spline%gsl_spline, c_loc(xa), c_loc(ya), size(xa, kind=fgsl_size_t))
   end function fgsl_spline_init
   function fgsl_spline_name(spline)
     type(fgsl_spline), intent(in) :: spline
@@ -272,3 +291,358 @@
     integer(fgsl_size_t) :: fgsl_sizeof_interp
     fgsl_sizeof_interp = gsl_aux_sizeof_interp()
   end function fgsl_sizeof_interp
+  function fgsl_interp2d_alloc(T, xsize, ysize)
+    type(fgsl_interp2d_type), intent(in) :: T
+    integer(fgsl_size_t), intent(in) :: xsize, ysize
+    type(fgsl_interp2d) :: fgsl_interp2d_alloc
+    fgsl_interp2d_alloc%gsl_interp2d = gsl_interp2d_alloc(&
+    fgsl_aux_interp2d_alloc(T%which), xsize, ysize)
+  end function fgsl_interp2d_alloc
+  function fgsl_interp2d_name(interp)
+    type(fgsl_interp2d), intent(in) :: interp
+    character(kind=fgsl_char,len=fgsl_strmax) :: fgsl_interp2d_name
+    type(c_ptr) :: name
+    name = gsl_interp2d_name(interp%gsl_interp2d)
+    fgsl_interp2d_name = fgsl_name(name)
+  end function fgsl_interp2d_name
+  function fgsl_interp2d_min_size(interp)
+    type(fgsl_interp2d), intent(in) :: interp
+    integer(fgsl_size_t) :: fgsl_interp2d_min_size
+    fgsl_interp2d_min_size = gsl_interp2d_min_size(interp%gsl_interp2d)
+  end function fgsl_interp2d_min_size
+  function fgsl_interp2d_type_min_size(T)
+    type(fgsl_interp2d_type), intent(in) :: T
+    integer(fgsl_size_t) :: fgsl_interp2d_type_min_size
+    fgsl_interp2d_type_min_size = gsl_interp2d_type_min_size(&
+    fgsl_aux_interp2d_alloc(T%which))
+  end function fgsl_interp2d_type_min_size
+  function fgsl_interp2d_init(interp, xa, ya, za)
+    type(fgsl_interp2d), intent(in) :: interp
+    real(fgsl_double), dimension(:), intent(in), target :: xa, ya
+    real(fgsl_double), dimension(:,:), intent(in), target :: za
+    integer(fgsl_int) :: fgsl_interp2d_init
+    ! this may be a good time to check the dimensions of za vs those of xa and ya
+    if (size(xa, dim=1, kind=fgsl_size_t) /= size(za, dim=1, kind=fgsl_size_t)) then
+      call fgsl_error('xa and za dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      fgsl_interp2d_init = fgsl_ebadlen
+      return
+    endif
+    if (size(ya, dim=1, kind=fgsl_size_t) /= size(za, dim=2, kind=fgsl_size_t)) then
+      call fgsl_error('ya and za dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      fgsl_interp2d_init = fgsl_ebadlen
+      return
+    endif
+    fgsl_interp2d_init = gsl_interp2d_init(interp%gsl_interp2d, &
+    c_loc(xa), c_loc(ya), c_loc(za), size(xa, kind=fgsl_size_t), &
+    size(ya, kind=fgsl_size_t))
+  end function fgsl_interp2d_init
+  subroutine fgsl_interp2d_free(interp)
+    type(fgsl_interp2d), intent(in) :: interp
+    call gsl_interp2d_free(interp%gsl_interp2d)
+  end subroutine fgsl_interp2d_free
+  function fgsl_interp2d_eval(interp, xarr, yarr, zarr, x, y, xa, ya)
+    type(fgsl_interp2d), intent(in) :: interp
+    real(fgsl_double), dimension(:), intent(in), target :: xarr, yarr
+    real(fgsl_double), dimension(:,:), intent(in), target :: zarr
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double) :: fgsl_interp2d_eval
+    ! I could do more bounds checking here, but seems like overkill
+    fgsl_interp2d_eval = gsl_interp2d_eval(interp%gsl_interp2d, c_loc(xarr), &
+    c_loc(yarr), c_loc(zarr), x, y, xa%gsl_interp_accel, ya%gsl_interp_accel)
+  end function fgsl_interp2d_eval
+  function fgsl_interp2d_eval_extrap(interp, xarr, yarr, zarr, x, y, xa, ya)
+    type(fgsl_interp2d), intent(in) :: interp
+    real(fgsl_double), dimension(:), intent(in), target :: xarr, yarr
+    real(fgsl_double), dimension(:,:), intent(in), target :: zarr
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double) :: fgsl_interp2d_eval_extrap
+    ! I could do more bounds checking here, but seems like overkill
+    fgsl_interp2d_eval_extrap = gsl_interp2d_eval_extrap(interp%gsl_interp2d, c_loc(xarr), &
+    c_loc(yarr), c_loc(zarr), x, y, xa%gsl_interp_accel, ya%gsl_interp_accel)
+  end function fgsl_interp2d_eval_extrap
+  function fgsl_interp2d_eval_e(interp, xarr, yarr, zarr, x, y, xa, ya, z)
+    type(fgsl_interp2d), intent(in) :: interp
+    real(fgsl_double), dimension(:), intent(in), target :: xarr, yarr
+    real(fgsl_double), dimension(:,:), intent(in), target :: zarr
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double), intent(out) :: z
+    integer(fgsl_int) :: fgsl_interp2d_eval_e
+    ! I could do more bounds checking here, but seems like overkill
+    fgsl_interp2d_eval_e = gsl_interp2d_eval_e(interp%gsl_interp2d, c_loc(xarr), &
+    c_loc(yarr), c_loc(zarr), x, y, xa%gsl_interp_accel, ya%gsl_interp_accel, z)
+  end function fgsl_interp2d_eval_e
+  function fgsl_interp2d_eval_e_extrap(interp, xarr, yarr, zarr, x, y, xa, ya, z)
+    type(fgsl_interp2d), intent(in) :: interp
+    real(fgsl_double), dimension(:), intent(in), target :: xarr, yarr
+    real(fgsl_double), dimension(:,:), intent(in), target :: zarr
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double), intent(out) :: z
+    integer(fgsl_int) :: fgsl_interp2d_eval_e_extrap
+    ! I could do more bounds checking here, but seems like overkill
+    fgsl_interp2d_eval_e_extrap = gsl_interp2d_eval_e_extrap(interp%gsl_interp2d, c_loc(xarr), &
+    c_loc(yarr), c_loc(zarr), x, y, xa%gsl_interp_accel, ya%gsl_interp_accel, z)
+  end function fgsl_interp2d_eval_e_extrap
+  function fgsl_interp2d_eval_deriv_x(interp, xarr, yarr, zarr, x, y, xa, ya)
+    type(fgsl_interp2d), intent(in) :: interp
+    real(fgsl_double), dimension(:), intent(in), target :: xarr, yarr
+    real(fgsl_double), dimension(:,:), intent(in), target :: zarr
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double) :: fgsl_interp2d_eval_deriv_x
+    ! I could do more bounds checking here, but seems like overkill
+    fgsl_interp2d_eval_deriv_x = gsl_interp2d_eval_deriv_x(interp%gsl_interp2d, c_loc(xarr), &
+    c_loc(yarr), c_loc(zarr), x, y, xa%gsl_interp_accel, ya%gsl_interp_accel)
+  end function fgsl_interp2d_eval_deriv_x
+  function fgsl_interp2d_eval_deriv_x_e(interp, xarr, yarr, zarr, x, y, xa, ya, z)
+    type(fgsl_interp2d), intent(in) :: interp
+    real(fgsl_double), dimension(:), intent(in), target :: xarr, yarr
+    real(fgsl_double), dimension(:,:), intent(in), target :: zarr
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double), intent(out) :: z
+    integer(fgsl_int) :: fgsl_interp2d_eval_deriv_x_e
+    ! I could do more bounds checking here, but seems like overkill
+    fgsl_interp2d_eval_deriv_x_e = gsl_interp2d_eval_deriv_x_e(interp%gsl_interp2d, c_loc(xarr), &
+    c_loc(yarr), c_loc(zarr), x, y, xa%gsl_interp_accel, ya%gsl_interp_accel, z)
+  end function fgsl_interp2d_eval_deriv_x_e
+  function fgsl_interp2d_eval_deriv_y(interp, xarr, yarr, zarr, x, y, xa, ya)
+    type(fgsl_interp2d), intent(in) :: interp
+    real(fgsl_double), dimension(:), intent(in), target :: xarr, yarr
+    real(fgsl_double), dimension(:,:), intent(in), target :: zarr
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double) :: fgsl_interp2d_eval_deriv_y
+    ! I could do more bounds checking here, but seems like overkill
+    fgsl_interp2d_eval_deriv_y = gsl_interp2d_eval_deriv_y(interp%gsl_interp2d, c_loc(xarr), &
+    c_loc(yarr), c_loc(zarr), x, y, xa%gsl_interp_accel, ya%gsl_interp_accel)
+  end function fgsl_interp2d_eval_deriv_y
+  function fgsl_interp2d_eval_deriv_y_e(interp, xarr, yarr, zarr, x, y, xa, ya, z)
+    type(fgsl_interp2d), intent(in) :: interp
+    real(fgsl_double), dimension(:), intent(in), target :: xarr, yarr
+    real(fgsl_double), dimension(:,:), intent(in), target :: zarr
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double), intent(out) :: z
+    integer(fgsl_int) :: fgsl_interp2d_eval_deriv_y_e
+    ! I could do more bounds checking here, but seems like overkill
+    fgsl_interp2d_eval_deriv_y_e = gsl_interp2d_eval_deriv_y_e(interp%gsl_interp2d, c_loc(xarr), &
+    c_loc(yarr), c_loc(zarr), x, y, xa%gsl_interp_accel, ya%gsl_interp_accel, z)
+  end function fgsl_interp2d_eval_deriv_y_e
+  function fgsl_interp2d_eval_deriv_xx(interp, xarr, yarr, zarr, x, y, xa, ya)
+    type(fgsl_interp2d), intent(in) :: interp
+    real(fgsl_double), dimension(:), intent(in), target :: xarr, yarr
+    real(fgsl_double), dimension(:,:), intent(in), target :: zarr
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double) :: fgsl_interp2d_eval_deriv_xx
+    ! I could do more bounds checking here, but seems like overkill
+    fgsl_interp2d_eval_deriv_xx = gsl_interp2d_eval_deriv_xx(interp%gsl_interp2d, c_loc(xarr), &
+    c_loc(yarr), c_loc(zarr), x, y, xa%gsl_interp_accel, ya%gsl_interp_accel)
+  end function fgsl_interp2d_eval_deriv_xx
+  function fgsl_interp2d_eval_deriv_xx_e(interp, xarr, yarr, zarr, x, y, xa, ya, z)
+    type(fgsl_interp2d), intent(in) :: interp
+    real(fgsl_double), dimension(:), intent(in), target :: xarr, yarr
+    real(fgsl_double), dimension(:,:), intent(in), target :: zarr
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double), intent(out) :: z
+    integer(fgsl_int) :: fgsl_interp2d_eval_deriv_xx_e
+    ! I could do more bounds checking here, but seems like overkill
+    fgsl_interp2d_eval_deriv_xx_e = gsl_interp2d_eval_deriv_xx_e(interp%gsl_interp2d, c_loc(xarr), &
+    c_loc(yarr), c_loc(zarr), x, y, xa%gsl_interp_accel, ya%gsl_interp_accel, z)
+  end function fgsl_interp2d_eval_deriv_xx_e
+  function fgsl_interp2d_eval_deriv_yy(interp, xarr, yarr, zarr, x, y, xa, ya)
+    type(fgsl_interp2d), intent(in) :: interp
+    real(fgsl_double), dimension(:), intent(in), target :: xarr, yarr
+    real(fgsl_double), dimension(:,:), intent(in), target :: zarr
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double) :: fgsl_interp2d_eval_deriv_yy
+    ! I could do more bounds checking here, but seems like overkill
+    fgsl_interp2d_eval_deriv_yy = gsl_interp2d_eval_deriv_yy(interp%gsl_interp2d, c_loc(xarr), &
+    c_loc(yarr), c_loc(zarr), x, y, xa%gsl_interp_accel, ya%gsl_interp_accel)
+  end function fgsl_interp2d_eval_deriv_yy
+  function fgsl_interp2d_eval_deriv_yy_e(interp, xarr, yarr, zarr, x, y, xa, ya, z)
+    type(fgsl_interp2d), intent(in) :: interp
+    real(fgsl_double), dimension(:), intent(in), target :: xarr, yarr
+    real(fgsl_double), dimension(:,:), intent(in), target :: zarr
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double), intent(out) :: z
+    integer(fgsl_int) :: fgsl_interp2d_eval_deriv_yy_e
+    ! I could do more bounds checking here, but seems like overkill
+    fgsl_interp2d_eval_deriv_yy_e = gsl_interp2d_eval_deriv_yy_e(interp%gsl_interp2d, c_loc(xarr), &
+    c_loc(yarr), c_loc(zarr), x, y, xa%gsl_interp_accel, ya%gsl_interp_accel, z)
+  end function fgsl_interp2d_eval_deriv_yy_e
+  function fgsl_interp2d_eval_deriv_xy(interp, xarr, yarr, zarr, x, y, xa, ya)
+    type(fgsl_interp2d), intent(in) :: interp
+    real(fgsl_double), dimension(:), intent(in), target :: xarr, yarr
+    real(fgsl_double), dimension(:,:), intent(in), target :: zarr
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double) :: fgsl_interp2d_eval_deriv_xy
+    ! I could do more bounds checking here, but seems like overkill
+    fgsl_interp2d_eval_deriv_xy = gsl_interp2d_eval_deriv_xy(interp%gsl_interp2d, c_loc(xarr), &
+    c_loc(yarr), c_loc(zarr), x, y, xa%gsl_interp_accel, ya%gsl_interp_accel)
+  end function fgsl_interp2d_eval_deriv_xy
+  function fgsl_interp2d_eval_deriv_xy_e(interp, xarr, yarr, zarr, x, y, xa, ya, z)
+    type(fgsl_interp2d), intent(in) :: interp
+    real(fgsl_double), dimension(:), intent(in), target :: xarr, yarr
+    real(fgsl_double), dimension(:,:), intent(in), target :: zarr
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double), intent(out) :: z
+    integer(fgsl_int) :: fgsl_interp2d_eval_deriv_xy_e
+    ! I could do more bounds checking here, but seems like overkill
+    fgsl_interp2d_eval_deriv_xy_e = gsl_interp2d_eval_deriv_xy_e(interp%gsl_interp2d, c_loc(xarr), &
+    c_loc(yarr), c_loc(zarr), x, y, xa%gsl_interp_accel, ya%gsl_interp_accel, z)
+  end function fgsl_interp2d_eval_deriv_xy_e
+  function fgsl_spline2d_alloc(T, xsize, ysize)
+    type(fgsl_interp2d_type), intent(in) :: T
+    integer(fgsl_size_t), intent(in) :: xsize, ysize
+    type(fgsl_spline2d) :: fgsl_spline2d_alloc
+    fgsl_spline2d_alloc%gsl_spline2d = gsl_spline2d_alloc(&
+    fgsl_aux_interp2d_alloc(T%which), xsize, ysize)
+  end function fgsl_spline2d_alloc
+  function fgsl_spline2d_init(interp, xa, ya, za)
+    type(fgsl_spline2d), intent(in) :: interp
+    real(fgsl_double), dimension(:), intent(in), target :: xa, ya
+    real(fgsl_double), dimension(:,:), intent(in), target :: za
+    integer(fgsl_int) :: fgsl_spline2d_init
+    ! this may be a good time to check the dimensions of za vs those of xa and ya
+    if (size(xa, dim=1, kind=fgsl_size_t) /= size(za, dim=1, kind=fgsl_size_t)) then
+      call fgsl_error('xa and za dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      fgsl_spline2d_init = fgsl_ebadlen
+      return
+    endif
+    if (size(ya, dim=1, kind=fgsl_size_t) /= size(za, dim=2, kind=fgsl_size_t)) then
+      call fgsl_error('ya and za dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      fgsl_spline2d_init = fgsl_ebadlen
+      return
+    endif
+    fgsl_spline2d_init = gsl_spline2d_init(interp%gsl_spline2d, &
+    c_loc(xa), c_loc(ya), c_loc(za), size(xa, kind=fgsl_size_t), &
+    size(ya, kind=fgsl_size_t))
+  end function fgsl_spline2d_init
+  subroutine fgsl_spline2d_free(interp)
+    type(fgsl_spline2d), intent(in) :: interp
+    call gsl_spline2d_free(interp%gsl_spline2d)
+  end subroutine fgsl_spline2d_free
+  function fgsl_spline2d_eval(interp, x, y, xa, ya)
+    type(fgsl_spline2d), intent(in) :: interp
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double) :: fgsl_spline2d_eval
+    fgsl_spline2d_eval = gsl_spline2d_eval(interp%gsl_spline2d, x, y, &
+    xa%gsl_interp_accel, ya%gsl_interp_accel)
+  end function fgsl_spline2d_eval
+  function fgsl_spline2d_eval_e(interp, x, y, xa, ya, z)
+    type(fgsl_spline2d), intent(in) :: interp
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double), intent(out) :: z
+    integer(fgsl_int) :: fgsl_spline2d_eval_e
+    fgsl_spline2d_eval_e = gsl_spline2d_eval_e(interp%gsl_spline2d, x, y, &
+    xa%gsl_interp_accel, ya%gsl_interp_accel, z)
+  end function fgsl_spline2d_eval_e
+  function fgsl_spline2d_eval_deriv_x(interp, x, y, xa, ya)
+    type(fgsl_spline2d), intent(in) :: interp
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double) :: fgsl_spline2d_eval_deriv_x
+    fgsl_spline2d_eval_deriv_x = gsl_spline2d_eval_deriv_x(interp%gsl_spline2d, x, y, &
+    xa%gsl_interp_accel, ya%gsl_interp_accel)
+  end function fgsl_spline2d_eval_deriv_x
+  function fgsl_spline2d_eval_deriv_x_e(interp, x, y, xa, ya, z)
+    type(fgsl_spline2d), intent(in) :: interp
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double), intent(out) :: z
+    integer(fgsl_int) :: fgsl_spline2d_eval_deriv_x_e
+    fgsl_spline2d_eval_deriv_x_e = gsl_spline2d_eval_deriv_x_e(interp%gsl_spline2d, x, y, &
+    xa%gsl_interp_accel, ya%gsl_interp_accel, z)
+  end function fgsl_spline2d_eval_deriv_x_e
+  function fgsl_spline2d_eval_deriv_y(interp, x, y, xa, ya)
+    type(fgsl_spline2d), intent(in) :: interp
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double) :: fgsl_spline2d_eval_deriv_y
+    fgsl_spline2d_eval_deriv_y = gsl_spline2d_eval_deriv_y(interp%gsl_spline2d, x, y, &
+    xa%gsl_interp_accel, ya%gsl_interp_accel)
+  end function fgsl_spline2d_eval_deriv_y
+  function fgsl_spline2d_eval_deriv_y_e(interp, x, y, xa, ya, z)
+    type(fgsl_spline2d), intent(in) :: interp
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double), intent(out) :: z
+    integer(fgsl_int) :: fgsl_spline2d_eval_deriv_y_e
+    fgsl_spline2d_eval_deriv_y_e = gsl_spline2d_eval_deriv_y_e(interp%gsl_spline2d, x, y, &
+    xa%gsl_interp_accel, ya%gsl_interp_accel, z)
+  end function fgsl_spline2d_eval_deriv_y_e
+  function fgsl_spline2d_eval_deriv_xx(interp, x, y, xa, ya)
+    type(fgsl_spline2d), intent(in) :: interp
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double) :: fgsl_spline2d_eval_deriv_xx
+    fgsl_spline2d_eval_deriv_xx = gsl_spline2d_eval_deriv_xx(interp%gsl_spline2d, x, y, &
+    xa%gsl_interp_accel, ya%gsl_interp_accel)
+  end function fgsl_spline2d_eval_deriv_xx
+  function fgsl_spline2d_eval_deriv_xx_e(interp, x, y, xa, ya, z)
+    type(fgsl_spline2d), intent(in) :: interp
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double), intent(out) :: z
+    integer(fgsl_int) :: fgsl_spline2d_eval_deriv_xx_e
+    fgsl_spline2d_eval_deriv_xx_e = gsl_spline2d_eval_deriv_xx_e(interp%gsl_spline2d, x, y, &
+    xa%gsl_interp_accel, ya%gsl_interp_accel, z)
+  end function fgsl_spline2d_eval_deriv_xx_e
+  function fgsl_spline2d_eval_deriv_yy(interp, x, y, xa, ya)
+    type(fgsl_spline2d), intent(in) :: interp
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double) :: fgsl_spline2d_eval_deriv_yy
+    fgsl_spline2d_eval_deriv_yy = gsl_spline2d_eval_deriv_yy(interp%gsl_spline2d, x, y, &
+    xa%gsl_interp_accel, ya%gsl_interp_accel)
+  end function fgsl_spline2d_eval_deriv_yy
+  function fgsl_spline2d_eval_deriv_yy_e(interp, x, y, xa, ya, z)
+    type(fgsl_spline2d), intent(in) :: interp
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double), intent(out) :: z
+    integer(fgsl_int) :: fgsl_spline2d_eval_deriv_yy_e
+    fgsl_spline2d_eval_deriv_yy_e = gsl_spline2d_eval_deriv_yy_e(interp%gsl_spline2d, x, y, &
+    xa%gsl_interp_accel, ya%gsl_interp_accel, z)
+  end function fgsl_spline2d_eval_deriv_yy_e
+  function fgsl_spline2d_eval_deriv_xy(interp, x, y, xa, ya)
+    type(fgsl_spline2d), intent(in) :: interp
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double) :: fgsl_spline2d_eval_deriv_xy
+    fgsl_spline2d_eval_deriv_xy = gsl_spline2d_eval_deriv_xy(interp%gsl_spline2d, x, y, &
+    xa%gsl_interp_accel, ya%gsl_interp_accel)
+  end function fgsl_spline2d_eval_deriv_xy
+  function fgsl_spline2d_eval_deriv_xy_e(interp, x, y, xa, ya, z)
+    type(fgsl_spline2d), intent(in) :: interp
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double), intent(out) :: z
+    integer(fgsl_int) :: fgsl_spline2d_eval_deriv_xy_e
+    fgsl_spline2d_eval_deriv_xy_e = gsl_spline2d_eval_deriv_xy_e(interp%gsl_spline2d, x, y, &
+    xa%gsl_interp_accel, ya%gsl_interp_accel, z)
+  end function fgsl_spline2d_eval_deriv_xy_e
+  function fgsl_spline2d_name(interp)
+    type(fgsl_spline2d), intent(in) :: interp
+    character(kind=fgsl_char,len=fgsl_strmax) :: fgsl_spline2d_name
+    type(c_ptr) :: name
+    name = gsl_spline2d_name(interp%gsl_spline2d)
+    fgsl_spline2d_name = fgsl_name(name)
+  end function fgsl_spline2d_name
+  function fgsl_spline2d_min_size(interp)
+    type(fgsl_spline2d), intent(in) :: interp
+    integer(fgsl_size_t) :: fgsl_spline2d_min_size
+    fgsl_spline2d_min_size = gsl_spline2d_min_size(interp%gsl_spline2d)
+  end function fgsl_spline2d_min_size

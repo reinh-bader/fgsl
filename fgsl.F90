@@ -256,11 +256,27 @@ module fgsl
        fgsl_interp_min_size, &
        fgsl_interp_type_min_size,&
        fgsl_interp_name
+  public :: fgsl_interp2d_alloc, fgsl_interp2d_name, fgsl_interp2d_min_size, &
+       fgsl_interp2d_type_min_size, fgsl_interp2d_init, fgsl_interp2d_free, fgsl_interp2d_eval, &
+       fgsl_interp2d_eval_extrap, fgsl_interp2d_eval_e, fgsl_interp2d_eval_e_extrap, &
+       fgsl_interp2d_eval_deriv_x, fgsl_interp2d_eval_deriv_x_e, &
+       fgsl_interp2d_eval_deriv_y, fgsl_interp2d_eval_deriv_y_e, &
+       fgsl_interp2d_eval_deriv_xx, fgsl_interp2d_eval_deriv_xx_e, &
+       fgsl_interp2d_eval_deriv_yy, fgsl_interp2d_eval_deriv_yy_e, &
+       fgsl_interp2d_eval_deriv_xy, fgsl_interp2d_eval_deriv_xy_e
   public :: fgsl_spline_alloc, fgsl_spline_init, fgsl_spline_free, &
        fgsl_spline_name, fgsl_spline_min_size, fgsl_spline_eval, &
        fgsl_spline_eval_e, fgsl_spline_eval_deriv, fgsl_spline_eval_deriv_e, &
        fgsl_spline_eval_deriv2, fgsl_spline_eval_deriv2_e, &
        fgsl_spline_eval_integ, fgsl_spline_eval_integ_e
+  public :: fgsl_spline2d_alloc, fgsl_spline2d_init, fgsl_spline2d_free, &
+       fgsl_spline2d_eval, fgsl_spline2d_eval_e, &
+       fgsl_spline2d_eval_deriv_x, fgsl_spline2d_eval_deriv_x_e, &
+       fgsl_spline2d_eval_deriv_y, fgsl_spline2d_eval_deriv_y_e, &
+       fgsl_spline2d_eval_deriv_xx, fgsl_spline2d_eval_deriv_xx_e, &
+       fgsl_spline2d_eval_deriv_yy, fgsl_spline2d_eval_deriv_yy_e, &
+       fgsl_spline2d_eval_deriv_xy, fgsl_spline2d_eval_deriv_xy_e, &
+       fgsl_spline2d_min_size, fgsl_spline2d_name
   public :: fgsl_interp_accel_alloc, fgsl_interp_accel_free, &
        fgsl_interp_accel_find, fgsl_interp_bsearch
 ! permutations, combinations and multisets
@@ -1090,6 +1106,21 @@ module fgsl
      private
      type(c_ptr) :: gsl_spline = c_null_ptr
   end type fgsl_spline
+  type, public :: fgsl_spline2d
+     private
+     type(c_ptr) :: gsl_spline2d = c_null_ptr
+  end type fgsl_spline2d
+  type, public :: fgsl_interp2d_type
+    private
+    integer(fgsl_int) :: which = 0
+  end type fgsl_interp2d_type
+  type(fgsl_interp2d_type), parameter, public :: &
+       fgsl_interp2d_bilinear = fgsl_interp2d_type(1), &
+       fgsl_interp2d_bicubic = fgsl_interp2d_type(2)
+  type, public :: fgsl_interp2d
+     private
+     type(c_ptr) :: gsl_interp2d = c_null_ptr
+  end type fgsl_interp2d
 !
 ! Types: Permutations, Combinations and Multisets
 !

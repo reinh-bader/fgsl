@@ -31,7 +31,7 @@ program interp
   call unit_assert_true('fgsl_interp_alloc',fgsl_well_defined(a_interp),.true.)
   name = fgsl_interp_name(a_interp)
   call unit_assert_equal('fgsl_interp_alloc','cspline',name)
-  status = fgsl_interp_init(a_interp,xa,ya,nmax)
+  status = fgsl_interp_init(a_interp,xa,ya)
   call unit_assert_equal('fgsl_interp_init',fgsl_success,status)
   dmx = 0.0d0
   do i=2,nmax
@@ -58,7 +58,7 @@ program interp
   call unit_assert_true('fgsl_spline_alloc',fgsl_well_defined(spline),.true.)
   name = fgsl_spline_name(spline)
   call unit_assert_equal('fgsl_spline_alloc','cspline',name)
-  status = fgsl_spline_init(spline,xa,ya,nmax)
+  status = fgsl_spline_init(spline,xa,ya)
   call unit_assert_equal('fgsl_interp_init',fgsl_success,status)
   dmx = 0.0d0
   do i=2,nmax
@@ -74,13 +74,13 @@ program interp
   call unit_assert_equal_within('fgsl_spline_eval',0.0d0,dmx,eps10)
   index = fgsl_spline_min_size(spline)
   call unit_assert_equal('fgsl_interp_init',3,index)
-  
+
   call fgsl_spline_free(spline)
 !
   a_interp = fgsl_interp_alloc(fgsl_interp_polynomial,nmax)
   name = fgsl_interp_name(a_interp)
   call unit_assert_equal('fgsl_interp_alloc','polynomial',name)
-  status = fgsl_interp_init(a_interp,xa,ya,nmax)
+  status = fgsl_interp_init(a_interp,xa,ya)
   call unit_assert_equal('fgsl_interp_init',fgsl_success,status)
   dmx = 0.0d0
   do i=2,nmax
@@ -100,7 +100,7 @@ program interp
 !
   index = fgsl_interp_bsearch(xa, 1.5_fgsl_double,1_fgsl_size_t,nmax)
   call unit_assert_equal('fgsl_interp_bsearch',2,index)
-  index = fgsl_interp_accel_find(acc, xa, nmax, 1.5_fgsl_double)
+  index = fgsl_interp_accel_find(acc, xa, 1.5_fgsl_double)
   call unit_assert_equal('fgsl_interp_accel_find',2,index)
   call fgsl_interp_accel_free(acc)
 !

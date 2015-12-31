@@ -33,6 +33,7 @@
 #include <gsl/gsl_sf.h>
 #include <gsl/gsl_multifit.h>
 #include <gsl/gsl_multilarge.h>
+#include <gsl/gsl_interp2d.h>
 
 
 gsl_function *fgsl_function_cinit(double (*func)(double x, void *params), void *params) {
@@ -252,6 +253,22 @@ void fgsl_aux_matrix_complex_size(gsl_matrix_complex *fvec,
     	*n = fvec->size1;
     if (lda != NULL)
     	*lda = fvec->tda;
+}
+
+const gsl_interp2d_type *fgsl_aux_interp2d_alloc(int i) {
+  const gsl_interp2d_type *res;
+  switch (i) {
+    case 1:
+      res = gsl_interp2d_bilinear;
+      break;
+    case 2:
+      res = gsl_interp2d_bicubic;
+      break;
+	  default:
+	    res = NULL;
+	    break;
+  }
+  return res;
 }
 
 const gsl_interp_type *fgsl_aux_interp_alloc(int i) {
