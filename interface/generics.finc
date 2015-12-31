@@ -14,6 +14,7 @@
      module procedure fgsl_matrix_complex_status
      module procedure fgsl_cheb_series_status
      module procedure fgsl_interp_status
+     module procedure fgsl_interp2d_status
      module procedure fgsl_dht_status
      module procedure fgsl_error_handler_status
      module procedure fgsl_integration_workspace_status
@@ -23,6 +24,7 @@
      module procedure fgsl_integration_glfixed_table_status
      module procedure fgsl_interp_accel_status
      module procedure fgsl_spline_status
+     module procedure fgsl_spline2d_status
      module procedure fgsl_permutation_status
      module procedure fgsl_combination_status
      module procedure fgsl_multiset_status

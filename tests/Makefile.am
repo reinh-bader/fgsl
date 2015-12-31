@@ -6,12 +6,12 @@ check_PROGRAMS = poly interp specfunc permutation integration \
 	statistics ntuple siman ode deriv roots \
 	minim multiroots montecarlo bspline \
 	multimin fit nlfit version \
-	chebyshev error ieee_utils math
+	chebyshev error ieee_utils math interp2d
 
-poly_SOURCES = mod_unit.f90 mod_unit.mod poly.F90 
+poly_SOURCES = mod_unit.f90 mod_unit.mod poly.F90
 poly_LDADD = ../libfgsl.la
 
-interp_SOURCES = mod_unit.f90 mod_unit.mod interp.f90 
+interp_SOURCES = mod_unit.f90 mod_unit.mod interp.f90
 interp_LDADD = ../libfgsl.la
 
 specfunc_SOURCES = specfunc.f90 mod_unit.f90 mod_unit.mod
@@ -97,6 +97,9 @@ chebyshev_LDADD = ../libfgsl.la
 
 math_SOURCES = math.f90 mod_unit.f90 mod_unit.mod
 math_LDADD = ../libfgsl.la
+
+interp2d_SOURCES = interp2d.f90 mod_unit.f90 mod_unit.mod
+interp2d_LDADD = ../libfgsl.la
 
 
 TESTS = $(check_PROGRAMS)

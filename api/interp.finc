@@ -38,6 +38,12 @@
     fgsl_interp_status = .true.
     if (.not. c_associated(interp%gsl_interp)) fgsl_interp_status = .false.
   end function fgsl_interp_status
+  function fgsl_interp2d_status(interp)
+    type(fgsl_interp2d), intent(in) :: interp
+    logical :: fgsl_interp2d_status
+    fgsl_interp2d_status = .true.
+    if (.not. c_associated(interp%gsl_interp2d)) fgsl_interp2d_status = .false.
+  end function fgsl_interp2d_status
   function fgsl_interp_accel_status(acc)
     type(fgsl_interp_accel), intent(in) :: acc
     logical :: fgsl_interp_accel_status
@@ -286,6 +292,12 @@
     fgsl_spline_status = .true.
     if (.not. c_associated(spline%gsl_spline)) fgsl_spline_status = .false.
   end function fgsl_spline_status
+  function fgsl_spline2d_status(spline)
+    type(fgsl_spline2d), intent(in) :: spline
+    logical :: fgsl_spline2d_status
+    fgsl_spline2d_status = .true.
+    if (.not. c_associated(spline%gsl_spline2d)) fgsl_spline2d_status = .false.
+  end function fgsl_spline2d_status
   function fgsl_sizeof_interp(w)
     type(fgsl_interp), intent(in) :: w
     integer(fgsl_size_t) :: fgsl_sizeof_interp

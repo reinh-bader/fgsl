@@ -73,7 +73,7 @@ program interp
   end do
   call unit_assert_equal_within('fgsl_spline_eval',0.0d0,dmx,eps10)
   index = fgsl_spline_min_size(spline)
-  call unit_assert_equal('fgsl_interp_init',3,index)
+  call unit_assert_equal('fgsl_spline_min_size',3,index)
 
   call fgsl_spline_free(spline)
 !

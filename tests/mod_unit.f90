@@ -8,10 +8,11 @@ module mod_unit
   integer, parameter :: dk = selected_real_kind(15)
 !FIXME - PGI does not accept  logical, protected :: unit_debug = .false.
   logical :: unit_debug = .false.
-  logical, allocatable :: unit_ok(:) 
+  logical, allocatable :: unit_ok(:)
   integer :: index_ok
   interface unit_assert_equal
      module procedure unit_assert_equal_integer
+     module procedure unit_assert_equal_long
      module procedure unit_assert_equal_integer_array
      module procedure unit_assert_equal_string
   end interface
@@ -39,9 +40,14 @@ contains
   end subroutine unit_init
   subroutine unit_assert_equal_integer(description, ival_target, ival_check)
     character(len=*), intent(in) :: description
-    integer(kind=ik), intent(in) :: ival_target, ival_check
+    integer(kind=4), intent(in) :: ival_target, ival_check
     call unit_toggle(description, ival_target == ival_check)
   end subroutine unit_assert_equal_integer
+  subroutine unit_assert_equal_long(description, ival_target, ival_check)
+    character(len=*), intent(in) :: description
+    integer(kind=8), intent(in) :: ival_target, ival_check
+    call unit_toggle(description, ival_target == ival_check)
+  end subroutine unit_assert_equal_long
   subroutine unit_assert_equal_integer_array(description, &
        ival_target, ival_check)
     character(len=*), intent(in) :: description
