@@ -513,3 +513,20 @@
     type(c_ptr), value :: a, d
     integer(c_int) :: gsl_linalg_balance_matrix
   end function gsl_linalg_balance_matrix
+  function gsl_linalg_qr_matq(QR, tau, A) &
+    bind(c, name='gsl_linalg_QR_matQ')
+    import :: c_ptr, c_int
+    type(c_ptr), value :: QR, tau, A
+    integer(c_int) :: gsl_linalg_qr_matq
+  end function gsl_linalg_qr_matq
+  subroutine gsl_linalg_givens(a, b, c, s) bind(c)
+    import :: c_double
+    real(c_double), value :: a, b
+    real(c_double):: c, s
+  end subroutine gsl_linalg_givens
+  subroutine gsl_linalg_givens_gv(v, i, j, c, s) bind(c)
+    import :: c_ptr, c_size_t, c_double
+    type(c_ptr), value :: v
+    integer(c_size_t), value :: i, j
+    real(c_double), value :: c, s
+  end subroutine gsl_linalg_givens_gv

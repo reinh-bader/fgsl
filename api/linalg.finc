@@ -668,3 +668,21 @@
     fgsl_linalg_balance_matrix = gsl_linalg_balance_matrix(a%gsl_matrix, &
          d%gsl_vector)
   end function fgsl_linalg_balance_matrix
+  function fgsl_linalg_qr_matq(QR, tau, A)
+    type(fgsl_matrix), intent(in) :: QR
+    type(fgsl_vector), intent(in) :: tau
+    type(fgsl_matrix), intent(inout) :: A
+    integer(fgsl_int) :: fgsl_linalg_qr_matq
+    fgsl_linalg_qr_matq = gsl_linalg_qr_matq(QR%gsl_matrix, tau%gsl_vector, A%gsl_matrix)
+  end function fgsl_linalg_qr_matq
+  subroutine fgsl_linalg_givens(a, b, c, s)
+    real(fgsl_double), intent(in) :: a, b
+    real(fgsl_double), intent(out) :: c, s
+    call gsl_linalg_givens(a, b, c, s)
+  end subroutine fgsl_linalg_givens
+  subroutine fgsl_linalg_givens_gv(v, i, j, c, s)
+    type(fgsl_vector), intent(inout) :: v
+    integer(fgsl_size_t), intent(in) :: i, j
+    real(fgsl_double), intent(in) :: c, s
+    call gsl_linalg_givens_gv(v%gsl_vector, i, j, c, s)
+  end subroutine fgsl_linalg_givens_gv

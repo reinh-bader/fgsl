@@ -351,7 +351,8 @@ module fgsl
        fgsl_linalg_householder_hv, fgsl_linalg_complex_householder_hv, &
        fgsl_linalg_hh_solve, fgsl_linalg_hh_svx, fgsl_linalg_solve_tridiag, &
        fgsl_linalg_solve_symm_tridiag, fgsl_linalg_solve_cyc_tridiag, &
-       fgsl_linalg_solve_symm_cyc_tridiag, fgsl_linalg_balance_matrix
+       fgsl_linalg_solve_symm_cyc_tridiag, fgsl_linalg_balance_matrix, &
+       fgsl_linalg_qr_matq, fgsl_linalg_givens, fgsl_linalg_givens_gv
   public :: fgsl_linalg_sv_leverage
 ! eigensystems
   public :: fgsl_eigen_symm_alloc, fgsl_eigen_symm_free, fgsl_eigen_symm, &
