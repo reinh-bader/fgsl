@@ -670,6 +670,15 @@ module fgsl
        fgsl_bspline_greville_abscissa
   public :: fgsl_bspline_knots_greville
 
+! sparse matrices
+  public :: fgsl_spmatrix_alloc, fgsl_spmatrix_alloc_nzmax, &
+       fgsl_spmatrix_free, fgsl_spmatrix_realloc, fgsl_spmatrix_set_zero, &
+       fgsl_spmatrix_nnz, fgsl_spmatrix_compare_idx, fgsl_spmatrix_memcpy, &
+       fgsl_spmatrix_get, fgsl_spmatrix_set, fgsl_spmatrix_compcol, &
+       fgsl_spmatrix_cumsum, fgsl_spmatrix_scale, fgsl_spmatrix_minmax, &
+       fgsl_spmatrix_add, fgsl_spmatrix_d2sp, fgsl_spmatrix_sp2d, &
+       fgsl_spmatrix_equal, fgsl_spmatrix_transpose_memcpy
+
 ! IEEE
   public :: fgsl_ieee_fprintf, fgsl_ieee_printf, fgsl_ieee_env_setup
 !
@@ -1298,11 +1307,11 @@ module fgsl
 !
   type, public :: fgsl_rng
      private
-     type(c_ptr) :: gsl_rng
+     type(c_ptr) :: gsl_rng = c_null_ptr
   end type fgsl_rng
   type, public :: fgsl_rng_type
      private
-     type(c_ptr) :: gsl_rng_type
+     type(c_ptr) :: gsl_rng_type = c_null_ptr
      integer(fgsl_int) :: type = 0
   end type fgsl_rng_type
 ! Note: we need a dynamic component here, since
@@ -1743,8 +1752,18 @@ module fgsl
 !
   type, public :: fgsl_bspline_workspace
      private
-     type(c_ptr) :: gsl_bspline_workspace
+     type(c_ptr) :: gsl_bspline_workspace = c_null_ptr
   end type fgsl_bspline_workspace
+
+!
+! Types: sparse matrices
+!
+  integer(fgsl_int), public, parameter :: fgsl_spmatrix_triplet = 0
+  integer(fgsl_int), public, parameter :: fgsl_spmatrix_ccs = 1
+  type, public :: fgsl_spmatrix
+    private
+    type(c_ptr) :: gsl_spmatrix = c_null_ptr
+  end type fgsl_spmatrix
 !
 ! required C interfaces
 ! FGSL names occurring here are auxiliary routines
@@ -1786,6 +1805,7 @@ module fgsl
 #include "interface/bspline.finc"
 #include "interface/ieee.finc"
 #include "interface/multilarge.finc"
+#include "interface/spmatrix.finc"
   end interface
 #include "interface/generics.finc"
 contains
@@ -1825,4 +1845,5 @@ contains
 #include "api/bspline.finc"
 #include "api/ieee.finc"
 #include "api/multilarge.finc"
+#include "api/spmatrix.finc"
 end module fgsl

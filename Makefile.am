@@ -45,6 +45,7 @@ libfgsl_la_SOURCES = fgsl.F90 \
 										 api/siman.finc \
 										 api/wavelet.finc \
 										 api/multilarge.finc \
+										 api/spmatrix.finc \
 										 interface/array.finc \
 										 interface/eigen.finc \
 										 interface/ieee.finc \
@@ -81,7 +82,8 @@ libfgsl_la_SOURCES = fgsl.F90 \
 										 interface/multifit.finc \
 										 interface/poly.finc \
 										 interface/statistics.finc \
-										 interface/multilarge.finc
+										 interface/multilarge.finc \
+										 interface/spmatrix.finc
 
 libfgsl_la_DEPENDENCIES = $(libfgsl_la_SOURCES)
 

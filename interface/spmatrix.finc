@@ -1,0 +1,104 @@
+  !-*-f90-*-
+!
+!  Interfaces: Sparse matrices
+!
+function gsl_spmatrix_alloc(n1, n2) bind(c)
+  import :: c_ptr, c_size_t
+  integer(c_size_t), value :: n1, n2
+  type(c_ptr) :: gsl_spmatrix_alloc
+end function gsl_spmatrix_alloc
+function gsl_spmatrix_alloc_nzmax(n1, n2, nzmax, flags) bind(c)
+  import :: c_ptr, c_size_t
+  integer(c_size_t), value :: n1, n2, nzmax, flags
+  type(c_ptr) :: gsl_spmatrix_alloc_nzmax
+end function gsl_spmatrix_alloc_nzmax
+subroutine gsl_spmatrix_free(m) bind(c)
+  import :: c_ptr
+  type(c_ptr), value :: m
+end subroutine gsl_spmatrix_free
+function gsl_spmatrix_realloc(nzmax, m) bind(c)
+  import :: c_ptr, c_int, c_size_t
+  integer(c_size_t), value :: nzmax
+  type(c_ptr), value :: m
+  integer(c_int) :: gsl_spmatrix_realloc
+end function gsl_spmatrix_realloc
+function gsl_spmatrix_set_zero(m) bind(c)
+  import :: c_ptr, c_int
+  type(c_ptr), value :: m
+  integer(c_int) :: gsl_spmatrix_set_zero
+end function gsl_spmatrix_set_zero
+function gsl_spmatrix_nnz(m) bind(c)
+  import :: c_ptr, c_size_t
+  type(c_ptr), value :: m
+  integer(c_size_t) :: gsl_spmatrix_nnz
+end function gsl_spmatrix_nnz
+function gsl_spmatrix_compare_idx(ia, ja, ib, jb) bind(c)
+  import :: c_int, c_size_t
+  integer(c_size_t), value :: ia, ja, ib, jb
+  integer(c_int) :: gsl_spmatrix_compare_idx
+end function gsl_spmatrix_compare_idx
+function gsl_spmatrix_memcpy(dest, src) bind(c)
+  import :: c_ptr, c_int
+  type(c_ptr), value :: dest, src
+  integer(c_int) :: gsl_spmatrix_memcpy
+end function gsl_spmatrix_memcpy
+function gsl_spmatrix_get(m, i, j) bind(c)
+  import :: c_ptr, c_double, c_size_t
+  type(c_ptr), value :: m
+  integer(c_size_t), value :: i, j
+  real(c_double) :: gsl_spmatrix_get
+end function gsl_spmatrix_get
+function gsl_spmatrix_set(m, i, j, x) bind(c)
+  import :: c_ptr, c_double, c_size_t, c_int
+  type(c_ptr), value :: m
+  integer(c_size_t), value :: i, j
+  real(c_double), value :: x
+  integer(c_int) :: gsl_spmatrix_set
+end function gsl_spmatrix_set
+function gsl_spmatrix_compcol(T) bind(c)
+  import :: c_ptr
+  type(c_ptr) :: T, gsl_spmatrix_compcol
+  value :: T
+end function gsl_spmatrix_compcol
+subroutine gsl_spmatrix_cumsum(n, c) bind(c)
+  import :: c_size_t, c_ptr
+  integer(c_size_t), value :: n
+  type(c_ptr), value :: c ! c is array of type c_size_t with n+1 elements
+end subroutine gsl_spmatrix_cumsum
+function gsl_spmatrix_scale(m, x) bind(c)
+  import :: c_ptr, c_double, c_int
+  type(c_ptr), value :: m
+  real(c_double), value :: x
+  integer(c_int) :: gsl_spmatrix_scale
+end function gsl_spmatrix_scale
+function gsl_spmatrix_minmax(m, min_out, max_out) bind(c)
+  import :: c_ptr, c_double, c_int
+  type(c_ptr), value :: m
+  real(c_double) :: min_out, max_out
+  integer(c_int) :: gsl_spmatrix_minmax
+end function gsl_spmatrix_minmax
+function gsl_spmatrix_add(c, a, b) bind(c)
+  import :: c_ptr, c_int
+  type(c_ptr), value :: c, a, b
+  integer(c_int) :: gsl_spmatrix_add
+end function gsl_spmatrix_add
+function gsl_spmatrix_d2sp(S, A) bind(c)
+  import :: c_ptr, c_int
+  type(c_ptr), value :: S, A
+  integer(c_int) :: gsl_spmatrix_d2sp
+end function gsl_spmatrix_d2sp
+function gsl_spmatrix_sp2d(A, S) bind(c)
+  import :: c_ptr, c_int
+  type(c_ptr), value :: A, S
+  integer(c_int) :: gsl_spmatrix_sp2d
+end function gsl_spmatrix_sp2d
+function gsl_spmatrix_equal(a, b) bind(c)
+  import :: c_ptr, c_int
+  type(c_ptr), value :: a, b
+  integer(c_int) :: gsl_spmatrix_equal
+end function gsl_spmatrix_equal
+function gsl_spmatrix_transpose_memcpy(dest, src) bind(c)
+  import :: c_ptr, c_int
+  type(c_ptr), value :: dest, src
+  integer(c_int) :: gsl_spmatrix_transpose_memcpy
+end function gsl_spmatrix_transpose_memcpy

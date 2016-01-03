@@ -34,6 +34,7 @@
 #include <gsl/gsl_multifit.h>
 #include <gsl/gsl_multilarge.h>
 #include <gsl/gsl_interp2d.h>
+#include <gsl/gsl_spmatrix.h>
 
 
 gsl_function *fgsl_function_cinit(double (*func)(double x, void *params), void *params) {
