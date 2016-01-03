@@ -35,6 +35,7 @@
 #include <gsl/gsl_multilarge.h>
 #include <gsl/gsl_interp2d.h>
 #include <gsl/gsl_spmatrix.h>
+#include <gsl/gsl_splinalg.h>
 
 
 gsl_function *fgsl_function_cinit(double (*func)(double x, void *params), void *params) {
@@ -1073,6 +1074,19 @@ const gsl_multifit_fdfsolver_type *fgsl_aux_multifit_fdfsolver_alloc(int i) {
     }
     return res;
 
+}
+
+const gsl_splinalg_itersolve_type *fgsl_aux_splinalg_itersolve_alloc(int i) {
+  const gsl_splinalg_itersolve_type *res;
+  switch(i) {
+    case 1:
+      res = gsl_splinalg_itersolve_gmres;
+      break;
+    default:
+      res = NULL;
+      break;
+  }
+  return res;
 }
 
 

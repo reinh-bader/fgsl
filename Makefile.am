@@ -46,6 +46,7 @@ libfgsl_la_SOURCES = fgsl.F90 \
 										 api/wavelet.finc \
 										 api/multilarge.finc \
 										 api/spmatrix.finc \
+										 api/splinalg.finc \
 										 interface/array.finc \
 										 interface/eigen.finc \
 										 interface/ieee.finc \
@@ -83,7 +84,8 @@ libfgsl_la_SOURCES = fgsl.F90 \
 										 interface/poly.finc \
 										 interface/statistics.finc \
 										 interface/multilarge.finc \
-										 interface/spmatrix.finc
+										 interface/spmatrix.finc \
+										 interface/splinalg.finc
 
 libfgsl_la_DEPENDENCIES = $(libfgsl_la_SOURCES)
 
@@ -97,8 +99,6 @@ fgsl.lo: $(libfgsl_la_SOURCES)
 pkgconfigdir=$(libdir)/pkgconfig
 pkgconfig_DATA = fgsl.pc
 nodist_fgslinclude_HEADERS = fgsl.mod
-
-#EXTRA_DIST = fgsl.pc.in fgsl.spec
 
 EXTRA_DIST = Doxyfile
 

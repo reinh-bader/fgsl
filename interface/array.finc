@@ -51,8 +51,7 @@
   end subroutine fgsl_aux_vector_double_free
   function fgsl_aux_vector_double_align(a, len, fvec, size, offset, stride) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: a
-    type(c_ptr), value :: fvec
+    type(c_ptr), value :: a, fvec
     integer(c_size_t), value :: len, size, offset, stride
     integer(c_int) :: fgsl_aux_vector_double_align
   end function fgsl_aux_vector_double_align

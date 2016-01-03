@@ -679,6 +679,11 @@ module fgsl
        fgsl_spmatrix_add, fgsl_spmatrix_d2sp, fgsl_spmatrix_sp2d, &
        fgsl_spmatrix_equal, fgsl_spmatrix_transpose_memcpy
 
+! sparse matrix linear algebra
+  public :: fgsl_splinalg_itersolve_alloc, fgsl_splinalg_itersolve_free, &
+       fgsl_splinalg_itersolve_name, fgsl_splinalg_itersolve_iterate, &
+       fgsl_splinalg_itersolve_normr
+
 ! IEEE
   public :: fgsl_ieee_fprintf, fgsl_ieee_printf, fgsl_ieee_env_setup
 !
@@ -1765,6 +1770,19 @@ module fgsl
     type(c_ptr) :: gsl_spmatrix = c_null_ptr
   end type fgsl_spmatrix
 !
+! Types: sparse matrix linear algebra
+!
+type, public :: fgsl_splinalg_itersolve_type
+   private
+   integer(c_int) :: which = 0
+end type fgsl_splinalg_itersolve_type
+type(fgsl_splinalg_itersolve_type), public, parameter :: &
+     fgsl_splinalg_itersolve_gmres = fgsl_splinalg_itersolve_type(1)
+type, public :: fgsl_splinalg_itersolve
+  private
+  type(c_ptr) :: gsl_splinalg_itersolve
+end type fgsl_splinalg_itersolve
+!
 ! required C interfaces
 ! FGSL names occurring here are auxiliary routines
 ! needed to transfer static C information to the Fortran subsystem
@@ -1806,6 +1824,7 @@ module fgsl
 #include "interface/ieee.finc"
 #include "interface/multilarge.finc"
 #include "interface/spmatrix.finc"
+#include "interface/splinalg.finc"
   end interface
 #include "interface/generics.finc"
 contains
@@ -1846,4 +1865,5 @@ contains
 #include "api/ieee.finc"
 #include "api/multilarge.finc"
 #include "api/spmatrix.finc"
+#include "api/splinalg.finc"
 end module fgsl
