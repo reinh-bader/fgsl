@@ -632,3 +632,111 @@
     fgsl_multifit_status = .true.
     if (.not. c_associated(multifit%gsl_multifit_linear_workspace)) fgsl_multifit_status = .false.
   end function fgsl_multifit_status
+  function fgsl_multifit_fdfridge_alloc(T, n, p)
+    type(fgsl_multifit_fdfsolver_type), intent(in) :: T
+    integer(fgsl_size_t), intent(in) :: n, p
+    type(fgsl_multifit_fdfridge) :: fgsl_multifit_fdfridge_alloc
+    type(c_ptr) :: ftype
+    ftype = fgsl_aux_multifit_fdfsolver_alloc(t%which)
+    fgsl_multifit_fdfridge_alloc%gsl_multifit_fdfridge= &
+    gsl_multifit_fdfridge_alloc(ftype, n, p)
+  end function fgsl_multifit_fdfridge_alloc
+  subroutine fgsl_multifit_fdfridge_free(work)
+    type(fgsl_multifit_fdfridge), intent(inout) :: work
+    call gsl_multifit_fdfridge_free(work%gsl_multifit_fdfridge)
+  end subroutine fgsl_multifit_fdfridge_free
+  function fgsl_multifit_fdfridge_name(w)
+    type(fgsl_multifit_fdfridge), intent(in) :: w
+    character(kind=fgsl_char,len=fgsl_strmax) :: fgsl_multifit_fdfridge_name
+    type(c_ptr) :: name
+    name = gsl_multifit_fdfridge_name(w%gsl_multifit_fdfridge)
+    fgsl_multifit_fdfridge_name = fgsl_name(name)
+  end function fgsl_multifit_fdfridge_name
+  function fgsl_multifit_fdfridge_position(w)
+    type(fgsl_multifit_fdfridge), intent(in) :: w
+    type(fgsl_vector) :: fgsl_multifit_fdfridge_position
+    fgsl_multifit_fdfridge_position%gsl_vector = gsl_multifit_fdfridge_position(w%gsl_multifit_fdfridge)
+  end function fgsl_multifit_fdfridge_position
+  function fgsl_multifit_fdfridge_residual(w)
+    type(fgsl_multifit_fdfridge), intent(in) :: w
+    type(fgsl_vector) :: fgsl_multifit_fdfridge_residual
+    fgsl_multifit_fdfridge_residual%gsl_vector = gsl_multifit_fdfridge_residual(w%gsl_multifit_fdfridge)
+  end function fgsl_multifit_fdfridge_residual
+  function fgsl_multifit_fdfridge_niter(w)
+    type(fgsl_multifit_fdfridge), intent(in) :: w
+    integer(fgsl_size_t) :: fgsl_multifit_fdfridge_niter
+    fgsl_multifit_fdfridge_niter = gsl_multifit_fdfridge_niter(w%gsl_multifit_fdfridge)
+  end function fgsl_multifit_fdfridge_niter
+  function fgsl_multifit_fdfridge_set(w, f, x, lambda)
+    type(fgsl_multifit_fdfridge), intent(inout) :: w
+    type(fgsl_multifit_function_fdf), intent(inout) :: f
+    type(fgsl_vector), intent(in) :: x
+    real(fgsl_double), intent(in) :: lambda
+    integer(fgsl_int) :: fgsl_multifit_fdfridge_set
+    fgsl_multifit_fdfridge_set = gsl_multifit_fdfridge_set(&
+    w%gsl_multifit_fdfridge, f%gsl_multifit_function_fdf, &
+    x%gsl_vector, lambda)
+  end function fgsl_multifit_fdfridge_set
+  function fgsl_multifit_fdfridge_wset(w, f, x, lambda, wts)
+    type(fgsl_multifit_fdfridge), intent(inout) :: w
+    type(fgsl_multifit_function_fdf), intent(inout) :: f
+    type(fgsl_vector), intent(in) :: x, wts
+    real(fgsl_double), intent(in) :: lambda
+    integer(fgsl_int) :: fgsl_multifit_fdfridge_wset
+    fgsl_multifit_fdfridge_wset = gsl_multifit_fdfridge_wset(&
+    w%gsl_multifit_fdfridge, f%gsl_multifit_function_fdf, &
+    x%gsl_vector, lambda, wts%gsl_vector)
+  end function fgsl_multifit_fdfridge_wset
+  function fgsl_multifit_fdfridge_set2(w, f, x, lambda)
+    type(fgsl_multifit_fdfridge), intent(inout) :: w
+    type(fgsl_multifit_function_fdf), intent(inout) :: f
+    type(fgsl_vector), intent(in) :: x, lambda
+    integer(fgsl_int) :: fgsl_multifit_fdfridge_set2
+    fgsl_multifit_fdfridge_set2 = gsl_multifit_fdfridge_set2(&
+    w%gsl_multifit_fdfridge, f%gsl_multifit_function_fdf, &
+    x%gsl_vector, lambda%gsl_vector)
+  end function fgsl_multifit_fdfridge_set2
+  function fgsl_multifit_fdfridge_wset2(w, f, x, lambda, wts)
+    type(fgsl_multifit_fdfridge), intent(inout) :: w
+    type(fgsl_multifit_function_fdf), intent(inout) :: f
+    type(fgsl_vector), intent(in) :: x, wts, lambda
+    integer(fgsl_int) :: fgsl_multifit_fdfridge_wset2
+    fgsl_multifit_fdfridge_wset2 = gsl_multifit_fdfridge_wset2(&
+    w%gsl_multifit_fdfridge, f%gsl_multifit_function_fdf, &
+    x%gsl_vector, lambda%gsl_vector, wts%gsl_vector)
+  end function fgsl_multifit_fdfridge_wset2
+  function fgsl_multifit_fdfridge_set3(w, f, x, L)
+    type(fgsl_multifit_fdfridge), intent(inout) :: w
+    type(fgsl_multifit_function_fdf), intent(inout) :: f
+    type(fgsl_vector), intent(in) :: x
+    type(fgsl_matrix), intent(in) :: L
+    integer(fgsl_int) :: fgsl_multifit_fdfridge_set3
+    fgsl_multifit_fdfridge_set3 = gsl_multifit_fdfridge_set3(&
+    w%gsl_multifit_fdfridge, f%gsl_multifit_function_fdf, &
+    x%gsl_vector, L%gsl_matrix)
+  end function fgsl_multifit_fdfridge_set3
+  function fgsl_multifit_fdfridge_wset3(w, f, x, L, wts)
+    type(fgsl_multifit_fdfridge), intent(inout) :: w
+    type(fgsl_multifit_function_fdf), intent(inout) :: f
+    type(fgsl_vector), intent(in) :: x, wts
+    type(fgsl_matrix), intent(in) :: L
+    integer(fgsl_int) :: fgsl_multifit_fdfridge_wset3
+    fgsl_multifit_fdfridge_wset3 = gsl_multifit_fdfridge_wset3(&
+    w%gsl_multifit_fdfridge, f%gsl_multifit_function_fdf, &
+    x%gsl_vector, L%gsl_matrix, wts%gsl_vector)
+  end function fgsl_multifit_fdfridge_wset3
+  function fgsl_multifit_fdfridge_iterate(w)
+    type(fgsl_multifit_fdfridge), intent(inout) :: w
+    integer(fgsl_int) :: fgsl_multifit_fdfridge_iterate
+    fgsl_multifit_fdfridge_iterate = gsl_multifit_fdfridge_iterate(&
+    w%gsl_multifit_fdfridge)
+  end function fgsl_multifit_fdfridge_iterate
+  function fgsl_multifit_fdfridge_driver(w, maxiter, xtol, gtol, ftol, info)
+    type(fgsl_multifit_fdfridge), intent(inout) :: w
+    integer(fgsl_size_t), intent(in) :: maxiter
+    real(fgsl_double), intent(in) :: xtol, gtol, ftol
+    integer(fgsl_int), intent(out) :: info
+    integer(fgsl_int) :: fgsl_multifit_fdfridge_driver
+    fgsl_multifit_fdfridge_driver = gsl_multifit_fdfridge_driver(&
+    w%gsl_multifit_fdfridge, maxiter, xtol, gtol, ftol, info)
+  end function fgsl_multifit_fdfridge_driver

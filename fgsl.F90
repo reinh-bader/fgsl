@@ -635,6 +635,13 @@ module fgsl
        fgsl_multifit_robust_tune, fgsl_multifit_robust_name, &
        fgsl_multifit_robust_statistics, fgsl_multifit_robust, &
        fgsl_multifit_robust_est
+  public :: fgsl_multifit_fdfridge_alloc, fgsl_multifit_fdfridge_free, &
+       fgsl_multifit_fdfridge_name, fgsl_multifit_fdfridge_position, &
+       fgsl_multifit_fdfridge_residual, fgsl_multifit_fdfridge_niter, &
+       fgsl_multifit_fdfridge_set, fgsl_multifit_fdfridge_wset, &
+       fgsl_multifit_fdfridge_set2, fgsl_multifit_fdfridge_wset2, &
+       fgsl_multifit_fdfridge_set3, fgsl_multifit_fdfridge_wset3, &
+       fgsl_multifit_fdfridge_iterate, fgsl_multifit_fdfridge_driver
 
 ! large linear least squares systems
   public :: fgsl_multilarge_linear_alloc, fgsl_multilarge_linear_free, &
@@ -1752,6 +1759,10 @@ module fgsl
        fgsl_multifit_fdfsolver_lmder = fgsl_multifit_fdfsolver_type(1), &
        fgsl_multifit_fdfsolver_lmsder = fgsl_multifit_fdfsolver_type(2), &
        fgsl_multifit_fdfsolver_lmniel = fgsl_multifit_fdfsolver_type(3)
+  type, public:: fgsl_multifit_fdfridge
+    private
+    type(c_ptr) :: gsl_multifit_fdfridge = c_null_ptr
+  end type fgsl_multifit_fdfridge
 !
 ! Types: B-Splines
 !

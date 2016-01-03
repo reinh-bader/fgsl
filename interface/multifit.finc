@@ -412,3 +412,78 @@
     type(c_ptr), value :: r
     integer(c_int) :: gsl_multifit_linear_residuals
   end function gsl_multifit_linear_residuals
+  function gsl_multifit_fdfridge_alloc(T, n, p) bind(c)
+    import :: c_ptr, c_size_t
+    type(c_ptr), value :: T
+    integer(c_size_t), value :: n, p
+    type(c_ptr) :: gsl_multifit_fdfridge_alloc
+  end function gsl_multifit_fdfridge_alloc
+  subroutine gsl_multifit_fdfridge_free(work) bind(c)
+    import :: c_ptr
+    type(c_ptr), value :: work
+  end subroutine gsl_multifit_fdfridge_free
+  function gsl_multifit_fdfridge_name(w) bind(c)
+    import :: c_ptr
+    type(c_ptr), value :: w
+    type(c_ptr) :: gsl_multifit_fdfridge_name
+  end function gsl_multifit_fdfridge_name
+  function gsl_multifit_fdfridge_position(w) bind(c)
+    import :: c_ptr
+    type(c_ptr), value :: w
+    type(c_ptr) :: gsl_multifit_fdfridge_position
+  end function gsl_multifit_fdfridge_position
+  function gsl_multifit_fdfridge_residual(w) bind(c)
+    import :: c_ptr
+    type(c_ptr), value :: w
+    type(c_ptr) :: gsl_multifit_fdfridge_residual
+  end function gsl_multifit_fdfridge_residual
+  function gsl_multifit_fdfridge_niter(w) bind(c)
+    import :: c_ptr, c_size_t
+    type(c_ptr), value :: w
+    integer(c_size_t) :: gsl_multifit_fdfridge_niter
+  end function gsl_multifit_fdfridge_niter
+  function gsl_multifit_fdfridge_set(w, f, x, lambda) bind(c)
+    import :: c_ptr, c_int, c_double
+    type(c_ptr), value :: w, f, x
+    real(c_double), value :: lambda
+    integer(c_int) :: gsl_multifit_fdfridge_set
+  end function gsl_multifit_fdfridge_set
+  function gsl_multifit_fdfridge_wset(w, f, x, lambda, wts) bind(c)
+    import :: c_ptr, c_int, c_double
+    type(c_ptr), value :: w, f, x, wts
+    real(c_double), value :: lambda
+    integer(c_int) :: gsl_multifit_fdfridge_wset
+  end function gsl_multifit_fdfridge_wset
+  function gsl_multifit_fdfridge_set2(w, f, x, lambda) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: w, f, x, lambda
+    integer(c_int) :: gsl_multifit_fdfridge_set2
+  end function gsl_multifit_fdfridge_set2
+  function gsl_multifit_fdfridge_wset2(w, f, x, lambda, wts) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: w, f, x, wts, lambda
+    integer(c_int) :: gsl_multifit_fdfridge_wset2
+  end function gsl_multifit_fdfridge_wset2
+  function gsl_multifit_fdfridge_set3(w, f, x, L) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: w, f, x, L
+    integer(c_int) :: gsl_multifit_fdfridge_set3
+  end function gsl_multifit_fdfridge_set3
+  function gsl_multifit_fdfridge_wset3(w, f, x, L, wts) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: w, f, x, L, wts
+    integer(c_int) :: gsl_multifit_fdfridge_wset3
+  end function gsl_multifit_fdfridge_wset3
+  function gsl_multifit_fdfridge_iterate(w) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: w
+    integer(c_int) :: gsl_multifit_fdfridge_iterate
+  end function gsl_multifit_fdfridge_iterate
+  function gsl_multifit_fdfridge_driver(w, maxiter, xtol, gtol, ftol, info) bind(c)
+    import :: c_ptr, c_int, c_size_t, c_double
+    type(c_ptr), value :: w
+    integer(c_size_t), value :: maxiter
+    real(c_double), value :: xtol, gtol, ftol
+    integer(c_int) :: info
+    integer(c_int) :: gsl_multifit_fdfridge_driver
+  end function gsl_multifit_fdfridge_driver
