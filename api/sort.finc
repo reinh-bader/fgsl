@@ -22,7 +22,7 @@
   end subroutine fgsl_heapsort
   function fgsl_heapsort_index(p, array, count, size, compare)
     integer(fgsl_size_t), intent(in) :: count, size
-    integer(fgsl_size_t), intent(out) :: p(count)
+    integer(fgsl_size_t), intent(out), target :: p(count)
     type(c_ptr) :: array
     interface
        function compare(x, y) bind(c)
@@ -35,89 +35,89 @@
 !
     type(c_funptr) :: fp
     fp = c_funloc(compare)
-    fgsl_heapsort_index = gsl_heapsort_index(p, array, count, size, fp)
+    fgsl_heapsort_index = gsl_heapsort_index(c_loc(p), array, count, size, fp)
   end function fgsl_heapsort_index
-  subroutine fgsl_sort_double(data, stride, n)
-    real(fgsl_double), intent(inout) :: data(:)
-    integer(fgsl_size_t), intent(in) :: stride, n
-    call gsl_sort(data, stride, n)
+  subroutine fgsl_sort_double(data, stride)
+    real(fgsl_double), intent(inout), target :: data(:)
+    integer(fgsl_size_t), intent(in) :: stride
+    call gsl_sort(c_loc(data), stride, size(data, kind=fgsl_size_t))
   end subroutine fgsl_sort_double
-  subroutine fgsl_sort_double_index(p, data, stride, n)
-    integer(fgsl_size_t), intent(out) :: p(:)
-    real(fgsl_double), intent(in) :: data(:)
-    integer(fgsl_size_t), intent(in) :: stride, n
-    call gsl_sort_index(p, data, stride, n)
+  subroutine fgsl_sort_double_index(p, data, stride)
+    integer(fgsl_size_t), intent(out), target :: p(:)
+    real(fgsl_double), intent(in), target :: data(:)
+    integer(fgsl_size_t), intent(in) :: stride
+    call gsl_sort_index(c_loc(p), c_loc(data), stride, size(data, kind=fgsl_size_t))
   end subroutine fgsl_sort_double_index
-  function fgsl_sort_double_smallest(dest, k, src, stride, n)
-    integer(fgsl_size_t), intent(in) :: k, stride, n
-    real(fgsl_double), intent(out) :: dest(k)
-    real(fgsl_double), intent(in) :: src(:)
+  function fgsl_sort_double_smallest(dest, k, src, stride)
+    integer(fgsl_size_t), intent(in) :: k, stride
+    real(fgsl_double), intent(out), target :: dest(k)
+    real(fgsl_double), intent(in), target :: src(:)
     integer(fgsl_int) :: fgsl_sort_double_smallest
-    fgsl_sort_double_smallest = gsl_sort_smallest(dest, k, src, stride, n)
+    fgsl_sort_double_smallest = gsl_sort_smallest(c_loc(dest), k, c_loc(src), stride, size(src, kind=fgsl_size_t))
   end function fgsl_sort_double_smallest
-  function fgsl_sort_double_smallest_index(p, k, src, stride, n)
-    integer(fgsl_size_t), intent(in) :: k, stride, n
-    integer(fgsl_size_t), intent(out) :: p(k)
-    real(fgsl_double), intent(in) :: src(:)
+  function fgsl_sort_double_smallest_index(p, k, src, stride)
+    integer(fgsl_size_t), intent(in) :: k, stride
+    integer(fgsl_size_t), intent(out), target :: p(k)
+    real(fgsl_double), intent(in), target :: src(:)
     integer(fgsl_int) :: fgsl_sort_double_smallest_index
-    fgsl_sort_double_smallest_index = gsl_sort_smallest_index(p, k, &
-         src, stride, n)
+    fgsl_sort_double_smallest_index = gsl_sort_smallest_index(c_loc(p), k, &
+         c_loc(src), stride, size(src, kind=fgsl_size_t))
   end function fgsl_sort_double_smallest_index
-  function fgsl_sort_double_largest(dest, k, src, stride, n)
-    integer(fgsl_size_t), intent(in) :: k, stride, n
-    real(fgsl_double), intent(out) :: dest(k)
-    real(fgsl_double), intent(in) :: src(:)
+  function fgsl_sort_double_largest(dest, k, src, stride)
+    integer(fgsl_size_t), intent(in) :: k, stride
+    real(fgsl_double), intent(out), target :: dest(k)
+    real(fgsl_double), intent(in), target :: src(:)
     integer(fgsl_int) :: fgsl_sort_double_largest
-    fgsl_sort_double_largest = gsl_sort_largest(dest, k, src, stride, n)
+    fgsl_sort_double_largest = gsl_sort_largest(c_loc(dest), k, c_loc(src), stride, size(src, kind=fgsl_size_t))
   end function fgsl_sort_double_largest
-  function fgsl_sort_double_largest_index(p, k, src, stride, n)
-    integer(fgsl_size_t), intent(in) :: k, stride, n
-    integer(fgsl_size_t), intent(out) :: p(k)
-    real(fgsl_double), intent(in) :: src(:)
+  function fgsl_sort_double_largest_index(p, k, src, stride)
+    integer(fgsl_size_t), intent(in) :: k, stride
+    integer(fgsl_size_t), intent(out), target :: p(k)
+    real(fgsl_double), intent(in), target :: src(:)
     integer(fgsl_int) :: fgsl_sort_double_largest_index
-    fgsl_sort_double_largest_index = gsl_sort_largest_index(p, k, &
-         src, stride, n)
+    fgsl_sort_double_largest_index = gsl_sort_largest_index(c_loc(p), k, &
+         c_loc(src), stride, size(src, kind=fgsl_size_t))
   end function fgsl_sort_double_largest_index
-  subroutine fgsl_sort_long(data, stride, n)
-    integer(fgsl_long), intent(inout) :: data(:)
-    integer(fgsl_size_t), intent(in) :: stride, n
-    call gsl_sort_long(data, stride, n)
+  subroutine fgsl_sort_long(data, stride)
+    integer(fgsl_long), intent(inout), target :: data(:)
+    integer(fgsl_size_t), intent(in) :: stride
+    call gsl_sort_long(c_loc(data), stride, size(data, kind=fgsl_size_t))
   end subroutine fgsl_sort_long
-  subroutine fgsl_sort_long_index(p, data, stride, n)
-    integer(fgsl_size_t), intent(out) :: p(:)
-    integer(fgsl_long), intent(in) :: data(:)
-    integer(fgsl_size_t), intent(in) :: stride, n
-    call gsl_sort_long_index(p, data, stride, n)
+  subroutine fgsl_sort_long_index(p, data, stride)
+    integer(fgsl_size_t), intent(out), target :: p(:)
+    integer(fgsl_long), intent(in), target :: data(:)
+    integer(fgsl_size_t), intent(in) :: stride
+    call gsl_sort_long_index(c_loc(p), c_loc(data), stride, size(data, kind=fgsl_size_t))
   end subroutine fgsl_sort_long_index
-  function fgsl_sort_long_smallest(dest, k, src, stride, n)
-    integer(fgsl_size_t), intent(in) :: k, stride, n
-    integer(fgsl_long), intent(out) :: dest(k)
-    integer(fgsl_long), intent(in) :: src(:)
+  function fgsl_sort_long_smallest(dest, k, src, stride)
+    integer(fgsl_size_t), intent(in) :: k, stride
+    integer(fgsl_long), intent(out), target :: dest(k)
+    integer(fgsl_long), intent(in), target :: src(:)
     integer(fgsl_int) :: fgsl_sort_long_smallest
-    fgsl_sort_long_smallest = gsl_sort_long_smallest(dest, k, src, stride, n)
+    fgsl_sort_long_smallest = gsl_sort_long_smallest(c_loc(dest), k, c_loc(src), stride, size(src, kind=fgsl_size_t))
   end function fgsl_sort_long_smallest
-  function fgsl_sort_long_smallest_index(p, k, src, stride, n)
-    integer(fgsl_size_t), intent(in) :: k, stride, n
-    integer(fgsl_size_t), intent(out) :: p(k)
-    integer(fgsl_long), intent(in) :: src(:)
+  function fgsl_sort_long_smallest_index(p, k, src, stride)
+    integer(fgsl_size_t), intent(in) :: k, stride
+    integer(fgsl_size_t), intent(out), target :: p(k)
+    integer(fgsl_long), intent(in), target :: src(:)
     integer(fgsl_int) :: fgsl_sort_long_smallest_index
-    fgsl_sort_long_smallest_index = gsl_sort_long_smallest_index(p, k, &
-         src, stride, n)
+    fgsl_sort_long_smallest_index = gsl_sort_long_smallest_index(c_loc(p), k, &
+         c_loc(src), stride, size(src, kind=fgsl_size_t))
   end function fgsl_sort_long_smallest_index
-  function fgsl_sort_long_largest(dest, k, src, stride, n)
-    integer(fgsl_size_t), intent(in) :: k, stride, n
-    integer(fgsl_long), intent(out) :: dest(k)
-    integer(fgsl_long), intent(in) :: src(:)
+  function fgsl_sort_long_largest(dest, k, src, stride)
+    integer(fgsl_size_t), intent(in) :: k, stride
+    integer(fgsl_long), intent(out), target :: dest(k)
+    integer(fgsl_long), intent(in), target :: src(:)
     integer(fgsl_int) :: fgsl_sort_long_largest
-    fgsl_sort_long_largest = gsl_sort_long_largest(dest, k, src, stride, n)
+    fgsl_sort_long_largest = gsl_sort_long_largest(c_loc(dest), k, c_loc(src), stride, size(src, kind=fgsl_size_t))
   end function fgsl_sort_long_largest
-  function fgsl_sort_long_largest_index(p, k, src, stride, n)
-    integer(fgsl_size_t), intent(in) :: k, stride, n
-    integer(fgsl_size_t), intent(out) :: p(k)
-    integer(fgsl_long), intent(in) :: src(:)
+  function fgsl_sort_long_largest_index(p, k, src, stride)
+    integer(fgsl_size_t), intent(in) :: k, stride
+    integer(fgsl_size_t), intent(out), target :: p(k)
+    integer(fgsl_long), intent(in), target :: src(:)
     integer(fgsl_int) :: fgsl_sort_long_largest_index
-    fgsl_sort_long_largest_index = gsl_sort_long_largest_index(p, k, &
-         src, stride, n)
+    fgsl_sort_long_largest_index = gsl_sort_long_largest_index(c_loc(p), k, &
+         c_loc(src), stride, size(src, kind=fgsl_size_t))
   end function fgsl_sort_long_largest_index
   subroutine fgsl_sort_vector(v)
     type(fgsl_vector), intent(inout) :: v

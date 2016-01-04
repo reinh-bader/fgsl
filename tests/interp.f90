@@ -8,7 +8,7 @@ program interp
   type(fgsl_interp_accel) :: acc
   type(fgsl_interp) :: a_interp
   type(fgsl_spline) :: spline
-  integer :: i, index
+  integer(fgsl_long) :: i, index
   character(kind=fgsl_char,len=fgsl_strmax) :: name
   real(fgsl_double), dimension(nmax) :: xa, ya, d, d2, di, ra_e, rda_e, rd2a_e, ri_e
   real(fgsl_double) :: dmx, ra, rda, rd2a, ri
@@ -73,7 +73,7 @@ program interp
   end do
   call unit_assert_equal_within('fgsl_spline_eval',0.0d0,dmx,eps10)
   index = fgsl_spline_min_size(spline)
-  call unit_assert_equal('fgsl_spline_min_size',3,index)
+  call unit_assert_equal('fgsl_spline_min_size',3_fgsl_long,index)
 
   call fgsl_spline_free(spline)
 !
@@ -99,9 +99,9 @@ program interp
   call fgsl_interp_free(a_interp)
 !
   index = fgsl_interp_bsearch(xa, 1.5_fgsl_double,1_fgsl_size_t,nmax)
-  call unit_assert_equal('fgsl_interp_bsearch',2,index)
+  call unit_assert_equal('fgsl_interp_bsearch',2_fgsl_long,index)
   index = fgsl_interp_accel_find(acc, xa, 1.5_fgsl_double)
-  call unit_assert_equal('fgsl_interp_accel_find',2,index)
+  call unit_assert_equal('fgsl_interp_accel_find',2_fgsl_long,index)
   call fgsl_interp_accel_free(acc)
 !
 ! Done
