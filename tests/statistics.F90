@@ -7,7 +7,7 @@ program statistics
   real(fgsl_double) :: s_array(nsize), s_arr2(nsize), w(nsize), wk(2*nsize)
   real(fgsl_double) :: s_mean, s_m2, s_var, s_kur, s_sd, s_skew, &
        s_auto, s_cov, s_cor, s_spear, xc, xv
-  integer :: i
+  integer(fgsl_long) :: i
   integer(fgsl_size_t) :: mx, mn
 !
 ! Test statistical routines
@@ -188,18 +188,18 @@ program statistics
        minval(s_array),xc,eps10)
 ! NOTE: zero-based counting
   i = fgsl_stats_max_index(s_array,1_fgsl_size_t,nsize)
-  call unit_assert_equal('fgsl_stats_max_index',int(nsize-1),i)
+  call unit_assert_equal('fgsl_stats_max_index',nsize-1,i)
   i = fgsl_stats_min_index(s_array,1_fgsl_size_t,nsize)
-  call unit_assert_equal('fgsl_stats_min_index',0,i)
+  call unit_assert_equal('fgsl_stats_min_index',0_fgsl_long,i)
   call fgsl_stats_minmax_index(mn, mx, s_array,1_fgsl_size_t,nsize)
   call unit_assert_equal('fgsl_stats_minmax_index',0,int(mn))
   call unit_assert_equal('fgsl_stats_minmax_index',int(nsize-1),int(mx))
 !
-  xv = fgsl_stats_median_from_sorted_data(s_array,1_fgsl_size_t,nsize)
+  xv = fgsl_stats_median_from_sorted_data(s_array,1_fgsl_size_t)
   xc = 0.5d0*(s_array(25)+s_array(26))
   call unit_assert_equal_within('fgsl_stats_median_from_sorted_data',&
        xc,xv,eps10)
-  xv = fgsl_stats_quantile_from_sorted_data(s_array,1_fgsl_size_t,nsize,0.5d0)
+  xv = fgsl_stats_quantile_from_sorted_data(s_array,1_fgsl_size_t,0.5d0)
   call unit_assert_equal_within('fgsl_stats_quantile_from_sorted_data',&
        xc,xv,eps10)
 
