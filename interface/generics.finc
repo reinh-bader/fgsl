@@ -196,3 +196,21 @@
      module procedure fgsl_ieee_printf_float
      module procedure fgsl_ieee_printf_double
   end interface
+!
+! Multifit: with or without weights
+! The C API allows a user to pass NULL if weights are not required,
+! however this cannot be done easily with Fortran. This seems to be
+! an elegant solution
+!
+  interface fgsl_multifit_fdfsolver_dif_df
+    module procedure fgsl_multifit_fdfsolver_dif_df_wts
+    module procedure fgsl_multifit_fdfsolver_dif_df_nowts
+  end interface fgsl_multifit_fdfsolver_dif_df
+  interface fgsl_multifit_eval_wf
+    module procedure fgsl_multifit_eval_wf_wts
+    module procedure fgsl_multifit_eval_wf_nowts
+  end interface fgsl_multifit_eval_wf
+  interface fgsl_multifit_eval_wdf
+    module procedure fgsl_multifit_eval_wdf_wts
+    module procedure fgsl_multifit_eval_wdf_nowts
+  end interface fgsl_multifit_eval_wdf

@@ -245,15 +245,24 @@
     fgsl_multifit_fdfsolver_driver = gsl_multifit_fdfsolver_driver(&
     s%gsl_multifit_fdfsolver, maxiter, xtol, gtol, ftol, info)
   end function fgsl_multifit_fdfsolver_driver
-  function fgsl_multifit_fdfsolver_dif_df(x, wts, fdf, f, J)
+  function fgsl_multifit_fdfsolver_dif_df_wts(x, wts, fdf, f, J)
     type(fgsl_vector), intent(in) :: x, f, wts
     type(fgsl_multifit_function_fdf), intent(inout) :: fdf
     type(fgsl_matrix), intent(inout) :: J
-    integer(fgsl_int) :: fgsl_multifit_fdfsolver_dif_df
-    fgsl_multifit_fdfsolver_dif_df = gsl_multifit_fdfsolver_dif_df(&
+    integer(fgsl_int) :: fgsl_multifit_fdfsolver_dif_df_wts
+    fgsl_multifit_fdfsolver_dif_df_wts = gsl_multifit_fdfsolver_dif_df(&
         x%gsl_vector, wts%gsl_vector, fdf%gsl_multifit_function_fdf, f%gsl_vector,&
         J%gsl_matrix)
-  end function fgsl_multifit_fdfsolver_dif_df
+  end function fgsl_multifit_fdfsolver_dif_df_wts
+  function fgsl_multifit_fdfsolver_dif_df_nowts(x, fdf, f, J)
+    type(fgsl_vector), intent(in) :: x, f
+    type(fgsl_multifit_function_fdf), intent(inout) :: fdf
+    type(fgsl_matrix), intent(inout) :: J
+    integer(fgsl_int) :: fgsl_multifit_fdfsolver_dif_df_nowts
+    fgsl_multifit_fdfsolver_dif_df_nowts = gsl_multifit_fdfsolver_dif_df(&
+        x%gsl_vector, c_null_ptr, fdf%gsl_multifit_function_fdf, f%gsl_vector,&
+        J%gsl_matrix)
+  end function fgsl_multifit_fdfsolver_dif_df_nowts
   function fgsl_multifit_robust_alloc(t, n, p)
     type(fgsl_multifit_robust_type), intent(in) :: t
     integer(fgsl_size_t), intent(in) :: n, p
@@ -333,22 +342,38 @@
     fgsl_multifit_fdfsolver_niter = &
     gsl_multifit_fdfsolver_niter(s%gsl_multifit_fdfsolver)
   end function fgsl_multifit_fdfsolver_niter
-  function fgsl_multifit_eval_wf(fdf, x, wts, y)
+  function fgsl_multifit_eval_wf_wts(fdf, x, wts, y)
     type(fgsl_multifit_function_fdf), intent(inout) :: fdf
     type(fgsl_vector), intent(in) :: x, wts
     type(fgsl_vector), intent(inout) :: y
-    integer(fgsl_int) :: fgsl_multifit_eval_wf
-    fgsl_multifit_eval_wf = gsl_multifit_eval_wf(fdf%gsl_multifit_function_fdf, &
+    integer(fgsl_int) :: fgsl_multifit_eval_wf_wts
+    fgsl_multifit_eval_wf_wts = gsl_multifit_eval_wf(fdf%gsl_multifit_function_fdf, &
     x%gsl_vector, wts%gsl_vector, y%gsl_vector)
-  end function fgsl_multifit_eval_wf
-  function fgsl_multifit_eval_wdf(fdf, x, wts, dy)
+  end function fgsl_multifit_eval_wf_wts
+  function fgsl_multifit_eval_wf_nowts(fdf, x, y)
+    type(fgsl_multifit_function_fdf), intent(inout) :: fdf
+    type(fgsl_vector), intent(in) :: x
+    type(fgsl_vector), intent(inout) :: y
+    integer(fgsl_int) :: fgsl_multifit_eval_wf_nowts
+    fgsl_multifit_eval_wf_nowts = gsl_multifit_eval_wf(fdf%gsl_multifit_function_fdf, &
+    x%gsl_vector, c_null_ptr, y%gsl_vector)
+  end function fgsl_multifit_eval_wf_nowts
+  function fgsl_multifit_eval_wdf_wts(fdf, x, wts, dy)
     type(fgsl_multifit_function_fdf), intent(inout) :: fdf
     type(fgsl_vector), intent(in) :: x, wts
     type(fgsl_matrix), intent(inout) :: dy
-    integer(fgsl_int) :: fgsl_multifit_eval_wdf
-    fgsl_multifit_eval_wdf = gsl_multifit_eval_wdf(fdf%gsl_multifit_function_fdf, &
+    integer(fgsl_int) :: fgsl_multifit_eval_wdf_wts
+    fgsl_multifit_eval_wdf_wts = gsl_multifit_eval_wdf(fdf%gsl_multifit_function_fdf, &
     x%gsl_vector, wts%gsl_vector, dy%gsl_matrix)
-  end function fgsl_multifit_eval_wdf
+  end function fgsl_multifit_eval_wdf_wts
+  function fgsl_multifit_eval_wdf_nowts(fdf, x, dy)
+    type(fgsl_multifit_function_fdf), intent(inout) :: fdf
+    type(fgsl_vector), intent(in) :: x
+    type(fgsl_matrix), intent(inout) :: dy
+    integer(fgsl_int) :: fgsl_multifit_eval_wdf_nowts
+    fgsl_multifit_eval_wdf_nowts = gsl_multifit_eval_wdf(fdf%gsl_multifit_function_fdf, &
+    x%gsl_vector, c_null_ptr, dy%gsl_matrix)
+  end function fgsl_multifit_eval_wdf_nowts
   function fgsl_multifit_fdfsolver_test(s, xtol, gtol, ftol, info)
     type(fgsl_multifit_fdfsolver), intent(in) :: s
     real(fgsl_double), intent(in) :: xtol, gtol, ftol
