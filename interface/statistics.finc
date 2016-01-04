@@ -4,259 +4,259 @@
 !
   function gsl_stats_mean (data, stride, n) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: stride, n
     real(c_double) :: gsl_stats_mean
   end function gsl_stats_mean
   function gsl_stats_variance (data, stride, n) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: stride, n
     real(c_double) :: gsl_stats_variance
   end function gsl_stats_variance
   function gsl_stats_variance_m (data, stride, n, mean) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: stride, n
     real(c_double), value :: mean
     real(c_double) :: gsl_stats_variance_m
   end function gsl_stats_variance_m
   function gsl_stats_sd (data, stride, n) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: stride, n
     real(c_double) :: gsl_stats_sd
   end function gsl_stats_sd
   function gsl_stats_sd_m (data, stride, n, mean) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: stride, n
     real(c_double), value :: mean
     real(c_double) :: gsl_stats_sd_m
   end function gsl_stats_sd_m
   function gsl_stats_variance_with_fixed_mean (data, stride, n, mean) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: stride, n
     real(c_double), value :: mean
     real(c_double) :: gsl_stats_variance_with_fixed_mean
   end function gsl_stats_variance_with_fixed_mean
   function gsl_stats_sd_with_fixed_mean (data, stride, n, mean) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: stride, n
     real(c_double), value :: mean
     real(c_double) :: gsl_stats_sd_with_fixed_mean
   end function gsl_stats_sd_with_fixed_mean
   function gsl_stats_absdev (data, stride, n) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: stride, n
     real(c_double) :: gsl_stats_absdev
   end function gsl_stats_absdev
   function gsl_stats_absdev_m (data, stride, n, mean) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: stride, n
     real(c_double), value :: mean
     real(c_double) :: gsl_stats_absdev_m
   end function gsl_stats_absdev_m
   function gsl_stats_skew (data, stride, n) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: stride, n
     real(c_double) :: gsl_stats_skew
   end function gsl_stats_skew
   function gsl_stats_skew_m_sd (data, stride, n, mean, sd) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: stride, n
     real(c_double), value :: mean, sd
     real(c_double) :: gsl_stats_skew_m_sd
   end function gsl_stats_skew_m_sd
   function gsl_stats_kurtosis (data, stride, n) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: stride, n
     real(c_double) :: gsl_stats_kurtosis
   end function gsl_stats_kurtosis
   function gsl_stats_kurtosis_m_sd (data, stride, n, mean, sd) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: stride, n
     real(c_double), value :: mean, sd
     real(c_double) :: gsl_stats_kurtosis_m_sd
   end function gsl_stats_kurtosis_m_sd
   function gsl_stats_lag1_autocorrelation (data, stride, n) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: stride, n
     real(c_double) :: gsl_stats_lag1_autocorrelation
   end function gsl_stats_lag1_autocorrelation
   function gsl_stats_lag1_autocorrelation_m (data, stride, n, mean) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: stride, n
     real(c_double), value :: mean
     real(c_double) :: gsl_stats_lag1_autocorrelation_m
   end function gsl_stats_lag1_autocorrelation_m
   function gsl_stats_covariance(data1, stride1, data2, stride2, n) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data1, data2
+    type(c_ptr), value :: data1, data2
     integer(c_size_t), value :: stride1, stride2, n
     real(c_double) :: gsl_stats_covariance
   end function gsl_stats_covariance
   function gsl_stats_covariance_m(data1, stride1, data2, stride2, n, &
        mean1, mean2) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data1, data2
+    type(c_ptr), value :: data1, data2
     integer(c_size_t), value :: stride1, stride2, n
     real(c_double), value :: mean1, mean2
     real(c_double) :: gsl_stats_covariance_m
   end function gsl_stats_covariance_m
   function gsl_stats_correlation(data1, stride1, data2, stride2, n) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data1, data2
+    type(c_ptr), value :: data1, data2
     integer(c_size_t), value :: stride1, stride2, n
     real(c_double) :: gsl_stats_correlation
   end function gsl_stats_correlation
   function gsl_stats_spearman(data1, stride1, data2, stride2, n, work) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data1, data2
-    real(c_double), dimension(*), intent(inout) :: work
+    type(c_ptr), value :: data1, data2
+    type(c_ptr), value :: work
     integer(c_size_t), value :: stride1, stride2, n
     real(c_double) :: gsl_stats_spearman
   end function gsl_stats_spearman
   function gsl_stats_wmean(w, wstride, data, stride, n) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: w, data
+    type(c_ptr), value :: w, data
     integer(c_size_t), value :: wstride, stride, n
     real(c_double) :: gsl_stats_wmean
   end function gsl_stats_wmean
   function gsl_stats_wvariance(w, wstride, data, stride, n) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: w, data
+    type(c_ptr), value :: w, data
     integer(c_size_t), value :: wstride, stride, n
     real(c_double) :: gsl_stats_wvariance
   end function gsl_stats_wvariance
   function gsl_stats_wvariance_m(w, wstride, data, stride, n, mean) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: w, data
+    type(c_ptr), value :: w, data
     integer(c_size_t), value :: wstride, stride, n
     real(c_double), value :: mean
     real(c_double) :: gsl_stats_wvariance_m
   end function gsl_stats_wvariance_m
   function gsl_stats_wsd(w, wstride, data, stride, n) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: w, data
+    type(c_ptr), value :: w, data
     integer(c_size_t), value :: wstride, stride, n
     real(c_double) :: gsl_stats_wsd
   end function gsl_stats_wsd
   function gsl_stats_wsd_m(w, wstride, data, stride, n, mean) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: w, data
+    type(c_ptr), value :: w, data
     integer(c_size_t), value :: wstride, stride, n
     real(c_double), value :: mean
     real(c_double) :: gsl_stats_wsd_m
   end function gsl_stats_wsd_m
   function gsl_stats_wvariance_with_fixed_mean(w, wstride, data, stride, n, mean) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: w, data
+    type(c_ptr), value :: w, data
     integer(c_size_t), value :: wstride, stride, n
     real(c_double), value :: mean
     real(c_double) :: gsl_stats_wvariance_with_fixed_mean
   end function gsl_stats_wvariance_with_fixed_mean
   function gsl_stats_wsd_with_fixed_mean(w, wstride, data, stride, n, mean) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: w, data
+    type(c_ptr), value :: w, data
     integer(c_size_t), value :: wstride, stride, n
     real(c_double), value :: mean
     real(c_double) :: gsl_stats_wsd_with_fixed_mean
   end function gsl_stats_wsd_with_fixed_mean
   function gsl_stats_wabsdev(w, wstride, data, stride, n) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: w, data
+    type(c_ptr), value :: w, data
     integer(c_size_t), value :: wstride, stride, n
     real(c_double) :: gsl_stats_wabsdev
   end function gsl_stats_wabsdev
   function gsl_stats_wabsdev_m(w, wstride, data, stride, n, mean) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: w, data
+    type(c_ptr), value :: w, data
     integer(c_size_t), value :: wstride, stride, n
     real(c_double), value :: mean
     real(c_double) :: gsl_stats_wabsdev_m
   end function gsl_stats_wabsdev_m
   function gsl_stats_wskew(w, wstride, data, stride, n) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: w, data
+    type(c_ptr), value :: w, data
     integer(c_size_t), value :: wstride, stride, n
     real(c_double) :: gsl_stats_wskew
   end function gsl_stats_wskew
   function gsl_stats_wskew_m_sd(w, wstride, data, stride, n, mean, sd) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: w, data
+    type(c_ptr), value :: w, data
     integer(c_size_t), value :: wstride, stride, n
     real(c_double), value :: mean, sd
     real(c_double) :: gsl_stats_wskew_m_sd
   end function gsl_stats_wskew_m_sd
   function gsl_stats_wkurtosis(w, wstride, data, stride, n) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: w, data
+    type(c_ptr), value :: w, data
     integer(c_size_t), value :: wstride, stride, n
     real(c_double) :: gsl_stats_wkurtosis
   end function gsl_stats_wkurtosis
   function gsl_stats_wkurtosis_m_sd(w, wstride, data, stride, n, mean, sd) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: w, data
+    type(c_ptr), value :: w, data
     integer(c_size_t), value :: wstride, stride, n
     real(c_double), value :: mean, sd
     real(c_double) :: gsl_stats_wkurtosis_m_sd
   end function gsl_stats_wkurtosis_m_sd
   function gsl_stats_max(data, stride, n) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: stride, n
     real(c_double) :: gsl_stats_max
   end function gsl_stats_max
   function gsl_stats_min(data, stride, n) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: stride, n
     real(c_double) :: gsl_stats_min
   end function gsl_stats_min
   subroutine gsl_stats_minmax(min, max, data, stride, n) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: stride, n
-    real(c_double), intent(out) :: min, max
+    real(c_double) :: min, max
   end subroutine gsl_stats_minmax
   function gsl_stats_max_index(data, stride, n) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: stride, n
     integer(c_size_t) :: gsl_stats_max_index
   end function gsl_stats_max_index
   function gsl_stats_min_index(data, stride, n) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: stride, n
     integer(c_size_t) :: gsl_stats_min_index
   end function gsl_stats_min_index
   subroutine gsl_stats_minmax_index(min_index, max_index, data, stride, n) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: stride, n
-    integer(c_size_t), intent(out) :: min_index, max_index
+    integer(c_size_t) :: min_index, max_index
   end subroutine gsl_stats_minmax_index
   function gsl_stats_median_from_sorted_data(data, stride, n) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: stride, n
     real(c_double) :: gsl_stats_median_from_sorted_data
   end function gsl_stats_median_from_sorted_data
   function gsl_stats_quantile_from_sorted_data(data, stride, n, f) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: data
+    type(c_ptr), value :: data
     real(c_double), value :: f
     integer(c_size_t), value :: stride, n
     real(c_double) :: gsl_stats_quantile_from_sorted_data
