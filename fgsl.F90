@@ -691,6 +691,15 @@ module fgsl
        fgsl_splinalg_itersolve_name, fgsl_splinalg_itersolve_iterate, &
        fgsl_splinalg_itersolve_normr
 
+! running statistics
+  public :: fgsl_rstat_quantile_alloc, fgsl_rstat_quantile_free, &
+       fgsl_rstat_quantile_add, fgsl_rstat_quantile_get, &
+       fgsl_rstat_alloc, fgsl_rstat_free, fgsl_rstat_n, &
+       fgsl_rstat_add, fgsl_rstat_min, fgsl_rstat_max, &
+       fgsl_rstat_mean, fgsl_rstat_variance, fgsl_rstat_sd, &
+       fgsl_rstat_sd_mean, fgsl_rstat_median, fgsl_rstat_skew, &
+       fgsl_rstat_kurtosis, fgsl_rstat_reset
+
 ! IEEE
   public :: fgsl_ieee_fprintf, fgsl_ieee_printf, fgsl_ieee_env_setup
 !
@@ -1794,6 +1803,17 @@ type, public :: fgsl_splinalg_itersolve
   type(c_ptr) :: gsl_splinalg_itersolve
 end type fgsl_splinalg_itersolve
 !
+! Types: Running Statistics
+!
+type, public :: fgsl_rstat_quantile_workspace
+  private
+  type(c_ptr) :: gsl_rstat_quantile_workspace
+end type fgsl_rstat_quantile_workspace
+type, public :: fgsl_rstat_workspace
+  private
+  type(c_ptr) :: gsl_rstat_workspace
+end type fgsl_rstat_workspace
+!
 ! required C interfaces
 ! FGSL names occurring here are auxiliary routines
 ! needed to transfer static C information to the Fortran subsystem
@@ -1836,6 +1856,7 @@ end type fgsl_splinalg_itersolve
 #include "interface/multilarge.finc"
 #include "interface/spmatrix.finc"
 #include "interface/splinalg.finc"
+#include "interface/rstat.finc"
   end interface
 #include "interface/generics.finc"
 contains
@@ -1877,4 +1898,5 @@ contains
 #include "api/multilarge.finc"
 #include "api/spmatrix.finc"
 #include "api/splinalg.finc"
+#include "api/rstat.finc"
 end module fgsl

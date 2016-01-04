@@ -16,7 +16,7 @@ check_PROGRAMS = cdf cheb combination diff dwt \
 		 ode-initval permutation permshuffle \
 		 polyroots qrng randpoisson randwalk \
 		 rng rngunif roots siman stat statsort \
-		 sum vector spmatrix splinalg
+		 sum vector spmatrix splinalg rstat
 
 cdf_SOURCES = cdf.f90
 
@@ -110,6 +110,8 @@ spmatrix_SOURCES = spmatrix.f90
 
 splinalg_SOURCES = splinalg.f90
 
+rstat_SOURCES = rstat.f90
+
 #integration_omp_SOURCES = integration_omp.f90
 #integration_omp_FCFLAGS = @OPENMP_FCFLAGS@ -I${top_srcdir} -I${top_builddir}
 #integration_omp_LDADD =  ${top_builddir}/libfgsl.la
@@ -127,7 +129,7 @@ dist_fgsl_example_DATA = $(data_files) cdf.f90 cheb.f90 combination.F90 diff.f90
 			polyroots.f90 qrng.f90 randpoisson.f90 randwalk.f90 \
 			rng.f90 rngunif.f90 roots.f90 siman.f90 siman_print.c \
 			stat.f90 statsort.f90 sum.f90 vector.f90 integration_omp.f90 \
-			spmatrix.f90 splinalg.f90
+			spmatrix.f90 splinalg.f90 rstat.f90
 
 TESTS = $(check_PROGRAMS)
 XFAIL_TESTS = error_1

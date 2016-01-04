@@ -6,6 +6,8 @@ fgslincludedir=${includedir}/fgsl
 
 all-am: fgsl.mod
 
+NULL =
+
 lib_LTLIBRARIES = libfgsl.la
 libfgsl_la_SOURCES = fgsl.F90 \
 										 fgsl_utils.c \
@@ -47,6 +49,7 @@ libfgsl_la_SOURCES = fgsl.F90 \
 										 api/multilarge.finc \
 										 api/spmatrix.finc \
 										 api/splinalg.finc \
+										 api/rstat.finc \
 										 interface/array.finc \
 										 interface/eigen.finc \
 										 interface/ieee.finc \
@@ -85,7 +88,9 @@ libfgsl_la_SOURCES = fgsl.F90 \
 										 interface/statistics.finc \
 										 interface/multilarge.finc \
 										 interface/spmatrix.finc \
-										 interface/splinalg.finc
+										 interface/splinalg.finc \
+										 interface/rstat.finc \
+										 $(NULL)
 
 libfgsl_la_DEPENDENCIES = $(libfgsl_la_SOURCES)
 
