@@ -1429,14 +1429,14 @@
     real(fgsl_double) :: fgsl_sf_ellint_d
     fgsl_sf_ellint_d = gsl_sf_ellint_d(phi, k, mode%gsl_mode)
   end function fgsl_sf_ellint_d
-  function fgsl_sf_ellint_d_e(phi, k, n, mode, result)
-    real(fgsl_double), intent(in) :: phi, k, n
+  function fgsl_sf_ellint_d_e(phi, k, mode, result)
+    real(fgsl_double), intent(in) :: phi, k
     type(fgsl_mode_t), intent(in) :: mode
     type(fgsl_sf_result), intent(out) :: result
     integer(fgsl_int) :: fgsl_sf_ellint_d_e
 !
     type(gsl_sf_result) :: res
-    fgsl_sf_ellint_d_e = gsl_sf_ellint_d_e(phi, k, n, mode%gsl_mode, res)
+    fgsl_sf_ellint_d_e = gsl_sf_ellint_d_e(phi, k, mode%gsl_mode, res)
     result = res
   end function fgsl_sf_ellint_d_e
   function fgsl_sf_ellint_rc(x, y, mode)

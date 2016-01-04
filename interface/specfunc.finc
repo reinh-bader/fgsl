@@ -1127,9 +1127,9 @@
        integer(c_int), value :: mode
        real(c_double) :: gsl_sf_ellint_d
      end function gsl_sf_ellint_d
-     function gsl_sf_ellint_d_e(phi, k, n, mode, result) bind(c, name='gsl_sf_ellint_D_e')
+     function gsl_sf_ellint_d_e(phi, k, mode, result) bind(c, name='gsl_sf_ellint_D_e')
        import
-       real(c_double), value :: phi, k, n
+       real(c_double), value :: phi, k
        integer(c_int), value :: mode
        type(gsl_sf_result), intent(out) :: result
        integer(c_int) :: gsl_sf_ellint_d_e
