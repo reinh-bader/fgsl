@@ -1083,6 +1083,22 @@ module fgsl
        fgsl_prec_double = fgsl_mode_t(0), &
        fgsl_prec_single = fgsl_mode_t(1), &
        fgsl_prec_approx = fgsl_mode_t(2)
+  type, public :: fgsl_sf_legendre_t
+    private
+    integer(c_int) :: gsl_sf_legendre_t = 0
+  end type fgsl_sf_legendre_t
+  type(fgsl_sf_legendre_t), parameter, public :: &
+    fgsl_sf_legendre_schmidt = fgsl_sf_legendre_t(0), &
+    fgsl_sf_legendre_spharm = fgsl_sf_legendre_t(1), &
+    fgsl_sf_legendre_full = fgsl_sf_legendre_t(2), &
+    fgsl_sf_legendre_none = fgsl_sf_legendre_t(3)
+!
+! Enum: legendre special Functions
+!
+integer(fgsl_int), public, parameter :: gsl_sf_legendre_schmidt = 0
+integer(fgsl_int), public, parameter :: gsl_sf_legendre_spharm = 1
+integer(fgsl_int), public, parameter :: gsl_sf_legendre_full = 2
+integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
 !
 ! Types : Array support
 !
@@ -1820,13 +1836,6 @@ type, public :: fgsl_rstat_workspace
   private
   type(c_ptr) :: gsl_rstat_workspace
 end type fgsl_rstat_workspace
-!
-! Enum: legendre special Functions
-!
-integer(fgsl_int), public, parameter :: gsl_sf_legendre_schmidt = 0
-integer(fgsl_int), public, parameter :: gsl_sf_legendre_spharm = 1
-integer(fgsl_int), public, parameter :: gsl_sf_legendre_full = 2
-integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
 
 !
 ! required C interfaces
