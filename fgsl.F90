@@ -222,6 +222,13 @@ module fgsl
        fgsl_sf_legendre_h3d_0, fgsl_sf_legendre_h3d_0_e, fgsl_sf_legendre_h3d_1, &
        fgsl_sf_legendre_h3d_1_e, fgsl_sf_legendre_h3d, fgsl_sf_legendre_h3d_e, &
        fgsl_sf_legendre_h3d_array
+  public :: fgsl_sf_legendre_array, fgsl_sf_legendre_array_e, &
+       fgsl_sf_legendre_deriv_array, fgsl_sf_legendre_deriv_array_e, &
+       fgsl_sf_legendre_deriv_alt_array, fgsl_sf_legendre_deriv_alt_array_e, &
+       fgsl_sf_legendre_deriv2_array, fgsl_sf_legendre_deriv2_array_e, &
+       fgsl_sf_legendre_deriv2_alt_array, fgsl_sf_legendre_deriv2_alt_array_e, &
+       fgsl_sf_legendre_array_n, fgsl_sf_legendre_array_index, fgsl_sf_legendre_nlm
+
   public :: fgsl_sf_log, fgsl_sf_log_e, fgsl_sf_log_abs, fgsl_sf_log_abs_e, &
        fgsl_sf_complex_log_e, fgsl_sf_log_1plusx, fgsl_sf_log_1plusx_e, &
        fgsl_sf_log_1plusx_mx, fgsl_sf_log_1plusx_mx_e, fgsl_sf_psi_int, &
@@ -1813,6 +1820,14 @@ type, public :: fgsl_rstat_workspace
   private
   type(c_ptr) :: gsl_rstat_workspace
 end type fgsl_rstat_workspace
+!
+! Enum: legendre special Functions
+!
+integer(fgsl_int), public, parameter :: gsl_sf_legendre_schmidt = 0
+integer(fgsl_int), public, parameter :: gsl_sf_legendre_spharm = 1
+integer(fgsl_int), public, parameter :: gsl_sf_legendre_full = 2
+integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
+
 !
 ! required C interfaces
 ! FGSL names occurring here are auxiliary routines

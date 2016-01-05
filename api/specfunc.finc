@@ -3411,3 +3411,118 @@
     result%err = source%err
     result%e10 = source%e10
   end subroutine gsl_sfe10_to_fgsl_sfe10
+  function fgsl_sf_legendre_array(norm, lmax, x, result_array)
+    integer(fgsl_int), intent(in) :: norm
+    integer(fgsl_size_t), intent(in) :: lmax
+    real(fgsl_double), intent(in) :: x
+    real(fgsl_double), dimension(:), intent(out), target :: result_array
+    integer(fgsl_int) :: fgsl_sf_legendre_array
+    fgsl_sf_legendre_array = gsl_sf_legendre_array(norm, lmax, x, &
+    c_loc(result_array))
+  end function fgsl_sf_legendre_array
+  function fgsl_sf_legendre_array_e(norm, lmax, x, csphase, result_array)
+    integer(fgsl_int), intent(in) :: norm
+    integer(fgsl_size_t), intent(in) :: lmax
+    real(fgsl_double), intent(in) :: x, csphase
+    real(fgsl_double), dimension(:), intent(out), target :: result_array
+    integer(fgsl_int) :: fgsl_sf_legendre_array_e
+    fgsl_sf_legendre_array_e = gsl_sf_legendre_array_e(norm, lmax, x, csphase, &
+    c_loc(result_array))
+  end function fgsl_sf_legendre_array_e
+  function fgsl_sf_legendre_deriv_array(norm, lmax, x, result_array, result_deriv_array)
+    integer(fgsl_int), intent(in) :: norm
+    integer(fgsl_size_t), intent(in) :: lmax
+    real(fgsl_double), intent(in) :: x
+    real(fgsl_double), dimension(:), intent(out), target :: result_array, result_deriv_array
+    integer(fgsl_int) :: fgsl_sf_legendre_deriv_array
+    fgsl_sf_legendre_deriv_array = gsl_sf_legendre_deriv_array(norm, lmax, x, &
+    c_loc(result_array), c_loc(result_deriv_array))
+  end function fgsl_sf_legendre_deriv_array
+  function fgsl_sf_legendre_deriv_array_e(norm, lmax, x, csphase, result_array, &
+    result_deriv_array)
+    integer(fgsl_int), intent(in) :: norm
+    integer(fgsl_size_t), intent(in) :: lmax
+    real(fgsl_double), intent(in) :: x, csphase
+    real(fgsl_double), dimension(:), intent(out), target :: result_array, result_deriv_array
+    integer(fgsl_int) :: fgsl_sf_legendre_deriv_array_e
+    fgsl_sf_legendre_deriv_array_e = gsl_sf_legendre_deriv_array_e(norm, lmax, x, csphase, &
+    c_loc(result_array), c_loc(result_deriv_array))
+  end function fgsl_sf_legendre_deriv_array_e
+  function fgsl_sf_legendre_deriv_alt_array(norm, lmax, x, result_array, result_deriv_array)
+    integer(fgsl_int), intent(in) :: norm
+    integer(fgsl_size_t), intent(in) :: lmax
+    real(fgsl_double), intent(in) :: x
+    real(fgsl_double), dimension(:), intent(out), target :: result_array, result_deriv_array
+    integer(fgsl_int) :: fgsl_sf_legendre_deriv_alt_array
+    fgsl_sf_legendre_deriv_alt_array = gsl_sf_legendre_deriv_alt_array(norm, lmax, x, &
+    c_loc(result_array), c_loc(result_deriv_array))
+  end function fgsl_sf_legendre_deriv_alt_array
+  function fgsl_sf_legendre_deriv_alt_array_e(norm, lmax, x, csphase, result_array, &
+    result_deriv_array)
+    integer(fgsl_int), intent(in) :: norm
+    integer(fgsl_size_t), intent(in) :: lmax
+    real(fgsl_double), intent(in) :: x, csphase
+    real(fgsl_double), dimension(:), intent(out), target :: result_array, result_deriv_array
+    integer(fgsl_int) :: fgsl_sf_legendre_deriv_alt_array_e
+    fgsl_sf_legendre_deriv_alt_array_e = gsl_sf_legendre_deriv_alt_array_e(norm, lmax, x, csphase, &
+    c_loc(result_array), c_loc(result_deriv_array))
+  end function fgsl_sf_legendre_deriv_alt_array_e
+  function fgsl_sf_legendre_deriv2_array(norm, lmax, x, result_array, &
+    result_deriv_array, result_deriv2_array)
+    integer(fgsl_int), intent(in) :: norm
+    integer(fgsl_size_t), intent(in) :: lmax
+    real(fgsl_double), intent(in) :: x
+    real(fgsl_double), dimension(:), intent(out), target :: result_array, &
+    result_deriv_array, result_deriv2_array
+    integer(fgsl_int) :: fgsl_sf_legendre_deriv2_array
+    fgsl_sf_legendre_deriv2_array = gsl_sf_legendre_deriv2_array(norm, lmax, x, &
+    c_loc(result_array), c_loc(result_deriv_array), c_loc(result_deriv2_array))
+  end function fgsl_sf_legendre_deriv2_array
+  function fgsl_sf_legendre_deriv2_array_e(norm, lmax, x, csphase, result_array, &
+    result_deriv_array, result_deriv2_array)
+    integer(fgsl_int), intent(in) :: norm
+    integer(fgsl_size_t), intent(in) :: lmax
+    real(fgsl_double), intent(in) :: x, csphase
+    real(fgsl_double), dimension(:), intent(out), target :: result_array, &
+    result_deriv_array, result_deriv2_array
+    integer(fgsl_int) :: fgsl_sf_legendre_deriv2_array_e
+    fgsl_sf_legendre_deriv2_array_e = gsl_sf_legendre_deriv2_array_e(norm, lmax, x, csphase, &
+    c_loc(result_array), c_loc(result_deriv_array), c_loc(result_deriv2_array))
+  end function fgsl_sf_legendre_deriv2_array_e
+  function fgsl_sf_legendre_deriv2_alt_array(norm, lmax, x, result_array, &
+    result_deriv_array, result_deriv2_array)
+    integer(fgsl_int), intent(in) :: norm
+    integer(fgsl_size_t), intent(in) :: lmax
+    real(fgsl_double), intent(in) :: x
+    real(fgsl_double), dimension(:), intent(out), target :: result_array, &
+    result_deriv_array, result_deriv2_array
+    integer(fgsl_int) :: fgsl_sf_legendre_deriv2_alt_array
+    fgsl_sf_legendre_deriv2_alt_array = gsl_sf_legendre_deriv2_alt_array(norm, lmax, x, &
+    c_loc(result_array), c_loc(result_deriv_array), c_loc(result_deriv2_array))
+  end function fgsl_sf_legendre_deriv2_alt_array
+  function fgsl_sf_legendre_deriv2_alt_array_e(norm, lmax, x, csphase, result_array, &
+    result_deriv_array, result_deriv2_array)
+    integer(fgsl_int), intent(in) :: norm
+    integer(fgsl_size_t), intent(in) :: lmax
+    real(fgsl_double), intent(in) :: x, csphase
+    real(fgsl_double), dimension(:), intent(out), target :: result_array, &
+    result_deriv_array, result_deriv2_array
+    integer(fgsl_int) :: fgsl_sf_legendre_deriv2_alt_array_e
+    fgsl_sf_legendre_deriv2_alt_array_e = gsl_sf_legendre_deriv2_alt_array_e(norm, lmax, x, csphase, &
+    c_loc(result_array), c_loc(result_deriv_array), c_loc(result_deriv2_array))
+  end function fgsl_sf_legendre_deriv2_alt_array_e
+  function fgsl_sf_legendre_array_n(lmax)
+    integer(fgsl_size_t), intent(in) :: lmax
+    integer(fgsl_size_t) :: fgsl_sf_legendre_array_n
+    fgsl_sf_legendre_array_n = gsl_sf_legendre_array_n(lmax)
+  end function fgsl_sf_legendre_array_n
+  function fgsl_sf_legendre_array_index(l, m)
+    integer(fgsl_size_t), intent(in) :: l, m
+    integer(fgsl_size_t) :: fgsl_sf_legendre_array_index
+    fgsl_sf_legendre_array_index = gsl_sf_legendre_array_index(l, m)
+  end function fgsl_sf_legendre_array_index
+  function fgsl_sf_legendre_nlm(lmax)
+    integer(fgsl_size_t), intent(in) :: lmax
+    integer(fgsl_size_t) :: fgsl_sf_legendre_nlm
+    fgsl_sf_legendre_nlm = gsl_sf_legendre_nlm(lmax)
+  end function fgsl_sf_legendre_nlm

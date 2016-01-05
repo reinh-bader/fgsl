@@ -2673,3 +2673,106 @@
        type(gsl_sf_result), intent(out) :: result
        integer(c_int) :: gsl_sf_eta_e
      end function gsl_sf_eta_e
+     function gsl_sf_legendre_array(norm, lmax, x, result_array) bind(c)
+       import :: c_int, c_size_t, c_double, c_ptr
+       integer(c_int), value :: norm
+       integer(c_size_t), value :: lmax
+       real(c_double), value :: x
+       type(c_ptr), value :: result_array
+       integer(c_int) :: gsl_sf_legendre_array
+     end function gsl_sf_legendre_array
+     function gsl_sf_legendre_array_e(norm, lmax, x, csphase, result_array) bind(c)
+       import :: c_int, c_size_t, c_double, c_ptr
+       integer(c_int), value :: norm
+       integer(c_size_t), value :: lmax
+       real(c_double), value :: x, csphase
+       type(c_ptr), value :: result_array
+       integer(c_int) :: gsl_sf_legendre_array_e
+     end function gsl_sf_legendre_array_e
+     function gsl_sf_legendre_deriv_array(norm, lmax, x, result_array, &
+       result_deriv_array) bind(c)
+       import :: c_int, c_size_t, c_double, c_ptr
+       integer(c_int), value :: norm
+       integer(c_size_t), value :: lmax
+       real(c_double), value :: x
+       type(c_ptr), value :: result_array, result_deriv_array
+       integer(c_int) :: gsl_sf_legendre_deriv_array
+     end function gsl_sf_legendre_deriv_array
+     function gsl_sf_legendre_deriv_array_e(norm, lmax, x, csphase, &
+       result_array, result_deriv_array) bind(c)
+       import :: c_int, c_size_t, c_double, c_ptr
+       integer(c_int), value :: norm
+       integer(c_size_t), value :: lmax
+       real(c_double), value :: x, csphase
+       type(c_ptr), value :: result_array, result_deriv_array
+       integer(c_int) :: gsl_sf_legendre_deriv_array_e
+     end function gsl_sf_legendre_deriv_array_e
+     function gsl_sf_legendre_deriv_alt_array(norm, lmax, x, result_array, &
+       result_deriv_array) bind(c)
+       import :: c_int, c_size_t, c_double, c_ptr
+       integer(c_int), value :: norm
+       integer(c_size_t), value :: lmax
+       real(c_double), value :: x
+       type(c_ptr), value :: result_array, result_deriv_array
+       integer(c_int) :: gsl_sf_legendre_deriv_alt_array
+     end function gsl_sf_legendre_deriv_alt_array
+     function gsl_sf_legendre_deriv_alt_array_e(norm, lmax, x, csphase, &
+       result_array, result_deriv_array) bind(c)
+       import :: c_int, c_size_t, c_double, c_ptr
+       integer(c_int), value :: norm
+       integer(c_size_t), value :: lmax
+       real(c_double), value :: x, csphase
+       type(c_ptr), value :: result_array, result_deriv_array
+       integer(c_int) :: gsl_sf_legendre_deriv_alt_array_e
+     end function gsl_sf_legendre_deriv_alt_array_e
+     function gsl_sf_legendre_deriv2_array(norm, lmax, x, result_array, &
+       result_deriv_array, result_deriv2_array) bind(c)
+       import :: c_int, c_size_t, c_double, c_ptr
+       integer(c_int), value :: norm
+       integer(c_size_t), value :: lmax
+       real(c_double), value :: x
+       type(c_ptr), value :: result_array, result_deriv_array, result_deriv2_array
+       integer(c_int) :: gsl_sf_legendre_deriv2_array
+     end function gsl_sf_legendre_deriv2_array
+     function gsl_sf_legendre_deriv2_array_e(norm, lmax, x, csphase, &
+       result_array, result_deriv_array, result_deriv2_array) bind(c)
+       import :: c_int, c_size_t, c_double, c_ptr
+       integer(c_int), value :: norm
+       integer(c_size_t), value :: lmax
+       real(c_double), value :: x, csphase
+       type(c_ptr), value :: result_array, result_deriv_array, result_deriv2_array
+       integer(c_int) :: gsl_sf_legendre_deriv2_array_e
+     end function gsl_sf_legendre_deriv2_array_e
+     function gsl_sf_legendre_deriv2_alt_array(norm, lmax, x, result_array,&
+        result_deriv_array, result_deriv2_array) bind(c)
+       import :: c_int, c_size_t, c_double, c_ptr
+       integer(c_int), value :: norm
+       integer(c_size_t), value :: lmax
+       real(c_double), value :: x
+       type(c_ptr), value :: result_array, result_deriv_array, result_deriv2_array
+       integer(c_int) :: gsl_sf_legendre_deriv2_alt_array
+     end function gsl_sf_legendre_deriv2_alt_array
+     function gsl_sf_legendre_deriv2_alt_array_e(norm, lmax, x, csphase, &
+       result_array, result_deriv_array, result_deriv2_array) bind(c)
+       import :: c_int, c_size_t, c_double, c_ptr
+       integer(c_int), value :: norm
+       integer(c_size_t), value :: lmax
+       real(c_double), value :: x, csphase
+       type(c_ptr), value :: result_array, result_deriv_array, result_deriv2_array
+       integer(c_int) :: gsl_sf_legendre_deriv2_alt_array_e
+     end function gsl_sf_legendre_deriv2_alt_array_e
+     function gsl_sf_legendre_array_n(lmax) bind(c)
+       import :: c_size_t
+       integer(c_size_t), value :: lmax
+       integer(c_size_t) :: gsl_sf_legendre_array_n
+     end function gsl_sf_legendre_array_n
+     function gsl_sf_legendre_array_index(l, m) bind(c)
+       import :: c_size_t
+       integer(c_size_t), value :: l, m
+       integer(c_size_t) :: gsl_sf_legendre_array_index
+     end function gsl_sf_legendre_array_index
+     function gsl_sf_legendre_nlm(lmax) bind(c)
+       import :: c_size_t
+       integer(c_size_t), value :: lmax
+       integer(c_size_t) :: gsl_sf_legendre_nlm
+     end function gsl_sf_legendre_nlm
