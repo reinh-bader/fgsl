@@ -2776,3 +2776,153 @@
        integer(c_size_t), value :: lmax
        integer(c_size_t) :: gsl_sf_legendre_nlm
      end function gsl_sf_legendre_nlm
+     function gsl_sf_mathieu_a_array(order_min, order_max, qq, work, result_array) bind(c)
+       import :: c_int, c_double, c_ptr
+       integer(c_int), value :: order_min, order_max
+       real(c_double), value :: qq
+       type(c_ptr), value :: work, result_array
+       integer(c_int) :: gsl_sf_mathieu_a_array
+     end function gsl_sf_mathieu_a_array
+     function gsl_sf_mathieu_b_array(order_min, order_max, qq, work, result_array) bind(c)
+       import :: c_int, c_double, c_ptr
+       integer(c_int), value :: order_min, order_max
+       real(c_double), value :: qq
+       type(c_ptr), value :: work, result_array
+       integer(c_int) :: gsl_sf_mathieu_b_array
+     end function gsl_sf_mathieu_b_array
+     function gsl_sf_mathieu_a_e(order, qq, result) bind(c)
+       import :: c_int, c_double, c_ptr
+       integer(c_int), value :: order
+       real(c_double), value :: qq
+       type(c_ptr), value :: result
+       integer(c_int) :: gsl_sf_mathieu_a_e
+     end function gsl_sf_mathieu_a_e
+     function gsl_sf_mathieu_a(order, qq) bind(c)
+       import :: c_int, c_double
+       integer(c_int), value :: order
+       real(c_double), value :: qq
+       real(c_double) :: gsl_sf_mathieu_a
+     end function gsl_sf_mathieu_a
+     function gsl_sf_mathieu_b_e(order, qq, result) bind(c)
+       import :: c_int, c_double, c_ptr
+       integer(c_int), value :: order
+       real(c_double), value :: qq
+       type(c_ptr), value :: result
+       integer(c_int) :: gsl_sf_mathieu_b_e
+     end function gsl_sf_mathieu_b_e
+     function gsl_sf_mathieu_b(order, qq) bind(c)
+       import :: c_int, c_double
+       integer(c_int), value :: order
+       real(c_double), value :: qq
+       real(c_double) :: gsl_sf_mathieu_b
+     end function gsl_sf_mathieu_b
+     function gsl_sf_mathieu_a_coeff(order, qq, aa, coeff) bind(c)
+       import :: c_int, c_double, c_ptr
+       integer(c_int), value :: order
+       real(c_double), value :: qq, aa
+       type(c_ptr), value :: coeff
+       integer(c_int) :: gsl_sf_mathieu_a_coeff
+     end function gsl_sf_mathieu_a_coeff
+     function gsl_sf_mathieu_b_coeff(order, qq, aa, coeff) bind(c)
+       import :: c_int, c_double, c_ptr
+       integer(c_int), value :: order
+       real(c_double), value :: qq, aa
+       type(c_ptr), value :: coeff
+       integer(c_int) :: gsl_sf_mathieu_b_coeff
+     end function gsl_sf_mathieu_b_coeff
+     function gsl_sf_mathieu_alloc(nn, qq) bind(c)
+       import :: c_size_t, c_double, c_ptr
+       integer(c_size_t), value :: nn
+       real(c_double), value :: qq
+       type(c_ptr) :: gsl_sf_mathieu_alloc
+     end function gsl_sf_mathieu_alloc
+     subroutine gsl_sf_mathieu_free(workspace) bind(c)
+       import :: c_ptr
+       type(c_ptr), value :: workspace
+     end subroutine gsl_sf_mathieu_free
+     function gsl_sf_mathieu_ce_e(order, qq, zz, result) bind(c)
+       import :: c_int, c_double, c_ptr
+       integer(c_int), value :: order
+       real(c_double), value :: qq, zz
+       type(c_ptr), value :: result
+       integer(c_int) :: gsl_sf_mathieu_ce_e
+     end function gsl_sf_mathieu_ce_e
+     function gsl_sf_mathieu_ce(order, qq, zz) bind(c)
+       import :: c_int, c_double, c_ptr
+       integer(c_int), value :: order
+       real(c_double), value :: qq, zz
+       real(c_double) :: gsl_sf_mathieu_ce
+     end function gsl_sf_mathieu_ce
+     function gsl_sf_mathieu_se_e(order, qq, zz, result) bind(c)
+       import :: c_int, c_double, c_ptr
+       integer(c_int), value :: order
+       real(c_double), value :: qq, zz
+       type(c_ptr), value :: result
+       integer(c_int) :: gsl_sf_mathieu_se_e
+     end function gsl_sf_mathieu_se_e
+     function gsl_sf_mathieu_se(order, qq, zz) bind(c)
+       import :: c_int, c_double, c_ptr
+       integer(c_int), value :: order
+       real(c_double), value :: qq, zz
+       real(c_double) :: gsl_sf_mathieu_se
+     end function gsl_sf_mathieu_se
+     function gsl_sf_mathieu_ce_array(nmin, nmax, qq, zz, work, result_array) bind(c)
+       import :: c_int, c_double, c_ptr
+       integer(c_int), value :: nmin, nmax
+       real(c_double), value :: qq, zz
+       type(c_ptr), value :: work, result_array
+       integer(c_int) :: gsl_sf_mathieu_ce_array
+     end function gsl_sf_mathieu_ce_array
+     function gsl_sf_mathieu_se_array(nmin, nmax, qq, zz, work, result_array) bind(c)
+       import :: c_int, c_double, c_ptr
+       integer(c_int), value :: nmin, nmax
+       real(c_double), value :: qq, zz
+       type(c_ptr), value :: work, result_array
+       integer(c_int) :: gsl_sf_mathieu_se_array
+     end function gsl_sf_mathieu_se_array
+     function gsl_sf_mathieu_mc_e(kind, order, qq, zz, result) &
+       bind(c, name='gsl_sf_mathieu_Mc_e')
+       import :: c_int, c_double, c_ptr
+       integer(c_int), value :: kind, order
+       real(c_double), value :: qq, zz
+       type(c_ptr), value :: result
+       integer(c_int) :: gsl_sf_mathieu_mc_e
+     end function gsl_sf_mathieu_mc_e
+     function gsl_sf_mathieu_mc(kind, order, qq, zz) &
+       bind(c, name='gsl_sf_mathieu_Mc')
+       import :: c_int, c_double, c_ptr
+       integer(c_int), value :: kind, order
+       real(c_double), value :: qq, zz
+       real(c_double) :: gsl_sf_mathieu_mc
+     end function gsl_sf_mathieu_mc
+     function gsl_sf_mathieu_ms_e(kind, order, qq, zz, result) &
+       bind(c, name='gsl_sf_mathieu_Ms_e')
+       import :: c_int, c_double, c_ptr
+       integer(c_int), value :: kind, order
+       real(c_double), value :: qq, zz
+       type(c_ptr), value :: result
+       integer(c_int) :: gsl_sf_mathieu_ms_e
+     end function gsl_sf_mathieu_ms_e
+     function gsl_sf_mathieu_ms(kind, order, qq, zz) &
+       bind(c, name='gsl_sf_mathieu_Ms')
+       import :: c_int, c_double, c_ptr
+       integer(c_int), value :: kind, order
+       real(c_double), value :: qq, zz
+       real(c_double) :: gsl_sf_mathieu_ms
+     end function gsl_sf_mathieu_ms
+     function gsl_sf_mathieu_mc_array(kind, nmin, nmax, qq, zz, work, result_array) &
+       bind(c, name='gsl_sf_mathieu_Mc_array')
+       import :: c_int, c_double, c_ptr
+       integer(c_int), value :: kind, nmin, nmax
+       real(c_double), value :: qq, zz
+       type(c_ptr), value :: work, result_array
+       integer(c_int) :: gsl_sf_mathieu_mc_array
+     end function gsl_sf_mathieu_mc_array
+     function gsl_sf_mathieu_ms_array(kind, nmin, nmax, qq, zz, work, result_array) &
+       bind(c, name='gsl_sf_mathieu_Ms_array')
+       import :: c_int, c_double, c_ptr
+       integer(c_int), value :: kind, nmin, nmax
+       real(c_double), value :: qq, zz
+       type(c_ptr), value :: work, result_array
+       integer(c_int) :: gsl_sf_mathieu_ms_array
+     end function gsl_sf_mathieu_ms_array

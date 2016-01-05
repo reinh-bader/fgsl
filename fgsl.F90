@@ -228,6 +228,18 @@ module fgsl
        fgsl_sf_legendre_deriv2_array, fgsl_sf_legendre_deriv2_array_e, &
        fgsl_sf_legendre_deriv2_alt_array, fgsl_sf_legendre_deriv2_alt_array_e, &
        fgsl_sf_legendre_array_n, fgsl_sf_legendre_array_index, fgsl_sf_legendre_nlm
+  public :: fgsl_sf_mathieu_a_array, fgsl_sf_mathieu_b_array, &
+       fgsl_sf_mathieu_a_e, fgsl_sf_mathieu_a, &
+       fgsl_sf_mathieu_b_e, fgsl_sf_mathieu_b, &
+       fgsl_sf_mathieu_a_coeff, fgsl_sf_mathieu_b_coeff, &
+       fgsl_sf_mathieu_alloc, fgsl_sf_mathieu_free, &
+       fgsl_sf_mathieu_ce_e, fgsl_sf_mathieu_ce, &
+       fgsl_sf_mathieu_se_e, fgsl_sf_mathieu_se, &
+       fgsl_sf_mathieu_ce_array, fgsl_sf_mathieu_se_array, &
+       fgsl_sf_mathieu_mc_e, fgsl_sf_mathieu_mc, &
+       fgsl_sf_mathieu_ms_e, fgsl_sf_mathieu_ms, &
+       fgsl_sf_mathieu_mc_array, fgsl_sf_mathieu_ms_array
+
 
   public :: fgsl_sf_log, fgsl_sf_log_e, fgsl_sf_log_abs, fgsl_sf_log_abs_e, &
        fgsl_sf_complex_log_e, fgsl_sf_log_1plusx, fgsl_sf_log_1plusx_e, &
@@ -1092,6 +1104,10 @@ module fgsl
     fgsl_sf_legendre_spharm = fgsl_sf_legendre_t(1), &
     fgsl_sf_legendre_full = fgsl_sf_legendre_t(2), &
     fgsl_sf_legendre_none = fgsl_sf_legendre_t(3)
+  type, public :: fgsl_sf_mathieu_workspace
+    private
+    type(c_ptr) :: gsl_sf_mathieu_workspace
+  end type fgsl_sf_mathieu_workspace
 !
 ! Enum: legendre special Functions
 !

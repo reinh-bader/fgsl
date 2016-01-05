@@ -3534,3 +3534,172 @@
     integer(fgsl_size_t) :: fgsl_sf_legendre_nlm
     fgsl_sf_legendre_nlm = gsl_sf_legendre_nlm(lmax)
   end function fgsl_sf_legendre_nlm
+  function fgsl_sf_mathieu_a_array(order_min, order_max, qq, work, result_array)
+    integer(fgsl_int), intent(in) :: order_min, order_max
+    real(fgsl_double), intent(in) :: qq
+    type(fgsl_sf_mathieu_workspace), intent(inout) :: work
+    real(fgsl_double), dimension(:), intent(out), target :: result_array
+    integer(fgsl_int) :: fgsl_sf_mathieu_a_array
+    fgsl_sf_mathieu_a_array = gsl_sf_mathieu_a_array(order_min, order_max, qq, &
+    work%gsl_sf_mathieu_workspace, c_loc(result_array))
+  end function fgsl_sf_mathieu_a_array
+  function fgsl_sf_mathieu_b_array(order_min, order_max, qq, work, result_array)
+    integer(fgsl_int), intent(in) :: order_min, order_max
+    real(fgsl_double), intent(in) :: qq
+    type(fgsl_sf_mathieu_workspace), intent(inout) :: work
+    real(fgsl_double), dimension(:), intent(out), target :: result_array
+    integer(fgsl_int) :: fgsl_sf_mathieu_b_array
+    fgsl_sf_mathieu_b_array = gsl_sf_mathieu_b_array(order_min, order_max, qq, &
+    work%gsl_sf_mathieu_workspace, c_loc(result_array))
+  end function fgsl_sf_mathieu_b_array
+  function fgsl_sf_mathieu_a_e(order, qq, result)
+    integer(c_int), intent(in) :: order
+    real(c_double), intent(in) :: qq
+    type(fgsl_sf_result), intent(out) :: result
+    integer(fgsl_int) :: fgsl_sf_mathieu_a_e
+    type(gsl_sf_result), target :: res
+    fgsl_sf_mathieu_a_e = gsl_sf_mathieu_a_e(order, qq, c_loc(res))
+    result = res
+  end function fgsl_sf_mathieu_a_e
+  function fgsl_sf_mathieu_a(order, qq)
+    integer(c_int), intent(in) :: order
+    real(c_double), intent(in) :: qq
+    real(fgsl_double) :: fgsl_sf_mathieu_a
+    fgsl_sf_mathieu_a = gsl_sf_mathieu_a(order, qq)
+  end function fgsl_sf_mathieu_a
+  function fgsl_sf_mathieu_b_e(order, qq, result)
+    integer(c_int), intent(in) :: order
+    real(c_double), intent(in) :: qq
+    type(fgsl_sf_result), intent(out) :: result
+    integer(fgsl_int) :: fgsl_sf_mathieu_b_e
+    type(gsl_sf_result), target :: res
+    fgsl_sf_mathieu_b_e = gsl_sf_mathieu_b_e(order, qq, c_loc(res))
+    result = res
+  end function fgsl_sf_mathieu_b_e
+  function fgsl_sf_mathieu_b(order, qq)
+    integer(c_int), intent(in) :: order
+    real(c_double), intent(in) :: qq
+    real(fgsl_double) :: fgsl_sf_mathieu_b
+    fgsl_sf_mathieu_b = gsl_sf_mathieu_b(order, qq)
+  end function fgsl_sf_mathieu_b
+  function fgsl_sf_mathieu_a_coeff(order, qq, aa, coeff)
+    integer(c_int), intent(in) :: order
+    real(c_double), intent(in) :: qq, aa
+    real(c_double), dimension(:), intent(out), target :: coeff
+    integer(fgsl_int) :: fgsl_sf_mathieu_a_coeff
+    fgsl_sf_mathieu_a_coeff = gsl_sf_mathieu_a_coeff(order, qq, aa, c_loc(coeff))
+  end function fgsl_sf_mathieu_a_coeff
+  function fgsl_sf_mathieu_b_coeff(order, qq, aa, coeff)
+    integer(c_int), intent(in) :: order
+    real(c_double), intent(in) :: qq, aa
+    real(c_double), dimension(:), intent(out), target :: coeff
+    integer(fgsl_int) :: fgsl_sf_mathieu_b_coeff
+    fgsl_sf_mathieu_b_coeff = gsl_sf_mathieu_b_coeff(order, qq, aa, c_loc(coeff))
+  end function fgsl_sf_mathieu_b_coeff
+  function fgsl_sf_mathieu_alloc(nn, qq)
+    integer(fgsl_size_t), intent(in) :: nn
+    real(fgsl_double), intent(in) :: qq
+    type(fgsl_sf_mathieu_workspace) :: fgsl_sf_mathieu_alloc
+    fgsl_sf_mathieu_alloc%gsl_sf_mathieu_workspace = &
+    gsl_sf_mathieu_alloc(nn, qq)
+  end function fgsl_sf_mathieu_alloc
+  subroutine fgsl_sf_mathieu_free(workspace)
+    type(fgsl_sf_mathieu_workspace), intent(inout) :: workspace
+    call gsl_sf_mathieu_free(workspace%gsl_sf_mathieu_workspace)
+  end subroutine fgsl_sf_mathieu_free
+  function fgsl_sf_mathieu_ce_e(order, qq, zz, result)
+    integer(fgsl_int), intent(in) :: order
+    real(fgsl_double), intent(in) :: qq, zz
+    type(fgsl_sf_result), intent(out) :: result
+    integer(fgsl_int) :: fgsl_sf_mathieu_ce_e
+    type(gsl_sf_result), target :: res
+    fgsl_sf_mathieu_ce_e = gsl_sf_mathieu_ce_e(order, qq, zz, c_loc(res))
+    result = res
+  end function fgsl_sf_mathieu_ce_e
+  function fgsl_sf_mathieu_ce(order, qq, zz)
+    integer(fgsl_int), intent(in) :: order
+    real(fgsl_double), intent(in) :: qq, zz
+    real(fgsl_double) :: fgsl_sf_mathieu_ce
+    fgsl_sf_mathieu_ce = gsl_sf_mathieu_ce(order, qq, zz)
+  end function fgsl_sf_mathieu_ce
+  function fgsl_sf_mathieu_se_e(order, qq, zz, result)
+    integer(fgsl_int), intent(in) :: order
+    real(fgsl_double), intent(in) :: qq, zz
+    type(fgsl_sf_result), intent(out) :: result
+    integer(fgsl_int) :: fgsl_sf_mathieu_se_e
+    type(gsl_sf_result), target :: res
+    fgsl_sf_mathieu_se_e = gsl_sf_mathieu_se_e(order, qq, zz, c_loc(res))
+    result = res
+  end function fgsl_sf_mathieu_se_e
+  function fgsl_sf_mathieu_se(order, qq, zz)
+    integer(fgsl_int), intent(in) :: order
+    real(fgsl_double), intent(in) :: qq, zz
+    real(fgsl_double) :: fgsl_sf_mathieu_se
+    fgsl_sf_mathieu_se = gsl_sf_mathieu_se(order, qq, zz)
+  end function fgsl_sf_mathieu_se
+  function fgsl_sf_mathieu_ce_array(nmin, nmax, qq, zz, work, result_array)
+    integer(fgsl_int), intent(in) :: nmin, nmax
+    real(fgsl_double), intent(in) :: qq, zz
+    type(fgsl_sf_mathieu_workspace), intent(inout) :: work
+    real(fgsl_double), dimension(:), intent(out), target :: result_array
+    integer(fgsl_int) :: fgsl_sf_mathieu_ce_array
+    fgsl_sf_mathieu_ce_array = gsl_sf_mathieu_ce_array(nmin, nmax, qq, zz, &
+    work%gsl_sf_mathieu_workspace, c_loc(result_array))
+  end function fgsl_sf_mathieu_ce_array
+  function fgsl_sf_mathieu_se_array(nmin, nmax, qq, zz, work, result_array)
+    integer(fgsl_int), intent(in) :: nmin, nmax
+    real(fgsl_double), intent(in) :: qq, zz
+    type(fgsl_sf_mathieu_workspace), intent(inout) :: work
+    real(fgsl_double), dimension(:), intent(out), target :: result_array
+    integer(fgsl_int) :: fgsl_sf_mathieu_se_array
+    fgsl_sf_mathieu_se_array = gsl_sf_mathieu_se_array(nmin, nmax, qq, zz, &
+    work%gsl_sf_mathieu_workspace, c_loc(result_array))
+  end function fgsl_sf_mathieu_se_array
+  function fgsl_sf_mathieu_mc_e(kind, order, qq, zz, result)
+    integer(fgsl_int), intent(in) :: kind, order
+    real(fgsl_double), intent(in) :: qq, zz
+    type(fgsl_sf_result), intent(out) :: result
+    integer(fgsl_int) :: fgsl_sf_mathieu_mc_e
+    type(gsl_sf_result), target :: res
+    fgsl_sf_mathieu_mc_e = gsl_sf_mathieu_mc_e(kind, order, qq, zz, c_loc(res))
+    result = res
+  end function fgsl_sf_mathieu_mc_e
+  function fgsl_sf_mathieu_mc(kind, order, qq, zz)
+    integer(fgsl_int), intent(in) :: kind, order
+    real(fgsl_double), intent(in) :: qq, zz
+    real(fgsl_double) :: fgsl_sf_mathieu_mc
+    fgsl_sf_mathieu_mc = gsl_sf_mathieu_mc(kind, order, qq, zz)
+  end function fgsl_sf_mathieu_mc
+  function fgsl_sf_mathieu_ms_e(kind, order, qq, zz, result)
+    integer(fgsl_int), intent(in) :: kind, order
+    real(fgsl_double), intent(in) :: qq, zz
+    type(fgsl_sf_result), intent(out) :: result
+    integer(fgsl_int) :: fgsl_sf_mathieu_ms_e
+    type(gsl_sf_result), target :: res
+    fgsl_sf_mathieu_ms_e = gsl_sf_mathieu_ms_e(kind, order, qq, zz, c_loc(res))
+    result = res
+  end function fgsl_sf_mathieu_ms_e
+  function fgsl_sf_mathieu_ms(kind, order, qq, zz)
+    integer(fgsl_int), intent(in) :: kind, order
+    real(fgsl_double), intent(in) :: qq, zz
+    real(fgsl_double) :: fgsl_sf_mathieu_ms
+    fgsl_sf_mathieu_ms = gsl_sf_mathieu_ms(kind, order, qq, zz)
+  end function fgsl_sf_mathieu_ms
+  function fgsl_sf_mathieu_mc_array(kind, nmin, nmax, qq, zz, work, result_array)
+    integer(fgsl_int), intent(in) :: kind, nmin, nmax
+    real(fgsl_double), intent(in) :: qq, zz
+    type(fgsl_sf_mathieu_workspace), intent(inout) :: work
+    real(fgsl_double), dimension(:), intent(out), target :: result_array
+    integer(fgsl_int) :: fgsl_sf_mathieu_mc_array
+    fgsl_sf_mathieu_mc_array = gsl_sf_mathieu_mc_array(kind, nmin, nmax, qq, zz, &
+    work%gsl_sf_mathieu_workspace, c_loc(result_array))
+  end function fgsl_sf_mathieu_mc_array
+  function fgsl_sf_mathieu_ms_array(kind, nmin, nmax, qq, zz, work, result_array)
+    integer(fgsl_int), intent(in) :: kind, nmin, nmax
+    real(fgsl_double), intent(in) :: qq, zz
+    type(fgsl_sf_mathieu_workspace), intent(inout) :: work
+    real(fgsl_double), dimension(:), intent(out), target :: result_array
+    integer(fgsl_int) :: fgsl_sf_mathieu_ms_array
+    fgsl_sf_mathieu_ms_array = gsl_sf_mathieu_ms_array(kind, nmin, nmax, qq, zz, &
+    work%gsl_sf_mathieu_workspace, c_loc(result_array))
+  end function fgsl_sf_mathieu_ms_array
