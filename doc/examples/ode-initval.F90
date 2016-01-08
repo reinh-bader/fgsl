@@ -4,30 +4,34 @@ module mod_ode
   use, intrinsic :: iso_c_binding
   implicit none
 contains
-  function func(t, y, dydt, params) bind(c)
+  function func(t, y_c, dydt_c, params) bind(c)
     real(c_double), value :: t
-    real(c_double), dimension(*), intent(in) :: y
-    real(c_double), dimension(*) :: dydt
+    type(c_ptr), value :: y_c, dydt_c
+    real(c_double), dimension(:), pointer :: y, dydt
     type(c_ptr), value :: params
     integer(c_int) :: func
-! 
+!
     real(c_double), pointer :: mu
 !
+    call c_f_pointer(y_c, y, [2])
+    call c_f_pointer(dydt_c, dydt, [2])
     call c_f_pointer(params, mu)
     dydt(1) = y(2)
     dydt(2) = -y(1) - mu*y(2)*(y(1)*y(1) - 1)
     func = fgsl_success
   end function func
-  function jac(t, y, dfdy, dfdt, params) bind(c)
+  function jac(t, y_c, dfdy_c, dfdt_c, params) bind(c)
     real(c_double), value :: t
-    real(c_double), dimension(*), intent(in) :: y
-    real(c_double), dimension(*) :: dfdy
-    real(c_double), dimension(*) :: dfdt
+    type(c_ptr), value :: y_c, dfdy_c, dfdt_c
+    real(c_double), dimension(:), pointer :: y, dfdy, dfdt
     type(c_ptr), value :: params
     integer(c_int) :: jac
-! 
+!
     real(c_double), pointer :: mu
 !
+    call c_f_pointer(y_c, y, [2])
+    call c_f_pointer(dfdy_c, dfdy, [4])
+    call c_f_pointer(dfdt_c, dfdt, [2])
     call c_f_pointer(params, mu)
     dfdy(1) = 0.0_c_double
     dfdy(2) = 1.0_c_double
@@ -62,7 +66,7 @@ program ode
   h = 1.0e-6_fgsl_double
   y = (/1.0_c_double, 0.0_c_double /)
   write(6, '(''# Using the '',A,'' algorithm'')') trim(name)
-  do while (t < t1) 
+  do while (t < t1)
      status = fgsl_odeiv2_evolve_apply(ode_evlv, ode_ctrl, ode_step, &
           ode_system, t, t1, h, y)
      if (status /= FGSL_SUCCESS) exit

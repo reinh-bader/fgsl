@@ -1,7 +1,7 @@
 !-*-f90-*-
 !
 ! Interfaces: Hankel transforms
-! 
+!
   function gsl_dht_alloc(size) bind(c)
     import
     integer(c_size_t), value :: size
@@ -26,8 +26,8 @@
   function gsl_dht_apply(t, f_in, f_out) bind(c)
     import
     type(c_ptr), value :: t
-    real(c_double), dimension(*), intent(in) :: f_in
-    real(c_double), dimension(*), intent(out) :: f_out 
+    type(c_ptr), value :: f_in
+    type(c_ptr), value :: f_out 
     integer(c_int) :: gsl_dht_apply
   end function gsl_dht_apply
   function gsl_dht_x_sample(t, n) bind(c)
@@ -42,5 +42,3 @@
     integer(c_int), value :: n
     real(c_double) :: gsl_dht_k_sample
   end function gsl_dht_k_sample
-    
-    

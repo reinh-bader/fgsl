@@ -18,7 +18,7 @@ program dwt
   do i=1,N
      abscoeff(i) = abs(data(i))
   end do
-  call fgsl_sort_index(p, abscoeff, 1_fgsl_size_t)
+  call fgsl_sort_index(p, abscoeff, 1_fgsl_size_t, N)
   do i=1,N-NC
      data(p(i)+1) = 0.0_fgsl_double
   end do

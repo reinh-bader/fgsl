@@ -75,30 +75,30 @@
   end function gsl_permutation_prev
   function gsl_permute(p, data, stride, n) bind(c)
     import
-    integer(c_size_t), dimension(*), intent(in) :: p
+    type(c_ptr), value :: p
     integer(c_size_t), value :: stride, n
-    real(c_double), dimension(*), intent(inout) :: data
+    type(c_ptr), value :: data
     integer(c_int) :: gsl_permute
   end function gsl_permute
   function gsl_permute_long(p, data, stride, n) bind(c)
     import
-    integer(c_size_t), dimension(*), intent(in) :: p
+    type(c_ptr), value :: p
     integer(c_size_t), value :: stride, n
-    integer(c_long), dimension(*), intent(inout) :: data
+    type(c_ptr), value :: data
     integer(c_int) :: gsl_permute_long
   end function gsl_permute_long
   function gsl_permute_inverse(p, data, stride, n) bind(c)
     import
-    integer(c_size_t), dimension(*), intent(in) :: p
+    type(c_ptr), value :: p
     integer(c_size_t), value :: stride, n
-    real(c_double), dimension(*), intent(inout) :: data
+    type(c_ptr), value :: data
     integer(c_int) :: gsl_permute_inverse
   end function gsl_permute_inverse
   function gsl_permute_long_inverse(p, data, stride, n) bind(c)
     import
-    integer(c_size_t), dimension(*), intent(in) :: p
+    type(c_ptr), value :: p
     integer(c_size_t), value :: stride, n
-    integer(c_long), dimension(*), intent(inout) :: data
+    type(c_ptr), value :: data
     integer(c_int) :: gsl_permute_long_inverse
   end function gsl_permute_long_inverse
   function gsl_permute_vector(p,v) bind(c)
@@ -130,7 +130,7 @@
   function gsl_permutation_fprintf(stream, p, format) bind(c)
     import :: c_ptr, c_int, c_char
     type(c_ptr), value :: stream, p
-    character(kind=c_char), dimension(*) :: format
+    type(c_ptr), value :: format
     integer(c_int) :: gsl_permutation_fprintf
   end function gsl_permutation_fprintf
   function gsl_permutation_fscanf(stream, p) bind(c)
@@ -245,7 +245,7 @@
   function gsl_combination_fprintf(stream, c, format) bind(c)
     import :: c_ptr, c_int, c_char
     type(c_ptr), value :: stream, c
-    character(kind=c_char), dimension(*) :: format
+    type(c_ptr), value :: format
     integer(c_int) :: gsl_combination_fprintf
   end function gsl_combination_fprintf
   function gsl_combination_fscanf(stream, c) bind(c)
@@ -333,7 +333,7 @@
   function gsl_multiset_fprintf(stream, c, format) bind(c)
     import :: c_ptr, c_int, c_char
     type(c_ptr), value :: stream, c
-    character(kind=c_char), dimension(*) :: format
+    type(c_ptr), value :: format
     integer(c_int) :: gsl_multiset_fprintf
   end function gsl_multiset_fprintf
   function gsl_multiset_fscanf(stream, c) bind(c)

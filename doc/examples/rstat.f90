@@ -58,10 +58,10 @@ subroutine rstat2
   end do
 
   ! exact values
-  call fgsl_sort(data, 1_fgsl_size_t)
-  exact_p25 = fgsl_stats_quantile_from_sorted_data(data, 1_fgsl_size_t, 0.25_fgsl_double)
-  exact_p50 = fgsl_stats_quantile_from_sorted_data(data, 1_fgsl_size_t, 0.5_fgsl_double)
-  exact_p75 = fgsl_stats_quantile_from_sorted_data(data, 1_fgsl_size_t, 0.75_fgsl_double)
+  call fgsl_sort(data, 1_fgsl_size_t, N)
+  exact_p25 = fgsl_stats_quantile_from_sorted_data(data, 1_fgsl_size_t, N, 0.25_fgsl_double)
+  exact_p50 = fgsl_stats_quantile_from_sorted_data(data, 1_fgsl_size_t, N, 0.5_fgsl_double)
+  exact_p75 = fgsl_stats_quantile_from_sorted_data(data, 1_fgsl_size_t, N, 0.75_fgsl_double)
 
   ! estimated values
   val_p25 = fgsl_rstat_quantile_get(work_25)

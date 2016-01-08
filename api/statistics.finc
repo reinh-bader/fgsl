@@ -257,18 +257,18 @@
     integer(fgsl_size_t), intent(out) :: min_index, max_index
     call gsl_stats_minmax_index(min_index, max_index, c_loc(data), stride, n)
   end subroutine fgsl_stats_minmax_index
-  function fgsl_stats_median_from_sorted_data(data, stride)
+  function fgsl_stats_median_from_sorted_data(data, stride, n)
     real(fgsl_double), intent(in), target :: data(:)
-    integer(fgsl_size_t), intent(in) :: stride
+    integer(fgsl_size_t), intent(in) :: stride, n
     real(fgsl_double) :: fgsl_stats_median_from_sorted_data
     fgsl_stats_median_from_sorted_data = &
-         gsl_stats_median_from_sorted_data(c_loc(data), stride, size(data, kind=fgsl_size_t))
+         gsl_stats_median_from_sorted_data(c_loc(data), stride, n)
   end function fgsl_stats_median_from_sorted_data
-  function fgsl_stats_quantile_from_sorted_data(data, stride, f)
+  function fgsl_stats_quantile_from_sorted_data(data, stride, n, f)
     real(fgsl_double), intent(in), target :: data(:)
     real(fgsl_double), intent(in) :: f
-    integer(fgsl_size_t), intent(in) :: stride
+    integer(fgsl_size_t), intent(in) :: stride, n
     real(fgsl_double) :: fgsl_stats_quantile_from_sorted_data
     fgsl_stats_quantile_from_sorted_data = &
-         gsl_stats_quantile_from_sorted_data(c_loc(data), stride, size(data, kind=fgsl_size_t), f)
+         gsl_stats_quantile_from_sorted_data(c_loc(data), stride, n, f)
   end function fgsl_stats_quantile_from_sorted_data

@@ -329,9 +329,9 @@
   function fgsl_sf_bessel_jcn_array(nmin, nmax, x, result)
     integer(fgsl_int), intent(in) :: nmin, nmax
     real(fgsl_double), intent(in) :: x
-    real(fgsl_double), intent(out) :: result(:)
+    real(fgsl_double), intent(out), target :: result(:)
     integer(fgsl_int) :: fgsl_sf_bessel_jcn_array
-    fgsl_sf_bessel_jcn_array = gsl_sf_bessel_jcn_array(nmin, nmax, x, result)
+    fgsl_sf_bessel_jcn_array = gsl_sf_bessel_jcn_array(nmin, nmax, x, c_loc(result))
   end function fgsl_sf_bessel_jcn_array
   function fgsl_sf_bessel_yc0(x)
     real(fgsl_double), intent(in) :: x
@@ -380,9 +380,9 @@
   function fgsl_sf_bessel_ycn_array(nmin, nmax, x, result)
     integer(fgsl_int), intent(in) :: nmin, nmax
     real(fgsl_double), intent(in) :: x
-    real(fgsl_double), intent(out) :: result(:)
+    real(fgsl_double), intent(out), target :: result(:)
     integer(fgsl_int) :: fgsl_sf_bessel_ycn_array
-    fgsl_sf_bessel_ycn_array = gsl_sf_bessel_ycn_array(nmin, nmax, x, result)
+    fgsl_sf_bessel_ycn_array = gsl_sf_bessel_ycn_array(nmin, nmax, x, c_loc(result))
   end function fgsl_sf_bessel_ycn_array
   function fgsl_sf_bessel_ic0(x)
     real(fgsl_double), intent(in) :: x
@@ -431,9 +431,9 @@
   function fgsl_sf_bessel_icn_array(nmin, nmax, x, result)
     integer(fgsl_int), intent(in) :: nmin, nmax
     real(fgsl_double), intent(in) :: x
-    real(fgsl_double), intent(out) :: result(:)
+    real(fgsl_double), intent(out), target :: result(:)
     integer(fgsl_int) :: fgsl_sf_bessel_icn_array
-    fgsl_sf_bessel_icn_array = gsl_sf_bessel_icn_array(nmin, nmax, x, result)
+    fgsl_sf_bessel_icn_array = gsl_sf_bessel_icn_array(nmin, nmax, x, c_loc(result))
   end function fgsl_sf_bessel_icn_array
   function fgsl_sf_bessel_ic0_scaled(x)
     real(fgsl_double), intent(in) :: x
@@ -482,9 +482,9 @@
   function fgsl_sf_bessel_icn_scaled_array(nmin, nmax, x, result)
     integer(fgsl_int), intent(in) :: nmin, nmax
     real(fgsl_double), intent(in) :: x
-    real(fgsl_double), intent(out) :: result(:)
+    real(fgsl_double), intent(out), target :: result(:)
     integer(fgsl_int) :: fgsl_sf_bessel_icn_scaled_array
-    fgsl_sf_bessel_icn_scaled_array = gsl_sf_bessel_icn_scaled_array(nmin, nmax, x, result)
+    fgsl_sf_bessel_icn_scaled_array = gsl_sf_bessel_icn_scaled_array(nmin, nmax, x, c_loc(result))
   end function fgsl_sf_bessel_icn_scaled_array
   function fgsl_sf_bessel_kc0(x)
     real(fgsl_double), intent(in) :: x
@@ -533,9 +533,9 @@
   function fgsl_sf_bessel_kcn_array(nmin, nmax, x, result)
     integer(fgsl_int), intent(in) :: nmin, nmax
     real(fgsl_double), intent(in) :: x
-    real(fgsl_double), intent(out) :: result(:)
+    real(fgsl_double), intent(out), target :: result(:)
     integer(fgsl_int) :: fgsl_sf_bessel_kcn_array
-    fgsl_sf_bessel_kcn_array = gsl_sf_bessel_kcn_array(nmin, nmax, x, result)
+    fgsl_sf_bessel_kcn_array = gsl_sf_bessel_kcn_array(nmin, nmax, x, c_loc(result))
   end function fgsl_sf_bessel_kcn_array
   function fgsl_sf_bessel_kc0_scaled(x)
     real(fgsl_double), intent(in) :: x
@@ -584,9 +584,9 @@
   function fgsl_sf_bessel_kcn_scaled_array(nmin, nmax, x, result)
     integer(fgsl_int), intent(in) :: nmin, nmax
     real(fgsl_double), intent(in) :: x
-    real(fgsl_double), intent(out) :: result(:)
+    real(fgsl_double), intent(out), target :: result(:)
     integer(fgsl_int) :: fgsl_sf_bessel_kcn_scaled_array
-    fgsl_sf_bessel_kcn_scaled_array = gsl_sf_bessel_kcn_scaled_array(nmin, nmax, x, result)
+    fgsl_sf_bessel_kcn_scaled_array = gsl_sf_bessel_kcn_scaled_array(nmin, nmax, x, c_loc(result))
   end function fgsl_sf_bessel_kcn_scaled_array
 ! spherical bessel functions
   function fgsl_sf_bessel_js0(x)
@@ -650,16 +650,16 @@
   function fgsl_sf_bessel_jsl_array(lmax, x, result)
     integer(fgsl_int), intent(in) :: lmax
     real(fgsl_double), intent(in) :: x
-    real(fgsl_double), intent(out) :: result(:)
+    real(fgsl_double), intent(out), target :: result(:)
     integer(fgsl_int) :: fgsl_sf_bessel_jsl_array
-    fgsl_sf_bessel_jsl_array = gsl_sf_bessel_jsl_array(lmax, x, result)
+    fgsl_sf_bessel_jsl_array = gsl_sf_bessel_jsl_array(lmax, x, c_loc(result))
   end function fgsl_sf_bessel_jsl_array
   function fgsl_sf_bessel_jsl_steed_array(lmax, x, result)
     integer(fgsl_int), intent(in) :: lmax
     real(fgsl_double), intent(in) :: x
-    real(fgsl_double), intent(out) :: result(:)
+    real(fgsl_double), intent(out), target :: result(:)
     integer(fgsl_int) :: fgsl_sf_bessel_jsl_steed_array
-    fgsl_sf_bessel_jsl_steed_array = gsl_sf_bessel_jsl_steed_array(lmax, x, result)
+    fgsl_sf_bessel_jsl_steed_array = gsl_sf_bessel_jsl_steed_array(lmax, x, c_loc(result))
   end function fgsl_sf_bessel_jsl_steed_array
   function fgsl_sf_bessel_ys0(x)
     real(fgsl_double), intent(in) :: x
@@ -722,9 +722,9 @@
   function fgsl_sf_bessel_ysl_array(lmax, x, result)
     integer(fgsl_int), intent(in) :: lmax
     real(fgsl_double), intent(in) :: x
-    real(fgsl_double), intent(out) :: result(:)
+    real(fgsl_double), intent(out), target :: result(:)
     integer(fgsl_int) :: fgsl_sf_bessel_ysl_array
-    fgsl_sf_bessel_ysl_array = gsl_sf_bessel_ysl_array(lmax, x, result)
+    fgsl_sf_bessel_ysl_array = gsl_sf_bessel_ysl_array(lmax, x, c_loc(result))
   end function fgsl_sf_bessel_ysl_array
   function fgsl_sf_bessel_is0_scaled(x)
     real(fgsl_double), intent(in) :: x
@@ -787,9 +787,9 @@
   function fgsl_sf_bessel_isl_scaled_array(lmax, x, result)
     integer(fgsl_int), intent(in) :: lmax
     real(fgsl_double), intent(in) :: x
-    real(fgsl_double), intent(out) :: result(:)
+    real(fgsl_double), intent(out), target :: result(:)
     integer(fgsl_int) :: fgsl_sf_bessel_isl_scaled_array
-    fgsl_sf_bessel_isl_scaled_array = gsl_sf_bessel_isl_scaled_array(lmax, x, result)
+    fgsl_sf_bessel_isl_scaled_array = gsl_sf_bessel_isl_scaled_array(lmax, x, c_loc(result))
   end function fgsl_sf_bessel_isl_scaled_array
   function fgsl_sf_bessel_ks0_scaled(x)
     real(fgsl_double), intent(in) :: x
@@ -852,9 +852,9 @@
   function fgsl_sf_bessel_ksl_scaled_array(lmax, x, result)
     integer(fgsl_int), intent(in) :: lmax
     real(fgsl_double), intent(in) :: x
-    real(fgsl_double), intent(out) :: result(:)
+    real(fgsl_double), intent(out), target :: result(:)
     integer(fgsl_int) :: fgsl_sf_bessel_ksl_scaled_array
-    fgsl_sf_bessel_ksl_scaled_array = gsl_sf_bessel_ksl_scaled_array(lmax, x, result)
+    fgsl_sf_bessel_ksl_scaled_array = gsl_sf_bessel_ksl_scaled_array(lmax, x, c_loc(result))
   end function fgsl_sf_bessel_ksl_scaled_array
 ! fractional order bessel functions
   function fgsl_sf_bessel_jnu(n, x)
@@ -873,13 +873,13 @@
     fgsl_sf_bessel_jnu_e = gsl_sf_bessel_jnu_e(n, x, res)
     result = res
   end function fgsl_sf_bessel_jnu_e
-  function fgsl_sf_bessel_sequence_jnu_e(nu, mode, size, v)
+  function fgsl_sf_bessel_sequence_jnu_e(nu, mode, v)
     real(fgsl_double), intent(in) :: nu
     type(fgsl_mode_t), intent(in) :: mode
-    integer(fgsl_size_t), intent(in) :: size
-    real(fgsl_double), intent(inout) :: v(:)
+    real(fgsl_double), intent(inout), target :: v(:)
     integer(fgsl_int) :: fgsl_sf_bessel_sequence_jnu_e
-    fgsl_sf_bessel_sequence_jnu_e = gsl_sf_bessel_sequence_jnu_e(nu, mode%gsl_mode, size, v)
+    fgsl_sf_bessel_sequence_jnu_e = gsl_sf_bessel_sequence_jnu_e(nu, mode%gsl_mode, &
+    size(v, kind=fgsl_size_t), c_loc(v))
   end function fgsl_sf_bessel_sequence_jnu_e
   function fgsl_sf_bessel_ynu(n, x)
     real(fgsl_double), intent(in) :: n
@@ -1081,45 +1081,59 @@
     g = gl
     gp = gpl
   end function fgsl_sf_coulomb_wave_fg_e
-  function fgsl_sf_coulomb_wave_f_array (l_min, kmax, eta, x, fc_array, &
+  function fgsl_sf_coulomb_wave_f_array (l_min, eta, x, fc_array, &
           f_exponent)
     real(fgsl_double), intent(in) :: l_min, eta, x
-    integer(fgsl_int), intent(in) :: kmax
-    real(fgsl_double), intent(out) :: fc_array(:)
+    real(fgsl_double), intent(out), target :: fc_array(:)
     real(fgsl_double), intent(out) :: f_exponent
     integer(fgsl_int) :: fgsl_sf_coulomb_wave_f_array
-    fgsl_sf_coulomb_wave_f_array = gsl_sf_coulomb_wave_f_array (l_min, kmax, &
-         eta, x, fc_array, f_exponent)
+    fgsl_sf_coulomb_wave_f_array = gsl_sf_coulomb_wave_f_array (l_min, &
+    size(fc_array, kind=fgsl_int)-1, &
+    eta, x, c_loc(fc_array), f_exponent)
   end function fgsl_sf_coulomb_wave_f_array
-  function fgsl_sf_coulomb_wave_fg_array(l_min, kmax, eta, x, fc_array, &
+  function fgsl_sf_coulomb_wave_fg_array(l_min, eta, x, fc_array, &
           gc_array, f_exponent, g_exponent)
     real(fgsl_double), intent(in) :: l_min, eta, x
-    integer(fgsl_int), intent(in) :: kmax
-    real(fgsl_double), intent(out) :: fc_array(:), gc_array(:)
+    real(fgsl_double), intent(out), target :: fc_array(:), gc_array(:)
     real(fgsl_double), intent(out) :: f_exponent, g_exponent
     integer(fgsl_int) :: fgsl_sf_coulomb_wave_fg_array
-    fgsl_sf_coulomb_wave_fg_array = gsl_sf_coulomb_wave_fg_array (l_min, kmax, &
-         eta, x, fc_array, gc_array, f_exponent, g_exponent)
+    if (size(fc_array) /= size(gc_array)) then
+      call fgsl_error('fc_array and gc_array dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      fgsl_sf_coulomb_wave_fg_array = fgsl_ebadlen
+      return
+    endif
+    fgsl_sf_coulomb_wave_fg_array = gsl_sf_coulomb_wave_fg_array (l_min, &
+    size(fc_array, kind=fgsl_int)-1, &
+    eta, x, c_loc(fc_array), c_loc(gc_array), f_exponent, g_exponent)
   end function fgsl_sf_coulomb_wave_fg_array
-  function fgsl_sf_coulomb_wave_fgp_array(l_min, kmax, eta, x, fc_array, fcp_array, &
+  function fgsl_sf_coulomb_wave_fgp_array(l_min, eta, x, fc_array, fcp_array, &
           gc_array, gcp_array, f_exponent, g_exponent)
     real(fgsl_double), intent(in) :: l_min, eta, x
-    integer(fgsl_int), intent(in) :: kmax
-    real(fgsl_double), intent(out) :: fc_array(:), gc_array(:), fcp_array(:), gcp_array(:)
+    real(fgsl_double), intent(out), target :: fc_array(:), gc_array(:), fcp_array(:), gcp_array(:)
     real(fgsl_double), intent(out) :: f_exponent, g_exponent
     integer(fgsl_int) :: fgsl_sf_coulomb_wave_fgp_array
-    fgsl_sf_coulomb_wave_fgp_array = gsl_sf_coulomb_wave_fgp_array (l_min, kmax, &
-         eta, x, fc_array, fcp_array, gc_array, gcp_array, f_exponent, g_exponent)
+    if (size(fc_array) /= size(gc_array) .or.&
+        size(fc_array) /= size(fcp_array) .or.&
+        size(fc_array) /= size(gcp_array)) then
+      call fgsl_error('fc_array, fcp_array, gc_array and gcp_array dimensions do not match',&
+       __FILE__, __LINE__, fgsl_ebadlen)
+      fgsl_sf_coulomb_wave_fgp_array = fgsl_ebadlen
+      return
+    endif
+    fgsl_sf_coulomb_wave_fgp_array = gsl_sf_coulomb_wave_fgp_array (l_min, &
+    size(fc_array, kind=fgsl_int)-1, &
+    eta, x, c_loc(fc_array), c_loc(fcp_array), c_loc(gc_array), c_loc(gcp_array),&
+     f_exponent, g_exponent)
   end function fgsl_sf_coulomb_wave_fgp_array
-  function fgsl_sf_coulomb_wave_sphf_array(l_min, kmax, eta, x, fc_array, &
+  function fgsl_sf_coulomb_wave_sphf_array(l_min, eta, x, fc_array, &
           f_exponent)
     real(fgsl_double), intent(in) :: l_min, eta, x
-    integer(fgsl_int), intent(in) :: kmax
-    real(fgsl_double), intent(out) :: fc_array(:)
+    real(fgsl_double), intent(out), target :: fc_array(:)
     real(fgsl_double), intent(out) :: f_exponent
     integer(fgsl_int) :: fgsl_sf_coulomb_wave_sphf_array
-    fgsl_sf_coulomb_wave_sphf_array = gsl_sf_coulomb_wave_sphf_array (l_min, kmax, &
-         eta, x, fc_array, f_exponent)
+    fgsl_sf_coulomb_wave_sphf_array = gsl_sf_coulomb_wave_sphf_array (l_min, &
+    size(fc_array, kind=fgsl_int)-1, &
+    eta, x, c_loc(fc_array), f_exponent)
   end function fgsl_sf_coulomb_wave_sphf_array
   function fgsl_sf_coulomb_cl_e(l, eta, result)
     real(fgsl_double), intent(in) :: eta, l
@@ -1130,12 +1144,12 @@
     fgsl_sf_coulomb_cl_e = gsl_sf_coulomb_cl_e(l, eta, res)
     result = res
   end function fgsl_sf_coulomb_cl_e
-  function fgsl_sf_coulomb_cl_array(l_min, kmax, eta, cl)
+  function fgsl_sf_coulomb_cl_array(l_min, eta, cl)
     real(fgsl_double), intent(in) :: l_min, eta
-    integer(fgsl_int), intent(in) :: kmax
-    real(fgsl_double), intent(out) :: cl(:)
+    real(fgsl_double), intent(out), target :: cl(:)
     integer(fgsl_int) :: fgsl_sf_coulomb_cl_array
-    fgsl_sf_coulomb_cl_array = gsl_sf_coulomb_cl_array (l_min, kmax, eta, cl)
+    fgsl_sf_coulomb_cl_array = gsl_sf_coulomb_cl_array (l_min, size(cl, kind=fgsl_int)-1, &
+    eta, c_loc(cl))
   end function fgsl_sf_coulomb_cl_array
   function fgsl_sf_coupling_3j(two_ja, two_jb, two_jc, two_ma, two_mb, two_mc)
     integer(fgsl_int), intent(in) :: two_ja, two_jb, two_jc, two_ma, two_mb, two_mc
@@ -2373,12 +2387,12 @@
     fgsl_sf_gegenpoly_n_e = gsl_sf_gegenpoly_n_e(n, lambda, x, res)
     result = res
   end function fgsl_sf_gegenpoly_n_e
-  function fgsl_sf_gegenpoly_array(nmax, lambda, x, result_array)
-    integer(fgsl_int), intent(in) :: nmax
+  function fgsl_sf_gegenpoly_array(lambda, x, result_array)
     real(fgsl_double), intent(in) :: lambda, x
-    real(fgsl_double), intent(out) :: result_array(:)
+    real(fgsl_double), intent(out), target :: result_array(:)
     integer(fgsl_int) :: fgsl_sf_gegenpoly_array
-    fgsl_sf_gegenpoly_array = gsl_sf_gegenpoly_array(nmax, lambda, x, result_array)
+    fgsl_sf_gegenpoly_array = gsl_sf_gegenpoly_array(size(result_array, kind=fgsl_int)-1&
+    , lambda, x, c_loc(result_array))
   end function fgsl_sf_gegenpoly_array
   function fgsl_sf_hyperg_0f1(c, x)
     real(fgsl_double), intent(in) :: c, x
@@ -2687,20 +2701,26 @@
     fgsl_sf_legendre_pl_e = gsl_sf_legendre_pl_e(l, x, res)
     result = res
   end function fgsl_sf_legendre_pl_e
-  function fgsl_sf_legendre_pl_array(lmax, x, result_array)
-    integer(fgsl_int), intent(in) :: lmax
+  function fgsl_sf_legendre_pl_array(x, result_array)
     real(fgsl_double), intent(in) :: x
-    real(fgsl_double), intent(out) :: result_array(:)
+    real(fgsl_double), intent(out), target :: result_array(:)
     real(fgsl_double) :: fgsl_sf_legendre_pl_array
-    fgsl_sf_legendre_pl_array = gsl_sf_legendre_pl_array(lmax, x, result_array)
+    fgsl_sf_legendre_pl_array = gsl_sf_legendre_pl_array(size(result_array, kind=fgsl_int)-1,&
+    x, c_loc(result_array))
   end function fgsl_sf_legendre_pl_array
-  function fgsl_sf_legendre_pl_deriv_array(lmax, x, result_array, deriv_array)
-    integer(fgsl_int), intent(in) :: lmax
+  function fgsl_sf_legendre_pl_deriv_array(x, result_array, deriv_array)
     real(fgsl_double), intent(in) :: x
-    real(fgsl_double), intent(out) :: result_array(:), deriv_array(:)
+    real(fgsl_double), intent(out), target :: result_array(:), deriv_array(:)
     real(fgsl_double) :: fgsl_sf_legendre_pl_deriv_array
+    if (size(result_array) /= size(deriv_array)) then
+      call fgsl_error('result_array and deriv_array dimensions do not match',&
+       __FILE__, __LINE__, fgsl_ebadlen)
+      fgsl_sf_legendre_pl_deriv_array = 0.0_fgsl_double
+      return
+    end if
     fgsl_sf_legendre_pl_deriv_array = &
-         gsl_sf_legendre_pl_deriv_array(lmax, x, result_array, deriv_array)
+    gsl_sf_legendre_pl_deriv_array(size(result_array, kind=fgsl_int)-1, &
+    x, c_loc(result_array), c_loc(deriv_array))
   end function fgsl_sf_legendre_pl_deriv_array
   function fgsl_sf_legendre_q0(x)
     real(fgsl_double), intent(in) :: x
@@ -2910,12 +2930,12 @@
     fgsl_sf_legendre_h3d_e = gsl_sf_legendre_h3d_e(l, lambda, eta, res)
     result = res
   end function fgsl_sf_legendre_h3d_e
-  function fgsl_sf_legendre_h3d_array(lmax, lambda, eta, result_array)
-    integer(fgsl_int), intent(in) :: lmax
+  function fgsl_sf_legendre_h3d_array(lambda, eta, result_array)
     real(fgsl_double), intent(in) :: lambda, eta
-    real(fgsl_double), intent(out) :: result_array(:)
+    real(fgsl_double), intent(out), target :: result_array(:)
     integer(fgsl_int) :: fgsl_sf_legendre_h3d_array
-    fgsl_sf_legendre_h3d_array = gsl_sf_legendre_h3d_array(lmax, lambda, eta, result_array)
+    fgsl_sf_legendre_h3d_array = gsl_sf_legendre_h3d_array(size(result_array, kind=fgsl_int)-1,&
+    lambda, eta, c_loc(result_array))
   end function fgsl_sf_legendre_h3d_array
   function fgsl_sf_log(x)
     real(fgsl_double), intent(in) :: x

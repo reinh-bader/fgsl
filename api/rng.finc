@@ -5,7 +5,7 @@
 !> \page "Comments on random numbers"
 !> Please go to api/rng.finc for the API documentation.
 
-  function fgsl_rng_alloc(t) 
+  function fgsl_rng_alloc(t)
     type(fgsl_rng_type), intent(inout) :: t
     type(fgsl_rng) :: fgsl_rng_alloc
     if (.not. c_associated(t%gsl_rng_type)) then
@@ -23,60 +23,60 @@
     type(fgsl_rng), intent(inout) :: r
     call gsl_rng_free(r%gsl_rng)
   end subroutine fgsl_rng_free
-  function fgsl_rng_get(r) 
+  function fgsl_rng_get(r)
     type(fgsl_rng), intent(in) :: r
     integer(fgsl_long) :: fgsl_rng_get
-    fgsl_rng_get = gsl_rng_get(r%gsl_rng) 
+    fgsl_rng_get = gsl_rng_get(r%gsl_rng)
   end function fgsl_rng_get
-  function fgsl_rng_uniform(r) 
+  function fgsl_rng_uniform(r)
     type(fgsl_rng), intent(in) :: r
     real(fgsl_double) :: fgsl_rng_uniform
-    fgsl_rng_uniform = gsl_rng_uniform(r%gsl_rng) 
+    fgsl_rng_uniform = gsl_rng_uniform(r%gsl_rng)
   end function fgsl_rng_uniform
-  function fgsl_rng_uniform_pos(r) 
+  function fgsl_rng_uniform_pos(r)
     type(fgsl_rng), intent(in) :: r
     real(fgsl_double) :: fgsl_rng_uniform_pos
-    fgsl_rng_uniform_pos = gsl_rng_uniform_pos(r%gsl_rng) 
+    fgsl_rng_uniform_pos = gsl_rng_uniform_pos(r%gsl_rng)
   end function fgsl_rng_uniform_pos
-  function fgsl_rng_uniform_int(r, n) 
+  function fgsl_rng_uniform_int(r, n)
     type(fgsl_rng), intent(in) :: r
     integer(fgsl_long), intent(in) :: n
     integer(fgsl_long) :: fgsl_rng_uniform_int
-    fgsl_rng_uniform_int = gsl_rng_uniform_int(r%gsl_rng, n) 
+    fgsl_rng_uniform_int = gsl_rng_uniform_int(r%gsl_rng, n)
   end function fgsl_rng_uniform_int
-  function fgsl_rng_name(r) 
+  function fgsl_rng_name(r)
     type(fgsl_rng), intent(in) :: r
     character(kind=fgsl_char, len=fgsl_strmax) :: fgsl_rng_name
 !
     type(c_ptr) :: name
     name = gsl_rng_name(r%gsl_rng)
-    fgsl_rng_name = fgsl_name(name) 
+    fgsl_rng_name = fgsl_name(name)
   end function fgsl_rng_name
-  function fgsl_rng_max(r) 
+  function fgsl_rng_max(r)
     type(fgsl_rng), intent(in) :: r
     integer(fgsl_long) :: fgsl_rng_max
-    fgsl_rng_max = gsl_rng_max(r%gsl_rng) 
+    fgsl_rng_max = gsl_rng_max(r%gsl_rng)
   end function fgsl_rng_max
-  function fgsl_rng_min(r) 
+  function fgsl_rng_min(r)
     type(fgsl_rng), intent(in) :: r
     integer(fgsl_long) :: fgsl_rng_min
-    fgsl_rng_min = gsl_rng_min(r%gsl_rng) 
+    fgsl_rng_min = gsl_rng_min(r%gsl_rng)
   end function fgsl_rng_min
 ! FIXME: state, size and types_setup routines not (yet?) implemented
-  function fgsl_rng_env_setup() 
+  function fgsl_rng_env_setup()
     type(fgsl_rng_type) :: fgsl_rng_env_setup
-    fgsl_rng_env_setup%gsl_rng_type = gsl_rng_env_setup() 
+    fgsl_rng_env_setup%gsl_rng_type = gsl_rng_env_setup()
   end function fgsl_rng_env_setup
-  function fgsl_rng_memcpy(cpy, src) 
+  function fgsl_rng_memcpy(cpy, src)
     type(fgsl_rng), intent(inout) :: cpy
     type(fgsl_rng), intent(in) :: src
     integer(fgsl_int) :: fgsl_rng_memcpy
-    fgsl_rng_memcpy = gsl_rng_memcpy(cpy%gsl_rng, src%gsl_rng) 
+    fgsl_rng_memcpy = gsl_rng_memcpy(cpy%gsl_rng, src%gsl_rng)
   end function fgsl_rng_memcpy
-  function fgsl_rng_clone(r) 
+  function fgsl_rng_clone(r)
     type(fgsl_rng), intent(in) :: r
     type(fgsl_rng) :: fgsl_rng_clone
-    fgsl_rng_clone%gsl_rng = gsl_rng_clone(r%gsl_rng) 
+    fgsl_rng_clone%gsl_rng = gsl_rng_clone(r%gsl_rng)
   end function fgsl_rng_clone
   function fgsl_rng_fwrite(stream, r)
     type(fgsl_file), intent(in) :: stream
@@ -90,7 +90,7 @@
     integer(fgsl_int) :: fgsl_rng_fread
     fgsl_rng_fread = gsl_rng_fread(stream%gsl_file, r%gsl_rng)
   end function fgsl_rng_fread
-  function fgsl_qrng_alloc(t, d) 
+  function fgsl_qrng_alloc(t, d)
     type(fgsl_qrng_type), intent(in) :: t
     integer(fgsl_int), intent(in) :: d
     type(fgsl_qrng) :: fgsl_qrng_alloc
@@ -109,29 +109,29 @@
   end subroutine fgsl_qrng_init
   function fgsl_qrng_get(q, x)
     type(fgsl_qrng), intent(in) :: q
-    real(fgsl_double), intent(out) :: x(:)
+    real(fgsl_double), intent(out), target :: x(:)
     integer(fgsl_int) :: fgsl_qrng_get
-    fgsl_qrng_get = gsl_qrng_get(q%gsl_qrng, x)
+    fgsl_qrng_get = gsl_qrng_get(q%gsl_qrng, c_loc(x))
   end function fgsl_qrng_get
-  function fgsl_qrng_name(q) 
+  function fgsl_qrng_name(q)
     type(fgsl_qrng), intent(in) :: q
     character(kind=fgsl_char, len=fgsl_strmax) :: fgsl_qrng_name
 !
     type(c_ptr) :: name
     name = gsl_qrng_name(q%gsl_qrng)
-    fgsl_qrng_name = fgsl_name(name) 
+    fgsl_qrng_name = fgsl_name(name)
   end function fgsl_qrng_name
 ! FIXME: state and size routines not (yet?) implemented
-  function fgsl_qrng_memcpy(cpy, src) 
+  function fgsl_qrng_memcpy(cpy, src)
     type(fgsl_qrng), intent(inout) :: cpy
     type(fgsl_qrng), intent(in) :: src
     integer(fgsl_int) :: fgsl_qrng_memcpy
-    fgsl_qrng_memcpy = gsl_qrng_memcpy(cpy%gsl_qrng, src%gsl_qrng) 
+    fgsl_qrng_memcpy = gsl_qrng_memcpy(cpy%gsl_qrng, src%gsl_qrng)
   end function fgsl_qrng_memcpy
-  function fgsl_qrng_clone(q) 
+  function fgsl_qrng_clone(q)
     type(fgsl_qrng), intent(in) :: q
     type(fgsl_qrng) :: fgsl_qrng_clone
-    fgsl_qrng_clone%gsl_qrng = gsl_qrng_clone(q%gsl_qrng) 
+    fgsl_qrng_clone%gsl_qrng = gsl_qrng_clone(q%gsl_qrng)
   end function fgsl_qrng_clone
 !
   function fgsl_ran_gaussian(r, sigma)
@@ -240,13 +240,13 @@
     real(fgsl_double) :: fgsl_ran_ugaussian_tail_pdf
     fgsl_ran_ugaussian_tail_pdf = gsl_ran_ugaussian_tail_pdf(x, a)
   end function fgsl_ran_ugaussian_tail_pdf
-  subroutine fgsl_ran_bivariate_gaussian(r, sigma_x, sigma_y, rho, x, y) 
+  subroutine fgsl_ran_bivariate_gaussian(r, sigma_x, sigma_y, rho, x, y)
     type(fgsl_rng), intent(in) :: r
     real(fgsl_double), intent(in) :: sigma_x, sigma_y, rho
     real(fgsl_double), intent(out) :: x, y
-    call gsl_ran_bivariate_gaussian(r%gsl_rng, sigma_x, sigma_y, rho, x, y) 
+    call gsl_ran_bivariate_gaussian(r%gsl_rng, sigma_x, sigma_y, rho, x, y)
   end subroutine fgsl_ran_bivariate_gaussian
-  function fgsl_ran_bivariate_gaussian_pdf(x, y, sigma_x, sigma_y, rho) 
+  function fgsl_ran_bivariate_gaussian_pdf(x, y, sigma_x, sigma_y, rho)
     real(fgsl_double), intent(in) :: x, y, sigma_x, sigma_y, rho
     real(fgsl_double) :: fgsl_ran_bivariate_gaussian_pdf
     fgsl_ran_bivariate_gaussian_pdf = &
@@ -784,22 +784,22 @@
     real(fgsl_double) :: fgsl_cdf_pareto_qinv
     fgsl_cdf_pareto_qinv = gsl_cdf_pareto_qinv(q, a, b)
   end function fgsl_cdf_pareto_qinv
-  subroutine fgsl_ran_dir_2d(r, x, y) 
+  subroutine fgsl_ran_dir_2d(r, x, y)
     type(fgsl_rng), intent(in) :: r
     real(fgsl_double), intent(out) :: x, y
-    call gsl_ran_dir_2d(r%gsl_rng, x, y) 
+    call gsl_ran_dir_2d(r%gsl_rng, x, y)
   end subroutine fgsl_ran_dir_2d
-  subroutine fgsl_ran_dir_2d_trig_method(r, x, y) 
+  subroutine fgsl_ran_dir_2d_trig_method(r, x, y)
     type(fgsl_rng), intent(in) :: r
     real(fgsl_double), intent(out) :: x, y
-    call gsl_ran_dir_2d_trig_method(r%gsl_rng, x, y) 
+    call gsl_ran_dir_2d_trig_method(r%gsl_rng, x, y)
   end subroutine fgsl_ran_dir_2d_trig_method
-  subroutine fgsl_ran_dir_3d(r, x, y, z) 
+  subroutine fgsl_ran_dir_3d(r, x, y, z)
     type(fgsl_rng), intent(in) :: r
     real(fgsl_double), intent(out) :: x, y, z
     call gsl_ran_dir_3d(r%gsl_rng, x, y, z)
   end subroutine fgsl_ran_dir_3d
-  subroutine fgsl_ran_dir_nd(r, n, x) 
+  subroutine fgsl_ran_dir_nd(r, n, x)
     type(fgsl_rng), intent(in) :: r
     integer(fgsl_size_t), intent(in) :: n
     real(fgsl_double), intent(out) :: x
@@ -913,33 +913,49 @@
     real(fgsl_double) :: fgsl_cdf_gumbel2_qinv
     fgsl_cdf_gumbel2_qinv = gsl_cdf_gumbel2_qinv(q, a, b)
   end function fgsl_cdf_gumbel2_qinv
-  subroutine fgsl_ran_dirichlet(r, k, alpha, theta) 
+  subroutine fgsl_ran_dirichlet(r, alpha, theta)
     type(fgsl_rng), intent(in) :: r
-    integer(fgsl_size_t), intent(in) :: k
-    real(fgsl_double), intent(in) :: alpha(:)
-    real(fgsl_double), intent(out) :: theta(:)
-    call gsl_ran_dirichlet(r%gsl_rng, k, alpha, theta) 
+    real(fgsl_double), intent(in), target :: alpha(:)
+    real(fgsl_double), intent(out), target :: theta(:)
+    !check dims
+    if (size(theta) /= size(alpha)) then
+      call fgsl_error('alpha and beta dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      return
+    endif
+    call gsl_ran_dirichlet(r%gsl_rng, size(alpha, kind=fgsl_size_t), &
+    c_loc(alpha), c_loc(theta))
   end subroutine fgsl_ran_dirichlet
-  function fgsl_ran_dirichlet_pdf(k, alpha, theta) 
-    integer(fgsl_size_t), intent(in) :: k
-    real(fgsl_double), intent(in) :: alpha(:)
-    real(fgsl_double), intent(in) :: theta(:)
+  function fgsl_ran_dirichlet_pdf(alpha, theta)
+    real(fgsl_double), intent(in), target :: alpha(:)
+    real(fgsl_double), intent(in), target :: theta(:)
     real(fgsl_double) :: fgsl_ran_dirichlet_pdf
-    fgsl_ran_dirichlet_pdf = gsl_ran_dirichlet_pdf(k, alpha, theta) 
+    !check dims
+    if (size(theta) /= size(alpha)) then
+      call fgsl_error('alpha and beta dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      fgsl_ran_dirichlet_pdf = 0.0_fgsl_double
+      return
+    endif
+    fgsl_ran_dirichlet_pdf = gsl_ran_dirichlet_pdf(size(alpha, kind=fgsl_size_t), &
+    c_loc(alpha), c_loc(theta))
   end function fgsl_ran_dirichlet_pdf
-  function fgsl_ran_dirichlet_lnpdf(k, alpha, theta) 
-    integer(fgsl_size_t), intent(in) :: k
-    real(fgsl_double), intent(in) :: alpha(:)
-    real(fgsl_double), intent(in) :: theta(:)
+  function fgsl_ran_dirichlet_lnpdf(alpha, theta)
+    real(fgsl_double), intent(in), target :: alpha(:)
+    real(fgsl_double), intent(in), target :: theta(:)
     real(fgsl_double) :: fgsl_ran_dirichlet_lnpdf
-    fgsl_ran_dirichlet_lnpdf = gsl_ran_dirichlet_lnpdf(k, alpha, theta) 
+    !check dims
+    if (size(theta) /= size(alpha)) then
+      call fgsl_error('alpha and beta dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      fgsl_ran_dirichlet_lnpdf = 0.0_fgsl_double
+      return
+    endif
+    fgsl_ran_dirichlet_lnpdf = gsl_ran_dirichlet_lnpdf(size(alpha, kind=fgsl_size_t), &
+    c_loc(alpha), c_loc(theta))
   end function fgsl_ran_dirichlet_lnpdf
-  function fgsl_ran_discrete_preproc(k, p)
-    integer(fgsl_size_t), intent(in) :: k
-    real(fgsl_double), intent(in) :: p(:)
+  function fgsl_ran_discrete_preproc(p)
+    real(fgsl_double), intent(in), target :: p(:)
     type(fgsl_ran_discrete_t) :: fgsl_ran_discrete_preproc
     fgsl_ran_discrete_preproc%gsl_ran_discrete_t = &
-         gsl_ran_discrete_preproc(k, p)
+         gsl_ran_discrete_preproc(size(p, kind=fgsl_size_t), c_loc(p))
   end function fgsl_ran_discrete_preproc
   function fgsl_ran_discrete(r, g)
     type(fgsl_rng), intent(in) :: r
@@ -947,11 +963,11 @@
     integer(fgsl_size_t) :: fgsl_ran_discrete
     fgsl_ran_discrete = gsl_ran_discrete(r%gsl_rng, g%gsl_ran_discrete_t)
   end function fgsl_ran_discrete
-  function fgsl_ran_discrete_pdf(k, g) 
+  function fgsl_ran_discrete_pdf(k, g)
     integer(fgsl_size_t), intent(in) :: k
     type(fgsl_ran_discrete_t), intent(in) :: g
     real(fgsl_double) :: fgsl_ran_discrete_pdf
-    fgsl_ran_discrete_pdf = gsl_ran_discrete_pdf(k, g%gsl_ran_discrete_t) 
+    fgsl_ran_discrete_pdf = gsl_ran_discrete_pdf(k, g%gsl_ran_discrete_t)
   end function fgsl_ran_discrete_pdf
   subroutine fgsl_ran_discrete_free(g)
     type(fgsl_ran_discrete_t), intent(inout) :: g
@@ -1018,27 +1034,43 @@
     real(fgsl_double) :: fgsl_cdf_binomial_q
     fgsl_cdf_binomial_q = gsl_cdf_binomial_q(k, p, n)
   end function fgsl_cdf_binomial_q
-  subroutine fgsl_ran_multinomial(r, k, nn, p, n)
+  subroutine fgsl_ran_multinomial(r, nn, p, n)
     type(fgsl_rng), intent(in) :: r
-    integer(fgsl_size_t), intent(in) :: k
     integer(fgsl_int), intent(in) :: nn
-    real(fgsl_double), intent(in) :: p(:)
-    integer(fgsl_int), intent(out) :: n(:)
-    call gsl_ran_multinomial(r%gsl_rng, k, nn, p, n)
+    real(fgsl_double), intent(in), target :: p(:)
+    integer(fgsl_int), intent(out), target :: n(:)
+    !check dims
+    if (size(p) /= size(n)) then
+      call fgsl_error('p and n dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      return
+    endif
+    call gsl_ran_multinomial(r%gsl_rng, size(p, kind=fgsl_size_t), nn, c_loc(p), c_loc(n))
   end subroutine fgsl_ran_multinomial
-  function fgsl_ran_multinomial_pdf(k, p, n)
-    integer(fgsl_size_t), intent(in) :: k
-    real(fgsl_double), intent(in) :: p(:)
-    integer(fgsl_int), intent(in) :: n(:)
+  function fgsl_ran_multinomial_pdf(p, n)
+    real(fgsl_double), intent(in), target :: p(:)
+    integer(fgsl_int), intent(in), target :: n(:)
     real(fgsl_double) :: fgsl_ran_multinomial_pdf
-    fgsl_ran_multinomial_pdf = gsl_ran_multinomial_pdf(k, p, n)
+    !check dims
+    if (size(p) /= size(n)) then
+      call fgsl_error('p and n dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      fgsl_ran_multinomial_pdf = 0.0_fgsl_double
+      return
+    endif
+    fgsl_ran_multinomial_pdf = gsl_ran_multinomial_pdf(size(p, kind=fgsl_size_t), &
+    c_loc(p), c_loc(n))
   end function fgsl_ran_multinomial_pdf
-  function fgsl_ran_multinomial_lnpdf(k, p, n)
-    integer(fgsl_size_t), intent(in) :: k
-    real(fgsl_double), intent(in) :: p(:)
-    integer(fgsl_int), intent(in) :: n(:)
+  function fgsl_ran_multinomial_lnpdf(p, n)
+    real(fgsl_double), intent(in), target :: p(:)
+    integer(fgsl_int), intent(in), target :: n(:)
     real(fgsl_double) :: fgsl_ran_multinomial_lnpdf
-    fgsl_ran_multinomial_lnpdf = gsl_ran_multinomial_lnpdf(k, p, n)
+    !check dims
+    if (size(p) /= size(n)) then
+      call fgsl_error('p and n dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      fgsl_ran_multinomial_lnpdf = 0.0_fgsl_double
+      return
+    endif
+    fgsl_ran_multinomial_lnpdf = gsl_ran_multinomial_lnpdf(&
+    size(p, kind=fgsl_size_t), c_loc(p), c_loc(n))
   end function fgsl_ran_multinomial_lnpdf
   function fgsl_ran_negative_binomial(r, p, n)
     type(fgsl_rng), intent(in) :: r
@@ -1112,25 +1144,25 @@
     real(fgsl_double) :: fgsl_cdf_geometric_q
     fgsl_cdf_geometric_q = gsl_cdf_geometric_q(k, p)
   end function fgsl_cdf_geometric_q
-  function fgsl_ran_hypergeometric(r, n1, n2, t) 
+  function fgsl_ran_hypergeometric(r, n1, n2, t)
     type(fgsl_rng), intent(in) :: r
     integer(fgsl_int), intent(in) :: n1, n2, t
     integer(fgsl_int) :: fgsl_ran_hypergeometric
     fgsl_ran_hypergeometric = gsl_ran_hypergeometric(r%gsl_rng, n1, n2, t)
   end function fgsl_ran_hypergeometric
-  function fgsl_ran_hypergeometric_pdf(k, n1, n2, t) 
+  function fgsl_ran_hypergeometric_pdf(k, n1, n2, t)
     integer(fgsl_int), intent(in) :: k
     integer(fgsl_int), intent(in) :: n1, n2, t
     real(fgsl_double)  :: fgsl_ran_hypergeometric_pdf
     fgsl_ran_hypergeometric_pdf = gsl_ran_hypergeometric_pdf(k, n1, n2, t)
   end function fgsl_ran_hypergeometric_pdf
-  function fgsl_cdf_hypergeometric_p(k, n1, n2, t) 
+  function fgsl_cdf_hypergeometric_p(k, n1, n2, t)
     integer(fgsl_int), intent(in) :: k
     integer(fgsl_int), intent(in) :: n1, n2, t
     real(fgsl_double)  :: fgsl_cdf_hypergeometric_p
     fgsl_cdf_hypergeometric_p = gsl_cdf_hypergeometric_p(k, n1, n2, t)
   end function fgsl_cdf_hypergeometric_p
-  function fgsl_cdf_hypergeometric_q(k, n1, n2, t) 
+  function fgsl_cdf_hypergeometric_q(k, n1, n2, t)
     integer(fgsl_int), intent(in) :: k
     integer(fgsl_int), intent(in) :: n1, n2, t
     real(fgsl_double)  :: fgsl_cdf_hypergeometric_q
@@ -1176,21 +1208,21 @@
     size = fgsl_sizeof(1_fgsl_size_t)
     call gsl_ran_shuffle(r%gsl_rng, ptr_base, n, size)
   end subroutine fgsl_ran_shuffle_size_t
-  function fgsl_ran_choose(r, dest, k, src, n, size) 
+  function fgsl_ran_choose(r, dest, k, src, n, size)
     type(fgsl_rng), intent(in) :: r
     type(c_ptr), intent(in) :: dest, src
     integer(fgsl_size_t), intent(in) :: k, n, size
     integer(fgsl_int) :: fgsl_ran_choose
     fgsl_ran_choose = gsl_ran_choose(r%gsl_rng, dest, k, src, n, size)
   end function fgsl_ran_choose
-  subroutine fgsl_ran_sample(r, dest, k, src, n, size) 
+  subroutine fgsl_ran_sample(r, dest, k, src, n, size)
     type(fgsl_rng), intent(in) :: r
     type(c_ptr), intent(in) :: dest, src
     integer(fgsl_size_t), intent(in) :: k, n, size
     call gsl_ran_sample(r%gsl_rng, dest, k, src, n, size)
   end subroutine fgsl_ran_sample
 ! Add-ons
-  subroutine fgsl_rng_c_ptr(res, src) 
+  subroutine fgsl_rng_c_ptr(res, src)
     type(c_ptr), intent(in) :: src
     type(fgsl_rng), intent(out) :: res
     res%gsl_rng = src
@@ -1214,19 +1246,3 @@
     if (.not. c_associated(ran_discrete_t%gsl_ran_discrete_t)) &
          fgsl_ran_discrete_t_status = .false.
   end function fgsl_ran_discrete_t_status
-
-
- 
-
-
-
- 
-
-
-
- 
-
-
-
- 
-

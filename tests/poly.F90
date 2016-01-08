@@ -15,29 +15,29 @@ program poly
   call unit_init(50)
 !
   d(1:2) = (/1.0_fgsl_double, 2.0_fgsl_double/)
-  ra = fgsl_poly_eval(d, 2, 2.0_fgsl_double)
+  ra = fgsl_poly_eval(d(1:2), 2.0_fgsl_double)
   call unit_assert_equal_within('fgsl_poly_eval',5.0d0,ra,eps10)
-  z0 = fgsl_poly_complex_eval(d, 2, (2.0_fgsl_double, 0.0_fgsl_double))
+  z0 = fgsl_poly_complex_eval(d(1:2), (2.0_fgsl_double, 0.0_fgsl_double))
   call unit_assert_equal_within('fgsl_poly_complex_eval',(5.0d0,0.0d0),z0,eps10)
   z(1) = (1.0_fgsl_double, 0.0_fgsl_double)
   z(2) = (2.0_fgsl_double, 0.0_fgsl_double)
-  z0 = fgsl_complex_poly_complex_eval(z(1:2), 2, &
+  z0 = fgsl_complex_poly_complex_eval(z(1:2), &
        (2.0_fgsl_double, 0.0_fgsl_double))
   call unit_assert_equal_within('fgsl_complex_poly_complex_eval', &
        (5.0d0,0.0d0),z0,eps10)
   xa(1:3) =  (/1.0_fgsl_double, 2.0_fgsl_double, 3.0_fgsl_double/)
   ya(1:3) =  (/1.0_fgsl_double, 8.0_fgsl_double, 3.0_fgsl_double/)
-  status = fgsl_poly_dd_init(da, xa, ya, 3_fgsl_size_t)
-  ra = fgsl_poly_dd_eval(da, xa, 3_fgsl_size_t, 2.0_fgsl_double)
+  status = fgsl_poly_dd_init(da(1:3), xa(1:3), ya(1:3))
   call unit_assert_equal('fgsl_poly_dd_init',fgsl_success,status)
+  ra = fgsl_poly_dd_eval(da(1:3), xa(1:3), 2.0_fgsl_double)
   call unit_assert_equal_within('fgsl_poly_dd_eval',8.0d0,ra,eps10)
-  status = fgsl_poly_dd_taylor(di, 0.0_fgsl_double, da, xa, 3_fgsl_size_t, d)
+  status = fgsl_poly_dd_taylor(di(1:3), 0.0_fgsl_double, da(1:3), xa(1:3), d(1:3))
   ra = di(1) + 2.0d0 * di(2) + 4.0d0 * di(3)
   call unit_assert_equal('fgsl_poly_dd_taylor:status',fgsl_success,status)
   call unit_assert_equal_within('fgsl_poly_dd_taylor',8.0d0,ra,eps10)
   dya(1:3) =  (/4.5_fgsl_double, -11.0_fgsl_double, .6_fgsl_double/)
-  status = fgsl_poly_dd_hermite_init(da, za, xa, ya, dya, 3_fgsl_size_t)
-  ra = fgsl_poly_dd_eval(da, za, 6_fgsl_size_t, 2.0_fgsl_double)
+  status = fgsl_poly_dd_hermite_init(da(1:6), za(1:6), xa(1:3), ya(1:3), dya(1:3))
+  ra = fgsl_poly_dd_eval(da(1:6), za(1:6), 2.0_fgsl_double)
 ! FIXME: unclear whether the constant 6 above is correct.
   call unit_assert_equal_within('fgsl_poly_dd_hermite_init',8.0d0,ra,eps10)
   status = fgsl_poly_solve_quadratic(1.0_fgsl_double, -3.0_fgsl_double, &

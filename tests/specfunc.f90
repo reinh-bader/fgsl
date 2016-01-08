@@ -6,7 +6,7 @@ program specfunc
   real(fgsl_double), parameter :: eps7 = 1.0E-7_fgsl_double
   real(fgsl_double), parameter :: eps10 = 1.0E-10_fgsl_double
   real(fgsl_double), parameter :: eps15 = 1.0E-15_fgsl_double
-  integer(fgsl_int) :: status, lmsize
+  integer(fgsl_int) :: status
   real(fgsl_double) :: ra, ra_2, ra_3, ra_exp, ra_exp_2, x11, x21, &
        ra_arr(1), ra_arr_der(1), ra_arr_2(1), ra_arr_2_der(1), &
        ra_arr_3(2), ra_arr_3_der(2)
@@ -363,7 +363,7 @@ program specfunc
        sfres%val,sfres%err)
   ra_arr(1) = 1.0d0
   status = fgsl_sf_bessel_sequence_jnu_e(1.0_fgsl_double, fgsl_prec_double, &
-       1_fgsl_size_t, ra_arr)
+       ra_arr)
   call unit_assert_equal('fgsl_sf_bessel_sequence_jnu_e:status',&
        fgsl_success,status)
   call unit_assert_equal_within('fgsl_sf_bessel_sequence_jnu_e',&
@@ -466,13 +466,13 @@ program specfunc
        2.043097162103555d0,sfres_2%val,sfres_2%err)
   call unit_assert_equal_within('fgsl_sf_coulomb_wave_fg_e:Gder',&
        -1.263598113312426d0,sfres_2_der%val,sfres_2_der%err)
-  status = fgsl_sf_coulomb_wave_f_array (0.0_fgsl_double,0,1.0_fgsl_double, &
+  status = fgsl_sf_coulomb_wave_f_array (0.0_fgsl_double,1.0_fgsl_double, &
        1.0_fgsl_double,ra_arr,ra_exp)
   call unit_assert_equal('fgsl_sf_coulomb_wave_f_array:status',&
        fgsl_success,status)
   call unit_assert_equal_within('fgsl_sf_coulomb_wave_f_array',&
        0.2275262105105601d0,ra_arr(1),eps10)
-  status = fgsl_sf_coulomb_wave_fg_array (0.0_fgsl_double,0,1.0_fgsl_double, &
+  status = fgsl_sf_coulomb_wave_fg_array (0.0_fgsl_double,1.0_fgsl_double, &
        1.0_fgsl_double,ra_arr,ra_arr_2,ra_exp,ra_exp_2)
   call unit_assert_equal('fgsl_sf_coulomb_wave_fg_array:status',&
        fgsl_success,status)
@@ -480,7 +480,7 @@ program specfunc
        0.2275262105105601d0,ra_arr(1),eps10)
   call unit_assert_equal_within('fgsl_sf_coulomb_wave_fg_array:G',&
        2.043097162103555d0,ra_arr_2(1),eps10)
-  status = fgsl_sf_coulomb_wave_fgp_array (0.0_fgsl_double,0,1.0_fgsl_double, &
+  status = fgsl_sf_coulomb_wave_fgp_array (0.0_fgsl_double,1.0_fgsl_double, &
        1.0_fgsl_double,ra_arr,ra_arr_der,ra_arr_2,ra_arr_2_der,ra_exp,ra_exp_2)
   call unit_assert_equal('fgsl_sf_coulomb_wave_fg_array:status',&
        fgsl_success,status)
@@ -492,7 +492,7 @@ program specfunc
        2.043097162103555d0,ra_arr_2(1),eps10)
   call unit_assert_equal_within('fgsl_sf_coulomb_wave_fg_array:Gder',&
        -1.263598113312426d0,ra_arr_2_der(1),eps10)
-  status = fgsl_sf_coulomb_wave_sphf_array (0.0_fgsl_double,0,1.0_fgsl_double, &
+  status = fgsl_sf_coulomb_wave_sphf_array (0.0_fgsl_double,1.0_fgsl_double, &
        1.0_fgsl_double,ra_arr,ra_exp)
   call unit_assert_equal('fgsl_sf_coulomb_wave_sphf_array:status',&
        fgsl_success,status)
@@ -502,7 +502,7 @@ program specfunc
   call unit_assert_equal('fgsl_sf_coulomb_cl_e:status',fgsl_success,status)
   call unit_assert_equal_within('fgsl_sf_coulomb_cl_e',&
        1.0d0,sfres%val,sfres%err)
-  status = fgsl_sf_coulomb_cl_array(0.0_fgsl_double, 0, 0.0_fgsl_double,ra_arr)
+  status = fgsl_sf_coulomb_cl_array(0.0_fgsl_double, 0.0_fgsl_double,ra_arr)
   call unit_assert_equal('fgsl_sf_coulomb_cl_array:status',fgsl_success,status)
   call unit_assert_equal_within('fgsl_sf_coulomb_cl_array',&
        1.0d0,ra_arr(1),eps10)
@@ -644,7 +644,7 @@ program specfunc
 ! NOTE: replaced sfres%err by eps10
   ra = fgsl_sf_ellint_d(m_pi/2,.0_fgsl_double, fgsl_prec_double)
   call unit_assert_equal_within('fgsl_sf_ellint_d',m_pi/4,ra,eps10)
-  status = fgsl_sf_ellint_d_e(m_pi/2,.0_fgsl_double,.0_fgsl_double,&
+  status = fgsl_sf_ellint_d_e(m_pi/2,.0_fgsl_double,&
        fgsl_prec_double,sfres)
   call unit_assert_equal('fgsl_sf_ellint_d_e:status',fgsl_success,status)
   call unit_assert_equal_within('fgsl_sf_ellint_d_e',&
@@ -1078,7 +1078,7 @@ program specfunc
   call unit_assert_equal('fgsl_sf_gegenpoly_n_e:status',fgsl_success,status)
   call unit_assert_equal_within('fgsl_sf_gegenpoly_n_e',&
       4.0d0,sfres%val,sfres%err)
-  status = fgsl_sf_gegenpoly_array(1,3.0_fgsl_double,2.0_fgsl_double,ra_arr_3)
+  status = fgsl_sf_gegenpoly_array(3.0_fgsl_double,2.0_fgsl_double,ra_arr_3)
   call unit_assert_equal('fgsl_sf_gegenpoly_array:status',fgsl_success,status)
   call unit_assert_equal_within('fgsl_sf_gegenpoly_1',1.d0,ra_arr_3(1),eps10)
   call unit_assert_equal_within('fgsl_sf_gegenpoly_1',1.2d1,ra_arr_3(2),eps10)
@@ -1245,12 +1245,12 @@ program specfunc
   call unit_assert_equal('fgsl_sf_legendre_pl_e:status',fgsl_success,status)
   call unit_assert_equal_within('fgsl_sf_legendre_pl_e',&
        1.0d0,sfres%val,sfres%err)
-  ra = fgsl_sf_legendre_pl_array(1,1.0d0,ra_arr_3)
+  ra = fgsl_sf_legendre_pl_array(1.0d0,ra_arr_3)
   call unit_assert_equal_within('fgsl_sf_legendre_pl_array',&
        1.0d0,ra_arr_3(1),eps10)
   call unit_assert_equal_within('fgsl_sf_legendre_pl_array',&
        1.0d0,ra_arr_3(2),eps10)
-  ra = fgsl_sf_legendre_pl_deriv_array(1,1.0d0,ra_arr_3,ra_arr_3_der)
+  ra = fgsl_sf_legendre_pl_deriv_array(1.0d0,ra_arr_3,ra_arr_3_der)
   call unit_assert_equal_within('fgsl_sf_legendre_pl_array:0',&
        1.0d0,ra_arr_3(1),eps10)
   call unit_assert_equal_within('fgsl_sf_legendre_pl_array:1',&
@@ -1360,7 +1360,7 @@ program specfunc
   call unit_assert_equal('fgsl_sf_legendre_h3d_e:status',fgsl_success,status)
   call unit_assert_equal_within('fgsl_sf_legendre_h3d_e',&
        0.2650289172078014d0,sfres%val,sfres%err)
-  status = fgsl_sf_legendre_h3d_array(1,1.0d0,2.0d0,ra_arr_3)
+  status = fgsl_sf_legendre_h3d_array(1.0d0,2.0d0,ra_arr_3)
   call unit_assert_equal('fgsl_sf_legendre_h3d_0_e:status',fgsl_success,status)
   call unit_assert_equal_within('fgsl_sf_legendre_h3d_0',&
        0.2507120000699062d0,ra_arr_3(1),eps10)

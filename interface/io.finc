@@ -4,7 +4,7 @@
 !
   function fopen(path, mode) bind(c)
     import :: c_char, c_ptr
-    character(kind=c_char), dimension(*) :: path, mode
+    type(c_ptr), value :: path, mode
     type(c_ptr) :: fopen
   end function fopen
   function fclose(fd) bind(c)

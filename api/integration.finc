@@ -50,19 +50,18 @@
          a, b, epsabs, epsrel, limit, workspace%gsl_integration_workspace, &
          result, abserr)
   end function fgsl_integration_qags
-  function fgsl_integration_qagp(f, pts, npts, epsabs, epsrel, limit, &
+  function fgsl_integration_qagp(f, pts, epsabs, epsrel, limit, &
          workspace, result, abserr)
     type(fgsl_function), intent(in) :: f
-    real(fgsl_double), intent(in) :: pts(:)
-    integer(fgsl_size_t), intent(in) :: npts
+    real(fgsl_double), intent(in), target :: pts(:)
     real(fgsl_double), intent(in) :: epsabs, epsrel
     integer(fgsl_size_t), intent(in) :: limit
     type(fgsl_integration_workspace), intent(inout) :: workspace
     real(fgsl_double), intent(out) :: result, abserr
     integer(fgsl_int) :: fgsl_integration_qagp
     fgsl_integration_qagp = gsl_integration_qagp(f%gsl_function, &
-         pts, npts, epsabs, epsrel, limit, workspace%gsl_integration_workspace, &
-         result, abserr)
+         c_loc(pts), size(pts, dim=1, kind=fgsl_size_t), epsabs, epsrel, &
+         limit, workspace%gsl_integration_workspace, result, abserr)
   end function fgsl_integration_qagp
   function fgsl_integration_qagi(f, epsabs, epsrel, limit, &
          workspace, result, abserr)

@@ -5,11 +5,12 @@ module mod_monte
   real(fgsl_double), parameter :: exact = 1.3932039296856768_fgsl_double
   integer(fgsl_size_t), parameter :: calls = 500000
 contains
-  function g(v, n, params) bind(c)
+  function g(v_c, n, params) bind(c)
     integer(c_size_t), value :: n
-    real(c_double), dimension(*) :: v
-    type(c_ptr), value :: params
+    type(c_ptr), value :: v_c, params
     real(c_double) :: g
+    real(c_double), dimension(:), pointer :: v
+    call c_f_pointer(v_c, v, [n])
     g = 1.0_c_double/(m_pi**3)/ &
          (1.0_fgsl_double - cos(v(1))*cos(v(2))*cos(v(3)))
   end function g
@@ -34,9 +35,9 @@ program monte
 !   C.Itzykson, J.M.Drouffe, "Statistical Field Theory -
 !   Volume 1", Section 1.1, p21, which cites the original
 !   paper M.L.Glasser, I.J.Zucker, Proc.Natl.Acad.Sci.USA 74
-!   1800 (1977) 
+!   1800 (1977)
 
-! For simplicity we compute the integral over the region 
+! For simplicity we compute the integral over the region
 !   (0,0,0) -> (pi,pi,pi) and multiply by 8
   use mod_monte
   implicit none
@@ -73,14 +74,14 @@ program monte
        10000_fgsl_size_t, r, v, res, err)
   call display_results('vegas warm-up',res,err)
   write(6, *) 'converging ...'
-  do 
+  do
      status = fgsl_monte_vegas_integrate(gfun, xl, xu, 3_fgsl_size_t, &
           calls/5_fgsl_size_t, r, v, res, err)
      call fgsl_monte_vegas_getparams(v, y, yy, chisq, yyy, &
        its, stage, mode, verbose, file)
      write(6, '(''result = '',F10.6,'' sigma = '',F10.6, &
           & '' chisq/dof = '',F6.1)') res,err,chisq
-     if (abs(chisq - 1.0_fgsl_double) <= 0.5_fgsl_double) exit 
+     if (abs(chisq - 1.0_fgsl_double) <= 0.5_fgsl_double) exit
   end do
   call display_results('vegas converged',res,err)
   call fgsl_monte_vegas_free(v)

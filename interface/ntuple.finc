@@ -1,17 +1,17 @@
 !-*-f90-*-
 !
 ! Interfaces: Ntuples
-! 
+!
   function gsl_ntuple_create(fname, data, size) bind(c)
     import
-    character(kind=c_char), dimension(*) :: fname
+    type(c_ptr), value :: fname
     type(c_ptr), value :: data
     integer(c_size_t), value :: size
     type(c_ptr) :: gsl_ntuple_create
   end function gsl_ntuple_create
   function gsl_ntuple_open(fname, data, size) bind(c)
     import
-    character(kind=c_char), dimension(*) :: fname
+    type(c_ptr), value :: fname
     type(c_ptr), value :: data
     integer(c_size_t), value :: size
     type(c_ptr) :: gsl_ntuple_open

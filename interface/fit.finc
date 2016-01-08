@@ -5,44 +5,44 @@
   function gsl_fit_linear(x, xstride, y, ystride, n, c0, c1, &
        cov00, cov01, cov11, sumsq) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: x, y
+    type(c_ptr), value :: x, y
     integer(c_size_t), value :: xstride, ystride, n
-    real(c_double), intent(out) :: c0, c1, cov00, cov01, cov11, sumsq
+    real(c_double) :: c0, c1, cov00, cov01, cov11, sumsq
     integer(c_int) :: gsl_fit_linear
   end function gsl_fit_linear
   function gsl_fit_wlinear(x, xstride, w, wstride, y, ystride, n, c0, c1, &
        cov00, cov01, cov11, chisq) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: x, y, w
+    type(c_ptr), value :: x, y, w
     integer(c_size_t), value :: xstride, ystride, wstride, n
-    real(c_double), intent(out) :: c0, c1, cov00, cov01, cov11, chisq
+    real(c_double) :: c0, c1, cov00, cov01, cov11, chisq
     integer(c_int) :: gsl_fit_wlinear
   end function gsl_fit_wlinear
   function gsl_fit_linear_est(x, c0, c1, cov00, cov01, cov11, y, y_err) bind(c)
     import
     real(c_double), value :: x, c0, c1, cov00, cov01, cov11
-    real(c_double), intent(out) ::  y, y_err
+    real(c_double) ::  y, y_err
     integer(c_int) :: gsl_fit_linear_est
   end function gsl_fit_linear_est
   function gsl_fit_mul(x, xstride, y, ystride, n, c1, &
         cov11, sumsq) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: x, y
+    type(c_ptr), value :: x, y
     integer(c_size_t), value :: xstride, ystride, n
-    real(c_double), intent(out) :: c1, cov11, sumsq
+    real(c_double) :: c1, cov11, sumsq
     integer(c_int) :: gsl_fit_mul
   end function gsl_fit_mul
   function gsl_fit_wmul(x, xstride, w, wstride, y, ystride, n, c1, &
         cov11, chisq) bind(c)
     import
-    real(c_double), dimension(*), intent(in) :: x, y, w
+    type(c_ptr), value :: x, y, w
     integer(c_size_t), value :: xstride, ystride, wstride, n
-    real(c_double), intent(out) :: c1, cov11, chisq
+    real(c_double) :: c1, cov11, chisq
     integer(c_int) :: gsl_fit_wmul
   end function gsl_fit_wmul
   function gsl_fit_mul_est(x, c1, cov11, y, y_err) bind(c)
     import
     real(c_double), value :: x, c1, cov11
-    real(c_double), intent(out) ::  y, y_err
+    real(c_double) ::  y, y_err
     integer(c_int) :: gsl_fit_mul_est
   end function gsl_fit_mul_est

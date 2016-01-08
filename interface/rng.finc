@@ -100,8 +100,7 @@
   end subroutine gsl_qrng_init
   function gsl_qrng_get(q, x) bind(c)
     import
-    type(c_ptr), value :: q
-    real(c_double), dimension(*), intent(out) :: x
+    type(c_ptr), value :: q, x
     integer(c_int) :: gsl_qrng_get
   end function gsl_qrng_get
   function gsl_qrng_name(q) bind(c)
@@ -121,7 +120,7 @@
     type(c_ptr) :: gsl_qrng_clone
   end function gsl_qrng_clone
 
-!  
+!
   function fgsl_aux_qrng_assign(i) bind(c)
     import
     integer(c_int), value :: i
@@ -908,29 +907,25 @@
   end function gsl_cdf_gumbel2_qinv
   subroutine gsl_ran_dirichlet(r, k, alpha, theta) bind(c)
     import
-    type(c_ptr), value :: r
+    type(c_ptr), value :: r, alpha, theta
     integer(c_size_t), value :: k
-    real(c_double), dimension(*), intent(in) :: alpha
-    real(c_double), dimension(*), intent(out) :: theta
   end subroutine gsl_ran_dirichlet
   function gsl_ran_dirichlet_pdf(k, alpha, theta) bind(c)
     import
     integer(c_size_t), value :: k
-    real(c_double), dimension(*), intent(in) :: alpha
-    real(c_double), dimension(*), intent(in) :: theta
+    type(c_ptr), value :: alpha, theta
     real(c_double) :: gsl_ran_dirichlet_pdf
   end function gsl_ran_dirichlet_pdf
   function gsl_ran_dirichlet_lnpdf(k, alpha, theta) bind(c)
     import
     integer(c_size_t), value :: k
-    real(c_double), dimension(*), intent(in) :: alpha
-    real(c_double), dimension(*), intent(in) :: theta
+    type(c_ptr), value :: alpha, theta
     real(c_double) :: gsl_ran_dirichlet_lnpdf
   end function gsl_ran_dirichlet_lnpdf
   function gsl_ran_discrete_preproc(k, p) bind(c)
     import
     integer(c_size_t), value :: k
-    real(c_double), dimension(*), intent(in) :: p
+    type(c_ptr), value :: p
     type(c_ptr) :: gsl_ran_discrete_preproc
   end function gsl_ran_discrete_preproc
   function gsl_ran_discrete(r, g) bind(c)
@@ -1011,24 +1006,20 @@
   end function gsl_cdf_binomial_q
   subroutine gsl_ran_multinomial(r, k, nn, p, n) bind(c)
     import
-    type(c_ptr), value :: r
+    type(c_ptr), value :: r, p, n
     integer(c_size_t), value :: k
     integer(c_int), value :: nn
-    real(c_double), dimension(*), intent(in) :: p
-    integer(c_int), dimension(*), intent(out) :: n
   end subroutine gsl_ran_multinomial
   function gsl_ran_multinomial_pdf(k, p, n) bind(c)
     import
     integer(c_size_t), value :: k
-    real(c_double), dimension(*), intent(in) :: p
-    integer(c_int), dimension(*), intent(in) :: n
+    type(c_ptr), value :: p, n
     real(c_double) :: gsl_ran_multinomial_pdf
   end function gsl_ran_multinomial_pdf
   function gsl_ran_multinomial_lnpdf(k, p, n) bind(c)
     import
     integer(c_size_t), value :: k
-    real(c_double), dimension(*), intent(in) :: p
-    integer(c_int), dimension(*), intent(in) :: n
+    type(c_ptr), value :: p, n
     real(c_double) :: gsl_ran_multinomial_lnpdf
   end function gsl_ran_multinomial_lnpdf
   function gsl_ran_negative_binomial(r, p, n) bind(c)

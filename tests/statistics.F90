@@ -195,11 +195,11 @@ program statistics
   call unit_assert_equal('fgsl_stats_minmax_index',0,int(mn))
   call unit_assert_equal('fgsl_stats_minmax_index',int(nsize-1),int(mx))
 !
-  xv = fgsl_stats_median_from_sorted_data(s_array,1_fgsl_size_t)
+  xv = fgsl_stats_median_from_sorted_data(s_array,1_fgsl_size_t,nsize)
   xc = 0.5d0*(s_array(25)+s_array(26))
   call unit_assert_equal_within('fgsl_stats_median_from_sorted_data',&
        xc,xv,eps10)
-  xv = fgsl_stats_quantile_from_sorted_data(s_array,1_fgsl_size_t,0.5d0)
+  xv = fgsl_stats_quantile_from_sorted_data(s_array,1_fgsl_size_t,nsize,0.5d0)
   call unit_assert_equal_within('fgsl_stats_quantile_from_sorted_data',&
        xc,xv,eps10)
 

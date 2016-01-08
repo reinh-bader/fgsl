@@ -4,85 +4,85 @@
 !
      function gsl_poly_eval(c, len, x) bind(c)
        import
-       real(c_double), dimension(*), intent(in) :: c
+       type(c_ptr), value :: c
        integer(c_int), value :: len
        real(c_double), value :: x
        real(c_double) :: gsl_poly_eval
      end function gsl_poly_eval
      function gsl_poly_complex_eval(c, len, z) bind(c)
        import
-       real(c_double), dimension(*), intent(in) :: c
+       type(c_ptr), value :: c
        integer(c_int), value :: len
        type(gsl_complex), value :: z
        type(gsl_complex) :: gsl_poly_complex_eval
      end function gsl_poly_complex_eval
      function gsl_complex_poly_complex_eval(c, len, z) bind(c)
        import
-       type(gsl_complex), dimension(*), intent(in) :: c
+       type(c_ptr), value :: c
        integer(c_int), value :: len
        type(gsl_complex), value :: z
        type(gsl_complex) :: gsl_complex_poly_complex_eval
      end function gsl_complex_poly_complex_eval
      function gsl_poly_eval_derivs(c, lenc, x, res, lenres) bind(c)
-       import :: c_double, c_size_t, c_int
+       import :: c_double, c_size_t, c_int, c_ptr
        integer(c_int) :: gsl_poly_eval_derivs
        integer(c_size_t), value :: lenc, lenres
-       real(c_double), dimension(*), intent(in) :: c
-       real(c_double), dimension(*) :: res
+       type(c_ptr), value :: c
+       type(c_ptr), value :: res
        real(c_double), value :: x
      end function gsl_poly_eval_derivs
      function gsl_poly_dd_init(dd, x, y, size) bind(c)
        import
-       real(c_double), dimension(*), intent(inout) :: dd
-       real(c_double), dimension(*), intent(in) :: x, y
+       type(c_ptr), value :: dd
+       type(c_ptr), value :: x, y
        integer(c_size_t), value :: size
        integer(c_int) :: gsl_poly_dd_init
      end function gsl_poly_dd_init
      function gsl_poly_dd_eval(dd, xa, size, x) bind(c)
        import
-       real(c_double), dimension(*), intent(in) :: dd, xa
+       type(c_ptr), value :: dd, xa
        real(c_double), value :: x
        integer(c_size_t), value :: size
        real(c_double) :: gsl_poly_dd_eval
      end function gsl_poly_dd_eval
      function gsl_poly_dd_taylor(c, xp, dd, x, size, w) bind(c)
        import
-       real(c_double), dimension(*), intent(inout) :: c
+       type(c_ptr), value :: c
        real(c_double), value :: xp
-       real(c_double), dimension(*), intent(in) :: dd, x
-       real(c_double), dimension(*), intent(out) :: w
+       type(c_ptr), value :: dd, x
+       type(c_ptr), value :: w
        integer(c_size_t), value :: size
        integer(c_int) :: gsl_poly_dd_taylor
      end function gsl_poly_dd_taylor
      function gsl_poly_dd_hermite_init(dd, z, xa, ya, dya, size) bind(c)
        import
-       real(c_double), dimension(*), intent(inout) :: dd, z
-       real(c_double), dimension(*), intent(in) :: xa, ya, dya
+       type(c_ptr), value :: dd, z
+       type(c_ptr), value :: xa, ya, dya
        integer(c_size_t), value :: size
        integer(c_int) :: gsl_poly_dd_hermite_init
      end function gsl_poly_dd_hermite_init
      function gsl_poly_solve_quadratic(a, b, c, x0, x1) bind(c)
        import
        real(c_double), value :: a, b, c
-       real(c_double), intent(out) :: x0, x1
+       real(c_double) :: x0, x1
        integer(c_int) :: gsl_poly_solve_quadratic
      end function gsl_poly_solve_quadratic
      function gsl_poly_complex_solve_quadratic(a, b, c, x0, x1) bind(c, name='gsl_poly_complex_solve_quadratic')
        import
        real(c_double), value :: a, b, c
-       type(gsl_complex), intent(out) :: x0, x1
+       type(gsl_complex) :: x0, x1
        integer(c_int) :: gsl_poly_complex_solve_quadratic
      end function gsl_poly_complex_solve_quadratic
      function gsl_poly_solve_cubic(a, b, c, x0, x1, x2) bind(c)
        import
        real(c_double), value :: a, b, c
-       real(c_double), intent(out) :: x0, x1, x2
+       real(c_double) :: x0, x1, x2
        integer(c_int) :: gsl_poly_solve_cubic
      end function gsl_poly_solve_cubic
      function gsl_poly_complex_solve_cubic(a, b, c, x0, x1, x2) bind(c, name='gsl_poly_complex_solve_cubic')
        import
        real(c_double), value :: a, b, c
-       type(gsl_complex), intent(out) :: x0, x1, x2
+       type(gsl_complex) :: x0, x1, x2
        integer(c_int) :: gsl_poly_complex_solve_cubic
      end function gsl_poly_complex_solve_cubic
      function gsl_poly_complex_workspace_alloc(n) bind(c, name='gsl_poly_complex_workspace_alloc')
@@ -96,9 +96,9 @@
      end subroutine gsl_poly_complex_workspace_free
      function gsl_poly_complex_solve(a, n, w, z) bind(c, name='gsl_poly_complex_solve')
        import
-       real(c_double), dimension(*), intent(in) :: a
+       type(c_ptr), value :: a
        integer(c_size_t), value :: n
        type(c_ptr), value :: w
-       real(c_double), dimension(*), intent(out) :: z
+       type(c_ptr), value :: z
        integer(c_int) :: gsl_poly_complex_solve
      end function gsl_poly_complex_solve

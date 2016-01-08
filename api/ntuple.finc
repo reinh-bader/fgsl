@@ -1,56 +1,56 @@
 !-*-f90-*-
 !
 ! API: Ntuples
-! 
+!
 !> \page "Comments on ntuples"
 !> Please go to api/ntuple.finc for the API documentation.
 
- function fgsl_ntuple_create(fname, data, size) 
+ function fgsl_ntuple_create(fname, data, size)
     character(kind=fgsl_char, len=*), intent(in) :: fname
     type(c_ptr), intent(in) :: data
     integer(fgsl_size_t), intent(in) :: size
     type(fgsl_ntuple) :: fgsl_ntuple_create
 !
-    character(kind=fgsl_char,len=fgsl_pathmax) :: lname
+    character(kind=fgsl_char,len=fgsl_pathmax), target :: lname
     if (len(trim(fname)) < fgsl_pathmax) then
        lname = trim(fname) // c_null_char
        fgsl_ntuple_create%gsl_ntuple = &
-            gsl_ntuple_create(lname, data, size)
+            gsl_ntuple_create(c_loc(lname), data, size)
     else
        fgsl_ntuple_create%gsl_ntuple = c_null_ptr
     end if
   end function fgsl_ntuple_create
-  function fgsl_ntuple_open(fname, data, size) 
+  function fgsl_ntuple_open(fname, data, size)
     character(kind=fgsl_char, len=*), intent(in) :: fname
     type(c_ptr), intent(in) :: data
     integer(fgsl_size_t), intent(in) :: size
     type(fgsl_ntuple) :: fgsl_ntuple_open
 !
-    character(kind=fgsl_char,len=fgsl_pathmax) :: lname
+    character(kind=fgsl_char,len=fgsl_pathmax), target :: lname
     if (len(trim(fname)) < fgsl_pathmax) then
        lname = trim(fname) // c_null_char
        fgsl_ntuple_open%gsl_ntuple = &
-            gsl_ntuple_open(lname, data, size)
+            gsl_ntuple_open(c_loc(lname), data, size)
     else
        fgsl_ntuple_open%gsl_ntuple = c_null_ptr
     end if
   end function fgsl_ntuple_open
-  function fgsl_ntuple_write(ntuple) 
+  function fgsl_ntuple_write(ntuple)
     type(fgsl_ntuple), intent(in) :: ntuple
     integer(fgsl_int) :: fgsl_ntuple_write
     fgsl_ntuple_write = gsl_ntuple_write(ntuple%gsl_ntuple)
   end function fgsl_ntuple_write
-  function fgsl_ntuple_bookdata(ntuple) 
+  function fgsl_ntuple_bookdata(ntuple)
     type(fgsl_ntuple), intent(in) :: ntuple
     integer(fgsl_int) :: fgsl_ntuple_bookdata
     fgsl_ntuple_bookdata = gsl_ntuple_write(ntuple%gsl_ntuple)
   end function fgsl_ntuple_bookdata
-  function fgsl_ntuple_read(ntuple) 
+  function fgsl_ntuple_read(ntuple)
     type(fgsl_ntuple), intent(inout) :: ntuple
     integer(fgsl_int) :: fgsl_ntuple_read
     fgsl_ntuple_read = gsl_ntuple_read(ntuple%gsl_ntuple)
   end function fgsl_ntuple_read
-  function fgsl_ntuple_close(ntuple) 
+  function fgsl_ntuple_close(ntuple)
     type(fgsl_ntuple), intent(inout) :: ntuple
     integer(fgsl_int) :: fgsl_ntuple_close
     fgsl_ntuple_close = gsl_ntuple_close(ntuple%gsl_ntuple)
@@ -138,4 +138,3 @@
     if (.not. c_associated(ntuple_select_fn%gsl_ntuple_select_fn)) &
          fgsl_ntuple_select_fn_status = .false.
   end function fgsl_ntuple_select_fn_status
-
