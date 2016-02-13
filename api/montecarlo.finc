@@ -4,16 +4,16 @@
 !
 !> \page "Comments on monte carlo routines"
 !> Please go to api/montecarlo.finc for the API documentation.
-!> Note: in GSL 1.13, accessors were also added to GSL. They're 
-!> slightly different named and have a differing interface from 
+!> Note: in GSL 1.13, accessors were also added to GSL. They're
+!> slightly different named and have a differing interface from
 !> fgsl_monte_*_?etparams routines already existing in FGSL.
 !> To preserve backward compatibility, the FGSL accessors are retained.
 
   function fgsl_monte_function_init(func, dim, params)
     interface
-       function func(x, dim, params) bind(c)
+       function func(xke, dim, params) bind(c)
          use, intrinsic :: iso_c_binding
-         real(c_double), dimension(*) :: x
+         type(c_ptr), value :: xke
          integer(c_size_t), value :: dim
          type(c_ptr), value :: params
          real(c_double) :: func
@@ -32,18 +32,18 @@
     type(fgsl_monte_function), intent(inout) :: func
     call fgsl_monte_function_cfree(func%gsl_monte_function)
   end subroutine fgsl_monte_function_free
-  function fgsl_monte_plain_alloc(dim) 
+  function fgsl_monte_plain_alloc(dim)
     integer(fgsl_size_t), intent(in) :: dim
     type(fgsl_monte_plain_state) :: fgsl_monte_plain_alloc
     fgsl_monte_plain_alloc%gsl_monte_plain_state = &
          gsl_monte_plain_alloc(dim)
   end function fgsl_monte_plain_alloc
-  function fgsl_monte_plain_init(s) 
+  function fgsl_monte_plain_init(s)
     type(fgsl_monte_plain_state), intent(in) :: s
     integer(fgsl_int) :: fgsl_monte_plain_init
     fgsl_monte_plain_init = gsl_monte_plain_init(s%gsl_monte_plain_state)
   end function fgsl_monte_plain_init
-  function fgsl_monte_plain_integrate(f, xl, xu, dim, calls, r, s, result, abserr) 
+  function fgsl_monte_plain_integrate(f, xl, xu, dim, calls, r, s, result, abserr)
     type(fgsl_monte_function), intent(in) :: f
     integer(fgsl_size_t), intent(in) :: dim, calls
     real(fgsl_double), intent(in) :: xl(dim), xu(dim)
@@ -61,15 +61,15 @@
   end subroutine fgsl_monte_plain_free
   function fgsl_monte_miser_alloc(dim)
     integer(fgsl_size_t), value :: dim
-    type(fgsl_monte_miser_state) :: fgsl_monte_miser_alloc 
+    type(fgsl_monte_miser_state) :: fgsl_monte_miser_alloc
     fgsl_monte_miser_alloc%gsl_monte_miser_state = gsl_monte_miser_alloc(dim)
   end function fgsl_monte_miser_alloc
-  function fgsl_monte_miser_init(s) 
+  function fgsl_monte_miser_init(s)
     type(fgsl_monte_miser_state), intent(in) :: s
     integer(fgsl_int) :: fgsl_monte_miser_init
     fgsl_monte_miser_init = gsl_monte_miser_init(s%gsl_monte_miser_state)
   end function fgsl_monte_miser_init
-  function fgsl_monte_miser_integrate(f, xl, xu, dim, calls, r, s, result, abserr) 
+  function fgsl_monte_miser_integrate(f, xl, xu, dim, calls, r, s, result, abserr)
     type(fgsl_monte_function), intent(in) :: f
     integer(fgsl_size_t), intent(in) :: dim, calls
     real(fgsl_double), intent(in) :: xl(dim), xu(dim)
@@ -88,15 +88,15 @@
 !
   function fgsl_monte_vegas_alloc(dim)
     integer(fgsl_size_t), value :: dim
-    type(fgsl_monte_vegas_state) :: fgsl_monte_vegas_alloc 
+    type(fgsl_monte_vegas_state) :: fgsl_monte_vegas_alloc
     fgsl_monte_vegas_alloc%gsl_monte_vegas_state = gsl_monte_vegas_alloc(dim)
   end function fgsl_monte_vegas_alloc
-  function fgsl_monte_vegas_init(s) 
+  function fgsl_monte_vegas_init(s)
     type(fgsl_monte_vegas_state), intent(in) :: s
     integer(fgsl_int) :: fgsl_monte_vegas_init
     fgsl_monte_vegas_init = gsl_monte_vegas_init(s%gsl_monte_vegas_state)
   end function fgsl_monte_vegas_init
-  function fgsl_monte_vegas_integrate(f, xl, xu, dim, calls, r, s, result, abserr) 
+  function fgsl_monte_vegas_integrate(f, xl, xu, dim, calls, r, s, result, abserr)
     type(fgsl_monte_function), intent(in) :: f
     integer(fgsl_size_t), intent(in) :: dim, calls
     real(fgsl_double), intent(in) :: xl(dim), xu(dim)
@@ -112,7 +112,7 @@
     type(fgsl_monte_vegas_state), intent(inout) :: s
     call gsl_monte_vegas_free(s%gsl_monte_vegas_state)
   end subroutine fgsl_monte_vegas_free
-  function fgsl_monte_vegas_chisq(s) 
+  function fgsl_monte_vegas_chisq(s)
     real(fgsl_double) :: fgsl_monte_vegas_chisq
     type(fgsl_monte_vegas_state), intent(in) :: s
     fgsl_monte_vegas_chisq = gsl_monte_vegas_chisq(s%gsl_monte_vegas_state)
@@ -153,7 +153,7 @@
 !
 !> Accessor routine for setting the parameters for the MISER algorithm
   subroutine fgsl_monte_miser_setparams(s, estimate_frac, min_calls, &
-       min_calls_per_bisection, alpha, dither) 
+       min_calls_per_bisection, alpha, dither)
     type(fgsl_monte_miser_state), intent(inout) :: s
     real(fgsl_double), intent(in) :: estimate_frac, alpha, dither
     integer(fgsl_size_t), intent(in) ::  min_calls, min_calls_per_bisection
@@ -162,7 +162,7 @@
   end subroutine fgsl_monte_miser_setparams
 !> Accessor routine for reading out the parameters for the MISER algorithm
   subroutine fgsl_monte_miser_getparams(s, estimate_frac, min_calls, &
-       min_calls_per_bisection, alpha, dither) 
+       min_calls_per_bisection, alpha, dither)
     type(fgsl_monte_miser_state), intent(in) :: s
     real(fgsl_double), intent(out) :: estimate_frac, alpha, dither
     integer(fgsl_size_t), intent(out) ::  min_calls, min_calls_per_bisection
@@ -193,4 +193,3 @@
          sigma, chisq, alpha, iterations, stage, mode, verbose, &
          ostream%gsl_file)
   end subroutine fgsl_monte_vegas_getparams
-  

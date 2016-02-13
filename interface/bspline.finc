@@ -44,21 +44,21 @@ function gsl_bspline_eval_nonzero(x, b, istart, iend, w) bind(c)
   integer(c_size_t) :: istart, iend
   type(c_ptr), value :: b, w
 end function gsl_bspline_eval_nonzero
-function gsl_bspline_deriv_eval(x, nderiv, b, w, dw) bind(c)
+function gsl_bspline_deriv_eval(x, nderiv, db, w) bind(c)
   import :: c_int, c_ptr, c_double, c_size_t
   integer(c_int) :: gsl_bspline_deriv_eval
   integer(c_size_t), value :: nderiv
   real(c_double), value :: x
-  type(c_ptr), value :: b, w, dw
+  type(c_ptr), value :: db, w
 end function gsl_bspline_deriv_eval
-function gsl_bspline_deriv_eval_nonzero(x, nderiv, b, istart, &
-     iend, w, dw) bind(c)
+function gsl_bspline_deriv_eval_nonzero(x, nderiv, db, istart, &
+     iend, w) bind(c)
   import :: c_int, c_ptr, c_double, c_size_t
   integer(c_int) :: gsl_bspline_deriv_eval_nonzero
   real(c_double), value :: x
   integer(c_size_t), value :: nderiv
   integer(c_size_t) :: istart, iend
-  type(c_ptr), value :: b, w, dw
+  type(c_ptr), value :: db, w
 end function gsl_bspline_deriv_eval_nonzero
 function gsl_bspline_ncoeffs(w) bind(c)
   import :: c_size_t, c_ptr
@@ -71,11 +71,9 @@ function gsl_bspline_greville_abscissa(i, w) bind(c)
   integer(c_size_t) :: i
   type(c_ptr), value :: w
 end function gsl_bspline_greville_abscissa
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
 function gsl_bspline_knots_greville(abscissae, w, abserr) bind(c)
   import :: c_ptr, c_double, c_int
   type(c_ptr), value :: abscissae, w
   real(c_double) :: abserr
   integer(c_int) :: gsl_bspline_knots_greville
 end function gsl_bspline_knots_greville
-#endif

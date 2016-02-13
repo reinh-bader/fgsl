@@ -14,25 +14,19 @@
 !> \param params - parameter of arbitrary type
 !> \param jacobian - interface for the jacobian of func
 !> \result ODE system object.
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
   function fgsl_odeiv2_system_init(func, dimension, params, jacobian)
     optional :: jacobian
     interface
        function func(t, y, dydt, params) bind(c)
          use, intrinsic :: iso_c_binding
          real(c_double), value :: t
-         real(c_double), dimension(*), intent(in) :: y
-         real(c_double), dimension(*) :: dydt
-         type(c_ptr), value :: params
+         type(c_ptr), value :: y, dydt, params
          integer(c_int) :: func
        end function func
        function jacobian(t, y, dfdy, dfdt, params) bind(c)
          use, intrinsic :: iso_c_binding
          real(c_double), value :: t
-         real(c_double), dimension(*), intent(in) :: y
-         real(c_double), dimension(*) :: dfdy
-         real(c_double), dimension(*) :: dfdt
-         type(c_ptr), value :: params
+         type(c_ptr), value :: y, dfdy, dfdt, params
          integer(c_int) :: jacobian
        end function jacobian
     end interface
@@ -40,7 +34,7 @@
     type(c_ptr), intent(in), optional :: params
     type(fgsl_odeiv2_system) :: fgsl_odeiv2_system_init
 !
-    type(c_funptr) :: func_loc 
+    type(c_funptr) :: func_loc
     type(c_funptr) :: jacobian_loc
     type(c_ptr) :: params_loc
     func_loc = c_funloc(func)
@@ -56,7 +50,7 @@
     type(fgsl_odeiv2_system), intent(inout) :: system
     call fgsl_odeiv2_system_cfree(system%gsl_odeiv2_system)
   end subroutine fgsl_odeiv2_system_free
-  function fgsl_odeiv2_step_alloc(t, dim) 
+  function fgsl_odeiv2_step_alloc(t, dim)
     type(fgsl_odeiv2_step_type), intent(in) :: t
     integer(fgsl_size_t), intent(in) :: dim
     type(fgsl_odeiv2_step) :: fgsl_odeiv2_step_alloc
@@ -90,22 +84,22 @@
     integer(fgsl_int) :: fgsl_odeiv2_step_order
     fgsl_odeiv2_step_order = gsl_odeiv2_step_order(s%gsl_odeiv2_step)
   end function fgsl_odeiv2_step_order
-  function fgsl_odeiv2_step_set_driver(s,d) 
+  function fgsl_odeiv2_step_set_driver(s,d)
     type(fgsl_odeiv2_step) :: s
     type(fgsl_odeiv2_driver), intent(in) :: d
     integer(c_int) :: fgsl_odeiv2_step_set_driver
     fgsl_odeiv2_step_set_driver = gsl_odeiv2_step_set_driver( &
          s%gsl_odeiv2_step, d%gsl_odeiv2_driver)
   end function fgsl_odeiv2_step_set_driver
-  function fgsl_odeiv2_step_apply(s, t, h, y, yerr, dydt_in, dydt_out, sys)
+  function fgsl_odeiv2_step_apply(s, t, h, y, yerr, dydt_in, dydt_out, dydt)
     type(fgsl_odeiv2_step), intent(in) :: s
     real(fgsl_double), intent(in) :: t, h
-    real(fgsl_double), intent(inout) :: y(:), yerr(:), dydt_out(:)
-    real(fgsl_double), intent(in) :: dydt_in(:)
-    type(fgsl_odeiv2_system), intent(in) :: sys
+    real(fgsl_double), intent(inout), target :: y(:), yerr(:), dydt_out(:)
+    real(fgsl_double), intent(in), target :: dydt_in(:)
+    type(fgsl_odeiv2_system), intent(in) :: dydt
     integer(fgsl_int) :: fgsl_odeiv2_step_apply
-    fgsl_odeiv2_step_apply = gsl_odeiv2_step_apply(s%gsl_odeiv2_step, t, h, y, yerr, &
-         dydt_in, dydt_out, sys%gsl_odeiv2_system)
+    fgsl_odeiv2_step_apply = gsl_odeiv2_step_apply(s%gsl_odeiv2_step, t, h, &
+    c_loc(y), c_loc(yerr), c_loc(dydt_in), c_loc(dydt_out), dydt%gsl_odeiv2_system)
   end function fgsl_odeiv2_step_apply
   function fgsl_odeiv2_control_standard_new(eps_abs, eps_rel, a_y, a_dydt)
     real(fgsl_double), intent(in) :: eps_abs, eps_rel, a_y, a_dydt
@@ -125,17 +119,17 @@
     fgsl_odeiv2_control_yp_new%gsl_odeiv2_control = &
          gsl_odeiv2_control_yp_new(eps_abs, eps_rel)
   end function fgsl_odeiv2_control_yp_new
-  function fgsl_odeiv2_control_scaled_new(eps_abs, eps_rel, a_y, a_dydt, scale_abs, dim)
+  function fgsl_odeiv2_control_scaled_new(eps_abs, eps_rel, a_y, a_dydt, scale_abs)
     real(fgsl_double), intent(in) :: eps_abs, eps_rel, a_y, a_dydt
-    real(fgsl_double), intent(in) :: scale_abs(:)
-    integer(fgsl_size_t), intent(in) :: dim
+    real(fgsl_double), intent(in), target :: scale_abs(:)
     type(fgsl_odeiv2_control) :: fgsl_odeiv2_control_scaled_new
     fgsl_odeiv2_control_scaled_new%gsl_odeiv2_control = &
-         gsl_odeiv2_control_scaled_new(eps_abs, eps_rel, a_y, a_dydt, scale_abs, dim)
+         gsl_odeiv2_control_scaled_new(eps_abs, eps_rel, a_y, a_dydt, &
+         c_loc(scale_abs), size(scale_abs, kind=fgsl_size_t))
   end function fgsl_odeiv2_control_scaled_new
 !> Note: use of fgsl_odeiv2_control_alloc requires an initializer for the t object
 !> written in C
-  function fgsl_odeiv2_control_alloc(t) 
+  function fgsl_odeiv2_control_alloc(t)
     type(fgsl_odeiv2_control_type), intent(in) :: t
     type(fgsl_odeiv2_control) :: fgsl_odeiv2_control_alloc
     fgsl_odeiv2_control_alloc%gsl_odeiv2_control = gsl_odeiv2_control_alloc( &
@@ -159,14 +153,14 @@
     if (.not. c_associated(s%gsl_odeiv2_control)) &
          fgsl_odeiv2_control_status = .false.
   end function fgsl_odeiv2_control_status
-  function fgsl_odeiv2_control_hadjust(c, s, y0, yerr, dydt, h) 
+  function fgsl_odeiv2_control_hadjust(c, s, y, yerr, dydt, h)
     type(fgsl_odeiv2_control), intent(in) :: c
     type(fgsl_odeiv2_step), intent(in) :: s
-    real(fgsl_double), intent(in) :: y0(:), yerr(:), dydt(:)
-    real(fgsl_double), intent(inout) :: h(:)
+    real(fgsl_double), intent(in), target :: y(:), yerr(:), dydt(:)
+    real(fgsl_double), intent(out) :: h
     integer(fgsl_int) :: fgsl_odeiv2_control_hadjust
     fgsl_odeiv2_control_hadjust = gsl_odeiv2_control_hadjust( &
-         c%gsl_odeiv2_control, s%gsl_odeiv2_step, y0, yerr, dydt, h) 
+         c%gsl_odeiv2_control, s%gsl_odeiv2_step, c_loc(y), c_loc(yerr), c_loc(dydt), h)
   end function fgsl_odeiv2_control_hadjust
   function fgsl_odeiv2_control_name (c)
     type(fgsl_odeiv2_control), intent(in) :: c
@@ -176,14 +170,14 @@
     name = gsl_odeiv2_control_name(c%gsl_odeiv2_control)
     fgsl_odeiv2_control_name = fgsl_name(name)
   end function fgsl_odeiv2_control_name
-  function fgsl_odeiv2_control_errlevel(c, y, dydt, h, ind, errlev) 
+  function fgsl_odeiv2_control_errlevel(c, y, dydt, h, ind, errlev)
     type(fgsl_odeiv2_control), value :: c
     real(fgsl_double), intent(in) :: y, dydt, h
     integer(fgsl_size_t), intent(in) :: ind
     real(fgsl_double), intent(inout) :: errlev
     integer(fgsl_int) :: fgsl_odeiv2_control_errlevel
     fgsl_odeiv2_control_errlevel = gsl_odeiv2_control_errlevel(c%gsl_odeiv2_control, &
-         y, dydt, h, ind, errlev) 
+         y, dydt, h, ind, errlev)
   end function fgsl_odeiv2_control_errlevel
   function fgsl_odeiv2_control_set_driver(c, d)
     type(fgsl_odeiv2_control), intent(inout) :: c
@@ -198,28 +192,31 @@
     fgsl_odeiv2_evolve_alloc%gsl_odeiv2_evolve = &
          gsl_odeiv2_evolve_alloc(dim)
   end function fgsl_odeiv2_evolve_alloc
-  function fgsl_odeiv2_evolve_apply(e, con, step, sys, t, t1, h, y) 
+  function fgsl_odeiv2_evolve_apply(e, con, step, dydt, t, t1, h, y)
     type(fgsl_odeiv2_evolve), intent(inout) :: e
     type(fgsl_odeiv2_control), intent(inout) :: con
     type(fgsl_odeiv2_step), intent(inout) :: step
-    type(fgsl_odeiv2_system), intent(in) :: sys
-    real(fgsl_double), intent(inout) :: t, h, y(:)
+    type(fgsl_odeiv2_system), intent(in) :: dydt
+    real(fgsl_double), intent(inout) :: t, h
+    real(fgsl_double), intent(inout), target :: y(:)
     real(fgsl_double), intent(in) :: t1
     integer(fgsl_int) :: fgsl_odeiv2_evolve_apply
     fgsl_odeiv2_evolve_apply = gsl_odeiv2_evolve_apply(e%gsl_odeiv2_evolve, &
-         con%gsl_odeiv2_control, step%gsl_odeiv2_step, sys%gsl_odeiv2_system, &
-         t, t1, h, y)
+         con%gsl_odeiv2_control, step%gsl_odeiv2_step, dydt%gsl_odeiv2_system, &
+         t, t1, h, c_loc(y))
   end function fgsl_odeiv2_evolve_apply
-  function fgsl_odeiv2_evolve_apply_fixed_step(e, con, step, sys, t, h, y) 
+  function fgsl_odeiv2_evolve_apply_fixed_step(e, con, step, dydt, t, h0, y)
     type(fgsl_odeiv2_evolve), intent(inout) :: e
     type(fgsl_odeiv2_control), intent(inout) :: con
     type(fgsl_odeiv2_step), intent(inout) :: step
-    type(fgsl_odeiv2_system), intent(in) :: sys
-    real(fgsl_double), intent(inout) :: t, h, y(:)
+    type(fgsl_odeiv2_system), intent(in) :: dydt
+    real(fgsl_double), intent(inout) :: t
+    real(fgsl_double), intent(in) :: h0
+    real(fgsl_double), intent(inout), target :: y(:)
     integer(fgsl_int) :: fgsl_odeiv2_evolve_apply_fixed_step
     fgsl_odeiv2_evolve_apply_fixed_step = gsl_odeiv2_evolve_apply_fixed_step( &
          e%gsl_odeiv2_evolve, con%gsl_odeiv2_control, step%gsl_odeiv2_step, &
-         sys%gsl_odeiv2_system, t, h, y)
+         dydt%gsl_odeiv2_system, t, h0, c_loc(y))
   end function fgsl_odeiv2_evolve_apply_fixed_step
   function fgsl_odeiv2_evolve_reset(s)
     type(fgsl_odeiv2_evolve), intent(inout) :: s
@@ -258,7 +255,7 @@
     fgsl_odeiv2_evolve_set_driver = gsl_odeiv2_evolve_set_driver( &
          c%gsl_odeiv2_evolve, d%gsl_odeiv2_driver)
   end function fgsl_odeiv2_evolve_set_driver
-  function fgsl_odeiv2_driver_alloc_y_new(sys, t, hstart, epsabs, epsrel) 
+  function fgsl_odeiv2_driver_alloc_y_new(sys, t, hstart, epsabs, epsrel)
     type(fgsl_odeiv2_system), intent(in) :: sys
     type(fgsl_odeiv2_step_type), intent(in) :: t
     real(c_double), intent(in) :: hstart, epsabs, epsrel
@@ -269,7 +266,7 @@
          gsl_odeiv2_driver_alloc_y_new(sys%gsl_odeiv2_system, &
          step_type, hstart, epsabs, epsrel)
   end function fgsl_odeiv2_driver_alloc_y_new
-  function fgsl_odeiv2_driver_alloc_yp_new(sys, t, hstart, epsabs, epsrel) 
+  function fgsl_odeiv2_driver_alloc_yp_new(sys, t, hstart, epsabs, epsrel)
     type(fgsl_odeiv2_system), intent(in) :: sys
     type(fgsl_odeiv2_step_type), intent(in) :: t
     real(c_double), intent(in) :: hstart, epsabs, epsrel
@@ -281,7 +278,7 @@
          step_type, hstart, epsabs, epsrel)
   end function fgsl_odeiv2_driver_alloc_yp_new
   function fgsl_odeiv2_driver_alloc_standard_new(sys, t, hstart, epsabs, epsrel, &
-       a_y, a_dydt) 
+       a_y, a_dydt)
     type(fgsl_odeiv2_system), intent(in) :: sys
     type(fgsl_odeiv2_step_type), intent(in) :: t
     real(c_double), intent(in) :: hstart, epsabs, epsrel, a_y, a_dydt
@@ -293,7 +290,7 @@
          step_type, hstart, epsabs, epsrel, a_y, a_dydt)
   end function fgsl_odeiv2_driver_alloc_standard_new
   function fgsl_odeiv2_driver_alloc_scaled_new(sys, t, hstart, epsabs, epsrel, &
-       a_y, a_dydt, scale_abs) 
+       a_y, a_dydt, scale_abs)
     type(fgsl_odeiv2_system), intent(in) :: sys
     type(fgsl_odeiv2_step_type), intent(in) :: t
     real(c_double), intent(in) :: hstart, epsabs, epsrel, a_y, a_dydt
@@ -326,16 +323,16 @@
     fgsl_odeiv2_driver_set_nmax = gsl_odeiv2_driver_set_nmax( &
          d%gsl_odeiv2_driver, nmax)
   end function fgsl_odeiv2_driver_set_nmax
-  function fgsl_odeiv2_driver_apply(d, t, t1, y) 
+  function fgsl_odeiv2_driver_apply(d, t, t1, y)
     type(fgsl_odeiv2_driver), intent(inout) :: d
     real(fgsl_double), intent(inout) :: t
     real(fgsl_double), intent(in) :: t1
     real(fgsl_double), intent(inout) :: y(:)
     integer(fgsl_int) :: fgsl_odeiv2_driver_apply
     fgsl_odeiv2_driver_apply = gsl_odeiv2_driver_apply( &
-         d%gsl_odeiv2_driver, t, t1, y) 
+         d%gsl_odeiv2_driver, t, t1, y)
   end function fgsl_odeiv2_driver_apply
-  function fgsl_odeiv2_driver_apply_fixed_step(d, t, h, n, y) 
+  function fgsl_odeiv2_driver_apply_fixed_step(d, t, h, n, y)
     type(fgsl_odeiv2_driver), intent(inout) :: d
     real(fgsl_double), intent(inout) :: t
     real(fgsl_double), intent(in) :: h
@@ -343,7 +340,7 @@
     real(fgsl_double), intent(inout) :: y(:)
     integer(fgsl_int) :: fgsl_odeiv2_driver_apply_fixed_step
     fgsl_odeiv2_driver_apply_fixed_step = gsl_odeiv2_driver_apply_fixed_step( &
-         d%gsl_odeiv2_driver, t, h, n, y) 
+         d%gsl_odeiv2_driver, t, h, n, y)
   end function fgsl_odeiv2_driver_apply_fixed_step
   function fgsl_odeiv2_driver_reset(d)
     type(fgsl_odeiv2_driver), intent(inout) :: d
@@ -361,8 +358,6 @@
     if (.not. c_associated(s%gsl_odeiv2_driver)) &
          fgsl_odeiv2_driver_status = .false.
   end function fgsl_odeiv2_driver_status
-#endif
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
   function fgsl_odeiv2_driver_reset_hstart(d, hstart)
     type(fgsl_odeiv2_driver), intent(inout) :: d
     real(fgsl_double), intent(in) :: hstart
@@ -370,7 +365,6 @@
     fgsl_odeiv2_driver_reset_hstart = gsl_odeiv2_driver_reset_hstart(&
     d%gsl_odeiv2_driver, hstart)
   end function fgsl_odeiv2_driver_reset_hstart
-#endif
 !
 ! obsolescent legacy interface
 !
@@ -387,18 +381,13 @@
        function func(t, y, dydt, params) bind(c)
          use, intrinsic :: iso_c_binding
          real(c_double), value :: t
-         real(c_double), dimension(*), intent(in) :: y
-         real(c_double), dimension(*) :: dydt
-         type(c_ptr), value :: params
+         type(c_ptr), value :: y, dydt, params
          integer(c_int) :: func
        end function func
        function jacobian(t, y, dfdy, dfdt, params) bind(c)
          use, intrinsic :: iso_c_binding
          real(c_double), value :: t
-         real(c_double), dimension(*), intent(in) :: y
-         real(c_double), dimension(*) :: dfdy
-         real(c_double), dimension(*) :: dfdt
-         type(c_ptr), value :: params
+         type(c_ptr), value :: y, dfdy, dfdt, params
          integer(c_int) :: jacobian
        end function jacobian
     end interface
@@ -406,7 +395,7 @@
     type(c_ptr), intent(in), optional :: params
     type(fgsl_odeiv_system) :: fgsl_odeiv_system_init
 !
-    type(c_funptr) :: func_loc 
+    type(c_funptr) :: func_loc
     type(c_funptr) :: jacobian_loc
     type(c_ptr) :: params_loc
 ! debug
@@ -430,7 +419,7 @@
     type(fgsl_odeiv_system), intent(inout) :: system
     call fgsl_odeiv_system_cfree(system%gsl_odeiv_system)
   end subroutine fgsl_odeiv_system_free
-  function fgsl_odeiv_step_alloc(t, dim) 
+  function fgsl_odeiv_step_alloc(t, dim)
     type(fgsl_odeiv_step_type), intent(in) :: t
     integer(fgsl_size_t), intent(in) :: dim
     type(fgsl_odeiv_step) :: fgsl_odeiv_step_alloc
@@ -468,11 +457,12 @@
   function fgsl_odeiv_step_apply(s, t, h, y, yerr, dydt_in, dydt_out, dydt)
     type(fgsl_odeiv_step), intent(in) :: s
     real(fgsl_double), intent(in) :: t, h
-    real(fgsl_double), intent(inout) :: y(:), yerr(:), dydt_in(:), dydt_out(:)
+    real(fgsl_double), intent(inout), target :: y(:), yerr(:), dydt_in(:), dydt_out(:)
     type(fgsl_odeiv_system), intent(in) :: dydt
     integer(fgsl_int) :: fgsl_odeiv_step_apply
-    fgsl_odeiv_step_apply = gsl_odeiv_step_apply(s%gsl_odeiv_step, t, h, y, yerr, &
-         dydt_in, dydt_out, dydt%gsl_odeiv_system)
+    fgsl_odeiv_step_apply = gsl_odeiv_step_apply(s%gsl_odeiv_step, t, h, &
+    c_loc(y), c_loc(yerr), &
+    c_loc(dydt_in), c_loc(dydt_out), dydt%gsl_odeiv_system)
   end function fgsl_odeiv_step_apply
   function fgsl_odeiv_control_standard_new(eps_abs, eps_rel, a_y, a_dydt)
     real(fgsl_double), intent(in) :: eps_abs, eps_rel, a_y, a_dydt
@@ -492,17 +482,17 @@
     fgsl_odeiv_control_yp_new%gsl_odeiv_control = &
          gsl_odeiv_control_yp_new(eps_abs, eps_rel)
   end function fgsl_odeiv_control_yp_new
-  function fgsl_odeiv_control_scaled_new(eps_abs, eps_rel, a_y, a_dydt, scale_abs, dim)
+  function fgsl_odeiv_control_scaled_new(eps_abs, eps_rel, a_y, a_dydt, scale_abs)
     real(fgsl_double), intent(in) :: eps_abs, eps_rel, a_y, a_dydt
-    real(fgsl_double), intent(in) :: scale_abs(:)
-    integer(fgsl_size_t), intent(in) :: dim
+    real(fgsl_double), intent(in), target :: scale_abs(:)
     type(fgsl_odeiv_control) :: fgsl_odeiv_control_scaled_new
     fgsl_odeiv_control_scaled_new%gsl_odeiv_control = &
-         gsl_odeiv_control_scaled_new(eps_abs, eps_rel, a_y, a_dydt, scale_abs, dim)
+         gsl_odeiv_control_scaled_new(eps_abs, eps_rel, a_y, a_dydt, &
+         c_loc(scale_abs), size(scale_abs, kind=fgsl_size_t))
   end function fgsl_odeiv_control_scaled_new
-!> Note: Use of fgsl_odeiv_control_alloc requires an initializer for the t object 
+!> Note: Use of fgsl_odeiv_control_alloc requires an initializer for the t object
 !> written in C
-  function fgsl_odeiv_control_alloc(t) 
+  function fgsl_odeiv_control_alloc(t)
     type(fgsl_odeiv_control_type), intent(in) :: t
     type(fgsl_odeiv_control) :: fgsl_odeiv_control_alloc
     fgsl_odeiv_control_alloc%gsl_odeiv_control = gsl_odeiv_control_alloc( &
@@ -519,14 +509,14 @@
     type(fgsl_odeiv_control), intent(inout) :: c
     call gsl_odeiv_control_free(c%gsl_odeiv_control)
   end subroutine fgsl_odeiv_control_free
-  function fgsl_odeiv_control_hadjust(c, s, y0, yerr, dydt, h) 
+  function fgsl_odeiv_control_hadjust(c, s, y0, yerr, dydt, h)
     type(fgsl_odeiv_control), intent(in) :: c
     type(fgsl_odeiv_step), intent(in) :: s
-    real(fgsl_double), intent(in) :: y0(:), yerr(:), dydt(:)
-    real(fgsl_double), intent(inout) :: h(:)
+    real(fgsl_double), intent(in), target :: y0(:), yerr(:), dydt(:)
+    real(fgsl_double), intent(inout), target :: h(:)
     integer(fgsl_int) :: fgsl_odeiv_control_hadjust
     fgsl_odeiv_control_hadjust = gsl_odeiv_control_hadjust(c%gsl_odeiv_control, s%gsl_odeiv_step, &
-         y0, yerr, dydt, h) 
+         c_loc(y0), c_loc(yerr), c_loc(dydt), c_loc(h))
   end function fgsl_odeiv_control_hadjust
   function fgsl_odeiv_control_name (c)
     type(fgsl_odeiv_control), intent(in) :: c
@@ -542,18 +532,19 @@
     fgsl_odeiv_evolve_alloc%gsl_odeiv_evolve = &
          gsl_odeiv_evolve_alloc(dim)
   end function fgsl_odeiv_evolve_alloc
-  function fgsl_odeiv_evolve_apply(e, con, step, dydt, t, t1, h, y) 
+  function fgsl_odeiv_evolve_apply(e, con, step, dydt, t, t1, h, y)
     type(fgsl_odeiv_evolve), intent(inout) :: e
     type(fgsl_odeiv_control), intent(inout) :: con
     type(fgsl_odeiv_step), intent(inout) :: step
     type(fgsl_odeiv_system), intent(in) :: dydt
-    real(fgsl_double), intent(inout) :: t, h, y(:)
+    real(fgsl_double), intent(inout) :: t, h
+    real(fgsl_double), dimension(:), intent(inout), target :: y
     real(fgsl_double), intent(in) :: t1
     integer(fgsl_int) :: fgsl_odeiv_evolve_apply
 !    write(6, *) 'Start evolving'
     fgsl_odeiv_evolve_apply = gsl_odeiv_evolve_apply(e%gsl_odeiv_evolve, &
          con%gsl_odeiv_control, step%gsl_odeiv_step, dydt%gsl_odeiv_system, &
-         t, t1, h, y)
+         t, t1, h, c_loc(y))
   end function fgsl_odeiv_evolve_apply
   function fgsl_odeiv_evolve_reset(s)
     type(fgsl_odeiv_evolve), intent(inout) :: s

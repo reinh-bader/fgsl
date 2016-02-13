@@ -1,11 +1,11 @@
 !-*-f90-*-
 !
-!  Interfaces: Interpolation 
+!  Interfaces: Interpolation
 !
      function gsl_interp_eval(interp, xa, ya, x, acc) bind(c)
        import
        type(c_ptr), value :: interp
-       real(c_double), dimension(*), intent(in) :: xa, ya
+       type(c_ptr), value :: xa, ya
        real(c_double), value :: x
        type(c_ptr), value :: acc
        real(c_double) :: gsl_interp_eval
@@ -13,16 +13,16 @@
      function gsl_interp_eval_e(interp, xa, ya, x, acc, y) bind(c)
        import
        type(c_ptr), value :: interp
-       real(c_double), dimension(*), intent(in) :: xa, ya
+       type(c_ptr), value :: xa, ya
        real(c_double), value :: x
-       real(c_double), intent(out) :: y
+       real(c_double) :: y
        type(c_ptr), value :: acc
        integer(c_int) :: gsl_interp_eval_e
      end function gsl_interp_eval_e
      function gsl_interp_eval_integ(interp, xa, ya, a, b, acc) bind(c)
        import
        type(c_ptr), value :: interp
-       real(c_double), dimension(*), intent(in) :: xa, ya
+       type(c_ptr), value :: xa, ya
        real(c_double), value :: a, b
        type(c_ptr), value :: acc
        real(c_double) :: gsl_interp_eval_integ
@@ -30,7 +30,7 @@
      function gsl_interp_eval_integ_e(interp, xa, ya, a, b, acc, result) bind(c)
        import
        type(c_ptr), value :: interp
-       real(c_double), dimension(*), intent(in) :: xa, ya
+       type(c_ptr), value :: xa, ya
        real(c_double), value :: a, b
        real(c_double), intent(out) :: result
        type(c_ptr), value :: acc
@@ -39,7 +39,7 @@
      function gsl_interp_eval_deriv(interp, xa, ya, x, acc) bind(c)
        import
        type(c_ptr), value :: interp
-       real(c_double), dimension(*), intent(in) :: xa, ya
+       type(c_ptr), value :: xa, ya
        real(c_double), value :: x
        type(c_ptr), value :: acc
        real(c_double) :: gsl_interp_eval_deriv
@@ -47,7 +47,7 @@
      function gsl_interp_eval_deriv_e(interp, xa, ya, x, acc, y) bind(c)
        import
        type(c_ptr), value :: interp
-       real(c_double), dimension(*), intent(in) :: xa, ya
+       type(c_ptr), value :: xa, ya
        real(c_double), value :: x
        real(c_double), intent(out) :: y
        type(c_ptr), value :: acc
@@ -56,7 +56,7 @@
      function gsl_interp_eval_deriv2(interp, xa, ya, x, acc) bind(c)
        import
        type(c_ptr), value :: interp
-       real(c_double), dimension(*), intent(in) :: xa, ya
+       type(c_ptr), value :: xa, ya
        real(c_double), value :: x
        type(c_ptr), value :: acc
        real(c_double) :: gsl_interp_eval_deriv2
@@ -64,7 +64,7 @@
      function gsl_interp_eval_deriv2_e(interp, xa, ya, x, acc, y) bind(c)
        import
        type(c_ptr), value :: interp
-       real(c_double), dimension(*), intent(in) :: xa, ya
+       type(c_ptr), value :: xa, ya
        real(c_double), value :: x
        real(c_double), intent(out) :: y
        type(c_ptr), value :: acc
@@ -88,7 +88,7 @@
      function gsl_interp_init(interp, xa, ya, size) bind(c)
        import
        type(c_ptr), value :: interp
-       real(c_double), dimension(*), intent(in) :: xa, ya
+       type(c_ptr), value :: xa, ya
        integer(c_size_t), value :: size
        integer(c_int) gsl_interp_init
      end function gsl_interp_init
@@ -110,16 +110,14 @@
        type(c_ptr), value :: interp
        integer(c_int) :: gsl_interp_min_size
      end function gsl_interp_min_size
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
      function gsl_interp_type_min_size(interp) bind(c)
        import
        type(c_ptr), value :: interp
        integer(c_int) :: gsl_interp_type_min_size
      end function gsl_interp_type_min_size
-#endif
      function gsl_interp_bsearch(xa, x, index_lo, index_hi) bind(c)
        import
-       real(c_double), dimension(*), intent(in) :: xa
+       type(c_ptr), value :: xa
        real(c_double), value :: x
        integer(c_size_t), value :: index_lo, index_hi
        integer(c_size_t) ::  gsl_interp_bsearch
@@ -127,7 +125,7 @@
      function gsl_interp_accel_find(acc, xa, size, x) bind(c)
        import
        type(c_ptr), value :: acc
-       real(c_double), dimension(*), intent(in) :: xa
+       type(c_ptr), value :: xa
        integer(c_size_t), value :: size
        real(c_double), value :: x
        integer(c_size_t) ::  gsl_interp_accel_find
@@ -141,7 +139,7 @@
      function gsl_spline_init(spline, xa, ya, size) bind(c)
        import
        type(c_ptr), value :: spline
-       real(c_double), dimension(*), intent(in) :: xa, ya
+       type(c_ptr), value :: xa, ya
        integer(c_size_t), value :: size
        integer(c_int) gsl_spline_init
      end function gsl_spline_init
@@ -223,3 +221,278 @@
        import :: c_size_t
        integer(c_size_t) :: gsl_aux_sizeof_interp
      end function gsl_aux_sizeof_interp
+     function fgsl_aux_interp2d_alloc(i) bind(c)
+       import :: c_ptr, c_int
+       integer(c_int), value :: i
+       type(c_ptr) :: fgsl_aux_interp2d_alloc
+     end function fgsl_aux_interp2d_alloc
+     function gsl_interp2d_alloc(T, xsize, ysize) bind(c)
+       import :: c_ptr, c_size_t
+       type(c_ptr), value :: T
+       integer(c_size_t), value :: xsize, ysize
+       type(c_ptr) :: gsl_interp2d_alloc
+     end function gsl_interp2d_alloc
+     function gsl_interp2d_name(interp) bind(c)
+       import :: c_ptr
+       type(c_ptr), value :: interp
+       type(c_ptr) :: gsl_interp2d_name
+     end function gsl_interp2d_name
+     function gsl_interp2d_min_size(interp) bind(c)
+       import :: c_ptr, c_size_t
+       type(c_ptr), value :: interp
+       integer(c_size_t) :: gsl_interp2d_min_size
+     end function gsl_interp2d_min_size
+     function gsl_interp2d_type_min_size(T) bind(c)
+       import :: c_ptr, c_size_t
+       type(c_ptr), value :: T
+       integer(c_size_t) :: gsl_interp2d_type_min_size
+     end function gsl_interp2d_type_min_size
+     function gsl_interp2d_init(interp, xa, ya, za, xsize, ysize) bind(c)
+       import :: c_int, c_ptr, c_size_t, c_double
+       type(c_ptr), value :: interp
+       type(c_ptr), value :: xa, ya, za
+       integer(c_size_t), value :: xsize, ysize
+       integer(c_int) :: gsl_interp2d_init
+     end function gsl_interp2d_init
+     subroutine gsl_interp2d_free(interp) bind(c)
+       import :: c_ptr
+       type(c_ptr), value :: interp
+     end subroutine gsl_interp2d_free
+     function gsl_interp2d_eval(interp, xarr, yarr, zarr, x, y, xa, ya) bind(c)
+       import :: c_ptr, c_double
+       type(c_ptr), value :: interp
+       type(c_ptr), value :: xarr, yarr, zarr
+       real(c_double), value :: x, y
+       type(c_ptr), value :: xa, ya
+       real(c_double) :: gsl_interp2d_eval
+     end function gsl_interp2d_eval
+     function gsl_interp2d_eval_extrap(interp, xarr, yarr, zarr, x, y, xa, ya) bind(c)
+       import :: c_ptr, c_double
+       type(c_ptr), value :: interp
+       type(c_ptr), value :: xarr, yarr, zarr
+       real(c_double), value :: x, y
+       type(c_ptr), value :: xa, ya
+       real(c_double) :: gsl_interp2d_eval_extrap
+     end function gsl_interp2d_eval_extrap
+     function gsl_interp2d_eval_e(interp, xarr, yarr, zarr, x, y, xa, ya, z) bind(c)
+       import :: c_ptr, c_double, c_int
+       type(c_ptr), value :: interp
+       type(c_ptr), value :: xarr, yarr, zarr
+       real(c_double), value :: x, y
+       type(c_ptr), value :: xa, ya
+       real(c_double) :: z
+       integer(c_int) :: gsl_interp2d_eval_e
+     end function gsl_interp2d_eval_e
+     function gsl_interp2d_eval_e_extrap(interp, xarr, yarr, zarr, x, y, xa, ya, z) bind(c)
+       import :: c_ptr, c_double, c_int
+       type(c_ptr), value :: interp
+       type(c_ptr), value :: xarr, yarr, zarr
+       real(c_double), value :: x, y
+       type(c_ptr), value :: xa, ya
+       real(c_double) :: z
+       integer(c_int) :: gsl_interp2d_eval_e_extrap
+     end function gsl_interp2d_eval_e_extrap
+     function gsl_interp2d_eval_deriv_x(interp, xarr, yarr, zarr, x, y, xa, ya) bind(c)
+       import :: c_ptr, c_double
+       type(c_ptr), value :: interp
+       type(c_ptr), value :: xarr, yarr, zarr
+       real(c_double), value :: x, y
+       type(c_ptr), value :: xa, ya
+       real(c_double) :: gsl_interp2d_eval_deriv_x
+     end function gsl_interp2d_eval_deriv_x
+     function gsl_interp2d_eval_deriv_x_e(interp, xarr, yarr, zarr, x, y, xa, ya, z) bind(c)
+       import :: c_ptr, c_double, c_int
+       type(c_ptr), value :: interp
+       type(c_ptr), value :: xarr, yarr, zarr
+       real(c_double), value :: x, y
+       type(c_ptr), value :: xa, ya
+       real(c_double) :: z
+       integer(c_int) :: gsl_interp2d_eval_deriv_x_e
+     end function gsl_interp2d_eval_deriv_x_e
+     function gsl_interp2d_eval_deriv_y(interp, xarr, yarr, zarr, x, y, xa, ya) bind(c)
+       import :: c_ptr, c_double
+       type(c_ptr), value :: interp
+       type(c_ptr), value :: xarr, yarr, zarr
+       real(c_double), value :: x, y
+       type(c_ptr), value :: xa, ya
+       real(c_double) :: gsl_interp2d_eval_deriv_y
+     end function gsl_interp2d_eval_deriv_y
+     function gsl_interp2d_eval_deriv_y_e(interp, xarr, yarr, zarr, x, y, xa, ya, z) bind(c)
+       import :: c_ptr, c_double, c_int
+       type(c_ptr), value :: interp
+       type(c_ptr), value :: xarr, yarr, zarr
+       real(c_double), value :: x, y
+       type(c_ptr), value :: xa, ya
+       real(c_double) :: z
+       integer(c_int) :: gsl_interp2d_eval_deriv_y_e
+     end function gsl_interp2d_eval_deriv_y_e
+     function gsl_interp2d_eval_deriv_xx(interp, xarr, yarr, zarr, x, y, xa, ya) bind(c)
+       import :: c_ptr, c_double
+       type(c_ptr), value :: interp
+       type(c_ptr), value :: xarr, yarr, zarr
+       real(c_double), value :: x, y
+       type(c_ptr), value :: xa, ya
+       real(c_double) :: gsl_interp2d_eval_deriv_xx
+     end function gsl_interp2d_eval_deriv_xx
+     function gsl_interp2d_eval_deriv_xx_e(interp, xarr, yarr, zarr, x, y, xa, ya, z) bind(c)
+       import :: c_ptr, c_double, c_int
+       type(c_ptr), value :: interp
+       type(c_ptr), value :: xarr, yarr, zarr
+       real(c_double), value :: x, y
+       type(c_ptr), value :: xa, ya
+       real(c_double) :: z
+       integer(c_int) :: gsl_interp2d_eval_deriv_xx_e
+     end function gsl_interp2d_eval_deriv_xx_e
+     function gsl_interp2d_eval_deriv_yy(interp, xarr, yarr, zarr, x, y, xa, ya) bind(c)
+       import :: c_ptr, c_double
+       type(c_ptr), value :: interp
+       type(c_ptr), value :: xarr, yarr, zarr
+       real(c_double), value :: x, y
+       type(c_ptr), value :: xa, ya
+       real(c_double) :: gsl_interp2d_eval_deriv_yy
+     end function gsl_interp2d_eval_deriv_yy
+     function gsl_interp2d_eval_deriv_yy_e(interp, xarr, yarr, zarr, x, y, xa, ya, z) bind(c)
+       import :: c_ptr, c_double, c_int
+       type(c_ptr), value :: interp
+       type(c_ptr), value :: xarr, yarr, zarr
+       real(c_double), value :: x, y
+       type(c_ptr), value :: xa, ya
+       real(c_double) :: z
+       integer(c_int) :: gsl_interp2d_eval_deriv_yy_e
+     end function gsl_interp2d_eval_deriv_yy_e
+     function gsl_interp2d_eval_deriv_xy(interp, xarr, yarr, zarr, x, y, xa, ya) bind(c)
+       import :: c_ptr, c_double
+       type(c_ptr), value :: interp
+       type(c_ptr), value :: xarr, yarr, zarr
+       real(c_double), value :: x, y
+       type(c_ptr), value :: xa, ya
+       real(c_double) :: gsl_interp2d_eval_deriv_xy
+     end function gsl_interp2d_eval_deriv_xy
+     function gsl_interp2d_eval_deriv_xy_e(interp, xarr, yarr, zarr, x, y, xa, ya, z) bind(c)
+       import :: c_ptr, c_double, c_int
+       type(c_ptr), value :: interp
+       type(c_ptr), value :: xarr, yarr, zarr
+       real(c_double), value :: x, y
+       type(c_ptr), value :: xa, ya
+       real(c_double) :: z
+       integer(c_int) :: gsl_interp2d_eval_deriv_xy_e
+     end function gsl_interp2d_eval_deriv_xy_e
+     function gsl_spline2d_alloc(T, xsize, ysize) bind(c)
+       import :: c_ptr, c_size_t
+       type(c_ptr), value :: T
+       integer(c_size_t), value :: xsize, ysize
+       type(c_ptr) :: gsl_spline2d_alloc
+     end function gsl_spline2d_alloc
+     function gsl_spline2d_init(interp, xa, ya, za, xsize, ysize) bind(c)
+       import :: c_ptr, c_double, c_size_t, c_int
+       type(c_ptr), value :: interp
+       type(c_ptr), value :: xa, ya, za
+       integer(c_size_t), value :: xsize, ysize
+       integer(c_int) :: gsl_spline2d_init
+     end function gsl_spline2d_init
+     subroutine gsl_spline2d_free(interp) bind(c)
+       import :: c_ptr
+       type(c_ptr), value :: interp
+     end subroutine gsl_spline2d_free
+     function gsl_spline2d_eval(interp, x, y, xa, ya) bind(c)
+       import :: c_ptr, c_double
+       type(c_ptr), value :: interp, xa, ya
+       real(c_double), value :: x, y
+       real(c_double) :: gsl_spline2d_eval
+     end function gsl_spline2d_eval
+     function gsl_spline2d_eval_e(interp, x, y, xa, ya, z) bind(c)
+       import :: c_ptr, c_double, c_int
+       type(c_ptr), value :: interp, xa, ya
+       real(c_double), value :: x, y
+       real(c_double) :: z
+       integer(c_int) :: gsl_spline2d_eval_e
+     end function gsl_spline2d_eval_e
+     function gsl_spline2d_eval_deriv_x(interp, x, y, xa, ya) bind(c)
+       import :: c_ptr, c_double
+       type(c_ptr), value :: interp, xa, ya
+       real(c_double), value :: x, y
+       real(c_double) :: gsl_spline2d_eval_deriv_x
+     end function gsl_spline2d_eval_deriv_x
+     function gsl_spline2d_eval_deriv_x_e(interp, x, y, xa, ya, z) bind(c)
+       import :: c_ptr, c_double, c_int
+       type(c_ptr), value :: interp, xa, ya
+       real(c_double), value :: x, y
+       real(c_double) :: z
+       integer(c_int) :: gsl_spline2d_eval_deriv_x_e
+     end function gsl_spline2d_eval_deriv_x_e
+     function gsl_spline2d_eval_deriv_y(interp, x, y, xa, ya) bind(c)
+       import :: c_ptr, c_double
+       type(c_ptr), value :: interp, xa, ya
+       real(c_double), value :: x, y
+       real(c_double) :: gsl_spline2d_eval_deriv_y
+     end function gsl_spline2d_eval_deriv_y
+     function gsl_spline2d_eval_deriv_y_e(interp, x, y, xa, ya, z) bind(c)
+       import :: c_ptr, c_double, c_int
+       type(c_ptr), value :: interp, xa, ya
+       real(c_double), value :: x, y
+       real(c_double) :: z
+       integer(c_int) :: gsl_spline2d_eval_deriv_y_e
+     end function gsl_spline2d_eval_deriv_y_e
+     function gsl_spline2d_eval_deriv_xx(interp, x, y, xa, ya) bind(c)
+       import :: c_ptr, c_double
+       type(c_ptr), value :: interp, xa, ya
+       real(c_double), value :: x, y
+       real(c_double) :: gsl_spline2d_eval_deriv_xx
+     end function gsl_spline2d_eval_deriv_xx
+     function gsl_spline2d_eval_deriv_xx_e(interp, x, y, xa, ya, z) bind(c)
+       import :: c_ptr, c_double, c_int
+       type(c_ptr), value :: interp, xa, ya
+       real(c_double), value :: x, y
+       real(c_double) :: z
+       integer(c_int) :: gsl_spline2d_eval_deriv_xx_e
+     end function gsl_spline2d_eval_deriv_xx_e
+     function gsl_spline2d_eval_deriv_yy(interp, x, y, xa, ya) bind(c)
+       import :: c_ptr, c_double
+       type(c_ptr), value :: interp, xa, ya
+       real(c_double), value :: x, y
+       real(c_double) :: gsl_spline2d_eval_deriv_yy
+     end function gsl_spline2d_eval_deriv_yy
+     function gsl_spline2d_eval_deriv_yy_e(interp, x, y, xa, ya, z) bind(c)
+       import :: c_ptr, c_double, c_int
+       type(c_ptr), value :: interp, xa, ya
+       real(c_double), value :: x, y
+       real(c_double) :: z
+       integer(c_int) :: gsl_spline2d_eval_deriv_yy_e
+     end function gsl_spline2d_eval_deriv_yy_e
+     function gsl_spline2d_eval_deriv_xy(interp, x, y, xa, ya) bind(c)
+       import :: c_ptr, c_double
+       type(c_ptr), value :: interp, xa, ya
+       real(c_double), value :: x, y
+       real(c_double) :: gsl_spline2d_eval_deriv_xy
+     end function gsl_spline2d_eval_deriv_xy
+     function gsl_spline2d_eval_deriv_xy_e(interp, x, y, xa, ya, z) bind(c)
+       import :: c_ptr, c_double, c_int
+       type(c_ptr), value :: interp, xa, ya
+       real(c_double), value :: x, y
+       real(c_double) :: z
+       integer(c_int) :: gsl_spline2d_eval_deriv_xy_e
+     end function gsl_spline2d_eval_deriv_xy_e
+     function gsl_spline2d_min_size(interp) bind(c)
+       import :: c_ptr, c_size_t
+       type(c_ptr), value :: interp
+       integer(c_size_t) :: gsl_spline2d_min_size
+     end function gsl_spline2d_min_size
+     function gsl_spline2d_name(interp) bind(c)
+       import :: c_ptr
+       type(c_ptr), value :: interp
+       type(c_ptr) :: gsl_spline2d_name
+     end function gsl_spline2d_name
+     function gsl_spline2d_set(interp, zarr, i, j, z) bind(c)
+       import :: c_ptr, c_int, c_size_t, c_double
+       type(c_ptr), value :: interp, zarr
+       integer(c_size_t), value :: i, j
+       real(c_double), value :: z
+       integer(c_int) :: gsl_spline2d_set
+     end function gsl_spline2d_set
+     function gsl_spline2d_get(interp, zarr, i, j) bind(c)
+       import :: c_ptr, c_double, c_size_t
+       type(c_ptr), value :: interp
+       type(c_ptr), value :: zarr
+       integer(c_size_t), value :: i, j
+       real(c_double) :: gsl_spline2d_get
+     end function gsl_spline2d_get

@@ -9,7 +9,7 @@
 !
 ! vectors (real)
 !
-!> Initialize a GSL vector object. This is invoked via the generic 
+!> Initialize a GSL vector object. This is invoked via the generic
 !> fgsl_vector_init.
 !> \param type - determine intrinsic type of vector object
 !> \return new object of type fgsl_vector
@@ -18,13 +18,13 @@
     type(fgsl_vector) :: fgsl_vector_init
     fgsl_vector_init%gsl_vector = fgsl_aux_vector_double_init()
   end function fgsl_vector_init
-!> Wrap a rank 1 Fortran array slice inside a double precision 
-!> real GSL vector object. This is invoked via the generic 
+!> Wrap a rank 1 Fortran array slice inside a double precision
+!> real GSL vector object. This is invoked via the generic
 !> fgsl_vector_align.
-!> \param array - requires the actual argument to have the 
-!>  TARGET attribute. Otherwise being passed by reference is 
+!> \param array - requires the actual argument to have the
+!>  TARGET attribute. Otherwise being passed by reference is
 !>  not guaranteed by the Fortran standard.
-!> \param len - number of elements of the rank 1 array 
+!> \param len - number of elements of the rank 1 array
 !> \param fvec - previously initialized GSL vector object
 !> \param size - number of elements from array wrapped inside fvec
 !> \param offset - index of first element of array to be mapped to fvec
@@ -36,15 +36,15 @@
     type(fgsl_vector), intent(inout) :: fvec
     integer(fgsl_int) :: fgsl_vector_align
 !
-    fgsl_vector_align = fgsl_aux_vector_double_align(array, len, &
+    fgsl_vector_align = fgsl_aux_vector_double_align(c_loc(array), len, &
          fvec%gsl_vector, size, offset, stride)
   end function fgsl_vector_align
 !> Associate a Fortran pointer with the data stored inside a GSL vector object.
-!> This is invoked via the generic fgsl_vector_align. Objects of type 
-!> <CODE>gsl_vector</CODE> which are returned by GSL routines often are 
-!> persistent subobjects of other GSL objects. A Fortran pointer aligned with 
-!> a subobject hence will remain up-to-date throughout the lifetime of the 
-!> object; it may become undefined once the object ceases to exist. 
+!> This is invoked via the generic fgsl_vector_align. Objects of type
+!> <CODE>gsl_vector</CODE> which are returned by GSL routines often are
+!> persistent subobjects of other GSL objects. A Fortran pointer aligned with
+!> a subobject hence will remain up-to-date throughout the lifetime of the
+!> object; it may become undefined once the object ceases to exist.
 !> \param ptr - rank 1 Fortran pointer
 !> \param fvec - double precision real GSL vector
 !> \return Status
@@ -73,7 +73,7 @@
        fgsl_vector_pointer_align = fgsl_success
     end if
   end function fgsl_vector_pointer_align
-!> The assignment operator (see interface/generics.finc) is overloaded to enable 
+!> The assignment operator (see interface/generics.finc) is overloaded to enable
 !> copying of the content of a GSL vector into a Fortran array.
   subroutine fgsl_vector_to_array(result, source)
     real(fgsl_double), intent(inout) :: result(:)
@@ -93,14 +93,14 @@
     end do
   end subroutine fgsl_vector_to_array
 !> Free the resources inside a GSL vector object previously established
-!> by a call to fgsl_vector_init(). This is invoked via the generic 
+!> by a call to fgsl_vector_init(). This is invoked via the generic
 !> fgsl_vector_free.
   subroutine fgsl_vector_free(fvec)
     type(fgsl_vector), intent(inout) :: fvec
 !    call gsl_vector_free(fvec%gsl_vector)
     call fgsl_aux_vector_double_free(fvec%gsl_vector)
   end subroutine fgsl_vector_free
-  subroutine fgsl_vector_c_ptr(res, src) 
+  subroutine fgsl_vector_c_ptr(res, src)
     type(c_ptr), intent(in) :: src
     type(fgsl_vector), intent(out) :: res
     res%gsl_vector = src
@@ -111,7 +111,7 @@
     fgsl_vector_status = .true.
     if (.not. c_associated(vector%gsl_vector)) fgsl_vector_status = .false.
   end function fgsl_vector_status
-!> Inquire the size of a double precision real GSL vector object. 
+!> Inquire the size of a double precision real GSL vector object.
   function fgsl_sizeof_vector(w)
     type(fgsl_vector), intent(in) :: w
     integer(fgsl_size_t) :: fgsl_sizeof_vector
@@ -120,7 +120,7 @@
 !
 ! vectors (complex)
 !
-!> Initialize a complex GSL vector object. This is invoked via the generic 
+!> Initialize a complex GSL vector object. This is invoked via the generic
 !> fgsl_vector_init.
 !> \param type - determine intrinsic type of vector object
 !> \return new object of type fgsl_vector
@@ -129,13 +129,13 @@
     type(fgsl_vector_complex) :: fgsl_vector_complex_init
     fgsl_vector_complex_init%gsl_vector_complex = fgsl_aux_vector_complex_init()
   end function fgsl_vector_complex_init
-!> Wrap a rank 1 Fortran array slice inside a double precision complex 
-!> real GSL vector object. This is invoked via the generic 
+!> Wrap a rank 1 Fortran array slice inside a double precision complex
+!> real GSL vector object. This is invoked via the generic
 !> fgsl_vector_align.
-!> \param array - requires the actual argument to have the 
-!>  TARGET attribute. Otherwise being passed by reference is 
+!> \param array - requires the actual argument to have the
+!>  TARGET attribute. Otherwise being passed by reference is
 !>  not guaranteed by the Fortran standard.
-!> \param len - number of elements of the rank 1 array 
+!> \param len - number of elements of the rank 1 array
 !> \param fvec - previously initialized complex GSL vector object
 !> \param size - number of elements from array wrapped inside fvec
 !> \param offset - index of first element of array to be mapped to fvec
@@ -152,11 +152,11 @@
          fvec%gsl_vector_complex, size, offset, stride)
   end function fgsl_vector_complex_align
 !> Associate a Fortran pointer with the data stored inside a GSL vector object.
-!> This is invoked via the generic fgsl_vector_align. Objects of type 
-!> <CODE>gsl_vector_complex</CODE> which are returned by GSL routines often are 
-!> persistent subobjects of other GSL objects. A Fortran pointer aligned with 
-!> a subobject hence will remain up-to-date throughout the lifetime of the 
-!> object; it may become undefined once the object ceases to exist. 
+!> This is invoked via the generic fgsl_vector_align. Objects of type
+!> <CODE>gsl_vector_complex</CODE> which are returned by GSL routines often are
+!> persistent subobjects of other GSL objects. A Fortran pointer aligned with
+!> a subobject hence will remain up-to-date throughout the lifetime of the
+!> object; it may become undefined once the object ceases to exist.
 !> \param ptr - rank 1 Fortran pointer
 !> \param fvec - double precision complex GSL vector
 !> \return Status
@@ -185,7 +185,7 @@
        fgsl_vector_complex_pointer_align = fgsl_success
     end if
   end function fgsl_vector_complex_pointer_align
-!> The assignment operator (see interface/generics.finc) is overloaded to enable 
+!> The assignment operator (see interface/generics.finc) is overloaded to enable
 !> copying of the content of a complex GSL vector into a Fortran array.
   subroutine fgsl_vector_complex_to_array(result, source)
     complex(fgsl_double_complex), intent(inout) :: result(:)
@@ -209,13 +209,13 @@
     end do
   end subroutine fgsl_vector_complex_to_array
 !> Free the resources inside a complex GSL vector object previously established
-!> by a call to fgsl_vector_complex_init(). This is invoked via the generic 
+!> by a call to fgsl_vector_complex_init(). This is invoked via the generic
 !> fgsl_vector_free.
   subroutine fgsl_vector_complex_free(fvec)
     type(fgsl_vector_complex), intent(inout) :: fvec
     call fgsl_aux_vector_complex_free(fvec%gsl_vector_complex)
   end subroutine fgsl_vector_complex_free
-  subroutine fgsl_vector_complex_c_ptr(res, src) 
+  subroutine fgsl_vector_complex_c_ptr(res, src)
     type(c_ptr), intent(in) :: src
     type(fgsl_vector_complex), intent(out) :: res
     res%gsl_vector_complex = src
@@ -226,7 +226,7 @@
     fgsl_vector_complex_status = .true.
     if (.not. c_associated(vector_complex%gsl_vector_complex)) fgsl_vector_complex_status = .false.
   end function fgsl_vector_complex_status
-!> Inquire the size of a double precision complex GSL vector object. 
+!> Inquire the size of a double precision complex GSL vector object.
   function fgsl_sizeof_vector_complex(w)
     type(fgsl_vector_complex), intent(in) :: w
     integer(fgsl_size_t) :: fgsl_sizeof_vector_complex
@@ -235,7 +235,7 @@
 !
 ! matrices (real)
 !
-!> Initialize a GSL matrix object. This is invoked via the generic 
+!> Initialize a GSL matrix object. This is invoked via the generic
 !> fgsl_matrix_init.
 !> \param type - determine intrinsic type of vector object
 !> \return new object of type fgsl_matrix.
@@ -244,14 +244,14 @@
     type(fgsl_matrix) :: fgsl_matrix_init
     fgsl_matrix_init%gsl_matrix = fgsl_aux_matrix_double_init()
   end function fgsl_matrix_init
-!> Wrap a rank 2 Fortran array inside a double precision 
-!> real GSL matrix object. This is invoked via the generic 
+!> Wrap a rank 2 Fortran array inside a double precision
+!> real GSL matrix object. This is invoked via the generic
 !> fgsl_matrix_align.
-!> \param array - requires the actual argument to have the 
-!>  TARGET attribute. Otherwise being passed by reference is 
+!> \param array - requires the actual argument to have the
+!>  TARGET attribute. Otherwise being passed by reference is
 !>  not guaranteed by the Fortran standard.
-!> \param lda - leading dimension of the rank 2 array 
-!> \param n - number of rows in array 
+!> \param lda - leading dimension of the rank 2 array
+!> \param n - number of rows in array
 !> \param m - number of columns in array
 !> \param fmat - previously initialized double precision GSL matrix object
 !> \return Status
@@ -265,11 +265,11 @@
          n, m, fmat%gsl_matrix)
   end function fgsl_matrix_align
 !> Associate a Fortran pointer with the data stored inside a GSL matrix object.
-!> This is invoked via the generic fgsl_matrix_align. Objects of type 
-!> <CODE>gsl_matrix</CODE> which are returned by GSL routines often are 
-!> persistent subobjects of other GSL objects. A Fortran pointer aligned with 
-!> a subobject hence will remain up-to-date throughout the lifetime of the 
-!> object; it may become undefined once the object ceases to exist. 
+!> This is invoked via the generic fgsl_matrix_align. Objects of type
+!> <CODE>gsl_matrix</CODE> which are returned by GSL routines often are
+!> persistent subobjects of other GSL objects. A Fortran pointer aligned with
+!> a subobject hence will remain up-to-date throughout the lifetime of the
+!> object; it may become undefined once the object ceases to exist.
 !> \param ptr - rank 2 Fortran pointer
 !> \param fmat - double precision real GSL matrix
 !> \return Status
@@ -287,7 +287,7 @@
     ptr => fp_local(1:n,1:m)
     fgsl_matrix_pointer_align = fgsl_success
   end function fgsl_matrix_pointer_align
-!> The assignment operator (see interface/generics.finc) is overloaded to enable 
+!> The assignment operator (see interface/generics.finc) is overloaded to enable
 !> copying of the content of a GSL matrix into a rank 2 Fortran array.
   subroutine fgsl_matrix_to_array(result, source)
     real(fgsl_double), intent(inout) :: result(:,:)
@@ -295,7 +295,7 @@
 !
     integer(fgsl_size_t) :: i, j, kl, m, n, ml, nl, lda
     call fgsl_aux_matrix_double_size(source%gsl_matrix, lda, n, m)
-    
+
     kl = size(result,1)
     nl = min(kl,n)
     kl = size(result,2)
@@ -319,13 +319,13 @@
     end do
   end subroutine fgsl_matrix_to_array
 !> Free the resources inside a GSL matrix object previously established
-!> by a call to fgsl_matrix_init(). This is invoked via the generic 
+!> by a call to fgsl_matrix_init(). This is invoked via the generic
 !> fgsl_matrix_free.
   subroutine fgsl_matrix_free(fvec)
     type(fgsl_matrix), intent(inout) :: fvec
     call fgsl_aux_matrix_double_free(fvec%gsl_matrix)
   end subroutine fgsl_matrix_free
-  subroutine fgsl_matrix_c_ptr(res, src) 
+  subroutine fgsl_matrix_c_ptr(res, src)
     type(c_ptr), intent(in) :: src
     type(fgsl_matrix), intent(out) :: res
     res%gsl_matrix = src
@@ -336,7 +336,7 @@
     fgsl_matrix_status = .true.
     if (.not. c_associated(matrix%gsl_matrix)) fgsl_matrix_status = .false.
   end function fgsl_matrix_status
-!> Inquire the number of elements in a double precision real GSL matrix object. 
+!> Inquire the number of elements in a double precision real GSL matrix object.
   function fgsl_sizeof_matrix(w)
     type(fgsl_matrix), intent(in) :: w
     integer(fgsl_size_t) :: fgsl_sizeof_matrix
@@ -345,7 +345,7 @@
 !
 ! matrices (complex)
 !
-!> Initialize a GSL matrix object. This is invoked via the generic 
+!> Initialize a GSL matrix object. This is invoked via the generic
 !> fgsl_matrix_init.
 !> \param type - determine intrinsic type of vector object
 !> \return new object of type fgsl_matrix.
@@ -354,14 +354,14 @@
     type(fgsl_matrix_complex) :: fgsl_matrix_complex_init
     fgsl_matrix_complex_init%gsl_matrix_complex = fgsl_aux_matrix_complex_init()
   end function fgsl_matrix_complex_init
-!> Wrap a rank 2 Fortran array inside a double precision 
-!> complex GSL matrix object. This is invoked via the generic 
+!> Wrap a rank 2 Fortran array inside a double precision
+!> complex GSL matrix object. This is invoked via the generic
 !> fgsl_matrix_align.
-!> \param array - requires the actual argument to have the 
-!>  TARGET attribute. Otherwise being passed by reference is 
+!> \param array - requires the actual argument to have the
+!>  TARGET attribute. Otherwise being passed by reference is
 !>  not guaranteed by the Fortran standard.
-!> \param lda - leading dimension of the rank 2 array 
-!> \param n - number of rows in array 
+!> \param lda - leading dimension of the rank 2 array
+!> \param n - number of rows in array
 !> \param m - number of columns in array
 !> \param fmat - previously initialized double precision complex GSL matrix object
 !> \return Status
@@ -376,11 +376,11 @@
          n, m, fmat%gsl_matrix_complex)
   end function fgsl_matrix_complex_align
 !> Associate a Fortran pointer with the data stored inside a complex GSL matrix object.
-!> This is invoked via the generic fgsl_matrix_align. Objects of type 
-!> <CODE>gsl_matrix_complex</CODE> which are returned by GSL routines often are 
-!> persistent subobjects of other GSL objects. A Fortran pointer aligned with 
-!> a subobject hence will remain up-to-date throughout the lifetime of the 
-!> object; it may become undefined once the object ceases to exist. 
+!> This is invoked via the generic fgsl_matrix_align. Objects of type
+!> <CODE>gsl_matrix_complex</CODE> which are returned by GSL routines often are
+!> persistent subobjects of other GSL objects. A Fortran pointer aligned with
+!> a subobject hence will remain up-to-date throughout the lifetime of the
+!> object; it may become undefined once the object ceases to exist.
 !> \param ptr - rank 2 Fortran pointer
 !> \param fmat - double precision complex GSL matrix
 !> \return Status
@@ -398,7 +398,7 @@
     ptr => fp_local(1:n,1:m)
     fgsl_matrix_complex_pointer_align = fgsl_success
   end function fgsl_matrix_complex_pointer_align
-!> The assignment operator (see interface/generics.finc) is overloaded to enable 
+!> The assignment operator (see interface/generics.finc) is overloaded to enable
 !> copying of the content of a complex GSL matrix into a rank 2 Fortran array.
   subroutine fgsl_matrix_complex_to_array(result, source)
     complex(fgsl_double_complex), intent(inout) :: result(:,:)
@@ -406,7 +406,7 @@
 !
     integer(fgsl_size_t) :: i, j, kl, m, n, ml, nl, lda
     call fgsl_aux_matrix_complex_size(source%gsl_matrix_complex, lda, n, m)
-    
+
     kl = size(result,1)
     nl = min(kl,n)
     kl = size(result,2)
@@ -430,13 +430,13 @@
     end do
   end subroutine fgsl_matrix_complex_to_array
 !> Free the resources inside a complex GSL matrix object previously established
-!> by a call to fgsl_matrix_complex_init(). This is invoked via the generic 
+!> by a call to fgsl_matrix_complex_init(). This is invoked via the generic
 !> fgsl_matrix_free.
  subroutine fgsl_matrix_complex_free(fvec)
     type(fgsl_matrix_complex), intent(inout) :: fvec
     call fgsl_aux_matrix_complex_free(fvec%gsl_matrix_complex)
   end subroutine fgsl_matrix_complex_free
-  subroutine fgsl_matrix_complex_c_ptr(res, src) 
+  subroutine fgsl_matrix_complex_c_ptr(res, src)
     type(c_ptr), intent(in) :: src
     type(fgsl_matrix_complex), intent(out) :: res
     res%gsl_matrix_complex = src
@@ -447,7 +447,7 @@
     fgsl_matrix_complex_status = .true.
     if (.not. c_associated(matrix_complex%gsl_matrix_complex)) fgsl_matrix_complex_status = .false.
   end function fgsl_matrix_complex_status
-!> Inquire the number of elements in a double precision complex GSL matrix object. 
+!> Inquire the number of elements in a double precision complex GSL matrix object.
   function fgsl_sizeof_matrix_complex(w)
     type(fgsl_matrix_complex), intent(in) :: w
     integer(fgsl_size_t) :: fgsl_sizeof_matrix_complex
@@ -487,4 +487,3 @@
     size1)
     fgsl_matrix_get_tda = tda
   end function fgsl_matrix_get_tda
-

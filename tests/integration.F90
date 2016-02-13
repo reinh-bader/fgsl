@@ -1,9 +1,8 @@
-#include "config.h"
 module mod_integration
   use fgsl
   use mod_unit
   use, intrinsic :: iso_c_binding
-  implicit none  
+  implicit none
   real(fgsl_double), parameter :: eps7 = 1.0d-7
   real(fgsl_double), parameter :: eps10 = 1.0d-10
 !  real(fgsl_double), parameter :: eps12 = 1.0d-12
@@ -85,10 +84,8 @@ program integration
   type(fgsl_integration_workspace) :: integ_wk, integ_wc
   type(fgsl_integration_qaws_table) :: qaws_wk
   type(fgsl_integration_qawo_table) :: qawo_wk
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
   type(fgsl_integration_glfixed_table) :: glfixed_wk
-#endif
-  
+
 !
 ! Test quadrature routines
 !
@@ -115,11 +112,9 @@ program integration
   status = fgsl_integration_qawo_table_set_length(qawo_wk,1.0d0)
   call unit_assert_equal('fgsl_integration_qawo_table_set_length:status',&
        fgsl_success,status)
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
   glfixed_wk = fgsl_integration_glfixed_table_alloc(ifixed)
   call unit_assert_true('fgsl_integration_glfixed_table_alloc',&
        fgsl_well_defined(glfixed_wk),.true.)
-#endif
 !
   xx = sqrt(2.0D0)
   stdfunc = fgsl_function_init(integrate_fun2, ptr)
@@ -149,7 +144,7 @@ program integration
   xx = 1.0D0
   pts(1:3) = (/-1.0d0, 0.0d0, 1.0d0/)
   stdfunc = fgsl_function_init(integrate_fun4, ptr)
-  status = fgsl_integration_qagp(stdfunc, pts, 3_fgsl_size_t, &
+  status = fgsl_integration_qagp(stdfunc, pts, &
        eps10, eps10, limit, integ_wk, ra, rda);
   call unit_assert_equal('fgsl_integration_qagp:status',fgsl_success,status)
   call unit_assert_equal_within('fgsl_integration_qagp',4.0d0,ra,rda)
@@ -220,7 +215,6 @@ program integration
   call fgsl_integration_workspace_free(integ_wc)
   call fgsl_function_free(stdfunc)
 !
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
   xx = sqrt(2.0D0)
   stdfunc = fgsl_function_init(integrate_fun2, ptr)
   ra = fgsl_integration_glfixed(stdfunc, -1.0_fgsl_double, 1.0_fgsl_double, &
@@ -228,13 +222,10 @@ program integration
   call unit_assert_equal_within('fgsl_integration_glfixed',&
        2.0d0*(3+sqrt(2.0d0))/3.0d0,ra,eps7)
   call fgsl_function_free(stdfunc)
-#endif
 !
   call fgsl_integration_qaws_table_free(qaws_wk)
   call fgsl_integration_qawo_table_free(qawo_wk)
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
   call fgsl_integration_glfixed_table_free(glfixed_wk)
-#endif
   call fgsl_integration_workspace_free(integ_wk)
 !
 ! Done

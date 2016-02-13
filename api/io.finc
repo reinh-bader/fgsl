@@ -11,14 +11,13 @@
 !> \return object of type fgsl_file which can be used in other I/O calls.
   function fgsl_open(path, mode)
     character(kind=fgsl_char, len=*), intent(in) :: path, mode
-!    character(kind=fgsl_char), dimension(*), intent(in) :: path, mode
     type(fgsl_file) :: fgsl_open
-    character(kind=fgsl_char,len=fgsl_pathmax) :: lpath
-    character(kind=fgsl_char,len=fgsl_strmax) :: lmode
+    character(kind=fgsl_char,len=fgsl_pathmax), target :: lpath
+    character(kind=fgsl_char,len=fgsl_strmax), target :: lmode
     if (len(trim(path)) < fgsl_pathmax .and. len(trim(mode)) < fgsl_strmax) then
        lpath = trim(path) // c_null_char
        lmode = trim(mode) // c_null_char
-       fgsl_open%gsl_file = fopen(lpath, lmode)
+       fgsl_open%gsl_file = fopen(c_loc(lpath), c_loc(lmode))
     else
        fgsl_open%gsl_file = c_null_ptr
     end if
@@ -50,8 +49,8 @@
     type(fgsl_file) :: fgsl_stderr
     fgsl_stderr%gsl_file = fgsl_cstderr()
   end function fgsl_stderr
-!> fgsl_flush flushes a fgsl_file object 
-  function fgsl_flush(file) 
+!> fgsl_flush flushes a fgsl_file object
+  function fgsl_flush(file)
     type(fgsl_file), intent(in) :: file
     integer(fgsl_int) :: fgsl_flush
     fgsl_flush = fflush(file%gsl_file)
@@ -59,6 +58,6 @@
   function fgsl_file_status(file)
     type(fgsl_file), intent(in) :: file
     logical :: fgsl_file_status
-    fgsl_file_status = .true. 
+    fgsl_file_status = .true.
     if (.not. c_associated(file%gsl_file)) fgsl_file_status = .false.
   end function fgsl_file_status

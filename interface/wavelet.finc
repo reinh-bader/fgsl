@@ -1,7 +1,7 @@
 !-*-f90-*-
 !
 ! Interfaces: wavelet transforms
-! 
+!
   function gsl_wavelet_alloc(t, k) bind(c)
     import
     type(c_ptr), value :: t
@@ -29,7 +29,7 @@
   function gsl_wavelet_transform(w, data, stride, n, dir, work) bind(c)
     import
     type(c_ptr), value :: w
-    real(c_double), dimension(*), intent(inout) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: stride, n
     integer(c_int), value :: dir
     type(c_ptr), value :: work
@@ -38,7 +38,7 @@
   function gsl_wavelet_transform_forward(w, data, stride, n, work) bind(c)
     import
     type(c_ptr), value :: w
-    real(c_double), dimension(*), intent(inout) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: stride, n
     type(c_ptr), value :: work
     integer(c_int) :: gsl_wavelet_transform_forward
@@ -46,7 +46,7 @@
   function gsl_wavelet_transform_inverse(w, data, stride, n, work) bind(c)
     import
     type(c_ptr), value :: w
-    real(c_double), dimension(*), intent(inout) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: stride, n
     type(c_ptr), value :: work
     integer(c_int) :: gsl_wavelet_transform_inverse
@@ -54,7 +54,7 @@
   function gsl_wavelet2d_transform(w, data, tda, size1, size2, dir, work) bind(c)
     import
     type(c_ptr), value :: w
-    real(c_double), dimension(*), intent(inout) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: tda, size1, size2
     integer(c_int), value :: dir
     type(c_ptr), value :: work
@@ -63,7 +63,7 @@
   function gsl_wavelet2d_transform_forward(w, data, tda, size1, size2, work) bind(c)
     import
     type(c_ptr), value :: w
-    real(c_double), dimension(*), intent(inout) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: tda, size1, size2
     type(c_ptr), value :: work
     integer(c_int) :: gsl_wavelet2d_transform_forward
@@ -71,7 +71,7 @@
   function gsl_wavelet2d_transform_inverse(w, data, tda, size1, size2, work) bind(c)
     import
     type(c_ptr), value :: w
-    real(c_double), dimension(*), intent(inout) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: tda, size1, size2
     type(c_ptr), value :: work
     integer(c_int) :: gsl_wavelet2d_transform_inverse
@@ -95,7 +95,7 @@
   function gsl_wavelet2d_nstransform(w, data, tda, size1, size2, dir, work) bind(c)
     import
     type(c_ptr), value :: w
-    real(c_double), dimension(*), intent(inout) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: tda, size1, size2
     integer(c_int), value :: dir
     type(c_ptr), value :: work
@@ -104,7 +104,7 @@
   function gsl_wavelet2d_nstransform_forward(w, data, tda, size1, size2, work) bind(c)
     import
     type(c_ptr), value :: w
-    real(c_double), dimension(*), intent(inout) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: tda, size1, size2
     type(c_ptr), value :: work
     integer(c_int) :: gsl_wavelet2d_nstransform_forward
@@ -112,7 +112,7 @@
   function gsl_wavelet2d_nstransform_inverse(w, data, tda, size1, size2, work) bind(c)
     import
     type(c_ptr), value :: w
-    real(c_double), dimension(*), intent(inout) :: data
+    type(c_ptr), value :: data
     integer(c_size_t), value :: tda, size1, size2
     type(c_ptr), value :: work
     integer(c_int) :: gsl_wavelet2d_nstransform_inverse
@@ -147,4 +147,3 @@
     import :: c_size_t
     integer(c_size_t) :: gsl_aux_sizeof_wavelet
   end function gsl_aux_sizeof_wavelet
-    

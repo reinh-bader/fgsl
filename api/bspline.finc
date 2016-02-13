@@ -15,17 +15,6 @@ subroutine fgsl_bspline_free (w)
   type(fgsl_bspline_workspace), intent(inout) :: w
   call gsl_bspline_free (w%gsl_bspline_workspace)
 end subroutine fgsl_bspline_free
-function fgsl_bspline_deriv_alloc(k)
-  integer(fgsl_size_t), intent(in) :: k
-  type(fgsl_bspline_deriv_workspace) :: fgsl_bspline_deriv_alloc
-!
-  fgsl_bspline_deriv_alloc%gsl_bspline_deriv_workspace =  &
-       gsl_bspline_deriv_alloc(k)
-end function fgsl_bspline_deriv_alloc
-subroutine fgsl_bspline_deriv_free (w)
-  type(fgsl_bspline_deriv_workspace), intent(inout) :: w
-  call gsl_bspline_deriv_free (w%gsl_bspline_deriv_workspace)
-end subroutine fgsl_bspline_deriv_free
 function fgsl_bspline_knots(breakpts, w)
   integer(fgsl_int) :: fgsl_bspline_knots
   type(fgsl_vector), intent(in) :: breakpts
@@ -57,40 +46,36 @@ function fgsl_bspline_eval_nonzero(x, bk, istart, iend, w)
   fgsl_bspline_eval_nonzero = gsl_bspline_eval_nonzero(x, bk%gsl_vector, &
        istart, iend, w%gsl_bspline_workspace)
 end function fgsl_bspline_eval_nonzero
-function fgsl_bspline_deriv_eval(x, nderiv, db, w, dw)
+function fgsl_bspline_deriv_eval(x, nderiv, db, w)
   integer(fgsl_int) :: fgsl_bspline_deriv_eval
   real(fgsl_double), intent(in) :: x
   integer(fgsl_size_t), intent(in) :: nderiv
   type(fgsl_matrix), intent(inout) :: db
   type(fgsl_bspline_workspace), intent(inout) :: w
-  type(fgsl_bspline_deriv_workspace), intent(inout) :: dw
   fgsl_bspline_deriv_eval = gsl_bspline_deriv_eval(x, nderiv, db%gsl_matrix, &
-       w%gsl_bspline_workspace, dw%gsl_bspline_deriv_workspace)
+       w%gsl_bspline_workspace)
 end function fgsl_bspline_deriv_eval
-function fgsl_bspline_deriv_eval_nonzero(x, nderiv, db, istart, iend, w, dw)
+function fgsl_bspline_deriv_eval_nonzero(x, nderiv, db, istart, iend, w)
   integer(fgsl_int) :: fgsl_bspline_deriv_eval_nonzero
   real(fgsl_double), intent(in) :: x
   integer(fgsl_size_t), intent(in) :: nderiv
   type(fgsl_matrix), intent(inout) :: db
   integer(fgsl_size_t), intent(inout) :: istart, iend
   type(fgsl_bspline_workspace), intent(inout) :: w
-  type(fgsl_bspline_deriv_workspace), intent(inout) :: dw
   fgsl_bspline_deriv_eval_nonzero = gsl_bspline_deriv_eval_nonzero(x, nderiv, &
-       db%gsl_matrix, istart, iend, w%gsl_bspline_workspace, &
-       dw%gsl_bspline_deriv_workspace)
+       db%gsl_matrix, istart, iend, w%gsl_bspline_workspace)
 end function fgsl_bspline_deriv_eval_nonzero
 function fgsl_bspline_ncoeffs(w)
   integer(fgsl_size_t) :: fgsl_bspline_ncoeffs
   type(fgsl_bspline_workspace), intent(inout) :: w
   fgsl_bspline_ncoeffs = gsl_bspline_ncoeffs(w%gsl_bspline_workspace)
 end function fgsl_bspline_ncoeffs
-function fgsl_bspline_greville_abscissa(i, w) 
+function fgsl_bspline_greville_abscissa(i, w)
   real(fgsl_double) :: fgsl_bspline_greville_abscissa
   integer(fgsl_size_t) :: i
   type(fgsl_bspline_workspace), intent(in) :: w
   fgsl_bspline_greville_abscissa = gsl_bspline_greville_abscissa(i, w%gsl_bspline_workspace)
 end function fgsl_bspline_greville_abscissa
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
 function fgsl_bspline_knots_greville(abscissae,w,abserr)
   type(fgsl_vector) :: abscissae
   type(fgsl_bspline_workspace) :: w
@@ -99,4 +84,3 @@ function fgsl_bspline_knots_greville(abscissae,w,abserr)
   fgsl_bspline_knots_greville = gsl_bspline_knots_greville(&
   abscissae%gsl_vector, w%gsl_bspline_workspace, abserr)
 end function fgsl_bspline_knots_greville
-#endif

@@ -24,6 +24,11 @@
     type(c_ptr), value :: s, f, x
     integer(c_int) :: gsl_multifit_fdfsolver_set
   end function gsl_multifit_fdfsolver_set
+  function gsl_multifit_fdfsolver_wset(s, f, x, wts) bind(c)
+    import
+    type(c_ptr), value :: s, f, x, wts
+    integer(c_int) :: gsl_multifit_fdfsolver_wset
+  end function gsl_multifit_fdfsolver_wset
   subroutine gsl_multifit_fsolver_free(s) bind(c)
     import :: c_ptr
     type(c_ptr), value :: s
@@ -72,10 +77,10 @@
     type(c_ptr), value :: s
     type(c_ptr) :: gsl_multifit_fdfsolver_f
   end function gsl_multifit_fdfsolver_f
-  function gsl_multifit_fdfsolver_jac(s) bind(c)
-    import :: c_ptr
-    type(c_ptr), value :: s
-    type(c_ptr) :: gsl_multifit_fdfsolver_jac
+  function gsl_multifit_fdfsolver_jac(s, J) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: s, J
+    integer(c_int) :: gsl_multifit_fdfsolver_jac
   end function gsl_multifit_fdfsolver_jac
   function gsl_multifit_test_delta(dx, x, epsabs, epsrel) bind(c)
     import :: c_ptr, c_int, c_double
@@ -100,7 +105,13 @@
     real(c_double), value :: epsrel
     integer(c_int) :: gsl_multifit_covar
   end function gsl_multifit_covar
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
+  function gsl_multifit_covar_qrpt(r, perm, epsrel, cov) &
+    bind(c, name='gsl_multifit_covar_QRPT')
+    import :: c_ptr, c_int, c_double
+    type(c_ptr), value :: r, perm, cov
+    real(c_double), value :: epsrel
+    integer(c_int) :: gsl_multifit_covar_qrpt
+  end function gsl_multifit_covar_qrpt
   function fgsl_aux_multifit_robust_alloc(i) bind(c)
     import :: c_int, c_ptr
     type(c_ptr) :: fgsl_aux_multifit_robust_alloc
@@ -113,23 +124,20 @@
     real(c_double), value :: epsabs, epsrel
     integer(c_int) :: gsl_multifit_fsolver_driver
   end function gsl_multifit_fsolver_driver
-  function gsl_multifit_fdfsolver_driver(s, maxiter, epsabs, epsrel) bind(c)
+  function gsl_multifit_fdfsolver_driver(s, maxiter, xtol, gtol,&
+    ftol, info) bind(c)
     import :: c_ptr, c_size_t, c_double, c_int
     type(c_ptr), value :: s
     integer(c_size_t), value :: maxiter
-    real(c_double), value :: epsabs, epsrel
+    real(c_double), value :: xtol, gtol, ftol
+    integer(c_int) :: info
     integer(c_int) :: gsl_multifit_fdfsolver_driver
   end function gsl_multifit_fdfsolver_driver
-  function gsl_multifit_fdfsolver_dif_df(x, fdf, f, J) bind(c)
+  function gsl_multifit_fdfsolver_dif_df(x, wts, fdf, f, J) bind(c)
     import :: c_ptr, c_int
-    type(c_ptr), value :: x, fdf, f, J
+    type(c_ptr), value :: x, wts, fdf, f, J
     integer(c_int) :: gsl_multifit_fdfsolver_dif_df
   end function gsl_multifit_fdfsolver_dif_df
-  function gsl_multifit_fdfsolver_dif_fdf(x, fdf, f, J) bind(c)
-    import :: c_ptr, c_int
-    type(c_ptr), value :: x, fdf, f, J
-    integer(c_int) :: gsl_multifit_fdfsolver_dif_fdf
-  end function gsl_multifit_fdfsolver_dif_fdf
   function gsl_multifit_robust_alloc(T, n, p) bind(c)
     import :: c_ptr, c_size_t
     type(c_ptr), value :: T
@@ -167,10 +175,9 @@
     real(c_double), intent(out) :: y, y_err
     integer(c_int) :: gsl_multifit_robust_est
   end function gsl_multifit_robust_est
-#endif
 !
   function fgsl_multifit_function_cinit(fp, ndim, p, params) bind(c)
-    import 
+    import
     type(c_funptr), value :: fp
     integer(c_size_t), value :: ndim, p
     type(c_ptr), value :: params
@@ -201,3 +208,282 @@
     integer(c_int), value :: it
     type(c_ptr) :: fgsl_aux_multifit_fdfsolver_alloc
   end function fgsl_aux_multifit_fdfsolver_alloc
+
+  function gsl_multifit_fdfsolver_residual(s) bind(c)
+    import c_ptr
+    type(c_ptr), value :: s
+    type(c_ptr) :: gsl_multifit_fdfsolver_residual
+  end function gsl_multifit_fdfsolver_residual
+  function gsl_multifit_fdfsolver_niter(s) bind(c)
+    import c_ptr, c_size_t
+    type(c_ptr), value :: s
+    integer(c_size_t) :: gsl_multifit_fdfsolver_niter
+  end function gsl_multifit_fdfsolver_niter
+  function gsl_multifit_eval_wf(fdf, x, wts, y) bind(c)
+    import c_ptr, c_int
+    type(c_ptr), value :: fdf, x, wts, y
+    integer(c_int) :: gsl_multifit_eval_wf
+  end function gsl_multifit_eval_wf
+  function gsl_multifit_eval_wdf(fdf, x, wts, dy) bind(c)
+    import c_ptr, c_int
+    type(c_ptr), value :: fdf, x, wts, dy
+    integer(c_int) :: gsl_multifit_eval_wdf
+  end function gsl_multifit_eval_wdf
+  function gsl_multifit_fdfsolver_test(s, xtol, gtol, ftol, info) bind(c)
+    import c_ptr, c_double, c_int
+    type(c_ptr), value :: s
+    real(c_double), value :: xtol, gtol, ftol
+    integer(c_int) :: info
+    integer(c_int) :: gsl_multifit_fdfsolver_test
+  end function gsl_multifit_fdfsolver_test
+
+  function gsl_multifit_linear_alloc(n, p) bind(c)
+    import
+    integer(c_size_t), value :: n, p
+    type(c_ptr) :: gsl_multifit_linear_alloc
+  end function gsl_multifit_linear_alloc
+  subroutine gsl_multifit_linear_free(w) bind(c)
+    import
+    type(c_ptr), value :: w
+  end subroutine gsl_multifit_linear_free
+  function gsl_multifit_linear(x, y, c, cov, chisq, work) bind(c)
+    import :: c_ptr, c_int, c_double
+    type(c_ptr), value :: x, y, c, cov, work
+    real(c_double) :: chisq
+    integer(c_int) :: gsl_multifit_linear
+  end function gsl_multifit_linear
+  function gsl_multifit_linear_svd(x, work) bind(c)
+    import :: c_ptr, c_int, c_double, c_size_t
+    type(c_ptr), value :: x, work
+    integer(c_int) :: gsl_multifit_linear_svd
+  end function gsl_multifit_linear_svd
+  function gsl_multifit_linear_bsvd(x, work) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: x, work
+    integer(c_int) :: gsl_multifit_linear_bsvd
+  end function gsl_multifit_linear_bsvd
+  function gsl_multifit_linear_solve(lambda, x, y, c, rnorm, snorm, work) bind(c)
+    import :: c_double, c_ptr, c_int
+    real(c_double), value :: lambda
+    type(c_ptr), value :: X, y, c, work
+    real(c_double) :: rnorm, snorm
+    integer(c_int) :: gsl_multifit_linear_solve
+  end function gsl_multifit_linear_solve
+  function gsl_multifit_linear_applyw(X, w, y, WX, Wy) &
+    bind(c, name='gsl_multifit_linear_applyW')
+    import :: c_ptr, c_int
+    type(c_ptr), value :: X, w, y, WX, Wy
+    integer(c_int) :: gsl_multifit_linear_applyw
+  end function gsl_multifit_linear_applyw
+  function gsl_multifit_linear_stdform1(L, X, y, Xs, ys, work) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: L, X, y, Xs, ys, work
+    integer(c_int) :: gsl_multifit_linear_stdform1
+  end function gsl_multifit_linear_stdform1
+  function gsl_multifit_linear_wstdform1(L, X, w, y, Xs, ys, work) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: L, X, w, y, Xs, ys, work
+    integer(c_int) :: gsl_multifit_linear_wstdform1
+  end function gsl_multifit_linear_wstdform1
+  function gsl_multifit_linear_l_decomp(L, tau) &
+    bind(c, name='gsl_multifit_linear_L_decomp')
+    import :: c_ptr, c_int
+    type(c_ptr), value :: L, tau
+    integer(c_int) :: gsl_multifit_linear_l_decomp
+  end function gsl_multifit_linear_l_decomp
+  function gsl_multifit_linear_stdform2(LQR, Ltau, X, y, Xs, ys, M, work) bind(c)
+    import :: c_int, c_ptr
+    type(c_ptr), value :: LQR, Ltau, X, y, Xs, ys, M, work
+    integer(c_int) :: gsl_multifit_linear_stdform2
+  end function gsl_multifit_linear_stdform2
+  function gsl_multifit_linear_wstdform2(LQR, Ltau, X, w, y, Xs, ys, M, work) bind(c)
+    import :: c_int, c_ptr
+    type(c_ptr), value :: LQR, Ltau, X, w, y, Xs, ys, M, work
+    integer(c_int) :: gsl_multifit_linear_wstdform2
+  end function gsl_multifit_linear_wstdform2
+  function gsl_multifit_linear_genform1(L, cs, c, work) bind(c)
+    import :: c_int, c_ptr
+    type(c_ptr), value :: L, cs, c, work
+    integer(c_int) :: gsl_multifit_linear_genform1
+  end function gsl_multifit_linear_genform1
+  function gsl_multifit_linear_genform2(LQR, Ltau, X, y, cs, M, c, work) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: LQR, Ltau, X, y, cs, M, c, work
+    integer(c_int) :: gsl_multifit_linear_genform2
+  end function gsl_multifit_linear_genform2
+  function gsl_multifit_linear_wgenform2(LQR, Ltau, X, w, y, cs, M, c, work) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: LQR, Ltau, X, w, y, cs, M, c, work
+    integer(c_int) :: gsl_multifit_linear_wgenform2
+  end function gsl_multifit_linear_wgenform2
+  function gsl_multifit_linear_lreg(smin, smax, reg_param) bind(c)
+    import :: c_double, c_ptr, c_int
+    real(c_double), value :: smin, smax
+    type(c_ptr), value :: reg_param
+    integer(c_int) :: gsl_multifit_linear_lreg
+  end function gsl_multifit_linear_lreg
+  function gsl_multifit_linear_lcurve(y, reg_param, rho, eta, work) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: y, reg_param, rho, eta, work
+    integer(c_int) :: gsl_multifit_linear_lcurve
+  end function gsl_multifit_linear_lcurve
+  function gsl_multifit_linear_lcorner(rho, eta, idx) bind(c)
+    import :: c_int, c_size_t, c_ptr
+    type(c_ptr), value :: rho, eta
+    integer(c_size_t) :: idx
+    integer(c_int) :: gsl_multifit_linear_lcorner
+  end function gsl_multifit_linear_lcorner
+  function gsl_multifit_linear_lcorner2(reg_param, eta, idx) bind(c)
+    import :: c_int, c_size_t, c_ptr
+    type(c_ptr), value :: reg_param, eta
+    integer(c_size_t) :: idx
+    integer(c_int) :: gsl_multifit_linear_lcorner2
+  end function gsl_multifit_linear_lcorner2
+  function gsl_multifit_linear_lk(p, k, L) &
+    bind(c, name='gsl_multifit_linear_Lk')
+    import :: c_size_t, c_int, c_ptr
+    integer(c_size_t), value :: p, k
+    type(c_ptr), value :: L
+    integer(c_int) :: gsl_multifit_linear_lk
+  end function gsl_multifit_linear_lk
+  function gsl_multifit_linear_lsobolev(p, kmax, alpha, L, work) &
+    bind(c, name='gsl_multifit_linear_Lsobolev')
+    import :: c_size_t, c_int, c_ptr
+    integer(c_size_t), value :: p, kmax
+    type(c_ptr), value :: alpha, L, work
+    integer(c_int) :: gsl_multifit_linear_lsobolev
+  end function gsl_multifit_linear_lsobolev
+  function gsl_multifit_linear_rcond(w) bind(c)
+    import :: c_double, c_ptr
+    type(c_ptr), value :: w
+    real(c_double) :: gsl_multifit_linear_rcond
+  end function gsl_multifit_linear_rcond
+  function gsl_multifit_robust_maxiter(maxiter, w) bind(c)
+    import :: c_size_t, c_int, c_ptr
+    integer(c_size_t), value :: maxiter
+    type(c_ptr), value :: w
+    integer(c_int) :: gsl_multifit_robust_maxiter
+  end function gsl_multifit_robust_maxiter
+  function gsl_multifit_robust_weights(r, wts, w) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: r, wts, w
+    integer(c_int) :: gsl_multifit_robust_weights
+  end function gsl_multifit_robust_weights
+  function gsl_multifit_robust_residuals(X, y, c, r, w) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: X, y, c, r, w
+    integer(c_int) :: gsl_multifit_robust_residuals
+  end function gsl_multifit_robust_residuals
+
+
+
+  function gsl_multifit_wlinear(x, w, y, c, cov, chisq, work) bind(c)
+    import :: c_ptr, c_int, c_double
+    type(c_ptr), value :: x, w, y, c, cov, work
+    real(c_double) :: chisq
+    integer(c_int) :: gsl_multifit_wlinear
+  end function gsl_multifit_wlinear
+  function gsl_multifit_wlinear_svd(x, w, y, tol, rank, c, cov, chisq, work) bind(c)
+    import :: c_ptr, c_int, c_double, c_size_t
+    type(c_ptr), value :: x, w, y, c, cov, work
+    real(c_double), value :: tol
+    integer(c_size_t) :: rank
+    real(c_double) :: chisq
+    integer(c_int) :: gsl_multifit_wlinear_svd
+  end function gsl_multifit_wlinear_svd
+  function gsl_multifit_wlinear_usvd(x, w, y, tol, rank, c, cov, chisq, work) bind(c)
+    import :: c_ptr, c_int, c_double, c_size_t
+    type(c_ptr), value :: x, w, y, c, cov, work
+    real(c_double), value :: tol
+    integer(c_size_t) :: rank
+    real(c_double) :: chisq
+    integer(c_int) :: gsl_multifit_wlinear_usvd
+  end function gsl_multifit_wlinear_usvd
+  function gsl_multifit_linear_est(x, c, cov, y, y_err) bind(c)
+    import :: c_ptr, c_double, c_int
+    type(c_ptr), value :: x, c, cov
+    real(c_double) :: y, y_err
+    integer(c_int) :: gsl_multifit_linear_est
+  end function gsl_multifit_linear_est
+  function gsl_multifit_linear_residuals(x, y, c, r) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: x
+    type(c_ptr), value :: y, c
+    type(c_ptr), value :: r
+    integer(c_int) :: gsl_multifit_linear_residuals
+  end function gsl_multifit_linear_residuals
+  function gsl_multifit_fdfridge_alloc(T, n, p) bind(c)
+    import :: c_ptr, c_size_t
+    type(c_ptr), value :: T
+    integer(c_size_t), value :: n, p
+    type(c_ptr) :: gsl_multifit_fdfridge_alloc
+  end function gsl_multifit_fdfridge_alloc
+  subroutine gsl_multifit_fdfridge_free(work) bind(c)
+    import :: c_ptr
+    type(c_ptr), value :: work
+  end subroutine gsl_multifit_fdfridge_free
+  function gsl_multifit_fdfridge_name(w) bind(c)
+    import :: c_ptr
+    type(c_ptr), value :: w
+    type(c_ptr) :: gsl_multifit_fdfridge_name
+  end function gsl_multifit_fdfridge_name
+  function gsl_multifit_fdfridge_position(w) bind(c)
+    import :: c_ptr
+    type(c_ptr), value :: w
+    type(c_ptr) :: gsl_multifit_fdfridge_position
+  end function gsl_multifit_fdfridge_position
+  function gsl_multifit_fdfridge_residual(w) bind(c)
+    import :: c_ptr
+    type(c_ptr), value :: w
+    type(c_ptr) :: gsl_multifit_fdfridge_residual
+  end function gsl_multifit_fdfridge_residual
+  function gsl_multifit_fdfridge_niter(w) bind(c)
+    import :: c_ptr, c_size_t
+    type(c_ptr), value :: w
+    integer(c_size_t) :: gsl_multifit_fdfridge_niter
+  end function gsl_multifit_fdfridge_niter
+  function gsl_multifit_fdfridge_set(w, f, x, lambda) bind(c)
+    import :: c_ptr, c_int, c_double
+    type(c_ptr), value :: w, f, x
+    real(c_double), value :: lambda
+    integer(c_int) :: gsl_multifit_fdfridge_set
+  end function gsl_multifit_fdfridge_set
+  function gsl_multifit_fdfridge_wset(w, f, x, lambda, wts) bind(c)
+    import :: c_ptr, c_int, c_double
+    type(c_ptr), value :: w, f, x, wts
+    real(c_double), value :: lambda
+    integer(c_int) :: gsl_multifit_fdfridge_wset
+  end function gsl_multifit_fdfridge_wset
+  function gsl_multifit_fdfridge_set2(w, f, x, lambda) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: w, f, x, lambda
+    integer(c_int) :: gsl_multifit_fdfridge_set2
+  end function gsl_multifit_fdfridge_set2
+  function gsl_multifit_fdfridge_wset2(w, f, x, lambda, wts) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: w, f, x, wts, lambda
+    integer(c_int) :: gsl_multifit_fdfridge_wset2
+  end function gsl_multifit_fdfridge_wset2
+  function gsl_multifit_fdfridge_set3(w, f, x, L) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: w, f, x, L
+    integer(c_int) :: gsl_multifit_fdfridge_set3
+  end function gsl_multifit_fdfridge_set3
+  function gsl_multifit_fdfridge_wset3(w, f, x, L, wts) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: w, f, x, L, wts
+    integer(c_int) :: gsl_multifit_fdfridge_wset3
+  end function gsl_multifit_fdfridge_wset3
+  function gsl_multifit_fdfridge_iterate(w) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: w
+    integer(c_int) :: gsl_multifit_fdfridge_iterate
+  end function gsl_multifit_fdfridge_iterate
+  function gsl_multifit_fdfridge_driver(w, maxiter, xtol, gtol, ftol, info) bind(c)
+    import :: c_ptr, c_int, c_size_t, c_double
+    type(c_ptr), value :: w
+    integer(c_size_t), value :: maxiter
+    real(c_double), value :: xtol, gtol, ftol
+    integer(c_int) :: info
+    integer(c_int) :: gsl_multifit_fdfridge_driver
+  end function gsl_multifit_fdfridge_driver

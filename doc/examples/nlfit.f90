@@ -2,7 +2,7 @@ module mod_nlfit
   use fgsl
   use, intrinsic :: iso_c_binding
   implicit none
-  type data 
+  type data
      integer(fgsl_size_t) :: n
      real(fgsl_double), allocatable :: y(:), sigma(:)
   end type data
@@ -69,7 +69,7 @@ program nlfit
   implicit none
   real(fgsl_double), parameter :: eps = 1.0E-4_fgsl_double
   integer(fgsl_size_t), parameter :: itmax = 30
-  integer(fgsl_size_t) :: nmax, nrt
+  integer(fgsl_size_t), parameter :: nmax = 40, nrt = 3
   integer(fgsl_int) :: status
   type(fgsl_multifit_function_fdf) :: nlfit_fdf
   type(fgsl_multifit_fdfsolver) :: nlfit_slv
@@ -78,16 +78,15 @@ program nlfit
   type(fgsl_matrix) :: cov, jac
   type(data), target :: fitdata
   type(c_ptr) :: ptr
-  real(fgsl_double), target :: v_params(3), v_cov(3,3)
+  real(fgsl_double), target :: v_params(3), v_cov(3,3), v_jac(nmax,nrt)
   real(fgsl_double), pointer :: v_fun(:), v_parptr(:)
   real(fgsl_double) :: chi, c
   integer :: i
 !
-  nmax = 40
   rng = fgsl_rng_alloc(fgsl_rng_default)
   fitdata%n = nmax
   allocate(fitdata%y(nmax),fitdata%sigma(nmax))
-  write(6, fmt='('' No.       Data value       Sigma'')')       
+  write(6, fmt='('' No.       Data value       Sigma'')')
   do i=1, nmax
      fitdata%y(i) = 1.0_fgsl_double + &
           5.0_fgsl_double * exp(-0.1_fgsl_double*dble(i-1)) + &
@@ -96,7 +95,6 @@ program nlfit
      write(6, fmt='(I3,2X,2(F16.8,1X))') i, fitdata%y(i), fitdata%sigma(i)
   end do
   ptr = c_loc(fitdata)
-  nrt = 3_fgsl_size_t
   nlfit_fdf = fgsl_multifit_function_fdf_init(expb_f, expb_df, &
        expb_fdf, nmax, nrt, ptr)
   nlfit_slv = fgsl_multifit_fdfsolver_alloc(fgsl_multifit_fdfsolver_lmsder, &
@@ -114,7 +112,9 @@ program nlfit
        fgsl_multifit_fdfsolver_position(nlfit_slv))
 ! storage for cov within Fortran
   cov = fgsl_matrix_init(type = 1.0_fgsl_double)
+  jac = fgsl_matrix_init(type = 1.0_fgsl_double)
   status = fgsl_matrix_align(v_cov,nrt,nrt,nrt,cov)
+  status = fgsl_matrix_align(v_jac,nrt,nrt,nmax,jac)
   if (fgsl_well_defined(nlfit_slv)) then
      status = fgsl_multifit_fdfsolver_set(nlfit_slv, nlfit_fdf, params)
      i = 0
@@ -132,11 +132,11 @@ program nlfit
         status = fgsl_multifit_test_delta( &
              fgsl_multifit_fdfsolver_dx(nlfit_slv), &
              fgsl_multifit_fdfsolver_position(nlfit_slv), eps, eps)
-        if (status == fgsl_success) then 
+        if (status == fgsl_success) then
            exit
         end if
      end do
-     jac = fgsl_multifit_fdfsolver_jac(nlfit_slv)
+     status = fgsl_multifit_fdfsolver_jac(nlfit_slv, jac)
      status = fgsl_multifit_covar(jac, 0.0_fgsl_double, cov)
      chi = sqrt(dot_product(v_fun,v_fun))
      c = max(1.0d0, chi/sqrt(dble(nmax-nrt)))
@@ -145,7 +145,7 @@ program nlfit
      write(6, '(''  fit function A exp (-lambda x) + b: '')')
      write(6, '(''  A      = '',1PE15.8,'' +/- '',1PE12.5)') v_parptr(1), &
           c * v_cov(1,1)
-     write(6, '(''  lambda = '',1PE15.8,'' +/- '',1PE12.5)') v_parptr(2), & 
+     write(6, '(''  lambda = '',1PE15.8,'' +/- '',1PE12.5)') v_parptr(2), &
           c * v_cov(2,2)
      write(6, '(''  b      = '',1PE15.8,'' +/- '',1PE12.5)') v_parptr(3), &
           c * v_cov(3,3)

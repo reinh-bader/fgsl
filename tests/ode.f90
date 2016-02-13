@@ -4,34 +4,38 @@ module mod_ode
   use mod_unit
   implicit none
 contains
-  function func_ode(t, y, dydt, params) bind(c)
+  function func_ode(t, y_c, dydt_c, params) bind(c)
     real(c_double), value :: t
-    real(c_double), dimension(*), intent(in) :: y
-    real(c_double), dimension(*) :: dydt
+    type(c_ptr), value :: y_c, dydt_c
+    real(c_double), dimension(:), pointer :: y, dydt
     type(c_ptr), value :: params
     integer(c_int) :: func_ode
-! 
+!
     real(c_double), pointer :: mu
 !
 !    write(6, *) 'Starting func:'
+    call c_f_pointer(y_c, y, [2])
+    call c_f_pointer(dydt_c, dydt, [2])
     call c_f_pointer(params, mu)
 !    write(6, *) 'y, mu:', y(1:2), mu
     dydt(1) = y(2)
     dydt(2) = -y(1) - mu*y(2)*(y(1)*y(1) - 1)
     func_ode = fgsl_success
   end function func_ode
-  function jac(t, y, dfdy, dfdt, params) bind(c)
+  function jac(t, y_c, dfdy_c, dfdt_c, params) bind(c)
     real(c_double), value :: t
-    real(c_double), dimension(*), intent(in) :: y
-    real(c_double), dimension(*) :: dfdy
-    real(c_double), dimension(*) :: dfdt
+    type(c_ptr), value :: y_c, dfdy_c, dfdt_c
+    real(c_double), dimension(:), pointer :: y, dfdy, dfdt
     type(c_ptr), value :: params
     integer(c_int) :: jac
-! 
+!
     real(c_double), pointer :: mu
 !
 !    write(6, *) 'Calling jac'
     call c_f_pointer(params, mu)
+    call c_f_pointer(y_c, y, [2])
+    call c_f_pointer(dfdy_c, dfdy, [4])
+    call c_f_pointer(dfdt_c, dfdt, [2])
     dfdy(1) = 0.0_c_double
     dfdy(2) = 1.0_c_double
     dfdy(3) = -2.0_c_double*mu*y(1)*y(2) - 1.0_c_double
@@ -71,8 +75,8 @@ program ode
 !
   t = 0.0_fgsl_double; t1 = 100.0_fgsl_double
   h = 1.0e-6_fgsl_double; y = (/1.0_c_double, 0.0_c_double /)
-  do while (t < t1) 
-     status = fgsl_odeiv_evolve_apply(ode_evlv, ode_ctrl, ode_step, ode_system, & 
+  do while (t < t1)
+     status = fgsl_odeiv_evolve_apply(ode_evlv, ode_ctrl, ode_step, ode_system, &
           t, t1, h, y)
      if (status /= fgsl_success) exit
 !     write(6,fmt='(3E15.8,1X)') t, y(1), y(2)
@@ -88,5 +92,5 @@ program ode
 !
 ! Done
 !
-  call unit_finalize() 
+  call unit_finalize()
 end program ode

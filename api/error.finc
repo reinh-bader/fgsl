@@ -40,7 +40,7 @@
     fgsl_set_error_handler_off%gsl_error_handler_t = &
          gsl_set_error_handler_off()
   end function fgsl_set_error_handler_off
-  function fgsl_strerror(errno) 
+  function fgsl_strerror(errno)
     integer(fgsl_int), intent(in) :: errno
     character(kind=fgsl_char,len=fgsl_strmax) :: fgsl_strerror
 !
@@ -54,7 +54,13 @@
     character(kind=fgsl_char,len=*), intent(in) :: &
          reason, file
     integer(fgsl_int), intent(in) :: line, errno
-    call gsl_error(reason//c_null_char, file//c_null_char, line, errno)
+    character(kind=fgsl_char,len=fgsl_strmax), target :: reason_null, file_null
+    if (len(trim(reason)) < fgsl_strmax .and. &
+         len(trim(file)) < fgsl_strmax) then
+       reason_null = trim(reason) // c_null_char
+       file_null = trim(file) // c_null_char
+       call gsl_error(c_loc(reason_null), c_loc(file_null), line, errno)
+    end if
   end subroutine fgsl_error
   function fgsl_error_handler_status(error_handler_t)
     type(fgsl_error_handler_t), intent(in) :: error_handler_t

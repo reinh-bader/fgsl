@@ -1,4 +1,3 @@
-#include "config.h"
 program linalg
   use fgsl
   use mod_unit
@@ -38,7 +37,7 @@ program linalg
        3_fgsl_size_t,inv)
   p = fgsl_permutation_alloc(3_fgsl_size_t)
   call unit_assert_equal('fgsl_matrix_align(in):status',fgsl_success,status)
-  status = fgsl_linalg_lu_decomp(a, p, signum) 
+  status = fgsl_linalg_lu_decomp(a, p, signum)
   call unit_assert_equal('fgsl_linalg_lu_decomp:status',fgsl_success,status)
 !  write(6, *) af
   do i=1,3
@@ -117,7 +116,7 @@ program linalg
        0_fgsl_size_t, 1_fgsl_size_t)
   status = fgsl_vector_align(rescf, 3_fgsl_size_t, resc, 3_fgsl_size_t, &
        0_fgsl_size_t, 1_fgsl_size_t)
-  status = fgsl_linalg_complex_lu_decomp(ac, p, signum) 
+  status = fgsl_linalg_complex_lu_decomp(ac, p, signum)
   call unit_assert_equal('fgsl_linalg_complex_lu_decomp:status',fgsl_success,status)
 !  write(6, *) acf
   do i=1,3
@@ -148,7 +147,7 @@ program linalg
        (/(-ui+3*ai)/5.0d0, (2*ui-ai)/5.0d0, (7*ui-ai)/5.0d0 /),xcf,eps10)
   call unit_assert_equal_within('fgsl_linalg_lu_refine:res',&
        (/1.0d-5*ui, 0.0d0*ui, -2.0d-5*ui /),rescf,eps10)
-! FIXME: remaining complex routines 
+! FIXME: remaining complex routines
 
 !
 ! QR
@@ -180,20 +179,20 @@ program linalg
        (/1.0d0/3.0d0, 2.0d0/3.0d0, 5.0d0/3.0d0 /),xf,eps10)
   call unit_assert_equal_within('fgsl_linalg_qr_lssolve:res',&
        (/0.0d0, 0.0d0, 0.0d0 /),resf,eps10)
-  status = fgsl_linalg_qr_unpack (a, tau, q, r) 
+  status = fgsl_linalg_qr_unpack (a, tau, q, r)
   call unit_assert_equal('fgsl_linalg_qr_unpack:status',fgsl_success,status)
   resf = (/ 1.0d0, 2.0d0, 3.0d0 /)
   status = fgsl_linalg_qr_qtvec (a, tau, res)
   call unit_assert_equal('fgsl_linalg_qr_qtvec:status',fgsl_success,status)
   xf = matmul(qf,  (/ 1.0d0, 2.0d0, 3.0d0 /))
   call unit_assert_equal_within('fgsl_linalg_qr_qtvec:res',&
-       xf,resf,eps10)  
+       xf,resf,eps10)
   resf = (/ 1.0d0, 2.0d0, 3.0d0 /)
   status = fgsl_linalg_qr_qvec (a, tau, res)
   call unit_assert_equal('fgsl_linalg_qr_qvec:status',fgsl_success,status)
   xf = matmul(transpose(qf),  (/ 1.0d0, 2.0d0, 3.0d0 /))
   call unit_assert_equal_within('fgsl_linalg_qr_qvec:res',&
-       xf,resf,eps10)  
+       xf,resf,eps10)
   invf = reshape((/ 1.0d0, 0.0d0, 0.0d0, 0.0d0, 1.0d0, 0.0d0, &
        0.0d0, 0.0d0, 1.0d0 /), (/3, 3/))
   status = fgsl_linalg_qr_qtmat (a, tau, inv)
@@ -202,7 +201,7 @@ program linalg
        reshape((/ 1.0d0, 0.0d0, 0.0d0, 0.0d0, 1.0d0, 0.0d0, &
        0.0d0, 0.0d0, 1.0d0 /), (/3, 3/)) )
   call unit_assert_equal_within('fgsl_linalg_qr_qtvec:res',&
-       mf,invf,eps10) 
+       mf,invf,eps10)
   status = fgsl_linalg_qr_rsolve(a, b, x)
   call unit_assert_equal('fgsl_linalg_qr_rsolve:status',fgsl_success,status)
   call unit_assert_equal_within('fgsl_linalg_qr_rsolve:x',&
@@ -290,12 +289,10 @@ program linalg
   call unit_assert_equal_within('fgsl_linalg_sv_solve:x',&
        (/1.0d0/3.0d0, 2.0d0/3.0d0, 5.0d0/3.0d0 /),xf,eps10)
 
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
   af = af_orig
   status = fgsl_linalg_sv_leverage(a, x)
   call unit_assert_equal_within('fgsl_linalg_sv_leverage:x',&
        (/2.0d0, 2.0d0, 5.0d0 /),xf,eps10)
-#endif
   af = af_orig
   status = fgsl_linalg_sv_decomp_mod(a, r, q, tau, res)
   call unit_assert_equal('fgsl_linalg_sv_decomp_mod:status',fgsl_success,status)
@@ -332,8 +329,8 @@ program linalg
        fgsl_success,status)
   call unit_assert_equal_within('fgsl_linalg_sv_svx:x',&
        (/-.25d0, .25d0, 1.5d0 /),xf,eps10)
-! FIXME complex Cholesky 
-  
+! FIXME complex Cholesky
+
 !
 ! cleanup
 !
@@ -352,7 +349,7 @@ program linalg
   call fgsl_vector_free(res)
   call fgsl_vector_free(resc)
   call fgsl_vector_free(tau)
-! 
+!
 ! Done
 !
   call unit_finalize()

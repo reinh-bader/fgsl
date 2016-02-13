@@ -10,12 +10,12 @@
     type(fgsl_histogram) :: fgsl_histogram_alloc
     fgsl_histogram_alloc%gsl_histogram = gsl_histogram_alloc(n)
   end function fgsl_histogram_alloc
-  function fgsl_histogram_set_ranges(h, range, size) 
+  function fgsl_histogram_set_ranges(h, range)
     type(fgsl_histogram), intent(inout) :: h
-    integer(fgsl_size_t), intent(in) :: size
-    real(fgsl_double), intent(in) :: range(:)
+    real(fgsl_double), intent(in), target :: range(:)
     integer(fgsl_int) :: fgsl_histogram_set_ranges
-    fgsl_histogram_set_ranges = gsl_histogram_set_ranges(h%gsl_histogram, range, size) 
+    fgsl_histogram_set_ranges = gsl_histogram_set_ranges(h%gsl_histogram, c_loc(range), &
+    size(range, dim=1, kind=fgsl_size_t))
   end function fgsl_histogram_set_ranges
   function fgsl_histogram_set_ranges_uniform(h, xmin, xmax)
     type(fgsl_histogram), intent(inout) :: h
@@ -24,32 +24,32 @@
     fgsl_histogram_set_ranges_uniform = &
          gsl_histogram_set_ranges_uniform(h%gsl_histogram, xmin, xmax)
   end function fgsl_histogram_set_ranges_uniform
-  subroutine fgsl_histogram_free(h) 
+  subroutine fgsl_histogram_free(h)
     type(fgsl_histogram), intent(inout) :: h
-    call gsl_histogram_free(h%gsl_histogram) 
+    call gsl_histogram_free(h%gsl_histogram)
   end subroutine fgsl_histogram_free
-  function fgsl_histogram_memcpy(dest, src) 
+  function fgsl_histogram_memcpy(dest, src)
     type(fgsl_histogram), intent(inout) :: dest
     type(fgsl_histogram), intent(in) :: src
     integer(fgsl_int) :: fgsl_histogram_memcpy
-    fgsl_histogram_memcpy = gsl_histogram_memcpy(dest%gsl_histogram, src%gsl_histogram) 
+    fgsl_histogram_memcpy = gsl_histogram_memcpy(dest%gsl_histogram, src%gsl_histogram)
   end function fgsl_histogram_memcpy
-  function fgsl_histogram_clone(src) 
+  function fgsl_histogram_clone(src)
     type(fgsl_histogram), intent(in) :: src
     type(fgsl_histogram) :: fgsl_histogram_clone
-    fgsl_histogram_clone%gsl_histogram = gsl_histogram_clone(src%gsl_histogram) 
+    fgsl_histogram_clone%gsl_histogram = gsl_histogram_clone(src%gsl_histogram)
   end function fgsl_histogram_clone
-  function fgsl_histogram_increment(h, x) 
+  function fgsl_histogram_increment(h, x)
     type(fgsl_histogram), intent(inout) :: h
     real(fgsl_double), intent(in) :: x
     integer(fgsl_int) :: fgsl_histogram_increment
-    fgsl_histogram_increment = gsl_histogram_increment(h%gsl_histogram, x) 
+    fgsl_histogram_increment = gsl_histogram_increment(h%gsl_histogram, x)
   end function fgsl_histogram_increment
-  function fgsl_histogram_accumulate(h, x, weight) 
+  function fgsl_histogram_accumulate(h, x, weight)
     type(fgsl_histogram), intent(inout) :: h
     real(fgsl_double), intent(in) :: x, weight
     integer(fgsl_int) :: fgsl_histogram_accumulate
-    fgsl_histogram_accumulate = gsl_histogram_accumulate(h%gsl_histogram, x, weight) 
+    fgsl_histogram_accumulate = gsl_histogram_accumulate(h%gsl_histogram, x, weight)
   end function fgsl_histogram_accumulate
   function fgsl_histogram_get(h, i)
     type(fgsl_histogram), intent(in) :: h
@@ -57,13 +57,13 @@
     real(fgsl_double) :: fgsl_histogram_get
     fgsl_histogram_get = gsl_histogram_get(h%gsl_histogram, i)
   end function fgsl_histogram_get
-  function fgsl_histogram_get_range(h, i, lower, upper) 
+  function fgsl_histogram_get_range(h, i, lower, upper)
     type(fgsl_histogram), intent(in) :: h
     integer(fgsl_size_t), intent(in) :: i
     real(fgsl_double), intent(out) :: lower, upper
     integer(fgsl_int) :: fgsl_histogram_get_range
     fgsl_histogram_get_range = &
-         gsl_histogram_get_range(h%gsl_histogram, i, lower, upper) 
+         gsl_histogram_get_range(h%gsl_histogram, i, lower, upper)
   end function fgsl_histogram_get_range
   function fgsl_histogram_max(h)
     type(fgsl_histogram), intent(in) :: h
@@ -80,16 +80,16 @@
     integer(fgsl_size_t) :: fgsl_histogram_bins
     fgsl_histogram_bins = gsl_histogram_bins(h%gsl_histogram)
   end function fgsl_histogram_bins
-  subroutine fgsl_histogram_reset(h) 
+  subroutine fgsl_histogram_reset(h)
     type(fgsl_histogram), intent(inout) :: h
-    call gsl_histogram_reset(h%gsl_histogram) 
+    call gsl_histogram_reset(h%gsl_histogram)
   end subroutine fgsl_histogram_reset
-  function fgsl_histogram_find(h, x, i) 
+  function fgsl_histogram_find(h, x, i)
     type(fgsl_histogram), intent(in) :: h
-    real(fgsl_double), intent(in) :: x    
+    real(fgsl_double), intent(in) :: x
     integer(fgsl_size_t), intent(out) :: i
     integer(fgsl_int) :: fgsl_histogram_find
-    fgsl_histogram_find = gsl_histogram_find(h%gsl_histogram, x, i) 
+    fgsl_histogram_find = gsl_histogram_find(h%gsl_histogram, x, i)
   end function fgsl_histogram_find
   function fgsl_histogram_max_val(h)
     type(fgsl_histogram), intent(in) :: h
@@ -129,48 +129,48 @@
   function fgsl_histogram_equal_bins_p(h1, h2)
     type(fgsl_histogram), intent(in) :: h1, h2
     real(fgsl_double) :: fgsl_histogram_equal_bins_p
-    fgsl_histogram_equal_bins_p = & 
+    fgsl_histogram_equal_bins_p = &
          gsl_histogram_equal_bins_p(h1%gsl_histogram, h2%gsl_histogram)
   end function fgsl_histogram_equal_bins_p
   function fgsl_histogram_add(h1, h2)
     type(fgsl_histogram), intent(inout) :: h1
     type(fgsl_histogram), intent(in) :: h2
     real(fgsl_double) :: fgsl_histogram_add
-    fgsl_histogram_add = & 
+    fgsl_histogram_add = &
          gsl_histogram_add(h1%gsl_histogram, h2%gsl_histogram)
   end function fgsl_histogram_add
   function fgsl_histogram_sub(h1, h2)
     type(fgsl_histogram), intent(inout) :: h1
     type(fgsl_histogram), intent(in) :: h2
     real(fgsl_double) :: fgsl_histogram_sub
-    fgsl_histogram_sub = & 
+    fgsl_histogram_sub = &
          gsl_histogram_sub(h1%gsl_histogram, h2%gsl_histogram)
   end function fgsl_histogram_sub
   function fgsl_histogram_mul(h1, h2)
     type(fgsl_histogram), intent(inout) :: h1
     type(fgsl_histogram), intent(in) :: h2
     real(fgsl_double) :: fgsl_histogram_mul
-    fgsl_histogram_mul = & 
+    fgsl_histogram_mul = &
          gsl_histogram_mul(h1%gsl_histogram, h2%gsl_histogram)
   end function fgsl_histogram_mul
   function fgsl_histogram_div(h1, h2)
     type(fgsl_histogram), intent(inout) :: h1
     type(fgsl_histogram), intent(in) :: h2
     real(fgsl_double) :: fgsl_histogram_div
-    fgsl_histogram_div = & 
+    fgsl_histogram_div = &
          gsl_histogram_div(h1%gsl_histogram, h2%gsl_histogram)
   end function fgsl_histogram_div
-  function fgsl_histogram_scale(h, scale) 
+  function fgsl_histogram_scale(h, scale)
     type(fgsl_histogram), intent(inout) :: h
     real(fgsl_double), intent(in) :: scale
     integer(fgsl_int) :: fgsl_histogram_scale
-    fgsl_histogram_scale = gsl_histogram_scale(h%gsl_histogram, scale) 
+    fgsl_histogram_scale = gsl_histogram_scale(h%gsl_histogram, scale)
   end function fgsl_histogram_scale
-  function fgsl_histogram_shift(h, offset) 
+  function fgsl_histogram_shift(h, offset)
     type(fgsl_histogram), intent(inout) :: h
     real(fgsl_double), intent(in) :: offset
     integer(fgsl_int) :: fgsl_histogram_shift
-    fgsl_histogram_shift = gsl_histogram_shift(h%gsl_histogram, offset) 
+    fgsl_histogram_shift = gsl_histogram_shift(h%gsl_histogram, offset)
   end function fgsl_histogram_shift
   function fgsl_histogram_fwrite(stream, h)
     type(fgsl_file), intent(in) :: stream
@@ -184,24 +184,25 @@
     integer(fgsl_int) :: fgsl_histogram_fread
     fgsl_histogram_fread = gsl_histogram_fread(stream%gsl_file, h%gsl_histogram)
   end function fgsl_histogram_fread
-  function fgsl_histogram_fprintf(stream, h, range_format, bin_format) 
+  function fgsl_histogram_fprintf(stream, h, range_format, bin_format)
     type(fgsl_file), intent(in) :: stream
     type(fgsl_histogram), intent(in) :: h
     character(kind=fgsl_char, len=*), intent(in) :: range_format, bin_format
     integer(fgsl_int) :: fgsl_histogram_fprintf
 !
-    character(kind=fgsl_char,len=fgsl_strmax) :: lrf, lbf
+    character(kind=fgsl_char,len=fgsl_strmax), target :: lrf, lbf
     if (len(trim(range_format)) < fgsl_strmax .and. &
          len(trim(bin_format)) < fgsl_strmax) then
-       lrf = trim(range_format) // c_null_char 
-       lbf = trim(bin_format) // c_null_char 
+       lrf = trim(range_format) // c_null_char
+       lbf = trim(bin_format) // c_null_char
        fgsl_histogram_fprintf = &
-            gsl_histogram_fprintf(stream%gsl_file, h%gsl_histogram, lrf, lbf)
+            gsl_histogram_fprintf(stream%gsl_file, h%gsl_histogram, &
+            c_loc(lrf), c_loc(lbf))
     else
        fgsl_histogram_fprintf = fgsl_failure
     end if
   end function fgsl_histogram_fprintf
-  function fgsl_histogram_fscanf(stream, h) 
+  function fgsl_histogram_fscanf(stream, h)
     type(fgsl_file), intent(in) :: stream
     type(fgsl_histogram), intent(inout) :: h
     integer(fgsl_int) :: fgsl_histogram_fscanf
@@ -212,17 +213,17 @@
     type(fgsl_histogram_pdf) :: fgsl_histogram_pdf_alloc
     fgsl_histogram_pdf_alloc%gsl_histogram_pdf = gsl_histogram_pdf_alloc(n)
   end function fgsl_histogram_pdf_alloc
-  function fgsl_histogram_pdf_init(p, h) 
+  function fgsl_histogram_pdf_init(p, h)
     type(fgsl_histogram_pdf), intent(inout) :: p
     type(fgsl_histogram), intent(in) :: h
     integer(fgsl_int) :: fgsl_histogram_pdf_init
-    fgsl_histogram_pdf_init = gsl_histogram_pdf_init(p%gsl_histogram_pdf, h%gsl_histogram) 
+    fgsl_histogram_pdf_init = gsl_histogram_pdf_init(p%gsl_histogram_pdf, h%gsl_histogram)
   end function fgsl_histogram_pdf_init
-  subroutine fgsl_histogram_pdf_free(p) 
+  subroutine fgsl_histogram_pdf_free(p)
     type(fgsl_histogram_pdf), intent(inout) :: p
-    call gsl_histogram_pdf_free(p%gsl_histogram_pdf) 
+    call gsl_histogram_pdf_free(p%gsl_histogram_pdf)
   end subroutine fgsl_histogram_pdf_free
-  function fgsl_histogram_pdf_sample(p, r) 
+  function fgsl_histogram_pdf_sample(p, r)
     type(fgsl_histogram_pdf), intent(in) :: p
     real(fgsl_double), intent(in) :: r
     real(fgsl_double) :: fgsl_histogram_pdf_sample
@@ -233,13 +234,14 @@
     type(fgsl_histogram2d) :: fgsl_histogram2d_alloc
     fgsl_histogram2d_alloc%gsl_histogram2d = gsl_histogram2d_alloc(nx, ny)
   end function fgsl_histogram2d_alloc
-  function fgsl_histogram2d_set_ranges(h, xrange, xsize, yrange, ysize) 
+  function fgsl_histogram2d_set_ranges(h, xrange, yrange)
     type(fgsl_histogram2d), intent(inout) :: h
-    integer(fgsl_size_t), intent(in) :: xsize, ysize
-    real(fgsl_double), intent(in) :: xrange(:), yrange(:)
+    real(fgsl_double), intent(in), target :: xrange(:), yrange(:)
     integer(fgsl_int) :: fgsl_histogram2d_set_ranges
     fgsl_histogram2d_set_ranges = &
-         gsl_histogram2d_set_ranges(h%gsl_histogram2d, xrange, xsize, yrange, ysize) 
+         gsl_histogram2d_set_ranges(h%gsl_histogram2d, c_loc(xrange), &
+         size(xrange, dim=1, kind=fgsl_size_t), c_loc(yrange), &
+         size(yrange, dim=1, kind=fgsl_size_t))
   end function fgsl_histogram2d_set_ranges
   function fgsl_histogram2d_set_ranges_uniform(h, xmin, xmax, ymin, ymax)
     type(fgsl_histogram2d), intent(inout) :: h
@@ -248,34 +250,34 @@
     fgsl_histogram2d_set_ranges_uniform = &
          gsl_histogram2d_set_ranges_uniform(h%gsl_histogram2d, xmin, xmax, ymin, ymax)
   end function fgsl_histogram2d_set_ranges_uniform
-  subroutine fgsl_histogram2d_free(h) 
+  subroutine fgsl_histogram2d_free(h)
     type(fgsl_histogram2d), intent(inout) :: h
-    call gsl_histogram2d_free(h%gsl_histogram2d) 
+    call gsl_histogram2d_free(h%gsl_histogram2d)
   end subroutine fgsl_histogram2d_free
-  function fgsl_histogram2d_memcpy(dest, src) 
+  function fgsl_histogram2d_memcpy(dest, src)
     type(fgsl_histogram2d), intent(inout) :: dest
     type(fgsl_histogram2d), intent(in) :: src
     integer(fgsl_int) :: fgsl_histogram2d_memcpy
     fgsl_histogram2d_memcpy = &
-         gsl_histogram2d_memcpy(dest%gsl_histogram2d, src%gsl_histogram2d) 
+         gsl_histogram2d_memcpy(dest%gsl_histogram2d, src%gsl_histogram2d)
   end function fgsl_histogram2d_memcpy
-  function fgsl_histogram2d_clone(src) 
+  function fgsl_histogram2d_clone(src)
     type(fgsl_histogram2d), intent(in) :: src
     type(fgsl_histogram2d) :: fgsl_histogram2d_clone
-    fgsl_histogram2d_clone%gsl_histogram2d = gsl_histogram2d_clone(src%gsl_histogram2d) 
+    fgsl_histogram2d_clone%gsl_histogram2d = gsl_histogram2d_clone(src%gsl_histogram2d)
   end function fgsl_histogram2d_clone
-  function fgsl_histogram2d_increment(h, x, y) 
+  function fgsl_histogram2d_increment(h, x, y)
     type(fgsl_histogram2d), intent(inout) :: h
     real(fgsl_double), intent(in) :: x, y
     integer(fgsl_int) :: fgsl_histogram2d_increment
-    fgsl_histogram2d_increment = gsl_histogram2d_increment(h%gsl_histogram2d, x, y) 
+    fgsl_histogram2d_increment = gsl_histogram2d_increment(h%gsl_histogram2d, x, y)
   end function fgsl_histogram2d_increment
-  function fgsl_histogram2d_accumulate(h, x, y, weight) 
+  function fgsl_histogram2d_accumulate(h, x, y, weight)
     type(fgsl_histogram2d), intent(inout) :: h
     real(fgsl_double), intent(in) :: x, y, weight
     integer(fgsl_int) :: fgsl_histogram2d_accumulate
     fgsl_histogram2d_accumulate = &
-         gsl_histogram2d_accumulate(h%gsl_histogram2d, x, y, weight) 
+         gsl_histogram2d_accumulate(h%gsl_histogram2d, x, y, weight)
   end function fgsl_histogram2d_accumulate
   function fgsl_histogram2d_get(h, i, j)
     type(fgsl_histogram2d), intent(in) :: h
@@ -283,21 +285,21 @@
     real(fgsl_double) :: fgsl_histogram2d_get
     fgsl_histogram2d_get = gsl_histogram2d_get(h%gsl_histogram2d, i, j)
   end function fgsl_histogram2d_get
-  function fgsl_histogram2d_get_xrange(h, i, xlower, xupper) 
+  function fgsl_histogram2d_get_xrange(h, i, xlower, xupper)
     type(fgsl_histogram2d), intent(in) :: h
     integer(fgsl_size_t), intent(in) :: i
     real(fgsl_double), intent(out) :: xlower, xupper
     integer(fgsl_int) :: fgsl_histogram2d_get_xrange
     fgsl_histogram2d_get_xrange = &
-         gsl_histogram2d_get_xrange(h%gsl_histogram2d, i, xlower, xupper) 
+         gsl_histogram2d_get_xrange(h%gsl_histogram2d, i, xlower, xupper)
   end function fgsl_histogram2d_get_xrange
-  function fgsl_histogram2d_get_yrange(h, i, ylower, yupper) 
+  function fgsl_histogram2d_get_yrange(h, i, ylower, yupper)
     type(fgsl_histogram2d), intent(in) :: h
     integer(fgsl_size_t), intent(in) :: i
     real(fgsl_double), intent(out) :: ylower, yupper
     integer(fgsl_int) :: fgsl_histogram2d_get_yrange
     fgsl_histogram2d_get_yrange = &
-         gsl_histogram2d_get_yrange(h%gsl_histogram2d, i, ylower, yupper) 
+         gsl_histogram2d_get_yrange(h%gsl_histogram2d, i, ylower, yupper)
   end function fgsl_histogram2d_get_yrange
   function fgsl_histogram2d_xmax(h)
     type(fgsl_histogram2d), intent(in) :: h
@@ -329,16 +331,16 @@
     integer(fgsl_size_t) :: fgsl_histogram2d_ny
     fgsl_histogram2d_ny = gsl_histogram2d_ny(h%gsl_histogram2d)
   end function fgsl_histogram2d_ny
-  subroutine fgsl_histogram2d_reset(h) 
+  subroutine fgsl_histogram2d_reset(h)
     type(fgsl_histogram2d), intent(inout) :: h
-    call gsl_histogram2d_reset(h%gsl_histogram2d) 
+    call gsl_histogram2d_reset(h%gsl_histogram2d)
   end subroutine fgsl_histogram2d_reset
-  function fgsl_histogram2d_find(h, x, y, i, j) 
+  function fgsl_histogram2d_find(h, x, y, i, j)
     type(fgsl_histogram2d), intent(in) :: h
-    real(fgsl_double), intent(in) :: x, y    
+    real(fgsl_double), intent(in) :: x, y
     integer(fgsl_size_t), intent(out) :: i, j
     integer(fgsl_int) :: fgsl_histogram2d_find
-    fgsl_histogram2d_find = gsl_histogram2d_find(h%gsl_histogram2d, x, y, i, j) 
+    fgsl_histogram2d_find = gsl_histogram2d_find(h%gsl_histogram2d, x, y, i, j)
   end function fgsl_histogram2d_find
   function fgsl_histogram2d_max_val(h)
     type(fgsl_histogram2d), intent(in) :: h
@@ -393,48 +395,48 @@
   function fgsl_histogram2d_equal_bins_p(h1, h2)
     type(fgsl_histogram2d), intent(in) :: h1, h2
     real(fgsl_double) :: fgsl_histogram2d_equal_bins_p
-    fgsl_histogram2d_equal_bins_p = & 
+    fgsl_histogram2d_equal_bins_p = &
          gsl_histogram2d_equal_bins_p(h1%gsl_histogram2d, h2%gsl_histogram2d)
   end function fgsl_histogram2d_equal_bins_p
   function fgsl_histogram2d_add(h1, h2)
     type(fgsl_histogram2d), intent(inout) :: h1
     type(fgsl_histogram2d), intent(in) :: h2
     real(fgsl_double) :: fgsl_histogram2d_add
-    fgsl_histogram2d_add = & 
+    fgsl_histogram2d_add = &
          gsl_histogram2d_add(h1%gsl_histogram2d, h2%gsl_histogram2d)
   end function fgsl_histogram2d_add
   function fgsl_histogram2d_sub(h1, h2)
     type(fgsl_histogram2d), intent(inout) :: h1
     type(fgsl_histogram2d), intent(in) :: h2
     real(fgsl_double) :: fgsl_histogram2d_sub
-    fgsl_histogram2d_sub = & 
+    fgsl_histogram2d_sub = &
          gsl_histogram2d_sub(h1%gsl_histogram2d, h2%gsl_histogram2d)
   end function fgsl_histogram2d_sub
   function fgsl_histogram2d_mul(h1, h2)
     type(fgsl_histogram2d), intent(inout) :: h1
     type(fgsl_histogram2d), intent(in) :: h2
     real(fgsl_double) :: fgsl_histogram2d_mul
-    fgsl_histogram2d_mul = & 
+    fgsl_histogram2d_mul = &
          gsl_histogram2d_mul(h1%gsl_histogram2d, h2%gsl_histogram2d)
   end function fgsl_histogram2d_mul
   function fgsl_histogram2d_div(h1, h2)
     type(fgsl_histogram2d), intent(inout) :: h1
     type(fgsl_histogram2d), intent(in) :: h2
     real(fgsl_double) :: fgsl_histogram2d_div
-    fgsl_histogram2d_div = & 
+    fgsl_histogram2d_div = &
          gsl_histogram2d_div(h1%gsl_histogram2d, h2%gsl_histogram2d)
   end function fgsl_histogram2d_div
-  function fgsl_histogram2d_scale(h, scale) 
+  function fgsl_histogram2d_scale(h, scale)
     type(fgsl_histogram2d), intent(inout) :: h
     real(fgsl_double), intent(in) :: scale
     integer(fgsl_int) :: fgsl_histogram2d_scale
-    fgsl_histogram2d_scale = gsl_histogram2d_scale(h%gsl_histogram2d, scale) 
+    fgsl_histogram2d_scale = gsl_histogram2d_scale(h%gsl_histogram2d, scale)
   end function fgsl_histogram2d_scale
-  function fgsl_histogram2d_shift(h, offset) 
+  function fgsl_histogram2d_shift(h, offset)
     type(fgsl_histogram2d), intent(inout) :: h
     real(fgsl_double), intent(in) :: offset
     integer(fgsl_int) :: fgsl_histogram2d_shift
-    fgsl_histogram2d_shift = gsl_histogram2d_shift(h%gsl_histogram2d, offset) 
+    fgsl_histogram2d_shift = gsl_histogram2d_shift(h%gsl_histogram2d, offset)
   end function fgsl_histogram2d_shift
   function fgsl_histogram2d_fwrite(stream, h)
     type(fgsl_file), intent(in) :: stream
@@ -448,24 +450,25 @@
     integer(fgsl_int) :: fgsl_histogram2d_fread
     fgsl_histogram2d_fread = gsl_histogram2d_fread(stream%gsl_file, h%gsl_histogram2d)
   end function fgsl_histogram2d_fread
-  function fgsl_histogram2d_fprintf(stream, h, range_format, bin_format) 
+  function fgsl_histogram2d_fprintf(stream, h, range_format, bin_format)
     type(fgsl_file), intent(in) :: stream
     type(fgsl_histogram2d), intent(in) :: h
     character(kind=fgsl_char, len=*), intent(in) :: range_format, bin_format
     integer(fgsl_int) :: fgsl_histogram2d_fprintf
 !
-    character(kind=fgsl_char,len=fgsl_strmax) :: lrf, lbf
+    character(kind=fgsl_char,len=fgsl_strmax), target :: lrf, lbf
     if (len(trim(range_format)) < fgsl_strmax .and. &
          len(trim(bin_format)) < fgsl_strmax) then
-       lrf = trim(range_format) // c_null_char 
-       lbf = trim(bin_format) // c_null_char 
+       lrf = trim(range_format) // c_null_char
+       lbf = trim(bin_format) // c_null_char
        fgsl_histogram2d_fprintf = &
-            gsl_histogram2d_fprintf(stream%gsl_file, h%gsl_histogram2d, lrf, lbf)
+            gsl_histogram2d_fprintf(stream%gsl_file, h%gsl_histogram2d, &
+            c_loc(lrf), c_loc(lbf))
     else
        fgsl_histogram2d_fprintf = fgsl_failure
     end if
   end function fgsl_histogram2d_fprintf
-  function fgsl_histogram2d_fscanf(stream, h) 
+  function fgsl_histogram2d_fscanf(stream, h)
     type(fgsl_file), intent(in) :: stream
     type(fgsl_histogram2d), intent(inout) :: h
     integer(fgsl_int) :: fgsl_histogram2d_fscanf
@@ -476,17 +479,17 @@
     type(fgsl_histogram2d_pdf) :: fgsl_histogram2d_pdf_alloc
     fgsl_histogram2d_pdf_alloc%gsl_histogram2d_pdf = gsl_histogram2d_pdf_alloc(nx, ny)
   end function fgsl_histogram2d_pdf_alloc
-  function fgsl_histogram2d_pdf_init(p, h) 
+  function fgsl_histogram2d_pdf_init(p, h)
     type(fgsl_histogram2d_pdf), intent(inout) :: p
     type(fgsl_histogram2d), intent(in) :: h
     integer(fgsl_int) :: fgsl_histogram2d_pdf_init
-    fgsl_histogram2d_pdf_init = gsl_histogram2d_pdf_init(p%gsl_histogram2d_pdf, h%gsl_histogram2d) 
+    fgsl_histogram2d_pdf_init = gsl_histogram2d_pdf_init(p%gsl_histogram2d_pdf, h%gsl_histogram2d)
   end function fgsl_histogram2d_pdf_init
-  subroutine fgsl_histogram2d_pdf_free(p) 
+  subroutine fgsl_histogram2d_pdf_free(p)
     type(fgsl_histogram2d_pdf), intent(inout) :: p
-    call gsl_histogram2d_pdf_free(p%gsl_histogram2d_pdf) 
+    call gsl_histogram2d_pdf_free(p%gsl_histogram2d_pdf)
   end subroutine fgsl_histogram2d_pdf_free
-  function fgsl_histogram2d_pdf_sample(p, r1, r2, x, y) 
+  function fgsl_histogram2d_pdf_sample(p, r1, r2, x, y)
     type(fgsl_histogram2d_pdf), intent(in) :: p
     real(fgsl_double), intent(in) :: r1, r2
     real(fgsl_double), intent(out) :: x, y
@@ -499,4 +502,3 @@
     fgsl_histogram_status = .true.
     if (.not. c_associated(histogram%gsl_histogram)) fgsl_histogram_status = .false.
   end function fgsl_histogram_status
-

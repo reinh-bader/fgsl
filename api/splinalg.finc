@@ -1,0 +1,41 @@
+!-*-f90-*-
+!
+!  API: Sparse matrix linear algebra
+!
+function fgsl_splinalg_itersolve_alloc(T, n, m)
+  type(fgsl_splinalg_itersolve_type), intent(in) :: T
+  integer(fgsl_size_t), intent(in) :: n, m
+  type(fgsl_splinalg_itersolve) :: fgsl_splinalg_itersolve_alloc
+  fgsl_splinalg_itersolve_alloc%gsl_splinalg_itersolve = &
+  gsl_splinalg_itersolve_alloc(fgsl_aux_splinalg_itersolve_alloc(&
+  T%which), n, m)
+end function fgsl_splinalg_itersolve_alloc
+subroutine fgsl_splinalg_itersolve_free(w)
+  type(fgsl_splinalg_itersolve), intent(inout) :: w
+  call gsl_splinalg_itersolve_free(w%gsl_splinalg_itersolve)
+end subroutine fgsl_splinalg_itersolve_free
+function fgsl_splinalg_itersolve_name(w)
+  type(fgsl_splinalg_itersolve), intent(in) :: w
+  character(kind=fgsl_char,len=fgsl_strmax) :: fgsl_splinalg_itersolve_name
+!
+  type(c_ptr) :: name
+!
+  name = gsl_splinalg_itersolve_name(w%gsl_splinalg_itersolve)
+  fgsl_splinalg_itersolve_name = fgsl_name(name)
+end function fgsl_splinalg_itersolve_name
+function fgsl_splinalg_itersolve_iterate(A, b, tol, x, w)
+  type(fgsl_spmatrix), intent(in) :: A
+  type(fgsl_vector), intent(in) :: b
+  real(fgsl_double), intent(in) :: tol
+  type(fgsl_vector), intent(inout) :: x
+  type(fgsl_splinalg_itersolve), intent(inout) :: w
+  integer(fgsl_int) :: fgsl_splinalg_itersolve_iterate
+  fgsl_splinalg_itersolve_iterate = gsl_splinalg_itersolve_iterate(&
+  A%gsl_spmatrix, b%gsl_vector, tol, x%gsl_vector, w%gsl_splinalg_itersolve)
+end function fgsl_splinalg_itersolve_iterate
+function fgsl_splinalg_itersolve_normr(w)
+  type(fgsl_splinalg_itersolve), intent(in) :: w
+  real(fgsl_double) :: fgsl_splinalg_itersolve_normr
+  fgsl_splinalg_itersolve_normr = gsl_splinalg_itersolve_normr(&
+  w%gsl_splinalg_itersolve)
+end function fgsl_splinalg_itersolve_normr

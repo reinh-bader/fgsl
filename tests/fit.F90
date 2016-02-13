@@ -1,6 +1,4 @@
-#include "config.h"
 program fit
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
   use fgsl
   use mod_unit
   implicit none
@@ -105,19 +103,8 @@ program fit
        (/1.239227245954253487d0, -2.773475128673630330d-2, &
        1.429249233259944463d0 /),cmf,eps10)
 
-  status = fgsl_multifit_linear_svd (fmat, yvec, 1.0E-7_fgsl_double, irk, cvec, cov, chisq, lfit_ws)
+  status = fgsl_multifit_linear_svd (fmat, lfit_ws)
   call unit_assert_equal('fgsl_multifit_linear_svd:status',fgsl_success,status)
-  call unit_assert_equal_within('fgsl_multifit_linear_svd:cmf', &
-       (/1.239227245954253487d0, -2.773475128673630330d-2, &
-       1.429249233259944463d0 /),cmf,eps10)
-  call unit_assert_equal('fgsl_multifit_linear_svd:rank',3,int(irk,fgsl_int))
-
-  status = fgsl_multifit_linear_usvd (fmat, yvec, 1.0E-7_fgsl_double, irk, cvec, cov, chisq, lfit_ws)
-  call unit_assert_equal('fgsl_multifit_linear_usvd:status',fgsl_success,status)
-  call unit_assert_equal_within('fgsl_multifit_linear_usvd:cmf', &
-       (/1.239227245954253487d0, -2.773475128673630330d-2, &
-       1.429249233259944463d0 /),cmf,eps10)
-  call unit_assert_equal('fgsl_multifit_linear_usvd:rank',3,int(irk,fgsl_int))
 
   status = fgsl_multifit_wlinear_svd (fmat, wvec, yvec, 1.0E-7_fgsl_double, irk, &
        cvec, cov, chisq, lfit_ws)
@@ -146,9 +133,5 @@ program fit
 !
 ! Done
 !
-  call unit_finalize() 
-#else
-!skip test
-call exit (77)
-#endif
+  call unit_finalize()
 end program fit

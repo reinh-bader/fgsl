@@ -5,16 +5,16 @@
 !> \page "Comments on eigensystems"
 !> Please go to api/eigen.finc for the API documentation.
 
-function fgsl_eigen_symm_alloc(n) 
+function fgsl_eigen_symm_alloc(n)
   integer(fgsl_size_t), intent(in) :: n
   type(fgsl_eigen_symm_workspace) :: fgsl_eigen_symm_alloc
   fgsl_eigen_symm_alloc%gsl_eigen_symm_workspace = gsl_eigen_symm_alloc(n)
 end function fgsl_eigen_symm_alloc
-subroutine fgsl_eigen_symm_free(w) 
+subroutine fgsl_eigen_symm_free(w)
   type(fgsl_eigen_symm_workspace) :: w
   call gsl_eigen_symm_free(w%gsl_eigen_symm_workspace)
 end subroutine fgsl_eigen_symm_free
-function fgsl_eigen_symm(a, eval, w) 
+function fgsl_eigen_symm(a, eval, w)
   type(fgsl_matrix), intent(inout) :: a
   type(fgsl_vector), intent(inout) :: eval
   type(fgsl_eigen_symm_workspace) :: w
@@ -22,16 +22,16 @@ function fgsl_eigen_symm(a, eval, w)
   fgsl_eigen_symm = gsl_eigen_symm(a%gsl_matrix, eval%gsl_vector, &
        w%gsl_eigen_symm_workspace)
 end function fgsl_eigen_symm
-function fgsl_eigen_symmv_alloc(n) 
+function fgsl_eigen_symmv_alloc(n)
   integer(fgsl_size_t), intent(in) :: n
   type(fgsl_eigen_symmv_workspace) :: fgsl_eigen_symmv_alloc
   fgsl_eigen_symmv_alloc%gsl_eigen_symmv_workspace = gsl_eigen_symmv_alloc(n)
 end function fgsl_eigen_symmv_alloc
-subroutine fgsl_eigen_symmv_free(w) 
+subroutine fgsl_eigen_symmv_free(w)
   type(fgsl_eigen_symmv_workspace) :: w
   call gsl_eigen_symmv_free(w%gsl_eigen_symmv_workspace)
 end subroutine fgsl_eigen_symmv_free
-function fgsl_eigen_symmv(a, eval, evec, w) 
+function fgsl_eigen_symmv(a, eval, evec, w)
   type(fgsl_matrix), intent(inout) :: a, evec
   type(fgsl_vector), intent(inout) :: eval
   type(fgsl_eigen_symmv_workspace) :: w
@@ -39,16 +39,16 @@ function fgsl_eigen_symmv(a, eval, evec, w)
   fgsl_eigen_symmv = gsl_eigen_symmv(a%gsl_matrix, eval%gsl_vector, &
        evec%gsl_matrix, w%gsl_eigen_symmv_workspace)
 end function fgsl_eigen_symmv
-function fgsl_eigen_herm_alloc(n) 
+function fgsl_eigen_herm_alloc(n)
   integer(fgsl_size_t), intent(in) :: n
   type(fgsl_eigen_herm_workspace) :: fgsl_eigen_herm_alloc
   fgsl_eigen_herm_alloc%gsl_eigen_herm_workspace = gsl_eigen_herm_alloc(n)
 end function fgsl_eigen_herm_alloc
-subroutine fgsl_eigen_herm_free(w) 
+subroutine fgsl_eigen_herm_free(w)
   type(fgsl_eigen_herm_workspace) :: w
   call gsl_eigen_herm_free(w%gsl_eigen_herm_workspace)
 end subroutine fgsl_eigen_herm_free
-function fgsl_eigen_herm(a, eval, w) 
+function fgsl_eigen_herm(a, eval, w)
   type(fgsl_matrix_complex), intent(inout) :: a
   type(fgsl_vector), intent(inout) :: eval
   type(fgsl_eigen_herm_workspace) :: w
@@ -56,16 +56,16 @@ function fgsl_eigen_herm(a, eval, w)
   fgsl_eigen_herm = gsl_eigen_herm(a%gsl_matrix_complex, eval%gsl_vector, &
        w%gsl_eigen_herm_workspace)
 end function fgsl_eigen_herm
-function fgsl_eigen_hermv_alloc(n) 
+function fgsl_eigen_hermv_alloc(n)
   integer(fgsl_size_t), intent(in) :: n
   type(fgsl_eigen_hermv_workspace) :: fgsl_eigen_hermv_alloc
   fgsl_eigen_hermv_alloc%gsl_eigen_hermv_workspace = gsl_eigen_hermv_alloc(n)
 end function fgsl_eigen_hermv_alloc
-subroutine fgsl_eigen_hermv_free(w) 
+subroutine fgsl_eigen_hermv_free(w)
   type(fgsl_eigen_hermv_workspace) :: w
   call gsl_eigen_hermv_free(w%gsl_eigen_hermv_workspace)
 end subroutine fgsl_eigen_hermv_free
-function fgsl_eigen_hermv(a, eval, evec, w) 
+function fgsl_eigen_hermv(a, eval, evec, w)
   type(fgsl_matrix_complex), intent(inout) :: a, evec
   type(fgsl_vector), intent(inout) :: eval
   type(fgsl_eigen_hermv_workspace) :: w
@@ -73,23 +73,23 @@ function fgsl_eigen_hermv(a, eval, evec, w)
   fgsl_eigen_hermv = gsl_eigen_hermv(a%gsl_matrix_complex, eval%gsl_vector, &
        evec%gsl_matrix_complex, w%gsl_eigen_hermv_workspace)
 end function fgsl_eigen_hermv
-function fgsl_eigen_nonsymm_alloc(n) 
+function fgsl_eigen_nonsymm_alloc(n)
   integer(fgsl_size_t), intent(in) :: n
   type(fgsl_eigen_nonsymm_workspace) :: fgsl_eigen_nonsymm_alloc
   fgsl_eigen_nonsymm_alloc%gsl_eigen_nonsymm_workspace = &
        gsl_eigen_nonsymm_alloc(n)
 end function fgsl_eigen_nonsymm_alloc
-subroutine fgsl_eigen_nonsymm_free(w) 
+subroutine fgsl_eigen_nonsymm_free(w)
   type(fgsl_eigen_nonsymm_workspace) :: w
   call gsl_eigen_nonsymm_free(w%gsl_eigen_nonsymm_workspace)
 end subroutine fgsl_eigen_nonsymm_free
-subroutine fgsl_eigen_nonsymm_params (compute_t, balance, w) 
+subroutine fgsl_eigen_nonsymm_params (compute_t, balance, w)
   integer(fgsl_int), intent(in) :: compute_t, balance
   type(fgsl_eigen_nonsymm_workspace), intent(inout) :: w
   call gsl_eigen_nonsymm_params (compute_t, balance, &
        w%gsl_eigen_nonsymm_workspace)
 end subroutine fgsl_eigen_nonsymm_params
-function fgsl_eigen_nonsymm(a, eval, w) 
+function fgsl_eigen_nonsymm(a, eval, w)
   type(fgsl_matrix), intent(inout) :: a
   type(fgsl_vector_complex), intent(inout) :: eval
   type(fgsl_eigen_nonsymm_workspace) :: w
@@ -97,7 +97,7 @@ function fgsl_eigen_nonsymm(a, eval, w)
   fgsl_eigen_nonsymm = gsl_eigen_nonsymm(a%gsl_matrix, &
        eval%gsl_vector_complex, w%gsl_eigen_nonsymm_workspace)
 end function fgsl_eigen_nonsymm
-function fgsl_eigen_nonsymm_z(a, eval, z, w) 
+function fgsl_eigen_nonsymm_z(a, eval, z, w)
   type(fgsl_matrix), intent(inout) :: a, z
   type(fgsl_vector_complex), intent(inout) :: eval
   type(fgsl_eigen_nonsymm_workspace) :: w
@@ -105,25 +105,23 @@ function fgsl_eigen_nonsymm_z(a, eval, z, w)
   fgsl_eigen_nonsymm_z = gsl_eigen_nonsymm_z(a%gsl_matrix, &
        eval%gsl_vector_complex, z%gsl_matrix, w%gsl_eigen_nonsymm_workspace)
 end function fgsl_eigen_nonsymm_z
-function fgsl_eigen_nonsymmv_alloc(n) 
+function fgsl_eigen_nonsymmv_alloc(n)
   integer(fgsl_size_t), intent(in) :: n
   type(fgsl_eigen_nonsymmv_workspace) :: fgsl_eigen_nonsymmv_alloc
   fgsl_eigen_nonsymmv_alloc%gsl_eigen_nonsymmv_workspace = &
        gsl_eigen_nonsymmv_alloc(n)
 end function fgsl_eigen_nonsymmv_alloc
-subroutine fgsl_eigen_nonsymmv_free(w) 
+subroutine fgsl_eigen_nonsymmv_free(w)
   type(fgsl_eigen_nonsymmv_workspace) :: w
   call gsl_eigen_nonsymmv_free(w%gsl_eigen_nonsymmv_workspace)
 end subroutine fgsl_eigen_nonsymmv_free
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
-subroutine fgsl_eigen_nonsymmv_params (balance, w) 
+subroutine fgsl_eigen_nonsymmv_params (balance, w)
   integer(fgsl_int), intent(in) :: balance
   type(fgsl_eigen_nonsymm_workspace), intent(inout) :: w
   call gsl_eigen_nonsymmv_params (balance, &
        w%gsl_eigen_nonsymm_workspace)
 end subroutine fgsl_eigen_nonsymmv_params
-#endif
-function fgsl_eigen_nonsymmv(a, eval, evec, w) 
+function fgsl_eigen_nonsymmv(a, eval, evec, w)
   type(fgsl_matrix), intent(inout) :: a
   type(fgsl_vector_complex), intent(inout) :: eval
   type(fgsl_matrix_complex), intent(inout) :: evec
@@ -133,7 +131,7 @@ function fgsl_eigen_nonsymmv(a, eval, evec, w)
        eval%gsl_vector_complex, evec%gsl_matrix_complex, &
        w%gsl_eigen_nonsymmv_workspace)
 end function fgsl_eigen_nonsymmv
-function fgsl_eigen_nonsymmv_z(a, eval, evec, z, w) 
+function fgsl_eigen_nonsymmv_z(a, eval, evec, z, w)
   type(fgsl_matrix), intent(inout) :: a, z
   type(fgsl_vector_complex), intent(inout) :: eval
   type(fgsl_matrix_complex), intent(inout) :: evec
@@ -143,17 +141,17 @@ function fgsl_eigen_nonsymmv_z(a, eval, evec, z, w)
        eval%gsl_vector_complex, evec%gsl_matrix_complex, &
        z%gsl_matrix, w%gsl_eigen_nonsymmv_workspace)
 end function fgsl_eigen_nonsymmv_z
-function fgsl_eigen_gensymm_alloc(n) 
+function fgsl_eigen_gensymm_alloc(n)
   integer(fgsl_size_t), intent(in) :: n
   type(fgsl_eigen_gensymm_workspace) :: fgsl_eigen_gensymm_alloc
   fgsl_eigen_gensymm_alloc%gsl_eigen_gensymm_workspace = &
        gsl_eigen_gensymm_alloc(n)
 end function fgsl_eigen_gensymm_alloc
-subroutine fgsl_eigen_gensymm_free(w) 
+subroutine fgsl_eigen_gensymm_free(w)
   type(fgsl_eigen_gensymm_workspace) :: w
   call gsl_eigen_gensymm_free(w%gsl_eigen_gensymm_workspace)
 end subroutine fgsl_eigen_gensymm_free
-function fgsl_eigen_gensymm(a, b, eval, w) 
+function fgsl_eigen_gensymm(a, b, eval, w)
   type(fgsl_matrix), intent(inout) :: a, b
   type(fgsl_vector), intent(inout) :: eval
   type(fgsl_eigen_gensymm_workspace) :: w
@@ -161,17 +159,17 @@ function fgsl_eigen_gensymm(a, b, eval, w)
   fgsl_eigen_gensymm = gsl_eigen_gensymm(a%gsl_matrix, b%gsl_matrix, &
        eval%gsl_vector, w%gsl_eigen_gensymm_workspace)
 end function fgsl_eigen_gensymm
-function fgsl_eigen_gensymmv_alloc(n) 
+function fgsl_eigen_gensymmv_alloc(n)
   integer(fgsl_size_t), intent(in) :: n
   type(fgsl_eigen_gensymmv_workspace) :: fgsl_eigen_gensymmv_alloc
   fgsl_eigen_gensymmv_alloc%gsl_eigen_gensymmv_workspace = &
        gsl_eigen_gensymmv_alloc(n)
 end function fgsl_eigen_gensymmv_alloc
-subroutine fgsl_eigen_gensymmv_free(w) 
+subroutine fgsl_eigen_gensymmv_free(w)
   type(fgsl_eigen_gensymmv_workspace) :: w
   call gsl_eigen_gensymmv_free(w%gsl_eigen_gensymmv_workspace)
 end subroutine fgsl_eigen_gensymmv_free
-function fgsl_eigen_gensymmv(a, b, eval, evec, w) 
+function fgsl_eigen_gensymmv(a, b, eval, evec, w)
   type(fgsl_matrix), intent(inout) :: a, b, evec
   type(fgsl_vector), intent(inout) :: eval
   type(fgsl_eigen_gensymmv_workspace) :: w
@@ -179,17 +177,17 @@ function fgsl_eigen_gensymmv(a, b, eval, evec, w)
   fgsl_eigen_gensymmv = gsl_eigen_gensymmv(a%gsl_matrix, b%gsl_matrix, &
        eval%gsl_vector, evec%gsl_matrix, w%gsl_eigen_gensymmv_workspace)
 end function fgsl_eigen_gensymmv
-function fgsl_eigen_genherm_alloc(n) 
+function fgsl_eigen_genherm_alloc(n)
   integer(fgsl_size_t), intent(in) :: n
   type(fgsl_eigen_genherm_workspace) :: fgsl_eigen_genherm_alloc
   fgsl_eigen_genherm_alloc%gsl_eigen_genherm_workspace = &
        gsl_eigen_genherm_alloc(n)
 end function fgsl_eigen_genherm_alloc
-subroutine fgsl_eigen_genherm_free(w) 
+subroutine fgsl_eigen_genherm_free(w)
   type(fgsl_eigen_genherm_workspace) :: w
   call gsl_eigen_genherm_free(w%gsl_eigen_genherm_workspace)
 end subroutine fgsl_eigen_genherm_free
-function fgsl_eigen_genherm(a, b, eval, w) 
+function fgsl_eigen_genherm(a, b, eval, w)
   type(fgsl_matrix_complex), intent(inout) :: a, b
   type(fgsl_vector), intent(inout) :: eval
   type(fgsl_eigen_genherm_workspace) :: w
@@ -197,17 +195,17 @@ function fgsl_eigen_genherm(a, b, eval, w)
   fgsl_eigen_genherm = gsl_eigen_genherm(a%gsl_matrix_complex, b%gsl_matrix_complex, &
        eval%gsl_vector, w%gsl_eigen_genherm_workspace)
 end function fgsl_eigen_genherm
-function fgsl_eigen_genhermv_alloc(n) 
+function fgsl_eigen_genhermv_alloc(n)
   integer(fgsl_size_t), intent(in) :: n
   type(fgsl_eigen_genhermv_workspace) :: fgsl_eigen_genhermv_alloc
   fgsl_eigen_genhermv_alloc%gsl_eigen_genhermv_workspace = &
        gsl_eigen_genhermv_alloc(n)
 end function fgsl_eigen_genhermv_alloc
-subroutine fgsl_eigen_genhermv_free(w) 
+subroutine fgsl_eigen_genhermv_free(w)
   type(fgsl_eigen_genhermv_workspace) :: w
   call gsl_eigen_genhermv_free(w%gsl_eigen_genhermv_workspace)
 end subroutine fgsl_eigen_genhermv_free
-function fgsl_eigen_genhermv(a, b, eval, evec, w) 
+function fgsl_eigen_genhermv(a, b, eval, evec, w)
   type(fgsl_matrix_complex), intent(inout) :: a, b, evec
   type(fgsl_vector), intent(inout) :: eval
   type(fgsl_eigen_genhermv_workspace) :: w
@@ -216,23 +214,23 @@ function fgsl_eigen_genhermv(a, b, eval, evec, w)
        b%gsl_matrix_complex, eval%gsl_vector, evec%gsl_matrix_complex, &
        w%gsl_eigen_genhermv_workspace)
 end function fgsl_eigen_genhermv
-function fgsl_eigen_gen_alloc(n) 
+function fgsl_eigen_gen_alloc(n)
   integer(fgsl_size_t), intent(in) :: n
   type(fgsl_eigen_gen_workspace) :: fgsl_eigen_gen_alloc
   fgsl_eigen_gen_alloc%gsl_eigen_gen_workspace = &
        gsl_eigen_gen_alloc(n)
 end function fgsl_eigen_gen_alloc
-subroutine fgsl_eigen_gen_free(w) 
+subroutine fgsl_eigen_gen_free(w)
   type(fgsl_eigen_gen_workspace) :: w
   call gsl_eigen_gen_free(w%gsl_eigen_gen_workspace)
 end subroutine fgsl_eigen_gen_free
-subroutine fgsl_eigen_gen_params (compute_s, compute_t, balance, w) 
+subroutine fgsl_eigen_gen_params (compute_s, compute_t, balance, w)
   integer(fgsl_int), intent(in) :: compute_s, compute_t, balance
   type(fgsl_eigen_gen_workspace), intent(inout) :: w
   call gsl_eigen_gen_params (compute_s, compute_t, balance, &
        w%gsl_eigen_gen_workspace)
 end subroutine fgsl_eigen_gen_params
-function fgsl_eigen_gen(a, b, alpha, beta, w) 
+function fgsl_eigen_gen(a, b, alpha, beta, w)
   type(fgsl_matrix), intent(inout) :: a, b
   type(fgsl_vector_complex), intent(inout) :: alpha
   type(fgsl_vector), intent(inout) :: beta
@@ -242,7 +240,7 @@ function fgsl_eigen_gen(a, b, alpha, beta, w)
        b%gsl_matrix, alpha%gsl_vector_complex, &
        beta%gsl_vector, w%gsl_eigen_gen_workspace)
 end function fgsl_eigen_gen
-function fgsl_eigen_gen_qz(a, b, alpha, beta, q, z, w) 
+function fgsl_eigen_gen_qz(a, b, alpha, beta, q, z, w)
   type(fgsl_matrix), intent(inout) :: a, b, q, z
   type(fgsl_vector_complex), intent(inout) :: alpha
   type(fgsl_vector), intent(inout) :: beta
@@ -253,17 +251,17 @@ function fgsl_eigen_gen_qz(a, b, alpha, beta, q, z, w)
        beta%gsl_vector, q%gsl_matrix, z%gsl_matrix, &
        w%gsl_eigen_gen_workspace)
 end function fgsl_eigen_gen_qz
-function fgsl_eigen_genv_alloc(n) 
+function fgsl_eigen_genv_alloc(n)
   integer(fgsl_size_t), intent(in) :: n
   type(fgsl_eigen_genv_workspace) :: fgsl_eigen_genv_alloc
   fgsl_eigen_genv_alloc%gsl_eigen_genv_workspace = &
        gsl_eigen_genv_alloc(n)
 end function fgsl_eigen_genv_alloc
-subroutine fgsl_eigen_genv_free(w) 
+subroutine fgsl_eigen_genv_free(w)
   type(fgsl_eigen_genv_workspace) :: w
   call gsl_eigen_genv_free(w%gsl_eigen_genv_workspace)
 end subroutine fgsl_eigen_genv_free
-function fgsl_eigen_genv(a, b, alpha, beta, evec, w) 
+function fgsl_eigen_genv(a, b, alpha, beta, evec, w)
   type(fgsl_matrix), intent(inout) :: a, b
   type(fgsl_vector_complex), intent(inout) :: alpha
   type(fgsl_vector), intent(inout) :: beta
@@ -275,7 +273,7 @@ function fgsl_eigen_genv(a, b, alpha, beta, evec, w)
        beta%gsl_vector, evec%gsl_matrix_complex, &
        w%gsl_eigen_genv_workspace)
 end function fgsl_eigen_genv
-function fgsl_eigen_genv_qz(a, b, alpha, beta, evec, q, z, w) 
+function fgsl_eigen_genv_qz(a, b, alpha, beta, evec, q, z, w)
   type(fgsl_matrix), intent(inout) :: a, b, q, z
   type(fgsl_vector_complex), intent(inout) :: alpha
   type(fgsl_vector), intent(inout) :: beta
@@ -290,7 +288,7 @@ function fgsl_eigen_genv_qz(a, b, alpha, beta, evec, q, z, w)
 end function fgsl_eigen_genv_qz
 function fgsl_eigen_symmv_sort (eval, evec, sort_type)
   type(fgsl_vector), intent(inout) :: eval
-  type(fgsl_matrix), intent(inout) :: evec 
+  type(fgsl_matrix), intent(inout) :: evec
   integer(fgsl_int), intent(in) :: sort_type
   integer(fgsl_int) :: fgsl_eigen_symmv_sort
   fgsl_eigen_symmv_sort = gsl_eigen_symmv_sort(eval%gsl_vector, &
@@ -298,7 +296,7 @@ function fgsl_eigen_symmv_sort (eval, evec, sort_type)
 end function fgsl_eigen_symmv_sort
 function fgsl_eigen_hermv_sort (eval, evec, sort_type)
   type(fgsl_vector), intent(inout) :: eval
-  type(fgsl_matrix_complex), intent(inout) :: evec 
+  type(fgsl_matrix_complex), intent(inout) :: evec
   integer(fgsl_int), intent(in) :: sort_type
   integer(fgsl_int) :: fgsl_eigen_hermv_sort
   fgsl_eigen_hermv_sort = gsl_eigen_hermv_sort(eval%gsl_vector, &
@@ -306,7 +304,7 @@ function fgsl_eigen_hermv_sort (eval, evec, sort_type)
 end function fgsl_eigen_hermv_sort
 function fgsl_eigen_nonsymmv_sort (eval, evec, sort_type)
   type(fgsl_vector_complex), intent(inout) :: eval
-  type(fgsl_matrix_complex), intent(inout) :: evec 
+  type(fgsl_matrix_complex), intent(inout) :: evec
   integer(fgsl_int), intent(in) :: sort_type
   integer(fgsl_int) :: fgsl_eigen_nonsymmv_sort
   fgsl_eigen_nonsymmv_sort = gsl_eigen_nonsymmv_sort( &
@@ -314,7 +312,7 @@ function fgsl_eigen_nonsymmv_sort (eval, evec, sort_type)
 end function fgsl_eigen_nonsymmv_sort
 function fgsl_eigen_gensymmv_sort (eval, evec, sort_type)
   type(fgsl_vector), intent(inout) :: eval
-  type(fgsl_matrix), intent(inout) :: evec 
+  type(fgsl_matrix), intent(inout) :: evec
   integer(fgsl_int), intent(in) :: sort_type
   integer(fgsl_int) :: fgsl_eigen_gensymmv_sort
   fgsl_eigen_gensymmv_sort = gsl_eigen_gensymmv_sort(eval%gsl_vector, &
@@ -322,7 +320,7 @@ function fgsl_eigen_gensymmv_sort (eval, evec, sort_type)
 end function fgsl_eigen_gensymmv_sort
 function fgsl_eigen_genhermv_sort (eval, evec, sort_type)
   type(fgsl_vector), intent(inout) :: eval
-  type(fgsl_matrix_complex), intent(inout) :: evec 
+  type(fgsl_matrix_complex), intent(inout) :: evec
   integer(fgsl_int), intent(in) :: sort_type
   integer(fgsl_int) :: fgsl_eigen_genhermv_sort
   fgsl_eigen_genhermv_sort = gsl_eigen_genhermv_sort(eval%gsl_vector, &
@@ -331,7 +329,7 @@ end function fgsl_eigen_genhermv_sort
 function fgsl_eigen_genv_sort (alpha, beta, evec, sort_type)
   type(fgsl_vector_complex), intent(inout) :: alpha
   type(fgsl_vector), intent(inout) :: beta
-  type(fgsl_matrix_complex), intent(inout) :: evec 
+  type(fgsl_matrix_complex), intent(inout) :: evec
   integer(fgsl_int), intent(in) :: sort_type
   integer(fgsl_int) :: fgsl_eigen_genv_sort
   fgsl_eigen_genv_sort = gsl_eigen_genv_sort(alpha%gsl_vector_complex, &

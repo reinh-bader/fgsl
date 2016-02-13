@@ -15,7 +15,7 @@ program interp
   acc = fgsl_interp_accel_alloc()
   write(6, *) 'Values of interpolating spline:'
   spline = fgsl_spline_alloc(fgsl_interp_cspline, 10_fgsl_size_t)
-  status = fgsl_spline_init (spline, x, y, 10_fgsl_size_t)
+  status = fgsl_spline_init (spline, x, y)
   do i=1, 101
      xi = x(1) + dble(i-1)/100.D0 * (x(10) - x(1))
      yi = fgsl_spline_eval (spline, xi, acc)

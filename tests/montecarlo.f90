@@ -6,11 +6,12 @@ module mod_montecarlo
   real(fgsl_double), parameter :: eps6 = 1.0d-6
   integer(fgsl_size_t), parameter :: calls = 500000
 contains
-  function g(v, n, params) bind(c)
+  function g(v_c, n, params) bind(c)
     integer(c_size_t), value :: n
-    real(c_double), dimension(*) :: v
-    type(c_ptr), value :: params
+    real(c_double), dimension(:), pointer :: v
+    type(c_ptr), value :: params, v_c
     real(c_double) :: g
+    call c_f_pointer(v_c, v, [n])
     g = 1.0_c_double/(m_pi**3)/ &
          (1.0_fgsl_double - cos(v(1))*cos(v(2))*cos(v(3)))
   end function g
@@ -67,12 +68,12 @@ program montecarlo
        fgsl_well_defined(v),.true.)
   status = fgsl_monte_vegas_integrate(gfun, xl, xu, 3_fgsl_size_t, &
        10000_fgsl_size_t, r, v, res, err)
-  do 
+  do
      status = fgsl_monte_vegas_integrate(gfun, xl, xu, 3_fgsl_size_t, &
           calls/5_fgsl_size_t, r, v, res, err)
      call fgsl_monte_vegas_getparams(v, y, yy, chisq, yyy, &
        its, stage, mode, verbose, file)
-     if (abs(chisq - 1.0_fgsl_double) <= 0.5_fgsl_double) exit 
+     if (abs(chisq - 1.0_fgsl_double) <= 0.5_fgsl_double) exit
   end do
   call unit_assert_equal('fgsl_monte_vegas:status',&
        fgsl_success,status)

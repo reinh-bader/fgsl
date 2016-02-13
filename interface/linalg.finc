@@ -270,14 +270,12 @@
     integer(c_int) :: signum
     integer(c_int) :: gsl_linalg_sv_solve
   end function gsl_linalg_sv_solve
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
   function gsl_linalg_sv_leverage(u, h) &
        bind(c, name='gsl_linalg_SV_leverage')
     import :: c_ptr, c_int
     type(c_ptr), value :: u, h
     integer(c_int) :: gsl_linalg_sv_leverage
   end function gsl_linalg_sv_leverage
-#endif
 !
 ! Cholesky
 !
@@ -322,13 +320,11 @@
     integer(c_int) :: gsl_linalg_cholesky_invert
     type(c_ptr), value :: chol
   end function gsl_linalg_cholesky_invert
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
   function gsl_linalg_complex_cholesky_invert (chol) bind(c)
     import :: c_ptr, c_int
     integer(c_int) :: gsl_linalg_complex_cholesky_invert
     type(c_ptr), value :: chol
   end function gsl_linalg_complex_cholesky_invert
-#endif
 !
 ! Tridiag
 !
@@ -410,7 +406,7 @@
     type(c_ptr), value :: a, tau_u, tau_v
     integer(c_int) :: gsl_linalg_bidiag_decomp
   end function gsl_linalg_bidiag_decomp
-  function gsl_linalg_bidiag_unpack (a, tau_u, u, tau_v, v, diag, & 
+  function gsl_linalg_bidiag_unpack (a, tau_u, u, tau_v, v, diag, &
        superdiag) bind(c)
     import :: c_ptr, c_int
     type(c_ptr), value :: a, tau_u, tau_v, u, v, diag, superdiag
@@ -517,5 +513,20 @@
     type(c_ptr), value :: a, d
     integer(c_int) :: gsl_linalg_balance_matrix
   end function gsl_linalg_balance_matrix
-
-
+  function gsl_linalg_qr_matq(QR, tau, A) &
+    bind(c, name='gsl_linalg_QR_matQ')
+    import :: c_ptr, c_int
+    type(c_ptr), value :: QR, tau, A
+    integer(c_int) :: gsl_linalg_qr_matq
+  end function gsl_linalg_qr_matq
+  subroutine gsl_linalg_givens(a, b, c, s) bind(c)
+    import :: c_double
+    real(c_double), value :: a, b
+    real(c_double):: c, s
+  end subroutine gsl_linalg_givens
+  subroutine gsl_linalg_givens_gv(v, i, j, c, s) bind(c)
+    import :: c_ptr, c_size_t, c_double
+    type(c_ptr), value :: v
+    integer(c_size_t), value :: i, j
+    real(c_double), value :: c, s
+  end subroutine gsl_linalg_givens_gv

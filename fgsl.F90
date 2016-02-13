@@ -6,30 +6,30 @@ module fgsl
 !>  \author R. Bader
 !>  \author Leibniz Supercomputing Centre, Garching, Germany
 !>  \details
-!>  Please see the <a href="pages.html">Related Pages</a> section 
+!>  Please see the <a href="pages.html">Related Pages</a> section
 !>  for the information about the conventions used in the interface.
-!>  Examples on how to use the interface are available in the 
+!>  Examples on how to use the interface are available in the
 !>  <p><b>doc/examples</b><p> subdirectory of the source package.
-!>  \page "Introduction" 
+!>  \page "Introduction"
 !>  <OL>
 !>  <LI> Introductory notes:
 !>      <UL>
-!>      <LI> In Fortran code, GSL_* must be replaced by FGSL_* for each API 
-!>           call, abstract data type, module variables and parameters (with 
+!>      <LI> In Fortran code, GSL_* must be replaced by FGSL_* for each API
+!>           call, abstract data type, module variables and parameters (with
 !>           exception of the M_* mathematical constants)
 !>      <LI> Some names were changed due to UC/LC aliasing. See the documentation
 !>           chapter on special functions for details.
-!>      <LI> Intrinsic type matching: 
+!>      <LI> Intrinsic type matching:
 !>        -# real(fgsl_double) is used for double precision values
 !>        -# real(fgsl_float) is used for single precision values
-!>        -# integer(fgsl_int) for integer 
-!>        -# integer(fgsl_long) for long integer 
+!>        -# integer(fgsl_int) for integer
+!>        -# integer(fgsl_long) for long integer
 !>        -# integer(fgsl_size_t) for size_t integer
 !>        -# complex(fgsl_double_complex) for gsl_complex
 !>        -# character(fgsl_char) for characters
 !>        -# no value attributes and mostly no pointers in Fortran calls
 !>        -# unsigned int must be converted to integer(fgsl_long).
-!>        -# char * results are converted to fixed length strings. Use TRIM. 
+!>        -# char * results are converted to fixed length strings. Use TRIM.
 !>       </UL>
 !>  <LI> Additional routines:
 !>      <UL>
@@ -46,9 +46,9 @@ module fgsl
 !>      <LI> additional remarks on the various files are available via the Related
 !>           Pages menu item
 !>      </UL>
-!>  <LI> Only interfaces from the GSL manual are implemented. The 
-!>       C include files may contain more stuff which may only be meant 
-!>       for internal use, or is not officially documented. 
+!>  <LI> Only interfaces from the GSL manual are implemented. The
+!>       C include files may contain more stuff which may only be meant
+!>       for internal use, or is not officially documented.
 !>  <LI> Inlining of GSL routines is not possible.
 !>  <LI> Macros are not supported:
 !>      <UL>
@@ -56,7 +56,7 @@ module fgsl
 !>      <LI> Inf/Nan need to use IEEE_VALUE (if available)
 !>      </UL>
 !>  </OL>
-!>  
+!>
 !-------------------------------------------------------------------------------
   use, intrinsic :: iso_c_binding
   implicit none
@@ -73,7 +73,7 @@ module fgsl
        fgsl_hypot, fgsl_hypot3, fgsl_acosh, fgsl_asinh, fgsl_atanh, fgsl_ldexp, fgsl_frexp, &
        fgsl_fcmp, fgsl_function_init, fgsl_function_fdf_init, fgsl_function_free, &
        fgsl_function_fdf_free, fgsl_fn_eval, fgsl_fn_fdf_eval_f, fgsl_fn_fdf_eval_df, &
-       fgsl_fn_fdf_eval_f_df 
+       fgsl_fn_fdf_eval_f_df
 ! complex functions
   public :: fgsl_complex_arg, fgsl_complex_logabs, fgsl_complex_log10, &
        fgsl_complex_log_b, fgsl_complex_arcsin, fgsl_complex_arcsin_real, &
@@ -90,9 +90,7 @@ module fgsl
        fgsl_poly_solve_cubic, fgsl_poly_complex_solve_cubic, &
        fgsl_poly_complex_workspace_alloc, fgsl_poly_complex_workspace_free, &
        fgsl_poly_complex_solve
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
   public :: fgsl_poly_dd_hermite_init
-#endif
 ! special functions
   public :: fgsl_sf_airy_ai, fgsl_sf_airy_ai_e, fgsl_sf_airy_bi, fgsl_sf_airy_bi_e, &
        fgsl_sf_airy_ai_scaled, fgsl_sf_airy_ai_scaled_e, fgsl_sf_airy_bi_scaled, &
@@ -104,22 +102,22 @@ module fgsl
        fgsl_sf_airy_zero_bi, fgsl_sf_airy_zero_bi_e, &
        fgsl_sf_airy_zero_ai_deriv, fgsl_sf_airy_zero_ai_deriv_e, &
        fgsl_sf_airy_zero_bi_deriv, fgsl_sf_airy_zero_bi_deriv_e
-  public :: fgsl_sf_bessel_jc0, fgsl_sf_bessel_jc0_e, & 
+  public :: fgsl_sf_bessel_jc0, fgsl_sf_bessel_jc0_e, &
        fgsl_sf_bessel_jc1, fgsl_sf_bessel_jc1_e, fgsl_sf_bessel_jcn, &
        fgsl_sf_bessel_jcn_e, fgsl_sf_bessel_jcn_array, &
-       fgsl_sf_bessel_yc0, fgsl_sf_bessel_yc0_e, & 
+       fgsl_sf_bessel_yc0, fgsl_sf_bessel_yc0_e, &
        fgsl_sf_bessel_yc1, fgsl_sf_bessel_yc1_e, fgsl_sf_bessel_ycn, &
        fgsl_sf_bessel_ycn_e, fgsl_sf_bessel_ycn_array, &
-       fgsl_sf_bessel_ic0, fgsl_sf_bessel_ic0_e, & 
+       fgsl_sf_bessel_ic0, fgsl_sf_bessel_ic0_e, &
        fgsl_sf_bessel_ic1, fgsl_sf_bessel_ic1_e, fgsl_sf_bessel_icn, &
        fgsl_sf_bessel_icn_e, fgsl_sf_bessel_icn_array, &
-       fgsl_sf_bessel_ic0_scaled, fgsl_sf_bessel_ic0_scaled_e, & 
+       fgsl_sf_bessel_ic0_scaled, fgsl_sf_bessel_ic0_scaled_e, &
        fgsl_sf_bessel_ic1_scaled, fgsl_sf_bessel_ic1_scaled_e, fgsl_sf_bessel_icn_scaled, &
        fgsl_sf_bessel_icn_scaled_e, fgsl_sf_bessel_icn_scaled_array, &
-       fgsl_sf_bessel_kc0, fgsl_sf_bessel_kc0_e, & 
+       fgsl_sf_bessel_kc0, fgsl_sf_bessel_kc0_e, &
        fgsl_sf_bessel_kc1, fgsl_sf_bessel_kc1_e, fgsl_sf_bessel_kcn, &
        fgsl_sf_bessel_kcn_e, fgsl_sf_bessel_kcn_array, &
-       fgsl_sf_bessel_kc0_scaled, fgsl_sf_bessel_kc0_scaled_e, & 
+       fgsl_sf_bessel_kc0_scaled, fgsl_sf_bessel_kc0_scaled_e, &
        fgsl_sf_bessel_kc1_scaled, fgsl_sf_bessel_kc1_scaled_e, fgsl_sf_bessel_kcn_scaled, &
        fgsl_sf_bessel_kcn_scaled_e, fgsl_sf_bessel_kcn_scaled_array
   public :: fgsl_sf_bessel_js0, fgsl_sf_bessel_js0_e, fgsl_sf_bessel_js1, fgsl_sf_bessel_js1_e, &
@@ -159,7 +157,7 @@ module fgsl
   public :: fgsl_sf_ellint_kcomp, fgsl_sf_ellint_kcomp_e, fgsl_sf_ellint_ecomp, &
        fgsl_sf_ellint_ecomp_e, fgsl_sf_ellint_f, fgsl_sf_ellint_pcomp, &
        fgsl_sf_ellint_pcomp_e, fgsl_sf_ellint_f_e, &
-       fgsl_sf_ellint_e, fgsl_sf_ellint_e_e, fgsl_sf_ellint_p, fgsl_sf_ellint_p_e, & 
+       fgsl_sf_ellint_e, fgsl_sf_ellint_e_e, fgsl_sf_ellint_p, fgsl_sf_ellint_p_e, &
        fgsl_sf_ellint_d, fgsl_sf_ellint_d_e, fgsl_sf_ellint_rc, fgsl_sf_ellint_rc_e, &
        fgsl_sf_ellint_rd, fgsl_sf_ellint_rd_e, fgsl_sf_ellint_rf, fgsl_sf_ellint_rf_e, &
        fgsl_sf_ellint_rj, fgsl_sf_ellint_rj_e, fgsl_sf_elljac_e
@@ -216,10 +214,7 @@ module fgsl
        fgsl_sf_legendre_q0, fgsl_sf_legendre_q0_e, &
        fgsl_sf_legendre_q1, fgsl_sf_legendre_q1_e, fgsl_sf_legendre_ql, &
        fgsl_sf_legendre_ql_e, fgsl_sf_legendre_plm, fgsl_sf_legendre_plm_e, &
-       fgsl_sf_legendre_plm_array, fgsl_sf_legendre_plm_deriv_array, &
-       fgsl_sf_legendre_sphplm, fgsl_sf_legendre_sphplm_e, &
-       fgsl_sf_legendre_sphplm_array, fgsl_sf_legendre_sphplm_deriv_array, &
-       fgsl_sf_legendre_array_size
+       fgsl_sf_legendre_sphplm, fgsl_sf_legendre_sphplm_e
   public :: fgsl_sf_conicalp_half, fgsl_sf_conicalp_half_e, fgsl_sf_conicalp_mhalf, &
        fgsl_sf_conicalp_mhalf_e, fgsl_sf_conicalp_0, fgsl_sf_conicalp_0_e, &
        fgsl_sf_conicalp_1, fgsl_sf_conicalp_1_e, fgsl_sf_conicalp_sph_reg, &
@@ -227,6 +222,25 @@ module fgsl
        fgsl_sf_legendre_h3d_0, fgsl_sf_legendre_h3d_0_e, fgsl_sf_legendre_h3d_1, &
        fgsl_sf_legendre_h3d_1_e, fgsl_sf_legendre_h3d, fgsl_sf_legendre_h3d_e, &
        fgsl_sf_legendre_h3d_array
+  public :: fgsl_sf_legendre_array, fgsl_sf_legendre_array_e, &
+       fgsl_sf_legendre_deriv_array, fgsl_sf_legendre_deriv_array_e, &
+       fgsl_sf_legendre_deriv_alt_array, fgsl_sf_legendre_deriv_alt_array_e, &
+       fgsl_sf_legendre_deriv2_array, fgsl_sf_legendre_deriv2_array_e, &
+       fgsl_sf_legendre_deriv2_alt_array, fgsl_sf_legendre_deriv2_alt_array_e, &
+       fgsl_sf_legendre_array_n, fgsl_sf_legendre_array_index, fgsl_sf_legendre_nlm
+  public :: fgsl_sf_mathieu_a_array, fgsl_sf_mathieu_b_array, &
+       fgsl_sf_mathieu_a_e, fgsl_sf_mathieu_a, &
+       fgsl_sf_mathieu_b_e, fgsl_sf_mathieu_b, &
+       fgsl_sf_mathieu_a_coeff, fgsl_sf_mathieu_b_coeff, &
+       fgsl_sf_mathieu_alloc, fgsl_sf_mathieu_free, &
+       fgsl_sf_mathieu_ce_e, fgsl_sf_mathieu_ce, &
+       fgsl_sf_mathieu_se_e, fgsl_sf_mathieu_se, &
+       fgsl_sf_mathieu_ce_array, fgsl_sf_mathieu_se_array, &
+       fgsl_sf_mathieu_mc_e, fgsl_sf_mathieu_mc, &
+       fgsl_sf_mathieu_ms_e, fgsl_sf_mathieu_ms, &
+       fgsl_sf_mathieu_mc_array, fgsl_sf_mathieu_ms_array
+
+
   public :: fgsl_sf_log, fgsl_sf_log_e, fgsl_sf_log_abs, fgsl_sf_log_abs_e, &
        fgsl_sf_complex_log_e, fgsl_sf_log_1plusx, fgsl_sf_log_1plusx_e, &
        fgsl_sf_log_1plusx_mx, fgsl_sf_log_1plusx_mx_e, fgsl_sf_psi_int, &
@@ -259,15 +273,29 @@ module fgsl
        fgsl_interp_eval_deriv2, fgsl_interp_eval_deriv2_e, &
        fgsl_interp_eval_integ, fgsl_interp_eval_integ_e, &
        fgsl_interp_min_size, &
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
        fgsl_interp_type_min_size,&
-#endif
        fgsl_interp_name
-  public :: fgsl_spline_alloc, fgsl_spline_init, fgsl_spline_free, & 
+  public :: fgsl_interp2d_alloc, fgsl_interp2d_name, fgsl_interp2d_min_size, &
+       fgsl_interp2d_type_min_size, fgsl_interp2d_init, fgsl_interp2d_free, fgsl_interp2d_eval, &
+       fgsl_interp2d_eval_extrap, fgsl_interp2d_eval_e, fgsl_interp2d_eval_e_extrap, &
+       fgsl_interp2d_eval_deriv_x, fgsl_interp2d_eval_deriv_x_e, &
+       fgsl_interp2d_eval_deriv_y, fgsl_interp2d_eval_deriv_y_e, &
+       fgsl_interp2d_eval_deriv_xx, fgsl_interp2d_eval_deriv_xx_e, &
+       fgsl_interp2d_eval_deriv_yy, fgsl_interp2d_eval_deriv_yy_e, &
+       fgsl_interp2d_eval_deriv_xy, fgsl_interp2d_eval_deriv_xy_e
+  public :: fgsl_spline_alloc, fgsl_spline_init, fgsl_spline_free, &
        fgsl_spline_name, fgsl_spline_min_size, fgsl_spline_eval, &
        fgsl_spline_eval_e, fgsl_spline_eval_deriv, fgsl_spline_eval_deriv_e, &
        fgsl_spline_eval_deriv2, fgsl_spline_eval_deriv2_e, &
        fgsl_spline_eval_integ, fgsl_spline_eval_integ_e
+  public :: fgsl_spline2d_alloc, fgsl_spline2d_init, fgsl_spline2d_free, &
+       fgsl_spline2d_eval, fgsl_spline2d_eval_e, &
+       fgsl_spline2d_eval_deriv_x, fgsl_spline2d_eval_deriv_x_e, &
+       fgsl_spline2d_eval_deriv_y, fgsl_spline2d_eval_deriv_y_e, &
+       fgsl_spline2d_eval_deriv_xx, fgsl_spline2d_eval_deriv_xx_e, &
+       fgsl_spline2d_eval_deriv_yy, fgsl_spline2d_eval_deriv_yy_e, &
+       fgsl_spline2d_eval_deriv_xy, fgsl_spline2d_eval_deriv_xy_e, &
+       fgsl_spline2d_min_size, fgsl_spline2d_name
   public :: fgsl_interp_accel_alloc, fgsl_interp_accel_free, &
        fgsl_interp_accel_find, fgsl_interp_bsearch
 ! permutations, combinations and multisets
@@ -283,7 +311,6 @@ module fgsl
        fgsl_permutation_canonical_cycles, fgsl_permutation_fwrite, &
        fgsl_permutation_fread, fgsl_permutation_fprintf, &
        fgsl_permutation_fscanf, &
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
        fgsl_multiset_alloc, &
        fgsl_multiset_calloc, fgsl_multiset_init_first, fgsl_multiset_init_last, &
        fgsl_multiset_free, fgsl_multiset_memcpy, fgsl_multiset_get, &
@@ -291,7 +318,6 @@ module fgsl
        fgsl_multiset_valid, fgsl_multiset_next, &
        fgsl_multiset_prev, fgsl_multiset_fwrite, fgsl_multiset_fread, &
        fgsl_multiset_fprintf, fgsl_multiset_fscanf, &
-#endif
        fgsl_combination_alloc, &
        fgsl_combination_calloc, fgsl_combination_init_first, fgsl_combination_init_last, &
        fgsl_combination_free, fgsl_combination_memcpy, fgsl_combination_get, &
@@ -304,9 +330,7 @@ module fgsl
        fgsl_sort_smallest, fgsl_sort_smallest_index, &
        fgsl_sort_largest, fgsl_sort_largest_index, &
        fgsl_sort, fgsl_sort_index
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
   public :: fgsl_sort_vector2
-#endif
 ! linear algebra
   public :: fgsl_linalg_lu_decomp, fgsl_linalg_complex_lu_decomp, &
        fgsl_linalg_lu_solve, fgsl_linalg_complex_lu_solve, &
@@ -330,9 +354,7 @@ module fgsl
        fgsl_linalg_cholesky_solve, fgsl_linalg_complex_cholesky_solve, &
        fgsl_linalg_cholesky_svx, fgsl_linalg_complex_cholesky_svx, &
        fgsl_linalg_cholesky_invert, &
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
        fgsl_linalg_complex_cholesky_invert, &
-#endif
        fgsl_linalg_symmtd_decomp, fgsl_linalg_symmtd_unpack, &
        fgsl_linalg_symmtd_unpack_t, fgsl_linalg_hermtd_decomp, &
        fgsl_linalg_hermtd_unpack, fgsl_linalg_hermtd_unpack_t, &
@@ -348,10 +370,9 @@ module fgsl
        fgsl_linalg_householder_hv, fgsl_linalg_complex_householder_hv, &
        fgsl_linalg_hh_solve, fgsl_linalg_hh_svx, fgsl_linalg_solve_tridiag, &
        fgsl_linalg_solve_symm_tridiag, fgsl_linalg_solve_cyc_tridiag, &
-       fgsl_linalg_solve_symm_cyc_tridiag, fgsl_linalg_balance_matrix
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
+       fgsl_linalg_solve_symm_cyc_tridiag, fgsl_linalg_balance_matrix, &
+       fgsl_linalg_qr_matq, fgsl_linalg_givens, fgsl_linalg_givens_gv
   public :: fgsl_linalg_sv_leverage
-#endif
 ! eigensystems
   public :: fgsl_eigen_symm_alloc, fgsl_eigen_symm_free, fgsl_eigen_symm, &
        fgsl_eigen_symmv_alloc, fgsl_eigen_symmv_free, fgsl_eigen_symmv, &
@@ -359,9 +380,7 @@ module fgsl
        fgsl_eigen_hermv_alloc, fgsl_eigen_hermv_free, fgsl_eigen_hermv, &
        fgsl_eigen_nonsymm_alloc, fgsl_eigen_nonsymm_free, fgsl_eigen_nonsymm, &
        fgsl_eigen_nonsymm_params, &
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
         fgsl_eigen_nonsymmv_params, &
-#endif
        fgsl_eigen_nonsymmv_alloc, fgsl_eigen_nonsymmv_free, fgsl_eigen_nonsymmv, &
        fgsl_eigen_nonsymm_z, fgsl_eigen_nonsymmv_z, &
        fgsl_eigen_gensymm_alloc, fgsl_eigen_gensymm_free, fgsl_eigen_gensymm, &
@@ -400,17 +419,11 @@ module fgsl
        fgsl_integration_qaws, &
        fgsl_integration_qawo_table_alloc, fgsl_integration_qawo_table_set, &
        fgsl_integration_qawo_table_set_length, fgsl_integration_qawo, &
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
        fgsl_integration_cquad_workspace_alloc, fgsl_integration_cquad_workspace_free, &
        fgsl_integration_cquad, &
-#endif
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
        fgsl_integration_glfixed_point,&
-#endif
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
        fgsl_integration_glfixed, &
        fgsl_integration_glfixed_table_alloc, fgsl_integration_glfixed_table_free, &
-#endif
        fgsl_integration_qawo_table_free, fgsl_integration_qawf
 
 ! random numbers, quasi-random numbers, distribution functions
@@ -476,7 +489,6 @@ module fgsl
 ! simulated annealing
   public :: fgsl_siman_params_init, fgsl_siman_params_free, fgsl_siman_solve
 ! ordinary differential equations
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 15
   public :: fgsl_odeiv2_system_init, fgsl_odeiv2_system_free, &
        fgsl_odeiv2_step_alloc, fgsl_odeiv2_step_status, fgsl_odeiv2_system_status, &
        fgsl_odeiv2_step_reset, fgsl_odeiv2_step_free, fgsl_odeiv2_step_name, &
@@ -492,11 +504,8 @@ module fgsl
        fgsl_odeiv2_driver_set_hmin, fgsl_odeiv2_driver_set_hmax, fgsl_odeiv2_driver_set_nmax, &
        fgsl_odeiv2_driver_apply, fgsl_odeiv2_driver_apply_fixed_step, &
        fgsl_odeiv2_driver_reset, fgsl_odeiv2_driver_free
-#endif
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
-  public :: gsl_odeiv2_driver_reset_hstart 
-#endif
-!      legacy calls  
+  public :: gsl_odeiv2_driver_reset_hstart
+!      legacy calls
   public :: fgsl_odeiv_system_init, fgsl_odeiv_system_free, &
        fgsl_odeiv_step_alloc, fgsl_odeiv_step_status, fgsl_odeiv_system_status, &
        fgsl_odeiv_step_reset, fgsl_odeiv_step_free, fgsl_odeiv_step_name, &
@@ -610,14 +619,24 @@ module fgsl
        fgsl_multimin_test_size, fgsl_multimin_fdfminimizer_x, fgsl_multimin_test_gradient
 ! Linear and nonlinear fitting
   public :: fgsl_fit_linear, fgsl_fit_wlinear, fgsl_fit_linear_est, fgsl_fit_mul, &
-       fgsl_fit_wmul, fgsl_fit_mul_est, fgsl_multifit_linear_alloc, fgsl_multifit_linear_free, &
+       fgsl_fit_wmul, fgsl_fit_mul_est
+
+  public :: fgsl_multifit_linear_alloc, fgsl_multifit_linear_free, &
        fgsl_multifit_linear, fgsl_multifit_linear_svd, &
        fgsl_multifit_wlinear, fgsl_multifit_wlinear_svd, &
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 14
-       fgsl_multifit_linear_usvd, fgsl_multifit_wlinear_usvd, & 
-#endif
-       fgsl_multifit_linear_est, &
-       fgsl_multifit_linear_residuals 
+       fgsl_multifit_wlinear_usvd, fgsl_multifit_linear_bsvd, &
+       fgsl_multifit_linear_est, fgsl_multifit_linear_solve, &
+       fgsl_multifit_linear_residuals, fgsl_multifit_linear_applyw, &
+       fgsl_multifit_linear_stdform1, fgsl_multifit_linear_wstdform1, &
+       fgsl_multifit_linear_l_decomp, fgsl_multifit_linear_stdform2, &
+       fgsl_multifit_linear_wstdform2, fgsl_multifit_linear_genform1, &
+       fgsl_multifit_linear_genform2, fgsl_multifit_linear_wgenform2, &
+       fgsl_multifit_linear_lreg, fgsl_multifit_linear_lcurve, &
+       fgsl_multifit_linear_lcorner, fgsl_multifit_linear_lcorner2, &
+       fgsl_multifit_linear_lk, fgsl_multifit_linear_lsobolev, &
+       fgsl_multifit_linear_rcond, fgsl_multifit_robust_maxiter, &
+       fgsl_multifit_robust_weights, fgsl_multifit_robust_residuals
+
   public :: fgsl_multifit_function_init, fgsl_multifit_function_fdf_init, &
        fgsl_multifit_function_free, fgsl_multifit_function_fdf_free, fgsl_multifit_fsolver_alloc, &
        fgsl_multifit_fdfsolver_alloc, fgsl_multifit_fsolver_free, fgsl_multifit_fdfsolver_free, &
@@ -626,15 +645,33 @@ module fgsl
        fgsl_multifit_fsolver_position, fgsl_multifit_fdfsolver_position, &
        fgsl_multifit_fdfsolver_dx, fgsl_multifit_fdfsolver_f, fgsl_multifit_fdfsolver_jac, &
        fgsl_multifit_test_delta, fgsl_multifit_test_gradient, fgsl_multifit_gradient, &
-       fgsl_multifit_covar
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
+       fgsl_multifit_covar, fgsl_multifit_covar_qrpt, fgsl_multifit_fdfsolver_wset, &
+       fgsl_multifit_fdfsolver_residual, fgsl_multifit_fdfsolver_niter, fgsl_multifit_eval_wf, &
+       fgsl_multifit_eval_wdf, fgsl_multifit_fdfsolver_test
   public :: fgsl_multifit_fsolver_driver, fgsl_multifit_fdfsolver_driver, &
-       fgsl_multifit_fdfsolver_dif_df, fgsl_multifit_fdfsolver_dif_fdf
+       fgsl_multifit_fdfsolver_dif_df
   public :: fgsl_multifit_robust_alloc, fgsl_multifit_robust_free, &
        fgsl_multifit_robust_tune, fgsl_multifit_robust_name, &
        fgsl_multifit_robust_statistics, fgsl_multifit_robust, &
        fgsl_multifit_robust_est
-#endif
+  public :: fgsl_multifit_fdfridge_alloc, fgsl_multifit_fdfridge_free, &
+       fgsl_multifit_fdfridge_name, fgsl_multifit_fdfridge_position, &
+       fgsl_multifit_fdfridge_residual, fgsl_multifit_fdfridge_niter, &
+       fgsl_multifit_fdfridge_set, fgsl_multifit_fdfridge_wset, &
+       fgsl_multifit_fdfridge_set2, fgsl_multifit_fdfridge_wset2, &
+       fgsl_multifit_fdfridge_set3, fgsl_multifit_fdfridge_wset3, &
+       fgsl_multifit_fdfridge_iterate, fgsl_multifit_fdfridge_driver
+
+! large linear least squares systems
+  public :: fgsl_multilarge_linear_alloc, fgsl_multilarge_linear_free, &
+       fgsl_multilarge_linear_name, fgsl_multilarge_linear_reset, &
+       fgsl_multilarge_linear_accumulate, fgsl_multilarge_linear_solve, &
+       fgsl_multilarge_linear_rcond, fgsl_multilarge_linear_lcurve, &
+       fgsl_multilarge_linear_wstdform1, fgsl_multilarge_linear_stdform1, &
+       fgsl_multilarge_linear_l_decomp, fgsl_multilarge_linear_wstdform2, &
+       fgsl_multilarge_linear_stdform2, fgsl_multilarge_linear_genform1, &
+       fgsl_multilarge_linear_genform2
+
 ! statistics
   public :: fgsl_stats_mean, fgsl_stats_variance, fgsl_stats_variance_m, &
        fgsl_stats_sd, fgsl_stats_sd_m, fgsl_stats_variance_with_fixed_mean, &
@@ -650,20 +687,38 @@ module fgsl
        fgsl_stats_min, fgsl_stats_minmax, fgsl_stats_max_index, &
        fgsl_stats_min_index, fgsl_stats_minmax_index, fgsl_stats_median_from_sorted_data, &
        fgsl_stats_quantile_from_sorted_data
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
-  public :: fgsl_stats_spearman      
-#endif
+  public :: fgsl_stats_spearman
 ! B-splines
   public :: fgsl_bspline_alloc, fgsl_bspline_free, fgsl_bspline_knots, &
-       fgsl_bspline_knots_uniform, fgsl_bspline_eval, & 
+       fgsl_bspline_knots_uniform, fgsl_bspline_eval, &
        fgsl_bspline_eval_nonzero,  fgsl_bspline_ncoeffs, &
-       fgsl_bspline_deriv_alloc, fgsl_bspline_deriv_free, &
        fgsl_bspline_deriv_eval, fgsl_bspline_deriv_eval_nonzero, &
        fgsl_bspline_greville_abscissa
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
   public :: fgsl_bspline_knots_greville
-#endif
-       
+
+! sparse matrices
+  public :: fgsl_spmatrix_alloc, fgsl_spmatrix_alloc_nzmax, &
+       fgsl_spmatrix_free, fgsl_spmatrix_realloc, fgsl_spmatrix_set_zero, &
+       fgsl_spmatrix_nnz, fgsl_spmatrix_compare_idx, fgsl_spmatrix_memcpy, &
+       fgsl_spmatrix_get, fgsl_spmatrix_set, fgsl_spmatrix_compcol, &
+       fgsl_spmatrix_cumsum, fgsl_spmatrix_scale, fgsl_spmatrix_minmax, &
+       fgsl_spmatrix_add, fgsl_spmatrix_d2sp, fgsl_spmatrix_sp2d, &
+       fgsl_spmatrix_equal, fgsl_spmatrix_transpose_memcpy
+
+! sparse matrix linear algebra
+  public :: fgsl_splinalg_itersolve_alloc, fgsl_splinalg_itersolve_free, &
+       fgsl_splinalg_itersolve_name, fgsl_splinalg_itersolve_iterate, &
+       fgsl_splinalg_itersolve_normr
+
+! running statistics
+  public :: fgsl_rstat_quantile_alloc, fgsl_rstat_quantile_free, &
+       fgsl_rstat_quantile_add, fgsl_rstat_quantile_get, &
+       fgsl_rstat_alloc, fgsl_rstat_free, fgsl_rstat_n, &
+       fgsl_rstat_add, fgsl_rstat_min, fgsl_rstat_max, &
+       fgsl_rstat_mean, fgsl_rstat_variance, fgsl_rstat_sd, &
+       fgsl_rstat_sd_mean, fgsl_rstat_median, fgsl_rstat_skew, &
+       fgsl_rstat_kurtosis, fgsl_rstat_reset
+
 ! IEEE
   public :: fgsl_ieee_fprintf, fgsl_ieee_printf, fgsl_ieee_env_setup
 !
@@ -698,34 +753,34 @@ module fgsl
   integer(fgsl_int), parameter, public :: fgsl_edom = 1      ! input domain error, e.g. sqrt(-1)
   integer(fgsl_int), parameter, public :: fgsl_erange = 2    ! output range error, e.g. exp(1e100)
   integer(fgsl_int), parameter, public :: fgsl_efault = 3    ! invalid pointer
-  integer(fgsl_int), parameter, public :: fgsl_einval = 4    ! invalid argument supplied by user 
+  integer(fgsl_int), parameter, public :: fgsl_einval = 4    ! invalid argument supplied by user
   integer(fgsl_int), parameter, public :: fgsl_efactor = 6   ! generic failure
   integer(fgsl_int), parameter, public :: fgsl_esanity = 7   ! sanity check failed - shouldn't happen
   integer(fgsl_int), parameter, public :: fgsl_enomem = 8    ! malloc failed
   integer(fgsl_int), parameter, public :: fgsl_ebadfunc = 9  ! problem with user-supplied function
-  integer(fgsl_int), parameter, public :: fgsl_erunaway = 10 ! iterative process is out of control 
+  integer(fgsl_int), parameter, public :: fgsl_erunaway = 10 ! iterative process is out of control
   integer(fgsl_int), parameter, public :: fgsl_emaxiter = 11 ! exceeded max number of iterations
   integer(fgsl_int), parameter, public :: fgsl_ezerodiv = 12 ! tried to divide by zero
   integer(fgsl_int), parameter, public :: fgsl_ebadtol = 13  ! user specified an invalid tolerance
   integer(fgsl_int), parameter, public :: fgsl_etol = 14     ! failed to reach the specified tolerance
-  integer(fgsl_int), parameter, public :: fgsl_eundrflw = 15 ! underflow 
+  integer(fgsl_int), parameter, public :: fgsl_eundrflw = 15 ! underflow
   integer(fgsl_int), parameter, public :: fgsl_eovrflw = 16  ! overflow
-  integer(fgsl_int), parameter, public :: fgsl_eloss = 17    ! loss of accuracy 
+  integer(fgsl_int), parameter, public :: fgsl_eloss = 17    ! loss of accuracy
   integer(fgsl_int), parameter, public :: fgsl_eround = 18   ! failed because of roundoff error
   integer(fgsl_int), parameter, public :: fgsl_ebadlen = 19  ! matrix, vector lengths are not conformant
   integer(fgsl_int), parameter, public :: fgsl_enotsqr = 20  ! matrix not square
-  integer(fgsl_int), parameter, public :: fgsl_esing = 21    ! apparent singularity detected 
-  integer(fgsl_int), parameter, public :: fgsl_ediverge = 22 ! integral or series is divergent 
-  integer(fgsl_int), parameter, public :: fgsl_eunsup = 23   ! no hw support for requested feature 
-  integer(fgsl_int), parameter, public :: fgsl_eunimpl = 24  ! requested feature not (yet) implemented 
+  integer(fgsl_int), parameter, public :: fgsl_esing = 21    ! apparent singularity detected
+  integer(fgsl_int), parameter, public :: fgsl_ediverge = 22 ! integral or series is divergent
+  integer(fgsl_int), parameter, public :: fgsl_eunsup = 23   ! no hw support for requested feature
+  integer(fgsl_int), parameter, public :: fgsl_eunimpl = 24  ! requested feature not (yet) implemented
   integer(fgsl_int), parameter, public :: fgsl_ecache = 25   ! cache limit exceeded
-  integer(fgsl_int), parameter, public :: fgsl_etable = 26   ! table limit exceeded 
+  integer(fgsl_int), parameter, public :: fgsl_etable = 26   ! table limit exceeded
   integer(fgsl_int), parameter, public :: fgsl_enoprog = 27  ! iteration: no progress towards solution
   integer(fgsl_int), parameter, public :: fgsl_enoprogj = 28 ! jacobian evals not improving the solution
-  integer(fgsl_int), parameter, public :: fgsl_etolf = 29    ! can't reach specified tolerance in F 
+  integer(fgsl_int), parameter, public :: fgsl_etolf = 29    ! can't reach specified tolerance in F
   integer(fgsl_int), parameter, public :: fgsl_etolx = 30    ! can't reach specified tolerance in X
   integer(fgsl_int), parameter, public :: fgsl_etolg = 31    ! can't reach specified tolerance in gradient
-  integer(fgsl_int), parameter, public :: fgsl_eof = 32      ! end of file 
+  integer(fgsl_int), parameter, public :: fgsl_eof = 32      ! end of file
 !
 ! mathematical constants from gsl_math.h
 !
@@ -746,7 +801,7 @@ module fgsl
   real(fgsl_extended), parameter, public :: m_ln2 = 0.69314718055994530941723212146_fgsl_extended
   real(fgsl_extended), parameter, public :: m_lnpi = 1.14472988584940017414342735135_fgsl_extended
   real(fgsl_extended), parameter, public :: m_euler = 0.57721566490153286060651209008_fgsl_extended
-! the following provokes warnings from g95 ... may need to change if refused by other compilers 
+! the following provokes warnings from g95 ... may need to change if refused by other compilers
 !  real(fgsl_double), parameter, public :: fgsl_posinf = 1.0_fgsl_double / 0.0_fgsl_double
 !  real(fgsl_double), parameter, public :: fgsl_neginf = -1.0_fgsl_double / 0.0_fgsl_double
 !  real(fgsl_double), parameter, public :: fgsl_nan = 0.0_fgsl_double / 0.0_fgsl_double
@@ -1031,7 +1086,7 @@ module fgsl
   type, public, bind(c) :: gsl_sf_result_e10
      real(c_double) :: val, err
      integer(c_int) :: e10
-  end type 
+  end type
   type, public :: fgsl_mode_t
      private
      integer(c_int) :: gsl_mode = 0
@@ -1040,6 +1095,26 @@ module fgsl
        fgsl_prec_double = fgsl_mode_t(0), &
        fgsl_prec_single = fgsl_mode_t(1), &
        fgsl_prec_approx = fgsl_mode_t(2)
+  type, public :: fgsl_sf_legendre_t
+    private
+    integer(c_int) :: gsl_sf_legendre_t = 0
+  end type fgsl_sf_legendre_t
+  type(fgsl_sf_legendre_t), parameter, public :: &
+    fgsl_sf_legendre_schmidt = fgsl_sf_legendre_t(0), &
+    fgsl_sf_legendre_spharm = fgsl_sf_legendre_t(1), &
+    fgsl_sf_legendre_full = fgsl_sf_legendre_t(2), &
+    fgsl_sf_legendre_none = fgsl_sf_legendre_t(3)
+  type, public :: fgsl_sf_mathieu_workspace
+    private
+    type(c_ptr) :: gsl_sf_mathieu_workspace
+  end type fgsl_sf_mathieu_workspace
+!
+! Enum: legendre special Functions
+!
+integer(fgsl_int), public, parameter :: gsl_sf_legendre_schmidt = 0
+integer(fgsl_int), public, parameter :: gsl_sf_legendre_spharm = 1
+integer(fgsl_int), public, parameter :: gsl_sf_legendre_full = 2
+integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
 !
 ! Types : Array support
 !
@@ -1060,9 +1135,23 @@ module fgsl
      type(c_ptr) :: gsl_matrix_complex = c_null_ptr
   end type fgsl_matrix_complex
 !
+! Types: large linear least squares systems
+!
+  type, public :: fgsl_multilarge_linear_type
+    private
+    integer(fgsl_int) :: which = 0
+  end type fgsl_multilarge_linear_type
+  type(fgsl_multilarge_linear_type), parameter, public :: &
+    fgsl_multilarge_linear_normal = fgsl_multilarge_linear_type(1), &
+    fgsl_multilarge_linear_tsqr = fgsl_multilarge_linear_type(2)
+
+  type, public :: fgsl_multilarge_linear_workspace
+    private
+    type(c_ptr) :: gsl_multilarge_linear_workspace
+  end type fgsl_multilarge_linear_workspace
+!
 ! Types : Interpolation
 !
-!  integer, parameter :: interp_maxnum = 6
   type, public :: fgsl_interp_type
      private
      integer(fgsl_int) :: which = 0
@@ -1073,7 +1162,8 @@ module fgsl
        fgsl_interp_cspline = fgsl_interp_type(3), &
        fgsl_interp_cspline_periodic = fgsl_interp_type(4), &
        fgsl_interp_akima = fgsl_interp_type(5), &
-       fgsl_interp_akima_periodic = fgsl_interp_type(6)
+       fgsl_interp_akima_periodic = fgsl_interp_type(6), &
+       fgsl_interp_steffen = fgsl_interp_type(7)
   type, public :: fgsl_interp
      private
      type(c_ptr) :: gsl_interp = c_null_ptr
@@ -1086,6 +1176,21 @@ module fgsl
      private
      type(c_ptr) :: gsl_spline = c_null_ptr
   end type fgsl_spline
+  type, public :: fgsl_spline2d
+     private
+     type(c_ptr) :: gsl_spline2d = c_null_ptr
+  end type fgsl_spline2d
+  type, public :: fgsl_interp2d_type
+    private
+    integer(fgsl_int) :: which = 0
+  end type fgsl_interp2d_type
+  type(fgsl_interp2d_type), parameter, public :: &
+       fgsl_interp2d_bilinear = fgsl_interp2d_type(1), &
+       fgsl_interp2d_bicubic = fgsl_interp2d_type(2)
+  type, public :: fgsl_interp2d
+     private
+     type(c_ptr) :: gsl_interp2d = c_null_ptr
+  end type fgsl_interp2d
 !
 ! Types: Permutations, Combinations and Multisets
 !
@@ -1097,11 +1202,10 @@ module fgsl
      private
      type(c_ptr) :: gsl_combination = c_null_ptr
   end type fgsl_combination
-  type, public :: fgsl_multiset 
+  type, public :: fgsl_multiset
      private
      type(c_ptr) :: gsl_multiset = c_null_ptr
   end type fgsl_multiset
-#if GSL_VERSION_MAJOR_FORTRAN >= 1 && GSL_VERSION_MINOR_FORTRAN >= 16
 !
 ! Types: Robust multifit
 !
@@ -1149,56 +1253,55 @@ module fgsl
        type(c_ptr) :: weights
        type(c_ptr) :: r
   end type gsl_multifit_robust_stats
-#endif
 !
 ! Types: Eigensystems
 !
   type, public :: fgsl_eigen_symm_workspace
-     private 
+     private
      type(c_ptr) :: gsl_eigen_symm_workspace = c_null_ptr
   end type fgsl_eigen_symm_workspace
   type, public :: fgsl_eigen_symmv_workspace
-     private 
+     private
      type(c_ptr) :: gsl_eigen_symmv_workspace = c_null_ptr
   end type fgsl_eigen_symmv_workspace
   type, public :: fgsl_eigen_herm_workspace
-     private 
+     private
      type(c_ptr) :: gsl_eigen_herm_workspace = c_null_ptr
   end type fgsl_eigen_herm_workspace
   type, public :: fgsl_eigen_hermv_workspace
-     private 
+     private
      type(c_ptr) :: gsl_eigen_hermv_workspace = c_null_ptr
   end type fgsl_eigen_hermv_workspace
   type, public :: fgsl_eigen_nonsymm_workspace
-     private 
+     private
      type(c_ptr) :: gsl_eigen_nonsymm_workspace = c_null_ptr
   end type fgsl_eigen_nonsymm_workspace
   type, public :: fgsl_eigen_nonsymmv_workspace
-     private 
+     private
      type(c_ptr) :: gsl_eigen_nonsymmv_workspace = c_null_ptr
   end type fgsl_eigen_nonsymmv_workspace
   type, public :: fgsl_eigen_gensymm_workspace
-     private 
+     private
      type(c_ptr) :: gsl_eigen_gensymm_workspace = c_null_ptr
   end type fgsl_eigen_gensymm_workspace
   type, public :: fgsl_eigen_gensymmv_workspace
-     private 
+     private
      type(c_ptr) :: gsl_eigen_gensymmv_workspace = c_null_ptr
   end type fgsl_eigen_gensymmv_workspace
   type, public :: fgsl_eigen_genherm_workspace
-     private 
+     private
      type(c_ptr) :: gsl_eigen_genherm_workspace = c_null_ptr
   end type fgsl_eigen_genherm_workspace
   type, public :: fgsl_eigen_genhermv_workspace
-     private 
+     private
      type(c_ptr) :: gsl_eigen_genhermv_workspace = c_null_ptr
   end type fgsl_eigen_genhermv_workspace
   type, public :: fgsl_eigen_gen_workspace
-     private 
+     private
      type(c_ptr) :: gsl_eigen_gen_workspace = c_null_ptr
   end type fgsl_eigen_gen_workspace
   type, public :: fgsl_eigen_genv_workspace
-     private 
+     private
      type(c_ptr) :: gsl_eigen_genv_workspace = c_null_ptr
   end type fgsl_eigen_genv_workspace
   integer(c_int), parameter, public :: fgsl_eigen_sort_val_asc = 0
@@ -1264,16 +1367,16 @@ module fgsl
 !
   type, public :: fgsl_rng
      private
-     type(c_ptr) :: gsl_rng
+     type(c_ptr) :: gsl_rng = c_null_ptr
   end type fgsl_rng
   type, public :: fgsl_rng_type
      private
-     type(c_ptr) :: gsl_rng_type
+     type(c_ptr) :: gsl_rng_type = c_null_ptr
      integer(fgsl_int) :: type = 0
   end type fgsl_rng_type
-! Note: we need a dynamic component here, since 
+! Note: we need a dynamic component here, since
 ! fgsl_rng_default needs to change at run time.
-! fgsl_rng_default will be set by fgsl_rng_env_setup, 
+! fgsl_rng_default will be set by fgsl_rng_env_setup,
 ! and the static objects will be all set at the
 ! first call of fgsl_rng_alloc
 !  integer, parameter :: rngmax = 61
@@ -1395,7 +1498,7 @@ module fgsl
   type, public :: fgsl_ntuple_value_fn
      private
      type(c_ptr) :: gsl_ntuple_value_fn = c_null_ptr
-  end type fgsl_ntuple_value_fn   
+  end type fgsl_ntuple_value_fn
 !
 ! Types: Monte Carlo integration
 !
@@ -1422,7 +1525,7 @@ module fgsl
 !
 ! Types: Simulated Annealing
 !
-  type, bind(c) :: gsl_siman_params_t 
+  type, bind(c) :: gsl_siman_params_t
      integer(c_int) :: n_tries, iters_fixed_t
      real(c_double) :: step_size, k, t_initial, mu_t, t_min
   end type gsl_siman_params_t
@@ -1618,7 +1721,7 @@ module fgsl
        fgsl_multiroot_fsolver_dnewton = fgsl_multiroot_fsolver_type(1), &
        fgsl_multiroot_fsolver_broyden = fgsl_multiroot_fsolver_type(2), &
        fgsl_multiroot_fsolver_hybrid = fgsl_multiroot_fsolver_type(3), &
-       fgsl_multiroot_fsolver_hybrids = fgsl_multiroot_fsolver_type(4) 
+       fgsl_multiroot_fsolver_hybrids = fgsl_multiroot_fsolver_type(4)
   type, public :: fgsl_multiroot_fdfsolver
      private
      type(c_ptr) :: gsl_multiroot_fdfsolver = c_null_ptr
@@ -1631,7 +1734,7 @@ module fgsl
        fgsl_multiroot_fdfsolver_newton = fgsl_multiroot_fdfsolver_type(1), &
        fgsl_multiroot_fdfsolver_gnewton = fgsl_multiroot_fdfsolver_type(2), &
        fgsl_multiroot_fdfsolver_hybridj = fgsl_multiroot_fdfsolver_type(3), &
-       fgsl_multiroot_fdfsolver_hybridsj = fgsl_multiroot_fdfsolver_type(4) 
+       fgsl_multiroot_fdfsolver_hybridsj = fgsl_multiroot_fdfsolver_type(4)
 !
 ! Types: Multi-Min
 !
@@ -1702,18 +1805,54 @@ module fgsl
   end type fgsl_multifit_fdfsolver_type
   type(fgsl_multifit_fdfsolver_type), public, parameter :: &
        fgsl_multifit_fdfsolver_lmder = fgsl_multifit_fdfsolver_type(1), &
-       fgsl_multifit_fdfsolver_lmsder = fgsl_multifit_fdfsolver_type(2)
+       fgsl_multifit_fdfsolver_lmsder = fgsl_multifit_fdfsolver_type(2), &
+       fgsl_multifit_fdfsolver_lmniel = fgsl_multifit_fdfsolver_type(3)
+  type, public:: fgsl_multifit_fdfridge
+    private
+    type(c_ptr) :: gsl_multifit_fdfridge = c_null_ptr
+  end type fgsl_multifit_fdfridge
 !
 ! Types: B-Splines
 !
   type, public :: fgsl_bspline_workspace
-     private 
-     type(c_ptr) :: gsl_bspline_workspace
+     private
+     type(c_ptr) :: gsl_bspline_workspace = c_null_ptr
   end type fgsl_bspline_workspace
-  type, public :: fgsl_bspline_deriv_workspace
-     private 
-     type(c_ptr) :: gsl_bspline_deriv_workspace
-  end type fgsl_bspline_deriv_workspace
+
+!
+! Types: sparse matrices
+!
+  integer(fgsl_int), public, parameter :: fgsl_spmatrix_triplet = 0
+  integer(fgsl_int), public, parameter :: fgsl_spmatrix_ccs = 1
+  type, public :: fgsl_spmatrix
+    private
+    type(c_ptr) :: gsl_spmatrix = c_null_ptr
+  end type fgsl_spmatrix
+!
+! Types: sparse matrix linear algebra
+!
+type, public :: fgsl_splinalg_itersolve_type
+   private
+   integer(c_int) :: which = 0
+end type fgsl_splinalg_itersolve_type
+type(fgsl_splinalg_itersolve_type), public, parameter :: &
+     fgsl_splinalg_itersolve_gmres = fgsl_splinalg_itersolve_type(1)
+type, public :: fgsl_splinalg_itersolve
+  private
+  type(c_ptr) :: gsl_splinalg_itersolve
+end type fgsl_splinalg_itersolve
+!
+! Types: Running Statistics
+!
+type, public :: fgsl_rstat_quantile_workspace
+  private
+  type(c_ptr) :: gsl_rstat_quantile_workspace
+end type fgsl_rstat_quantile_workspace
+type, public :: fgsl_rstat_workspace
+  private
+  type(c_ptr) :: gsl_rstat_workspace
+end type fgsl_rstat_workspace
+
 !
 ! required C interfaces
 ! FGSL names occurring here are auxiliary routines
@@ -1754,6 +1893,10 @@ module fgsl
 #include "interface/multifit.finc"
 #include "interface/bspline.finc"
 #include "interface/ieee.finc"
+#include "interface/multilarge.finc"
+#include "interface/spmatrix.finc"
+#include "interface/splinalg.finc"
+#include "interface/rstat.finc"
   end interface
 #include "interface/generics.finc"
 contains
@@ -1792,4 +1935,8 @@ contains
 #include "api/multifit.finc"
 #include "api/bspline.finc"
 #include "api/ieee.finc"
+#include "api/multilarge.finc"
+#include "api/spmatrix.finc"
+#include "api/splinalg.finc"
+#include "api/rstat.finc"
 end module fgsl
