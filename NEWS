@@ -1,8 +1,22 @@
+Changes in 1.1.0 (by Tom Schoonjans):
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+This branch introduces support for the recently released gsl 2.1. An overview:
+
+1.  fixed compilation of old fgsl 1.0.0 code against gsl 2.1.
+    Note that gsl 2.x has some changed APIs compared to 1.x. These changes carry over to fgsl.
+2.  removed support for gsl 1.16 and older: users that need to support these older 
+    gsl releases need to install fgsl 1.0.0
+3.  bindings written for all newly introduced API since gsl 2.0
+4.  some changes to existing fgsl API: removed 'size' arguments wherever sensible as 
+    these could be obtained from assumed-shape arrays.
+5.  general code cleanup: tried to make things more 'Fortran 2003'
+6.  several new tests and examples added
+
+
 Changes in 1.0.1:
 ~~~~~~~~~~~~~~~~~
 * fixed interface of fgsl_hypot and added that for fgsl_hypot3
   (bug report from Kyle Gerheiser)
-
 
 
 Changes in 1.0.0:

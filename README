@@ -1,23 +1,10 @@
 
-
-This is release 1.0.0 of the Fortran interface 
+This is release 1.1.0 of the Fortran interface 
 to the GNU Scientific Library. 
-Although based on version 1.16 of GSL, it maintains backward
-compatibility with versions 1.13 to 1.15.
-It should also work with future releases apart from missing API mappings.
+It is based on version 2.1 of GSL, and should not be used with earlier GSL releases.
+Please use the release 1.0.0 in combination with GSL 1.x
 
 Please consult the NEWS file for a change log.
-
-While this release supports a large subset of 
-GSL functionality, there are a number of things missing still:
-
-* for the most part, no generics yet for varying types and kinds
-* 1d and 2d vector/matrix API is not explicitly supported, but mapping
-  routines to Fortran arrays and pointers are available
-* no support yet for non-interoperable function and polymorphic
-  arguments. This will be done once the compilers are ready.
-* the test suite is still incomplete
-
 
 License:
 ~~~~~~~~
@@ -34,57 +21,10 @@ Installation procedure:
     includes into different packages e.g., gsl and gsl-devel.
     For building FGSL, both must be installed.
  2. The ANSI C compiler used to build the GSL installation
- 3. A Fortran 95 compiler which additionally implements the
-    following Fortran 2003 features:
-    - the IMPORT statement
-    - Interoperability with C (more specifically, the C processor
-      mentioned in 2. above). The intrinsic ISO_C_BINDING
-      module and all of its functionality except C_F_PROCPOINTER
-      is needed. The configure script checks the needed subset
-      of interoperable intrinsic types.
-    - INTENT for pointers.
-
-Note that to date, the following compilers have been verified to 
-correctly build the library and run the test programs:
-
-    - g95 0.92. On 64 bit systems, please use a version
-      from after August 14, 2008, earlier releases have problems
-      with C interoperable functions returning structures.
-    - NAG 5.1 build 344 or higher (32 bit). Please perform 
-export GSL_IEEE_MODE="mask-invalid,mask-underflow,mask-denormalized" 
-      before running the test program, or build with the option
-      -ieee=full (this was not checked with the 0.9 release).
-    - NAG 5.2 and higher on 32 and 64 bit systems.
-    - Intel Fortran 11.1 U5 and later
-
-In particular, the following compilers FAIL to build and/or run FGSL:
-
-    - IBM xlf 10.1.0.5 and lower fails to build the library due to 
-      non-implemented character length to array mapping.
-      10.1.0.6 builds the library, but fails to build any application
-      using the module due to spurious label duplication errors.
-    - NAG 5.1 on 64 bit. There is no support for a c_size_t shape array
-      constructor for c_f_pointer.
-    - Sun Studio 12U1 lacks support for POINTER intent, and has an 
-      additional bug which still needs to be tracked down.
-    - Intel ifort versions 10.1, 11.0 and 11.1 up to (I think) U4 
-      had a problem with C interoperable functions returning 
-      structures on 64 bit systems. 
-      As a consequence, the tests poly.exe and array.exe will crash
-      with a segmentation fault when using these compilers.
-    - PGI 10.x (x up to 4) has sufficient C interop support to build
-      FGSL, but has the same issue on 64 bit systems as described above
-      for the Intel compiler.
-    - Pathscale 3.2 has too buggy C interop support to build FGSL.
-    - gfortran 4.3.x does not support complex(c_double).
-    - gfortran 4.4.1 builds OK, but fails the last montecarlo test, 
-      apparently due to a spurious c_associated() call.
-    - IBM xlf 11.1 and higher builds the library and the tests.
-      Some tests fail, apparently due to being miscompiled (illegal
-      instruction). This requires further investigation.
+ 3. A Fortran 2003 compiler.
 
 (B) autoconf setup:
-This section applies only if you have downloaded the sourceforge
+This section applies only if you have downloaded the github
 repository. Use of autoconf version 2.69 or higher and m4 1.4.16 or 
 higher is recommended. Generate the configure script with
 mkdir m4
@@ -181,4 +121,6 @@ Releases:
   * 0.9.4 May 31, 2011 (revision 5233)
   --- Migrated to Sourceforge ---
   * 1.0.0: February 11, 2014 (revision 34)
+  --- Migrated to Github ---
+  * 1.1.0: February, 2016 
   
