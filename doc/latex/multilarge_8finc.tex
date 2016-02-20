@@ -1,0 +1,193 @@
+\hypertarget{multilarge_8finc}{}\section{api/multilarge.finc File Reference}
+\label{multilarge_8finc}\index{api/multilarge.\+finc@{api/multilarge.\+finc}}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=172pt]{multilarge_8finc__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+type(fgsl\+\_\+multilarge\+\_\+linear\+\_\+workspace) function \hyperlink{multilarge_8finc_a8ddf19b48933383805c0758c7348a49d}{fgsl\+\_\+multilarge\+\_\+linear\+\_\+alloc} (T, p)
+\item 
+subroutine \hyperlink{multilarge_8finc_a5a87bef286ed91ddcd3f8179152693fa}{fgsl\+\_\+multilarge\+\_\+linear\+\_\+free} (w)
+\item 
+character(kind=fgsl\+\_\+char, len=fgsl\+\_\+strmax) function \hyperlink{multilarge_8finc_a5deb84055ba5449fdf4aa950e0c975a8}{fgsl\+\_\+multilarge\+\_\+linear\+\_\+name} (w)
+\item 
+integer(fgsl\+\_\+int) function \hyperlink{multilarge_8finc_a591c80c16183c4cd85fddcfbc7dfa042}{fgsl\+\_\+multilarge\+\_\+linear\+\_\+reset} (w)
+\item 
+integer(fgsl\+\_\+int) function \hyperlink{multilarge_8finc_a5d536b7868cefe9b2c7a38986adb79a8}{fgsl\+\_\+multilarge\+\_\+linear\+\_\+accumulate} (X, y, w)
+\item 
+integer(fgsl\+\_\+int) function \hyperlink{multilarge_8finc_a247264b93af58a97ca5139d1a8de0926}{fgsl\+\_\+multilarge\+\_\+linear\+\_\+solve} (lambda, c, rnorm, snorm, w)
+\item 
+integer(fgsl\+\_\+int) function \hyperlink{multilarge_8finc_a418e63ac467265f3f37c798163ced789}{fgsl\+\_\+multilarge\+\_\+linear\+\_\+rcond} (rcond, w)
+\item 
+integer(fgsl\+\_\+int) function \hyperlink{multilarge_8finc_a952d6a8a156f5c348b4c0bd7ab58ee1d}{fgsl\+\_\+multilarge\+\_\+linear\+\_\+lcurve} (reg\+\_\+param, rho, eta, w)
+\item 
+integer(fgsl\+\_\+int) function \hyperlink{multilarge_8finc_a0d7f03295eaab8bdf7fe1059554bc153}{fgsl\+\_\+multilarge\+\_\+linear\+\_\+wstdform1} (L, X, w, y, Xs, ys, work)
+\item 
+integer(fgsl\+\_\+int) function \hyperlink{multilarge_8finc_a48001360ad92c99eccdc8a412423262d}{fgsl\+\_\+multilarge\+\_\+linear\+\_\+stdform1} (L, X, y, Xs, ys, work)
+\item 
+integer(fgsl\+\_\+int) function \hyperlink{multilarge_8finc_af96d41800da8aea6be5f49fbe41efe65}{fgsl\+\_\+multilarge\+\_\+linear\+\_\+l\+\_\+decomp} (L, tau)
+\item 
+integer(fgsl\+\_\+int) function \hyperlink{multilarge_8finc_a06f46b61b5e6c67264692f688eafc4f4}{fgsl\+\_\+multilarge\+\_\+linear\+\_\+wstdform2} (L\+Q\+R, Ltau, X, w, y, Xs, ys, work)
+\item 
+integer(fgsl\+\_\+int) function \hyperlink{multilarge_8finc_a4a8667cbdd77ffa02a409e3dc4382123}{fgsl\+\_\+multilarge\+\_\+linear\+\_\+stdform2} (L\+Q\+R, Ltau, X, y, Xs, ys, work)
+\item 
+integer(fgsl\+\_\+int) function \hyperlink{multilarge_8finc_adcedb84ce9871ffc383d38dba07dde29}{fgsl\+\_\+multilarge\+\_\+linear\+\_\+genform1} (L, cs, c, work)
+\item 
+integer(fgsl\+\_\+int) function \hyperlink{multilarge_8finc_a6c08382d4de2ae48062e7d1a96267a63}{fgsl\+\_\+multilarge\+\_\+linear\+\_\+genform2} (L\+Q\+R, Ltau, cs, c, work)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function/\+Subroutine Documentation}
+\hypertarget{multilarge_8finc_a5d536b7868cefe9b2c7a38986adb79a8}{}\index{multilarge.\+finc@{multilarge.\+finc}!fgsl\+\_\+multilarge\+\_\+linear\+\_\+accumulate@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+accumulate}}
+\index{fgsl\+\_\+multilarge\+\_\+linear\+\_\+accumulate@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+accumulate}!multilarge.\+finc@{multilarge.\+finc}}
+\subsubsection[{fgsl\+\_\+multilarge\+\_\+linear\+\_\+accumulate}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\+\_\+int) function fgsl\+\_\+multilarge\+\_\+linear\+\_\+accumulate (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\+\_\+matrix), intent(inout)}]{X, }
+\item[{type(fgsl\+\_\+vector), intent(inout)}]{y, }
+\item[{type(fgsl\+\_\+multilarge\+\_\+linear\+\_\+workspace), intent(in)}]{w}
+\end{DoxyParamCaption}
+)}\label{multilarge_8finc_a5d536b7868cefe9b2c7a38986adb79a8}
+\hypertarget{multilarge_8finc_a8ddf19b48933383805c0758c7348a49d}{}\index{multilarge.\+finc@{multilarge.\+finc}!fgsl\+\_\+multilarge\+\_\+linear\+\_\+alloc@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+alloc}}
+\index{fgsl\+\_\+multilarge\+\_\+linear\+\_\+alloc@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+alloc}!multilarge.\+finc@{multilarge.\+finc}}
+\subsubsection[{fgsl\+\_\+multilarge\+\_\+linear\+\_\+alloc}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\+\_\+multilarge\+\_\+linear\+\_\+workspace) function fgsl\+\_\+multilarge\+\_\+linear\+\_\+alloc (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\+\_\+multilarge\+\_\+linear\+\_\+type), intent(in)}]{T, }
+\item[{integer(fgsl\+\_\+size\+\_\+t), intent(in)}]{p}
+\end{DoxyParamCaption}
+)}\label{multilarge_8finc_a8ddf19b48933383805c0758c7348a49d}
+\hypertarget{multilarge_8finc_a5a87bef286ed91ddcd3f8179152693fa}{}\index{multilarge.\+finc@{multilarge.\+finc}!fgsl\+\_\+multilarge\+\_\+linear\+\_\+free@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+free}}
+\index{fgsl\+\_\+multilarge\+\_\+linear\+\_\+free@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+free}!multilarge.\+finc@{multilarge.\+finc}}
+\subsubsection[{fgsl\+\_\+multilarge\+\_\+linear\+\_\+free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\+\_\+multilarge\+\_\+linear\+\_\+free (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\+\_\+multilarge\+\_\+linear\+\_\+workspace), intent(inout)}]{w}
+\end{DoxyParamCaption}
+)}\label{multilarge_8finc_a5a87bef286ed91ddcd3f8179152693fa}
+\hypertarget{multilarge_8finc_adcedb84ce9871ffc383d38dba07dde29}{}\index{multilarge.\+finc@{multilarge.\+finc}!fgsl\+\_\+multilarge\+\_\+linear\+\_\+genform1@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+genform1}}
+\index{fgsl\+\_\+multilarge\+\_\+linear\+\_\+genform1@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+genform1}!multilarge.\+finc@{multilarge.\+finc}}
+\subsubsection[{fgsl\+\_\+multilarge\+\_\+linear\+\_\+genform1}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\+\_\+int) function fgsl\+\_\+multilarge\+\_\+linear\+\_\+genform1 (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\+\_\+vector), intent(in)}]{L, }
+\item[{type(fgsl\+\_\+vector), intent(in)}]{cs, }
+\item[{type(fgsl\+\_\+vector), intent(inout)}]{c, }
+\item[{type(fgsl\+\_\+multilarge\+\_\+linear\+\_\+workspace), intent(inout)}]{work}
+\end{DoxyParamCaption}
+)}\label{multilarge_8finc_adcedb84ce9871ffc383d38dba07dde29}
+\hypertarget{multilarge_8finc_a6c08382d4de2ae48062e7d1a96267a63}{}\index{multilarge.\+finc@{multilarge.\+finc}!fgsl\+\_\+multilarge\+\_\+linear\+\_\+genform2@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+genform2}}
+\index{fgsl\+\_\+multilarge\+\_\+linear\+\_\+genform2@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+genform2}!multilarge.\+finc@{multilarge.\+finc}}
+\subsubsection[{fgsl\+\_\+multilarge\+\_\+linear\+\_\+genform2}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\+\_\+int) function fgsl\+\_\+multilarge\+\_\+linear\+\_\+genform2 (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\+\_\+matrix), intent(in)}]{L\+Q\+R, }
+\item[{type(fgsl\+\_\+vector), intent(in)}]{Ltau, }
+\item[{type(fgsl\+\_\+vector), intent(in)}]{cs, }
+\item[{type(fgsl\+\_\+vector), intent(inout)}]{c, }
+\item[{type(fgsl\+\_\+multilarge\+\_\+linear\+\_\+workspace), intent(inout)}]{work}
+\end{DoxyParamCaption}
+)}\label{multilarge_8finc_a6c08382d4de2ae48062e7d1a96267a63}
+\hypertarget{multilarge_8finc_af96d41800da8aea6be5f49fbe41efe65}{}\index{multilarge.\+finc@{multilarge.\+finc}!fgsl\+\_\+multilarge\+\_\+linear\+\_\+l\+\_\+decomp@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+l\+\_\+decomp}}
+\index{fgsl\+\_\+multilarge\+\_\+linear\+\_\+l\+\_\+decomp@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+l\+\_\+decomp}!multilarge.\+finc@{multilarge.\+finc}}
+\subsubsection[{fgsl\+\_\+multilarge\+\_\+linear\+\_\+l\+\_\+decomp}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\+\_\+int) function fgsl\+\_\+multilarge\+\_\+linear\+\_\+l\+\_\+decomp (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\+\_\+matrix), intent(inout)}]{L, }
+\item[{type(fgsl\+\_\+vector), intent(inout)}]{tau}
+\end{DoxyParamCaption}
+)}\label{multilarge_8finc_af96d41800da8aea6be5f49fbe41efe65}
+\hypertarget{multilarge_8finc_a952d6a8a156f5c348b4c0bd7ab58ee1d}{}\index{multilarge.\+finc@{multilarge.\+finc}!fgsl\+\_\+multilarge\+\_\+linear\+\_\+lcurve@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+lcurve}}
+\index{fgsl\+\_\+multilarge\+\_\+linear\+\_\+lcurve@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+lcurve}!multilarge.\+finc@{multilarge.\+finc}}
+\subsubsection[{fgsl\+\_\+multilarge\+\_\+linear\+\_\+lcurve}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\+\_\+int) function fgsl\+\_\+multilarge\+\_\+linear\+\_\+lcurve (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\+\_\+vector), intent(inout)}]{reg\+\_\+param, }
+\item[{type(fgsl\+\_\+vector), intent(inout)}]{rho, }
+\item[{type(fgsl\+\_\+vector), intent(inout)}]{eta, }
+\item[{type(fgsl\+\_\+multilarge\+\_\+linear\+\_\+workspace), intent(inout)}]{w}
+\end{DoxyParamCaption}
+)}\label{multilarge_8finc_a952d6a8a156f5c348b4c0bd7ab58ee1d}
+\hypertarget{multilarge_8finc_a5deb84055ba5449fdf4aa950e0c975a8}{}\index{multilarge.\+finc@{multilarge.\+finc}!fgsl\+\_\+multilarge\+\_\+linear\+\_\+name@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+name}}
+\index{fgsl\+\_\+multilarge\+\_\+linear\+\_\+name@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+name}!multilarge.\+finc@{multilarge.\+finc}}
+\subsubsection[{fgsl\+\_\+multilarge\+\_\+linear\+\_\+name}]{\setlength{\rightskip}{0pt plus 5cm}character(kind=fgsl\+\_\+char,len=fgsl\+\_\+strmax) function fgsl\+\_\+multilarge\+\_\+linear\+\_\+name (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\+\_\+multilarge\+\_\+linear\+\_\+workspace), intent(in)}]{w}
+\end{DoxyParamCaption}
+)}\label{multilarge_8finc_a5deb84055ba5449fdf4aa950e0c975a8}
+\hypertarget{multilarge_8finc_a418e63ac467265f3f37c798163ced789}{}\index{multilarge.\+finc@{multilarge.\+finc}!fgsl\+\_\+multilarge\+\_\+linear\+\_\+rcond@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+rcond}}
+\index{fgsl\+\_\+multilarge\+\_\+linear\+\_\+rcond@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+rcond}!multilarge.\+finc@{multilarge.\+finc}}
+\subsubsection[{fgsl\+\_\+multilarge\+\_\+linear\+\_\+rcond}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\+\_\+int) function fgsl\+\_\+multilarge\+\_\+linear\+\_\+rcond (
+\begin{DoxyParamCaption}
+\item[{real(c\+\_\+double), intent(out)}]{rcond, }
+\item[{type(fgsl\+\_\+multilarge\+\_\+linear\+\_\+workspace), intent(inout)}]{w}
+\end{DoxyParamCaption}
+)}\label{multilarge_8finc_a418e63ac467265f3f37c798163ced789}
+\hypertarget{multilarge_8finc_a591c80c16183c4cd85fddcfbc7dfa042}{}\index{multilarge.\+finc@{multilarge.\+finc}!fgsl\+\_\+multilarge\+\_\+linear\+\_\+reset@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+reset}}
+\index{fgsl\+\_\+multilarge\+\_\+linear\+\_\+reset@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+reset}!multilarge.\+finc@{multilarge.\+finc}}
+\subsubsection[{fgsl\+\_\+multilarge\+\_\+linear\+\_\+reset}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\+\_\+int) function fgsl\+\_\+multilarge\+\_\+linear\+\_\+reset (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\+\_\+multilarge\+\_\+linear\+\_\+workspace), intent(in)}]{w}
+\end{DoxyParamCaption}
+)}\label{multilarge_8finc_a591c80c16183c4cd85fddcfbc7dfa042}
+\hypertarget{multilarge_8finc_a247264b93af58a97ca5139d1a8de0926}{}\index{multilarge.\+finc@{multilarge.\+finc}!fgsl\+\_\+multilarge\+\_\+linear\+\_\+solve@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+solve}}
+\index{fgsl\+\_\+multilarge\+\_\+linear\+\_\+solve@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+solve}!multilarge.\+finc@{multilarge.\+finc}}
+\subsubsection[{fgsl\+\_\+multilarge\+\_\+linear\+\_\+solve}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\+\_\+int) function fgsl\+\_\+multilarge\+\_\+linear\+\_\+solve (
+\begin{DoxyParamCaption}
+\item[{real(c\+\_\+double), intent(in)}]{lambda, }
+\item[{type(fgsl\+\_\+vector), intent(inout)}]{c, }
+\item[{real(c\+\_\+double), intent(out)}]{rnorm, }
+\item[{real(c\+\_\+double), intent(out)}]{snorm, }
+\item[{type(fgsl\+\_\+multilarge\+\_\+linear\+\_\+workspace), intent(inout)}]{w}
+\end{DoxyParamCaption}
+)}\label{multilarge_8finc_a247264b93af58a97ca5139d1a8de0926}
+\hypertarget{multilarge_8finc_a48001360ad92c99eccdc8a412423262d}{}\index{multilarge.\+finc@{multilarge.\+finc}!fgsl\+\_\+multilarge\+\_\+linear\+\_\+stdform1@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+stdform1}}
+\index{fgsl\+\_\+multilarge\+\_\+linear\+\_\+stdform1@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+stdform1}!multilarge.\+finc@{multilarge.\+finc}}
+\subsubsection[{fgsl\+\_\+multilarge\+\_\+linear\+\_\+stdform1}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\+\_\+int) function fgsl\+\_\+multilarge\+\_\+linear\+\_\+stdform1 (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\+\_\+vector), intent(in)}]{L, }
+\item[{type(fgsl\+\_\+vector), intent(in)}]{X, }
+\item[{type(fgsl\+\_\+vector), intent(in)}]{y, }
+\item[{type(fgsl\+\_\+matrix), intent(inout)}]{Xs, }
+\item[{type(fgsl\+\_\+vector), intent(inout)}]{ys, }
+\item[{type(fgsl\+\_\+multilarge\+\_\+linear\+\_\+workspace), intent(inout)}]{work}
+\end{DoxyParamCaption}
+)}\label{multilarge_8finc_a48001360ad92c99eccdc8a412423262d}
+\hypertarget{multilarge_8finc_a4a8667cbdd77ffa02a409e3dc4382123}{}\index{multilarge.\+finc@{multilarge.\+finc}!fgsl\+\_\+multilarge\+\_\+linear\+\_\+stdform2@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+stdform2}}
+\index{fgsl\+\_\+multilarge\+\_\+linear\+\_\+stdform2@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+stdform2}!multilarge.\+finc@{multilarge.\+finc}}
+\subsubsection[{fgsl\+\_\+multilarge\+\_\+linear\+\_\+stdform2}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\+\_\+int) function fgsl\+\_\+multilarge\+\_\+linear\+\_\+stdform2 (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\+\_\+matrix), intent(in)}]{L\+Q\+R, }
+\item[{type(fgsl\+\_\+vector), intent(in)}]{Ltau, }
+\item[{type(fgsl\+\_\+matrix), intent(in)}]{X, }
+\item[{type(fgsl\+\_\+vector), intent(in)}]{y, }
+\item[{type(fgsl\+\_\+matrix), intent(inout)}]{Xs, }
+\item[{type(fgsl\+\_\+vector), intent(inout)}]{ys, }
+\item[{type(fgsl\+\_\+multilarge\+\_\+linear\+\_\+workspace), intent(inout)}]{work}
+\end{DoxyParamCaption}
+)}\label{multilarge_8finc_a4a8667cbdd77ffa02a409e3dc4382123}
+\hypertarget{multilarge_8finc_a0d7f03295eaab8bdf7fe1059554bc153}{}\index{multilarge.\+finc@{multilarge.\+finc}!fgsl\+\_\+multilarge\+\_\+linear\+\_\+wstdform1@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+wstdform1}}
+\index{fgsl\+\_\+multilarge\+\_\+linear\+\_\+wstdform1@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+wstdform1}!multilarge.\+finc@{multilarge.\+finc}}
+\subsubsection[{fgsl\+\_\+multilarge\+\_\+linear\+\_\+wstdform1}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\+\_\+int) function fgsl\+\_\+multilarge\+\_\+linear\+\_\+wstdform1 (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\+\_\+vector), intent(in)}]{L, }
+\item[{type(fgsl\+\_\+vector), intent(in)}]{X, }
+\item[{type(fgsl\+\_\+vector), intent(in)}]{w, }
+\item[{type(fgsl\+\_\+vector), intent(in)}]{y, }
+\item[{type(fgsl\+\_\+matrix), intent(inout)}]{Xs, }
+\item[{type(fgsl\+\_\+vector), intent(inout)}]{ys, }
+\item[{type(fgsl\+\_\+multilarge\+\_\+linear\+\_\+workspace), intent(inout)}]{work}
+\end{DoxyParamCaption}
+)}\label{multilarge_8finc_a0d7f03295eaab8bdf7fe1059554bc153}
+\hypertarget{multilarge_8finc_a06f46b61b5e6c67264692f688eafc4f4}{}\index{multilarge.\+finc@{multilarge.\+finc}!fgsl\+\_\+multilarge\+\_\+linear\+\_\+wstdform2@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+wstdform2}}
+\index{fgsl\+\_\+multilarge\+\_\+linear\+\_\+wstdform2@{fgsl\+\_\+multilarge\+\_\+linear\+\_\+wstdform2}!multilarge.\+finc@{multilarge.\+finc}}
+\subsubsection[{fgsl\+\_\+multilarge\+\_\+linear\+\_\+wstdform2}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\+\_\+int) function fgsl\+\_\+multilarge\+\_\+linear\+\_\+wstdform2 (
+\begin{DoxyParamCaption}
+\item[{type(fgsl\+\_\+matrix), intent(in)}]{L\+Q\+R, }
+\item[{type(fgsl\+\_\+vector), intent(in)}]{Ltau, }
+\item[{type(fgsl\+\_\+matrix), intent(in)}]{X, }
+\item[{type(fgsl\+\_\+vector), intent(in)}]{w, }
+\item[{type(fgsl\+\_\+vector), intent(in)}]{y, }
+\item[{type(fgsl\+\_\+matrix), intent(inout)}]{Xs, }
+\item[{type(fgsl\+\_\+vector), intent(inout)}]{ys, }
+\item[{type(fgsl\+\_\+multilarge\+\_\+linear\+\_\+workspace), intent(inout)}]{work}
+\end{DoxyParamCaption}
+)}\label{multilarge_8finc_a06f46b61b5e6c67264692f688eafc4f4}

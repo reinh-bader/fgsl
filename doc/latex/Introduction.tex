@@ -1,41 +1,41 @@
 
 \begin{DoxyEnumerate}
-\item Introductory notes\-: 
+\item Introductory notes\+: 
 \begin{DoxyItemize}
-\item In Fortran code, G\-S\-L\-\_\-$\ast$ must be replaced by F\-G\-S\-L\-\_\-$\ast$ for each A\-P\-I call, abstract data type, module variables and parameters (with exception of the M\-\_\-$\ast$ mathematical constants) 
-\item Some names were changed due to U\-C/\-L\-C aliasing. See the documentation chapter on special functions for details. 
-\item Intrinsic type matching\-:
+\item In Fortran code, G\+S\+L\+\_\+$\ast$ must be replaced by F\+G\+S\+L\+\_\+$\ast$ for each A\+P\+I call, abstract data type, module variables and parameters (with exception of the M\+\_\+$\ast$ mathematical constants) 
+\item Some names were changed due to U\+C/\+L\+C aliasing. See the documentation chapter on special functions for details. 
+\item Intrinsic type matching\+:
 \begin{DoxyEnumerate}
-\item real(fgsl\-\_\-double) is used for double precision values
-\item real(fgsl\-\_\-float) is used for single precision values
-\item integer(fgsl\-\_\-int) for integer
-\item integer(fgsl\-\_\-long) for long integer
-\item integer(fgsl\-\_\-size\-\_\-t) for size\-\_\-t integer
-\item complex(fgsl\-\_\-double\-\_\-complex) for \hyperlink{structfgsl_1_1gsl__complex}{gsl\-\_\-complex}
-\item character(fgsl\-\_\-char) for characters
+\item real(fgsl\+\_\+double) is used for double precision values
+\item real(fgsl\+\_\+float) is used for single precision values
+\item integer(fgsl\+\_\+int) for integer
+\item integer(fgsl\+\_\+long) for long integer
+\item integer(fgsl\+\_\+size\+\_\+t) for size\+\_\+t integer
+\item complex(fgsl\+\_\+double\+\_\+complex) for \hyperlink{structfgsl_1_1gsl__complex}{gsl\+\_\+complex}
+\item character(fgsl\+\_\+char) for characters
 \item no value attributes and mostly no pointers in Fortran calls
-\item unsigned int must be converted to integer(fgsl\-\_\-long).
-\item char $\ast$ results are converted to fixed length strings. Use T\-R\-I\-M. 
+\item unsigned int must be converted to integer(fgsl\+\_\+long).
+\item char $\ast$ results are converted to fixed length strings. Use T\+R\+I\+M. 
 \end{DoxyEnumerate}
 \end{DoxyItemize}
-\item Additional routines\-: 
+\item Additional routines\+: 
 \begin{DoxyItemize}
-\item Generic interface \hyperlink{interfacefgsl__well__defined}{fgsl\-\_\-well\-\_\-defined} for checking status of F\-G\-S\-L objects (which are typically opaque). 
-\item See \hyperlink{array_8finc}{api/array.\-finc} for array alignment routines. 
-\item See \hyperlink{math_8finc}{api/math.\-finc} for function object constructors. 
-\item See \hyperlink{io_8finc}{api/io.\-finc} for I/\-O related add-\/ons. 
+\item Generic interface \hyperlink{interfacefgsl__well__defined}{fgsl\+\_\+well\+\_\+defined} for checking status of F\+G\+S\+L objects (which are typically opaque). 
+\item See \hyperlink{array_8finc}{api/array.\+finc} for array alignment routines. 
+\item See \hyperlink{math_8finc}{api/math.\+finc} for function object constructors. 
+\item See \hyperlink{io_8finc}{api/io.\+finc} for I/\+O related add-\/ons. 
 \end{DoxyItemize}
-\item Structure of the documentation\-: 
+\item Structure of the documentation\+: 
 \begin{DoxyItemize}
 \item type definitions are in the fgsl section of the Modules menu item 
-\item all A\-P\-I routines are available via the Files menu item 
+\item all A\+P\+I routines are available via the Files menu item 
 \item additional remarks on the various files are available via the Related Pages menu item 
 \end{DoxyItemize}
-\item Only interfaces from the G\-S\-L manual are implemented. The C include files may contain more stuff which may only be meant for internal use, or is not officially documented. 
-\item Inlining of G\-S\-L routines is not possible. 
-\item Macros are not supported\-: 
+\item Only interfaces from the G\+S\+L manual are implemented. The C include files may contain more stuff which may only be meant for internal use, or is not officially documented. 
+\item Inlining of G\+S\+L routines is not possible. 
+\item Macros are not supported\+: 
 \begin{DoxyItemize}
 \item macro values are replicated as parameters 
-\item Inf/\-Nan need to use I\-E\-E\-E\-\_\-\-V\-A\-L\-U\-E (if available) 
+\item Inf/\+Nan need to use I\+E\+E\+E\+\_\+\+V\+A\+L\+U\+E (if available) 
 \end{DoxyItemize}
 \end{DoxyEnumerate}

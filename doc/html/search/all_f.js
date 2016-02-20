@@ -7,6 +7,8 @@ var searchData=
   ['siman_2efinc',['siman.finc',['../siman_8finc.html',1,'']]],
   ['sort_2efinc',['sort.finc',['../sort_8finc.html',1,'']]],
   ['specfunc_2efinc',['specfunc.finc',['../specfunc_8finc.html',1,'']]],
+  ['splinalg_2efinc',['splinalg.finc',['../splinalg_8finc.html',1,'']]],
+  ['spmatrix_2efinc',['spmatrix.finc',['../spmatrix_8finc.html',1,'']]],
   ['sse',['sse',['../structfgsl_1_1fgsl__multifit__robust__stats.html#a137f634721561413a40c1269d954a504',1,'fgsl::fgsl_multifit_robust_stats']]],
   ['statistics_2efinc',['statistics.finc',['../statistics_8finc.html',1,'']]],
   ['sum_5flevin_2efinc',['sum_levin.finc',['../sum__levin_8finc.html',1,'']]]

@@ -1,158 +1,135 @@
-\hypertarget{bspline_8finc}{\section{api/bspline.finc File Reference}
-\label{bspline_8finc}\index{api/bspline.\-finc@{api/bspline.\-finc}}
-}
-This graph shows which files directly or indirectly include this file\-:\nopagebreak
+\hypertarget{bspline_8finc}{}\section{api/bspline.finc File Reference}
+\label{bspline_8finc}\index{api/bspline.\+finc@{api/bspline.\+finc}}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=162pt]{bspline_8finc__dep__incl}
+\includegraphics[width=160pt]{bspline_8finc__dep__incl}
 \end{center}
 \end{figure}
-\subsection*{Functions/\-Subroutines}
+\subsection*{Functions/\+Subroutines}
 \begin{DoxyCompactItemize}
 \item 
-type(fgsl\-\_\-bspline\-\_\-workspace) \\*
-function \hyperlink{bspline_8finc_a4e15c7b2231a5f1a625f5d182ca159ed}{fgsl\-\_\-bspline\-\_\-alloc} (k, nbreak)
+type(fgsl\+\_\+bspline\+\_\+workspace) function \hyperlink{bspline_8finc_a4e15c7b2231a5f1a625f5d182ca159ed}{fgsl\+\_\+bspline\+\_\+alloc} (k, nbreak)
 \item 
-subroutine \hyperlink{bspline_8finc_aa6355eaea88c1a3223784670cd61f944}{fgsl\-\_\-bspline\-\_\-free} (w)
+subroutine \hyperlink{bspline_8finc_aa6355eaea88c1a3223784670cd61f944}{fgsl\+\_\+bspline\+\_\+free} (w)
 \item 
-type(fgsl\-\_\-bspline\-\_\-deriv\-\_\-workspace) \\*
-function \hyperlink{bspline_8finc_afcbf1aea5432f70f6a80b96c503ce660}{fgsl\-\_\-bspline\-\_\-deriv\-\_\-alloc} (k)
+integer(fgsl\+\_\+int) function \hyperlink{bspline_8finc_a0c926191aa070f99a3f01fd32fa1b95d}{fgsl\+\_\+bspline\+\_\+knots} (breakpts, w)
 \item 
-subroutine \hyperlink{bspline_8finc_a8ccf44ef0167e5813a4671a5d5eaad8b}{fgsl\-\_\-bspline\-\_\-deriv\-\_\-free} (w)
+integer(fgsl\+\_\+int) function \hyperlink{bspline_8finc_ae8a83e75e87a6475b4ad8584c18c037d}{fgsl\+\_\+bspline\+\_\+knots\+\_\+uniform} (a, b, w)
 \item 
-integer(fgsl\-\_\-int) function \hyperlink{bspline_8finc_a0c926191aa070f99a3f01fd32fa1b95d}{fgsl\-\_\-bspline\-\_\-knots} (breakpts, w)
+integer(fgsl\+\_\+int) function \hyperlink{bspline_8finc_ad884eba33109f4963100c7a64601c9df}{fgsl\+\_\+bspline\+\_\+eval} (x, b, w)
 \item 
-integer(fgsl\-\_\-int) function \hyperlink{bspline_8finc_ae8a83e75e87a6475b4ad8584c18c037d}{fgsl\-\_\-bspline\-\_\-knots\-\_\-uniform} (a, b, w)
+integer(fgsl\+\_\+int) function \hyperlink{bspline_8finc_a2cf7b76c3b3eacc2458726ce7eec827a}{fgsl\+\_\+bspline\+\_\+eval\+\_\+nonzero} (x, bk, istart, iend, w)
 \item 
-integer(fgsl\-\_\-int) function \hyperlink{bspline_8finc_ad884eba33109f4963100c7a64601c9df}{fgsl\-\_\-bspline\-\_\-eval} (x, b, w)
+integer(fgsl\+\_\+int) function \hyperlink{bspline_8finc_ac4ce634b5d07adac2ba4ec3035da2266}{fgsl\+\_\+bspline\+\_\+deriv\+\_\+eval} (x, nderiv, db, w)
 \item 
-integer(fgsl\-\_\-int) function \hyperlink{bspline_8finc_a2cf7b76c3b3eacc2458726ce7eec827a}{fgsl\-\_\-bspline\-\_\-eval\-\_\-nonzero} (x, bk, istart, iend, w)
+integer(fgsl\+\_\+int) function \hyperlink{bspline_8finc_a833991eb00de5fd00732476be6996b2d}{fgsl\+\_\+bspline\+\_\+deriv\+\_\+eval\+\_\+nonzero} (x, nderiv, db, istart, iend, w)
 \item 
-integer(fgsl\-\_\-int) function \hyperlink{bspline_8finc_a1a0753fdf8d9e838bc1b1886b29e673c}{fgsl\-\_\-bspline\-\_\-deriv\-\_\-eval} (x, nderiv, db, w, dw)
+integer(fgsl\+\_\+size\+\_\+t) function \hyperlink{bspline_8finc_a88f74da4054f622ccec25854d7d82a26}{fgsl\+\_\+bspline\+\_\+ncoeffs} (w)
 \item 
-integer(fgsl\-\_\-int) function \hyperlink{bspline_8finc_a42dce02a85085b1eddf167c995873e38}{fgsl\-\_\-bspline\-\_\-deriv\-\_\-eval\-\_\-nonzero} (x, nderiv, db, istart, iend, w, dw)
+real(fgsl\+\_\+double) function \hyperlink{bspline_8finc_a3919f7952797fb2dd676ae3f910c6d9e}{fgsl\+\_\+bspline\+\_\+greville\+\_\+abscissa} (i, w)
 \item 
-integer(fgsl\-\_\-size\-\_\-t) function \hyperlink{bspline_8finc_a88f74da4054f622ccec25854d7d82a26}{fgsl\-\_\-bspline\-\_\-ncoeffs} (w)
-\item 
-real(fgsl\-\_\-double) function \hyperlink{bspline_8finc_a3919f7952797fb2dd676ae3f910c6d9e}{fgsl\-\_\-bspline\-\_\-greville\-\_\-abscissa} (i, w)
-\item 
-integer(fgsl\-\_\-int) function \hyperlink{bspline_8finc_ae82914f8a3d09b557ceac031a59363a0}{fgsl\-\_\-bspline\-\_\-knots\-\_\-greville} (abscissae, w, abserr)
+integer(fgsl\+\_\+int) function \hyperlink{bspline_8finc_ae82914f8a3d09b557ceac031a59363a0}{fgsl\+\_\+bspline\+\_\+knots\+\_\+greville} (abscissae, w, abserr)
 \end{DoxyCompactItemize}
 
 
-\subsection{Function/\-Subroutine Documentation}
-\hypertarget{bspline_8finc_a4e15c7b2231a5f1a625f5d182ca159ed}{\index{bspline.\-finc@{bspline.\-finc}!fgsl\-\_\-bspline\-\_\-alloc@{fgsl\-\_\-bspline\-\_\-alloc}}
-\index{fgsl\-\_\-bspline\-\_\-alloc@{fgsl\-\_\-bspline\-\_\-alloc}!bspline.finc@{bspline.\-finc}}
-\subsubsection[{fgsl\-\_\-bspline\-\_\-alloc}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-bspline\-\_\-workspace) function fgsl\-\_\-bspline\-\_\-alloc (
+\subsection{Function/\+Subroutine Documentation}
+\hypertarget{bspline_8finc_a4e15c7b2231a5f1a625f5d182ca159ed}{}\index{bspline.\+finc@{bspline.\+finc}!fgsl\+\_\+bspline\+\_\+alloc@{fgsl\+\_\+bspline\+\_\+alloc}}
+\index{fgsl\+\_\+bspline\+\_\+alloc@{fgsl\+\_\+bspline\+\_\+alloc}!bspline.\+finc@{bspline.\+finc}}
+\subsubsection[{fgsl\+\_\+bspline\+\_\+alloc}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\+\_\+bspline\+\_\+workspace) function fgsl\+\_\+bspline\+\_\+alloc (
 \begin{DoxyParamCaption}
-\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{k, }
-\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{nbreak}
+\item[{integer(fgsl\+\_\+size\+\_\+t), intent(in)}]{k, }
+\item[{integer(fgsl\+\_\+size\+\_\+t), intent(in)}]{nbreak}
 \end{DoxyParamCaption}
-)}}\label{bspline_8finc_a4e15c7b2231a5f1a625f5d182ca159ed}
-\hypertarget{bspline_8finc_afcbf1aea5432f70f6a80b96c503ce660}{\index{bspline.\-finc@{bspline.\-finc}!fgsl\-\_\-bspline\-\_\-deriv\-\_\-alloc@{fgsl\-\_\-bspline\-\_\-deriv\-\_\-alloc}}
-\index{fgsl\-\_\-bspline\-\_\-deriv\-\_\-alloc@{fgsl\-\_\-bspline\-\_\-deriv\-\_\-alloc}!bspline.finc@{bspline.\-finc}}
-\subsubsection[{fgsl\-\_\-bspline\-\_\-deriv\-\_\-alloc}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-bspline\-\_\-deriv\-\_\-workspace) function fgsl\-\_\-bspline\-\_\-deriv\-\_\-alloc (
+)}\label{bspline_8finc_a4e15c7b2231a5f1a625f5d182ca159ed}
+\hypertarget{bspline_8finc_ac4ce634b5d07adac2ba4ec3035da2266}{}\index{bspline.\+finc@{bspline.\+finc}!fgsl\+\_\+bspline\+\_\+deriv\+\_\+eval@{fgsl\+\_\+bspline\+\_\+deriv\+\_\+eval}}
+\index{fgsl\+\_\+bspline\+\_\+deriv\+\_\+eval@{fgsl\+\_\+bspline\+\_\+deriv\+\_\+eval}!bspline.\+finc@{bspline.\+finc}}
+\subsubsection[{fgsl\+\_\+bspline\+\_\+deriv\+\_\+eval}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\+\_\+int) function fgsl\+\_\+bspline\+\_\+deriv\+\_\+eval (
 \begin{DoxyParamCaption}
-\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{k}
+\item[{real(fgsl\+\_\+double), intent(in)}]{x, }
+\item[{integer(fgsl\+\_\+size\+\_\+t), intent(in)}]{nderiv, }
+\item[{type(fgsl\+\_\+matrix), intent(inout)}]{db, }
+\item[{type(fgsl\+\_\+bspline\+\_\+workspace), intent(inout)}]{w}
 \end{DoxyParamCaption}
-)}}\label{bspline_8finc_afcbf1aea5432f70f6a80b96c503ce660}
-\hypertarget{bspline_8finc_a1a0753fdf8d9e838bc1b1886b29e673c}{\index{bspline.\-finc@{bspline.\-finc}!fgsl\-\_\-bspline\-\_\-deriv\-\_\-eval@{fgsl\-\_\-bspline\-\_\-deriv\-\_\-eval}}
-\index{fgsl\-\_\-bspline\-\_\-deriv\-\_\-eval@{fgsl\-\_\-bspline\-\_\-deriv\-\_\-eval}!bspline.finc@{bspline.\-finc}}
-\subsubsection[{fgsl\-\_\-bspline\-\_\-deriv\-\_\-eval}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-bspline\-\_\-deriv\-\_\-eval (
+)}\label{bspline_8finc_ac4ce634b5d07adac2ba4ec3035da2266}
+\hypertarget{bspline_8finc_a833991eb00de5fd00732476be6996b2d}{}\index{bspline.\+finc@{bspline.\+finc}!fgsl\+\_\+bspline\+\_\+deriv\+\_\+eval\+\_\+nonzero@{fgsl\+\_\+bspline\+\_\+deriv\+\_\+eval\+\_\+nonzero}}
+\index{fgsl\+\_\+bspline\+\_\+deriv\+\_\+eval\+\_\+nonzero@{fgsl\+\_\+bspline\+\_\+deriv\+\_\+eval\+\_\+nonzero}!bspline.\+finc@{bspline.\+finc}}
+\subsubsection[{fgsl\+\_\+bspline\+\_\+deriv\+\_\+eval\+\_\+nonzero}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\+\_\+int) function fgsl\+\_\+bspline\+\_\+deriv\+\_\+eval\+\_\+nonzero (
 \begin{DoxyParamCaption}
-\item[{real(fgsl\-\_\-double), intent(in)}]{x, }
-\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{nderiv, }
-\item[{type(fgsl\-\_\-matrix), intent(inout)}]{db, }
-\item[{type(fgsl\-\_\-bspline\-\_\-workspace), intent(inout)}]{w, }
-\item[{type(fgsl\-\_\-bspline\-\_\-deriv\-\_\-workspace), intent(inout)}]{dw}
+\item[{real(fgsl\+\_\+double), intent(in)}]{x, }
+\item[{integer(fgsl\+\_\+size\+\_\+t), intent(in)}]{nderiv, }
+\item[{type(fgsl\+\_\+matrix), intent(inout)}]{db, }
+\item[{integer(fgsl\+\_\+size\+\_\+t), intent(inout)}]{istart, }
+\item[{integer(fgsl\+\_\+size\+\_\+t), intent(inout)}]{iend, }
+\item[{type(fgsl\+\_\+bspline\+\_\+workspace), intent(inout)}]{w}
 \end{DoxyParamCaption}
-)}}\label{bspline_8finc_a1a0753fdf8d9e838bc1b1886b29e673c}
-\hypertarget{bspline_8finc_a42dce02a85085b1eddf167c995873e38}{\index{bspline.\-finc@{bspline.\-finc}!fgsl\-\_\-bspline\-\_\-deriv\-\_\-eval\-\_\-nonzero@{fgsl\-\_\-bspline\-\_\-deriv\-\_\-eval\-\_\-nonzero}}
-\index{fgsl\-\_\-bspline\-\_\-deriv\-\_\-eval\-\_\-nonzero@{fgsl\-\_\-bspline\-\_\-deriv\-\_\-eval\-\_\-nonzero}!bspline.finc@{bspline.\-finc}}
-\subsubsection[{fgsl\-\_\-bspline\-\_\-deriv\-\_\-eval\-\_\-nonzero}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-bspline\-\_\-deriv\-\_\-eval\-\_\-nonzero (
+)}\label{bspline_8finc_a833991eb00de5fd00732476be6996b2d}
+\hypertarget{bspline_8finc_ad884eba33109f4963100c7a64601c9df}{}\index{bspline.\+finc@{bspline.\+finc}!fgsl\+\_\+bspline\+\_\+eval@{fgsl\+\_\+bspline\+\_\+eval}}
+\index{fgsl\+\_\+bspline\+\_\+eval@{fgsl\+\_\+bspline\+\_\+eval}!bspline.\+finc@{bspline.\+finc}}
+\subsubsection[{fgsl\+\_\+bspline\+\_\+eval}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\+\_\+int) function fgsl\+\_\+bspline\+\_\+eval (
 \begin{DoxyParamCaption}
-\item[{real(fgsl\-\_\-double), intent(in)}]{x, }
-\item[{integer(fgsl\-\_\-size\-\_\-t), intent(in)}]{nderiv, }
-\item[{type(fgsl\-\_\-matrix), intent(inout)}]{db, }
-\item[{integer(fgsl\-\_\-size\-\_\-t), intent(inout)}]{istart, }
-\item[{integer(fgsl\-\_\-size\-\_\-t), intent(inout)}]{iend, }
-\item[{type(fgsl\-\_\-bspline\-\_\-workspace), intent(inout)}]{w, }
-\item[{type(fgsl\-\_\-bspline\-\_\-deriv\-\_\-workspace), intent(inout)}]{dw}
+\item[{real(fgsl\+\_\+double), intent(in)}]{x, }
+\item[{type(fgsl\+\_\+vector), intent(inout)}]{b, }
+\item[{type(fgsl\+\_\+bspline\+\_\+workspace), intent(inout)}]{w}
 \end{DoxyParamCaption}
-)}}\label{bspline_8finc_a42dce02a85085b1eddf167c995873e38}
-\hypertarget{bspline_8finc_a8ccf44ef0167e5813a4671a5d5eaad8b}{\index{bspline.\-finc@{bspline.\-finc}!fgsl\-\_\-bspline\-\_\-deriv\-\_\-free@{fgsl\-\_\-bspline\-\_\-deriv\-\_\-free}}
-\index{fgsl\-\_\-bspline\-\_\-deriv\-\_\-free@{fgsl\-\_\-bspline\-\_\-deriv\-\_\-free}!bspline.finc@{bspline.\-finc}}
-\subsubsection[{fgsl\-\_\-bspline\-\_\-deriv\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-bspline\-\_\-deriv\-\_\-free (
+)}\label{bspline_8finc_ad884eba33109f4963100c7a64601c9df}
+\hypertarget{bspline_8finc_a2cf7b76c3b3eacc2458726ce7eec827a}{}\index{bspline.\+finc@{bspline.\+finc}!fgsl\+\_\+bspline\+\_\+eval\+\_\+nonzero@{fgsl\+\_\+bspline\+\_\+eval\+\_\+nonzero}}
+\index{fgsl\+\_\+bspline\+\_\+eval\+\_\+nonzero@{fgsl\+\_\+bspline\+\_\+eval\+\_\+nonzero}!bspline.\+finc@{bspline.\+finc}}
+\subsubsection[{fgsl\+\_\+bspline\+\_\+eval\+\_\+nonzero}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\+\_\+int) function fgsl\+\_\+bspline\+\_\+eval\+\_\+nonzero (
 \begin{DoxyParamCaption}
-\item[{type(fgsl\-\_\-bspline\-\_\-deriv\-\_\-workspace), intent(inout)}]{w}
+\item[{real(fgsl\+\_\+double), intent(in)}]{x, }
+\item[{type(fgsl\+\_\+vector), intent(inout)}]{bk, }
+\item[{integer(fgsl\+\_\+size\+\_\+t), intent(inout)}]{istart, }
+\item[{integer(fgsl\+\_\+size\+\_\+t), intent(inout)}]{iend, }
+\item[{type(fgsl\+\_\+bspline\+\_\+workspace), intent(inout)}]{w}
 \end{DoxyParamCaption}
-)}}\label{bspline_8finc_a8ccf44ef0167e5813a4671a5d5eaad8b}
-\hypertarget{bspline_8finc_ad884eba33109f4963100c7a64601c9df}{\index{bspline.\-finc@{bspline.\-finc}!fgsl\-\_\-bspline\-\_\-eval@{fgsl\-\_\-bspline\-\_\-eval}}
-\index{fgsl\-\_\-bspline\-\_\-eval@{fgsl\-\_\-bspline\-\_\-eval}!bspline.finc@{bspline.\-finc}}
-\subsubsection[{fgsl\-\_\-bspline\-\_\-eval}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-bspline\-\_\-eval (
+)}\label{bspline_8finc_a2cf7b76c3b3eacc2458726ce7eec827a}
+\hypertarget{bspline_8finc_aa6355eaea88c1a3223784670cd61f944}{}\index{bspline.\+finc@{bspline.\+finc}!fgsl\+\_\+bspline\+\_\+free@{fgsl\+\_\+bspline\+\_\+free}}
+\index{fgsl\+\_\+bspline\+\_\+free@{fgsl\+\_\+bspline\+\_\+free}!bspline.\+finc@{bspline.\+finc}}
+\subsubsection[{fgsl\+\_\+bspline\+\_\+free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\+\_\+bspline\+\_\+free (
 \begin{DoxyParamCaption}
-\item[{real(fgsl\-\_\-double), intent(in)}]{x, }
-\item[{type(fgsl\-\_\-vector), intent(inout)}]{b, }
-\item[{type(fgsl\-\_\-bspline\-\_\-workspace), intent(inout)}]{w}
+\item[{type(fgsl\+\_\+bspline\+\_\+workspace), intent(inout)}]{w}
 \end{DoxyParamCaption}
-)}}\label{bspline_8finc_ad884eba33109f4963100c7a64601c9df}
-\hypertarget{bspline_8finc_a2cf7b76c3b3eacc2458726ce7eec827a}{\index{bspline.\-finc@{bspline.\-finc}!fgsl\-\_\-bspline\-\_\-eval\-\_\-nonzero@{fgsl\-\_\-bspline\-\_\-eval\-\_\-nonzero}}
-\index{fgsl\-\_\-bspline\-\_\-eval\-\_\-nonzero@{fgsl\-\_\-bspline\-\_\-eval\-\_\-nonzero}!bspline.finc@{bspline.\-finc}}
-\subsubsection[{fgsl\-\_\-bspline\-\_\-eval\-\_\-nonzero}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-bspline\-\_\-eval\-\_\-nonzero (
+)}\label{bspline_8finc_aa6355eaea88c1a3223784670cd61f944}
+\hypertarget{bspline_8finc_a3919f7952797fb2dd676ae3f910c6d9e}{}\index{bspline.\+finc@{bspline.\+finc}!fgsl\+\_\+bspline\+\_\+greville\+\_\+abscissa@{fgsl\+\_\+bspline\+\_\+greville\+\_\+abscissa}}
+\index{fgsl\+\_\+bspline\+\_\+greville\+\_\+abscissa@{fgsl\+\_\+bspline\+\_\+greville\+\_\+abscissa}!bspline.\+finc@{bspline.\+finc}}
+\subsubsection[{fgsl\+\_\+bspline\+\_\+greville\+\_\+abscissa}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\+\_\+double) function fgsl\+\_\+bspline\+\_\+greville\+\_\+abscissa (
 \begin{DoxyParamCaption}
-\item[{real(fgsl\-\_\-double), intent(in)}]{x, }
-\item[{type(fgsl\-\_\-vector), intent(inout)}]{bk, }
-\item[{integer(fgsl\-\_\-size\-\_\-t), intent(inout)}]{istart, }
-\item[{integer(fgsl\-\_\-size\-\_\-t), intent(inout)}]{iend, }
-\item[{type(fgsl\-\_\-bspline\-\_\-workspace), intent(inout)}]{w}
+\item[{integer(fgsl\+\_\+size\+\_\+t)}]{i, }
+\item[{type(fgsl\+\_\+bspline\+\_\+workspace), intent(in)}]{w}
 \end{DoxyParamCaption}
-)}}\label{bspline_8finc_a2cf7b76c3b3eacc2458726ce7eec827a}
-\hypertarget{bspline_8finc_aa6355eaea88c1a3223784670cd61f944}{\index{bspline.\-finc@{bspline.\-finc}!fgsl\-\_\-bspline\-\_\-free@{fgsl\-\_\-bspline\-\_\-free}}
-\index{fgsl\-\_\-bspline\-\_\-free@{fgsl\-\_\-bspline\-\_\-free}!bspline.finc@{bspline.\-finc}}
-\subsubsection[{fgsl\-\_\-bspline\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-bspline\-\_\-free (
+)}\label{bspline_8finc_a3919f7952797fb2dd676ae3f910c6d9e}
+\hypertarget{bspline_8finc_a0c926191aa070f99a3f01fd32fa1b95d}{}\index{bspline.\+finc@{bspline.\+finc}!fgsl\+\_\+bspline\+\_\+knots@{fgsl\+\_\+bspline\+\_\+knots}}
+\index{fgsl\+\_\+bspline\+\_\+knots@{fgsl\+\_\+bspline\+\_\+knots}!bspline.\+finc@{bspline.\+finc}}
+\subsubsection[{fgsl\+\_\+bspline\+\_\+knots}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\+\_\+int) function fgsl\+\_\+bspline\+\_\+knots (
 \begin{DoxyParamCaption}
-\item[{type(fgsl\-\_\-bspline\-\_\-workspace), intent(inout)}]{w}
+\item[{type(fgsl\+\_\+vector), intent(in)}]{breakpts, }
+\item[{type(fgsl\+\_\+bspline\+\_\+workspace), intent(inout)}]{w}
 \end{DoxyParamCaption}
-)}}\label{bspline_8finc_aa6355eaea88c1a3223784670cd61f944}
-\hypertarget{bspline_8finc_a3919f7952797fb2dd676ae3f910c6d9e}{\index{bspline.\-finc@{bspline.\-finc}!fgsl\-\_\-bspline\-\_\-greville\-\_\-abscissa@{fgsl\-\_\-bspline\-\_\-greville\-\_\-abscissa}}
-\index{fgsl\-\_\-bspline\-\_\-greville\-\_\-abscissa@{fgsl\-\_\-bspline\-\_\-greville\-\_\-abscissa}!bspline.finc@{bspline.\-finc}}
-\subsubsection[{fgsl\-\_\-bspline\-\_\-greville\-\_\-abscissa}]{\setlength{\rightskip}{0pt plus 5cm}real(fgsl\-\_\-double) function fgsl\-\_\-bspline\-\_\-greville\-\_\-abscissa (
+)}\label{bspline_8finc_a0c926191aa070f99a3f01fd32fa1b95d}
+\hypertarget{bspline_8finc_ae82914f8a3d09b557ceac031a59363a0}{}\index{bspline.\+finc@{bspline.\+finc}!fgsl\+\_\+bspline\+\_\+knots\+\_\+greville@{fgsl\+\_\+bspline\+\_\+knots\+\_\+greville}}
+\index{fgsl\+\_\+bspline\+\_\+knots\+\_\+greville@{fgsl\+\_\+bspline\+\_\+knots\+\_\+greville}!bspline.\+finc@{bspline.\+finc}}
+\subsubsection[{fgsl\+\_\+bspline\+\_\+knots\+\_\+greville}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\+\_\+int) function fgsl\+\_\+bspline\+\_\+knots\+\_\+greville (
 \begin{DoxyParamCaption}
-\item[{integer(fgsl\-\_\-size\-\_\-t)}]{i, }
-\item[{type(fgsl\-\_\-bspline\-\_\-workspace), intent(in)}]{w}
+\item[{type(fgsl\+\_\+vector)}]{abscissae, }
+\item[{type(fgsl\+\_\+bspline\+\_\+workspace)}]{w, }
+\item[{real(fgsl\+\_\+double), intent(out)}]{abserr}
 \end{DoxyParamCaption}
-)}}\label{bspline_8finc_a3919f7952797fb2dd676ae3f910c6d9e}
-\hypertarget{bspline_8finc_a0c926191aa070f99a3f01fd32fa1b95d}{\index{bspline.\-finc@{bspline.\-finc}!fgsl\-\_\-bspline\-\_\-knots@{fgsl\-\_\-bspline\-\_\-knots}}
-\index{fgsl\-\_\-bspline\-\_\-knots@{fgsl\-\_\-bspline\-\_\-knots}!bspline.finc@{bspline.\-finc}}
-\subsubsection[{fgsl\-\_\-bspline\-\_\-knots}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-bspline\-\_\-knots (
+)}\label{bspline_8finc_ae82914f8a3d09b557ceac031a59363a0}
+\hypertarget{bspline_8finc_ae8a83e75e87a6475b4ad8584c18c037d}{}\index{bspline.\+finc@{bspline.\+finc}!fgsl\+\_\+bspline\+\_\+knots\+\_\+uniform@{fgsl\+\_\+bspline\+\_\+knots\+\_\+uniform}}
+\index{fgsl\+\_\+bspline\+\_\+knots\+\_\+uniform@{fgsl\+\_\+bspline\+\_\+knots\+\_\+uniform}!bspline.\+finc@{bspline.\+finc}}
+\subsubsection[{fgsl\+\_\+bspline\+\_\+knots\+\_\+uniform}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\+\_\+int) function fgsl\+\_\+bspline\+\_\+knots\+\_\+uniform (
 \begin{DoxyParamCaption}
-\item[{type(fgsl\-\_\-vector), intent(in)}]{breakpts, }
-\item[{type(fgsl\-\_\-bspline\-\_\-workspace), intent(inout)}]{w}
+\item[{real(fgsl\+\_\+double), intent(in)}]{a, }
+\item[{real(fgsl\+\_\+double), intent(in)}]{b, }
+\item[{type(fgsl\+\_\+bspline\+\_\+workspace), intent(inout)}]{w}
 \end{DoxyParamCaption}
-)}}\label{bspline_8finc_a0c926191aa070f99a3f01fd32fa1b95d}
-\hypertarget{bspline_8finc_ae82914f8a3d09b557ceac031a59363a0}{\index{bspline.\-finc@{bspline.\-finc}!fgsl\-\_\-bspline\-\_\-knots\-\_\-greville@{fgsl\-\_\-bspline\-\_\-knots\-\_\-greville}}
-\index{fgsl\-\_\-bspline\-\_\-knots\-\_\-greville@{fgsl\-\_\-bspline\-\_\-knots\-\_\-greville}!bspline.finc@{bspline.\-finc}}
-\subsubsection[{fgsl\-\_\-bspline\-\_\-knots\-\_\-greville}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-bspline\-\_\-knots\-\_\-greville (
+)}\label{bspline_8finc_ae8a83e75e87a6475b4ad8584c18c037d}
+\hypertarget{bspline_8finc_a88f74da4054f622ccec25854d7d82a26}{}\index{bspline.\+finc@{bspline.\+finc}!fgsl\+\_\+bspline\+\_\+ncoeffs@{fgsl\+\_\+bspline\+\_\+ncoeffs}}
+\index{fgsl\+\_\+bspline\+\_\+ncoeffs@{fgsl\+\_\+bspline\+\_\+ncoeffs}!bspline.\+finc@{bspline.\+finc}}
+\subsubsection[{fgsl\+\_\+bspline\+\_\+ncoeffs}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\+\_\+size\+\_\+t) function fgsl\+\_\+bspline\+\_\+ncoeffs (
 \begin{DoxyParamCaption}
-\item[{type(fgsl\-\_\-vector)}]{abscissae, }
-\item[{type(fgsl\-\_\-bspline\-\_\-workspace)}]{w, }
-\item[{real(fgsl\-\_\-double), intent(out)}]{abserr}
+\item[{type(fgsl\+\_\+bspline\+\_\+workspace), intent(inout)}]{w}
 \end{DoxyParamCaption}
-)}}\label{bspline_8finc_ae82914f8a3d09b557ceac031a59363a0}
-\hypertarget{bspline_8finc_ae8a83e75e87a6475b4ad8584c18c037d}{\index{bspline.\-finc@{bspline.\-finc}!fgsl\-\_\-bspline\-\_\-knots\-\_\-uniform@{fgsl\-\_\-bspline\-\_\-knots\-\_\-uniform}}
-\index{fgsl\-\_\-bspline\-\_\-knots\-\_\-uniform@{fgsl\-\_\-bspline\-\_\-knots\-\_\-uniform}!bspline.finc@{bspline.\-finc}}
-\subsubsection[{fgsl\-\_\-bspline\-\_\-knots\-\_\-uniform}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-int) function fgsl\-\_\-bspline\-\_\-knots\-\_\-uniform (
-\begin{DoxyParamCaption}
-\item[{real(fgsl\-\_\-double), intent(in)}]{a, }
-\item[{real(fgsl\-\_\-double), intent(in)}]{b, }
-\item[{type(fgsl\-\_\-bspline\-\_\-workspace), intent(inout)}]{w}
-\end{DoxyParamCaption}
-)}}\label{bspline_8finc_ae8a83e75e87a6475b4ad8584c18c037d}
-\hypertarget{bspline_8finc_a88f74da4054f622ccec25854d7d82a26}{\index{bspline.\-finc@{bspline.\-finc}!fgsl\-\_\-bspline\-\_\-ncoeffs@{fgsl\-\_\-bspline\-\_\-ncoeffs}}
-\index{fgsl\-\_\-bspline\-\_\-ncoeffs@{fgsl\-\_\-bspline\-\_\-ncoeffs}!bspline.finc@{bspline.\-finc}}
-\subsubsection[{fgsl\-\_\-bspline\-\_\-ncoeffs}]{\setlength{\rightskip}{0pt plus 5cm}integer(fgsl\-\_\-size\-\_\-t) function fgsl\-\_\-bspline\-\_\-ncoeffs (
-\begin{DoxyParamCaption}
-\item[{type(fgsl\-\_\-bspline\-\_\-workspace), intent(inout)}]{w}
-\end{DoxyParamCaption}
-)}}\label{bspline_8finc_a88f74da4054f622ccec25854d7d82a26}
+)}\label{bspline_8finc_a88f74da4054f622ccec25854d7d82a26}

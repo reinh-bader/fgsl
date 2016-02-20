@@ -1,74 +1,72 @@
-\hypertarget{error_8finc}{\section{api/error.finc File Reference}
-\label{error_8finc}\index{api/error.\-finc@{api/error.\-finc}}
-}
-This graph shows which files directly or indirectly include this file\-:\nopagebreak
+\hypertarget{error_8finc}{}\section{api/error.finc File Reference}
+\label{error_8finc}\index{api/error.\+finc@{api/error.\+finc}}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=152pt]{error_8finc__dep__incl}
+\includegraphics[width=148pt]{error_8finc__dep__incl}
 \end{center}
 \end{figure}
-\subsection*{Functions/\-Subroutines}
+\subsection*{Functions/\+Subroutines}
 \begin{DoxyCompactItemize}
 \item 
-type(fgsl\-\_\-error\-\_\-handler\-\_\-t) function \hyperlink{error_8finc_a0bcea44cb57ec40ff8ee5deb56628d6c}{fgsl\-\_\-set\-\_\-error\-\_\-handler} (new\-\_\-handler)
+type(fgsl\+\_\+error\+\_\+handler\+\_\+t) function \hyperlink{error_8finc_a0bcea44cb57ec40ff8ee5deb56628d6c}{fgsl\+\_\+set\+\_\+error\+\_\+handler} (new\+\_\+handler)
 \item 
-type(fgsl\-\_\-error\-\_\-handler\-\_\-t) function \hyperlink{error_8finc_a038022a5ae74d2221231fb2d484e3fb9}{fgsl\-\_\-set\-\_\-error\-\_\-handler\-\_\-off} ()
+type(fgsl\+\_\+error\+\_\+handler\+\_\+t) function \hyperlink{error_8finc_a038022a5ae74d2221231fb2d484e3fb9}{fgsl\+\_\+set\+\_\+error\+\_\+handler\+\_\+off} ()
 \item 
-character(kind=fgsl\-\_\-char, len=fgsl\-\_\-strmax) \\*
-function \hyperlink{error_8finc_afb379d7136f115fcbc5fbe6178ab1a8b}{fgsl\-\_\-strerror} (errno)
+character(kind=fgsl\+\_\+char, len=fgsl\+\_\+strmax) function \hyperlink{error_8finc_afb379d7136f115fcbc5fbe6178ab1a8b}{fgsl\+\_\+strerror} (errno)
 \item 
-subroutine \hyperlink{error_8finc_a4d5b557021a59a337ae0a724da2f2f79}{fgsl\-\_\-error} (reason, file, line, errno)
+subroutine \hyperlink{error_8finc_a4d5b557021a59a337ae0a724da2f2f79}{fgsl\+\_\+error} (reason, file, line, errno)
 \item 
-logical function \hyperlink{error_8finc_aa355a6ea584a0315b6bd48125143f61e}{fgsl\-\_\-error\-\_\-handler\-\_\-status} (error\-\_\-handler\-\_\-t)
+logical function \hyperlink{error_8finc_aa355a6ea584a0315b6bd48125143f61e}{fgsl\+\_\+error\+\_\+handler\+\_\+status} (error\+\_\+handler\+\_\+t)
 \item 
-type(fgsl\-\_\-error\-\_\-handler\-\_\-t) function \hyperlink{error_8finc_a2021475812bde99b19e3497120fe502f}{fgsl\-\_\-error\-\_\-handler\-\_\-init} (handler\-\_\-sr)
+type(fgsl\+\_\+error\+\_\+handler\+\_\+t) function \hyperlink{error_8finc_a2021475812bde99b19e3497120fe502f}{fgsl\+\_\+error\+\_\+handler\+\_\+init} (handler\+\_\+sr)
 \end{DoxyCompactItemize}
 
 
-\subsection{Function/\-Subroutine Documentation}
-\hypertarget{error_8finc_a4d5b557021a59a337ae0a724da2f2f79}{\index{error.\-finc@{error.\-finc}!fgsl\-\_\-error@{fgsl\-\_\-error}}
-\index{fgsl\-\_\-error@{fgsl\-\_\-error}!error.finc@{error.\-finc}}
-\subsubsection[{fgsl\-\_\-error}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\-\_\-error (
+\subsection{Function/\+Subroutine Documentation}
+\hypertarget{error_8finc_a4d5b557021a59a337ae0a724da2f2f79}{}\index{error.\+finc@{error.\+finc}!fgsl\+\_\+error@{fgsl\+\_\+error}}
+\index{fgsl\+\_\+error@{fgsl\+\_\+error}!error.\+finc@{error.\+finc}}
+\subsubsection[{fgsl\+\_\+error}]{\setlength{\rightskip}{0pt plus 5cm}subroutine fgsl\+\_\+error (
 \begin{DoxyParamCaption}
-\item[{character(kind=fgsl\-\_\-char,len=$\ast$), intent(in)}]{reason, }
-\item[{character(kind=fgsl\-\_\-char,len=$\ast$), intent(in)}]{file, }
-\item[{integer(fgsl\-\_\-int), intent(in)}]{line, }
-\item[{integer(fgsl\-\_\-int), intent(in)}]{errno}
+\item[{character(kind=fgsl\+\_\+char,len=$\ast$), intent(in)}]{reason, }
+\item[{character(kind=fgsl\+\_\+char,len=$\ast$), intent(in)}]{file, }
+\item[{integer(fgsl\+\_\+int), intent(in)}]{line, }
+\item[{integer(fgsl\+\_\+int), intent(in)}]{errno}
 \end{DoxyParamCaption}
-)}}\label{error_8finc_a4d5b557021a59a337ae0a724da2f2f79}
-\hypertarget{error_8finc_a2021475812bde99b19e3497120fe502f}{\index{error.\-finc@{error.\-finc}!fgsl\-\_\-error\-\_\-handler\-\_\-init@{fgsl\-\_\-error\-\_\-handler\-\_\-init}}
-\index{fgsl\-\_\-error\-\_\-handler\-\_\-init@{fgsl\-\_\-error\-\_\-handler\-\_\-init}!error.finc@{error.\-finc}}
-\subsubsection[{fgsl\-\_\-error\-\_\-handler\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-error\-\_\-handler\-\_\-t) function fgsl\-\_\-error\-\_\-handler\-\_\-init (
+)}\label{error_8finc_a4d5b557021a59a337ae0a724da2f2f79}
+\hypertarget{error_8finc_a2021475812bde99b19e3497120fe502f}{}\index{error.\+finc@{error.\+finc}!fgsl\+\_\+error\+\_\+handler\+\_\+init@{fgsl\+\_\+error\+\_\+handler\+\_\+init}}
+\index{fgsl\+\_\+error\+\_\+handler\+\_\+init@{fgsl\+\_\+error\+\_\+handler\+\_\+init}!error.\+finc@{error.\+finc}}
+\subsubsection[{fgsl\+\_\+error\+\_\+handler\+\_\+init}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\+\_\+error\+\_\+handler\+\_\+t) function fgsl\+\_\+error\+\_\+handler\+\_\+init (
 \begin{DoxyParamCaption}
-\item[{}]{handler\-\_\-sr}
+\item[{}]{handler\+\_\+sr}
 \end{DoxyParamCaption}
-)}}\label{error_8finc_a2021475812bde99b19e3497120fe502f}
-\hypertarget{error_8finc_aa355a6ea584a0315b6bd48125143f61e}{\index{error.\-finc@{error.\-finc}!fgsl\-\_\-error\-\_\-handler\-\_\-status@{fgsl\-\_\-error\-\_\-handler\-\_\-status}}
-\index{fgsl\-\_\-error\-\_\-handler\-\_\-status@{fgsl\-\_\-error\-\_\-handler\-\_\-status}!error.finc@{error.\-finc}}
-\subsubsection[{fgsl\-\_\-error\-\_\-handler\-\_\-status}]{\setlength{\rightskip}{0pt plus 5cm}logical function fgsl\-\_\-error\-\_\-handler\-\_\-status (
+)}\label{error_8finc_a2021475812bde99b19e3497120fe502f}
+\hypertarget{error_8finc_aa355a6ea584a0315b6bd48125143f61e}{}\index{error.\+finc@{error.\+finc}!fgsl\+\_\+error\+\_\+handler\+\_\+status@{fgsl\+\_\+error\+\_\+handler\+\_\+status}}
+\index{fgsl\+\_\+error\+\_\+handler\+\_\+status@{fgsl\+\_\+error\+\_\+handler\+\_\+status}!error.\+finc@{error.\+finc}}
+\subsubsection[{fgsl\+\_\+error\+\_\+handler\+\_\+status}]{\setlength{\rightskip}{0pt plus 5cm}logical function fgsl\+\_\+error\+\_\+handler\+\_\+status (
 \begin{DoxyParamCaption}
-\item[{type(fgsl\-\_\-error\-\_\-handler\-\_\-t), intent(in)}]{error\-\_\-handler\-\_\-t}
+\item[{type(fgsl\+\_\+error\+\_\+handler\+\_\+t), intent(in)}]{error\+\_\+handler\+\_\+t}
 \end{DoxyParamCaption}
-)}}\label{error_8finc_aa355a6ea584a0315b6bd48125143f61e}
-\hypertarget{error_8finc_a0bcea44cb57ec40ff8ee5deb56628d6c}{\index{error.\-finc@{error.\-finc}!fgsl\-\_\-set\-\_\-error\-\_\-handler@{fgsl\-\_\-set\-\_\-error\-\_\-handler}}
-\index{fgsl\-\_\-set\-\_\-error\-\_\-handler@{fgsl\-\_\-set\-\_\-error\-\_\-handler}!error.finc@{error.\-finc}}
-\subsubsection[{fgsl\-\_\-set\-\_\-error\-\_\-handler}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-error\-\_\-handler\-\_\-t) function fgsl\-\_\-set\-\_\-error\-\_\-handler (
+)}\label{error_8finc_aa355a6ea584a0315b6bd48125143f61e}
+\hypertarget{error_8finc_a0bcea44cb57ec40ff8ee5deb56628d6c}{}\index{error.\+finc@{error.\+finc}!fgsl\+\_\+set\+\_\+error\+\_\+handler@{fgsl\+\_\+set\+\_\+error\+\_\+handler}}
+\index{fgsl\+\_\+set\+\_\+error\+\_\+handler@{fgsl\+\_\+set\+\_\+error\+\_\+handler}!error.\+finc@{error.\+finc}}
+\subsubsection[{fgsl\+\_\+set\+\_\+error\+\_\+handler}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\+\_\+error\+\_\+handler\+\_\+t) function fgsl\+\_\+set\+\_\+error\+\_\+handler (
 \begin{DoxyParamCaption}
-\item[{type(fgsl\-\_\-error\-\_\-handler\-\_\-t), intent(in)}]{new\-\_\-handler}
+\item[{type(fgsl\+\_\+error\+\_\+handler\+\_\+t), intent(in)}]{new\+\_\+handler}
 \end{DoxyParamCaption}
-)}}\label{error_8finc_a0bcea44cb57ec40ff8ee5deb56628d6c}
-\hypertarget{error_8finc_a038022a5ae74d2221231fb2d484e3fb9}{\index{error.\-finc@{error.\-finc}!fgsl\-\_\-set\-\_\-error\-\_\-handler\-\_\-off@{fgsl\-\_\-set\-\_\-error\-\_\-handler\-\_\-off}}
-\index{fgsl\-\_\-set\-\_\-error\-\_\-handler\-\_\-off@{fgsl\-\_\-set\-\_\-error\-\_\-handler\-\_\-off}!error.finc@{error.\-finc}}
-\subsubsection[{fgsl\-\_\-set\-\_\-error\-\_\-handler\-\_\-off}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\-\_\-error\-\_\-handler\-\_\-t) function fgsl\-\_\-set\-\_\-error\-\_\-handler\-\_\-off (
+)}\label{error_8finc_a0bcea44cb57ec40ff8ee5deb56628d6c}
+\hypertarget{error_8finc_a038022a5ae74d2221231fb2d484e3fb9}{}\index{error.\+finc@{error.\+finc}!fgsl\+\_\+set\+\_\+error\+\_\+handler\+\_\+off@{fgsl\+\_\+set\+\_\+error\+\_\+handler\+\_\+off}}
+\index{fgsl\+\_\+set\+\_\+error\+\_\+handler\+\_\+off@{fgsl\+\_\+set\+\_\+error\+\_\+handler\+\_\+off}!error.\+finc@{error.\+finc}}
+\subsubsection[{fgsl\+\_\+set\+\_\+error\+\_\+handler\+\_\+off}]{\setlength{\rightskip}{0pt plus 5cm}type(fgsl\+\_\+error\+\_\+handler\+\_\+t) function fgsl\+\_\+set\+\_\+error\+\_\+handler\+\_\+off (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{error_8finc_a038022a5ae74d2221231fb2d484e3fb9}
-\hypertarget{error_8finc_afb379d7136f115fcbc5fbe6178ab1a8b}{\index{error.\-finc@{error.\-finc}!fgsl\-\_\-strerror@{fgsl\-\_\-strerror}}
-\index{fgsl\-\_\-strerror@{fgsl\-\_\-strerror}!error.finc@{error.\-finc}}
-\subsubsection[{fgsl\-\_\-strerror}]{\setlength{\rightskip}{0pt plus 5cm}character(kind=fgsl\-\_\-char,len=fgsl\-\_\-strmax) function fgsl\-\_\-strerror (
+)}\label{error_8finc_a038022a5ae74d2221231fb2d484e3fb9}
+\hypertarget{error_8finc_afb379d7136f115fcbc5fbe6178ab1a8b}{}\index{error.\+finc@{error.\+finc}!fgsl\+\_\+strerror@{fgsl\+\_\+strerror}}
+\index{fgsl\+\_\+strerror@{fgsl\+\_\+strerror}!error.\+finc@{error.\+finc}}
+\subsubsection[{fgsl\+\_\+strerror}]{\setlength{\rightskip}{0pt plus 5cm}character(kind=fgsl\+\_\+char,len=fgsl\+\_\+strmax) function fgsl\+\_\+strerror (
 \begin{DoxyParamCaption}
-\item[{integer(fgsl\-\_\-int), intent(in)}]{errno}
+\item[{integer(fgsl\+\_\+int), intent(in)}]{errno}
 \end{DoxyParamCaption}
-)}}\label{error_8finc_afb379d7136f115fcbc5fbe6178ab1a8b}
+)}\label{error_8finc_afb379d7136f115fcbc5fbe6178ab1a8b}
