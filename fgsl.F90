@@ -3,8 +3,7 @@ module fgsl
 !-------------------------------------------------------------------------------
 !>  \mainpage
 !>  \brief Interface module for use of GSL from Fortran
-!>  \author R. Bader
-!>  \author Leibniz Supercomputing Centre, Garching, Germany
+!>  \author R. Bader, T. Schoonjans
 !>  \details
 !>  Please see the <a href="pages.html">Related Pages</a> section
 !>  for the information about the conventions used in the interface.
