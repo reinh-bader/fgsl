@@ -2,6 +2,8 @@
 !
 !  API: large linear least squares systems
 !
+!> \page "Comments on large linear least square systems"
+!> Please go to api/multilarge.finc for the API documentation.
 
 function fgsl_multilarge_linear_alloc(T, p)
   type(fgsl_multilarge_linear_type), intent(in) :: T

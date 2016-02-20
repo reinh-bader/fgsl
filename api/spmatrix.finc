@@ -2,6 +2,9 @@
 !
 !  API: Sparse matrices
 !
+!> \page "Comments on sparse matrix routines"
+!> Please go to api/spmatrix.finc for the API documentation.
+
 function fgsl_spmatrix_alloc(n1, n2)
   integer(fgsl_size_t), intent(in) :: n1, n2
   type(fgsl_spmatrix) :: fgsl_spmatrix_alloc

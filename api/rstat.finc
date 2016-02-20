@@ -2,6 +2,9 @@
 !
 ! API : Running statistics
 !
+!> \page "Comments on running statistics"
+!> Please go to api/rstat.finc for the API documentation.
+
 function fgsl_rstat_quantile_alloc(p)
   real(fgsl_double), intent(in) :: p
   type(fgsl_rstat_quantile_workspace) :: fgsl_rstat_quantile_alloc

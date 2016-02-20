@@ -2,6 +2,9 @@
 !
 !  API: Sparse matrix linear algebra
 !
+!> \page "Comments on sparse matrix linear algebra
+!> Please go to api/splinalg.finc for the API documentation.
+
 function fgsl_splinalg_itersolve_alloc(T, n, m)
   type(fgsl_splinalg_itersolve_type), intent(in) :: T
   integer(fgsl_size_t), intent(in) :: n, m
