@@ -4,7 +4,7 @@ AM_CPPFLAGS = -I${top_srcdir} -I${top_builddir}
 
 fgslincludedir=${includedir}/fgsl
 
-all-am: fgsl.mod
+BUILT_SOURCES = fgsl.mod
 
 NULL =
 
