@@ -8,6 +8,8 @@ check_PROGRAMS = poly interp specfunc permutation integration \
 	multimin fit nlfit version \
 	chebyshev error ieee_utils math interp2d
 
+BUILT_SOURCES = mod_unit.mod
+
 poly_SOURCES = mod_unit.f90 mod_unit.mod poly.F90
 poly_LDADD = ../libfgsl.la
 
