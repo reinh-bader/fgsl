@@ -68,6 +68,29 @@ if test "x$IEEE_EXCEPTIONS" = xyes ; then
 	AC_DEFINE([IEEE_EXCEPTIONS],[],[Fortran 2003 ieee_exceptions intrinsic module found])
 fi
 
+#check for target support
+AC_FC_SRCEXT([F90],[
+	AC_MSG_CHECKING([whether the fortran compiler supports the 2008 feature: c_loc for targeted arrays])
+	AC_LANG_PUSH(Fortran)
+	AC_COMPILE_IFELSE([[
+SUBROUTINE test(c)
+USE, INTRINSIC :: iso_c_binding
+IMPLICIT NONE
+INTEGER(c_size_t), DIMENSION(:), INTENT(inout), TARGET:: c
+TYPE(C_PTR) :: ptr
+
+ptr = C_LOC(c)
+
+ENDSUBROUTINE
+	]], [C_LOC_TARGET=yes], [C_LOC_TARGET=no])
+	AC_LANG_POP(Fortran)
+	AC_MSG_RESULT([$C_LOC_TARGET])
+])
+
+if test "x$C_LOC_TARGET" = xno; then
+	AC_MSG_ERROR([Fortran compiler does not support a required feature from the 2008 standard.])
+fi
+
 case "$host" in
 	*mingw*)
 		FGSL_LDFLAGS="-no-undefined"
