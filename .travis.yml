@@ -56,10 +56,6 @@ script:
   - make
   - make distcheck
 
-branches:
-  only:
-    - master
-
 notifications:
   email:
     recipients:
