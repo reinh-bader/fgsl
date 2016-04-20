@@ -38,7 +38,7 @@ env:
     - PKG_CONFIG_LIBDIR=/usr/local/lib/pkgconfig
 
 before_install:
-  - if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew install ${GCC} ; fi
+  - if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew uninstall gcc && brew install ${GCC} ; fi
 
 install:
   - wget http://ftp.heanet.ie/mirrors/gnu/gsl/gsl-2.1.tar.gz
