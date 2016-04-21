@@ -10,98 +10,100 @@ check_PROGRAMS = poly interp specfunc permutation integration \
 
 BUILT_SOURCES = mod_unit.mod
 
+SHARED_LDADD = ../libfgsl.la $(gsl_LIBS)
+
 poly_SOURCES = mod_unit.f90 mod_unit.mod poly.F90
-poly_LDADD = ../libfgsl.la
+poly_LDADD = $(SHARED_LDADD)
 
 interp_SOURCES = mod_unit.f90 mod_unit.mod interp.f90
-interp_LDADD = ../libfgsl.la
+interp_LDADD = $(SHARED_LDADD)
 
 specfunc_SOURCES = specfunc.f90 mod_unit.f90 mod_unit.mod
-specfunc_LDADD = ../libfgsl.la
+specfunc_LDADD = $(SHARED_LDADD)
 
 permutation_SOURCES = permutation.F90 mod_unit.f90 mod_unit.mod
-permutation_LDADD = ../libfgsl.la
+permutation_LDADD = $(SHARED_LDADD)
 
 integration_SOURCES = integration.F90 mod_unit.f90 mod_unit.mod
-integration_LDADD = ../libfgsl.la
+integration_LDADD = $(SHARED_LDADD)
 
 sort_SOURCES = sort.F90 mod_unit.f90 mod_unit.mod
-sort_LDADD = ../libfgsl.la
+sort_LDADD = $(SHARED_LDADD)
 
 array_SOURCES = array.f90 mod_unit.f90 mod_unit.mod
-array_LDADD = ../libfgsl.la
+array_LDADD = $(SHARED_LDADD)
 
 linalg_SOURCES = linalg.F90 mod_unit.f90 mod_unit.mod
-linalg_LDADD = ../libfgsl.la
+linalg_LDADD = $(SHARED_LDADD)
 
 eigen_SOURCES = eigen.f90 mod_unit.f90 mod_unit.mod
-eigen_LDADD = ../libfgsl.la
+eigen_LDADD = $(SHARED_LDADD)
 
 fft_SOURCES = fft.f90 mod_unit.f90 mod_unit.mod
-fft_LDADD = ../libfgsl.la
+fft_LDADD = $(SHARED_LDADD)
 
 rng_SOURCES = rng.f90 mod_unit.f90 mod_unit.mod
-rng_LDADD = ../libfgsl.la
+rng_LDADD = $(SHARED_LDADD)
 
 histogram_SOURCES = histogram.f90 mod_unit.f90 mod_unit.mod
-histogram_LDADD = ../libfgsl.la
+histogram_LDADD = $(SHARED_LDADD)
 
 statistics_SOURCES = statistics.F90 mod_unit.f90 mod_unit.mod
-statistics_LDADD = ../libfgsl.la
+statistics_LDADD = $(SHARED_LDADD)
 
 ntuple_SOURCES = ntuple.f90 mod_unit.f90 mod_unit.mod
-ntuple_LDADD = ../libfgsl.la
+ntuple_LDADD = $(SHARED_LDADD)
 
 siman_SOURCES = siman.f90 mod_unit.f90 mod_unit.mod
-siman_LDADD = ../libfgsl.la
+siman_LDADD = $(SHARED_LDADD)
 
 ode_SOURCES = ode.f90 mod_unit.f90 mod_unit.mod
-ode_LDADD = ../libfgsl.la
+ode_LDADD = $(SHARED_LDADD)
 
 deriv_SOURCES = deriv.f90 mod_unit.f90 mod_unit.mod
-deriv_LDADD = ../libfgsl.la
+deriv_LDADD = $(SHARED_LDADD)
 
 roots_SOURCES = roots.f90 mod_unit.f90 mod_unit.mod
-roots_LDADD = ../libfgsl.la
+roots_LDADD = $(SHARED_LDADD)
 
 minim_SOURCES = minim.f90 mod_unit.f90 mod_unit.mod
-minim_LDADD = ../libfgsl.la
+minim_LDADD = $(SHARED_LDADD)
 
 multiroots_SOURCES = multiroots.f90 mod_unit.f90 mod_unit.mod
-multiroots_LDADD = ../libfgsl.la
+multiroots_LDADD = $(SHARED_LDADD)
 
 montecarlo_SOURCES = montecarlo.f90 mod_unit.f90 mod_unit.mod
-montecarlo_LDADD = ../libfgsl.la
+montecarlo_LDADD = $(SHARED_LDADD)
 
 bspline_SOURCES = bspline.f90 mod_unit.f90 mod_unit.mod
-bspline_LDADD = ../libfgsl.la
+bspline_LDADD = $(SHARED_LDADD)
 
 ieee_utils_SOURCES = ieee_utils.f90 mod_unit.f90 mod_unit.mod
-ieee_utils_LDADD = ../libfgsl.la
+ieee_utils_LDADD = $(SHARED_LDADD)
 
 multimin_SOURCES = multimin.f90 mod_unit.f90 mod_unit.mod
-multimin_LDADD = ../libfgsl.la
+multimin_LDADD = $(SHARED_LDADD)
 
 fit_SOURCES = fit.F90 mod_unit.f90 mod_unit.mod
-fit_LDADD = ../libfgsl.la
+fit_LDADD = $(SHARED_LDADD)
 
 nlfit_SOURCES = nlfit.F90 mod_unit.f90 mod_unit.mod
-nlfit_LDADD = ../libfgsl.la
+nlfit_LDADD = $(SHARED_LDADD)
 
 version_SOURCES = version.f90 mod_unit.f90 mod_unit.mod
-version_LDADD = ../libfgsl.la
+version_LDADD = $(SHARED_LDADD)
 
 error_SOURCES = error.F90 mod_unit.f90 mod_unit.mod
-error_LDADD = ../libfgsl.la
+error_LDADD = $(SHARED_LDADD)
 
 chebyshev_SOURCES = chebyshev.f90 mod_unit.f90 mod_unit.mod
-chebyshev_LDADD = ../libfgsl.la
+chebyshev_LDADD = $(SHARED_LDADD)
 
 math_SOURCES = math.f90 mod_unit.f90 mod_unit.mod
-math_LDADD = ../libfgsl.la
+math_LDADD = $(SHARED_LDADD)
 
 interp2d_SOURCES = interp2d.f90 mod_unit.f90 mod_unit.mod
-interp2d_LDADD = ../libfgsl.la
+interp2d_LDADD = $(SHARED_LDADD)
 
 
 TESTS = $(check_PROGRAMS)
