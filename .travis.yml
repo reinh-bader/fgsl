@@ -13,6 +13,7 @@ matrix:
           packages:
             - gcc-4.9
             - gfortran-4.9
+            - libblas-dev
       env: FGSL_CC='gcc-4.9' FGSL_FC='gfortran-4.9'
     - os: linux
       addons:
@@ -22,6 +23,7 @@ matrix:
           packages:
             - gcc-5
             - gfortran-5
+            - libblas-dev
       env: FGSL_CC='gcc-5' FGSL_FC='gfortran-5'
     - os: osx
       compiler: gcc
@@ -53,7 +55,7 @@ install:
 
 script:
   - autoreconf -fi
-  - ./configure LDFLAGS="-Wl,-rpath -Wl,/usr/local/lib" CC=${FGSL_CC} FC=${FGSL_FC}
+  - ./configure CC=${FGSL_CC} FC=${FGSL_FC}
   - make
   - make check
 
