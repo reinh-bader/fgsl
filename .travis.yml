@@ -14,7 +14,7 @@ matrix:
             - gcc-4.9
             - gfortran-4.9
             - libblas-dev
-      env: FGSL_CC='gcc-4.9' FGSL_FC='gfortran-4.9'
+      env: FGSL_CC='gcc-4.9' FGSL_FC='gfortran-4.9' LIBS='-L/usr/lib -lblas'
     - os: linux
       addons:
         apt:
@@ -24,7 +24,7 @@ matrix:
             - gcc-5
             - gfortran-5
             - libblas-dev
-      env: FGSL_CC='gcc-5' FGSL_FC='gfortran-5'
+      env: FGSL_CC='gcc-5' FGSL_FC='gfortran-5' LIBS='-L/usr/lib -lblas'
     - os: osx
       compiler: gcc
       env: GCC='gcc49' FGSL_CC='gcc-4.9' FGSL_FC='gfortran-4.9'
