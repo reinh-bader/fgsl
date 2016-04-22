@@ -1,6 +1,6 @@
 AM_CPPFLAGS = -I${top_srcdir} -I${top_builddir}
 AM_FCFLAGS = -I${top_srcdir} -I${top_builddir}
-LDADD = ${top_builddir}/libfgsl.la
+LDADD = ${top_builddir}/libfgsl.la $(gsl_LIBS)
 
 fgsl_exampledir = $(datadir)/examples/fgsl
 

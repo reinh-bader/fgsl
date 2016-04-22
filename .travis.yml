@@ -1,0 +1,72 @@
+language: c
+
+dist: trusty
+sudo: required
+
+matrix:
+  include:
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - gcc-4.9
+            - gfortran-4.9
+            - libblas
+            - libblas-dev
+      env: FGSL_CC='gcc-4.9' FGSL_FC='gfortran-4.9' LIBS='-L/usr/lib -lblas -lm'
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - gcc-5
+            - gfortran-5
+            - libblas
+            - libblas-dev
+      env: FGSL_CC='gcc-5' FGSL_FC='gfortran-5' LIBS='-L/usr/lib -lblas -lm'
+    - os: osx
+      compiler: gcc
+      env: GCC='gcc49' FGSL_CC='gcc-4.9' FGSL_FC='gfortran-4.9'
+    - os: osx
+      compiler: gcc
+      env: GCC='gcc5' FGSL_CC='gcc-5' FGSL_FC='gfortran-5'
+
+
+env:
+  global:
+    - LD_LIBRARY_PATH=/usr/local/lib
+    - LD_RUN_PATH=/usr/local/lib
+    - PKG_CONFIG_LIBDIR=/usr/local/lib/pkgconfig
+
+before_install:
+  - if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew uninstall gcc && brew install ${GCC} ; fi
+
+install:
+  - wget http://ftp.heanet.ie/mirrors/gnu/gsl/gsl-2.1.tar.gz
+  - tar xvfz gsl-2.1.tar.gz
+  - cd gsl-2.1
+  - ./configure CC=${FGSL_CC} FC=${FGSL_FC}
+  - make -j4
+  - make check
+  - if [ $TRAVIS_OS_NAME == osx ]; then make install ; fi
+  - if [ $TRAVIS_OS_NAME == linux ]; then sudo make install ; fi
+  - cd ..
+
+script:
+  - autoreconf -fi
+  - ./configure CC=${FGSL_CC} FC=${FGSL_FC}
+  - make
+  - make check
+
+notifications:
+  email:
+    recipients:
+      - Tom.Schoonjans@me.com
+    on_success: never
+    on_failure: always
+
+#os:
+#  - osx
