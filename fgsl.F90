@@ -661,6 +661,26 @@ module fgsl
        fgsl_multifit_fdfridge_set3, fgsl_multifit_fdfridge_wset3, &
        fgsl_multifit_fdfridge_iterate, fgsl_multifit_fdfridge_driver
 
+! 
+! new nonlinear fitting interfaces
+  public :: fgsl_multifit_nlinear_alloc, fgsl_multilarge_nlinear_alloc, &
+       fgsl_multifit_nlinear_default_parameters, fgsl_multilarge_nlinear_default_parameters, &
+       fgsl_multifit_nlinear_init, fgsl_multifit_nlinear_winit, &
+       fgsl_multilarge_nlinear_init, fgsl_multilarge_nlinear_winit, &
+       fgsl_multifit_nlinear_free, fgsl_multilarge_nlinear_free, &
+       fgsl_multifit_nlinear_name, fgsl_multilarge_nlinear_name, &
+       fgsl_multifit_nlinear_trs_name, fgsl_multilarge_nlinear_trs_name, &
+       fgsl_multifit_nlinear_iterate, fgsl_multilarge_nlinear_iterate, &
+       fgsl_multifit_nlinear_position, fgsl_multilarge_nlinear_position, &
+       fgsl_multifit_nlinear_residual, fgsl_multilarge_nlinear_residual, &
+       fgsl_multifit_nlinear_jac, fgsl_multifit_nlinear_niter, fgsl_multilarge_nlinear_niter, &
+       fgsl_multifit_nlinear_rcond, fgsl_multilarge_nlinear_rcond, &
+       fgsl_multifit_nlinear_test, fgsl_multilarge_nlinear_test, &
+       fgsl_multifit_nlinear_driver, fgsl_multilarge_nlinear_driver, &
+       fgsl_multifit_nlinear_covar, fgsl_multilarge_nlinear_covar, &
+       fgsl_multifit_nlinear_fdf_init, fgsl_multifit_nlinear_fdf_free
+       
+!
 ! large linear least squares systems
   public :: fgsl_multilarge_linear_alloc, fgsl_multilarge_linear_free, &
        fgsl_multilarge_linear_name, fgsl_multilarge_linear_reset, &
@@ -1772,12 +1792,102 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
        fgsl_multimin_fdfminimizer_vector_bfgs = fgsl_multimin_fdfminimizer_type(4), &
        fgsl_multimin_fdfminimizer_vector_bfgs2 = fgsl_multimin_fdfminimizer_type(5)
 !
-! Types: Fitting
+! Types and constants: Fitting
 !
   type, public :: fgsl_multifit_linear_workspace
      private
      type(c_ptr) :: gsl_multifit_linear_workspace = c_null_ptr
   end type fgsl_multifit_linear_workspace
+!
+! new nonlinear interfaces for both small and large problems
+  type, public :: fgsl_multifit_nlinear_type
+     private
+     type(c_ptr) :: gsl_multifit_nlinear_type = c_null_ptr
+  end type fgsl_multifit_nlinear_type
+  type, public :: fgsl_multifit_nlinear_workspace
+     private
+     type(c_ptr) :: gsl_multifit_nlinear_workspace = c_null_ptr
+  end type fgsl_multifit_nlinear_workspace
+  type, BIND(C) :: gsl_multifit_nlinear_parameters
+     type(c_ptr) :: trs, scale, solver
+     integer(c_int) :: fdtype
+     real(c_double) :: factor_up, factor_down, avmax, h_df, h_fvv
+  end type
+  type, public :: fgsl_multifit_nlinear_parameters
+     private
+     type(gsl_multifit_nlinear_parameters) :: gsl_multifit_nlinear_parameters 
+  end type fgsl_multifit_nlinear_parameters
+  type, public :: fgsl_multilarge_nlinear_type
+     private
+     type(c_ptr) :: gsl_multilarge_nlinear_type = c_null_ptr
+  end type fgsl_multilarge_nlinear_type
+  type, public :: fgsl_multilarge_nlinear_workspace
+     private
+     type(c_ptr) :: gsl_multilarge_nlinear_workspace = c_null_ptr
+  end type fgsl_multilarge_nlinear_workspace
+  type, BIND(C) :: gsl_multilarge_nlinear_parameters
+     type(c_ptr) :: trs, scale, solver
+     integer(c_int) :: fdtype
+     real(c_double) :: factor_up, factor_down, avmax, h_df, h_fvv
+     integer(c_size_t) :: maxiter    
+     real(c_double) :: tol
+  end type
+  type, public :: fgsl_multilarge_nlinear_parameters
+     private
+     type(gsl_multilarge_nlinear_parameters) :: gsl_multilarge_nlinear_parameters
+  end type fgsl_multilarge_nlinear_parameters
+  type, public :: fgsl_multifit_nlinear_fdf
+     private
+     type(c_ptr) :: gsl_multifit_nlinear_fdf = c_null_ptr
+  end type fgsl_multifit_nlinear_fdf
+  type, public :: fgsl_multilarge_nlinear_fdf
+     private
+     type(c_ptr) :: gsl_multilarge_nlinear_fdf = c_null_ptr
+  end type fgsl_multilarge_nlinear_fdf
+  abstract interface
+    subroutine fgsl_nlinear_callback(iter, params, w) BIND(C)
+      import :: fgsl_size_t, c_ptr, c_funptr
+      integer(fgsl_size_t), intent(in) :: iter
+      type(c_ptr), value :: params
+      type(c_funptr), value :: w
+    end subroutine
+  end interface
+!
+! trust region subproblem methods
+  type, public :: fgsl_multifit_nlinear_trs
+    private 
+    integer(c_int) :: which = 0
+  end type
+  type(fgsl_multifit_nlinear_trs), public, parameter :: &
+          fgsl_multifit_nlinear_trs_lm = fgsl_multifit_nlinear_trs(1), &
+          fgsl_multifit_nlinear_trs_lmaccel = fgsl_multifit_nlinear_trs(2), &
+          fgsl_multifit_nlinear_trs_dogleg = fgsl_multifit_nlinear_trs(3), &
+          fgsl_multifit_nlinear_trs_ddogleg = fgsl_multifit_nlinear_trs(4), &
+          fgsl_multifit_nlinear_trs_subspace2d = fgsl_multifit_nlinear_trs(5)
+! 
+! scaling matrix strategies
+  type, public :: fgsl_multifit_nlinear_scale
+    private 
+    integer(c_int) :: which = 0
+  end type
+  type(fgsl_multifit_nlinear_scale), public, parameter :: &
+          fgsl_multifit_nlinear_scale_levenberg = fgsl_multifit_nlinear_scale(1), &
+          fgsl_multifit_nlinear_scale_marquardt = fgsl_multifit_nlinear_scale(2), &
+          fgsl_multifit_nlinear_scale_more = fgsl_multifit_nlinear_scale(3)
+!
+! linear solvers
+  type, public :: fgsl_multifit_nlinear_solver
+    private 
+    integer(c_int) :: which = 0
+  end type
+  type(fgsl_multifit_nlinear_solver), public, parameter :: &
+          fgsl_multifit_nlinear_solver_cholesky = fgsl_multifit_nlinear_solver(1), &
+          fgsl_multifit_nlinear_solver_qr = fgsl_multifit_nlinear_solver(2), &
+          fgsl_multifit_nlinear_solver_svd = fgsl_multifit_nlinear_solver(3)
+  integer(fgsl_int), parameter :: FGSL_MULTIFIT_NLINEAR_FWDIFF = 0, & 
+                                  FGSL_MULTIFIT_NLINEAR_CTRDIFF = 1
+!
+! nonlinear fitting legacy interface
   type, public :: fgsl_multifit_function
      private
      type(c_ptr) :: gsl_multifit_function = c_null_ptr
@@ -1889,6 +1999,7 @@ end type fgsl_rstat_workspace
 #include "interface/multiroots.finc"
 #include "interface/multimin.finc"
 #include "interface/fit.finc"
+#include "interface/nlfit.finc"
 #include "interface/multifit.finc"
 #include "interface/bspline.finc"
 #include "interface/ieee.finc"
@@ -1931,6 +2042,7 @@ contains
 #include "api/multiroots.finc"
 #include "api/multimin.finc"
 #include "api/fit.finc"
+#include "api/nlfit.finc"
 #include "api/multifit.finc"
 #include "api/bspline.finc"
 #include "api/ieee.finc"

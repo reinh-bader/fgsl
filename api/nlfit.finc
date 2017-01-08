@@ -1,0 +1,281 @@
+!-*-f90-*-
+!
+!  API: non-linear least-squares fitting
+!
+!> \page "Comments on nonlinear least squares fitting"
+!> The new interface deals with both "normal" and "large" problems.
+!> Please go to api/nlfit.finc for the API documentation.
+
+  type(fgsl_multifit_nlinear_type) function fgsl_multifit_nlinear_setup(s)
+    character(kind=fgsl_char, len=*) :: s 
+    fgsl_multifit_nlinear_setup%gsl_multifit_nlinear_type = gsl_multifit_nlinear_setup(s(1:1))
+  end function
+  function fgsl_multifit_nlinear_alloc(t, params, n, p)
+    type(fgsl_multifit_nlinear_type), intent(in) :: t
+    type(fgsl_multifit_nlinear_parameters), intent(in) :: params
+    integer(fgsl_size_t), intent(in) :: n, p
+    type(fgsl_multifit_nlinear_workspace) :: fgsl_multifit_nlinear_alloc
+!
+    fgsl_multifit_nlinear_alloc%gsl_multifit_nlinear_workspace = &
+         gsl_multifit_nlinear_alloc(t%gsl_multifit_nlinear_type, &
+                 params%gsl_multifit_nlinear_parameters, n, p)
+  end function fgsl_multifit_nlinear_alloc
+  function fgsl_multilarge_nlinear_alloc(t, params, n, p)
+    type(fgsl_multilarge_nlinear_type), intent(in) :: t
+    type(fgsl_multilarge_nlinear_parameters), intent(in) :: params
+    integer(fgsl_size_t), intent(in) :: n, p
+    type(fgsl_multilarge_nlinear_workspace) :: fgsl_multilarge_nlinear_alloc
+!
+    fgsl_multilarge_nlinear_alloc%gsl_multilarge_nlinear_workspace = &
+         gsl_multilarge_nlinear_alloc(t%gsl_multilarge_nlinear_type, &
+                 params%gsl_multilarge_nlinear_parameters, n, p)
+  end function fgsl_multilarge_nlinear_alloc
+  function fgsl_multifit_nlinear_default_parameters()
+    type(fgsl_multifit_nlinear_parameters) :: fgsl_multifit_nlinear_default_parameters
+    fgsl_multifit_nlinear_default_parameters%gsl_multifit_nlinear_parameters = &
+         gsl_multifit_nlinear_default_parameters()
+  end function
+  function fgsl_multilarge_nlinear_default_parameters()
+    type(fgsl_multilarge_nlinear_parameters) :: fgsl_multilarge_nlinear_default_parameters
+    fgsl_multilarge_nlinear_default_parameters%gsl_multilarge_nlinear_parameters = &
+         gsl_multilarge_nlinear_default_parameters()
+  end function
+  integer(fgsl_int) function fgsl_multifit_nlinear_init(x, fdf, w)
+    type(fgsl_vector), intent(in) :: x
+    type(fgsl_multifit_nlinear_fdf), intent(in) :: fdf
+    type(fgsl_multifit_nlinear_workspace), intent(inout) :: w
+    fgsl_multifit_nlinear_init = gsl_multifit_nlinear_init(x%gsl_vector, &
+         fdf%gsl_multifit_nlinear_fdf, w%gsl_multifit_nlinear_workspace)
+  end function
+  integer(fgsl_int) function fgsl_multifit_nlinear_winit(x, wts, fdf, w)
+    type(fgsl_vector), intent(in) :: x, wts
+    type(fgsl_multifit_nlinear_fdf), intent(in) :: fdf
+    type(fgsl_multifit_nlinear_workspace), intent(inout) :: w
+    fgsl_multifit_nlinear_winit = gsl_multifit_nlinear_winit(x%gsl_vector, &
+         wts%gsl_vector, fdf%gsl_multifit_nlinear_fdf, w%gsl_multifit_nlinear_workspace)
+  end function
+  integer(fgsl_int) function fgsl_multilarge_nlinear_init(x, fdf, w)
+    type(fgsl_vector), intent(in) :: x
+    type(fgsl_multilarge_nlinear_fdf), intent(in) :: fdf
+    type(fgsl_multilarge_nlinear_workspace), intent(inout) :: w
+    fgsl_multilarge_nlinear_init = gsl_multilarge_nlinear_init(x%gsl_vector, &
+         fdf%gsl_multilarge_nlinear_fdf, w%gsl_multilarge_nlinear_workspace)
+  end function
+  integer(fgsl_int) function fgsl_multilarge_nlinear_winit(x, wts, fdf, w)
+    type(fgsl_vector), intent(in) :: x, wts
+    type(fgsl_multilarge_nlinear_fdf), intent(in) :: fdf
+    type(fgsl_multilarge_nlinear_workspace), intent(inout) :: w
+    fgsl_multilarge_nlinear_winit = gsl_multilarge_nlinear_winit(x%gsl_vector, &
+         wts%gsl_vector, fdf%gsl_multilarge_nlinear_fdf, w%gsl_multilarge_nlinear_workspace)
+  end function
+  subroutine fgsl_multifit_nlinear_free(w)
+    type(fgsl_multifit_nlinear_workspace), intent(inout) :: w
+    call gsl_multifit_nlinear_free(w%gsl_multifit_nlinear_workspace)
+  end subroutine
+  subroutine fgsl_multilarge_nlinear_free(w)
+    type(fgsl_multilarge_nlinear_workspace), intent(inout) :: w
+    call gsl_multilarge_nlinear_free(w%gsl_multilarge_nlinear_workspace)
+  end subroutine
+  function fgsl_multifit_nlinear_name(w)
+    type(fgsl_multifit_nlinear_workspace), intent(in) :: w
+    character(kind=fgsl_char,len=fgsl_strmax) :: fgsl_multifit_nlinear_name
+    type(c_ptr) :: name
+    name = gsl_multifit_nlinear_name(w%gsl_multifit_nlinear_workspace)
+    fgsl_multifit_nlinear_name = fgsl_name(name)
+  end function
+  function fgsl_multilarge_nlinear_name(w)
+    type(fgsl_multilarge_nlinear_workspace), intent(in) :: w
+    character(kind=fgsl_char,len=fgsl_strmax) :: fgsl_multilarge_nlinear_name
+    type(c_ptr) :: name
+    name = gsl_multilarge_nlinear_name(w%gsl_multilarge_nlinear_workspace)
+    fgsl_multilarge_nlinear_name = fgsl_name(name)
+  end function
+  function fgsl_multifit_nlinear_trs_name(w)
+    type(fgsl_multifit_nlinear_workspace), intent(in) :: w
+    character(kind=fgsl_char,len=fgsl_strmax) :: fgsl_multifit_nlinear_trs_name
+    type(c_ptr) :: name
+    name = gsl_multifit_nlinear_trs_name(w%gsl_multifit_nlinear_workspace)
+    fgsl_multifit_nlinear_trs_name = fgsl_name(name)
+  end function
+  function fgsl_multilarge_nlinear_trs_name(w)
+    type(fgsl_multilarge_nlinear_workspace), intent(in) :: w
+    character(kind=fgsl_char,len=fgsl_strmax) :: fgsl_multilarge_nlinear_trs_name
+    type(c_ptr) :: name
+    name = gsl_multilarge_nlinear_trs_name(w%gsl_multilarge_nlinear_workspace)
+    fgsl_multilarge_nlinear_trs_name = fgsl_name(name)
+  end function
+  integer(fgsl_int) function fgsl_multifit_nlinear_iterate(w)
+    type(fgsl_multifit_nlinear_workspace), intent(inout) :: w
+    fgsl_multifit_nlinear_iterate = gsl_multifit_nlinear_iterate(w%gsl_multifit_nlinear_workspace)
+  end function
+  integer(fgsl_int) function fgsl_multilarge_nlinear_iterate(w)
+    type(fgsl_multilarge_nlinear_workspace), intent(inout) :: w
+    fgsl_multilarge_nlinear_iterate = gsl_multilarge_nlinear_iterate(&
+               w%gsl_multilarge_nlinear_workspace)
+  end function
+  function fgsl_multifit_nlinear_position(w)
+    type(fgsl_multifit_nlinear_workspace), intent(in) :: w
+    type(fgsl_vector) :: fgsl_multifit_nlinear_position
+    fgsl_multifit_nlinear_position%gsl_vector = &
+         gsl_multifit_nlinear_position(w%gsl_multifit_nlinear_workspace)
+  end function fgsl_multifit_nlinear_position
+  function fgsl_multilarge_nlinear_position(w)
+    type(fgsl_multilarge_nlinear_workspace), intent(in) :: w
+    type(fgsl_vector) :: fgsl_multilarge_nlinear_position
+    fgsl_multilarge_nlinear_position%gsl_vector = &
+         gsl_multilarge_nlinear_position(w%gsl_multilarge_nlinear_workspace)
+  end function fgsl_multilarge_nlinear_position
+  function fgsl_multifit_nlinear_residual(w)
+    type(fgsl_multifit_nlinear_workspace), intent(in) :: w
+    type(fgsl_vector) :: fgsl_multifit_nlinear_residual
+    fgsl_multifit_nlinear_residual%gsl_vector = &
+         gsl_multifit_nlinear_residual(w%gsl_multifit_nlinear_workspace)
+  end function fgsl_multifit_nlinear_residual
+  function fgsl_multilarge_nlinear_residual(w)
+    type(fgsl_multilarge_nlinear_workspace), intent(in) :: w
+    type(fgsl_vector) :: fgsl_multilarge_nlinear_residual
+    fgsl_multilarge_nlinear_residual%gsl_vector = &
+         gsl_multilarge_nlinear_residual(w%gsl_multilarge_nlinear_workspace)
+  end function fgsl_multilarge_nlinear_residual
+  function fgsl_multifit_nlinear_jac(w)
+    type(fgsl_multifit_nlinear_workspace), intent(in) :: w
+    type(fgsl_matrix) :: fgsl_multifit_nlinear_jac
+    fgsl_multifit_nlinear_jac%gsl_matrix = &
+         gsl_multifit_nlinear_jac(w%gsl_multifit_nlinear_workspace)
+  end function fgsl_multifit_nlinear_jac
+  integer(fgsl_size_t) function fgsl_multifit_nlinear_niter(w)
+    type(fgsl_multifit_nlinear_workspace), intent(in) :: w
+    fgsl_multifit_nlinear_niter = &
+         gsl_multifit_nlinear_niter(w%gsl_multifit_nlinear_workspace)
+  end function fgsl_multifit_nlinear_niter
+  integer(fgsl_size_t) function fgsl_multilarge_nlinear_niter(w)
+    type(fgsl_multilarge_nlinear_workspace), intent(in) :: w
+    fgsl_multilarge_nlinear_niter = &
+         gsl_multilarge_nlinear_niter(w%gsl_multilarge_nlinear_workspace)
+  end function fgsl_multilarge_nlinear_niter
+  integer(fgsl_int) function fgsl_multifit_nlinear_rcond(rcond, w)
+    real(fgsl_double), intent(inout) :: rcond
+    type(fgsl_multifit_nlinear_workspace), intent(in) :: w
+    fgsl_multifit_nlinear_rcond = &
+         gsl_multifit_nlinear_rcond(rcond, w%gsl_multifit_nlinear_workspace)
+  end function fgsl_multifit_nlinear_rcond
+  integer(fgsl_int) function fgsl_multilarge_nlinear_rcond(rcond, w)
+    real(fgsl_double), intent(inout) :: rcond
+    type(fgsl_multilarge_nlinear_workspace), intent(in) :: w
+    fgsl_multilarge_nlinear_rcond = &
+         gsl_multilarge_nlinear_rcond(rcond, w%gsl_multilarge_nlinear_workspace)
+  end function fgsl_multilarge_nlinear_rcond
+  integer(fgsl_int) function fgsl_multifit_nlinear_test(xtol, gtol, ftol, info, w)
+    real(fgsl_double), intent(in) :: xtol, gtol, ftol
+    integer(fgsl_int), intent(inout) :: info
+    type(fgsl_multifit_nlinear_workspace), intent(in) :: w
+    fgsl_multifit_nlinear_test = &
+         gsl_multifit_nlinear_test(xtol, gtol, ftol, info, w%gsl_multifit_nlinear_workspace)
+  end function fgsl_multifit_nlinear_test
+  integer(fgsl_int) function fgsl_multilarge_nlinear_test(xtol, gtol, ftol, info, w)
+    real(fgsl_double), intent(in) :: xtol, gtol, ftol
+    integer(fgsl_int), intent(inout) :: info
+    type(fgsl_multilarge_nlinear_workspace), intent(in) :: w
+    fgsl_multilarge_nlinear_test = &
+         gsl_multilarge_nlinear_test(xtol, gtol, ftol, info, w%gsl_multilarge_nlinear_workspace)
+  end function fgsl_multilarge_nlinear_test
+  integer(fgsl_int) function fgsl_multifit_nlinear_driver(maxiter, xtol, gtol, ftol, &
+                       callback, callback_params, info, w)
+    integer(fgsl_size_t), intent(in) :: maxiter
+    real(fgsl_double), intent(in) :: xtol, gtol, ftol
+    procedure(fgsl_nlinear_callback), optional :: callback
+    type(c_ptr), value :: callback_params
+    integer(fgsl_int), intent(inout) :: info
+    type(fgsl_multifit_nlinear_workspace), intent(in) :: w
+    type(c_funptr) :: callback_ptr
+    if (present(callback)) then
+      callback_ptr = c_funloc(callback)
+    else
+      callback_ptr = c_null_funptr
+    end if
+    fgsl_multifit_nlinear_driver = gsl_multifit_nlinear_driver(maxiter, xtol, gtol, &
+                         ftol, callback_ptr, callback_params, info, &
+                         w%gsl_multifit_nlinear_workspace)
+  end function fgsl_multifit_nlinear_driver
+  integer(fgsl_int) function fgsl_multilarge_nlinear_driver(maxiter, xtol, gtol, ftol, &
+                       callback, callback_params, info, w)
+    integer(fgsl_size_t), intent(in) :: maxiter
+    real(fgsl_double), intent(in) :: xtol, gtol, ftol
+    procedure(fgsl_nlinear_callback), optional :: callback
+    type(c_ptr), value :: callback_params
+    integer(fgsl_int), intent(inout) :: info
+    type(fgsl_multilarge_nlinear_workspace), intent(in) :: w
+    type(c_funptr) :: callback_ptr
+    if (present(callback)) then
+      callback_ptr = c_funloc(callback)
+    else
+      callback_ptr = c_null_funptr
+    end if
+    fgsl_multilarge_nlinear_driver = gsl_multilarge_nlinear_driver(maxiter, xtol, gtol, &
+                         ftol, callback_ptr, callback_params, info, &
+                         w%gsl_multilarge_nlinear_workspace)
+  end function fgsl_multilarge_nlinear_driver
+  integer(fgsl_int) function fgsl_multifit_nlinear_covar(j, epsrel, covar)
+    type(fgsl_matrix), intent(in) :: j
+    real(fgsl_double), intent(in) :: epsrel
+    type(fgsl_matrix), intent(inout) :: covar
+    fgsl_multifit_nlinear_covar = gsl_multifit_nlinear_covar(j%gsl_matrix, &
+                         epsrel, covar%gsl_matrix)
+  end function fgsl_multifit_nlinear_covar
+  integer(fgsl_int) function fgsl_multilarge_nlinear_covar(covar, w)
+    type(fgsl_matrix), intent(inout) :: covar
+    type(fgsl_multilarge_nlinear_workspace), intent(in) :: w
+    fgsl_multilarge_nlinear_covar = gsl_multilarge_nlinear_covar(covar%gsl_matrix, &
+                         w%gsl_multilarge_nlinear_workspace)
+  end function fgsl_multilarge_nlinear_covar
+  function fgsl_multifit_nlinear_fdf_init(ndim, p, params, func, dfunc, fvv)
+    interface
+       function func(x, params, f) bind(c)
+         import :: c_ptr, c_int
+         type(c_ptr), value :: x, params, f
+         integer(c_int) :: func
+       end function func
+       function dfunc(x, params, df) bind(c)
+         import :: c_ptr, c_int
+         type(c_ptr), value :: x, params, df
+         integer(c_int) :: dfunc
+       end function dfunc
+       function fvv(x, v, params, vv) bind(c)
+         import :: c_ptr, c_int
+         type(c_ptr), value :: x, v, params, vv
+         integer(c_int) :: fvv
+       end function fvv
+    end interface
+    optional :: dfunc, fvv
+    integer(fgsl_size_t), intent(in) :: ndim, p
+    type(c_ptr), intent(in) :: params
+    type(fgsl_multifit_nlinear_fdf) :: fgsl_multifit_nlinear_fdf_init
+!
+    type(c_funptr) :: fp, dfp, fvvp
+    fp = c_funloc(func)
+    if (present(dfunc)) then
+       dfp = c_funloc(dfunc)
+    else
+       dfp = c_null_funptr
+    end if
+    if (present(fvv)) then
+       fvvp = c_funloc(fvv)
+    else
+       fvvp = c_null_funptr
+    end if
+    fgsl_multifit_nlinear_fdf_init%gsl_multifit_nlinear_fdf = &
+         fgsl_multifit_nlinear_fdf_cinit(ndim, p, params, fp, dfp, fvvp)
+  end function fgsl_multifit_nlinear_fdf_init
+  subroutine fgsl_multifit_nlinear_fdf_free(fun)
+    type(fgsl_multifit_nlinear_fdf), intent(inout) :: fun
+    call fgsl_multifit_nlinear_fdf_cfree(fun%gsl_multifit_nlinear_fdf)
+  end subroutine fgsl_multifit_nlinear_fdf_free
+  function fgsl_multifit_nlinear_status(s)
+    type(fgsl_multifit_nlinear_workspace), intent(in) :: s
+    logical :: fgsl_multifit_nlinear_status
+    fgsl_multifit_nlinear_status = .false.
+    if (c_associated(s%gsl_multifit_nlinear_workspace)) &
+         fgsl_multifit_nlinear_status = .true.
+  end function fgsl_multifit_nlinear_status
+
+

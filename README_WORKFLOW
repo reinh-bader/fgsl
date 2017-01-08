@@ -1,0 +1,13 @@
+Some notes on the source management workflow
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* generate local clone of repo
+  git clone https://github.com/reinh-bader/fgsl.git
+  produces a folder fgsl that contains the clone
+* add a new, modified or deleted file to the repo
+  git add <file_name>
+  note: modified files must also be added
+* commit modified files
+  git commit -m "<commit message>" 
+* push updated repository back to master
+  git push

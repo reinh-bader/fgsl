@@ -4,6 +4,7 @@
 !
 !> \page "Comments on nonlinear least squares fitting"
 !> Please go to api/multifit.finc for the API documentation.
+!> Legacy interface - api/nlfit.finc should be used instead.
 
   function fgsl_multifit_function_init(func, ndim, p, params)
     interface

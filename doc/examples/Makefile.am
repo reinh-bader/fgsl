@@ -11,7 +11,8 @@ check_PROGRAMS = cdf cheb combination diff dwt \
 		 fitting fitting3 fitting2 histogram \
 		 histogram2d ieee ieeeround integration \
 		 interp interpp intro matrix min monte \
-		 nlfit ntuplew ntupler \
+                 multifit nlfit \
+		 ntuplew ntupler \
 		 linalglu eigen eigen_nonsymm fft \
 		 ode-initval permutation permshuffle \
 		 polyroots qrng randpoisson randwalk \
@@ -61,6 +62,8 @@ matrix_SOURCES = matrix.f90
 min_SOURCES = min.f90
 
 monte_SOURCES = monte.f90
+
+multifit_SOURCES = multifit.f90
 
 nlfit_SOURCES = nlfit.f90
 

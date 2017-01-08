@@ -60,9 +60,13 @@
      module procedure fgsl_multifit_status
      module procedure fgsl_multifit_fsolver_status
      module procedure fgsl_multifit_fdfsolver_status
+     module procedure fgsl_multifit_nlinear_status
      module procedure fgsl_file_status
      module procedure fgsl_wavelet_status
      module procedure fgsl_wavelet_workspace_status
+  end interface
+  interface fgsl_multifit_nlinear_type
+     module procedure fgsl_multifit_nlinear_setup
   end interface
   interface fgsl_sizeof
      module procedure fgsl_sizeof_double

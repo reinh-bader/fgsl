@@ -1,3 +1,12 @@
+Changes in 1.2.0:
+~~~~~~~~~~~~~~~~~
+This branch introduces support for gsl 2.3. An overview:
+
+1. added support for the multifit_nlinear and multilarge_nlinear interfaces, 
+   including example programs
+
+
+
 Changes in 1.1.0 (by Tom Schoonjans):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This branch introduces support for the recently released gsl 2.1. An overview:

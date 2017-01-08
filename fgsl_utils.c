@@ -32,6 +32,7 @@
 // FIXME: remove after IBM compiler fixed
 #include <gsl/gsl_sf.h>
 #include <gsl/gsl_multifit.h>
+#include <gsl/gsl_multifit_nlinear.h>
 #include <gsl/gsl_multilarge.h>
 #include <gsl/gsl_interp2d.h>
 #include <gsl/gsl_spmatrix.h>
@@ -865,12 +866,38 @@ gsl_multiroot_function_fdf *fgsl_multiroot_function_fdf_cinit(
     return result;
 }
 
+
 void fgsl_multiroot_function_cfree(gsl_multiroot_function *fun) {
     free(fun);
 }
 void fgsl_multiroot_function_fdf_cfree(gsl_multiroot_function_fdf *fun) {
     free(fun);
 }
+
+gsl_multifit_nlinear_fdf *fgsl_multifit_nlinear_fdf_cinit(
+       size_t ndim, size_t p, void *params, 
+       int (*f)(const gsl_vector *x, void *params, gsl_vector *f), 
+       int (*df)(const gsl_vector *x, void *params, gsl_matrix *df), 
+       int (*fvv)(const gsl_vector *x, const gsl_vector *v, void *params, gsl_vector *vv) 
+       ) {
+    gsl_multifit_nlinear_fdf *result;
+    result = (gsl_multifit_nlinear_fdf *) malloc(sizeof(gsl_multifit_nlinear_fdf));
+    result->f = f;
+    result->df = df;
+    result->fvv = fvv;
+    result->n = ndim;
+    result->p = p;
+    result->params = params;
+    return result;
+}
+void fgsl_multifit_nlinear_fdf_cfree(gsl_multifit_nlinear_fdf *fun) {
+    free(fun);
+}
+
+gsl_multifit_nlinear_type *gsl_multifit_nlinear_setup(char *s) {
+    return gsl_multifit_nlinear_trust;
+}
+
 
 const gsl_multiroot_fsolver_type *fgsl_aux_multiroot_fsolver_alloc(int i) {
     const gsl_multiroot_fsolver_type *res;

@@ -1,8 +1,9 @@
 
-This is release 1.1.0 of the Fortran interface 
+This is release 1.2.0 of the Fortran interface 
 to the GNU Scientific Library. 
-It is based on version 2.1 of GSL, and should not be used with earlier GSL releases.
+It is based on version 2.3 of GSL, and should not be used with earlier GSL releases.
 Please use the release 1.0.0 in combination with GSL 1.x
+Please use the release 1.1.0 in combination with GSL 2.1 or 2.2.1
 
 Please consult the NEWS file for a change log.
 
