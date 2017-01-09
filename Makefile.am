@@ -96,7 +96,7 @@ libfgsl_la_DEPENDENCIES = $(libfgsl_la_SOURCES)
 
 libfgsl_la_LDFLAGS = -version-info @LIB_CURRENT@:@LIB_REVISION@:@LIB_AGE@ @FGSL_LDFLAGS@
 libfgsl_la_CFLAGS = @gsl_CFLAGS@ -I$(top_srcdir)
-libfgsl_la_FCFLAGS = -I$(top_srcdir)
+libfgsl_la_FCFLAGS = -Xpreprocessor -I$(top_srcdir)
 libfgsl_la_LIBADD = @gsl_LIBS@
 
 fgsl.mod: fgsl.o libfgsl.la
