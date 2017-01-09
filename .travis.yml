@@ -63,13 +63,13 @@ before_install:
 
 install:
   - wget http://ftp.heanet.ie/mirrors/gnu/gsl/gsl-2.3.tar.gz
-  - tar xvfz gsl-2.3.tar.gz
+  - tar xvfz gsl-2.3.tar.gz > /dev/null
   - cd gsl-2.3
-  - ./configure
-  - make
-  - make check
-  - if [ $TRAVIS_OS_NAME == osx ]; then make install ; fi
-  - if [ $TRAVIS_OS_NAME == linux ]; then sudo make install ; fi
+  - ./configure > /dev/null
+  - make > /dev/null
+  - make check > /dev/null
+  - if [ $TRAVIS_OS_NAME == osx ]; then make install > /dev/null ; fi
+  - if [ $TRAVIS_OS_NAME == linux ]; then sudo make install > /dev/null ; fi
   - cd ..
 
 script:
