@@ -80,6 +80,7 @@ script:
     make
     make check
     make distcheck
+    set +e
 
 notifications:
   email:
