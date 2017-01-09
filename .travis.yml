@@ -13,7 +13,7 @@ matrix:
           packages:
             - gcc-4.9
             - gfortran-4.9
-            - libblas
+            - libblas3
             - libblas-dev
       env: FGSL_CC='gcc-4.9' FGSL_FC='gfortran-4.9' LIBS='-L/usr/lib -lblas -lm'
     - os: linux
@@ -24,7 +24,7 @@ matrix:
           packages:
             - gcc-5
             - gfortran-5
-            - libblas
+            - libblas3
             - libblas-dev
       env: FGSL_CC='gcc-5' FGSL_FC='gfortran-5' LIBS='-L/usr/lib -lblas -lm'
     - os: linux
@@ -35,15 +35,13 @@ matrix:
           packages:
             - gcc-6
             - gfortran-6
-            - libblas
+            - libblas3
             - libblas-dev
       env: FGSL_CC='gcc-6' FGSL_FC='gfortran-6' LIBS='-L/usr/lib -lblas -lm'
     - os: osx
       env: GCC='gcc@4.9' FGSL_CC='gcc-4.9' FGSL_FC='gfortran-4.9'
     - os: osx
       env: GCC='gcc@5' FGSL_CC='gcc-5' FGSL_FC='gfortran-5'
-    - os: osx
-      env: GCC='gcc@6' FGSL_CC='gcc-6' FGSL_FC='gfortran-6'
 
 
 env:
