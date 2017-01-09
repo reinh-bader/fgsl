@@ -168,7 +168,27 @@
     type(c_ptr), value :: params
     type(c_funptr), value :: fp, dfp, fvvp
  end function
+ subroutine gsl_multifit_nlinear_fdf_get(fdf, fp, dfp, fvvp, &
+          n, p, params, nevalf, nevaldf, nevalfvv) BIND(C)
+    import
+    type(c_ptr), value :: fdf
+    type(c_funptr) :: fp, dfp, fvvp
+    integer(c_size_t) :: n, p, nevalf, nevaldf, nevalfvv
+    type(c_ptr) :: params
+ end subroutine
  subroutine fgsl_multifit_nlinear_fdf_cfree(fdf) BIND(C)
     import
     type(c_ptr), value :: fdf
  end subroutine
+ type(c_ptr) function gsl_multifit_nlinear_get_trs(which) BIND(C)
+    import
+    integer(c_int), value :: which
+ end function
+ type(c_ptr) function gsl_multifit_nlinear_get_scale(which) BIND(C)
+    import
+    integer(c_int), value :: which
+ end function
+ type(c_ptr) function gsl_multifit_nlinear_get_solver(which) BIND(C)
+    import
+    integer(c_int), value :: which
+ end function

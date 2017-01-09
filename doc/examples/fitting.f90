@@ -25,7 +25,7 @@ program fitting
   write(6, '(''# chisq = '',F12.5)') chisq
 
   do i=1, n
-     write(6, '(''data: '',2(F6.1,1X),F12.5))') x(i), y(i), 1.0D0/sqrt(w(i))
+     write(6, '(''data: '',2(F6.1,1X),F12.5)') x(i), y(i), 1.0D0/sqrt(w(i))
   end do
 
   do i=-30,129

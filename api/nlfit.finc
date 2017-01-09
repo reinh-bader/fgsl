@@ -229,24 +229,9 @@
                          w%gsl_multilarge_nlinear_workspace)
   end function fgsl_multilarge_nlinear_covar
   function fgsl_multifit_nlinear_fdf_init(ndim, p, params, func, dfunc, fvv)
-    interface
-       function func(x, params, f) bind(c)
-         import :: c_ptr, c_int
-         type(c_ptr), value :: x, params, f
-         integer(c_int) :: func
-       end function func
-       function dfunc(x, params, df) bind(c)
-         import :: c_ptr, c_int
-         type(c_ptr), value :: x, params, df
-         integer(c_int) :: dfunc
-       end function dfunc
-       function fvv(x, v, params, vv) bind(c)
-         import :: c_ptr, c_int
-         type(c_ptr), value :: x, v, params, vv
-         integer(c_int) :: fvv
-       end function fvv
-    end interface
-    optional :: dfunc, fvv
+    procedure(fgsl_nlinear_fdf_func), optional :: func
+    procedure(fgsl_nlinear_fdf_dfunc), optional :: dfunc
+    procedure(fgsl_nlinear_fdf_fvv), optional :: fvv
     integer(fgsl_size_t), intent(in) :: ndim, p
     type(c_ptr), intent(in) :: params
     type(fgsl_multifit_nlinear_fdf) :: fgsl_multifit_nlinear_fdf_init
@@ -266,6 +251,29 @@
     fgsl_multifit_nlinear_fdf_init%gsl_multifit_nlinear_fdf = &
          fgsl_multifit_nlinear_fdf_cinit(ndim, p, params, fp, dfp, fvvp)
   end function fgsl_multifit_nlinear_fdf_init
+  subroutine fgsl_multifit_nlinear_fdf_get(fdf, func, dfunc, fvv, n, p, params, &
+         nevalf, nevaldf, nevalfvv)
+    type(fgsl_multifit_nlinear_fdf), intent(in) :: fdf
+    procedure(fgsl_nlinear_fdf_func), pointer, optional :: func
+    procedure(fgsl_nlinear_fdf_dfunc), pointer, optional :: dfunc
+    procedure(fgsl_nlinear_fdf_fvv), pointer, optional :: fvv
+    integer(fgsl_size_t), intent(out), optional :: n, p, nevalf, nevaldf, nevalfvv
+    type(c_ptr), intent(out), optional :: params
+    type(c_funptr) :: pfunc, pdfunc, pfvv
+    integer(fgsl_size_t) :: nl, pl, nevalfl, nevaldfl, nevalfvvl
+    type(c_ptr) :: paramsl
+    call gsl_multifit_nlinear_fdf_get(fdf%gsl_multifit_nlinear_fdf, pfunc, pdfunc, pfvv, &
+          nl, pl, paramsl, nevalfl, nevaldfl, nevalfvvl)
+    if (present(func)) call c_f_procpointer(pfunc, func)
+    if (present(dfunc)) call c_f_procpointer(pdfunc, dfunc)
+    if (present(fvv)) call c_f_procpointer(pfvv, fvv)
+    if (present(n)) n = nl
+    if (present(p)) p = pl
+    if (present(params)) params = paramsl
+    if (present(nevalf)) nevalf = nevalfl
+    if (present(nevaldf)) nevaldf = nevaldfl
+    if (present(nevalfvv)) nevalfvv = nevalfvvl
+  end subroutine fgsl_multifit_nlinear_fdf_get
   subroutine fgsl_multifit_nlinear_fdf_free(fun)
     type(fgsl_multifit_nlinear_fdf), intent(inout) :: fun
     call fgsl_multifit_nlinear_fdf_cfree(fun%gsl_multifit_nlinear_fdf)
@@ -277,5 +285,23 @@
     if (c_associated(s%gsl_multifit_nlinear_workspace)) &
          fgsl_multifit_nlinear_status = .true.
   end function fgsl_multifit_nlinear_status
-
-
+  subroutine fgsl_multifit_nlinear_parameters_set(params, trs, scale, solver, &
+         fdtype, factor_up, factor_down, avmax, h_df, h_fvv)
+    type(fgsl_multifit_nlinear_parameters) :: params
+    type(fgsl_multifit_nlinear_trs), optional :: trs
+    type(fgsl_multifit_nlinear_scale), optional :: scale
+    type(fgsl_multifit_nlinear_solver), optional :: solver
+    integer(fgsl_int), optional :: fdtype
+    real(c_double), optional :: factor_up, factor_down, avmax, h_df, h_fvv
+    associate(p => params%gsl_multifit_nlinear_parameters)
+      if (present(trs)) p%trs = gsl_multifit_nlinear_get_trs(trs%which)
+      if (present(scale)) p%scale = gsl_multifit_nlinear_get_scale(scale%which)
+      if (present(solver)) p%solver = gsl_multifit_nlinear_get_solver(solver%which)
+      if (present(fdtype)) p%fdtype = fdtype
+      if (present(factor_up)) p%factor_up = factor_up
+      if (present(factor_down)) p%factor_down = factor_down
+      if (present(avmax)) p%avmax = avmax
+      if (present(h_df)) p%h_df = h_df
+      if (present(h_fvv)) p%h_fvv = h_fvv
+    end associate
+  end subroutine

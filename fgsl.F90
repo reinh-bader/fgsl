@@ -678,7 +678,8 @@ module fgsl
        fgsl_multifit_nlinear_test, fgsl_multilarge_nlinear_test, &
        fgsl_multifit_nlinear_driver, fgsl_multilarge_nlinear_driver, &
        fgsl_multifit_nlinear_covar, fgsl_multilarge_nlinear_covar, &
-       fgsl_multifit_nlinear_fdf_init, fgsl_multifit_nlinear_fdf_free
+       fgsl_multifit_nlinear_fdf_init, fgsl_multifit_nlinear_fdf_free, &
+       fgsl_multifit_nlinear_fdf_get, fgsl_multifit_nlinear_parameters_set
        
 !
 ! large linear least squares systems
@@ -1138,19 +1139,15 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
 ! Types : Array support
 !
   type, public :: fgsl_vector
-     private
      type(c_ptr) :: gsl_vector = c_null_ptr
   end type fgsl_vector
   type, public :: fgsl_matrix
-     private
      type(c_ptr) :: gsl_matrix = c_null_ptr
   end type fgsl_matrix
   type, public :: fgsl_vector_complex
-     private
      type(c_ptr) :: gsl_vector_complex = c_null_ptr
   end type fgsl_vector_complex
   type, public :: fgsl_matrix_complex
-     private
      type(c_ptr) :: gsl_matrix_complex = c_null_ptr
   end type fgsl_matrix_complex
 !
@@ -1805,7 +1802,6 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
      type(c_ptr) :: gsl_multifit_nlinear_type = c_null_ptr
   end type fgsl_multifit_nlinear_type
   type, public :: fgsl_multifit_nlinear_workspace
-     private
      type(c_ptr) :: gsl_multifit_nlinear_workspace = c_null_ptr
   end type fgsl_multifit_nlinear_workspace
   type, BIND(C) :: gsl_multifit_nlinear_parameters
@@ -1822,7 +1818,6 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
      type(c_ptr) :: gsl_multilarge_nlinear_type = c_null_ptr
   end type fgsl_multilarge_nlinear_type
   type, public :: fgsl_multilarge_nlinear_workspace
-     private
      type(c_ptr) :: gsl_multilarge_nlinear_workspace = c_null_ptr
   end type fgsl_multilarge_nlinear_workspace
   type, BIND(C) :: gsl_multilarge_nlinear_parameters
@@ -1847,15 +1842,25 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
   abstract interface
     subroutine fgsl_nlinear_callback(iter, params, w) BIND(C)
       import :: fgsl_size_t, c_ptr, c_funptr
-      integer(fgsl_size_t), intent(in) :: iter
-      type(c_ptr), value :: params
-      type(c_funptr), value :: w
+      integer(fgsl_size_t), value :: iter
+      type(c_ptr), value :: params, w
     end subroutine
+    integer(c_int) function fgsl_nlinear_fdf_func(x, params, f) bind(c)
+      import :: c_ptr, c_int
+      type(c_ptr), value :: x, params, f
+    end function 
+    integer(c_int) function fgsl_nlinear_fdf_dfunc(x, params, df) bind(c)
+      import :: c_ptr, c_int
+      type(c_ptr), value :: x, params, df
+    end function 
+    integer(c_int) function fgsl_nlinear_fdf_fvv(x, v, params, vv) bind(c)
+      import :: c_ptr, c_int
+      type(c_ptr), value :: x, v, params, vv
+    end function
   end interface
 !
 ! trust region subproblem methods
-  type, public :: fgsl_multifit_nlinear_trs
-    private 
+  type, private :: fgsl_multifit_nlinear_trs
     integer(c_int) :: which = 0
   end type
   type(fgsl_multifit_nlinear_trs), public, parameter :: &
@@ -1866,8 +1871,7 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
           fgsl_multifit_nlinear_trs_subspace2d = fgsl_multifit_nlinear_trs(5)
 ! 
 ! scaling matrix strategies
-  type, public :: fgsl_multifit_nlinear_scale
-    private 
+  type, private :: fgsl_multifit_nlinear_scale
     integer(c_int) :: which = 0
   end type
   type(fgsl_multifit_nlinear_scale), public, parameter :: &
@@ -1876,15 +1880,14 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
           fgsl_multifit_nlinear_scale_more = fgsl_multifit_nlinear_scale(3)
 !
 ! linear solvers
-  type, public :: fgsl_multifit_nlinear_solver
-    private 
+  type, private :: fgsl_multifit_nlinear_solver
     integer(c_int) :: which = 0
   end type
   type(fgsl_multifit_nlinear_solver), public, parameter :: &
           fgsl_multifit_nlinear_solver_cholesky = fgsl_multifit_nlinear_solver(1), &
           fgsl_multifit_nlinear_solver_qr = fgsl_multifit_nlinear_solver(2), &
           fgsl_multifit_nlinear_solver_svd = fgsl_multifit_nlinear_solver(3)
-  integer(fgsl_int), parameter :: FGSL_MULTIFIT_NLINEAR_FWDIFF = 0, & 
+  integer(fgsl_int), parameter, public :: FGSL_MULTIFIT_NLINEAR_FWDIFF = 0, & 
                                   FGSL_MULTIFIT_NLINEAR_CTRDIFF = 1
 !
 ! nonlinear fitting legacy interface
