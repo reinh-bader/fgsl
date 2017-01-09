@@ -65,7 +65,7 @@ install:
   - wget http://ftp.heanet.ie/mirrors/gnu/gsl/gsl-2.3.tar.gz
   - tar xvfz gsl-2.3.tar.gz
   - cd gsl-2.3
-  - ./configure CC=${FGSL_CC} FC=${FGSL_FC}
+  - ./configure
   - make
   - make check
   - if [ $TRAVIS_OS_NAME == osx ]; then make install ; fi
