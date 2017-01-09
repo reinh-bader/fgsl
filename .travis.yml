@@ -57,7 +57,7 @@ before_install:
       brew uninstall --force $(brew list)
       brew cleanup -s
       brew update
-      brew install ${GCC} autoconf automake libtool
+      brew install ${GCC} autoconf automake libtool wget
     fi
 
 install:
