@@ -54,30 +54,33 @@ before_install:
   - |
     set -e
     if [ $TRAVIS_OS_NAME == osx ] ; then 
-      brew uninstall --force gcc xctool swiftlint gcc49 carthage llvm
-      brew update
-      brew upgrade
-      brew install ${GCC}
+      brew uninstall --force $(brew list)
       brew cleanup -s
+      brew update
+      brew install ${GCC} autoconf automake libtool
     fi
 
 install:
-  - wget http://ftp.heanet.ie/mirrors/gnu/gsl/gsl-2.3.tar.gz
-  - tar xvfz gsl-2.3.tar.gz > /dev/null
-  - cd gsl-2.3
-  - ./configure > /dev/null
-  - make > /dev/null
-  - make check > /dev/null
-  - if [ $TRAVIS_OS_NAME == osx ]; then make install > /dev/null ; fi
-  - if [ $TRAVIS_OS_NAME == linux ]; then sudo make install > /dev/null ; fi
-  - cd ..
+  - |
+    set -e
+    wget http://ftp.heanet.ie/mirrors/gnu/gsl/gsl-2.3.tar.gz
+    tar xfz gsl-2.3.tar.gz
+    cd gsl-2.3
+    ./configure &> /dev/null
+    make &> /dev/null
+    make check > /dev/null
+    if [ $TRAVIS_OS_NAME == osx ]; then make install > /dev/null ; fi
+    if [ $TRAVIS_OS_NAME == linux ]; then sudo make install > /dev/null ; fi
+    cd ..
 
 script:
-  - autoreconf -fi
-  - ./configure CFLAGS="-Wall" FCFLAGS="-Wall"
-  - make
-  - make check
-  - make distcheck
+  - |
+    set -e
+    autoreconf -fi
+    ./configure CFLAGS="-Wall" FCFLAGS="-Wall"
+    make
+    make check
+    make distcheck
 
 notifications:
   email:
