@@ -13,9 +13,9 @@ matrix:
           packages:
             - gcc-4.9
             - gfortran-4.9
-            - libblas
+            - libblas3
             - libblas-dev
-      env: FGSL_CC='gcc-4.9' FGSL_FC='gfortran-4.9' LIBS='-L/usr/lib -lblas -lm'
+      env: CC='gcc-4.9' FC='gfortran-4.9' LIBS='-L/usr/lib -lblas -lm'
     - os: linux
       addons:
         apt:
@@ -24,9 +24,9 @@ matrix:
           packages:
             - gcc-5
             - gfortran-5
-            - libblas
+            - libblas3
             - libblas-dev
-      env: FGSL_CC='gcc-5' FGSL_FC='gfortran-5' LIBS='-L/usr/lib -lblas -lm'
+      env: CC='gcc-5' FC='gfortran-5' LIBS='-L/usr/lib -lblas -lm'
     - os: linux
       addons:
         apt:
@@ -35,15 +35,13 @@ matrix:
           packages:
             - gcc-6
             - gfortran-6
-            - libblas
+            - libblas3
             - libblas-dev
-      env: FGSL_CC='gcc-6' FGSL_FC='gfortran-6' LIBS='-L/usr/lib -lblas -lm'
+      env: CC='gcc-6' FC='gfortran-6' LIBS='-L/usr/lib -lblas -lm'
     - os: osx
-      env: GCC='gcc@4.9' FGSL_CC='gcc-4.9' FGSL_FC='gfortran-4.9'
+      env: GCC='gcc@4.9' CC='gcc-4.9' FC='gfortran-4.9'
     - os: osx
-      env: GCC='gcc@5' FGSL_CC='gcc-5' FGSL_FC='gfortran-5'
-    - os: osx
-      env: GCC='gcc@6' FGSL_CC='gcc-6' FGSL_FC='gfortran-6'
+      env: GCC='gcc@5' CC='gcc-5' FC='gfortran-5'
 
 
 env:
@@ -55,32 +53,34 @@ env:
 before_install:
   - |
     set -e
-    set -x
     if [ $TRAVIS_OS_NAME == osx ] ; then 
-      brew uninstall --force gcc xctool swiftlint gcc49 carthage llvm
-      brew update
-      brew upgrade
-      brew install ${GCC}
+      brew uninstall --force $(brew list)
       brew cleanup -s
+      brew update
+      brew install ${GCC} autoconf automake libtool wget pkg-config
     fi
 
 install:
-  - wget http://ftp.heanet.ie/mirrors/gnu/gsl/gsl-2.3.tar.gz
-  - tar xvfz gsl-2.3.tar.gz
-  - cd gsl-2.3
-  - ./configure CC=${FGSL_CC} FC=${FGSL_FC}
-  - make
-  - make check
-  - if [ $TRAVIS_OS_NAME == osx ]; then make install ; fi
-  - if [ $TRAVIS_OS_NAME == linux ]; then sudo make install ; fi
-  - cd ..
+  - |
+    set -e
+    wget http://ftp.heanet.ie/mirrors/gnu/gsl/gsl-2.3.tar.gz
+    tar xfz gsl-2.3.tar.gz
+    cd gsl-2.3
+    ./configure
+    make
+    if [ $TRAVIS_OS_NAME == osx ]; then make install ; fi
+    if [ $TRAVIS_OS_NAME == linux ]; then sudo make install ; fi
+    cd ..
 
 script:
-  - autoreconf -fi || exit 1
-  - ./configure CC=${FGSL_CC} FC=${FGSL_FC} CFLAGS="-Wall" FCFLAGS="-Wall" || exit 1
-  - make || exit 1
-  - make check || exit 1
-  - make distcheck || exit 1
+  - |
+    set -e
+    autoreconf -fi
+    ./configure CFLAGS="-Wall" FCFLAGS="-Wall"
+    make
+    make check
+    make distcheck
+    set +e
 
 notifications:
   email:
@@ -89,5 +89,8 @@ notifications:
     on_success: never
     on_failure: always
 
+branches:
+  only:
+    - master
 #os:
 #  - osx
