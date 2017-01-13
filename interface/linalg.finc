@@ -299,7 +299,7 @@
     integer(c_int) :: gsl_linalg_cod_unpack
   end function gsl_linalg_cod_unpack
   function gsl_linalg_cod_matz (qrz, tau_z, rank, a, work) &
-       bind(c, name='gsl_linalg_COD_matz')
+       bind(c, name='gsl_linalg_COD_matZ')
     import :: c_ptr, c_int, c_size_t
     type(c_ptr), value :: qrz, tau_z, a, work
     integer(c_size_t), value :: rank
