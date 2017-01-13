@@ -252,6 +252,14 @@
     real(c_double) :: chisq
     integer(c_int) :: gsl_multifit_linear
   end function gsl_multifit_linear
+  function gsl_multifit_linear_tsvd(x, y, tol, c, cov, chisq, rank, work) bind(c)
+    import :: c_ptr, c_int, c_double, c_size_t
+    type(c_ptr), value :: x, y, c, cov, work
+    real(c_double), value :: tol
+    real(c_double) :: chisq
+    integer(c_size_t) :: rank
+    integer(c_int) :: gsl_multifit_linear_tsvd
+  end function gsl_multifit_linear_tsvd
   function gsl_multifit_linear_svd(x, work) bind(c)
     import :: c_ptr, c_int, c_double, c_size_t
     type(c_ptr), value :: x, work
@@ -339,6 +347,33 @@
     integer(c_size_t) :: idx
     integer(c_int) :: gsl_multifit_linear_lcorner2
   end function gsl_multifit_linear_lcorner2
+  integer(c_int) function gsl_multifit_linear_gcv_init(y, reg_param, uty, delta0, work) bind(c)
+    import :: c_int, c_ptr, c_double
+    type(c_ptr), value :: y, reg_param, uty, work
+    real(c_double) :: delta0
+  end function
+  integer(c_int) function gsl_multifit_linear_gcv_curve(reg_param, uty, delta0, g, work) bind(c)
+    import :: c_int, c_ptr, c_double
+    type(c_ptr), value :: reg_param, uty, g, work
+    real(c_double), value :: delta0
+  end function
+  integer(c_int) function gsl_multifit_linear_gcv_min(reg_param, uty, delta0, g, &
+          lambda, work) bind(c)
+    import :: c_int, c_ptr, c_double
+    type(c_ptr), value :: reg_param, uty, g, work
+    real(c_double), value :: delta0
+    real(c_double) :: lambda
+  end function
+  real(c_double) function gsl_multifit_linear_gcv_calc(lambda, uty, delta0, work) bind(c)
+    import :: c_ptr, c_double
+    type(c_ptr), value :: uty, work
+    real(c_double), value :: delta0, lambda
+  end function
+  integer(c_int) function gsl_multifit_linear_gcv(y, reg_param, g, lambda, g_lambda, work) bind(c)
+    import :: c_int, c_ptr, c_double
+    type(c_ptr), value :: y, reg_param, g, work
+    real(c_double) :: lambda, g_lambda
+  end function
   function gsl_multifit_linear_lk(p, k, L) &
     bind(c, name='gsl_multifit_linear_Lk')
     import :: c_size_t, c_int, c_ptr
@@ -383,6 +418,14 @@
     real(c_double) :: chisq
     integer(c_int) :: gsl_multifit_wlinear
   end function gsl_multifit_wlinear
+  function gsl_multifit_wlinear_tsvd(x, w, y, tol, c, cov, chisq, rank, work) bind(c)
+    import :: c_ptr, c_int, c_double, c_size_t
+    type(c_ptr), value :: x, w, y, c, cov, work
+    real(c_double), value :: tol
+    real(c_double) :: chisq
+    integer(c_size_t) :: rank
+    integer(c_int) :: gsl_multifit_wlinear_tsvd
+  end function gsl_multifit_wlinear_tsvd
   function gsl_multifit_wlinear_svd(x, w, y, tol, rank, c, cov, chisq, work) bind(c)
     import :: c_ptr, c_int, c_double, c_size_t
     type(c_ptr), value :: x, w, y, c, cov, work
@@ -412,6 +455,11 @@
     type(c_ptr), value :: r
     integer(c_int) :: gsl_multifit_linear_residuals
   end function gsl_multifit_linear_residuals
+  integer(c_size_t) function gsl_multifit_linear_rank(tol, work) bind(c)
+    import :: c_ptr, c_size_t, c_double
+    type(c_ptr), value :: work
+    real(c_double), value :: tol
+  end function
   function gsl_multifit_fdfridge_alloc(T, n, p) bind(c)
     import :: c_ptr, c_size_t
     type(c_ptr), value :: T

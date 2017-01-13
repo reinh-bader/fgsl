@@ -8,11 +8,13 @@ program permutation
   type(fgsl_multiset) :: m1, m2
   type(fgsl_error_handler_t) :: std
   type(fgsl_vector) :: vec
+  type(fgsl_matrix) :: a
   type(fgsl_file) :: pfile
   integer(fgsl_int) :: status
   integer(fgsl_size_t) :: index
   integer(fgsl_size_t), pointer, dimension(:) :: p_data
   real(fgsl_double) :: da(8)
+  real(fgsl_double) :: af(4,4)
   integer(fgsl_long) :: ida(8)
 !
 ! Test permutations, combinations and multisets
@@ -102,6 +104,21 @@ program permutation
   call unit_assert_equal_within('fgsl_permute_inverse',&
        (/4.0d0,3.0d0,2.0d0,1.0d0/),da(1:4),eps10)
   call fgsl_vector_free(vec)
+  a = fgsl_matrix_init(1.0_fgsl_double)
+  status = fgsl_matrix_align(af, 4_fgsl_size_t, 4_fgsl_size_t, &
+       4_fgsl_size_t,a)
+  af = reshape( [ 1.0d0, 0.0d0, 0.0d0, 0.0d0, &
+                  0.0d0, 1.0d0, 0.0d0, 0.0d0, &
+                  0.0d0, 0.0d0, 1.0d0, 0.0d0, &
+                  0.0d0, 0.0d0, 0.0d0, 1.0d0 ], shape = [ 4, 4 ] )
+  status = fgsl_permute_matrix(p1, a)
+  call unit_assert_equal_within('fgsl_permute_matrix',&
+       reshape( [ 0.0d0, 0.0d0, 0.0d0, 1.0d0, &
+                  0.0d0, 0.0d0, 1.0d0, 0.0d0, &
+                  0.0d0, 1.0d0, 0.0d0, 0.0d0, &
+                  1.0d0, 0.0d0, 0.0d0, 0.0d0 ], shape = [ 4, 4 ] ),af,eps10)
+  call fgsl_matrix_free(a)
+
 ! multiply
   status = fgsl_permutation_mul(p3,p1,p2)
   call unit_assert_equal('fgsl_permute_mul:status',fgsl_success,status)

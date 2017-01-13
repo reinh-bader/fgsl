@@ -7,6 +7,11 @@ function gsl_rstat_quantile_alloc(p) bind(c)
   real(c_double), value :: p
   type(c_ptr) :: gsl_rstat_quantile_alloc
 end function gsl_rstat_quantile_alloc
+function gsl_rstat_quantile_reset(w) bind(c)
+  import :: c_ptr, c_int
+  type(c_ptr), value  :: w
+  integer(c_int) :: gsl_rstat_quantile_alloc
+end function gsl_rstat_quantile_reset
 subroutine gsl_rstat_quantile_free(w) bind(c)
   import :: c_ptr
   type(c_ptr), value :: w
@@ -56,6 +61,11 @@ function gsl_rstat_mean(w) bind(c)
   type(c_ptr), value :: w
   real(c_double) :: gsl_rstat_mean
 end function gsl_rstat_mean
+function gsl_rstat_rms(w) bind(c)
+  import :: c_ptr, c_double
+  type(c_ptr), value :: w
+  real(c_double) :: gsl_rstat_rms
+end function gsl_rstat_rms
 function gsl_rstat_variance(w) bind(c)
   import :: c_ptr, c_double
   type(c_ptr), value :: w

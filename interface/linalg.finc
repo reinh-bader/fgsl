@@ -215,6 +215,19 @@
     type(c_ptr), value :: qr, tau, p, x
     integer(c_int) :: gsl_linalg_qrpt_svx
   end function gsl_linalg_qrpt_svx
+  function gsl_linalg_qrpt_lssolve (qr, tau, p, b, x, r) &
+       bind(c, name='gsl_linalg_QRPT_lssolve')
+    import :: c_ptr, c_int
+    type(c_ptr), value :: qr, tau, p, b, x, r
+    integer(c_int) :: gsl_linalg_qrpt_lssolve
+  end function gsl_linalg_qrpt_lssolve
+  function gsl_linalg_qrpt_lssolve2 (qr, tau, p, b, rank, x, r) &
+       bind(c, name='gsl_linalg_QRPT_lssolve2')
+    import :: c_ptr, c_int, c_size_t
+    type(c_ptr), value :: qr, tau, p, b, x, r
+    integer(c_size_t), value :: rank
+    integer(c_int) :: gsl_linalg_qrpt_lssolve2
+  end function gsl_linalg_qrpt_lssolve2
   function gsl_linalg_qrpt_qrsolve (q, r, p, b, x) &
        bind(c, name='gsl_linalg_QRPT_QRsolve')
     import :: c_ptr, c_int
@@ -239,6 +252,59 @@
     type(c_ptr), value :: qr, p, x
     integer(c_int) :: gsl_linalg_qrpt_rsvx
   end function gsl_linalg_qrpt_rsvx
+  function gsl_linalg_qrpt_rank (qr, tol) &
+       bind(c, name='gsl_linalg_QRPT_rank')
+    import :: c_ptr, c_size_t, c_double
+    type(c_ptr), value :: qr
+    real(c_double), value :: tol
+    integer(c_size_t) :: gsl_linalg_qrpt_rank
+  end function gsl_linalg_qrpt_rank
+  function gsl_linalg_qrpt_rcond (qr, rcond, wk) &
+       bind(c, name='gsl_linalg_QRPT_rcond')
+    import :: c_ptr, c_int, c_double
+    type(c_ptr), value :: qr, wk
+    real(c_double) :: rcond
+    integer(c_int) :: gsl_linalg_qrpt_rcond
+  end function gsl_linalg_qrpt_rcond
+!
+! Complete orthogonal decomposition (COD)
+!
+  function gsl_linalg_cod_decomp (a, tau_q, tau_z, p, rank, work) &
+       bind(c, name='gsl_linalg_COD_decomp')
+    import :: c_ptr, c_int, c_size_t
+    type(c_ptr), value :: a, tau_q, tau_z, p, work
+    integer(c_size_t) :: rank
+    integer(c_int) :: gsl_linalg_cod_decomp
+  end function gsl_linalg_cod_decomp
+  function gsl_linalg_cod_decomp_e (a, tau_q, tau_z, p, tol, rank, work) &
+       bind(c, name='gsl_linalg_COD_decomp_e')
+    import :: c_ptr, c_int, c_size_t, c_double
+    type(c_ptr), value :: a, tau_q, tau_z, p, work
+    real(c_double), value :: tol
+    integer(c_size_t) :: rank
+    integer(c_int) :: gsl_linalg_cod_decomp_e
+  end function gsl_linalg_cod_decomp_e
+  function gsl_linalg_cod_lssolve (qrz, tau_q, tau_z, p, rank, b, x, residual) &
+       bind(c, name='gsl_linalg_COD_lssolve')
+    import :: c_ptr, c_int, c_size_t
+    type(c_ptr), value :: qrz, tau_q, tau_z, p, b, x, residual
+    integer(c_size_t), value :: rank
+    integer(c_int) :: gsl_linalg_cod_lssolve
+  end function gsl_linalg_cod_lssolve
+  function gsl_linalg_cod_unpack (qrz, tau_q, tau_z, p, rank, q, r, z) &
+       bind(c, name='gsl_linalg_COD_unpack')
+    import :: c_ptr, c_int, c_size_t
+    type(c_ptr), value :: qrz, tau_q, tau_z, p, q, r, z
+    integer(c_size_t), value :: rank
+    integer(c_int) :: gsl_linalg_cod_unpack
+  end function gsl_linalg_cod_unpack
+  function gsl_linalg_cod_matz (qrz, tau_z, rank, a, work) &
+       bind(c, name='gsl_linalg_COD_matz')
+    import :: c_ptr, c_int, c_size_t
+    type(c_ptr), value :: qrz, tau_z, a, work
+    integer(c_size_t), value :: rank
+    integer(c_int) :: gsl_linalg_cod_matz
+  end function gsl_linalg_cod_matz
 !
 ! SVD
 !
@@ -279,6 +345,12 @@
 !
 ! Cholesky
 !
+  function gsl_linalg_cholesky_decomp1 (a) &
+       bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: a
+    integer(c_int) :: gsl_linalg_cholesky_decomp1
+  end function gsl_linalg_cholesky_decomp1
   function gsl_linalg_cholesky_decomp (a) &
        bind(c)
     import :: c_ptr, c_int
@@ -325,6 +397,127 @@
     integer(c_int) :: gsl_linalg_complex_cholesky_invert
     type(c_ptr), value :: chol
   end function gsl_linalg_complex_cholesky_invert
+  function gsl_linalg_cholesky_decomp2 (a,s) &
+       bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: a,s
+    integer(c_int) :: gsl_linalg_cholesky_decomp2
+  end function gsl_linalg_cholesky_decomp2
+  function gsl_linalg_cholesky_solve2 (chol, s, b, x) &
+       bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: chol, s, b, x
+    integer(c_int) :: gsl_linalg_cholesky_solve2
+  end function gsl_linalg_cholesky_solve2
+  function gsl_linalg_cholesky_svx2 (chol, s, x) &
+       bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: chol, s, x
+    integer(c_int) :: gsl_linalg_cholesky_svx2
+  end function gsl_linalg_cholesky_svx2
+  function gsl_linalg_cholesky_scale (a,s) &
+       bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: a,s
+    integer(c_int) :: gsl_linalg_cholesky_scale
+  end function gsl_linalg_cholesky_scale
+  function gsl_linalg_cholesky_scale_apply (a,s) &
+       bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: a,s
+    integer(c_int) :: gsl_linalg_cholesky_scale_apply
+  end function gsl_linalg_cholesky_scale_apply
+  function gsl_linalg_cholesky_rcond (chol, rcond, work) &
+       bind(c)
+    import :: c_ptr, c_int, c_double
+    type(c_ptr), value :: chol, work
+    real(c_double), intent(inout) :: rcond
+    integer(c_int) :: gsl_linalg_cholesky_rcond
+  end function gsl_linalg_cholesky_rcond
+!
+! pivoted Cholesky
+!
+  function gsl_linalg_pcholesky_decomp (a, p) &
+       bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: a, p
+    integer(c_int) :: gsl_linalg_pcholesky_decomp
+  end function gsl_linalg_pcholesky_decomp
+  function gsl_linalg_pcholesky_solve (ldlt, p, b, x) &
+       bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: ldlt, p, b, x
+    integer(c_int) :: gsl_linalg_pcholesky_solve
+  end function gsl_linalg_pcholesky_solve
+  function gsl_linalg_pcholesky_svx (ldlt, p, x) &
+       bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: ldlt, p, x
+    integer(c_int) :: gsl_linalg_pcholesky_svx
+  end function gsl_linalg_pcholesky_svx
+  function gsl_linalg_pcholesky_invert (ldlt, p, ainv) bind(c)
+    import :: c_ptr, c_int
+    integer(c_int) :: gsl_linalg_pcholesky_invert
+    type(c_ptr), value :: ldlt, p, ainv
+  end function gsl_linalg_pcholesky_invert
+  function gsl_linalg_pcholesky_decomp2 (a, p,s) &
+       bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: a, p,s
+    integer(c_int) :: gsl_linalg_pcholesky_decomp2
+  end function gsl_linalg_pcholesky_decomp2
+  function gsl_linalg_pcholesky_solve2 (ldlt, p, s, b, x) &
+       bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: ldlt, p, s, b, x
+    integer(c_int) :: gsl_linalg_pcholesky_solve2
+  end function gsl_linalg_pcholesky_solve2
+  function gsl_linalg_pcholesky_svx2 (ldlt, p, s, x) &
+       bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: ldlt, p, s, x
+    integer(c_int) :: gsl_linalg_pcholesky_svx2
+  end function gsl_linalg_pcholesky_svx2
+  function gsl_linalg_pcholesky_rcond (ldlt, p, rcond, work) &
+       bind(c)
+    import :: c_ptr, c_int, c_double
+    type(c_ptr), value :: ldlt, p, work
+    real(c_double), intent(inout) :: rcond
+    integer(c_int) :: gsl_linalg_pcholesky_rcond
+  end function gsl_linalg_pcholesky_rcond
+!
+! modified Cholesky
+!
+  function gsl_linalg_mcholesky_decomp (a, p, e) &
+       bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: a, p, e
+    integer(c_int) :: gsl_linalg_mcholesky_decomp
+  end function gsl_linalg_mcholesky_decomp
+  function gsl_linalg_mcholesky_solve (ldlt, p, b, x) &
+       bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: ldlt, p, b, x
+    integer(c_int) :: gsl_linalg_mcholesky_solve
+  end function gsl_linalg_mcholesky_solve
+  function gsl_linalg_mcholesky_svx (ldlt, p, x) &
+       bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: ldlt, p, x
+    integer(c_int) :: gsl_linalg_mcholesky_svx
+  end function gsl_linalg_mcholesky_svx
+  function gsl_linalg_mcholesky_invert (ldlt, p, ainv) bind(c)
+    import :: c_ptr, c_int
+    integer(c_int) :: gsl_linalg_mcholesky_invert
+    type(c_ptr), value :: ldlt, p, ainv
+  end function gsl_linalg_mcholesky_invert
+  function gsl_linalg_mcholesky_rcond (ldlt, p, rcond, work) &
+       bind(c)
+    import :: c_ptr, c_int, c_double
+    type(c_ptr), value :: ldlt, p, work
+    real(c_double), intent(inout) :: rcond
+    integer(c_int) :: gsl_linalg_mcholesky_rcond
+  end function gsl_linalg_mcholesky_rcond
 !
 ! Tridiag
 !
@@ -530,3 +723,32 @@
     integer(c_size_t), value :: i, j
     real(c_double), value :: c, s
   end subroutine gsl_linalg_givens_gv
+!
+! Triangular matrices
+! 
+  integer(c_int) function gsl_linalg_tri_upper_invert(t) bind(c)
+    import :: c_int, c_ptr
+    type(c_ptr), value :: t
+  end function
+  integer(c_int) function gsl_linalg_tri_lower_invert(t) bind(c)
+    import :: c_int, c_ptr
+    type(c_ptr), value :: t
+  end function
+  integer(c_int) function gsl_linalg_tri_upper_unit_invert(t) bind(c)
+    import :: c_int, c_ptr
+    type(c_ptr), value :: t
+  end function
+  integer(c_int) function gsl_linalg_tri_lower_unit_invert(t) bind(c)
+    import :: c_int, c_ptr
+    type(c_ptr), value :: t
+  end function
+  integer(c_int) function gsl_linalg_tri_upper_rcond(t, rcond, work) bind(c)
+    import :: c_int, c_double, c_ptr
+    type(c_ptr), value :: t, work
+    real(c_double) :: rcond
+  end function
+  integer(c_int) function gsl_linalg_tri_lower_rcond(t, rcond, work) bind(c)
+    import :: c_int, c_double, c_ptr
+    type(c_ptr), value :: t, work
+    real(c_double) :: rcond
+  end function

@@ -111,6 +111,11 @@
     type(c_ptr), value :: p,v
     integer(c_int) :: gsl_permute_vector_inverse
   end function gsl_permute_vector_inverse
+  function gsl_permute_matrix(p,v) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: p,v
+    integer(c_int) :: gsl_permute_matrix
+  end function gsl_permute_matrix
   function gsl_permutation_mul(p, pa, pb) bind(c)
     import
     type(c_ptr), value :: p

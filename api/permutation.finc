@@ -129,6 +129,13 @@
     fgsl_permute_vector_inverse = &
          gsl_permute_vector_inverse(p%gsl_permutation,v%gsl_vector)
   end function fgsl_permute_vector_inverse
+  function fgsl_permute_matrix(p,a)
+    type(fgsl_permutation), intent(in) :: p
+    type(fgsl_matrix), intent(inout) :: a
+    integer(fgsl_int) :: fgsl_permute_matrix
+    fgsl_permute_matrix = &
+         gsl_permute_matrix(p%gsl_permutation,a%gsl_matrix)
+  end function fgsl_permute_matrix
   function fgsl_permutation_mul(p, pa, pb)
     type(fgsl_permutation), intent(inout) :: p
     type(fgsl_permutation),  intent(in) :: pa, pb
