@@ -1992,8 +1992,8 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
 !
 ! Types: sparse matrices
 !
-  integer(fgsl_int), public, parameter :: fgsl_spmatrix_triplet = 0
-  integer(fgsl_int), public, parameter :: fgsl_spmatrix_ccs = 1
+  integer(fgsl_size_t), public, parameter :: fgsl_spmatrix_triplet = 0
+  integer(fgsl_size_t), public, parameter :: fgsl_spmatrix_ccs = 1
   type, public :: fgsl_spmatrix
     private
     type(c_ptr) :: gsl_spmatrix = c_null_ptr

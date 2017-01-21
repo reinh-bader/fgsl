@@ -4,12 +4,12 @@ program histogram
   real(fgsl_double) :: a, b, x
   integer(fgsl_size_t) :: n
   integer(fgsl_int) :: status
-  integer(8) :: i
+  integer :: i
   type(fgsl_histogram) :: h
   type(fgsl_file) :: stdout
   namelist / histpar / a, b, n
 !
-  write(6, *) 'Reading histogram parameters from file histogram.dat ... '
+  write(*, *) 'Reading histogram parameters from file histogram.dat ... '
   open(20, file=HISTOGRAM_DAT, form='formatted', status='old')
   read(20, nml=histpar) 
   close(20)
@@ -22,7 +22,7 @@ program histogram
      status = fgsl_histogram_increment (h, x)
   end do
   close(20)
-  write(6, *) 'Printing histogram:'
+  write(*, *) 'Printing histogram:'
   status = fgsl_histogram_fprintf(stdout, h,'%12.5f','%7.0f')
   call fgsl_histogram_free(h)
 end program histogram

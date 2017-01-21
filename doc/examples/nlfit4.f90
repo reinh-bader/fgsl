@@ -68,7 +68,7 @@ contains
     
     type(model_params), pointer :: par
     type(fgsl_vector) :: xx, uu, vv
-    real(fgsl_double), pointer :: xxp(:), vvp(:), uup(:)
+    real(fgsl_double), pointer :: xxp(:), uup(:)
     type(fgsl_matrix) :: jj
     real(fgsl_double), pointer :: jtjp(:,:)
     integer(fgsl_size_t) :: i, j
@@ -120,7 +120,7 @@ contains
     status = fgsl_vector_align(p_v, f_v)
     call fgsl_obj_c_ptr(f_fvv, fvv)
     status = fgsl_vector_align(p_fvv, f_fvv)
-     call fgsl_obj_c_ptr(xx, x)
+    call fgsl_obj_c_ptr(xx, x)
     status = fgsl_vector_align(p_xx, xx)
    
     p_fvv = 0.0_fgsl_double

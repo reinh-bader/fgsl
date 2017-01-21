@@ -10,7 +10,7 @@ end function gsl_rstat_quantile_alloc
 function gsl_rstat_quantile_reset(w) bind(c)
   import :: c_ptr, c_int
   type(c_ptr), value  :: w
-  integer(c_int) :: gsl_rstat_quantile_alloc
+  integer(c_int) :: gsl_rstat_quantile_reset
 end function gsl_rstat_quantile_reset
 subroutine gsl_rstat_quantile_free(w) bind(c)
   import :: c_ptr
