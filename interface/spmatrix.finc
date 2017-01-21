@@ -12,6 +12,11 @@ function gsl_spmatrix_alloc_nzmax(n1, n2, nzmax, flags) bind(c)
   integer(c_size_t), value :: n1, n2, nzmax, flags
   type(c_ptr) :: gsl_spmatrix_alloc_nzmax
 end function gsl_spmatrix_alloc_nzmax
+subroutine gsl_spmatrix_size(m, n1, n2) bind(c)
+  import :: c_ptr, c_size_t
+  type(c_ptr), value :: m
+  integer(c_size_t) :: n1, n2
+end subroutine gsl_spmatrix_size
 subroutine gsl_spmatrix_free(m) bind(c)
   import :: c_ptr
   type(c_ptr), value :: m
@@ -57,8 +62,8 @@ function gsl_spmatrix_set(m, i, j, x) bind(c)
 end function gsl_spmatrix_set
 function gsl_spmatrix_compcol(T) bind(c)
   import :: c_ptr
-  type(c_ptr) :: T, gsl_spmatrix_compcol
-  value :: T
+  type(c_ptr) :: gsl_spmatrix_compcol
+  type(c_ptr), value :: T
 end function gsl_spmatrix_compcol
 subroutine gsl_spmatrix_cumsum(n, c) bind(c)
   import :: c_size_t, c_ptr
@@ -102,3 +107,16 @@ function gsl_spmatrix_transpose_memcpy(dest, src) bind(c)
   type(c_ptr), value :: dest, src
   integer(c_int) :: gsl_spmatrix_transpose_memcpy
 end function gsl_spmatrix_transpose_memcpy
+function gsl_spblas_dgemv(transa, alpha, a, x, beta, y) bind(c)
+  import :: c_ptr, c_int, c_double
+  integer(c_int), value :: transa
+  type(c_ptr), value :: a, x, y
+  real(c_double), value :: alpha, beta
+  integer(c_int) :: gsl_spblas_dgemv
+end function gsl_spblas_dgemv
+function gsl_spblas_dgemm(alpha, a, b, c) bind(c)
+  import :: c_ptr, c_int, c_double
+  type(c_ptr), value :: a, b, c
+  real(c_double), value :: alpha
+  integer(c_int) :: gsl_spblas_dgemm
+end function gsl_spblas_dgemm

@@ -11,7 +11,7 @@ check_PROGRAMS = cdf cheb combination diff dwt \
 		 fitting fitting3 fitting2 histogram \
 		 histogram2d ieee ieeeround integration \
 		 interp interpp intro matrix min monte \
-                 multifit nlfit nlfit2 \
+                 multifit nlfit nlfit2 nlfit4 \
 		 ntuplew ntupler \
 		 linalglu eigen eigen_nonsymm fft \
 		 ode-initval permutation permshuffle \
@@ -68,6 +68,8 @@ multifit_SOURCES = multifit.f90
 nlfit_SOURCES = nlfit.f90
 
 nlfit2_SOURCES = nlfit2.f90
+
+nlfit4_SOURCES = nlfit4.f90
 
 ntupler_SOURCES = ntupler.f90
 
@@ -128,7 +130,7 @@ dist_fgsl_example_DATA = $(data_files) cdf.f90 cheb.f90 combination.F90 diff.f90
 			fitting.f90 fitting3.f90 fitting2.f90 histogram.F90 \
 			histogram2d.f90 ieee.f90 ieeeround.f90 integration.f90 \
 			interp.f90 interpp.f90 intro.f90 matrix.f90 min.f90 monte.f90 \
-			nlfit.f90 ntuplew.f90 ntupler.f90 \
+			nlfit.f90 nlfit2.f90 nlfit4.f90 ntuplew.f90 ntupler.f90 \
 			linalglu.f90 eigen.f90 eigen_nonsymm.f90 fft.f90 \
 			ode-initval.F90 permutation.f90 permshuffle.f90 \
 			polyroots.f90 qrng.f90 randpoisson.f90 randwalk.f90 \

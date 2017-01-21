@@ -137,8 +137,8 @@
      function gsl_odeiv2_evolve_apply_fixed_step(e, con, step, dydt, t, h0, y) bind(c)
        import
        type(c_ptr), value :: e, con, step, dydt,  y
-       real(c_double) :: t, h0
-       value :: h0
+       real(c_double) :: t
+       real(c_double), value :: h0
        integer(c_int) :: gsl_odeiv2_evolve_apply_fixed_step
      end function gsl_odeiv2_evolve_apply_fixed_step
      function gsl_odeiv2_evolve_reset(s) bind(c)

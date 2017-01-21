@@ -15,7 +15,9 @@ This release introduces support for gsl 2.3. An overview:
 5. updated the randist interface with the multivariate Gaussian distribution
 6. updated the multifit_linear interface with fgsl_multifit_linear_rank,  
    fgsl_multifit_linear_gcv* and the fgsl_multifit_*linear_tsvd routines.
-
+7. Travis CI configuration updated by T. Schoonjans
+8. added fgsl_spblas_dgem[v,m] to sparse matrix routines
+9. minor changes to work around compiler bugs
 
 
 Changes in 1.1.0 (by Tom Schoonjans):

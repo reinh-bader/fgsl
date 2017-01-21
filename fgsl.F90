@@ -706,8 +706,9 @@ module fgsl
        fgsl_multifit_nlinear_driver, fgsl_multilarge_nlinear_driver, &
        fgsl_multifit_nlinear_covar, fgsl_multilarge_nlinear_covar, &
        fgsl_multifit_nlinear_fdf_init, fgsl_multifit_nlinear_fdf_free, &
-       fgsl_multifit_nlinear_fdf_get, fgsl_multifit_nlinear_parameters_set
-       
+       fgsl_multifit_nlinear_fdf_get, fgsl_multifit_nlinear_parameters_set, &
+       fgsl_multilarge_nlinear_fdf_init, fgsl_multilarge_nlinear_fdf_free, &
+       fgsl_multilarge_nlinear_fdf_get, fgsl_multilarge_nlinear_parameters_set
 !
 ! large linear least squares systems
   public :: fgsl_multilarge_linear_alloc, fgsl_multilarge_linear_free, &
@@ -744,13 +745,14 @@ module fgsl
   public :: fgsl_bspline_knots_greville
 
 ! sparse matrices
-  public :: fgsl_spmatrix_alloc, fgsl_spmatrix_alloc_nzmax, &
+  public :: fgsl_spmatrix_alloc, fgsl_spmatrix_alloc_nzmax, fgsl_spmatrix_size, &
        fgsl_spmatrix_free, fgsl_spmatrix_realloc, fgsl_spmatrix_set_zero, &
        fgsl_spmatrix_nnz, fgsl_spmatrix_compare_idx, fgsl_spmatrix_memcpy, &
        fgsl_spmatrix_get, fgsl_spmatrix_set, fgsl_spmatrix_compcol, &
        fgsl_spmatrix_cumsum, fgsl_spmatrix_scale, fgsl_spmatrix_minmax, &
        fgsl_spmatrix_add, fgsl_spmatrix_d2sp, fgsl_spmatrix_sp2d, &
-       fgsl_spmatrix_equal, fgsl_spmatrix_transpose_memcpy
+       fgsl_spmatrix_equal, fgsl_spmatrix_transpose_memcpy, &
+       fgsl_spblas_dgemv, fgsl_spblas_dgemm
 
 ! sparse matrix linear algebra
   public :: fgsl_splinalg_itersolve_alloc, fgsl_splinalg_itersolve_free, &
@@ -1852,7 +1854,7 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
      type(c_ptr) :: trs, scale, solver
      integer(c_int) :: fdtype
      real(c_double) :: factor_up, factor_down, avmax, h_df, h_fvv
-     integer(c_size_t) :: maxiter    
+     integer(c_size_t) :: max_iter    
      real(c_double) :: tol
   end type
   type, public :: fgsl_multilarge_nlinear_parameters
@@ -1881,6 +1883,12 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
       import :: c_ptr, c_int
       type(c_ptr), value :: x, params, df
     end function 
+    integer(c_int) function fgsl_nlinear_fdf_dlfunc(t, x, u, params, v, jtj) bind(c)
+      import :: c_ptr, c_int
+!     assuming int is the correct integer for enum type
+      integer(c_int), value :: t
+      type(c_ptr), value :: x, u, params, v, jtj
+    end function 
     integer(c_int) function fgsl_nlinear_fdf_fvv(x, v, params, vv) bind(c)
       import :: c_ptr, c_int
       type(c_ptr), value :: x, v, params, vv
@@ -1897,6 +1905,16 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
           fgsl_multifit_nlinear_trs_dogleg = fgsl_multifit_nlinear_trs(3), &
           fgsl_multifit_nlinear_trs_ddogleg = fgsl_multifit_nlinear_trs(4), &
           fgsl_multifit_nlinear_trs_subspace2d = fgsl_multifit_nlinear_trs(5)
+  type, private :: fgsl_multilarge_nlinear_trs
+    integer(c_int) :: which = 0
+  end type
+  type(fgsl_multilarge_nlinear_trs), public, parameter :: &
+          fgsl_multilarge_nlinear_trs_lm = fgsl_multilarge_nlinear_trs(1), &
+          fgsl_multilarge_nlinear_trs_lmaccel = fgsl_multilarge_nlinear_trs(2), &
+          fgsl_multilarge_nlinear_trs_dogleg = fgsl_multilarge_nlinear_trs(3), &
+          fgsl_multilarge_nlinear_trs_ddogleg = fgsl_multilarge_nlinear_trs(4), &
+          fgsl_multilarge_nlinear_trs_subspace2d = fgsl_multilarge_nlinear_trs(5), &
+          fgsl_multilarge_nlinear_trs_cgst = fgsl_multilarge_nlinear_trs(6)
 ! 
 ! scaling matrix strategies
   type, private :: fgsl_multifit_nlinear_scale
@@ -1906,6 +1924,13 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
           fgsl_multifit_nlinear_scale_levenberg = fgsl_multifit_nlinear_scale(1), &
           fgsl_multifit_nlinear_scale_marquardt = fgsl_multifit_nlinear_scale(2), &
           fgsl_multifit_nlinear_scale_more = fgsl_multifit_nlinear_scale(3)
+  type, private :: fgsl_multilarge_nlinear_scale
+    integer(c_int) :: which = 0
+  end type
+  type(fgsl_multilarge_nlinear_scale), public, parameter :: &
+          fgsl_multilarge_nlinear_scale_levenberg = fgsl_multilarge_nlinear_scale(1), &
+          fgsl_multilarge_nlinear_scale_marquardt = fgsl_multilarge_nlinear_scale(2), &
+          fgsl_multilarge_nlinear_scale_more = fgsl_multilarge_nlinear_scale(3)
 !
 ! linear solvers
   type, private :: fgsl_multifit_nlinear_solver
@@ -1917,6 +1942,11 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
           fgsl_multifit_nlinear_solver_svd = fgsl_multifit_nlinear_solver(3)
   integer(fgsl_int), parameter, public :: FGSL_MULTIFIT_NLINEAR_FWDIFF = 0, & 
                                   FGSL_MULTIFIT_NLINEAR_CTRDIFF = 1
+  type, private :: fgsl_multilarge_nlinear_solver
+    integer(c_int) :: which = 0
+  end type
+  type(fgsl_multilarge_nlinear_solver), public, parameter :: &
+          fgsl_multilarge_nlinear_solver_cholesky = fgsl_multilarge_nlinear_solver(1)
 !
 ! nonlinear fitting legacy interface
   type, public :: fgsl_multifit_function

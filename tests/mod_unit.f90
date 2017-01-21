@@ -5,6 +5,7 @@ module mod_unit
   public :: unit_debug, unit_init, unit_finalize, unit_assert_equal, &
        unit_assert_equal_within, unit_assert_true
   integer, parameter :: ik = selected_int_kind(6)
+  integer, parameter :: lk = selected_int_kind(14)
   integer, parameter :: dk = selected_real_kind(15)
 !FIXME - PGI does not accept  logical, protected :: unit_debug = .false.
   logical :: unit_debug = .false.
@@ -40,12 +41,12 @@ contains
   end subroutine unit_init
   subroutine unit_assert_equal_integer(description, ival_target, ival_check)
     character(len=*), intent(in) :: description
-    integer(kind=4), intent(in) :: ival_target, ival_check
+    integer(kind=ik), intent(in) :: ival_target, ival_check
     call unit_toggle(description, ival_target == ival_check)
   end subroutine unit_assert_equal_integer
   subroutine unit_assert_equal_long(description, ival_target, ival_check)
     character(len=*), intent(in) :: description
-    integer(kind=8), intent(in) :: ival_target, ival_check
+    integer(kind=lk), intent(in) :: ival_target, ival_check
     call unit_toggle(description, ival_target == ival_check)
   end subroutine unit_assert_equal_long
   subroutine unit_assert_equal_integer_array(description, &

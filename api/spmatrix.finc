@@ -16,6 +16,11 @@ function fgsl_spmatrix_alloc_nzmax(n1, n2, nzmax, flags)
   fgsl_spmatrix_alloc_nzmax%gsl_spmatrix = &
   gsl_spmatrix_alloc_nzmax(n1, n2, nzmax, flags)
 end function fgsl_spmatrix_alloc_nzmax
+subroutine fgsl_spmatrix_size(m, n1, n2)
+  type(fgsl_spmatrix), intent(in) :: m
+  integer(fgsl_size_t), intent(inout) :: n1, n2
+  call gsl_spmatrix_size(m%gsl_spmatrix, n1, n2)
+end subroutine
 subroutine fgsl_spmatrix_free(m)
   type(fgsl_spmatrix), intent(in) :: m
   call gsl_spmatrix_free(m%gsl_spmatrix)
@@ -116,3 +121,19 @@ function fgsl_spmatrix_transpose_memcpy(dest, src)
   integer(fgsl_int) :: fgsl_spmatrix_transpose_memcpy
   fgsl_spmatrix_transpose_memcpy = gsl_spmatrix_transpose_memcpy(dest%gsl_spmatrix, src%gsl_spmatrix)
 end function fgsl_spmatrix_transpose_memcpy
+integer(fgsl_int) function fgsl_spblas_dgemv(transa, alpha, a, x, beta, y)
+  integer(fgsl_int), intent(in) :: transa
+  real(fgsl_double), intent(in) :: alpha, beta
+  type(fgsl_spmatrix), intent(in) :: a
+  type(fgsl_vector), intent(in) :: x
+  type(fgsl_vector), intent(inout) :: y
+  fgsl_spblas_dgemv = gsl_spblas_dgemv(transa, alpha, a%gsl_spmatrix, x%gsl_vector, &
+       beta, y%gsl_vector)
+end function fgsl_spblas_dgemv
+integer(fgsl_int) function fgsl_spblas_dgemm(alpha, a, b, c)
+  real(fgsl_double), intent(in) :: alpha
+  type(fgsl_spmatrix), intent(in) :: a, b
+  type(fgsl_spmatrix), intent(inout) :: c
+  fgsl_spblas_dgemm = gsl_spblas_dgemm(alpha, a%gsl_spmatrix, b%gsl_spmatrix, &
+       c%gsl_spmatrix)
+end function fgsl_spblas_dgemm

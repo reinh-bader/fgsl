@@ -304,6 +304,21 @@ program linalg
   call unit_assert_equal_within('fgsl_linalg_qrpt_lssolve2:residual',&
        (/0.0d0, 0.0d0, 0.0d0 /),sdf,eps10)
 !
+! COD
+!
+  af = af_orig
+  status = fgsl_linalg_cod_decomp(a, tau, sd, p, rank, x)
+  call unit_assert_equal('fgsl_linalg_cod_decomp:status',fgsl_success,status)
+  call unit_assert_equal_within('fgsl_linalg_cod_decomp:tau_q',&
+       (/ 1.44721359549996d0, 1.74535599249993d0, 0.00000000000000d0 /),tauf,eps10)
+  call unit_assert_equal_within('fgsl_linalg_cod_decomp:tau_z',&
+       (/ -3.525431591703201d-16, -3.525431591703199d-16, 3.525431591703201d-16 /),sdf,eps10)
+  status = fgsl_linalg_cod_lssolve(a, tau, sd, p, rank, b, x, res)
+  call unit_assert_equal_within('fgsl_linalg_cod_decomp:x',&
+       (/1.0d0/3.0d0, 2.0d0/3.0d0, 5.0d0/3.0d0 /),xf,eps10)
+  call unit_assert_equal_within('fgsl_linalg_cod_decomp:res',&
+       (/0.0d0, 0.0d0, 0.0d0 /),resf,eps10)
+!
 ! SVD
 !
   af = af_orig
