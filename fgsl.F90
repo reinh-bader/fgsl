@@ -304,7 +304,7 @@ module fgsl
        fgsl_permutation_valid, fgsl_permutation_reverse, fgsl_permutation_inverse, &
        fgsl_permutation_next, fgsl_permutation_prev, &
        fgsl_permute, fgsl_permute_inverse, fgsl_permute_vector, &
-       fgsl_permute_vector_inverse, fgsl_permutation_mul, &
+       fgsl_permute_vector_inverse, fgsl_permute_matrix, fgsl_permutation_mul, &
        fgsl_permutation_linear_to_canonical, fgsl_permutation_canonical_to_linear, &
        fgsl_permutation_inversions, fgsl_permutation_linear_cycles, &
        fgsl_permutation_canonical_cycles, fgsl_permutation_fwrite, &
@@ -347,13 +347,28 @@ module fgsl
        fgsl_linalg_qrpt_decomp2, fgsl_linalg_qrpt_solve, fgsl_linalg_qrpt_svx, &
        fgsl_linalg_qrpt_qrsolve, fgsl_linalg_qrpt_update, &
        fgsl_linalg_qrpt_rsolve, fgsl_linalg_qrpt_rsvx, &
+       fgsl_linalg_qrpt_lssolve, fgsl_linalg_qrpt_lssolve2, &
+       fgsl_linalg_qrpt_rank, fgsl_linalg_qrpt_rcond, &
+       fgsl_linalg_cod_decomp, fgsl_linalg_cod_decomp_e, fgsl_linalg_cod_lssolve, &
+       fgsl_linalg_cod_unpack, fgsl_linalg_cod_matz, &
        fgsl_linalg_sv_decomp, fgsl_linalg_sv_decomp_mod, &
        fgsl_linalg_sv_decomp_jacobi, fgsl_linalg_sv_solve, &
-       fgsl_linalg_cholesky_decomp, fgsl_linalg_complex_cholesky_decomp, &
+       fgsl_linalg_cholesky_decomp1, fgsl_linalg_complex_cholesky_decomp, &
+       fgsl_linalg_cholesky_decomp, &
        fgsl_linalg_cholesky_solve, fgsl_linalg_complex_cholesky_solve, &
        fgsl_linalg_cholesky_svx, fgsl_linalg_complex_cholesky_svx, &
-       fgsl_linalg_cholesky_invert, &
+       fgsl_linalg_cholesky_invert, fgsl_linalg_cholesky_rcond, &
        fgsl_linalg_complex_cholesky_invert, &
+       fgsl_linalg_cholesky_decomp2, fgsl_linalg_cholesky_solve2, &
+       fgsl_linalg_cholesky_svx2, &
+       fgsl_linalg_cholesky_scale, fgsl_linalg_cholesky_scale_apply, &
+       fgsl_linalg_pcholesky_decomp, fgsl_linalg_pcholesky_solve, &
+       fgsl_linalg_pcholesky_svx, fgsl_linalg_pcholesky_decomp2, &
+       fgsl_linalg_pcholesky_solve2, fgsl_linalg_pcholesky_svx2, &
+       fgsl_linalg_pcholesky_invert, fgsl_linalg_pcholesky_rcond, &
+       fgsl_linalg_mcholesky_decomp, fgsl_linalg_mcholesky_solve, &
+       fgsl_linalg_mcholesky_svx, fgsl_linalg_mcholesky_rcond, &
+       fgsl_linalg_mcholesky_invert, &
        fgsl_linalg_symmtd_decomp, fgsl_linalg_symmtd_unpack, &
        fgsl_linalg_symmtd_unpack_t, fgsl_linalg_hermtd_decomp, &
        fgsl_linalg_hermtd_unpack, fgsl_linalg_hermtd_unpack_t, &
@@ -370,7 +385,10 @@ module fgsl
        fgsl_linalg_hh_solve, fgsl_linalg_hh_svx, fgsl_linalg_solve_tridiag, &
        fgsl_linalg_solve_symm_tridiag, fgsl_linalg_solve_cyc_tridiag, &
        fgsl_linalg_solve_symm_cyc_tridiag, fgsl_linalg_balance_matrix, &
-       fgsl_linalg_qr_matq, fgsl_linalg_givens, fgsl_linalg_givens_gv
+       fgsl_linalg_qr_matq, fgsl_linalg_givens, fgsl_linalg_givens_gv, &
+       fgsl_linalg_tri_upper_invert, fgsl_linalg_tri_lower_invert, &
+       fgsl_linalg_tri_upper_unit_invert, fgsl_linalg_tri_lower_unit_invert, &
+       fgsl_linalg_tri_upper_rcond, fgsl_linalg_tri_lower_rcond
   public :: fgsl_linalg_sv_leverage
 ! eigensystems
   public :: fgsl_eigen_symm_alloc, fgsl_eigen_symm_free, fgsl_eigen_symm, &
@@ -438,7 +456,12 @@ module fgsl
        fgsl_cdf_gaussian_pinv, fgsl_cdf_gaussian_qinv, fgsl_cdf_ugaussian_p, &
        fgsl_cdf_ugaussian_q, fgsl_cdf_ugaussian_pinv, fgsl_cdf_ugaussian_qinv, &
        fgsl_ran_gaussian_tail, fgsl_ran_gaussian_tail_pdf, fgsl_ran_ugaussian_tail, &
-       fgsl_ran_ugaussian_tail_pdf, fgsl_ran_bivariate_gaussian, fgsl_ran_exponential, &
+       fgsl_ran_ugaussian_tail_pdf, fgsl_ran_bivariate_gaussian, &
+       fgsl_ran_bivariate_gaussian_pdf,  &
+       fgsl_ran_multivariate_gaussian, fgsl_ran_multivariate_gaussian_pdf, &
+       fgsl_ran_multivariate_gaussian_log_pdf, &
+       fgsl_ran_multivariate_gaussian_mean, fgsl_ran_multivariate_gaussian_vcov, &
+       fgsl_ran_exponential, &
        fgsl_ran_exponential_pdf, fgsl_cdf_exponential_p, fgsl_cdf_exponential_q, &
        fgsl_cdf_exponential_pinv, fgsl_cdf_exponential_qinv, fgsl_ran_laplace, &
        fgsl_ran_laplace_pdf, fgsl_cdf_laplace_p, fgsl_cdf_laplace_q, &
@@ -621,17 +644,21 @@ module fgsl
        fgsl_fit_wmul, fgsl_fit_mul_est
 
   public :: fgsl_multifit_linear_alloc, fgsl_multifit_linear_free, &
-       fgsl_multifit_linear, fgsl_multifit_linear_svd, &
-       fgsl_multifit_wlinear, fgsl_multifit_wlinear_svd, &
+       fgsl_multifit_linear, fgsl_multifit_linear_tsvd, fgsl_multifit_linear_svd, &
+       fgsl_multifit_wlinear,fgsl_multifit_wlinear_tsvd, fgsl_multifit_wlinear_svd, &
        fgsl_multifit_wlinear_usvd, fgsl_multifit_linear_bsvd, &
        fgsl_multifit_linear_est, fgsl_multifit_linear_solve, &
-       fgsl_multifit_linear_residuals, fgsl_multifit_linear_applyw, &
+       fgsl_multifit_linear_residuals, fgsl_multifit_linear_rank, &
+       fgsl_multifit_linear_applyw, &
        fgsl_multifit_linear_stdform1, fgsl_multifit_linear_wstdform1, &
        fgsl_multifit_linear_l_decomp, fgsl_multifit_linear_stdform2, &
        fgsl_multifit_linear_wstdform2, fgsl_multifit_linear_genform1, &
        fgsl_multifit_linear_genform2, fgsl_multifit_linear_wgenform2, &
        fgsl_multifit_linear_lreg, fgsl_multifit_linear_lcurve, &
        fgsl_multifit_linear_lcorner, fgsl_multifit_linear_lcorner2, &
+       fgsl_multifit_linear_gcv_init, fgsl_multifit_linear_gcv_curve, &
+       fgsl_multifit_linear_gcv_min, fgsl_multifit_linear_gcv_calc, &
+       fgsl_multifit_linear_gcv, &
        fgsl_multifit_linear_lk, fgsl_multifit_linear_lsobolev, &
        fgsl_multifit_linear_rcond, fgsl_multifit_robust_maxiter, &
        fgsl_multifit_robust_weights, fgsl_multifit_robust_residuals
@@ -679,8 +706,9 @@ module fgsl
        fgsl_multifit_nlinear_driver, fgsl_multilarge_nlinear_driver, &
        fgsl_multifit_nlinear_covar, fgsl_multilarge_nlinear_covar, &
        fgsl_multifit_nlinear_fdf_init, fgsl_multifit_nlinear_fdf_free, &
-       fgsl_multifit_nlinear_fdf_get, fgsl_multifit_nlinear_parameters_set
-       
+       fgsl_multifit_nlinear_fdf_get, fgsl_multifit_nlinear_parameters_set, &
+       fgsl_multilarge_nlinear_fdf_init, fgsl_multilarge_nlinear_fdf_free, &
+       fgsl_multilarge_nlinear_fdf_get, fgsl_multilarge_nlinear_parameters_set
 !
 ! large linear least squares systems
   public :: fgsl_multilarge_linear_alloc, fgsl_multilarge_linear_free, &
@@ -717,13 +745,14 @@ module fgsl
   public :: fgsl_bspline_knots_greville
 
 ! sparse matrices
-  public :: fgsl_spmatrix_alloc, fgsl_spmatrix_alloc_nzmax, &
+  public :: fgsl_spmatrix_alloc, fgsl_spmatrix_alloc_nzmax, fgsl_spmatrix_size, &
        fgsl_spmatrix_free, fgsl_spmatrix_realloc, fgsl_spmatrix_set_zero, &
        fgsl_spmatrix_nnz, fgsl_spmatrix_compare_idx, fgsl_spmatrix_memcpy, &
        fgsl_spmatrix_get, fgsl_spmatrix_set, fgsl_spmatrix_compcol, &
        fgsl_spmatrix_cumsum, fgsl_spmatrix_scale, fgsl_spmatrix_minmax, &
        fgsl_spmatrix_add, fgsl_spmatrix_d2sp, fgsl_spmatrix_sp2d, &
-       fgsl_spmatrix_equal, fgsl_spmatrix_transpose_memcpy
+       fgsl_spmatrix_equal, fgsl_spmatrix_transpose_memcpy, &
+       fgsl_spblas_dgemv, fgsl_spblas_dgemm
 
 ! sparse matrix linear algebra
   public :: fgsl_splinalg_itersolve_alloc, fgsl_splinalg_itersolve_free, &
@@ -733,9 +762,10 @@ module fgsl
 ! running statistics
   public :: fgsl_rstat_quantile_alloc, fgsl_rstat_quantile_free, &
        fgsl_rstat_quantile_add, fgsl_rstat_quantile_get, &
+       fgsl_rstat_quantile_reset, &
        fgsl_rstat_alloc, fgsl_rstat_free, fgsl_rstat_n, &
        fgsl_rstat_add, fgsl_rstat_min, fgsl_rstat_max, &
-       fgsl_rstat_mean, fgsl_rstat_variance, fgsl_rstat_sd, &
+       fgsl_rstat_mean, fgsl_rstat_rms, fgsl_rstat_variance, fgsl_rstat_sd, &
        fgsl_rstat_sd_mean, fgsl_rstat_median, fgsl_rstat_skew, &
        fgsl_rstat_kurtosis, fgsl_rstat_reset
 
@@ -1824,7 +1854,7 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
      type(c_ptr) :: trs, scale, solver
      integer(c_int) :: fdtype
      real(c_double) :: factor_up, factor_down, avmax, h_df, h_fvv
-     integer(c_size_t) :: maxiter    
+     integer(c_size_t) :: max_iter    
      real(c_double) :: tol
   end type
   type, public :: fgsl_multilarge_nlinear_parameters
@@ -1853,6 +1883,12 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
       import :: c_ptr, c_int
       type(c_ptr), value :: x, params, df
     end function 
+    integer(c_int) function fgsl_nlinear_fdf_dlfunc(t, x, u, params, v, jtj) bind(c)
+      import :: c_ptr, c_int
+!     assuming int is the correct integer for enum type
+      integer(c_int), value :: t
+      type(c_ptr), value :: x, u, params, v, jtj
+    end function 
     integer(c_int) function fgsl_nlinear_fdf_fvv(x, v, params, vv) bind(c)
       import :: c_ptr, c_int
       type(c_ptr), value :: x, v, params, vv
@@ -1869,6 +1905,16 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
           fgsl_multifit_nlinear_trs_dogleg = fgsl_multifit_nlinear_trs(3), &
           fgsl_multifit_nlinear_trs_ddogleg = fgsl_multifit_nlinear_trs(4), &
           fgsl_multifit_nlinear_trs_subspace2d = fgsl_multifit_nlinear_trs(5)
+  type, private :: fgsl_multilarge_nlinear_trs
+    integer(c_int) :: which = 0
+  end type
+  type(fgsl_multilarge_nlinear_trs), public, parameter :: &
+          fgsl_multilarge_nlinear_trs_lm = fgsl_multilarge_nlinear_trs(1), &
+          fgsl_multilarge_nlinear_trs_lmaccel = fgsl_multilarge_nlinear_trs(2), &
+          fgsl_multilarge_nlinear_trs_dogleg = fgsl_multilarge_nlinear_trs(3), &
+          fgsl_multilarge_nlinear_trs_ddogleg = fgsl_multilarge_nlinear_trs(4), &
+          fgsl_multilarge_nlinear_trs_subspace2d = fgsl_multilarge_nlinear_trs(5), &
+          fgsl_multilarge_nlinear_trs_cgst = fgsl_multilarge_nlinear_trs(6)
 ! 
 ! scaling matrix strategies
   type, private :: fgsl_multifit_nlinear_scale
@@ -1878,6 +1924,13 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
           fgsl_multifit_nlinear_scale_levenberg = fgsl_multifit_nlinear_scale(1), &
           fgsl_multifit_nlinear_scale_marquardt = fgsl_multifit_nlinear_scale(2), &
           fgsl_multifit_nlinear_scale_more = fgsl_multifit_nlinear_scale(3)
+  type, private :: fgsl_multilarge_nlinear_scale
+    integer(c_int) :: which = 0
+  end type
+  type(fgsl_multilarge_nlinear_scale), public, parameter :: &
+          fgsl_multilarge_nlinear_scale_levenberg = fgsl_multilarge_nlinear_scale(1), &
+          fgsl_multilarge_nlinear_scale_marquardt = fgsl_multilarge_nlinear_scale(2), &
+          fgsl_multilarge_nlinear_scale_more = fgsl_multilarge_nlinear_scale(3)
 !
 ! linear solvers
   type, private :: fgsl_multifit_nlinear_solver
@@ -1889,6 +1942,11 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
           fgsl_multifit_nlinear_solver_svd = fgsl_multifit_nlinear_solver(3)
   integer(fgsl_int), parameter, public :: FGSL_MULTIFIT_NLINEAR_FWDIFF = 0, & 
                                   FGSL_MULTIFIT_NLINEAR_CTRDIFF = 1
+  type, private :: fgsl_multilarge_nlinear_solver
+    integer(c_int) :: which = 0
+  end type
+  type(fgsl_multilarge_nlinear_solver), public, parameter :: &
+          fgsl_multilarge_nlinear_solver_cholesky = fgsl_multilarge_nlinear_solver(1)
 !
 ! nonlinear fitting legacy interface
   type, public :: fgsl_multifit_function
@@ -1934,8 +1992,8 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
 !
 ! Types: sparse matrices
 !
-  integer(fgsl_int), public, parameter :: fgsl_spmatrix_triplet = 0
-  integer(fgsl_int), public, parameter :: fgsl_spmatrix_ccs = 1
+  integer(fgsl_size_t), public, parameter :: fgsl_spmatrix_triplet = 0
+  integer(fgsl_size_t), public, parameter :: fgsl_spmatrix_ccs = 1
   type, public :: fgsl_spmatrix
     private
     type(c_ptr) :: gsl_spmatrix = c_null_ptr

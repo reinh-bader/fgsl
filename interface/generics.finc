@@ -68,6 +68,9 @@
   interface fgsl_multifit_nlinear_type
      module procedure fgsl_multifit_nlinear_setup
   end interface
+  interface fgsl_multilarge_nlinear_type
+     module procedure fgsl_multilarge_nlinear_setup
+  end interface
   interface fgsl_sizeof
      module procedure fgsl_sizeof_double
      module procedure fgsl_sizeof_float

@@ -5,8 +5,12 @@ program rng
   real(fgsl_double), parameter :: eps10 = 1.0d-10
   character(kind=fgsl_char, len=fgsl_strmax) :: name
   integer(fgsl_long) :: rn
-  real(fgsl_double) :: rd, rd_copy, re, rid, rie, qd(1), qd_copy(1)
+  real(fgsl_double) :: rd, rd_copy, re, rid, rie, qd(1), qd_copy(1), &
+       rho, sigma, x, y
   type(fgsl_rng) :: r, copy, clone
+  type(fgsl_vector) :: xx, mu, result, work
+  type(fgsl_matrix) :: l
+  real(fgsl_double) :: xxf(2), muf(2), resultf(2), lf(2,2)
   type(fgsl_qrng) :: q, qcopy, qclone
   type(fgsl_rng_type) :: t
   type(fgsl_file) :: rfile
@@ -118,6 +122,53 @@ program rng
 !  rd = fgsl_ran_ugaussian_ratio_method(r)
 !  call unit_assert_equal_within('fgsl_ran_ugaussian_ratio_method',&
 !       0.7630954425575337d0,rd,eps10)
+
+! FIXME: tests for some functions are missing here
+
+  sigma = 1.0d0
+  rho = 0.4d0
+  call fgsl_ran_bivariate_gaussian(r, sigma, 2.0d0*sigma, rho, x, y)
+  call unit_assert_equal_within('fgsl_ran_bivariate_gaussian',&
+       [ 1.10738714772252d0, -1.47314485089665d0 ],[ x, y ],eps10)
+  x = 0.1d0
+  y = 0.2d0
+  rd = fgsl_ran_bivariate_gaussian_pdf(x, y, sigma, 2.0d0*sigma, rho)
+  call unit_assert_equal_within('fgsl_ran_bivariate_gaussian',&
+        8.620816273107094d-2,rd,eps10)
+
+  xx = fgsl_vector_init(1.0_fgsl_double)
+  mu = fgsl_vector_init(1.0_fgsl_double)
+  result = fgsl_vector_init(1.0_fgsl_double)
+  work = fgsl_vector_init(1.0_fgsl_double)
+  l = fgsl_matrix_init(1.0_fgsl_double)
+  status = fgsl_vector_align(xxf, 2_fgsl_size_t, xx, 2_fgsl_size_t, &
+       0_fgsl_size_t, 1_fgsl_size_t)
+  status = fgsl_vector_align(muf, 2_fgsl_size_t, mu, 2_fgsl_size_t, &
+       0_fgsl_size_t, 1_fgsl_size_t)
+  status = fgsl_vector_align(resultf, 2_fgsl_size_t, result, 2_fgsl_size_t, &
+       0_fgsl_size_t, 1_fgsl_size_t)
+  status = fgsl_vector_align(resultf, 2_fgsl_size_t, work, 2_fgsl_size_t, &
+       0_fgsl_size_t, 1_fgsl_size_t)
+! Note result and work are aliased against resultf
+  status = fgsl_matrix_align(lf, 2_fgsl_size_t, 2_fgsl_size_t, &
+       2_fgsl_size_t,l)
+  muf = [ 0.2d0 , 0.8d0 ]
+  lf = reshape( [ 2.0d0, 0.0d0, 0.0d0, 1.0d0 ], [ 2, 2 ] )
+  status = fgsl_ran_multivariate_gaussian(r, mu, l, result)
+  call unit_assert_equal('fgsl_ran_multivariate_gaussian:status',fgsl_success,status)
+  call unit_assert_equal_within('fgsl_ran_multivariate_gaussian:result',&
+       [ 0.381341008927370d0, 0.705879273922799d0 ],resultf,eps10)
+  xxf = [ 0.7, -1.2 ]
+  status = fgsl_ran_multivariate_gaussian_pdf(xx, mu, l, rd, work)
+  call unit_assert_equal('fgsl_ran_multivariate_gaussian_pdf:status',fgsl_success,status)
+  call unit_assert_equal_within('fgsl_ran_multivariate_gaussian_pdf:result',&
+        1.043829169309120d-2,rd,eps10)
+  status = fgsl_ran_multivariate_gaussian_log_pdf(xx, mu, l, rd, work)
+  call unit_assert_equal('fgsl_ran_multivariate_gaussian_log_pdf:status',fgsl_success,status)
+  call unit_assert_equal_within('fgsl_ran_multivariate_gaussian_log_pdf:result',&
+        -4.56227434084661d0,rd,eps10)
+! FIXME tests for gaussian_mean and gaussian_vcov missing
+
   rd = fgsl_cdf_gaussian_p(2.0d0,1.0d0)
   call unit_assert_equal_within('fgsl_cdf_gaussian_p',&
        0.9772498680518208d0,rd,eps10)
@@ -147,6 +198,11 @@ program rng
   call fgsl_rng_free(r)
   call fgsl_rng_free(copy)
   call fgsl_rng_free(clone)
+  call fgsl_vector_free(xx)
+  call fgsl_vector_free(result)
+  call fgsl_vector_free(work)
+  call fgsl_vector_free(mu)
+  call fgsl_matrix_free(l)
   call fgsl_qrng_free(q)
   call fgsl_qrng_free(qcopy)
   call fgsl_qrng_free(qclone)

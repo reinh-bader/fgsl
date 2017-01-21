@@ -3,7 +3,7 @@ subroutine rstat1()
   use, intrinsic :: iso_fortran_env
   implicit none
   real(fgsl_double) :: data(5) = [17.2, 18.1, 16.5, 18.3, 12.6]
-  real(fgsl_double) :: mean, variance, largest, smallest
+  real(fgsl_double) :: mean, variance, largest, smallest, rms
   type(fgsl_rstat_workspace) :: rstat_p
   integer(fgsl_size_t) :: i
   integer(fgsl_int) :: status
@@ -18,12 +18,13 @@ subroutine rstat1()
   variance = fgsl_rstat_variance(rstat_p)
   largest  = fgsl_rstat_max(rstat_p)
   smallest = fgsl_rstat_min(rstat_p)
+  rms      = fgsl_rstat_rms(rstat_p)
 
-  write(output_unit, '(A,5G10.4)') 'The dataset is ', (data(i), i=1,5)
-  write(output_unit, '(A,G10.4)') 'The sample mean is ', mean
-  write(output_unit, '(A,G10.4)') 'The estimated variance is ', variance
-  write(output_unit, '(A,G10.4)') 'The largest value is ', largest
-  write(output_unit, '(A,G10.4)') 'The smallest value is ', smallest
+  write(output_unit, '(A,5G11.4)') 'The dataset is ', (data(i), i=1,5)
+  write(output_unit, '(A,G11.4)') 'The sample mean is ', mean
+  write(output_unit, '(A,G11.4)') 'The estimated variance is ', variance
+  write(output_unit, '(A,G11.4)') 'The root mean square is ', rms
+  write(output_unit, '(A,G11.4)') 'The largest value is ', largest
 
   status = fgsl_rstat_reset(rstat_p)
   call fgsl_rstat_free(rstat_p)
@@ -69,19 +70,17 @@ subroutine rstat2
   val_p75 = fgsl_rstat_quantile_get(work_75)
 
   write(output_unit, '(A,5G12.4,A)') 'The dataset is ', (data(i), i=1,5), ' ...'
-  write(output_unit, '(A,G10.4,A,G10.4,A,G10.4)') '0.25 quartile: exact = ', &
+  write(output_unit, '(A,G11.4,A,G11.4,A,G11.4)') '0.25 quartile: exact = ', &
     exact_p25, ', estimated = ', val_p25, ', error = ', (val_p25 - exact_p25) / exact_p25
-  write(output_unit, '(A,G10.4,A,G10.4,A,G10.4)') '0.50 quartile: exact = ', &
+  write(output_unit, '(A,G11.4,A,G11.4,A,G11.4)') '0.50 quartile: exact = ', &
     exact_p50, ', estimated = ', val_p50, ', error = ', (val_p50 - exact_p50) / exact_p50
-  write(output_unit, '(A,G10.4,A,G10.4,A,G10.4)') '0.75 quartile: exact = ', &
+  write(output_unit, '(A,G11.4,A,G11.4,A,G11.4)') '0.75 quartile: exact = ', &
     exact_p75, ', estimated = ', val_p75, ', error = ', (val_p75 - exact_p75) / exact_p75
 
-  !  printf ("0.25 quartile: exact = %.5f, estimated = %.5f, error = %.6e\n",
-  !          exact_p25, val_p25, (val_p25 - exact_p25) / exact_p25);
-  !  printf ("0.50 quartile: exact = %.5f, estimated = %.5f, error = %.6e\n",
-  !          exact_p50, val_p50, (val_p50 - exact_p50) / exact_p50);
-  !  printf ("0.75 quartile: exact = %.5f, estimated = %.5f, error = %.6e\n",
-  !          exact_p75, val_p75, (val_p75 - exact_p75) / exact_p75);
+
+  status = fgsl_rstat_quantile_reset(work_25)
+  val_p25 = fgsl_rstat_quantile_get(work_25)
+  write(output_unit, '(A,G11.4)') 'estimate after reset: ', val_p25
 
   call fgsl_rstat_quantile_free(work_25)
   call fgsl_rstat_quantile_free(work_50)

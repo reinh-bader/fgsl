@@ -1,6 +1,8 @@
 Some notes on the source management workflow
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+(A) Trivial changes
+
 * generate local clone of repo
   git clone https://github.com/reinh-bader/fgsl.git
   produces a folder fgsl that contains the clone
@@ -11,3 +13,22 @@ Some notes on the source management workflow
   git commit -m "<commit message>" 
 * push updated repository back to master
   git push
+  
+
+(B) Non-trivial changes
+
+* generate local clone of repo
+  git clone https://github.com/reinh-bader/fgsl.git
+* create a new branch and check it out:
+  git checkout -b fgsl_devel_<new_version>
+  (this can be done even if some files have been modified in advance)
+* do some work
+* commit
+* push the new branch with the commit to github and track it
+  git push -u origin fgsl_devel_<new_version>
+* open a pull-request for this branch in the repository, and check the results of 
+  the Travis-CI builds: if one of them fails, fix the underlying cause in the code, 
+  commit and push, thereby triggering a new build
+* if needed, keep making changes to the code, commit them and check the build results.
+* when done, merge the PR in and delete the local and remote working branch.
+

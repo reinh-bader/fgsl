@@ -6,6 +6,10 @@
     import
     character(c_char) :: s
  end function
+ type(c_ptr) function gsl_multilarge_nlinear_setup(s) BIND(C)
+    import
+    character(c_char) :: s
+ end function
  function gsl_multifit_nlinear_alloc(t, params, n, p) BIND(C)
     import
     type(c_ptr), value :: t
@@ -124,20 +128,20 @@
     type(c_ptr), value :: w
  end function
  integer(c_int) function gsl_multifit_nlinear_test(xtol, gtol, ftol, info, w) BIND(C)
-    import
+    import :: c_ptr, c_double, c_int
     real(c_double), value :: xtol, gtol, ftol
     integer(c_int), intent(inout) :: info
     type(c_ptr), value :: w
  end function
  integer(c_int) function gsl_multilarge_nlinear_test(xtol, gtol, ftol, info, w) BIND(C)
-    import
+    import :: c_ptr, c_double, c_int
     real(c_double), value :: xtol, gtol, ftol
     integer(c_int), intent(inout) :: info
     type(c_ptr), value :: w
  end function
  integer(c_int) function gsl_multifit_nlinear_driver(maxiter, xtol, gtol, ftol, &
                        callback, callback_params, info, w) BIND(C)
-    import
+    import :: c_ptr, c_double, c_int, c_size_t, c_funptr
     integer(c_size_t), value :: maxiter
     real(c_double), value :: xtol, gtol, ftol
     type(c_funptr), value :: callback
@@ -146,7 +150,7 @@
  end function
  integer(c_int) function gsl_multilarge_nlinear_driver(maxiter, xtol, gtol, ftol, &
                        callback, callback_params, info, w) BIND(C)
-    import
+    import :: c_ptr, c_double, c_int, c_size_t, c_funptr
     integer(c_size_t), value :: maxiter
     real(c_double), value :: xtol, gtol, ftol
     type(c_funptr), value :: callback
@@ -189,6 +193,36 @@
     integer(c_int), value :: which
  end function
  type(c_ptr) function gsl_multifit_nlinear_get_solver(which) BIND(C)
+    import
+    integer(c_int), value :: which
+ end function
+ type(c_ptr) function fgsl_multilarge_nlinear_fdf_cinit(ndim, p, params, fp, dfp, fvvp) BIND(C)
+    import
+    integer(c_size_t), value :: ndim, p
+    type(c_ptr), value :: params
+    type(c_funptr), value :: fp, dfp, fvvp
+ end function
+ subroutine fgsl_multilarge_nlinear_fdf_cfree(fdf) BIND(C)
+    import
+    type(c_ptr), value :: fdf
+ end subroutine
+ subroutine gsl_multilarge_nlinear_fdf_get(fdf, fp, dfp, fvvp, &
+          n, p, params, nevalf, nevaldfu, nevaldf2, nevalfvv) BIND(C)
+    import
+    type(c_ptr), value :: fdf
+    type(c_funptr) :: fp, dfp, fvvp
+    integer(c_size_t) :: n, p, nevalf, nevaldfu, nevaldf2, nevalfvv
+    type(c_ptr) :: params
+ end subroutine
+ type(c_ptr) function gsl_multilarge_nlinear_get_trs(which) BIND(C)
+    import
+    integer(c_int), value :: which
+ end function
+ type(c_ptr) function gsl_multilarge_nlinear_get_scale(which) BIND(C)
+    import
+    integer(c_int), value :: which
+ end function
+ type(c_ptr) function gsl_multilarge_nlinear_get_solver(which) BIND(C)
     import
     integer(c_int), value :: which
  end function

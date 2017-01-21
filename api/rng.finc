@@ -252,6 +252,47 @@
     fgsl_ran_bivariate_gaussian_pdf = &
          gsl_ran_bivariate_gaussian_pdf(x, y, sigma_x, sigma_y, rho)
   end function fgsl_ran_bivariate_gaussian_pdf
+  function fgsl_ran_multivariate_gaussian(r, mu, l, result)
+    type(fgsl_rng), intent(in) :: r
+    type(fgsl_vector), intent(in) :: mu
+    type(fgsl_vector), intent(inout) :: result
+    type(fgsl_matrix), intent(in) :: l
+    integer(fgsl_int) :: fgsl_ran_multivariate_gaussian
+    fgsl_ran_multivariate_gaussian = gsl_ran_multivariate_gaussian(r%gsl_rng, &
+         mu%gsl_vector, l%gsl_matrix, result%gsl_vector)
+  end function fgsl_ran_multivariate_gaussian
+  function fgsl_ran_multivariate_gaussian_pdf(x, mu, l, result, work)
+    type(fgsl_vector), intent(in) :: x, mu
+    real(fgsl_double), intent(inout) :: result
+    type(fgsl_vector), intent(inout) :: work
+    type(fgsl_matrix), intent(in) :: l
+    integer(fgsl_int) :: fgsl_ran_multivariate_gaussian_pdf
+    fgsl_ran_multivariate_gaussian_pdf = gsl_ran_multivariate_gaussian_pdf(x%gsl_vector, &
+         mu%gsl_vector, l%gsl_matrix, result, work%gsl_vector)
+  end function fgsl_ran_multivariate_gaussian_pdf
+  function fgsl_ran_multivariate_gaussian_log_pdf(x, mu, l, result, work)
+    type(fgsl_vector), intent(in) :: x, mu
+    real(fgsl_double), intent(inout) :: result
+    type(fgsl_vector), intent(inout) :: work
+    type(fgsl_matrix), intent(in) :: l
+    integer(fgsl_int) :: fgsl_ran_multivariate_gaussian_log_pdf
+    fgsl_ran_multivariate_gaussian_log_pdf = gsl_ran_multivariate_gaussian_log_pdf( &
+         x%gsl_vector, mu%gsl_vector, l%gsl_matrix, result, work%gsl_vector)
+  end function fgsl_ran_multivariate_gaussian_log_pdf
+  function fgsl_ran_multivariate_gaussian_mean(x, mu_hat)
+    type(fgsl_matrix), intent(in) :: x
+    type(fgsl_vector), intent(inout) :: mu_hat
+    integer(fgsl_int) :: fgsl_ran_multivariate_gaussian_mean
+    fgsl_ran_multivariate_gaussian_mean = gsl_ran_multivariate_gaussian_mean( &
+         x%gsl_matrix, mu_hat%gsl_vector )
+  end function fgsl_ran_multivariate_gaussian_mean
+  function fgsl_ran_multivariate_gaussian_vcov(x, sigma_hat)
+    type(fgsl_matrix), intent(in) :: x
+    type(fgsl_matrix), intent(inout) :: sigma_hat
+    integer(fgsl_int) :: fgsl_ran_multivariate_gaussian_vcov
+    fgsl_ran_multivariate_gaussian_vcov = gsl_ran_multivariate_gaussian_vcov( &
+         x%gsl_matrix, sigma_hat%gsl_matrix )
+  end function fgsl_ran_multivariate_gaussian_vcov
   function fgsl_ran_exponential(r, mu)
     type(fgsl_rng), intent(in) :: r
     real(fgsl_double), intent(in) :: mu

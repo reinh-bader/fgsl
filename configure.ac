@@ -22,7 +22,7 @@ AC_USE_SYSTEM_EXTENSIONS
 m4_ifdef([AM_PROG_AR],[AM_PROG_AR])
 
 
-LT_PREREQ([2.3.0])
+LT_PREREQ([2.1.0])
 LT_INIT([win32-dll])
 
 AC_PROG_CC
@@ -32,7 +32,7 @@ fi
 #initialize pkg-config
 PKG_PROG_PKG_CONFIG
 
-PKG_CHECK_MODULES([gsl],gsl >= 2.3)
+PKG_CHECK_MODULES([gsl], [gsl >= 2.3])
 
 local_gsl_version=`$PKG_CONFIG --modversion gsl`
 AC_SUBST(GSL_VERSION,$local_gsl_version)

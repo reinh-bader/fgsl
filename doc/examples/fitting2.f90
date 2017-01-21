@@ -2,7 +2,7 @@ program fitting2
   use fgsl
   implicit none
   integer(fgsl_int) :: status
-  integer(fgsl_size_t) :: i, n
+  integer(fgsl_size_t) :: i, n, rk
   real(fgsl_double) :: xi, yi, ei, chisq
   type(fgsl_matrix) :: x, cov
   type(fgsl_vector) :: y, w, c
@@ -42,14 +42,16 @@ program fitting2
   close(20)
   work = fgsl_multifit_linear_alloc(n, 3_fgsl_size_t)
   status = fgsl_multifit_wlinear(x, w, y, c, cov, chisq, work)
+  rk = fgsl_multifit_linear_rank(1.0d-4, work)
   call fgsl_multifit_linear_free(work)
-  write(6, '(''# best fit:  Y = '',F12.5,'' + '',F12.5, &
+  write(*, '(''# best fit:  Y = '',F12.5,'' + '',F12.5, &
        & ''*X + '',F12.5,''*X^2'')') c_v
-  write(6, '(''# covariance matrix: '')') 
-  write(6, '(3(F12.5,1X))')  cov_m(1:3,1)
-  write(6, '(3(F12.5,1X))')  cov_m(1:3,2)
-  write(6, '(3(F12.5,1X))')  cov_m(1:3,3)
-  write(6, '(''# chisq = '',F12.5)') chisq
+  write(*, '(''# covariance matrix: '')') 
+  write(*, '(3(F12.5,1X))')  cov_m(1:3,1)
+  write(*, '(3(F12.5,1X))')  cov_m(1:3,2)
+  write(*, '(3(F12.5,1X))')  cov_m(1:3,3)
+  write(*, '(''# chisq = '',F12.5)') chisq
+  write(*, '(''# rank = '',I0)') rk 
 
   call fgsl_vector_free(y)
   call fgsl_vector_free(w)

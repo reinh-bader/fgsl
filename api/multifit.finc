@@ -404,6 +404,19 @@
     fgsl_multifit_linear = gsl_multifit_linear(x%gsl_matrix, y%gsl_vector, &
          c%gsl_vector, cov%gsl_matrix, chisq, work%gsl_multifit_linear_workspace)
   end function fgsl_multifit_linear
+  function fgsl_multifit_linear_tsvd(x, y, tol, c, cov, chisq, rank, work)
+    type(fgsl_matrix), intent(in) :: x
+    type(fgsl_vector), intent(in) :: y
+    real(fgsl_double), intent(in) :: tol
+    type(fgsl_vector), intent(inout) :: c
+    type(fgsl_matrix), intent(inout) :: cov
+    integer(fgsl_size_t), intent(inout) :: rank
+    type(fgsl_multifit_linear_workspace), intent(inout) :: work
+    real(fgsl_double), intent(inout) :: chisq
+    integer(fgsl_int) :: fgsl_multifit_linear_tsvd
+    fgsl_multifit_linear_tsvd = gsl_multifit_linear_tsvd(x%gsl_matrix, y%gsl_vector, tol, &
+         c%gsl_vector, cov%gsl_matrix, chisq, rank, work%gsl_multifit_linear_workspace)
+  end function fgsl_multifit_linear_tsvd
   function fgsl_multifit_linear_svd(x, work)
     type(fgsl_matrix), intent(in) :: x
     type(fgsl_multifit_linear_workspace), intent(inout) :: work
@@ -550,6 +563,46 @@
     fgsl_multifit_linear_lcorner2 = gsl_multifit_linear_lcorner2(&
     reg_param%gsl_vector, eta%gsl_vector, idx)
   end function fgsl_multifit_linear_lcorner2
+  integer(fgsl_int) function fgsl_multifit_linear_gcv_init(y, reg_param, uty, delta0, work)
+    type(fgsl_vector), intent(in) :: y
+    type(fgsl_vector), intent(inout) :: reg_param, uty
+    real(fgsl_double), intent(inout) :: delta0
+    type(fgsl_multifit_linear_workspace), intent(inout) :: work
+    fgsl_multifit_linear_gcv_init = gsl_multifit_linear_gcv_init(y%gsl_vector, &
+          reg_param%gsl_vector, uty%gsl_vector, delta0, work%gsl_multifit_linear_workspace)
+  end function
+  integer(fgsl_int) function fgsl_multifit_linear_gcv_curve(reg_param, uty, delta0, g, work)
+    type(fgsl_vector), intent(in) :: reg_param, uty
+    type(fgsl_vector), intent(inout) :: g
+    real(fgsl_double), intent(in) :: delta0
+    type(fgsl_multifit_linear_workspace), intent(inout) :: work
+    fgsl_multifit_linear_gcv_curve = gsl_multifit_linear_gcv_curve(reg_param%gsl_vector, &
+          uty%gsl_vector, delta0, g%gsl_vector, work%gsl_multifit_linear_workspace)
+  end function
+  integer(fgsl_int) function fgsl_multifit_linear_gcv_min(reg_param, uty, delta0, g, & 
+          lambda, work)
+    type(fgsl_vector), intent(in) :: reg_param, uty, g
+    real(fgsl_double), intent(in) :: delta0
+    real(fgsl_double), intent(inout) :: lambda
+    type(fgsl_multifit_linear_workspace), intent(inout) :: work
+    fgsl_multifit_linear_gcv_min = gsl_multifit_linear_gcv_min(reg_param%gsl_vector, &
+          uty%gsl_vector, delta0, g%gsl_vector, lambda, work%gsl_multifit_linear_workspace)
+  end function
+  real(fgsl_double) function fgsl_multifit_linear_gcv_calc(lambda, uty, delta0, work)
+    type(fgsl_vector), intent(in) :: uty
+    real(fgsl_double), intent(in) :: delta0, lambda
+    type(fgsl_multifit_linear_workspace), intent(inout) :: work
+    fgsl_multifit_linear_gcv_calc = gsl_multifit_linear_gcv_calc(lambda, &
+          uty%gsl_vector, delta0, work%gsl_multifit_linear_workspace)
+  end function
+  integer(fgsl_int) function fgsl_multifit_linear_gcv(y, reg_param, g, lambda, g_lambda, work)
+    type(fgsl_vector), intent(in) :: y
+    type(fgsl_vector), intent(inout) :: reg_param, g
+    real(fgsl_double), intent(inout) :: lambda, g_lambda
+    type(fgsl_multifit_linear_workspace), intent(inout) :: work
+    fgsl_multifit_linear_gcv = gsl_multifit_linear_gcv(y%gsl_vector, reg_param%gsl_vector, &
+          g%gsl_vector, lambda, g_lambda, work%gsl_multifit_linear_workspace)
+  end function
   function fgsl_multifit_linear_lk(p, k, l)
     integer(fgsl_size_t), intent(in) :: p, k
     type(fgsl_matrix), intent(inout) :: l
@@ -608,6 +661,20 @@
     fgsl_multifit_wlinear = gsl_multifit_wlinear(x%gsl_matrix, w%gsl_vector, y%gsl_vector, &
          c%gsl_vector, cov%gsl_matrix, chisq, work%gsl_multifit_linear_workspace)
   end function fgsl_multifit_wlinear
+  function fgsl_multifit_wlinear_tsvd(x, w, y, tol, c, cov, chisq, rank, work)
+    type(fgsl_matrix), intent(in) :: x
+    type(fgsl_vector), intent(in) :: w, y
+    real(fgsl_double), intent(in) :: tol
+    type(fgsl_vector), intent(inout) :: c
+    type(fgsl_matrix), intent(inout) :: cov
+    integer(fgsl_size_t), intent(inout) :: rank
+    type(fgsl_multifit_linear_workspace), intent(inout) :: work
+    real(fgsl_double), intent(inout) :: chisq
+    integer(fgsl_int) :: fgsl_multifit_wlinear_tsvd
+    fgsl_multifit_wlinear_tsvd = gsl_multifit_wlinear_tsvd( &
+         x%gsl_matrix, w%gsl_vector, y%gsl_vector, tol, &
+         c%gsl_vector, cov%gsl_matrix, chisq, rank, work%gsl_multifit_linear_workspace)
+  end function fgsl_multifit_wlinear_tsvd
   function fgsl_multifit_wlinear_svd(x, w, y, tol, rank, c, cov, chisq, work)
     type(fgsl_matrix), intent(in) :: x
     type(fgsl_vector), intent(in) :: w, y
@@ -652,6 +719,11 @@
     fgsl_multifit_linear_residuals = gsl_multifit_linear_residuals( &
          x%gsl_matrix, y%gsl_vector, c%gsl_vector, r%gsl_vector)
   end function fgsl_multifit_linear_residuals
+  integer(fgsl_size_t) function fgsl_multifit_linear_rank(tol, work)
+    real(fgsl_double), intent(in) :: tol
+    type(fgsl_multifit_linear_workspace), intent(in) :: work
+    fgsl_multifit_linear_rank = gsl_multifit_linear_rank(tol, work%gsl_multifit_linear_workspace)
+  end function
   function fgsl_multifit_status(multifit)
     type(fgsl_multifit_linear_workspace), intent(in) :: multifit
     logical :: fgsl_multifit_status
