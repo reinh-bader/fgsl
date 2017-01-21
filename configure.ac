@@ -32,7 +32,7 @@ fi
 #initialize pkg-config
 PKG_PROG_PKG_CONFIG
 
-PKG_CHECK_MODULES([gsl],gsl >= 2.3)
+PKG_CHECK_MODULES([gsl], [gsl >= 2.3])
 
 local_gsl_version=`$PKG_CONFIG --modversion gsl`
 AC_SUBST(GSL_VERSION,$local_gsl_version)
