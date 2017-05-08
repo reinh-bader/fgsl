@@ -94,7 +94,11 @@ script:
   - |
     set -e
     autoreconf -fi
-    ./configure CFLAGS="-Wall" FCFLAGS="-Wall"
+    if [ $CC == pgcc ] ; then
+      ./configure
+    else
+      ./configure CFLAGS="-Wall" FCFLAGS="-Wall"
+    fi
     make
     make check
     make distcheck
