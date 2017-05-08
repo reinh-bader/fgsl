@@ -38,10 +38,23 @@ matrix:
             - libblas3
             - libblas-dev
       env: CC='gcc-6' FC='gfortran-6' LIBS='-L/usr/lib -lblas -lm'
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - libblas3
+            - libblas-dev
+      env: CC='pgcc' FC='pgfortran' LIBS='-L/usr/lib -lblas -lm'
     - os: osx
       env: GCC='gcc@4.9' CC='gcc-4.9' FC='gfortran-4.9'
     - os: osx
       env: GCC='gcc@5' CC='gcc-5' FC='gfortran-5'
+    - os: osx
+      env: GCC='gcc@6' CC='gcc-6' FC='gfortran-6'
+    - os: osx
+      env: GCC='gcc@7' CC='gcc-7' FC='gfortran-7'
 
 
 env:
@@ -59,6 +72,11 @@ before_install:
       brew update
       brew install ${GCC} autoconf automake libtool wget pkg-config
     fi
+    if [ $CC == pgcc ] ; then
+      wget -q -O /dev/stdout \
+      'https://raw.githubusercontent.com/nemequ/pgi-travis/master/install-pgi.sh' | \
+      /bin/sh
+    fi 
 
 install:
   - |
@@ -66,7 +84,7 @@ install:
     wget http://ftp.heanet.ie/mirrors/gnu/gsl/gsl-2.3.tar.gz
     tar xfz gsl-2.3.tar.gz
     cd gsl-2.3
-    ./configure
+    ./configure CC=/usr/bin/gcc
     make
     if [ $TRAVIS_OS_NAME == osx ]; then make install ; fi
     if [ $TRAVIS_OS_NAME == linux ]; then sudo make install ; fi
@@ -76,7 +94,11 @@ script:
   - |
     set -e
     autoreconf -fi
-    ./configure CFLAGS="-Wall" FCFLAGS="-Wall"
+    if [ $CC == pgcc ] ; then
+      ./configure
+    else
+      ./configure CFLAGS="-Wall" FCFLAGS="-Wall"
+    fi
     make
     make check
     make distcheck
