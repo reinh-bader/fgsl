@@ -51,6 +51,10 @@ matrix:
       env: GCC='gcc@4.9' CC='gcc-4.9' FC='gfortran-4.9'
     - os: osx
       env: GCC='gcc@5' CC='gcc-5' FC='gfortran-5'
+    - os: osx
+      env: GCC='gcc@6' CC='gcc-6' FC='gfortran-6'
+    - os: osx
+      env: GCC='gcc@7' CC='gcc-7' FC='gfortran-7'
 
 
 env:
