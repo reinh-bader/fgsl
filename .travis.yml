@@ -63,9 +63,9 @@ before_install:
 install:
   - |
     set -e
-    wget http://ftp.heanet.ie/mirrors/gnu/gsl/gsl-2.3.tar.gz
-    tar xfz gsl-2.3.tar.gz
-    cd gsl-2.3
+    wget http://ftp.heanet.ie/mirrors/gnu/gsl/gsl-2.4.tar.gz
+    tar xfz gsl-2.4.tar.gz
+    cd gsl-2.4
     ./configure
     make
     if [ $TRAVIS_OS_NAME == osx ]; then make install ; fi
