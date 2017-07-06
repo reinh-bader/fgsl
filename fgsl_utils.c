@@ -971,16 +971,18 @@ void gsl_multifit_nlinear_fdf_get(gsl_multifit_nlinear_fdf *fdf,
 }
 
 gsl_multifit_nlinear_type *gsl_multifit_nlinear_setup(char *s) {
-    return gsl_multifit_nlinear_trust;
+    return (gsl_multifit_nlinear_type *) gsl_multifit_nlinear_trust;
 }
 gsl_multilarge_nlinear_type *gsl_multilarge_nlinear_setup(char *s) {
-    return gsl_multilarge_nlinear_trust;
+    return (gsl_multilarge_nlinear_type *) gsl_multilarge_nlinear_trust;
 }
 
 gsl_multilarge_nlinear_fdf *fgsl_multilarge_nlinear_fdf_cinit(
        size_t ndim, size_t p, void *params, 
        int (*f)(const gsl_vector *x, void *params, gsl_vector *f), 
-       int (*df)(const gsl_vector *x, void *params, gsl_matrix *df), 
+       int (*df)(CBLAS_TRANSPOSE_t TransJ, const gsl_vector * x,
+              const gsl_vector * u, void * params, gsl_vector * v,
+              gsl_matrix * JTJ),
        int (*fvv)(const gsl_vector *x, const gsl_vector *v, void *params, gsl_vector *vv) 
        ) {
     gsl_multilarge_nlinear_fdf *result;

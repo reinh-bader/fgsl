@@ -79,8 +79,11 @@ contains
        val_target, val_check, eps)
     character(len=*), intent(in) :: description
     real(kind=dk), intent(in) :: val_target, val_check, eps
-    call unit_toggle(description, abs(val_target - val_check) <= eps)
-    if (unit_debug) then
+    logical :: ok
+    ok = .true.
+    if (abs(val_target - val_check) > eps) ok = .false.
+    call unit_toggle(description, ok)
+    if (unit_debug .and. .not. ok) then
        write(6,fmt='(a,4x,2(1PD25.18),1PD8.1)') description,val_target,val_check,eps
     end if
   end subroutine unit_assert_equal_within_double
@@ -184,7 +187,7 @@ contains
     if (.not. test_ok) then
        write(6, *) 'FAIL: ', description
     elseif (unit_debug) then
-       write(6, *) 'OK: ', description
+       write(6, *) 'PASS: ', description
     end if
     if (.not. allocated(unit_ok)) then
        write(6, *) 'Please in insert call to unit_init(). Aborting. '

@@ -11,15 +11,6 @@ subroutine gsl_bspline_free (w) bind(c)
   import :: c_ptr
   type(c_ptr), value :: w
 end subroutine gsl_bspline_free
-function gsl_bspline_deriv_alloc(k) bind(c)
-  import :: c_size_t, c_ptr
-  integer(c_size_t), value :: k
-  type(c_ptr) :: gsl_bspline_deriv_alloc
-end function gsl_bspline_deriv_alloc
-subroutine gsl_bspline_deriv_free (w) bind(c)
-  import :: c_ptr
-  type(c_ptr), value :: w
-end subroutine gsl_bspline_deriv_free
 function gsl_bspline_knots(breakpts, w) bind(c)
   import :: c_int, c_ptr
   integer(c_int) :: gsl_bspline_knots

@@ -1,3 +1,4 @@
+!-*-f90-*-
 module fgsl
 #include "config.h"
 !-------------------------------------------------------------------------------
@@ -349,7 +350,8 @@ module fgsl
        fgsl_linalg_qrpt_rsolve, fgsl_linalg_qrpt_rsvx, &
        fgsl_linalg_qrpt_lssolve, fgsl_linalg_qrpt_lssolve2, &
        fgsl_linalg_qrpt_rank, fgsl_linalg_qrpt_rcond, &
-       fgsl_linalg_cod_decomp, fgsl_linalg_cod_decomp_e, fgsl_linalg_cod_lssolve, &
+       fgsl_linalg_cod_decomp, fgsl_linalg_cod_decomp_e, &
+       fgsl_linalg_cod_lssolve, fgsl_linalg_cod_lssolve2, &
        fgsl_linalg_cod_unpack, fgsl_linalg_cod_matz, &
        fgsl_linalg_sv_decomp, fgsl_linalg_sv_decomp_mod, &
        fgsl_linalg_sv_decomp_jacobi, fgsl_linalg_sv_solve, &
@@ -1121,10 +1123,12 @@ module fgsl
 !
 ! Types: Special Functions
 !
+! both interoperable and non-interoperable types are
+! made available. Overloaded assignment permits implicit copies
+! when necessary
   type, public :: fgsl_sf_result
      real(fgsl_double) :: val, err
   end type fgsl_sf_result
-! FIXME ifort refuses = overload if not public
   type, public, bind(c) :: gsl_sf_result
      real(c_double) :: val, err
   end type
@@ -1132,7 +1136,6 @@ module fgsl
      real(fgsl_double) :: val, err
      integer(fgsl_int) :: e10
   end type fgsl_sf_result_e10
-! FIXME ifort refuses = overload if not public
   type, public, bind(c) :: gsl_sf_result_e10
      real(c_double) :: val, err
      integer(c_int) :: e10

@@ -6,10 +6,10 @@ program linalg
   complex(fgsl_double), parameter :: ai = (0.0d0, 1.0d0), ui=(1.0d0, 0.0d0)
   type(fgsl_matrix) :: a, a_orig, inv, q, r
   type(fgsl_matrix_complex) :: ac, ac_orig
-  type(fgsl_vector) :: b, x, res, tau, sd, work
+  type(fgsl_vector) :: b, x, res, tau, sd, work, wk2
   type(fgsl_vector_complex) :: bc, xc, resc
   real(fgsl_double), target :: af(3, 3), af_orig(3, 3), bf(3), xf(3), resf(3), &
-       invf(3, 3), tauf(3), qf(3, 3), rf(3, 3), mf(3, 3), sdf(3), workf(9)
+       invf(3, 3), tauf(3), qf(3, 3), rf(3, 3), mf(3, 3), sdf(3), workf(9), wk2f(3)
   complex(fgsl_double) :: acf(3, 3), xcf(3), bcf(3), rescf(3), acf_orig(3, 3)
   real(fgsl_double) :: det, lndet, rcond
   type(fgsl_permutation) :: p
@@ -22,9 +22,12 @@ program linalg
   call unit_init(200)
   sd = fgsl_vector_init(1.0_fgsl_double)
   work = fgsl_vector_init(1.0_fgsl_double)
+  wk2 = fgsl_vector_init(1.0_fgsl_double)
   status = fgsl_vector_align(sdf, 3_fgsl_size_t, sd, 3_fgsl_size_t, &
        0_fgsl_size_t, 1_fgsl_size_t)
   status = fgsl_vector_align(workf, 9_fgsl_size_t, work, 9_fgsl_size_t, &
+       0_fgsl_size_t, 1_fgsl_size_t)
+  status = fgsl_vector_align(wk2f, 3_fgsl_size_t, wk2, 3_fgsl_size_t, &
        0_fgsl_size_t, 1_fgsl_size_t)
 !
 ! LU - real
@@ -314,10 +317,16 @@ program linalg
   call unit_assert_equal_within('fgsl_linalg_cod_decomp:tau_z',&
        (/ -3.525431591703201d-16, -3.525431591703199d-16, 3.525431591703201d-16 /),sdf,eps10)
   status = fgsl_linalg_cod_lssolve(a, tau, sd, p, rank, b, x, res)
-  call unit_assert_equal_within('fgsl_linalg_cod_decomp:x',&
+  call unit_assert_equal_within('fgsl_linalg_cod_lssolve:x',&
        (/1.0d0/3.0d0, 2.0d0/3.0d0, 5.0d0/3.0d0 /),xf,eps10)
-  call unit_assert_equal_within('fgsl_linalg_cod_decomp:res',&
+  call unit_assert_equal_within('fgsl_linalg_cod_lssolve:res',&
        (/0.0d0, 0.0d0, 0.0d0 /),resf,eps10)
+  status = fgsl_linalg_cod_lssolve2(1.e-12_fgsl_double, a, tau, sd, p, rank, b, x, res, q, wk2)
+  call unit_assert_equal_within('fgsl_linalg_cod_lssolve2:x',&
+       (/1.0d0/3.0d0, 2.0d0/3.0d0, 5.0d0/3.0d0 /),xf,eps10)
+  call unit_assert_equal_within('fgsl_linalg_cod_lssolve2:res',&
+       (/0.0d0, 0.0d0, 0.0d0 /),resf,eps10)
+
 !
 ! SVD
 !
@@ -373,7 +382,7 @@ program linalg
   call unit_assert_equal('fgsl_linalg_cholesky_rcond:status',&
        fgsl_success,status)
   call unit_assert_equal_within('fgsl_linalg_cholesky_rcond:rcond',&
-       .25d0,rcond,eps10)
+       .125d0,rcond,eps10)
 
   af = af_orig
   status = fgsl_linalg_cholesky_decomp2(a, sd)

@@ -4,6 +4,7 @@ module mod_nlfit
   use mod_unit
   implicit none
   real(fgsl_double), parameter :: eps10 = 1.0d-10
+  real(fgsl_double), parameter :: eps7 = 1.0d-7
   type data
      integer(fgsl_size_t) :: n
      real(fgsl_double), allocatable :: y(:), sigma(:)
@@ -153,7 +154,7 @@ program nlfit
   status = fgsl_vector_align(pv, pos)
   call unit_assert_equal_within('fgsl_multifit_fdfsolver_position-1',&
        (/4.8799966121990526d0,0.10993467064985155d0,1.1946651536729409d0/), &
-       pv, eps10)
+       pv, eps7)
   call fgsl_vector_free(xvec)
   call fgsl_multifit_fdfsolver_free(nlfit_slv)
   call fgsl_multifit_function_fdf_free(nlfit_fdf)

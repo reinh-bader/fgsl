@@ -372,32 +372,45 @@
     fgsl_linalg_cod_decomp_e = gsl_linalg_cod_decomp_e(a%gsl_matrix, tau_q%gsl_vector, &
           tau_z%gsl_vector, p%gsl_permutation, tol, rank, work%gsl_vector)
   end function
-  integer(fgsl_int) function fgsl_linalg_cod_lssolve(qrz, tau_q, tau_z, p, rank, b, x, residual)
-    type(fgsl_matrix), intent(in)  :: qrz
+  integer(fgsl_int) function fgsl_linalg_cod_lssolve(qrzt, tau_q, tau_z, p, rank, b, x, residual)
+    type(fgsl_matrix), intent(in)  :: qrzt
     type(fgsl_vector), intent(in) :: tau_q, tau_z, b
     type(fgsl_vector), intent(inout) :: x, residual
     type(fgsl_permutation), intent(in) :: p
     integer(fgsl_size_t), intent(in) :: rank
-    fgsl_linalg_cod_lssolve = gsl_linalg_cod_lssolve(qrz%gsl_matrix, tau_q%gsl_vector, &
+    fgsl_linalg_cod_lssolve = gsl_linalg_cod_lssolve(qrzt%gsl_matrix, tau_q%gsl_vector, &
           tau_z%gsl_vector, p%gsl_permutation, rank, b%gsl_vector, x%gsl_vector, &
           residual%gsl_vector)
   end function
-  integer(fgsl_int) function fgsl_linalg_cod_unpack(qrz, tau_q, tau_z, p, rank, q, r, z)
-    type(fgsl_matrix), intent(in)  :: qrz
+  integer(fgsl_int) function fgsl_linalg_cod_lssolve2(lambda, qrzt, tau_q, tau_z, p, &
+       rank, b, x, residual, s, work)
+    real(fgsl_double), intent(in) :: lambda
+    type(fgsl_matrix), intent(in)  :: qrzt
+    type(fgsl_vector), intent(in) :: tau_q, tau_z, b
+    type(fgsl_vector), intent(inout) :: x, residual, work
+    type(fgsl_matrix), intent(inout) :: s
+    type(fgsl_permutation), intent(in) :: p
+    integer(fgsl_size_t), intent(in) :: rank
+    fgsl_linalg_cod_lssolve2 = gsl_linalg_cod_lssolve2(lambda, qrzt%gsl_matrix, & 
+         tau_q%gsl_vector, tau_z%gsl_vector, p%gsl_permutation, rank, b%gsl_vector, &
+         x%gsl_vector, residual%gsl_vector, s%gsl_matrix, work%gsl_vector)
+  end function fgsl_linalg_cod_lssolve2
+  integer(fgsl_int) function fgsl_linalg_cod_unpack(qrzt, tau_q, tau_z, p, rank, q, r, z)
+    type(fgsl_matrix), intent(in)  :: qrzt
     type(fgsl_vector), intent(in) :: tau_q, tau_z
     type(fgsl_permutation), intent(in) :: p
     integer(fgsl_size_t), intent(in) :: rank
     type(fgsl_matrix), intent(inout)  :: q, r, z
-    fgsl_linalg_cod_unpack = gsl_linalg_cod_unpack(qrz%gsl_matrix, tau_q%gsl_vector, &
+    fgsl_linalg_cod_unpack = gsl_linalg_cod_unpack(qrzt%gsl_matrix, tau_q%gsl_vector, &
           tau_z%gsl_vector, p%gsl_permutation, rank, q%gsl_matrix, r%gsl_matrix, z%gsl_matrix)
   end function
-  integer(fgsl_int) function fgsl_linalg_cod_matz(qrz, tau_z, rank, a, work)
-    type(fgsl_matrix), intent(in)  :: qrz
+  integer(fgsl_int) function fgsl_linalg_cod_matz(qrzt, tau_z, rank, a, work)
+    type(fgsl_matrix), intent(in)  :: qrzt
     type(fgsl_vector), intent(in) ::  tau_z
     integer(fgsl_size_t), intent(in) :: rank
     type(fgsl_matrix), intent(inout)  :: a
     type(fgsl_vector), intent(inout) ::  work
-    fgsl_linalg_cod_matz = gsl_linalg_cod_matz(qrz%gsl_matrix, tau_z%gsl_vector, &
+    fgsl_linalg_cod_matz = gsl_linalg_cod_matz(qrzt%gsl_matrix, tau_z%gsl_vector, &
           rank, a%gsl_matrix, work%gsl_vector)
   end function
 !

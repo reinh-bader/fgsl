@@ -1,3 +1,17 @@
+Changes in 1.3.0 (by R Bader):
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+This release introduces support for gsl 2.4. An overview:
+
+1. fixes in fgsl_utils.c and mod_unit 
+2. fgsl_linalg_cod_*: added lssolve2 and changed QRZ to QRZT in all calls
+   (NOTE: keyword calls for previously existing COD routines with
+    QRZT argument must be updated)
+3. removed deprecated interfaces from interface/bspline.finc 
+4. specfunc changes:
+    * assumed shape for *_array functions was wrong; these and other trivial
+      calls reverted to thin bindings (saves call overhead anyway).
+
+
 Changes in 1.2.0 (by R Bader):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This release introduces support for gsl 2.3. An overview:

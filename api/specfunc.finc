@@ -97,6 +97,9 @@
 !> <TR><TD>    gsl_sf_bessel_zero_Jnu     <TD>     fgsl_sf_bessel_zero_jcnu
 !> <TR><TD>   gsl_sf_bessel_zero_Jnu_e   <TD>     fgsl_sf_bessel_zero_jcnu_e
 !> </TABLE>
+!
+! Airy functions
+!
   function fgsl_sf_airy_ai(x, mode)
     real(fgsl_double), intent(in) :: x
     type(fgsl_mode_t), intent(in) :: mode
@@ -161,7 +164,6 @@
     fgsl_sf_airy_bi_scaled_e = gsl_sf_airy_bi_scaled_e(x, mode%gsl_mode, res)
     result = res
   end function fgsl_sf_airy_bi_scaled_e
-!!!!!
   function fgsl_sf_airy_ai_deriv(x, mode)
     real(fgsl_double), intent(in) :: x
     type(fgsl_mode_t), intent(in) :: mode
@@ -182,6 +184,7 @@
     real(fgsl_double), intent(in) :: x
     type(fgsl_mode_t), intent(in) :: mode
     real(fgsl_double) :: fgsl_sf_airy_bi_deriv
+!
     fgsl_sf_airy_bi_deriv = gsl_sf_airy_bi_deriv(x, mode%gsl_mode)
   end function fgsl_sf_airy_bi_deriv
   function fgsl_sf_airy_bi_deriv_e(x, mode, result)
@@ -282,11 +285,10 @@
     fgsl_sf_airy_zero_bi_deriv_e = gsl_sf_airy_zero_bi_deriv_e(s, res)
     result = res
   end function fgsl_sf_airy_zero_bi_deriv_e
-  function fgsl_sf_bessel_jc0(x)
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_jc0
-    fgsl_sf_bessel_jc0 = gsl_sf_bessel_jc0(x)
-  end function fgsl_sf_bessel_jc0
+!
+! Bessel functions
+!
+! fgsl_sf_bessel_jc0 --> interface
   function fgsl_sf_bessel_jc0_e(x, result)
     real(fgsl_double), intent(in) :: x
     type(fgsl_sf_result), intent(out) :: result
@@ -296,11 +298,7 @@
     fgsl_sf_bessel_jc0_e = gsl_sf_bessel_jc0_e(x, res)
     result = res
   end function fgsl_sf_bessel_jc0_e
-  function fgsl_sf_bessel_jc1(x)
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_jc1
-    fgsl_sf_bessel_jc1 = gsl_sf_bessel_jc1(x)
-  end function fgsl_sf_bessel_jc1
+! fgsl_sf_bessel_jc1 --> interface
   function fgsl_sf_bessel_jc1_e(x, result)
     real(fgsl_double), intent(in) :: x
     type(fgsl_sf_result), intent(out) :: result
@@ -310,12 +308,7 @@
     fgsl_sf_bessel_jc1_e = gsl_sf_bessel_jc1_e(x, res)
     result = res
   end function fgsl_sf_bessel_jc1_e
-  function fgsl_sf_bessel_jcn(n, x)
-    integer(fgsl_int), intent(in) :: n
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_jcn
-    fgsl_sf_bessel_jcn = gsl_sf_bessel_jcn(n, x)
-  end function fgsl_sf_bessel_jcn
+! fgsl_sf_bessel_jc1 --> interface
   function fgsl_sf_bessel_jcn_e(n, x, result)
     integer(fgsl_int), intent(in) :: n
     real(fgsl_double), intent(in) :: x
@@ -326,18 +319,8 @@
     fgsl_sf_bessel_jcn_e = gsl_sf_bessel_jcn_e(n, x, res)
     result = res
   end function fgsl_sf_bessel_jcn_e
-  function fgsl_sf_bessel_jcn_array(nmin, nmax, x, result)
-    integer(fgsl_int), intent(in) :: nmin, nmax
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double), intent(out), target :: result(:)
-    integer(fgsl_int) :: fgsl_sf_bessel_jcn_array
-    fgsl_sf_bessel_jcn_array = gsl_sf_bessel_jcn_array(nmin, nmax, x, c_loc(result))
-  end function fgsl_sf_bessel_jcn_array
-  function fgsl_sf_bessel_yc0(x)
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_yc0
-    fgsl_sf_bessel_yc0 = gsl_sf_bessel_yc0(x)
-  end function fgsl_sf_bessel_yc0
+! fgsl_sf_bessel_jcn_array --> interface
+! fgsl_sf_bessel_yc0 --> interface
   function fgsl_sf_bessel_yc0_e(x, result)
     real(fgsl_double), intent(in) :: x
     type(fgsl_sf_result), intent(out) :: result
@@ -347,11 +330,7 @@
     fgsl_sf_bessel_yc0_e = gsl_sf_bessel_yc0_e(x, res)
     result = res
   end function fgsl_sf_bessel_yc0_e
-  function fgsl_sf_bessel_yc1(x)
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_yc1
-    fgsl_sf_bessel_yc1 = gsl_sf_bessel_yc1(x)
-  end function fgsl_sf_bessel_yc1
+! fgsl_sf_bessel_yc1 --> interface
   function fgsl_sf_bessel_yc1_e(x, result)
     real(fgsl_double), intent(in) :: x
     type(fgsl_sf_result), intent(out) :: result
@@ -361,12 +340,7 @@
     fgsl_sf_bessel_yc1_e = gsl_sf_bessel_yc1_e(x, res)
     result = res
   end function fgsl_sf_bessel_yc1_e
-  function fgsl_sf_bessel_ycn(n, x)
-    integer(fgsl_int), intent(in) :: n
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_ycn
-    fgsl_sf_bessel_ycn = gsl_sf_bessel_ycn(n, x)
-  end function fgsl_sf_bessel_ycn
+!  fgsl_sf_bessel_ycn --> interface
   function fgsl_sf_bessel_ycn_e(n, x, result)
     integer(fgsl_int), intent(in) :: n
     real(fgsl_double), intent(in) :: x
@@ -377,18 +351,8 @@
     fgsl_sf_bessel_ycn_e = gsl_sf_bessel_ycn_e(n, x, res)
     result = res
   end function fgsl_sf_bessel_ycn_e
-  function fgsl_sf_bessel_ycn_array(nmin, nmax, x, result)
-    integer(fgsl_int), intent(in) :: nmin, nmax
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double), intent(out), target :: result(:)
-    integer(fgsl_int) :: fgsl_sf_bessel_ycn_array
-    fgsl_sf_bessel_ycn_array = gsl_sf_bessel_ycn_array(nmin, nmax, x, c_loc(result))
-  end function fgsl_sf_bessel_ycn_array
-  function fgsl_sf_bessel_ic0(x)
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_ic0
-    fgsl_sf_bessel_ic0 = gsl_sf_bessel_ic0(x)
-  end function fgsl_sf_bessel_ic0
+!  fgsl_sf_bessel_ycn_array --> interface
+!  fgsl_sf_bessel_ic0 --> interface
   function fgsl_sf_bessel_ic0_e(x, result)
     real(fgsl_double), intent(in) :: x
     type(fgsl_sf_result), intent(out) :: result
@@ -398,11 +362,7 @@
     fgsl_sf_bessel_ic0_e = gsl_sf_bessel_ic0_e(x, res)
     result = res
   end function fgsl_sf_bessel_ic0_e
-  function fgsl_sf_bessel_ic1(x)
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_ic1
-    fgsl_sf_bessel_ic1 = gsl_sf_bessel_ic1(x)
-  end function fgsl_sf_bessel_ic1
+!  fgsl_sf_bessel_ic1 --> interface
   function fgsl_sf_bessel_ic1_e(x, result)
     real(fgsl_double), intent(in) :: x
     type(fgsl_sf_result), intent(out) :: result
@@ -412,12 +372,7 @@
     fgsl_sf_bessel_ic1_e = gsl_sf_bessel_ic1_e(x, res)
     result = res
   end function fgsl_sf_bessel_ic1_e
-  function fgsl_sf_bessel_icn(n, x)
-    integer(fgsl_int), intent(in) :: n
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_icn
-    fgsl_sf_bessel_icn = gsl_sf_bessel_icn(n, x)
-  end function fgsl_sf_bessel_icn
+!  fgsl_sf_bessel_icn --> interface
   function fgsl_sf_bessel_icn_e(n, x, result)
     integer(fgsl_int), intent(in) :: n
     real(fgsl_double), intent(in) :: x
@@ -428,18 +383,8 @@
     fgsl_sf_bessel_icn_e = gsl_sf_bessel_icn_e(n, x, res)
     result = res
   end function fgsl_sf_bessel_icn_e
-  function fgsl_sf_bessel_icn_array(nmin, nmax, x, result)
-    integer(fgsl_int), intent(in) :: nmin, nmax
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double), intent(out), target :: result(:)
-    integer(fgsl_int) :: fgsl_sf_bessel_icn_array
-    fgsl_sf_bessel_icn_array = gsl_sf_bessel_icn_array(nmin, nmax, x, c_loc(result))
-  end function fgsl_sf_bessel_icn_array
-  function fgsl_sf_bessel_ic0_scaled(x)
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_ic0_scaled
-    fgsl_sf_bessel_ic0_scaled = gsl_sf_bessel_ic0_scaled(x)
-  end function fgsl_sf_bessel_ic0_scaled
+!  fgsl_sf_bessel_icn_array --> interface
+!  fgsl_sf_bessel_ic0_scaled --> interface
   function fgsl_sf_bessel_ic0_scaled_e(x, result)
     real(fgsl_double), intent(in) :: x
     type(fgsl_sf_result), intent(out) :: result
@@ -449,11 +394,7 @@
     fgsl_sf_bessel_ic0_scaled_e = gsl_sf_bessel_ic0_scaled_e(x, res)
     result = res
   end function fgsl_sf_bessel_ic0_scaled_e
-  function fgsl_sf_bessel_ic1_scaled(x)
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_ic1_scaled
-    fgsl_sf_bessel_ic1_scaled = gsl_sf_bessel_ic1_scaled(x)
-  end function fgsl_sf_bessel_ic1_scaled
+!  fgsl_sf_bessel_ic1_scaled --> interface
   function fgsl_sf_bessel_ic1_scaled_e(x, result)
     real(fgsl_double), intent(in) :: x
     type(fgsl_sf_result), intent(out) :: result
@@ -463,12 +404,7 @@
     fgsl_sf_bessel_ic1_scaled_e = gsl_sf_bessel_ic1_scaled_e(x, res)
     result = res
   end function fgsl_sf_bessel_ic1_scaled_e
-  function fgsl_sf_bessel_icn_scaled(n, x)
-    integer(fgsl_int), intent(in) :: n
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_icn_scaled
-    fgsl_sf_bessel_icn_scaled = gsl_sf_bessel_icn_scaled(n, x)
-  end function fgsl_sf_bessel_icn_scaled
+!  fgsl_sf_bessel_icn_scaled --> interface
   function fgsl_sf_bessel_icn_scaled_e(n, x, result)
     integer(fgsl_int), intent(in) :: n
     real(fgsl_double), intent(in) :: x
@@ -479,18 +415,8 @@
     fgsl_sf_bessel_icn_scaled_e = gsl_sf_bessel_icn_scaled_e(n, x, res)
     result = res
   end function fgsl_sf_bessel_icn_scaled_e
-  function fgsl_sf_bessel_icn_scaled_array(nmin, nmax, x, result)
-    integer(fgsl_int), intent(in) :: nmin, nmax
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double), intent(out), target :: result(:)
-    integer(fgsl_int) :: fgsl_sf_bessel_icn_scaled_array
-    fgsl_sf_bessel_icn_scaled_array = gsl_sf_bessel_icn_scaled_array(nmin, nmax, x, c_loc(result))
-  end function fgsl_sf_bessel_icn_scaled_array
-  function fgsl_sf_bessel_kc0(x)
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_kc0
-    fgsl_sf_bessel_kc0 = gsl_sf_bessel_kc0(x)
-  end function fgsl_sf_bessel_kc0
+!  fgsl_sf_bessel_icn_scaled_array --> interface
+!  fgsl_sf_bessel_kc0 --> interface
   function fgsl_sf_bessel_kc0_e(x, result)
     real(fgsl_double), intent(in) :: x
     type(fgsl_sf_result), intent(out) :: result
@@ -500,11 +426,7 @@
     fgsl_sf_bessel_kc0_e = gsl_sf_bessel_kc0_e(x, res)
     result = res
   end function fgsl_sf_bessel_kc0_e
-  function fgsl_sf_bessel_kc1(x)
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_kc1
-    fgsl_sf_bessel_kc1 = gsl_sf_bessel_kc1(x)
-  end function fgsl_sf_bessel_kc1
+!  fgsl_sf_bessel_kc1 --> interface
   function fgsl_sf_bessel_kc1_e(x, result)
     real(fgsl_double), intent(in) :: x
     type(fgsl_sf_result), intent(out) :: result
@@ -514,12 +436,7 @@
     fgsl_sf_bessel_kc1_e = gsl_sf_bessel_kc1_e(x, res)
     result = res
   end function fgsl_sf_bessel_kc1_e
-  function fgsl_sf_bessel_kcn(n, x)
-    integer(fgsl_int), intent(in) :: n
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_kcn
-    fgsl_sf_bessel_kcn = gsl_sf_bessel_kcn(n, x)
-  end function fgsl_sf_bessel_kcn
+!  fgsl_sf_bessel_kcn --> interface
   function fgsl_sf_bessel_kcn_e(n, x, result)
     integer(fgsl_int), intent(in) :: n
     real(fgsl_double), intent(in) :: x
@@ -530,18 +447,8 @@
     fgsl_sf_bessel_kcn_e = gsl_sf_bessel_kcn_e(n, x, res)
     result = res
   end function fgsl_sf_bessel_kcn_e
-  function fgsl_sf_bessel_kcn_array(nmin, nmax, x, result)
-    integer(fgsl_int), intent(in) :: nmin, nmax
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double), intent(out), target :: result(:)
-    integer(fgsl_int) :: fgsl_sf_bessel_kcn_array
-    fgsl_sf_bessel_kcn_array = gsl_sf_bessel_kcn_array(nmin, nmax, x, c_loc(result))
-  end function fgsl_sf_bessel_kcn_array
-  function fgsl_sf_bessel_kc0_scaled(x)
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_kc0_scaled
-    fgsl_sf_bessel_kc0_scaled = gsl_sf_bessel_kc0_scaled(x)
-  end function fgsl_sf_bessel_kc0_scaled
+!  fgsl_sf_bessel_kcn_array --> interface
+!  fgsl_sf_bessel_kc0_scaled --> interface
   function fgsl_sf_bessel_kc0_scaled_e(x, result)
     real(fgsl_double), intent(in) :: x
     type(fgsl_sf_result), intent(out) :: result
@@ -551,11 +458,7 @@
     fgsl_sf_bessel_kc0_scaled_e = gsl_sf_bessel_kc0_scaled_e(x, res)
     result = res
   end function fgsl_sf_bessel_kc0_scaled_e
-  function fgsl_sf_bessel_kc1_scaled(x)
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_kc1_scaled
-    fgsl_sf_bessel_kc1_scaled = gsl_sf_bessel_kc1_scaled(x)
-  end function fgsl_sf_bessel_kc1_scaled
+!  fgsl_sf_bessel_kc1_scaled --> interface
   function fgsl_sf_bessel_kc1_scaled_e(x, result)
     real(fgsl_double), intent(in) :: x
     type(fgsl_sf_result), intent(out) :: result
@@ -565,12 +468,7 @@
     fgsl_sf_bessel_kc1_scaled_e = gsl_sf_bessel_kc1_scaled_e(x, res)
     result = res
   end function fgsl_sf_bessel_kc1_scaled_e
-  function fgsl_sf_bessel_kcn_scaled(n, x)
-    integer(fgsl_int), intent(in) :: n
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_kcn_scaled
-    fgsl_sf_bessel_kcn_scaled = gsl_sf_bessel_kcn_scaled(n, x)
-  end function fgsl_sf_bessel_kcn_scaled
+!  fgsl_sf_bessel_kcn_scaled --> interface
   function fgsl_sf_bessel_kcn_scaled_e(n, x, result)
     integer(fgsl_int), intent(in) :: n
     real(fgsl_double), intent(in) :: x
@@ -581,19 +479,11 @@
     fgsl_sf_bessel_kcn_scaled_e = gsl_sf_bessel_kcn_scaled_e(n, x, res)
     result = res
   end function fgsl_sf_bessel_kcn_scaled_e
-  function fgsl_sf_bessel_kcn_scaled_array(nmin, nmax, x, result)
-    integer(fgsl_int), intent(in) :: nmin, nmax
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double), intent(out), target :: result(:)
-    integer(fgsl_int) :: fgsl_sf_bessel_kcn_scaled_array
-    fgsl_sf_bessel_kcn_scaled_array = gsl_sf_bessel_kcn_scaled_array(nmin, nmax, x, c_loc(result))
-  end function fgsl_sf_bessel_kcn_scaled_array
+!  fgsl_sf_bessel_kcn_scaled_array --> interface
+!
 ! spherical bessel functions
-  function fgsl_sf_bessel_js0(x)
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_js0
-    fgsl_sf_bessel_js0 = gsl_sf_bessel_js0(x)
-  end function fgsl_sf_bessel_js0
+!
+!  fgsl_sf_bessel_js0 --> interface
   function fgsl_sf_bessel_js0_e(x, result)
     real(fgsl_double), intent(in) :: x
     type(fgsl_sf_result), intent(out) :: result
@@ -603,11 +493,7 @@
     fgsl_sf_bessel_js0_e = gsl_sf_bessel_js0_e(x, res)
     result = res
   end function fgsl_sf_bessel_js0_e
-  function fgsl_sf_bessel_js1(x)
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_js1
-    fgsl_sf_bessel_js1 = gsl_sf_bessel_js1(x)
-  end function fgsl_sf_bessel_js1
+!  fgsl_sf_bessel_js1 --> interface
   function fgsl_sf_bessel_js1_e(x, result)
     real(fgsl_double), intent(in) :: x
     type(fgsl_sf_result), intent(out) :: result
@@ -617,11 +503,7 @@
     fgsl_sf_bessel_js1_e = gsl_sf_bessel_js1_e(x, res)
     result = res
   end function fgsl_sf_bessel_js1_e
-  function fgsl_sf_bessel_js2(x)
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_js2
-    fgsl_sf_bessel_js2 = gsl_sf_bessel_js2(x)
-  end function fgsl_sf_bessel_js2
+!  fgsl_sf_bessel_js2 --> interface
   function fgsl_sf_bessel_js2_e(x, result)
     real(fgsl_double), intent(in) :: x
     type(fgsl_sf_result), intent(out) :: result
@@ -631,12 +513,7 @@
     fgsl_sf_bessel_js2_e = gsl_sf_bessel_js2_e(x, res)
     result = res
   end function fgsl_sf_bessel_js2_e
-  function fgsl_sf_bessel_jsl(n, x)
-    integer(fgsl_int), intent(in) :: n
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_jsl
-    fgsl_sf_bessel_jsl = gsl_sf_bessel_jsl(n, x)
-  end function fgsl_sf_bessel_jsl
+!   fgsl_sf_bessel_jsl --> interface
   function fgsl_sf_bessel_jsl_e(n, x, result)
     integer(fgsl_int), intent(in) :: n
     real(fgsl_double), intent(in) :: x
@@ -647,25 +524,9 @@
     fgsl_sf_bessel_jsl_e = gsl_sf_bessel_jsl_e(n, x, res)
     result = res
   end function fgsl_sf_bessel_jsl_e
-  function fgsl_sf_bessel_jsl_array(lmax, x, result)
-    integer(fgsl_int), intent(in) :: lmax
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double), intent(out), target :: result(:)
-    integer(fgsl_int) :: fgsl_sf_bessel_jsl_array
-    fgsl_sf_bessel_jsl_array = gsl_sf_bessel_jsl_array(lmax, x, c_loc(result))
-  end function fgsl_sf_bessel_jsl_array
-  function fgsl_sf_bessel_jsl_steed_array(lmax, x, result)
-    integer(fgsl_int), intent(in) :: lmax
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double), intent(out), target :: result(:)
-    integer(fgsl_int) :: fgsl_sf_bessel_jsl_steed_array
-    fgsl_sf_bessel_jsl_steed_array = gsl_sf_bessel_jsl_steed_array(lmax, x, c_loc(result))
-  end function fgsl_sf_bessel_jsl_steed_array
-  function fgsl_sf_bessel_ys0(x)
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_ys0
-    fgsl_sf_bessel_ys0 = gsl_sf_bessel_ys0(x)
-  end function fgsl_sf_bessel_ys0
+!  fgsl_sf_bessel_jsl_array --> interface
+!  fgsl_sf_bessel_jsl_steed_array --> interface
+!  fgsl_sf_bessel_ys0 --> interface
   function fgsl_sf_bessel_ys0_e(x, result)
     real(fgsl_double), intent(in) :: x
     type(fgsl_sf_result), intent(out) :: result
@@ -675,11 +536,7 @@
     fgsl_sf_bessel_ys0_e = gsl_sf_bessel_ys0_e(x, res)
     result = res
   end function fgsl_sf_bessel_ys0_e
-  function fgsl_sf_bessel_ys1(x)
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_ys1
-    fgsl_sf_bessel_ys1 = gsl_sf_bessel_ys1(x)
-  end function fgsl_sf_bessel_ys1
+!  fgsl_sf_bessel_ys1 --> interface
   function fgsl_sf_bessel_ys1_e(x, result)
     real(fgsl_double), intent(in) :: x
     type(fgsl_sf_result), intent(out) :: result
@@ -689,11 +546,7 @@
     fgsl_sf_bessel_ys1_e = gsl_sf_bessel_ys1_e(x, res)
     result = res
   end function fgsl_sf_bessel_ys1_e
-  function fgsl_sf_bessel_ys2(x)
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_ys2
-    fgsl_sf_bessel_ys2 = gsl_sf_bessel_ys2(x)
-  end function fgsl_sf_bessel_ys2
+!  fgsl_sf_bessel_ys2 --> interface
   function fgsl_sf_bessel_ys2_e(x, result)
     real(fgsl_double), intent(in) :: x
     type(fgsl_sf_result), intent(out) :: result
@@ -703,12 +556,7 @@
     fgsl_sf_bessel_ys2_e = gsl_sf_bessel_ys2_e(x, res)
     result = res
   end function fgsl_sf_bessel_ys2_e
-  function fgsl_sf_bessel_ysl(n, x)
-    integer(fgsl_int), intent(in) :: n
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_ysl
-    fgsl_sf_bessel_ysl = gsl_sf_bessel_ysl(n, x)
-  end function fgsl_sf_bessel_ysl
+!  fgsl_sf_bessel_ysl --> interface
   function fgsl_sf_bessel_ysl_e(n, x, result)
     integer(fgsl_int), intent(in) :: n
     real(fgsl_double), intent(in) :: x
@@ -719,18 +567,8 @@
     fgsl_sf_bessel_ysl_e = gsl_sf_bessel_ysl_e(n, x, res)
     result = res
   end function fgsl_sf_bessel_ysl_e
-  function fgsl_sf_bessel_ysl_array(lmax, x, result)
-    integer(fgsl_int), intent(in) :: lmax
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double), intent(out), target :: result(:)
-    integer(fgsl_int) :: fgsl_sf_bessel_ysl_array
-    fgsl_sf_bessel_ysl_array = gsl_sf_bessel_ysl_array(lmax, x, c_loc(result))
-  end function fgsl_sf_bessel_ysl_array
-  function fgsl_sf_bessel_is0_scaled(x)
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_is0_scaled
-    fgsl_sf_bessel_is0_scaled = gsl_sf_bessel_is0_scaled(x)
-  end function fgsl_sf_bessel_is0_scaled
+!  fgsl_sf_bessel_ysl_array --> interface
+!  fgsl_sf_bessel_is0_scaled --> interface
   function fgsl_sf_bessel_is0_scaled_e(x, result)
     real(fgsl_double), intent(in) :: x
     type(fgsl_sf_result), intent(out) :: result
@@ -740,11 +578,7 @@
     fgsl_sf_bessel_is0_scaled_e = gsl_sf_bessel_is0_scaled_e(x, res)
     result = res
   end function fgsl_sf_bessel_is0_scaled_e
-  function fgsl_sf_bessel_is1_scaled(x)
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_is1_scaled
-    fgsl_sf_bessel_is1_scaled = gsl_sf_bessel_is1_scaled(x)
-  end function fgsl_sf_bessel_is1_scaled
+!  fgsl_sf_bessel_is1_scaled --> interface
   function fgsl_sf_bessel_is1_scaled_e(x, result)
     real(fgsl_double), intent(in) :: x
     type(fgsl_sf_result), intent(out) :: result
@@ -754,11 +588,7 @@
     fgsl_sf_bessel_is1_scaled_e = gsl_sf_bessel_is1_scaled_e(x, res)
     result = res
   end function fgsl_sf_bessel_is1_scaled_e
-  function fgsl_sf_bessel_is2_scaled(x)
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_is2_scaled
-    fgsl_sf_bessel_is2_scaled = gsl_sf_bessel_is2_scaled(x)
-  end function fgsl_sf_bessel_is2_scaled
+!  fgsl_sf_bessel_is2_scaled --> interface
   function fgsl_sf_bessel_is2_scaled_e(x, result)
     real(fgsl_double), intent(in) :: x
     type(fgsl_sf_result), intent(out) :: result
@@ -768,12 +598,7 @@
     fgsl_sf_bessel_is2_scaled_e = gsl_sf_bessel_is2_scaled_e(x, res)
     result = res
   end function fgsl_sf_bessel_is2_scaled_e
-  function fgsl_sf_bessel_isl_scaled(n, x)
-    integer(fgsl_int), intent(in) :: n
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_isl_scaled
-    fgsl_sf_bessel_isl_scaled = gsl_sf_bessel_isl_scaled(n, x)
-  end function fgsl_sf_bessel_isl_scaled
+!  fgsl_sf_bessel_isl_scaled --> interface
   function fgsl_sf_bessel_isl_scaled_e(n, x, result)
     integer(fgsl_int), intent(in) :: n
     real(fgsl_double), intent(in) :: x
@@ -784,18 +609,8 @@
     fgsl_sf_bessel_isl_scaled_e = gsl_sf_bessel_isl_scaled_e(n, x, res)
     result = res
   end function fgsl_sf_bessel_isl_scaled_e
-  function fgsl_sf_bessel_isl_scaled_array(lmax, x, result)
-    integer(fgsl_int), intent(in) :: lmax
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double), intent(out), target :: result(:)
-    integer(fgsl_int) :: fgsl_sf_bessel_isl_scaled_array
-    fgsl_sf_bessel_isl_scaled_array = gsl_sf_bessel_isl_scaled_array(lmax, x, c_loc(result))
-  end function fgsl_sf_bessel_isl_scaled_array
-  function fgsl_sf_bessel_ks0_scaled(x)
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_ks0_scaled
-    fgsl_sf_bessel_ks0_scaled = gsl_sf_bessel_ks0_scaled(x)
-  end function fgsl_sf_bessel_ks0_scaled
+!  fgsl_sf_bessel_isl_scaled_array --> interface
+!  fgsl_sf_bessel_ks0_scaled(x) --> interface
   function fgsl_sf_bessel_ks0_scaled_e(x, result)
     real(fgsl_double), intent(in) :: x
     type(fgsl_sf_result), intent(out) :: result
@@ -805,11 +620,7 @@
     fgsl_sf_bessel_ks0_scaled_e = gsl_sf_bessel_ks0_scaled_e(x, res)
     result = res
   end function fgsl_sf_bessel_ks0_scaled_e
-  function fgsl_sf_bessel_ks1_scaled(x)
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_ks1_scaled
-    fgsl_sf_bessel_ks1_scaled = gsl_sf_bessel_ks1_scaled(x)
-  end function fgsl_sf_bessel_ks1_scaled
+!  fgsl_sf_bessel_ks1_scaled --> interface
   function fgsl_sf_bessel_ks1_scaled_e(x, result)
     real(fgsl_double), intent(in) :: x
     type(fgsl_sf_result), intent(out) :: result
@@ -819,11 +630,7 @@
     fgsl_sf_bessel_ks1_scaled_e = gsl_sf_bessel_ks1_scaled_e(x, res)
     result = res
   end function fgsl_sf_bessel_ks1_scaled_e
-  function fgsl_sf_bessel_ks2_scaled(x)
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_ks2_scaled
-    fgsl_sf_bessel_ks2_scaled = gsl_sf_bessel_ks2_scaled(x)
-  end function fgsl_sf_bessel_ks2_scaled
+! fgsl_sf_bessel_ks2_scaled --> interface
   function fgsl_sf_bessel_ks2_scaled_e(x, result)
     real(fgsl_double), intent(in) :: x
     type(fgsl_sf_result), intent(out) :: result
@@ -833,12 +640,7 @@
     fgsl_sf_bessel_ks2_scaled_e = gsl_sf_bessel_ks2_scaled_e(x, res)
     result = res
   end function fgsl_sf_bessel_ks2_scaled_e
-  function fgsl_sf_bessel_ksl_scaled(n, x)
-    integer(fgsl_int), intent(in) :: n
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_ksl_scaled
-    fgsl_sf_bessel_ksl_scaled = gsl_sf_bessel_ksl_scaled(n, x)
-  end function fgsl_sf_bessel_ksl_scaled
+!  fgsl_sf_bessel_ksl_scaled --> interface
   function fgsl_sf_bessel_ksl_scaled_e(n, x, result)
     integer(fgsl_int), intent(in) :: n
     real(fgsl_double), intent(in) :: x
@@ -849,20 +651,11 @@
     fgsl_sf_bessel_ksl_scaled_e = gsl_sf_bessel_ksl_scaled_e(n, x, res)
     result = res
   end function fgsl_sf_bessel_ksl_scaled_e
-  function fgsl_sf_bessel_ksl_scaled_array(lmax, x, result)
-    integer(fgsl_int), intent(in) :: lmax
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double), intent(out), target :: result(:)
-    integer(fgsl_int) :: fgsl_sf_bessel_ksl_scaled_array
-    fgsl_sf_bessel_ksl_scaled_array = gsl_sf_bessel_ksl_scaled_array(lmax, x, c_loc(result))
-  end function fgsl_sf_bessel_ksl_scaled_array
+!  fgsl_sf_bessel_ksl_scaled_array --> interface
+!
 ! fractional order bessel functions
-  function fgsl_sf_bessel_jnu(n, x)
-    real(fgsl_double), intent(in) :: n
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_jnu
-    fgsl_sf_bessel_jnu = gsl_sf_bessel_jnu(n, x)
-  end function fgsl_sf_bessel_jnu
+!
+! fgsl_sf_bessel_jnu --> interface
   function fgsl_sf_bessel_jnu_e(n, x, result)
     real(fgsl_double), intent(in) :: n
     real(fgsl_double), intent(in) :: x
@@ -881,12 +674,7 @@
     fgsl_sf_bessel_sequence_jnu_e = gsl_sf_bessel_sequence_jnu_e(nu, mode%gsl_mode, &
     size(v, kind=fgsl_size_t), c_loc(v))
   end function fgsl_sf_bessel_sequence_jnu_e
-  function fgsl_sf_bessel_ynu(n, x)
-    real(fgsl_double), intent(in) :: n
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_ynu
-    fgsl_sf_bessel_ynu = gsl_sf_bessel_ynu(n, x)
-  end function fgsl_sf_bessel_ynu
+!  fgsl_sf_bessel_ynu --> interface
   function fgsl_sf_bessel_ynu_e(n, x, result)
     real(fgsl_double), intent(in) :: n
     real(fgsl_double), intent(in) :: x
@@ -897,12 +685,7 @@
     fgsl_sf_bessel_ynu_e = gsl_sf_bessel_ynu_e(n, x, res)
     result = res
   end function fgsl_sf_bessel_ynu_e
-  function fgsl_sf_bessel_inu(n, x)
-    real(fgsl_double), intent(in) :: n
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_inu
-    fgsl_sf_bessel_inu = gsl_sf_bessel_inu(n, x)
-  end function fgsl_sf_bessel_inu
+!  fgsl_sf_bessel_inu --> interface
   function fgsl_sf_bessel_inu_e(n, x, result)
     real(fgsl_double), intent(in) :: n
     real(fgsl_double), intent(in) :: x
@@ -913,12 +696,7 @@
     fgsl_sf_bessel_inu_e = gsl_sf_bessel_inu_e(n, x, res)
     result = res
   end function fgsl_sf_bessel_inu_e
-  function fgsl_sf_bessel_inu_scaled(n, x)
-    real(fgsl_double), intent(in) :: n
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_inu_scaled
-    fgsl_sf_bessel_inu_scaled = gsl_sf_bessel_inu_scaled(n, x)
-  end function fgsl_sf_bessel_inu_scaled
+!  fgsl_sf_bessel_inu_scaled --> interface
   function fgsl_sf_bessel_inu_scaled_e(n, x, result)
     real(fgsl_double), intent(in) :: n
     real(fgsl_double), intent(in) :: x
@@ -929,12 +707,7 @@
     fgsl_sf_bessel_inu_scaled_e = gsl_sf_bessel_inu_scaled_e(n, x, res)
     result = res
   end function fgsl_sf_bessel_inu_scaled_e
-  function fgsl_sf_bessel_knu(n, x)
-    real(fgsl_double), intent(in) :: n
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_knu
-    fgsl_sf_bessel_knu = gsl_sf_bessel_knu(n, x)
-  end function fgsl_sf_bessel_knu
+!  fgsl_sf_bessel_knu --> interface
   function fgsl_sf_bessel_knu_e(n, x, result)
     real(fgsl_double), intent(in) :: n
     real(fgsl_double), intent(in) :: x
@@ -945,12 +718,7 @@
     fgsl_sf_bessel_knu_e = gsl_sf_bessel_knu_e(n, x, res)
     result = res
   end function fgsl_sf_bessel_knu_e
-  function fgsl_sf_bessel_lnknu(n, x)
-    real(fgsl_double), intent(in) :: n
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_lnknu
-    fgsl_sf_bessel_lnknu = gsl_sf_bessel_lnknu(n, x)
-  end function fgsl_sf_bessel_lnknu
+!  fgsl_sf_bessel_lnknu --> interface
   function fgsl_sf_bessel_lnknu_e(n, x, result)
     real(fgsl_double), intent(in) :: n
     real(fgsl_double), intent(in) :: x
@@ -961,12 +729,7 @@
     fgsl_sf_bessel_lnknu_e = gsl_sf_bessel_lnknu_e(n, x, res)
     result = res
   end function fgsl_sf_bessel_lnknu_e
-  function fgsl_sf_bessel_knu_scaled(n, x)
-    real(fgsl_double), intent(in) :: n
-    real(fgsl_double), intent(in) :: x
-    real(fgsl_double) :: fgsl_sf_bessel_knu_scaled
-    fgsl_sf_bessel_knu_scaled = gsl_sf_bessel_knu_scaled(n, x)
-  end function fgsl_sf_bessel_knu_scaled
+!  fgsl_sf_bessel_knu_scaled --> interface
   function fgsl_sf_bessel_knu_scaled_e(n, x, result)
     real(fgsl_double), intent(in) :: n
     real(fgsl_double), intent(in) :: x
@@ -977,11 +740,7 @@
     fgsl_sf_bessel_knu_scaled_e = gsl_sf_bessel_knu_scaled_e(n, x, res)
     result = res
   end function fgsl_sf_bessel_knu_scaled_e
-  function fgsl_sf_bessel_zero_jc0(s)
-    integer(fgsl_int), intent(in) :: s
-    real(fgsl_double) :: fgsl_sf_bessel_zero_jc0
-    fgsl_sf_bessel_zero_jc0 = gsl_sf_bessel_zero_jc0(s)
-  end function fgsl_sf_bessel_zero_jc0
+! fgsl_sf_bessel_zero_jc0 --> interface
   function fgsl_sf_bessel_zero_jc0_e(s, result)
     integer(fgsl_int), intent(in) :: s
     type(fgsl_sf_result), intent(out) :: result
@@ -991,11 +750,7 @@
     fgsl_sf_bessel_zero_jc0_e = gsl_sf_bessel_zero_jc0_e(s, res)
     result = res
   end function fgsl_sf_bessel_zero_jc0_e
-  function fgsl_sf_bessel_zero_jc1(s)
-    integer(fgsl_int), intent(in) :: s
-    real(fgsl_double) :: fgsl_sf_bessel_zero_jc1
-    fgsl_sf_bessel_zero_jc1 = gsl_sf_bessel_zero_jc1(s)
-  end function fgsl_sf_bessel_zero_jc1
+!  fgsl_sf_bessel_zero_jc1 --> interface
   function fgsl_sf_bessel_zero_jc1_e(s, result)
     integer(fgsl_int), intent(in) :: s
     type(fgsl_sf_result), intent(out) :: result
@@ -1005,12 +760,7 @@
     fgsl_sf_bessel_zero_jc1_e = gsl_sf_bessel_zero_jc1_e(s, res)
     result = res
   end function fgsl_sf_bessel_zero_jc1_e
-  function fgsl_sf_bessel_zero_jnu(nu, s)
-    real(fgsl_double), intent(in) :: nu
-    integer(fgsl_int), intent(in) :: s
-    real(fgsl_double) :: fgsl_sf_bessel_zero_jnu
-    fgsl_sf_bessel_zero_jnu = gsl_sf_bessel_zero_jnu(nu, s)
-  end function fgsl_sf_bessel_zero_jnu
+!  fgsl_sf_bessel_zero_jnu --> interface
   function fgsl_sf_bessel_zero_jnu_e(nu, s, result)
     real(fgsl_double), intent(in) :: nu
     integer(fgsl_int), intent(in) :: s
