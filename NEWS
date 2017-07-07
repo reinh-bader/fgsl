@@ -8,8 +8,9 @@ This release introduces support for gsl 2.4. An overview:
     QRZT argument must be updated)
 3. removed deprecated interfaces from interface/bspline.finc 
 4. specfunc changes:
-    * assumed shape for *_array functions was wrong; these and other trivial
-      calls reverted to thin bindings (saves call overhead anyway).
+    * interoperable calls are now thin bindings again (save on call overhead)
+    * assumed shape for *_array functions was wrong; Where not reverted to
+      thin binding, specified with INTENT(INOUT), CONTIGUOUS.
 
 
 Changes in 1.2.0 (by R Bader):
