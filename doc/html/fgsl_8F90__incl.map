@@ -1,41 +1,23 @@
 <map id="fgsl.F90" name="fgsl.F90">
-<area shape="rect" href="$generics_8finc.html" title="interface/generics.finc" alt="" coords="6269,80,6416,107"/>
-<area shape="rect" href="$error_8finc.html" title="api/error.finc" alt="" coords="6440,80,6531,107"/>
-<area shape="rect" href="$misc_8finc.html" title="api/misc.finc" alt="" coords="6555,80,6648,107"/>
-<area shape="rect" href="$io_8finc.html" title="api/io.finc" alt="" coords="6672,80,6747,107"/>
-<area shape="rect" href="$math_8finc.html" title="api/math.finc" alt="" coords="6771,80,6867,107"/>
-<area shape="rect" href="$complex_8finc.html" title="api/complex.finc" alt="" coords="6891,80,7005,107"/>
-<area shape="rect" href="$poly_8finc.html" title="api/poly.finc" alt="" coords="7029,80,7117,107"/>
-<area shape="rect" href="$specfunc_8finc.html" title="api/specfunc.finc" alt="" coords="7141,80,7259,107"/>
-<area shape="rect" href="$array_8finc.html" title="api/array.finc" alt="" coords="7283,80,7376,107"/>
-<area shape="rect" href="$interp_8finc.html" title="api/interp.finc" alt="" coords="7400,80,7499,107"/>
-<area shape="rect" href="$permutation_8finc.html" title="api/permutation.finc" alt="" coords="7523,80,7656,107"/>
-<area shape="rect" href="$sort_8finc.html" title="api/sort.finc" alt="" coords="7680,80,7768,107"/>
-<area shape="rect" href="$linalg_8finc.html" title="api/linalg.finc" alt="" coords="7792,80,7888,107"/>
-<area shape="rect" href="$eigen_8finc.html" title="api/eigen.finc" alt="" coords="7912,80,8008,107"/>
-<area shape="rect" href="$fft_8finc.html" title="api/fft.finc" alt="" coords="8032,80,8107,107"/>
-<area shape="rect" href="$integration_8finc.html" title="api/integration.finc" alt="" coords="8131,80,8256,107"/>
-<area shape="rect" href="$rng_8finc.html" title="api/rng.finc" alt="" coords="8280,80,8363,107"/>
-<area shape="rect" href="$statistics_8finc.html" title="api/statistics.finc" alt="" coords="8387,80,8507,107"/>
-<area shape="rect" href="$histogram_8finc.html" title="api/histogram.finc" alt="" coords="8531,80,8653,107"/>
-<area shape="rect" href="$ntuple_8finc.html" title="api/ntuple.finc" alt="" coords="8677,80,8779,107"/>
-<area shape="rect" href="$montecarlo_8finc.html" title="api/montecarlo.finc" alt="" coords="8803,80,8933,107"/>
-<area shape="rect" href="$siman_8finc.html" title="api/siman.finc" alt="" coords="8957,80,9059,107"/>
-<area shape="rect" href="$ode_8finc.html" title="api/ode.finc" alt="" coords="9083,80,9171,107"/>
-<area shape="rect" href="$deriv_8finc.html" title="api/deriv.finc" alt="" coords="9195,80,9285,107"/>
-<area shape="rect" href="$chebyshev_8finc.html" title="api/chebyshev.finc" alt="" coords="9309,80,9435,107"/>
-<area shape="rect" href="$sum__levin_8finc.html" title="api/sum_levin.finc" alt="" coords="9459,80,9581,107"/>
-<area shape="rect" href="$wavelet_8finc.html" title="api/wavelet.finc" alt="" coords="9605,80,9712,107"/>
-<area shape="rect" href="$dht_8finc.html" title="api/dht.finc" alt="" coords="9736,80,9819,107"/>
-<area shape="rect" href="$roots_8finc.html" title="api/roots.finc" alt="" coords="9843,80,9939,107"/>
-<area shape="rect" href="$min_8finc.html" title="api/min.finc" alt="" coords="9963,80,10051,107"/>
-<area shape="rect" href="$multiroots_8finc.html" title="api/multiroots.finc" alt="" coords="10075,80,10197,107"/>
-<area shape="rect" href="$multimin_8finc.html" title="api/multimin.finc" alt="" coords="10221,80,10336,107"/>
-<area shape="rect" href="$fit_8finc.html" title="api/fit.finc" alt="" coords="10360,80,10435,107"/>
-<area shape="rect" href="$multifit_8finc.html" title="api/multifit.finc" alt="" coords="10459,80,10563,107"/>
-<area shape="rect" href="$bspline_8finc.html" title="api/bspline.finc" alt="" coords="10587,80,10693,107"/>
-<area shape="rect" href="$ieee_8finc.html" title="api/ieee.finc" alt="" coords="10717,80,10808,107"/>
-<area shape="rect" href="$multilarge_8finc.html" title="api/multilarge.finc" alt="" coords="10832,80,10955,107"/>
-<area shape="rect" href="$spmatrix_8finc.html" title="api/spmatrix.finc" alt="" coords="10979,80,11093,107"/>
-<area shape="rect" href="$splinalg_8finc.html" title="api/splinalg.finc" alt="" coords="11117,80,11227,107"/>
+<area shape="rect" id="node43" href="$generics_8finc.html" title="interface/generics.finc" alt="" coords="6584,80,6735,107"/>
+<area shape="rect" id="node44" href="$error_8finc.html" title="api/error.finc" alt="" coords="6759,80,6853,107"/>
+<area shape="rect" id="node45" href="$misc_8finc.html" title="api/misc.finc" alt="" coords="6878,80,6974,107"/>
+<area shape="rect" id="node46" href="$io_8finc.html" title="api/io.finc" alt="" coords="6999,80,7077,107"/>
+<area shape="rect" id="node47" href="$math_8finc.html" title="api/math.finc" alt="" coords="7101,80,7199,107"/>
+<area shape="rect" id="node48" href="$complex_8finc.html" title="api/complex.finc" alt="" coords="7223,80,7341,107"/>
+<area shape="rect" id="node49" href="$poly_8finc.html" title="api/poly.finc" alt="" coords="7365,80,7457,107"/>
+<area shape="rect" id="node50" href="$specfunc_8finc.html" title="api/specfunc.finc" alt="" coords="7481,80,7603,107"/>
+<area shape="rect" id="node51" href="$array_8finc.html" title="api/array.finc" alt="" coords="7627,80,7724,107"/>
+<area shape="rect" id="node52" href="$interp_8finc.html" title="api/interp.finc" alt="" coords="7748,80,7848,107"/>
+<area shape="rect" id="node53" href="$permutation_8finc.html" title="api/permutation.finc" alt="" coords="7871,80,8007,107"/>
+<area shape="rect" id="node54" href="$sort_8finc.html" title="api/sort.finc" alt="" coords="8031,80,8122,107"/>
+<area shape="rect" id="node55" href="$linalg_8finc.html" title="api/linalg.finc" alt="" coords="8146,80,8245,107"/>
+<area shape="rect" id="node56" href="$eigen_8finc.html" title="api/eigen.finc" alt="" coords="8269,80,8367,107"/>
+<area shape="rect" id="node57" href="$fft_8finc.html" title="api/fft.finc" alt="" coords="8391,80,8471,107"/>
+<area shape="rect" id="node58" href="$integration_8finc.html" title="api/integration.finc" alt="" coords="8495,80,8623,107"/>
+<area shape="rect" id="node59" href="$rng_8finc.html" title="api/rng.finc" alt="" coords="8648,80,8735,107"/>
+<area shape="rect" id="node60" href="$statistics_8finc.html" title="api/statistics.finc" alt="" coords="8759,80,8880,107"/>
+<area shape="rect" id="node61" href="$histogram_8finc.html" title="api/histogram.finc" alt="" coords="8905,80,9030,107"/>
+<area shape="rect" id="node62" href="$ntuple_8finc.html" title="api/ntuple.finc" alt="" coords="9055,80,9157,107"/>
+<area shape="rect" id="node63" href="$montecarlo_8finc.html" title="api/montecarlo.finc" alt="" coords="9181,80,9313,107"/>
 </map>
