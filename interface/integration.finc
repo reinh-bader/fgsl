@@ -246,7 +246,7 @@
       type(c_ptr) :: gsl_integration_fixed_weights
       type(c_ptr), value :: w
     end function gsl_integration_fixed_weights
-    function gsl_integration_fixed(func, result, w)
+    function gsl_integration_fixed(func, result, w) bind(c)
       import :: c_ptr, c_int
       integer(c_int) :: gsl_integration_fixed
       type(c_ptr), value :: func, w, result

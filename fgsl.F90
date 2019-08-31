@@ -453,7 +453,10 @@ module fgsl
        fgsl_integration_glfixed_point,&
        fgsl_integration_glfixed, &
        fgsl_integration_glfixed_table_alloc, fgsl_integration_glfixed_table_free, &
-       fgsl_integration_qawo_table_free, fgsl_integration_qawf
+       fgsl_integration_qawo_table_free, fgsl_integration_qawf, &
+       fgsl_integration_fixed_alloc, fgsl_integration_fixed_free, &
+       fgsl_integration_fixed_n, fgsl_integration_fixed_nodes, &
+       fgsl_integration_fixed_weights, fgsl_integration_fixed
 
 ! random numbers, quasi-random numbers, distribution functions
   public :: fgsl_rng_alloc, fgsl_rng_set, fgsl_rng_free, fgsl_rng_get, fgsl_rng_uniform, &
