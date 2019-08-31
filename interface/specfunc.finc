@@ -1830,6 +1830,125 @@
        type(c_ptr), value :: result_array
        integer(c_int) :: gsl_sf_gegenpoly_array
      end function gsl_sf_gegenpoly_array
+! hermite
+     function fgsl_sf_hermite(n, x) bind(c, name='gsl_sf_hermite') 
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       real(c_double) :: fgsl_sf_hermite
+     end function fgsl_sf_hermite
+     function fgsl_sf_hermite_prob(n, x) bind(c, name='gsl_sf_hermite_prob') 
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       real(c_double) :: fgsl_sf_hermite_prob
+     end function fgsl_sf_hermite_prob
+     function gsl_sf_hermite_prob_e(n, x, result) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(inout) :: result
+       integer(c_int) :: gsl_sf_hermite_prob_e
+     end function gsl_sf_hermite_prob_e
+     function fgsl_sf_hermite_prob_array(nmax, x, result_array) &
+          bind(c, name='gsl_sf_hermite_prob_array') 
+       import
+       integer(c_int), value :: nmax
+       real(c_double), value :: x
+       real(c_double), intent(inout), dimension(*) :: result_array
+       integer(c_int) :: fgsl_sf_hermite_prob_array
+     end function fgsl_sf_hermite_prob_array
+     function fgsl_sf_hermite_prob_series(n, x, a) &
+          bind(c, name='gsl_sf_hermite_prob_series') 
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       real(c_double), dimension(*), intent(in)  :: a
+       real(c_double) :: fgsl_sf_hermite_prob_series
+     end function fgsl_sf_hermite_prob_series
+     function gsl_sf_hermite_prob_series_e(n, x, a, result) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       real(c_double), dimension(*), intent(in) :: a
+       type(gsl_sf_result), intent(inout) :: result
+       integer(c_int) :: gsl_sf_hermite_prob_series_e
+     end function gsl_sf_hermite_prob_series_e
+     function fgsl_sf_hermite_phys(n, x) bind(c, name='gsl_sf_hermite_phys') 
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       real(c_double) :: fgsl_sf_hermite_phys
+     end function fgsl_sf_hermite_phys
+     function gsl_sf_hermite_phys_e(n, x, result) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(inout) :: result
+       integer(c_int) :: gsl_sf_hermite_phys_e
+     end function gsl_sf_hermite_phys_e
+     function fgsl_sf_hermite_phys_array(nmax, x, result_array) &
+          bind(c, name='gsl_sf_hermite_phys_array') 
+       import
+       integer(c_int), value :: nmax
+       real(c_double), value :: x
+       real(c_double), intent(inout), dimension(*) :: result_array
+       integer(c_int) :: fgsl_sf_hermite_phys_array
+     end function fgsl_sf_hermite_phys_array
+     function fgsl_sf_hermite_phys_series(n, x, a) &
+          bind(c, name='gsl_sf_hermite_phys_series') 
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       real(c_double), dimension(*), intent(in)  :: a
+       real(c_double) :: fgsl_sf_hermite_phys_series
+     end function fgsl_sf_hermite_phys_series
+     function gsl_sf_hermite_phys_series_e(n, x, a, result) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       real(c_double), dimension(*), intent(in) :: a
+       type(gsl_sf_result), intent(inout) :: result
+       integer(c_int) :: gsl_sf_hermite_phys_series_e
+     end function gsl_sf_hermite_phys_series_e
+     function fgsl_sf_hermite_func(n, x) bind(c, name='gsl_sf_hermite_func') 
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       real(c_double) :: fgsl_sf_hermite_func
+     end function fgsl_sf_hermite_func
+     function gsl_sf_hermite_func_e(n, x, result) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(inout) :: result
+       integer(c_int) :: gsl_sf_hermite_func_e
+     end function gsl_sf_hermite_func_e
+     function fgsl_sf_hermite_func_array(nmax, x, result_array) &
+          bind(c, name='gsl_sf_hermite_func_array') 
+       import
+       integer(c_int), value :: nmax
+       real(c_double), value :: x
+       real(c_double), intent(inout), dimension(*) :: result_array
+       integer(c_int) :: fgsl_sf_hermite_func_array
+     end function fgsl_sf_hermite_func_array
+     function fgsl_sf_hermite_func_series(n, x, a) &
+          bind(c, name='gsl_sf_hermite_func_series') 
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       real(c_double), dimension(*), intent(in)  :: a
+       real(c_double) :: fgsl_sf_hermite_func_series
+     end function fgsl_sf_hermite_func_series
+     function gsl_sf_hermite_func_series_e(n, x, a, result) bind(c)
+       import
+       integer(c_int), value :: n
+       real(c_double), value :: x
+       real(c_double), dimension(*), intent(in) :: a
+       type(gsl_sf_result), intent(inout) :: result
+       integer(c_int) :: gsl_sf_hermite_func_series_e
+     end function gsl_sf_hermite_func_series_e
+!! hypergeometric
      function fgsl_sf_hyperg_0f1(c, x) bind(c, name='gsl_sf_hyperg_0F1')
        import
        real(c_double), value :: c, x

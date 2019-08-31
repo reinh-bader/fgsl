@@ -28,8 +28,8 @@
   end subroutine fgsl_dht_free
   function fgsl_dht_apply(t, f_in, f_out)
     type(fgsl_dht), intent(in) :: t
-    real(fgsl_double), intent(in), target :: f_in(:)
-    real(fgsl_double), intent(out), target :: f_out(:)
+    real(fgsl_double), intent(in), target, contiguous :: f_in(:)
+    real(fgsl_double), intent(out), target, contiguous :: f_out(:)
     integer(fgsl_int) :: fgsl_dht_apply
     fgsl_dht_apply = gsl_dht_apply(t%gsl_dht, c_loc(f_in), c_loc(f_out))
   end function fgsl_dht_apply

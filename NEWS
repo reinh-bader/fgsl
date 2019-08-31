@@ -5,12 +5,18 @@ This release introduces support for gsl 2.4. An overview:
 1. fixes in fgsl_utils.c and mod_unit 
 2. fgsl_linalg_cod_*: added lssolve2 and changed QRZ to QRZT in all calls
    (NOTE: keyword calls for previously existing COD routines with
-    QRZT argument must be updated)
+    QRZT argument must be updated in client code)
 3. removed deprecated interfaces from interface/bspline.finc 
 4. specfunc changes:
     * interoperable calls are now thin bindings again (save on call overhead)
-    * assumed shape for *_array functions was wrong; Where not reverted to
-      thin binding, specified with INTENT(INOUT), CONTIGUOUS.
+5. Applying c_loc to assumed shape arguments was wrong:
+    * where not reverted to thin binding, now specified with CONTIGUOUS.
+6. Added fgsl_integration_fixed_* interface to IQPACK
+7. Added fgsl_sf_hermite_* interface
+8. Fixed problems with interp2d, integration_qagp, linalq_qrpt, and sort 
+   test cases.
+
+
 
 
 Changes in 1.2.0 (by R Bader):

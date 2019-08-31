@@ -94,8 +94,8 @@
   function fgsl_odeiv2_step_apply(s, t, h, y, yerr, dydt_in, dydt_out, dydt)
     type(fgsl_odeiv2_step), intent(in) :: s
     real(fgsl_double), intent(in) :: t, h
-    real(fgsl_double), intent(inout), target :: y(:), yerr(:), dydt_out(:)
-    real(fgsl_double), intent(in), target :: dydt_in(:)
+    real(fgsl_double), intent(inout), target, contiguous :: y(:), yerr(:), dydt_out(:)
+    real(fgsl_double), intent(in), target, contiguous :: dydt_in(:)
     type(fgsl_odeiv2_system), intent(in) :: dydt
     integer(fgsl_int) :: fgsl_odeiv2_step_apply
     fgsl_odeiv2_step_apply = gsl_odeiv2_step_apply(s%gsl_odeiv2_step, t, h, &
@@ -121,7 +121,7 @@
   end function fgsl_odeiv2_control_yp_new
   function fgsl_odeiv2_control_scaled_new(eps_abs, eps_rel, a_y, a_dydt, scale_abs)
     real(fgsl_double), intent(in) :: eps_abs, eps_rel, a_y, a_dydt
-    real(fgsl_double), intent(in), target :: scale_abs(:)
+    real(fgsl_double), intent(in), target, contiguous :: scale_abs(:)
     type(fgsl_odeiv2_control) :: fgsl_odeiv2_control_scaled_new
     fgsl_odeiv2_control_scaled_new%gsl_odeiv2_control = &
          gsl_odeiv2_control_scaled_new(eps_abs, eps_rel, a_y, a_dydt, &
@@ -156,7 +156,7 @@
   function fgsl_odeiv2_control_hadjust(c, s, y, yerr, dydt, h)
     type(fgsl_odeiv2_control), intent(in) :: c
     type(fgsl_odeiv2_step), intent(in) :: s
-    real(fgsl_double), intent(in), target :: y(:), yerr(:), dydt(:)
+    real(fgsl_double), intent(in), target, contiguous :: y(:), yerr(:), dydt(:)
     real(fgsl_double), intent(out) :: h
     integer(fgsl_int) :: fgsl_odeiv2_control_hadjust
     fgsl_odeiv2_control_hadjust = gsl_odeiv2_control_hadjust( &
@@ -198,7 +198,7 @@
     type(fgsl_odeiv2_step), intent(inout) :: step
     type(fgsl_odeiv2_system), intent(in) :: dydt
     real(fgsl_double), intent(inout) :: t, h
-    real(fgsl_double), intent(inout), target :: y(:)
+    real(fgsl_double), intent(inout), target, contiguous :: y(:)
     real(fgsl_double), intent(in) :: t1
     integer(fgsl_int) :: fgsl_odeiv2_evolve_apply
     fgsl_odeiv2_evolve_apply = gsl_odeiv2_evolve_apply(e%gsl_odeiv2_evolve, &
@@ -212,7 +212,7 @@
     type(fgsl_odeiv2_system), intent(in) :: dydt
     real(fgsl_double), intent(inout) :: t
     real(fgsl_double), intent(in) :: h0
-    real(fgsl_double), intent(inout), target :: y(:)
+    real(fgsl_double), intent(inout), target, contiguous :: y(:)
     integer(fgsl_int) :: fgsl_odeiv2_evolve_apply_fixed_step
     fgsl_odeiv2_evolve_apply_fixed_step = gsl_odeiv2_evolve_apply_fixed_step( &
          e%gsl_odeiv2_evolve, con%gsl_odeiv2_control, step%gsl_odeiv2_step, &
@@ -457,7 +457,7 @@
   function fgsl_odeiv_step_apply(s, t, h, y, yerr, dydt_in, dydt_out, dydt)
     type(fgsl_odeiv_step), intent(in) :: s
     real(fgsl_double), intent(in) :: t, h
-    real(fgsl_double), intent(inout), target :: y(:), yerr(:), dydt_in(:), dydt_out(:)
+    real(fgsl_double), intent(inout), target, contiguous :: y(:), yerr(:), dydt_in(:), dydt_out(:)
     type(fgsl_odeiv_system), intent(in) :: dydt
     integer(fgsl_int) :: fgsl_odeiv_step_apply
     fgsl_odeiv_step_apply = gsl_odeiv_step_apply(s%gsl_odeiv_step, t, h, &
@@ -484,7 +484,7 @@
   end function fgsl_odeiv_control_yp_new
   function fgsl_odeiv_control_scaled_new(eps_abs, eps_rel, a_y, a_dydt, scale_abs)
     real(fgsl_double), intent(in) :: eps_abs, eps_rel, a_y, a_dydt
-    real(fgsl_double), intent(in), target :: scale_abs(:)
+    real(fgsl_double), intent(in), target, contiguous :: scale_abs(:)
     type(fgsl_odeiv_control) :: fgsl_odeiv_control_scaled_new
     fgsl_odeiv_control_scaled_new%gsl_odeiv_control = &
          gsl_odeiv_control_scaled_new(eps_abs, eps_rel, a_y, a_dydt, &
@@ -512,8 +512,8 @@
   function fgsl_odeiv_control_hadjust(c, s, y0, yerr, dydt, h)
     type(fgsl_odeiv_control), intent(in) :: c
     type(fgsl_odeiv_step), intent(in) :: s
-    real(fgsl_double), intent(in), target :: y0(:), yerr(:), dydt(:)
-    real(fgsl_double), intent(inout), target :: h(:)
+    real(fgsl_double), intent(in), target, contiguous :: y0(:), yerr(:), dydt(:)
+    real(fgsl_double), intent(inout), target, contiguous :: h(:)
     integer(fgsl_int) :: fgsl_odeiv_control_hadjust
     fgsl_odeiv_control_hadjust = gsl_odeiv_control_hadjust(c%gsl_odeiv_control, s%gsl_odeiv_step, &
          c_loc(y0), c_loc(yerr), c_loc(dydt), c_loc(h))
@@ -538,7 +538,7 @@
     type(fgsl_odeiv_step), intent(inout) :: step
     type(fgsl_odeiv_system), intent(in) :: dydt
     real(fgsl_double), intent(inout) :: t, h
-    real(fgsl_double), dimension(:), intent(inout), target :: y
+    real(fgsl_double), dimension(:), intent(inout), target, contiguous :: y
     real(fgsl_double), intent(in) :: t1
     integer(fgsl_int) :: fgsl_odeiv_evolve_apply
 !    write(6, *) 'Start evolving'

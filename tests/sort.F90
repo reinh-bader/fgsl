@@ -102,7 +102,7 @@ program sort
   array = (/(dble(i),i=dim,1,-1)/)
   call fgsl_sort_index(p,v_array)
   pm_data => fgsl_permutation_data(p)
-  call unit_assert_equal('fgsl_sort_vector_index',(/(i,i=dim-1,0,-1)/),int(p_array))
+  call unit_assert_equal('fgsl_sort_vector_index',(/(i,i=dim-1,0,-1)/),int(pm_data))
   array = (/(dble(i),i=dim,1,-1)/)
   status = fgsl_sort_smallest(t_array,dim,v_array)
   call unit_assert_equal('fgsl_sort_vector_smallest:status',fgsl_success,status)

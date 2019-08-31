@@ -194,8 +194,18 @@ module fgsl
        fgsl_sf_lnbeta_e, fgsl_sf_beta_inc, fgsl_sf_beta_inc_e
   public :: fgsl_sf_gegenpoly_1, fgsl_sf_gegenpoly_1_e, fgsl_sf_gegenpoly_2, &
        fgsl_sf_gegenpoly_2_e, fgsl_sf_gegenpoly_3, fgsl_sf_gegenpoly_3_e, &
-       fgsl_sf_gegenpoly_n, fgsl_sf_gegenpoly_n_e, fgsl_sf_gegenpoly_array, &
-       fgsl_sf_hyperg_0f1, fgsl_sf_hyperg_0f1_e, fgsl_sf_hyperg_1f1_int, &
+       fgsl_sf_gegenpoly_n, fgsl_sf_gegenpoly_n_e, fgsl_sf_gegenpoly_array
+
+  public :: fgsl_sf_hermite, fgsl_sf_hermite_prob, fgsl_sf_hermite_prob_e, &
+       fgsl_sf_hermite_prob_series_e, fgsl_sf_hermite_phys_e, &
+       fgsl_sf_hermite_phys_series_e, fgsl_sf_hermite_func_e, &
+       fgsl_sf_hermite_func_series_e, fgsl_sf_hermite_prob_array, &
+       fgsl_sf_hermite_prob_series, fgsl_sf_hermite_phys, &
+       fgsl_sf_hermite_phys_array, fgsl_sf_hermite_phys_series, &
+       fgsl_sf_hermite_func, fgsl_sf_hermite_func_array, &
+       fgsl_sf_hermite_func_series
+
+  public :: fgsl_sf_hyperg_0f1, fgsl_sf_hyperg_0f1_e, fgsl_sf_hyperg_1f1_int, &
        fgsl_sf_hyperg_1f1_int_e, fgsl_sf_hyperg_1f1, fgsl_sf_hyperg_1f1_e, &
        fgsl_sf_hyperg_u_int, fgsl_sf_hyperg_u_int_e, fgsl_sf_hyperg_u_int_e10_e, &
        fgsl_sf_hyperg_u, fgsl_sf_hyperg_u_e, fgsl_sf_hyperg_u_e10_e, &
@@ -1411,6 +1421,23 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
      private
      type(c_ptr) :: gsl_integration_glfixed_table = c_null_ptr
   end type fgsl_integration_glfixed_table
+  type, public :: fgsl_integration_fixed_workspace
+     private
+     type(c_ptr) :: gsl_integration_fixed_workspace = c_null_ptr
+  end type fgsl_integration_fixed_workspace
+  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_legendre = 1
+  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_chebyshev = 2
+  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_gegenbauer = 3
+  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_jacobi = 4
+  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_laguerre = 5
+  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_hermite = 6
+  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_exponential = 7
+  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_rational = 8
+  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_chebyshev2 = 9
+
+
+
+
 !
 ! Types: Random and Quasi-random numbers
 !

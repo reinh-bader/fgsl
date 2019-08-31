@@ -144,7 +144,7 @@ program integration
   xx = 1.0D0
   pts(1:3) = (/-1.0d0, 0.0d0, 1.0d0/)
   stdfunc = fgsl_function_init(integrate_fun4, ptr)
-  status = fgsl_integration_qagp(stdfunc, pts, &
+  status = fgsl_integration_qagp(stdfunc, pts(1:3), &
        eps10, eps10, limit, integ_wk, ra, rda);
   call unit_assert_equal('fgsl_integration_qagp:status',fgsl_success,status)
   call unit_assert_equal_within('fgsl_integration_qagp',4.0d0,ra,rda)
