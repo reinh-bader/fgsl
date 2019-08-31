@@ -72,7 +72,7 @@ function fgsl_spmatrix_compcol(T)
 end function fgsl_spmatrix_compcol
 subroutine fgsl_spmatrix_cumsum(n, c)
   integer(fgsl_size_t), intent(in) :: n
-  integer(fgsl_size_t), dimension(:), intent(inout), target :: c
+  integer(fgsl_size_t), dimension(:), intent(inout), target, contiguous :: c
   if (size(c, dim=1) /= n+1) then
     call fgsl_error('c must have n+1 elements', __FILE__, __LINE__, fgsl_ebadlen)
     return

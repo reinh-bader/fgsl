@@ -1,9 +1,11 @@
 
-This is release 1.2.0 of the Fortran interface 
+This is release 1.3.0 of the Fortran interface 
 to the GNU Scientific Library. 
-It is based on version 2.3 of GSL, and should not be used with earlier GSL releases.
+It is based on version 2.4 of GSL, and should not be used with 
+earlier GSL releases.
 Please use the release 1.0.0 in combination with GSL 1.x
 Please use the release 1.1.0 in combination with GSL 2.1 or 2.2.1
+Please use the release 1.2.0 in combination with GSL 2.3
 
 Please consult the NEWS file for a change log.
 
@@ -41,7 +43,7 @@ this has changed due to introduction of an autoconf based system
 export FC=<fortran compiler command>
 export FCFLAGS=<additional Fortran flags>
 export gsl_LIBS=<gsl library link line>
-export PKG_CONFIG_PATH=<directory in which gsl.pc resides>
+export PKG_CONFIG_PATH=<lib/pkgconfig directory in which gsl.pc resides>
 ./configure
     If you have to explicitly select which Fortran compiler is
     supposed to be used, add the following option to the configure script:
@@ -52,13 +54,15 @@ export PKG_CONFIG_PATH=<directory in which gsl.pc resides>
     For a list of all available options run:
     ./configure --help
 
-    NOTE: for supporting different compilers with a single GSL 
-    installation it is recommended to specify the following
+    NOTES: 
+    * for supporting different compilers with a single GSL 
+      installation it is recommended to specify the following
 
-    ./configure --prefix=<path to gsl install> \
-                --libdir=<path to gsl install>/lib/$FC \
-                --includedir=<path to gsl install>/include/$FC
-  
+      ./configure --prefix=<path to gsl install> \
+                  --libdir=<path to gsl install>/lib/$FC \
+                  --includedir=<path to gsl install>/include/$FC
+
+    * path names containing blanks are not supported.
   
 
 make

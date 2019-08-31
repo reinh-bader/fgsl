@@ -88,30 +88,30 @@
     fgsl_permutation_prev = gsl_permutation_prev(p%gsl_permutation)
   end function fgsl_permutation_prev
   function fgsl_permute(p, data, stride, n)
-    integer(fgsl_size_t), intent(in), target :: p(:)
+    integer(fgsl_size_t), intent(in), target, contiguous :: p(:)
     integer(fgsl_size_t), intent(in) :: stride, n
-    real(fgsl_double), dimension(:), intent(inout), target :: data
+    real(fgsl_double), dimension(:), intent(inout), target, contiguous :: data
     integer(fgsl_int) :: fgsl_permute
     fgsl_permute = gsl_permute(c_loc(p), c_loc(data), stride, n)
   end function fgsl_permute
   function fgsl_permute_long(p, data, stride, n)
-    integer(fgsl_size_t), intent(in), target :: p(:)
+    integer(fgsl_size_t), intent(in), target, contiguous :: p(:)
     integer(fgsl_size_t), intent(in) :: stride, n
-    integer(fgsl_long), dimension(:), intent(inout), target :: data
+    integer(fgsl_long), dimension(:), intent(inout), target, contiguous :: data
     integer(fgsl_int) :: fgsl_permute_long
     fgsl_permute_long = gsl_permute_long(c_loc(p), c_loc(data), stride, n)
   end function fgsl_permute_long
   function fgsl_permute_inverse(p, data, stride, n)
-    integer(fgsl_size_t), intent(in), target :: p(:)
+    integer(fgsl_size_t), intent(in), target, contiguous :: p(:)
     integer(fgsl_size_t), intent(in) :: stride, n
-    real(fgsl_double), dimension(:), intent(inout), target :: data
+    real(fgsl_double), dimension(:), intent(inout), target, contiguous :: data
     integer(fgsl_int) :: fgsl_permute_inverse
     fgsl_permute_inverse = gsl_permute_inverse(c_loc(p), c_loc(data), stride, n)
   end function fgsl_permute_inverse
   function fgsl_permute_long_inverse(p, data, stride, n)
-    integer(fgsl_size_t), intent(in), target :: p(:)
+    integer(fgsl_size_t), intent(in), target, contiguous :: p(:)
     integer(fgsl_size_t), intent(in) :: stride, n
-    integer(fgsl_long), dimension(:), intent(inout), target :: data
+    integer(fgsl_long), dimension(:), intent(inout), target, contiguous :: data
     integer(fgsl_int) :: fgsl_permute_long_inverse
     fgsl_permute_long_inverse = gsl_permute_long_inverse(c_loc(p), c_loc(data), stride, n)
   end function fgsl_permute_long_inverse

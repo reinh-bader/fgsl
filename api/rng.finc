@@ -109,7 +109,7 @@
   end subroutine fgsl_qrng_init
   function fgsl_qrng_get(q, x)
     type(fgsl_qrng), intent(in) :: q
-    real(fgsl_double), intent(out), target :: x(:)
+    real(fgsl_double), intent(out), target, contiguous :: x(:)
     integer(fgsl_int) :: fgsl_qrng_get
     fgsl_qrng_get = gsl_qrng_get(q%gsl_qrng, c_loc(x))
   end function fgsl_qrng_get
@@ -956,8 +956,8 @@
   end function fgsl_cdf_gumbel2_qinv
   subroutine fgsl_ran_dirichlet(r, alpha, theta)
     type(fgsl_rng), intent(in) :: r
-    real(fgsl_double), intent(in), target :: alpha(:)
-    real(fgsl_double), intent(out), target :: theta(:)
+    real(fgsl_double), intent(in), target, contiguous :: alpha(:)
+    real(fgsl_double), intent(out), target, contiguous :: theta(:)
     !check dims
     if (size(theta) /= size(alpha)) then
       call fgsl_error('alpha and beta dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
@@ -967,8 +967,8 @@
     c_loc(alpha), c_loc(theta))
   end subroutine fgsl_ran_dirichlet
   function fgsl_ran_dirichlet_pdf(alpha, theta)
-    real(fgsl_double), intent(in), target :: alpha(:)
-    real(fgsl_double), intent(in), target :: theta(:)
+    real(fgsl_double), intent(in), target, contiguous :: alpha(:)
+    real(fgsl_double), intent(in), target, contiguous :: theta(:)
     real(fgsl_double) :: fgsl_ran_dirichlet_pdf
     !check dims
     if (size(theta) /= size(alpha)) then
@@ -980,8 +980,8 @@
     c_loc(alpha), c_loc(theta))
   end function fgsl_ran_dirichlet_pdf
   function fgsl_ran_dirichlet_lnpdf(alpha, theta)
-    real(fgsl_double), intent(in), target :: alpha(:)
-    real(fgsl_double), intent(in), target :: theta(:)
+    real(fgsl_double), intent(in), target, contiguous :: alpha(:)
+    real(fgsl_double), intent(in), target, contiguous :: theta(:)
     real(fgsl_double) :: fgsl_ran_dirichlet_lnpdf
     !check dims
     if (size(theta) /= size(alpha)) then
@@ -993,7 +993,7 @@
     c_loc(alpha), c_loc(theta))
   end function fgsl_ran_dirichlet_lnpdf
   function fgsl_ran_discrete_preproc(p)
-    real(fgsl_double), intent(in), target :: p(:)
+    real(fgsl_double), intent(in), target, contiguous :: p(:)
     type(fgsl_ran_discrete_t) :: fgsl_ran_discrete_preproc
     fgsl_ran_discrete_preproc%gsl_ran_discrete_t = &
          gsl_ran_discrete_preproc(size(p, kind=fgsl_size_t), c_loc(p))
@@ -1078,8 +1078,8 @@
   subroutine fgsl_ran_multinomial(r, nn, p, n)
     type(fgsl_rng), intent(in) :: r
     integer(fgsl_int), intent(in) :: nn
-    real(fgsl_double), intent(in), target :: p(:)
-    integer(fgsl_int), intent(out), target :: n(:)
+    real(fgsl_double), intent(in), target, contiguous :: p(:)
+    integer(fgsl_int), intent(out), target, contiguous :: n(:)
     !check dims
     if (size(p) /= size(n)) then
       call fgsl_error('p and n dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
@@ -1088,8 +1088,8 @@
     call gsl_ran_multinomial(r%gsl_rng, size(p, kind=fgsl_size_t), nn, c_loc(p), c_loc(n))
   end subroutine fgsl_ran_multinomial
   function fgsl_ran_multinomial_pdf(p, n)
-    real(fgsl_double), intent(in), target :: p(:)
-    integer(fgsl_int), intent(in), target :: n(:)
+    real(fgsl_double), intent(in), target, contiguous :: p(:)
+    integer(fgsl_int), intent(in), target, contiguous :: n(:)
     real(fgsl_double) :: fgsl_ran_multinomial_pdf
     !check dims
     if (size(p) /= size(n)) then
@@ -1101,8 +1101,8 @@
     c_loc(p), c_loc(n))
   end function fgsl_ran_multinomial_pdf
   function fgsl_ran_multinomial_lnpdf(p, n)
-    real(fgsl_double), intent(in), target :: p(:)
-    integer(fgsl_int), intent(in), target :: n(:)
+    real(fgsl_double), intent(in), target, contiguous :: p(:)
+    integer(fgsl_int), intent(in), target, contiguous :: n(:)
     real(fgsl_double) :: fgsl_ran_multinomial_lnpdf
     !check dims
     if (size(p) /= size(n)) then

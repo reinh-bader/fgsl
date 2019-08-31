@@ -6,13 +6,13 @@
 !> Please go to api/poly.finc for the API documentation.
 
   function fgsl_poly_eval(c, x)
-    real(fgsl_double), intent(in), target :: c(:)
+    real(fgsl_double), intent(in), target, contiguous :: c(:)
     real(fgsl_double), intent(in) :: x
     real(fgsl_double) :: fgsl_poly_eval
     fgsl_poly_eval = gsl_poly_eval(c_loc(c), size(c, kind=fgsl_int), x)
   end function fgsl_poly_eval
   function fgsl_poly_complex_eval(c, z)
-    real(fgsl_double), intent(in), target :: c(:)
+    real(fgsl_double), intent(in), target, contiguous :: c(:)
     complex(fgsl_double_complex), intent(in) :: z
     complex(fgsl_double_complex) :: fgsl_poly_complex_eval
     type(gsl_complex) :: zz
@@ -32,15 +32,15 @@
   end function fgsl_complex_poly_complex_eval
   function fgsl_poly_eval_derivs(c, x, res)
     integer(fgsl_int) :: fgsl_poly_eval_derivs
-    real(fgsl_double), dimension(:), intent(in), target :: c
-    real(fgsl_double), dimension(:), target :: res
+    real(fgsl_double), dimension(:), intent(in), target, contiguous :: c
+    real(fgsl_double), dimension(:), target, contiguous :: res
     real(fgsl_double), intent(in) :: x
     fgsl_poly_eval_derivs = gsl_poly_eval_derivs(c_loc(c), size(c, kind=fgsl_size_t), &
     x, c_loc(res), size(res, kind=fgsl_size_t))
   end function fgsl_poly_eval_derivs
   function fgsl_poly_dd_init(dd, x, y)
-    real(fgsl_double), intent(inout), target :: dd(:)
-    real(fgsl_double), intent(in), target :: x(:), y(:)
+    real(fgsl_double), intent(inout), target, contiguous :: dd(:)
+    real(fgsl_double), intent(in), target, contiguous :: x(:), y(:)
     integer(fgsl_int) :: fgsl_poly_dd_init
     !check dims
     if (size(x) /= size(y) .or.&
@@ -53,7 +53,7 @@
     size(dd, kind=fgsl_size_t))
   end function fgsl_poly_dd_init
   function fgsl_poly_dd_eval(dd, xa, x)
-    real(fgsl_double), intent(in), target :: dd(:), xa(:)
+    real(fgsl_double), intent(in), target, contiguous :: dd(:), xa(:)
     real(fgsl_double), intent(in) :: x
     real(fgsl_double) :: fgsl_poly_dd_eval
     if (size(xa) /= size(dd)) then
@@ -64,10 +64,10 @@
     fgsl_poly_dd_eval = gsl_poly_dd_eval(c_loc(dd), c_loc(xa), size(dd, kind=fgsl_size_t), x)
   end function fgsl_poly_dd_eval
   function fgsl_poly_dd_taylor(c, xp, dd, x, w)
-    real(fgsl_double), intent(inout), target :: c(:)
+    real(fgsl_double), intent(inout), target, contiguous :: c(:)
     real(fgsl_double), intent(in) :: xp
-    real(fgsl_double), intent(in), target :: dd(:), x(:)
-    real(fgsl_double), intent(out), target :: w(:)
+    real(fgsl_double), intent(in), target, contiguous :: dd(:), x(:)
+    real(fgsl_double), intent(out), target, contiguous :: w(:)
     integer(fgsl_int) :: fgsl_poly_dd_taylor
     if (size(x) /= size(c) .or.&
         size(x) /= size(dd) .or.&
@@ -80,8 +80,8 @@
     size(dd, kind=fgsl_size_t), c_loc(w))
   end function fgsl_poly_dd_taylor
   function fgsl_poly_dd_hermite_init(dd, z, xa, ya, dya)
-    real(fgsl_double), intent(inout), target :: dd(:), z(:)
-    real(fgsl_double), intent(in), target :: xa(:), ya(:), dya(:)
+    real(fgsl_double), intent(inout), target, contiguous :: dd(:), z(:)
+    real(fgsl_double), intent(in), target, contiguous :: xa(:), ya(:), dya(:)
     integer(fgsl_int) :: fgsl_poly_dd_hermite_init
     if (2*size(xa) /= size(dd) .or.&
         2*size(xa) /= size(z) .or.&
@@ -145,7 +145,7 @@
     end if
   end function fgsl_poly_complex_workspace_stat
   function fgsl_poly_complex_solve(a, n, w, z)
-    real(fgsl_double), intent(in), target :: a(:)
+    real(fgsl_double), intent(in), target, contiguous :: a(:)
     integer(fgsl_size_t), intent(in) :: n
     type(fgsl_poly_complex_workspace), intent(inout) :: w
     complex(fgsl_double_complex), intent(out) :: z(:)

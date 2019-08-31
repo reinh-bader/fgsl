@@ -284,24 +284,32 @@
     integer(c_size_t) :: rank
     integer(c_int) :: gsl_linalg_cod_decomp_e
   end function gsl_linalg_cod_decomp_e
-  function gsl_linalg_cod_lssolve (qrz, tau_q, tau_z, p, rank, b, x, residual) &
+  function gsl_linalg_cod_lssolve (qrzt, tau_q, tau_z, p, rank, b, x, residual) &
        bind(c, name='gsl_linalg_COD_lssolve')
     import :: c_ptr, c_int, c_size_t
-    type(c_ptr), value :: qrz, tau_q, tau_z, p, b, x, residual
+    type(c_ptr), value :: qrzt, tau_q, tau_z, p, b, x, residual
     integer(c_size_t), value :: rank
     integer(c_int) :: gsl_linalg_cod_lssolve
   end function gsl_linalg_cod_lssolve
-  function gsl_linalg_cod_unpack (qrz, tau_q, tau_z, p, rank, q, r, z) &
+  function gsl_linalg_cod_lssolve2 (lambda, qrzt, tau_q, tau_z, p, rank, b, &
+       x, residual, s, work) bind(c, name='gsl_linalg_COD_lssolve2')
+    import :: c_ptr, c_int, c_size_t, c_double
+    real(c_double), value :: lambda
+    type(c_ptr), value :: qrzt, tau_q, tau_z, p, b, x, residual, s, work
+    integer(c_size_t), value :: rank
+    integer(c_int) :: gsl_linalg_cod_lssolve2
+  end function gsl_linalg_cod_lssolve2
+  function gsl_linalg_cod_unpack (qrzt, tau_q, tau_z, p, rank, q, r, z) &
        bind(c, name='gsl_linalg_COD_unpack')
     import :: c_ptr, c_int, c_size_t
-    type(c_ptr), value :: qrz, tau_q, tau_z, p, q, r, z
+    type(c_ptr), value :: qrzt, tau_q, tau_z, p, q, r, z
     integer(c_size_t), value :: rank
     integer(c_int) :: gsl_linalg_cod_unpack
   end function gsl_linalg_cod_unpack
-  function gsl_linalg_cod_matz (qrz, tau_z, rank, a, work) &
+  function gsl_linalg_cod_matz (qrzt, tau_z, rank, a, work) &
        bind(c, name='gsl_linalg_COD_matZ')
     import :: c_ptr, c_int, c_size_t
-    type(c_ptr), value :: qrz, tau_z, a, work
+    type(c_ptr), value :: qrzt, tau_z, a, work
     integer(c_size_t), value :: rank
     integer(c_int) :: gsl_linalg_cod_matz
   end function gsl_linalg_cod_matz

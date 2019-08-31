@@ -6,15 +6,15 @@ program interp2d
   real(fgsl_double), parameter :: eps10 = 1.0E-10_fgsl_double
   integer(fgsl_int) :: status
   type(fgsl_interp_accel) :: acc_x, acc_y
-  type(fgsl_interp2d) :: a_interp
+  type(fgsl_interp2d) :: a_interp, b_interp
   type(fgsl_spline2d) :: spline
   integer(fgsl_long) :: i, j, index
   character(kind=fgsl_char,len=fgsl_strmax) :: name
   real(fgsl_double), dimension(nmax_x) :: xa
   real(fgsl_double), dimension(nmax_y) :: ya
   real(fgsl_double), dimension(nmax_x, nmax_y) :: za, dx, dy, dxx, dyy, dxy, &
-    ra_e, rdxa_e, rdya_e, rdxxa_e, rdyya_e, rdxya_e
-  real(fgsl_double) :: dmx, ra, rdxa, rdya, rdxxa, rdyya, rdxya
+    rdxa_e, rdya_e, rdxxa_e, rdyya_e, rdxya_e
+  real(fgsl_double) :: dmx, ra, ra_e, rdxa, rdya, rdxxa, rdyya, rdxya
 
   !
   ! Test interpolation API
@@ -38,31 +38,32 @@ program interp2d
    end do
   end do
   acc_x = fgsl_interp_accel_alloc()
-  call unit_assert_true('fgsl_interp_accel_alloc',fgsl_well_defined(acc_x),.true.)
+  call unit_assert_true('fgsl_interp_accel_alloc x',fgsl_well_defined(acc_x),.true.)
   acc_y = fgsl_interp_accel_alloc()
-  call unit_assert_true('fgsl_interp_accel_alloc',fgsl_well_defined(acc_y),.true.)
+  call unit_assert_true('fgsl_interp_accel_alloc y',fgsl_well_defined(acc_y),.true.)
   a_interp = fgsl_interp2d_alloc(fgsl_interp2d_bicubic, nmax_x, nmax_y)
   call unit_assert_true('fgsl_interp2d_alloc',fgsl_well_defined(a_interp),.true.)
   name = fgsl_interp2d_name(a_interp)
-  call unit_assert_equal('fgsl_interp2d_alloc','bicubic',name)
+  call unit_assert_equal('fgsl_interp2d_name','bicubic',name)
   status = fgsl_interp2d_init(a_interp,xa,ya,za)
   call unit_assert_equal('fgsl_interp2d_init',fgsl_success,status)
   dmx = 0.0d0
-  do i=2,nmax_x
+  do i=1,nmax_x
     do j=1,nmax_y
-      ra = fgsl_interp2d_eval(a_interp, xa, ya, za, xa(i), ya(i), acc_x, acc_y)
-      status = fgsl_interp2d_eval_e(a_interp, xa, ya, za, xa(i), ya(i), acc_x, acc_y, ra_e(i,j))
-      rdxa = fgsl_interp2d_eval_deriv_x(a_interp, xa, ya, za, xa(i), ya(i), acc_x, acc_y)
-      status = fgsl_interp2d_eval_deriv_x_e(a_interp, xa, ya, za, xa(i), ya(i), acc_x, acc_y, rdxa_e(i,j))
-      rdya = fgsl_interp2d_eval_deriv_y(a_interp, xa, ya, za, xa(i), ya(i), acc_x, acc_y)
-      status = fgsl_interp2d_eval_deriv_y_e(a_interp, xa, ya, za, xa(i), ya(i), acc_x, acc_y, rdya_e(i,j))
-      rdxxa = fgsl_interp2d_eval_deriv_xx(a_interp, xa, ya, za, xa(i), ya(i), acc_x, acc_y)
-      status = fgsl_interp2d_eval_deriv_xx_e(a_interp, xa, ya, za, xa(i), ya(i), acc_x, acc_y, rdxxa_e(i,j))
-      rdyya = fgsl_interp2d_eval_deriv_yy(a_interp, xa, ya, za, xa(i), ya(i), acc_x, acc_y)
-      status = fgsl_interp2d_eval_deriv_yy_e(a_interp, xa, ya, za, xa(i), ya(i), acc_x, acc_y, rdyya_e(i,j))
-      rdxya = fgsl_interp2d_eval_deriv_xy(a_interp, xa, ya, za, xa(i), ya(i), acc_x, acc_y)
-      status = fgsl_interp2d_eval_deriv_xy_e(a_interp, xa, ya, za, xa(i), ya(i), acc_x, acc_y, rdxya_e(i,j))
+      ra = fgsl_interp2d_eval(a_interp, xa, ya, za, xa(i), ya(j), acc_x, acc_y)
+      status = fgsl_interp2d_eval_e(a_interp, xa, ya, za, xa(i), ya(j), acc_x, acc_y, ra_e)
+      rdxa = fgsl_interp2d_eval_deriv_x(a_interp, xa, ya, za, xa(i), ya(j), acc_x, acc_y)
+      status = fgsl_interp2d_eval_deriv_x_e(a_interp, xa, ya, za, xa(i), ya(j), acc_x, acc_y, rdxa_e(i,j))
+      rdya = fgsl_interp2d_eval_deriv_y(a_interp, xa, ya, za, xa(i), ya(j), acc_x, acc_y)
+      status = fgsl_interp2d_eval_deriv_y_e(a_interp, xa, ya, za, xa(i), ya(j), acc_x, acc_y, rdya_e(i,j))
+      rdxxa = fgsl_interp2d_eval_deriv_xx(a_interp, xa, ya, za, xa(i), ya(j), acc_x, acc_y)
+      status = fgsl_interp2d_eval_deriv_xx_e(a_interp, xa, ya, za, xa(i), ya(j), acc_x, acc_y, rdxxa_e(i,j))
+      rdyya = fgsl_interp2d_eval_deriv_yy(a_interp, xa, ya, za, xa(i), ya(j), acc_x, acc_y)
+      status = fgsl_interp2d_eval_deriv_yy_e(a_interp, xa, ya, za, xa(i), ya(j), acc_x, acc_y, rdyya_e(i,j))
+      rdxya = fgsl_interp2d_eval_deriv_xy(a_interp, xa, ya, za, xa(i), ya(j), acc_x, acc_y)
+      status = fgsl_interp2d_eval_deriv_xy_e(a_interp, xa, ya, za, xa(i), ya(j), acc_x, acc_y, rdxya_e(i,j))
       dmx = max(dmx, abs(ra - za(i,j)))
+      dmx = max(dmx, abs(ra_e - za(i,j)))
       dmx = max(dmx, abs(rdxa - rdxa_e(i,j)))
       dmx = max(dmx, abs(rdya - rdya_e(i,j)))
       dmx = max(dmx, abs(rdxxa - rdxxa_e(i,j)))
@@ -80,14 +81,19 @@ program interp2d
   status = fgsl_spline2d_init(spline,xa,ya,za)
   call unit_assert_equal('fgsl_interp2d_init',fgsl_success,status)
   dmx = 0.0d0
-  do i=2,nmax_x
-    do j=2,nmax_y
+  do i=1,nmax_x
+    do j=1,nmax_y
       ra = fgsl_spline2d_eval(spline, xa(i), ya(j), acc_x, acc_y)
       rdxa = fgsl_spline2d_eval_deriv_x(spline, xa(i), ya(j), acc_x, acc_y)
+      status = fgsl_spline2d_eval_deriv_x_e(spline, xa(i), ya(j), acc_x, acc_y, rdxa_e(i,j))
       rdya = fgsl_spline2d_eval_deriv_y(spline, xa(i), ya(j), acc_x, acc_y)
+      status = fgsl_spline2d_eval_deriv_y_e(spline, xa(i), ya(j), acc_x, acc_y, rdya_e(i,j))
       rdxxa = fgsl_spline2d_eval_deriv_xx(spline, xa(i), ya(j), acc_x, acc_y)
+      status = fgsl_spline2d_eval_deriv_xx_e(spline, xa(i), ya(j), acc_x, acc_y, rdxxa_e(i,j))
       rdyya = fgsl_spline2d_eval_deriv_yy(spline, xa(i), ya(j), acc_x, acc_y)
+      status = fgsl_spline2d_eval_deriv_yy_e(spline, xa(i), ya(j), acc_x, acc_y, rdyya_e(i,j))
       rdxya = fgsl_spline2d_eval_deriv_xy(spline, xa(i), ya(j), acc_x, acc_y)
+      status = fgsl_spline2d_eval_deriv_xy_e(spline, xa(i), ya(j), acc_x, acc_y, rdxya_e(i,j))
       dmx = max(dmx, abs(ra - za(i,j)))
       dmx = max(dmx, abs(rdxa - rdxa_e(i,j)))
       dmx = max(dmx, abs(rdya - rdya_e(i,j)))
@@ -102,30 +108,33 @@ program interp2d
 
   call fgsl_spline2d_free(spline)
 
-  a_interp = fgsl_interp2d_alloc(fgsl_interp2d_bicubic,nmax_x, nmax_y)
-  name = fgsl_interp2d_name(a_interp)
+  b_interp = fgsl_interp2d_alloc(fgsl_interp2d_bicubic,nmax_x, nmax_y)
+  call unit_assert_true('fgsl_interp2d_alloc',fgsl_well_defined(b_interp),.true.)
+  name = fgsl_interp2d_name(b_interp)
   call unit_assert_equal('fgsl_interp2d_name','bicubic',name)
-  status = fgsl_interp2d_init(a_interp,xa,ya,za)
+  status = fgsl_interp2d_init(b_interp,xa,ya,za)
   call unit_assert_equal('fgsl_interp2d_init',fgsl_success,status)
   dmx = 0.0d0
-  do i=2,nmax_x
-    do j=2,nmax_y
-      ra = fgsl_interp2d_eval(a_interp, xa, ya, za, xa(i), ya(i), acc_x, acc_y)
-      rdxa = fgsl_interp2d_eval_deriv_x(a_interp, xa, ya, za, xa(i), ya(i), acc_x, acc_y)
-      rdya = fgsl_interp2d_eval_deriv_y(a_interp, xa, ya, za, xa(i), ya(i), acc_x, acc_y)
-      rdxxa = fgsl_interp2d_eval_deriv_xx(a_interp, xa, ya, za, xa(i), ya(i), acc_x, acc_y)
-      rdyya = fgsl_interp2d_eval_deriv_yy(a_interp, xa, ya, za, xa(i), ya(i), acc_x, acc_y)
-      rdxya = fgsl_interp2d_eval_deriv_xy(a_interp, xa, ya, za, xa(i), ya(i), acc_x, acc_y)
-      dmx = max(dmx, abs(ra - za(i,j)))
-      dmx = max(dmx, abs(rdxa - dx(i,j)))
-      dmx = max(dmx, abs(rdya - dy(i,j)))
-      dmx = max(dmx, abs(rdxxa - dxx(i,j)))
-      dmx = max(dmx, abs(rdyya - dyy(i,j)))
-      dmx = max(dmx, abs(rdxya - dxy(i,j)))
+  do i=4,nmax_x-4
+    do j=8,nmax_y-8
+      ra = fgsl_interp2d_eval(b_interp, xa, ya, za, xa(i), ya(j), acc_x, acc_y)
+      rdxa = fgsl_interp2d_eval_deriv_x(b_interp, xa, ya, za, xa(i), ya(j), acc_x, acc_y)
+      rdya = fgsl_interp2d_eval_deriv_y(b_interp, xa, ya, za, xa(i), ya(j), acc_x, acc_y)
+      rdxxa = fgsl_interp2d_eval_deriv_xx(b_interp, xa, ya, za, xa(i), ya(j), acc_x, acc_y)
+      rdyya = fgsl_interp2d_eval_deriv_yy(b_interp, xa, ya, za, xa(i), ya(j), acc_x, acc_y)
+      rdxya = fgsl_interp2d_eval_deriv_xy(b_interp, xa, ya, za, xa(i), ya(j), acc_x, acc_y)
+      dmx = max(dmx, abs(ra - za(i,j)))/abs(za(i,j))
+      dmx = max(dmx, abs(rdxa - dx(i,j)))/abs(dx(i,j))
+      dmx = max(dmx, abs(rdya - dy(i,j)))/abs(dy(i,j))
+      dmx = max(dmx, abs(rdxxa - dxx(i,j)))/abs(dxx(i,j))
+      dmx = max(dmx, abs(rdyya - dyy(i,j)))/abs(dyy(i,j))
+      dmx = max(dmx, abs(rdxya - dxy(i,j)))/abs(dxy(i,j))
     end do
   end do
-  call unit_assert_equal_within('fgsl_interp2d_eval',0.0d0,dmx,eps10)
-  call fgsl_interp2d_free(a_interp)
+  call unit_assert_equal_within('fgsl_interp2d_eval',0.0d0,dmx,1.0d-3)
+  call fgsl_interp2d_free(b_interp)
+  call fgsl_interp_accel_free(acc_x)
+  call fgsl_interp_accel_free(acc_y)
   !
   ! Done
   !

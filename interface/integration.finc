@@ -220,3 +220,34 @@
       import :: c_size_t
       integer(c_size_t) :: gsl_aux_sizeof_integration_qawo_table
     end function gsl_aux_sizeof_integration_qawo_table
+    function gsl_aux_integration_fixed_alloc(t, n, a, b, alpha, beta) bind(c)
+      import :: c_ptr, c_size_t, c_double
+      type(c_ptr) :: gsl_aux_integration_fixed_alloc
+      integer, value :: t
+      integer(c_size_t), value :: n
+      real(c_double), value :: a, b, alpha, beta
+    end function gsl_aux_integration_fixed_alloc
+    subroutine gsl_integration_fixed_free(w) bind(c)
+      import :: c_ptr
+      type(c_ptr), value :: w
+    end subroutine gsl_integration_fixed_free
+    function gsl_integration_fixed_n(w) bind(c)
+      import :: c_size_t, c_ptr
+      integer(c_size_t) :: gsl_integration_fixed_n
+      type(c_ptr), value :: w
+    end function gsl_integration_fixed_n
+    function gsl_integration_fixed_nodes(w) bind(c)
+      import :: c_ptr
+      type(c_ptr) :: gsl_integration_fixed_nodes
+      type(c_ptr), value :: w
+    end function gsl_integration_fixed_nodes
+    function gsl_integration_fixed_weights(w) bind(c)
+      import :: c_ptr
+      type(c_ptr) :: gsl_integration_fixed_weights
+      type(c_ptr), value :: w
+    end function gsl_integration_fixed_weights
+    function gsl_integration_fixed(func, result, w) bind(c)
+      import :: c_ptr, c_int
+      integer(c_int) :: gsl_integration_fixed
+      type(c_ptr), value :: func, w, result
+    end function gsl_integration_fixed

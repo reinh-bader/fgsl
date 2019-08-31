@@ -42,7 +42,7 @@
   end subroutine fgsl_wavelet_workspace_free
   function fgsl_wavelet_transform(w, data, stride, n, dir, work)
     type(fgsl_wavelet), intent(in) :: w
-    real(fgsl_double), intent(inout), target :: data(:)
+    real(fgsl_double), intent(inout), target, contiguous :: data(:)
     integer(fgsl_size_t), intent(in) :: stride, n
     integer(fgsl_int), intent(in) :: dir
     type(fgsl_wavelet_workspace), intent(inout) :: work
@@ -52,7 +52,7 @@
   end function fgsl_wavelet_transform
   function fgsl_wavelet_transform_forward(w, data, stride, n, work)
     type(fgsl_wavelet), intent(in) :: w
-    real(fgsl_double), intent(inout), target :: data(:)
+    real(fgsl_double), intent(inout), target, contiguous :: data(:)
     integer(fgsl_size_t), intent(in) :: stride, n
     type(fgsl_wavelet_workspace), intent(inout) :: work
     integer(fgsl_int) :: fgsl_wavelet_transform_forward
@@ -61,7 +61,7 @@
   end function fgsl_wavelet_transform_forward
   function fgsl_wavelet_transform_inverse(w, data, stride, n, work)
     type(fgsl_wavelet), intent(in) :: w
-    real(fgsl_double), intent(inout), target :: data(:)
+    real(fgsl_double), intent(inout), target, contiguous :: data(:)
     integer(fgsl_size_t), intent(in) :: stride, n
     type(fgsl_wavelet_workspace), intent(inout) :: work
     integer(fgsl_int) :: fgsl_wavelet_transform_inverse
@@ -70,7 +70,7 @@
   end function fgsl_wavelet_transform_inverse
   function fgsl_wavelet2d_transform(w, data, tda, size1, size2, dir, work)
     type(fgsl_wavelet), intent(in) :: w
-    real(fgsl_double), intent(inout), target :: data(:)
+    real(fgsl_double), intent(inout), target, contiguous :: data(:)
     integer(fgsl_size_t), intent(in) :: tda, size1, size2
     integer(fgsl_int), intent(in) :: dir
     type(fgsl_wavelet_workspace), intent(inout) :: work
@@ -80,7 +80,7 @@
   end function fgsl_wavelet2d_transform
   function fgsl_wavelet2d_transform_forward(w, data, tda, size1, size2, work)
     type(fgsl_wavelet), intent(in) :: w
-    real(fgsl_double), intent(inout), target :: data(:)
+    real(fgsl_double), intent(inout), target, contiguous :: data(:)
     integer(fgsl_size_t), intent(in) :: tda, size1, size2
     type(fgsl_wavelet_workspace), intent(inout) :: work
     integer(fgsl_int) :: fgsl_wavelet2d_transform_forward
@@ -90,7 +90,7 @@
   end function fgsl_wavelet2d_transform_forward
   function fgsl_wavelet2d_transform_inverse(w, data, tda, size1, size2, work)
     type(fgsl_wavelet), intent(in) :: w
-    real(fgsl_double), intent(inout), target :: data(:)
+    real(fgsl_double), intent(inout), target, contiguous :: data(:)
     integer(fgsl_size_t), intent(in) :: tda, size1, size2
     type(fgsl_wavelet_workspace), intent(inout) :: work
     integer(fgsl_int) :: fgsl_wavelet2d_transform_inverse
@@ -128,7 +128,7 @@
   end function fgsl_wavelet2d_transform_matrix_inverse
   function fgsl_wavelet2d_nstransform(w, data, tda, size1, size2, dir, work)
     type(fgsl_wavelet), intent(in) :: w
-    real(fgsl_double), intent(inout), target :: data(:)
+    real(fgsl_double), intent(inout), target, contiguous :: data(:)
     integer(fgsl_size_t), intent(in) :: tda, size1, size2
     integer(fgsl_int), intent(in) :: dir
     type(fgsl_wavelet_workspace), intent(inout) :: work
@@ -138,7 +138,7 @@
   end function fgsl_wavelet2d_nstransform
   function fgsl_wavelet2d_nstransform_forward(w, data, tda, size1, size2, work)
     type(fgsl_wavelet), intent(in) :: w
-    real(fgsl_double), intent(inout), target :: data(:)
+    real(fgsl_double), intent(inout), target, contiguous :: data(:)
     integer(fgsl_size_t), intent(in) :: tda, size1, size2
     type(fgsl_wavelet_workspace), intent(inout) :: work
     integer(fgsl_int) :: fgsl_wavelet2d_nstransform_forward
@@ -148,7 +148,7 @@
   end function fgsl_wavelet2d_nstransform_forward
   function fgsl_wavelet2d_nstransform_inverse(w, data, tda, size1, size2, work)
     type(fgsl_wavelet), intent(in) :: w
-    real(fgsl_double), intent(inout), target :: data(:)
+    real(fgsl_double), intent(inout), target, contiguous :: data(:)
     integer(fgsl_size_t), intent(in) :: tda, size1, size2
     type(fgsl_wavelet_workspace), intent(inout) :: work
     integer(fgsl_int) :: fgsl_wavelet2d_nstransform_inverse

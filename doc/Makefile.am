@@ -3,7 +3,7 @@ SUBDIRS = examples
 
 fgsl_docdir = $(datadir)/doc/fgsl
 fgsl_doc2dir = $(datadir)/doc/fgsl/html
-dist_fgsl_doc_DATA = latex/refman.pdf 
+#dist_fgsl_doc_DATA = latex/refman.pdf 
 
 
 install-data-local:

@@ -114,4 +114,4 @@ XFAIL_TESTS = error
 mod_unit.mod:	mod_unit.o
 
 clean-local:
-	rm -f *.dat *.mod
+	rm -f *.dat *.mod unit_debug

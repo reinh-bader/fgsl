@@ -7,7 +7,7 @@
 
   function fgsl_fit_linear(x, xstride, y, ystride, n, c0, c1, &
        cov00, cov01, cov11, sumsq)
-    real(fgsl_double), intent(in), target :: x(:), y(:)
+    real(fgsl_double), intent(in), target, contiguous :: x(:), y(:)
     integer(fgsl_size_t), intent(in) :: xstride, ystride, n
     real(fgsl_double), intent(out) :: c0, c1, cov00, cov01, cov11, sumsq
     integer(fgsl_int) :: fgsl_fit_linear
@@ -16,7 +16,7 @@
   end function fgsl_fit_linear
   function fgsl_fit_wlinear(x, xstride, w, wstride, y, ystride, n, c0, c1, &
        cov00, cov01, cov11, chisq)
-    real(fgsl_double), intent(in), target :: x(:), y(:), w(:)
+    real(fgsl_double), intent(in), target, contiguous :: x(:), y(:), w(:)
     integer(fgsl_size_t), intent(in) :: xstride, ystride, wstride, n
     real(fgsl_double), intent(out) :: c0, c1, cov00, cov01, cov11, chisq
     integer(fgsl_int) :: fgsl_fit_wlinear
@@ -31,7 +31,7 @@
   end function fgsl_fit_linear_est
   function fgsl_fit_mul(x, xstride, y, ystride, n, c1, &
         cov11, sumsq)
-    real(fgsl_double), intent(in), target :: x(:), y(:)
+    real(fgsl_double), intent(in), target, contiguous :: x(:), y(:)
     integer(fgsl_size_t), intent(in) :: xstride, ystride, n
     real(fgsl_double), intent(out) :: c1,  cov11, sumsq
     integer(fgsl_int) :: fgsl_fit_mul
@@ -40,7 +40,7 @@
   end function fgsl_fit_mul
   function fgsl_fit_wmul(x, xstride, w, wstride, y, ystride, n, c1, &
         cov11, chisq)
-    real(fgsl_double), intent(in), target :: x(:), y(:), w(:)
+    real(fgsl_double), intent(in), target, contiguous :: x(:), y(:), w(:)
     integer(fgsl_size_t), intent(in) :: xstride, ystride, wstride, n
     real(fgsl_double), intent(out) :: c1, cov11, chisq
     integer(fgsl_int) :: fgsl_fit_wmul

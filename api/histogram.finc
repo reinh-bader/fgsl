@@ -12,7 +12,7 @@
   end function fgsl_histogram_alloc
   function fgsl_histogram_set_ranges(h, range)
     type(fgsl_histogram), intent(inout) :: h
-    real(fgsl_double), intent(in), target :: range(:)
+    real(fgsl_double), intent(in), target, contiguous :: range(:)
     integer(fgsl_int) :: fgsl_histogram_set_ranges
     fgsl_histogram_set_ranges = gsl_histogram_set_ranges(h%gsl_histogram, c_loc(range), &
     size(range, dim=1, kind=fgsl_size_t))
@@ -236,7 +236,7 @@
   end function fgsl_histogram2d_alloc
   function fgsl_histogram2d_set_ranges(h, xrange, yrange)
     type(fgsl_histogram2d), intent(inout) :: h
-    real(fgsl_double), intent(in), target :: xrange(:), yrange(:)
+    real(fgsl_double), intent(in), target, contiguous :: xrange(:), yrange(:)
     integer(fgsl_int) :: fgsl_histogram2d_set_ranges
     fgsl_histogram2d_set_ranges = &
          gsl_histogram2d_set_ranges(h%gsl_histogram2d, c_loc(xrange), &
