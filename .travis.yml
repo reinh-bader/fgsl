@@ -1,86 +1,82 @@
 language: generic
 
-dist: trusty
+dist: xenial
 sudo: required
 
-matrix:
-  include:
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - gcc-4.9
-            - gfortran-4.9
-            - libblas3
-            - libblas-dev
-      env: CC='gcc-4.9' FC='gfortran-4.9' LIBS='-L/usr/lib -lblas -lm'
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - gcc-5
-            - gfortran-5
-            - libblas3
-            - libblas-dev
-      env: CC='gcc-5' FC='gfortran-5' LIBS='-L/usr/lib -lblas -lm'
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - gcc-6
-            - gfortran-6
-            - libblas3
-            - libblas-dev
-      env: CC='gcc-6' FC='gfortran-6' LIBS='-L/usr/lib -lblas -lm'
-    - os: osx
-      env: GCC='gcc@4.9' CC='gcc-4.9' FC='gfortran-4.9'
-    - os: osx
-      env: GCC='gcc@5' CC='gcc-5' FC='gfortran-5'
+os:
+  - linux
+  - osx
 
+osx_image: xcode10.3
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - libblas3
+      - libblas-dev
 
 env:
+  matrix:
+    - GCC=6 GSL=2.4
+    - GCC=7 GSL=2.4
+    - GCC=8 GSL=2.4
+    - GCC=9 GSL=2.4
+    - GCC=6 GSL=2.5
+    - GCC=7 GSL=2.5
+    - GCC=8 GSL=2.5
+    - GCC=9 GSL=2.5
+    - GCC=6 GSL=2.6
+    - GCC=7 GSL=2.6
+    - GCC=8 GSL=2.6
+    - GCC=9 GSL=2.6
   global:
     - LD_LIBRARY_PATH=/usr/local/lib
     - LD_RUN_PATH=/usr/local/lib
     - PKG_CONFIG_LIBDIR=/usr/local/lib/pkgconfig
 
+matrix:
+  allow_failures:
+    - env: GCC=6 GSL=2.6
+    - env: GCC=7 GSL=2.6
+    - env: GCC=8 GSL=2.6
+    - env: GCC=9 GSL=2.6
+
 before_install:
   - |
-    set -e
     if [ $TRAVIS_OS_NAME == osx ] ; then 
       brew uninstall --force $(brew list)
       brew cleanup -s
       brew update
-      brew install ${GCC} autoconf automake libtool wget pkg-config
+      brew install gcc@${GCC} autoconf automake libtool wget pkg-config
+    fi
+    if [ $TRAVIS_OS_NAME == linux ] ; then 
+      sudo apt-get -y install gcc-${GCC} gfortran-${GCC}
     fi
 
 install:
   - |
-    set -e
-    wget http://ftp.heanet.ie/mirrors/gnu/gsl/gsl-2.4.tar.gz
-    tar xfz gsl-2.4.tar.gz
-    cd gsl-2.4
-    ./configure
-    make
+    export CC=gcc-${GCC}
+    export FC=gfortran-${GCC}
+    wget -q https://ftp.gnu.org/gnu/gsl/gsl-${GSL}.tar.gz
+    tar xfz gsl-${GSL}.tar.gz
+    cd gsl-${GSL}
+    ./configure || (cat config.log && exit 1)
+    make || exit 1
     if [ $TRAVIS_OS_NAME == osx ]; then make install ; fi
     if [ $TRAVIS_OS_NAME == linux ]; then sudo make install ; fi
     cd ..
 
 script:
   - |
-    set -e
+    export CC=gcc-${GCC}
+    export FC=gfortran-${GCC}
     autoreconf -fi
-    ./configure CFLAGS="-Wall" FCFLAGS="-Wall"
-    make
-    make check
-    make distcheck
-    set +e
+    ./configure CFLAGS="-Wall" FCFLAGS="-Wall" || (cat config.log && exit 1)
+    make || exit 1
+    make check || exit 1
+    make distcheck || exit 1
 
 notifications:
   email:
@@ -92,5 +88,3 @@ notifications:
 branches:
   only:
     - master
-#os:
-#  - osx
