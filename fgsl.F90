@@ -762,7 +762,7 @@ module fgsl
 ! sparse matrices
   public :: fgsl_spmatrix_alloc, fgsl_spmatrix_alloc_nzmax, fgsl_spmatrix_size, &
        fgsl_spmatrix_free, fgsl_spmatrix_realloc, fgsl_spmatrix_set_zero, &
-       fgsl_spmatrix_nnz, fgsl_spmatrix_compare_idx, fgsl_spmatrix_memcpy, &
+       fgsl_spmatrix_nnz, fgsl_spmatrix_memcpy, &
        fgsl_spmatrix_get, fgsl_spmatrix_set, fgsl_spmatrix_compcol, &
        fgsl_spmatrix_cumsum, fgsl_spmatrix_scale, fgsl_spmatrix_minmax, &
        fgsl_spmatrix_add, fgsl_spmatrix_d2sp, fgsl_spmatrix_sp2d, &

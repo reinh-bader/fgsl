@@ -41,11 +41,6 @@ function fgsl_spmatrix_nnz(m)
   integer(fgsl_size_t) :: fgsl_spmatrix_nnz
   fgsl_spmatrix_nnz = gsl_spmatrix_nnz(m%gsl_spmatrix)
 end function fgsl_spmatrix_nnz
-function fgsl_spmatrix_compare_idx(ia, ja, ib, jb)
-  integer(fgsl_size_t), intent(in) :: ia, ja, ib, jb
-  integer(fgsl_int) :: fgsl_spmatrix_compare_idx
-  fgsl_spmatrix_compare_idx = gsl_spmatrix_compare_idx(ia, ja, ib, jb)
-end function fgsl_spmatrix_compare_idx
 function fgsl_spmatrix_memcpy(dest, src)
   type(fgsl_spmatrix), intent(inout) :: dest
   type(fgsl_spmatrix), intent(in) :: src

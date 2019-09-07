@@ -37,11 +37,6 @@ function gsl_spmatrix_nnz(m) bind(c)
   type(c_ptr), value :: m
   integer(c_size_t) :: gsl_spmatrix_nnz
 end function gsl_spmatrix_nnz
-function gsl_spmatrix_compare_idx(ia, ja, ib, jb) bind(c)
-  import :: c_int, c_size_t
-  integer(c_size_t), value :: ia, ja, ib, jb
-  integer(c_int) :: gsl_spmatrix_compare_idx
-end function gsl_spmatrix_compare_idx
 function gsl_spmatrix_memcpy(dest, src) bind(c)
   import :: c_ptr, c_int
   type(c_ptr), value :: dest, src
