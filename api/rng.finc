@@ -1221,6 +1221,33 @@
     real(fgsl_double) :: fgsl_ran_logarithmic_pdf
     fgsl_ran_logarithmic_pdf = gsl_ran_logarithmic_pdf(k, p)
   end function fgsl_ran_logarithmic_pdf
+  function fgsl_ran_wishart(r, df, l, result, work)
+    type(fgsl_rng), intent(in) :: r
+    real(fgsl_double), intent(in) :: df
+    type(fgsl_matrix), intent(in) :: l
+    type(fgsl_matrix), intent(inout) :: result, work
+    integer(fgsl_int) :: fgsl_ran_wishart
+    fgsl_ran_wishart = gsl_ran_wishart(r%gsl_rng, df, l%gsl_matrix, &
+         result%gsl_matrix, work%gsl_matrix)
+  end function fgsl_ran_wishart
+  function fgsl_ran_wishart_pdf(x, l_x, df, l, result, work) 
+    type(fgsl_matrix), intent(in) :: x, l_x, l
+    type(fgsl_matrix), intent(inout) :: work
+    real(fgsl_double), intent(in) :: df
+    real(fgsl_double), intent(inout) :: result
+    integer(fgsl_int) :: fgsl_ran_wishart_pdf
+    fgsl_ran_wishart_pdf = gsl_ran_wishart_pdf(x%gsl_matrix, l_x%gsl_matrix, &
+         df, l%gsl_matrix, result, work%gsl_matrix)
+  end function fgsl_ran_wishart_pdf
+  function fgsl_ran_wishart_log_pdf(x, l_x, df, l, result, work) 
+    type(fgsl_matrix), intent(in) :: x, l_x, l
+    type(fgsl_matrix), intent(inout) :: work
+    real(fgsl_double), intent(in) :: df
+    real(fgsl_double), intent(inout) :: result
+    integer(fgsl_int) :: fgsl_ran_wishart_log_pdf
+    fgsl_ran_wishart_log_pdf = gsl_ran_wishart_log_pdf(x%gsl_matrix, &
+         l_x%gsl_matrix, df, l%gsl_matrix, result, work%gsl_matrix)
+  end function fgsl_ran_wishart_log_pdf
   subroutine fgsl_ran_shuffle(r, base, n, size)
     type(fgsl_rng), intent(in) :: r
     type(c_ptr), intent(in) :: base

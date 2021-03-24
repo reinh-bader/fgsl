@@ -18,7 +18,7 @@ PROGRAM splinalg
   type(fgsl_splinalg_itersolve) :: work
   integer(fgsl_size_t) :: iter = 0
   real(fgsl_double) :: residual, u_gsl, u_exact
-  real(fgsl_double),dimension(0:n-1) :: f_f, u_f
+  real(fgsl_double),dimension(0:n-1),target :: f_f, u_f
 
   A = fgsl_spmatrix_alloc(n,n)
   f = fgsl_vector_init(1.0_fgsl_double)

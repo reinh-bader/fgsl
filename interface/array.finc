@@ -14,6 +14,12 @@
     integer(c_size_t), value :: i
     type(c_ptr) :: gsl_vector_ptr
   end function gsl_vector_ptr
+  function gsl_vector_int_ptr(v, i) bind(c)
+    import
+    type(c_ptr), value :: v
+    integer(c_size_t), value :: i
+    type(c_ptr) :: gsl_vector_int_ptr
+  end function gsl_vector_int_ptr
   function gsl_vector_complex_get(v, i) bind(c)
     import
     type(c_ptr), value :: v
@@ -65,6 +71,30 @@
     type(c_ptr), value :: fvec
     integer(c_size_t) fgsl_aux_vector_double_stride
   end function fgsl_aux_vector_double_stride
+  function fgsl_aux_vector_int_init() bind(c)
+    import
+    type(c_ptr) :: fgsl_aux_vector_int_init
+  end function fgsl_aux_vector_int_init
+  subroutine fgsl_aux_vector_int_free(v) bind(c)
+    import
+    type(c_ptr), value :: v
+  end subroutine fgsl_aux_vector_int_free
+  function fgsl_aux_vector_int_align(a, len, fvec, size, offset, stride) bind(c)
+    import
+    type(c_ptr), value :: a, fvec
+    integer(c_size_t), value :: len, size, offset, stride
+    integer(c_int) :: fgsl_aux_vector_int_align
+  end function fgsl_aux_vector_int_align
+  function fgsl_aux_vector_int_size(fvec) bind(c)
+    import
+    type(c_ptr), value :: fvec
+    integer(c_size_t) fgsl_aux_vector_int_size
+  end function fgsl_aux_vector_int_size
+  function fgsl_aux_vector_int_stride(fvec) bind(c)
+    import
+    type(c_ptr), value :: fvec
+    integer(c_size_t) fgsl_aux_vector_int_stride
+  end function fgsl_aux_vector_int_stride
   function fgsl_aux_matrix_double_init() bind(c)
     import
     type(c_ptr) :: fgsl_aux_matrix_double_init

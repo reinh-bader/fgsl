@@ -9,6 +9,7 @@
 !  end interface
   interface fgsl_well_defined
      module procedure fgsl_vector_status
+     module procedure fgsl_vector_int_status
      module procedure fgsl_matrix_status
      module procedure fgsl_vector_complex_status
      module procedure fgsl_matrix_complex_status
@@ -114,10 +115,13 @@
 !
   interface fgsl_vector_init
      module procedure fgsl_vector_init
+     module procedure fgsl_vector_int_init
+     module procedure fgsl_vector_init_legacy
      module procedure fgsl_vector_complex_init
   end interface
   interface fgsl_vector_free
      module procedure fgsl_vector_free
+     module procedure fgsl_vector_int_free
      module procedure fgsl_vector_complex_free
   end interface
   interface fgsl_matrix_init
@@ -127,7 +131,11 @@
   interface fgsl_matrix_free
      module procedure fgsl_matrix_free
      module procedure fgsl_matrix_complex_free
-  end interface
+  end interface fgsl_matrix_free
+  interface fgsl_vector_to_fptr
+     module procedure fgsl_vector_to_fptr
+     module procedure fgsl_vector_int_to_fptr
+  end interface fgsl_vector_to_fptr
   interface fgsl_vector_align
      module procedure fgsl_vector_align
      module procedure fgsl_vector_complex_align

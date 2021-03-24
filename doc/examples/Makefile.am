@@ -18,7 +18,9 @@ check_PROGRAMS = cdf cheb combination diff dwt \
 		 ode-initval permutation permshuffle \
 		 polyroots qrng randpoisson randwalk \
 		 rng rngunif roots siman stat statsort \
-		 sum vector spmatrix splinalg rstat
+		 sum vector vector_int vector_legacy spmatrix splinalg rstat \
+		 movstat_1 movstat_2 movstat_3 \
+		 gaussfilt impulse
 
 cdf_SOURCES = cdf.f90
 
@@ -116,11 +118,25 @@ sum_SOURCES = sum.f90
 
 vector_SOURCES = vector.f90
 
+vector_int_SOURCES = vector_int.f90
+
+vector_legacy_SOURCES = vector_legacy.f90
+
 spmatrix_SOURCES = spmatrix.f90
 
 splinalg_SOURCES = splinalg.f90
 
 rstat_SOURCES = rstat.f90
+
+movstat_1_SOURCES = movstat_1.f90
+
+movstat_2_SOURCES = movstat_2.f90
+
+movstat_3_SOURCES = movstat_3.f90
+
+gaussfilt_SOURCES = gaussfilt.f90
+
+impulse_SOURCES = impulse.f90
 
 #integration_omp_SOURCES = integration_omp.f90
 #integration_omp_FCFLAGS = @OPENMP_FCFLAGS@ -I${top_srcdir} -I${top_builddir}
@@ -139,8 +155,10 @@ dist_fgsl_example_DATA = $(data_files) cdf.f90 cheb.f90 combination.F90 diff.f90
 			ode-initval.F90 permutation.f90 permshuffle.f90 \
 			polyroots.f90 qrng.f90 randpoisson.f90 randwalk.f90 \
 			rng.f90 rngunif.f90 roots.f90 siman.f90 siman_print.c \
-			stat.f90 statsort.f90 sum.f90 vector.f90 integration_omp.f90 \
-			spmatrix.f90 splinalg.f90 rstat.f90
+			stat.f90 statsort.f90 sum.f90 vector.f90 vector_int.f90 \
+			vector_legacy.f90 integration_omp.f90 \
+			spmatrix.f90 splinalg.f90 rstat.f90 movstat_1.f90 movstat_2.f90 \
+			movstat_3.f90 gaussfilt.f90 impulse.f90
 
 TESTS = $(check_PROGRAMS)
 XFAIL_TESTS = error_1
