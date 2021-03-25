@@ -77,4 +77,5 @@ function gsl_filter_impulse(endtype, scale_type, t, x, y, xmedian, xsigma, &
   real(c_double), value :: t
   type(c_ptr), value :: x, y, xmedian, xsigma, ioutlier, w
   integer(c_size_t), intent(inout) :: noutlier
+  integer(c_int) :: gsl_filter_impulse
 end function gsl_filter_impulse

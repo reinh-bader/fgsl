@@ -264,9 +264,9 @@
       integer(c_size_t) :: gsl_aux_sizeof_integration_qawo_table
     end function gsl_aux_sizeof_integration_qawo_table
     function gsl_aux_integration_fixed_alloc(t, n, a, b, alpha, beta) bind(c)
-      import :: c_ptr, c_size_t, c_double
+      import :: c_ptr, c_size_t, c_double, c_int
       type(c_ptr) :: gsl_aux_integration_fixed_alloc
-      integer, value :: t
+      integer(c_int), value :: t
       integer(c_size_t), value :: n
       real(c_double), value :: a, b, alpha, beta
     end function gsl_aux_integration_fixed_alloc

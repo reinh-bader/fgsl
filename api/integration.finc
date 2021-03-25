@@ -224,6 +224,8 @@
   function fgsl_integration_romberg_alloc(n) 
     type(fgsl_integration_romberg_workspace) :: fgsl_integration_romberg_alloc
     integer(fgsl_size_t), intent(in) :: n
+    fgsl_integration_romberg_alloc%gsl_integration_romberg_workspace = &
+          gsl_integration_romberg_alloc(n)
   end function fgsl_integration_romberg_alloc
   subroutine fgsl_integration_romberg_free(w) 
     type(fgsl_integration_romberg_workspace), intent(inout) :: w 
