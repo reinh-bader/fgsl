@@ -7,7 +7,7 @@ os:
   - linux
   - osx
 
-osx_image: xcode10.3
+osx_image: xcode11.3
 
 addons:
   apt:
@@ -23,12 +23,10 @@ env:
     - GCC=7 GSL=2.5
     - GCC=8 GSL=2.5
     - GCC=9 GSL=2.5
-    - GCC=10 GSL=2.5
     - GCC=6 GSL=2.6
     - GCC=7 GSL=2.6
     - GCC=8 GSL=2.6
     - GCC=9 GSL=2.6
-    - GCC=10 GSL=2.6
   global:
     - LD_LIBRARY_PATH=/usr/local/lib
     - LD_RUN_PATH=/usr/local/lib
@@ -39,7 +37,6 @@ matrix:
     - env: GCC=7 GSL=2.6
     - env: GCC=8 GSL=2.6
     - env: GCC=9 GSL=2.6
-    - env: GCC=10 GSL=2.6
 before_install:
   - |
     if [ $TRAVIS_OS_NAME == osx ] ; then 
