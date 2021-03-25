@@ -76,6 +76,7 @@ notifications:
   email:
     recipients:
       - Tom.Schoonjans@me.com
+      - Bader@lrz.de
     on_success: never
     on_failure: always
 
