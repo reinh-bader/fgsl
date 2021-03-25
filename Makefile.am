@@ -52,6 +52,8 @@ libfgsl_la_SOURCES = \
 	api/splinalg.finc \
 	api/rstat.finc \
 	api/nlfit.finc \
+	api/movstat.finc \
+	api/filter.finc \
 	interface/array.finc \
 	interface/eigen.finc \
 	interface/ieee.finc \
@@ -93,6 +95,8 @@ libfgsl_la_SOURCES = \
 	interface/splinalg.finc \
 	interface/rstat.finc \
 	interface/nlfit.finc \
+	interface/movstat.finc \
+	interface/filter.finc \
 	$(NULL)
 
 libfgsl_la_DEPENDENCIES = $(libfgsl_la_SOURCES)

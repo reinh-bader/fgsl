@@ -1156,6 +1156,26 @@
     real(c_double), value :: p
     real(c_double) :: gsl_ran_logarithmic_pdf
   end function gsl_ran_logarithmic_pdf
+  function gsl_ran_wishart(r, df, l, result, work) bind(c)
+    import :: c_int, c_ptr, c_double
+    type(c_ptr), value :: r, l, result, work
+    real(c_double), value :: df
+    integer(c_int) :: gsl_ran_wishart
+  end function gsl_ran_wishart
+  function gsl_ran_wishart_pdf(x, l_x, df, l, result, work) bind(c)
+    import :: c_int, c_ptr, c_double
+    type(c_ptr), value :: x, l_x, l, work
+    real(c_double), value :: df
+    real(c_double), intent(inout) :: result
+    integer(c_int) :: gsl_ran_wishart_pdf
+  end function gsl_ran_wishart_pdf
+  function gsl_ran_wishart_log_pdf(x, l_x, df, l, result, work) bind(c)
+    import :: c_int, c_ptr, c_double
+    type(c_ptr), value :: x, l_x, l, work
+    real(c_double), value :: df
+    real(c_double), intent(inout) :: result
+    integer(c_int) :: gsl_ran_wishart_log_pdf
+  end function gsl_ran_wishart_log_pdf
   subroutine gsl_ran_shuffle(r, base, n, size) bind(c)
     import :: c_ptr, c_size_t
     type(c_ptr), value :: r, base

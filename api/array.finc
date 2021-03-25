@@ -7,23 +7,97 @@
 !> leveraging Fortran-style array processing for those GSL routines which
 !> require arguments of type <CODE>fgsl_vector*</CODE> or <CODE>fgsl_matrix*</CODE>.
 !
-! vectors (real)
+! vectors (extended precision real)
 !
 !> Initialize a GSL vector object. This is invoked via the generic
 !> fgsl_vector_init.
+!> \param[in] array. The result variable's block is aliased to this
+!! contiguous array or a section of it. The actual argument must be
+!! a CONTIGUOUS array with the TARGET attribute. It can be of type
+!! integer(fgsl_int) or real(fgsl_double).
+!> \param[in] stride. If present, the stride between subsequent array
+!! elements of the function result. Otherwise, the value one is assumed.
+!> \param[inout] status. If present, the exit status.
+  function fgsl_vector_init(array, stride, stat)
+    real(fgsl_double), target, contiguous, intent(in) :: array(:)
+    integer(fgsl_size_t), intent(in), optional :: stride
+    integer(fgsl_int), intent(inout), optional :: stat
+    type(fgsl_vector) :: fgsl_vector_init
+    integer(fgsl_size_t) :: stride_local, array_size, section_size
+    integer(fgsl_int) :: stat_local
+
+    try : block
+
+      if (present(stride)) then
+         stride_local = stride
+      else
+         stride_local = 1_fgsl_size_t
+      end if
+      if (stride_local <= 0) then
+         stat_local = fgsl_einval
+         exit try
+      end if
+
+      array_size = size(array,dim=1,kind=fgsl_size_t)
+      section_size = (array_size - 1) / stride_local + 1
+      
+      fgsl_vector_init%gsl_vector = fgsl_aux_vector_double_init()
+      stat_local = fgsl_aux_vector_double_align(c_loc(array), &
+           array_size, fgsl_vector_init%gsl_vector, &
+           section_size, 0_fgsl_size_t, stride_local)
+    end block try
+    if ( present(stat) ) stat = stat_local
+    if ( .not. present(stat) .and. stat_local /= fgsl_success ) &
+         call fgsl_error("aligning failed", __FILE__, __LINE__, stat_local)
+  end function fgsl_vector_init
+  function fgsl_vector_int_init(array, stride, stat)
+    integer(fgsl_int), target, contiguous, intent(in) :: array(:)
+    integer(fgsl_size_t), intent(in), optional :: stride
+    integer(fgsl_int), intent(inout), optional :: stat
+    type(fgsl_vector_int) :: fgsl_vector_int_init
+    integer(fgsl_size_t) :: stride_local, array_size, section_size
+    integer(fgsl_int) :: stat_local
+
+    try : block
+
+      if (present(stride)) then
+         stride_local = stride
+      else
+         stride_local = 1_fgsl_size_t
+      end if
+      if (stride_local <= 0) then
+         stat_local = fgsl_einval
+         exit try
+      end if
+
+      array_size = size(array,dim=1,kind=fgsl_size_t)
+      section_size = (array_size - 1) / stride_local + 1
+      
+      fgsl_vector_int_init%gsl_vector_int = fgsl_aux_vector_int_init()
+      stat_local = fgsl_aux_vector_int_align(c_loc(array), &
+           array_size, fgsl_vector_int_init%gsl_vector_int, &
+           section_size, 0_fgsl_size_t, stride_local)
+    end block try
+    if ( present(stat) ) stat = stat_local
+    if ( .not. present(stat) .and. stat_local /= fgsl_success ) &
+         call fgsl_error("aligning failed", __FILE__, __LINE__, stat_local)
+  end function fgsl_vector_int_init
+!> Legacy specific fgsl_vector_init of  for GSL vector initialization 
 !> \param type - determine intrinsic type of vector object
 !> \return new object of type fgsl_vector
-  function fgsl_vector_init(type)
+  function fgsl_vector_init_legacy(type)
     real(fgsl_double), intent(in) :: type
-    type(fgsl_vector) :: fgsl_vector_init
-    fgsl_vector_init%gsl_vector = fgsl_aux_vector_double_init()
-  end function fgsl_vector_init
-!> Wrap a rank 1 Fortran array slice inside a double precision
-!> real GSL vector object. This is invoked via the generic
-!> fgsl_vector_align.
+    type(fgsl_vector) :: fgsl_vector_init_legacy
+    fgsl_vector_init_legacy%gsl_vector = fgsl_aux_vector_double_init()
+  end function fgsl_vector_init_legacy
+!> Legacy function to wrap a rank 1 Fortran array slice inside a double
+!!  precision real GSL vector object. This is invoked via the generic
+!! fgsl_vector_align.
+!! It is recommended to update codes using this to use the
+!! new fgsl_vector_init specific instead
 !> \param array - requires the actual argument to have the
-!>  TARGET attribute. Otherwise being passed by reference is
-!>  not guaranteed by the Fortran standard.
+!!  TARGET attribute. Otherwise being passed by reference is
+!!  not guaranteed by the Fortran standard.
 !> \param len - number of elements of the rank 1 array
 !> \param fvec - previously initialized GSL vector object
 !> \param size - number of elements from array wrapped inside fvec
@@ -39,7 +113,54 @@
     fgsl_vector_align = fgsl_aux_vector_double_align(c_loc(array), len, &
          fvec%gsl_vector, size, offset, stride)
   end function fgsl_vector_align
-!> Associate a Fortran pointer with the data stored inside a GSL vector object.
+!> Function to associate a Fortran pointer with a GSL vector object.
+!> \param[in] fvec. double precision real GSL vector
+!> The function result is a null pointer if the object is invalid,
+!! otherwise it points to the data described by the fvec object  
+  function fgsl_vector_to_fptr(fvec)
+    type(fgsl_vector), intent(in) :: fvec
+    real(fgsl_double), pointer :: fgsl_vector_to_fptr(:)
+    real(fgsl_double), pointer, contiguous :: fptr_local(:)
+    integer(fgsl_size_t) :: size, stride
+    type(c_ptr) :: cp
+
+    if ( fgsl_vector_status(fvec) ) then
+       size = fgsl_aux_vector_double_size(fvec%gsl_vector)
+       stride = fgsl_aux_vector_double_stride(fvec%gsl_vector)
+       if (stride == 0) then
+          fgsl_vector_to_fptr => null()
+       else
+          cp = gsl_vector_ptr(fvec%gsl_vector,0_fgsl_size_t)
+          call c_f_pointer(cp, fptr_local, [ size*stride ])
+          fgsl_vector_to_fptr => fptr_local(1:size*stride:stride)
+       end if
+    else
+       fgsl_vector_to_fptr => null()
+    end if
+  end function fgsl_vector_to_fptr
+  function fgsl_vector_int_to_fptr(fvec)
+    type(fgsl_vector_int), intent(in) :: fvec
+    integer(fgsl_int), pointer :: fgsl_vector_int_to_fptr(:)
+    integer(fgsl_int), pointer, contiguous :: fptr_local(:)
+    integer(fgsl_size_t) :: size, stride
+    type(c_ptr) :: cp
+
+    if ( fgsl_vector_int_status(fvec) ) then
+       size = fgsl_aux_vector_int_size(fvec%gsl_vector_int)
+       stride = fgsl_aux_vector_int_stride(fvec%gsl_vector_int)
+       if (stride == 0) then
+          fgsl_vector_int_to_fptr => null()
+       else
+          cp = gsl_vector_int_ptr(fvec%gsl_vector_int,0_fgsl_size_t)
+          call c_f_pointer(cp, fptr_local, [ size*stride ])
+          fgsl_vector_int_to_fptr => fptr_local(1:size*stride:stride)
+       end if
+    else
+       fgsl_vector_int_to_fptr => null()
+    end if
+  end function fgsl_vector_int_to_fptr
+!> Legacy function to associate a Fortran pointer with the data stored inside
+!> a GSL vector object. Codes should be updated to use fgsl_vector_ptr.
 !> This is invoked via the generic fgsl_vector_align. Objects of type
 !> <CODE>gsl_vector</CODE> which are returned by GSL routines often are
 !> persistent subobjects of other GSL objects. A Fortran pointer aligned with
@@ -100,6 +221,10 @@
 !    call gsl_vector_free(fvec%gsl_vector)
     call fgsl_aux_vector_double_free(fvec%gsl_vector)
   end subroutine fgsl_vector_free
+  subroutine fgsl_vector_int_free(fvec)
+    type(fgsl_vector_int), intent(inout) :: fvec
+    call fgsl_aux_vector_int_free(fvec%gsl_vector_int)
+  end subroutine fgsl_vector_int_free
   subroutine fgsl_vector_c_ptr(res, src)
     type(c_ptr), intent(in) :: src
     type(fgsl_vector), intent(out) :: res
@@ -112,6 +237,12 @@
     if (.not. c_associated(vector%gsl_vector)) fgsl_vector_status = .false.
   end function fgsl_vector_status
 !> Inquire the size of a double precision real GSL vector object.
+  function fgsl_vector_int_status(vector)
+    type(fgsl_vector_int), intent(in) :: vector
+    logical :: fgsl_vector_int_status
+    fgsl_vector_int_status = .true.
+    if (.not. c_associated(vector%gsl_vector_int)) fgsl_vector_int_status = .false.
+  end function fgsl_vector_int_status
   function fgsl_sizeof_vector(w)
     type(fgsl_vector), intent(in) :: w
     integer(fgsl_size_t) :: fgsl_sizeof_vector

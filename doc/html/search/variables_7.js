@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['numit',['numit',['../structfgsl_1_1fgsl__multifit__robust__stats.html#a9dcebe91b1e3a34ccb49129f10c861bc',1,'fgsl::fgsl_multifit_robust_stats']]]
+  ['params_4966',['params',['../structfgsl_1_1fgsl__movstat__function.html#a35da58e8d84fbce097a1200c34da3766',1,'fgsl::fgsl_movstat_function']]]
 ];

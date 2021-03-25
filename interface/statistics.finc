@@ -254,6 +254,12 @@
     integer(c_size_t), value :: stride, n
     real(c_double) :: gsl_stats_median_from_sorted_data
   end function gsl_stats_median_from_sorted_data
+  function fgsl_stats_median(data, stride, n) bind(c, name='gsl_stats_median')
+    import :: fgsl_size_t, fgsl_double
+    real(fgsl_double), dimension(*), intent(in) :: data
+    integer(fgsl_size_t), value :: stride, n
+    real(fgsl_double) :: fgsl_stats_median
+  end function fgsl_stats_median
   function gsl_stats_quantile_from_sorted_data(data, stride, n, f) bind(c)
     import
     type(c_ptr), value :: data
@@ -261,3 +267,71 @@
     integer(c_size_t), value :: stride, n
     real(c_double) :: gsl_stats_quantile_from_sorted_data
   end function gsl_stats_quantile_from_sorted_data
+  subroutine fgsl_stats_select(data, stride, n, k) bind(c, name='gsl_stats_select')
+    import :: fgsl_size_t, fgsl_double
+    real(fgsl_double), dimension(*), intent(inout) :: data
+    integer(fgsl_size_t), value :: stride, n, k
+  end subroutine fgsl_stats_select
+  function fgsl_stats_trmean_from_sorted_data(alpha, data, stride, n) &
+       bind(c, name='gsl_stats_trmean_from_sorted_data')
+    import :: fgsl_size_t, fgsl_double
+    real(fgsl_double), value :: alpha
+    real(fgsl_double), dimension(*), intent(in) :: data
+    integer(fgsl_size_t), value :: stride, n
+    real(fgsl_double) :: fgsl_stats_trmean_from_sorted_data
+  end function fgsl_stats_trmean_from_sorted_data
+  function fgsl_stats_gastwirth_from_sorted_data(data, stride, n) &
+       bind(c, name='gsl_stats_gastwirth_from_sorted_data')
+    import :: fgsl_size_t, fgsl_double
+    real(fgsl_double), dimension(*), intent(in) :: data
+    integer(fgsl_size_t), value :: stride, n
+    real(fgsl_double) :: fgsl_stats_gastwirth_from_sorted_data
+  end function fgsl_stats_gastwirth_from_sorted_data
+  function fgsl_stats_mad0(data, stride, n, work) bind(c, name='gsl_stats_mad0')
+    import :: fgsl_size_t, fgsl_double
+    real(fgsl_double), dimension(*), intent(in) :: data
+    integer(fgsl_size_t), value :: stride, n
+    real(fgsl_double), dimension(*), intent(inout) :: work
+    real(fgsl_double) :: fgsl_stats_mad0
+  end function fgsl_stats_mad0
+  function fgsl_stats_mad(data, stride, n, work) bind(c, name='gsl_stats_mad')
+    import :: fgsl_size_t, fgsl_double
+    real(fgsl_double), dimension(*), intent(in) :: data
+    integer(fgsl_size_t), value :: stride, n
+    real(fgsl_double), dimension(*), intent(inout) :: work
+    real(fgsl_double) :: fgsl_stats_mad
+  end function fgsl_stats_mad
+  function fgsl_stats_sn0_from_sorted_data(data, stride, n, work) &
+       bind(c, name='gsl_stats_Sn0_from_sorted_data')
+    import :: fgsl_size_t, fgsl_double
+    real(fgsl_double), dimension(*), intent(in) :: data
+    integer(fgsl_size_t), value :: stride, n
+    real(fgsl_double), dimension(*), intent(inout) :: work
+    real(fgsl_double) :: fgsl_stats_sn0_from_sorted_data
+  end function fgsl_stats_sn0_from_sorted_data
+  function fgsl_stats_sn_from_sorted_data(data, stride, n, work) &
+       bind(c, name='gsl_stats_Sn_from_sorted_data')
+    import :: fgsl_size_t, fgsl_double
+    real(fgsl_double), dimension(*), intent(in) :: data
+    integer(fgsl_size_t), value :: stride, n
+    real(fgsl_double), dimension(*), intent(inout) :: work
+    real(fgsl_double) :: fgsl_stats_sn_from_sorted_data
+  end function fgsl_stats_sn_from_sorted_data
+  function fgsl_stats_qn0_from_sorted_data(data, stride, n, work, work_int) &
+       bind(c, name='gsl_stats_Qn0_from_sorted_data')
+    import :: fgsl_size_t, fgsl_double, fgsl_int
+    real(fgsl_double), dimension(*), intent(in) :: data
+    integer(fgsl_size_t), value :: stride, n
+    real(fgsl_double), dimension(*), intent(inout) :: work
+    integer(fgsl_int), dimension(*), intent(inout) :: work_int
+    real(fgsl_double) :: fgsl_stats_qn0_from_sorted_data
+  end function fgsl_stats_qn0_from_sorted_data
+  function fgsl_stats_qn_from_sorted_data(data, stride, n, work, work_int) &
+       bind(c, name='gsl_stats_Qn_from_sorted_data')
+    import :: fgsl_size_t, fgsl_double, fgsl_int
+    real(fgsl_double), dimension(*), intent(in) :: data
+    integer(fgsl_size_t), value :: stride, n
+    real(fgsl_double), dimension(*), intent(inout) :: work
+    integer(fgsl_int), dimension(*), intent(inout) :: work_int
+    real(fgsl_double) :: fgsl_stats_qn_from_sorted_data
+  end function fgsl_stats_qn_from_sorted_data

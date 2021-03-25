@@ -183,6 +183,25 @@
       integer(c_size_t) :: nevals
       integer(c_int) :: gsl_integration_cquad
     end function gsl_integration_cquad
+    function gsl_integration_romberg_alloc(n) bind(c)
+      import :: c_ptr, c_size_t
+      type(c_ptr) :: gsl_integration_romberg_alloc
+      integer(c_size_t), value :: n
+    end function gsl_integration_romberg_alloc
+    subroutine gsl_integration_romberg_free(w) bind(c)
+      import :: c_ptr
+      type(c_ptr), value :: w 
+    end subroutine gsl_integration_romberg_free
+    function gsl_integration_romberg(f, a, b, epsabs, epsrel, result, neval, w) &
+         bind(c)
+      import :: c_ptr, c_double, c_size_t, c_int
+      integer(c_int) :: gsl_integration_romberg
+      type(c_ptr), value :: f
+      real(c_double), value :: a, b, epsabs, epsrel
+      real(c_double) :: result
+      integer(c_size_t) :: neval
+      type(c_ptr), value :: w
+    end function gsl_integration_romberg
     function gsl_integration_glfixed_table_alloc(n) bind(c)
       import :: c_size_t, c_ptr
       integer(c_size_t), value :: n
@@ -207,26 +226,6 @@
       real(c_double) :: xi, wi
       type(c_ptr), value :: t
     end function gsl_integration_glfixed_point
-!
-    function gsl_aux_sizeof_integration_workspace() bind(c)
-      import :: c_size_t
-      integer(c_size_t) :: gsl_aux_sizeof_integration_workspace
-    end function gsl_aux_sizeof_integration_workspace
-    function gsl_aux_sizeof_integration_qaws_table() bind(c)
-      import :: c_size_t
-      integer(c_size_t) :: gsl_aux_sizeof_integration_qaws_table
-    end function gsl_aux_sizeof_integration_qaws_table
-    function gsl_aux_sizeof_integration_qawo_table() bind(c)
-      import :: c_size_t
-      integer(c_size_t) :: gsl_aux_sizeof_integration_qawo_table
-    end function gsl_aux_sizeof_integration_qawo_table
-    function gsl_aux_integration_fixed_alloc(t, n, a, b, alpha, beta) bind(c)
-      import :: c_ptr, c_size_t, c_double
-      type(c_ptr) :: gsl_aux_integration_fixed_alloc
-      integer, value :: t
-      integer(c_size_t), value :: n
-      real(c_double), value :: a, b, alpha, beta
-    end function gsl_aux_integration_fixed_alloc
     subroutine gsl_integration_fixed_free(w) bind(c)
       import :: c_ptr
       type(c_ptr), value :: w
@@ -251,3 +250,23 @@
       integer(c_int) :: gsl_integration_fixed
       type(c_ptr), value :: func, w, result
     end function gsl_integration_fixed
+!
+    function gsl_aux_sizeof_integration_workspace() bind(c)
+      import :: c_size_t
+      integer(c_size_t) :: gsl_aux_sizeof_integration_workspace
+    end function gsl_aux_sizeof_integration_workspace
+    function gsl_aux_sizeof_integration_qaws_table() bind(c)
+      import :: c_size_t
+      integer(c_size_t) :: gsl_aux_sizeof_integration_qaws_table
+    end function gsl_aux_sizeof_integration_qaws_table
+    function gsl_aux_sizeof_integration_qawo_table() bind(c)
+      import :: c_size_t
+      integer(c_size_t) :: gsl_aux_sizeof_integration_qawo_table
+    end function gsl_aux_sizeof_integration_qawo_table
+    function gsl_aux_integration_fixed_alloc(t, n, a, b, alpha, beta) bind(c)
+      import :: c_ptr, c_size_t, c_double, c_int
+      type(c_ptr) :: gsl_aux_integration_fixed_alloc
+      integer(c_int), value :: t
+      integer(c_size_t), value :: n
+      real(c_double), value :: a, b, alpha, beta
+    end function gsl_aux_integration_fixed_alloc

@@ -220,6 +220,28 @@
          a, b, epsabs, epsrel, workspace%gsl_integration_cquad_workspace, &
          result, abserr, nevals)
   end function fgsl_integration_cquad
+
+  function fgsl_integration_romberg_alloc(n) 
+    type(fgsl_integration_romberg_workspace) :: fgsl_integration_romberg_alloc
+    integer(fgsl_size_t), intent(in) :: n
+    fgsl_integration_romberg_alloc%gsl_integration_romberg_workspace = &
+          gsl_integration_romberg_alloc(n)
+  end function fgsl_integration_romberg_alloc
+  subroutine fgsl_integration_romberg_free(w) 
+    type(fgsl_integration_romberg_workspace), intent(inout) :: w 
+    call gsl_integration_romberg_free(w%gsl_integration_romberg_workspace)
+  end subroutine fgsl_integration_romberg_free
+  function fgsl_integration_romberg(f, a, b, epsabs, epsrel, result, neval, w)
+    integer(fgsl_int) :: fgsl_integration_romberg
+    type(fgsl_function) :: f
+    real(fgsl_double), intent(in) :: a, b, epsabs, epsrel
+    real(fgsl_double), intent(inout) :: result
+    integer(c_size_t), intent(inout) :: neval
+    type(fgsl_integration_romberg_workspace), intent(inout) :: w
+    fgsl_integration_romberg = gsl_integration_romberg(f%gsl_function, a, b, &
+         epsabs, epsrel, result, neval, w%gsl_integration_romberg_workspace)
+  end function fgsl_integration_romberg
+
   function fgsl_integration_glfixed_table_alloc(n)
     integer(fgsl_size_t), intent(in) :: n
     type(fgsl_integration_glfixed_table) :: fgsl_integration_glfixed_table_alloc
@@ -247,6 +269,58 @@
     fgsl_integration_glfixed_point = gsl_integration_glfixed_point(a, b, i, &
          xi, wi, t%gsl_integration_glfixed_table)
   end function fgsl_integration_glfixed_point
+  function fgsl_integration_fixed_alloc(t, n, a, b, alpha, beta)
+    type(fgsl_integration_fixed_workspace) :: fgsl_integration_fixed_alloc
+    integer(fgsl_int), intent(in) :: t
+    integer(fgsl_size_t), intent(in) :: n
+    real(fgsl_double), intent(in) :: a, b, alpha, beta
+    fgsl_integration_fixed_alloc%gsl_integration_fixed_workspace = &
+         gsl_aux_integration_fixed_alloc(t, n, a, b, alpha, beta)
+  end function fgsl_integration_fixed_alloc
+  subroutine fgsl_integration_fixed_free(w)
+    type(fgsl_integration_fixed_workspace), intent(inout) :: w
+    call gsl_integration_fixed_free(w%gsl_integration_fixed_workspace)
+  end subroutine fgsl_integration_fixed_free
+  function fgsl_integration_fixed_n(w) 
+    integer(fgsl_size_t) :: fgsl_integration_fixed_n
+    type(fgsl_integration_fixed_workspace), intent(in) :: w
+    fgsl_integration_fixed_n = gsl_integration_fixed_n(&
+         w%gsl_integration_fixed_workspace)
+  end function fgsl_integration_fixed_n
+  function fgsl_integration_fixed_nodes(w) 
+    real(fgsl_double), pointer :: fgsl_integration_fixed_nodes(:)
+    type(fgsl_integration_fixed_workspace), intent(in) :: w
+    integer(fgsl_size_t) :: n
+    type(c_ptr) :: p
+    n = gsl_integration_fixed_n(w%gsl_integration_fixed_workspace)
+    p = gsl_integration_fixed_nodes(w%gsl_integration_fixed_workspace)
+    if (c_associated(p)) then
+       call c_f_pointer(p,fgsl_integration_fixed_nodes,[n])
+    else
+       nullify(fgsl_integration_fixed_nodes)
+    end if
+  end function fgsl_integration_fixed_nodes
+  function fgsl_integration_fixed_weights(w) 
+    real(fgsl_double), pointer :: fgsl_integration_fixed_weights(:)
+    type(fgsl_integration_fixed_workspace), intent(in) :: w
+    integer(fgsl_size_t) :: n
+    type(c_ptr) :: p
+    n = gsl_integration_fixed_n(w%gsl_integration_fixed_workspace)
+    p = gsl_integration_fixed_weights(w%gsl_integration_fixed_workspace)
+    if (c_associated(p)) then
+       call c_f_pointer(p,fgsl_integration_fixed_weights,[n])
+    else
+       nullify(fgsl_integration_fixed_weights)
+    end if
+  end function fgsl_integration_fixed_weights
+  function fgsl_integration_fixed(func, result, w)
+    integer(fgsl_int) :: fgsl_integration_fixed
+    type(fgsl_function), intent(inout) :: func
+    real(fgsl_double), target :: result
+    type(fgsl_integration_fixed_workspace), intent(in) :: w
+    fgsl_integration_fixed = gsl_integration_fixed(func%gsl_function, &
+         c_loc(result), w%gsl_integration_fixed_workspace)
+  end function fgsl_integration_fixed
 !
 ! additional utilities
 !
@@ -305,55 +379,3 @@
     fgsl_sizeof_integration_qawo_table = &
          gsl_aux_sizeof_integration_qawo_table()
   end function fgsl_sizeof_integration_qawo_table
-  function fgsl_integration_fixed_alloc(t, n, a, b, alpha, beta)
-    type(fgsl_integration_fixed_workspace) :: fgsl_integration_fixed_alloc
-    integer(fgsl_int), intent(in) :: t
-    integer(fgsl_size_t), intent(in) :: n
-    real(fgsl_double), intent(in) :: a, b, alpha, beta
-    fgsl_integration_fixed_alloc%gsl_integration_fixed_workspace = &
-         gsl_aux_integration_fixed_alloc(t, n, a, b, alpha, beta)
-  end function fgsl_integration_fixed_alloc
-  subroutine fgsl_integration_fixed_free(w)
-    type(fgsl_integration_fixed_workspace), intent(inout) :: w
-    call gsl_integration_fixed_free(w%gsl_integration_fixed_workspace)
-  end subroutine fgsl_integration_fixed_free
-  function fgsl_integration_fixed_n(w) 
-    integer(fgsl_size_t) :: fgsl_integration_fixed_n
-    type(fgsl_integration_fixed_workspace), intent(in) :: w
-    fgsl_integration_fixed_n = gsl_integration_fixed_n(&
-         w%gsl_integration_fixed_workspace)
-  end function fgsl_integration_fixed_n
-  function fgsl_integration_fixed_nodes(w) 
-    real(fgsl_double), pointer :: fgsl_integration_fixed_nodes(:)
-    type(fgsl_integration_fixed_workspace), intent(in) :: w
-    integer(fgsl_size_t) :: n
-    type(c_ptr) :: p
-    n = gsl_integration_fixed_n(w%gsl_integration_fixed_workspace)
-    p = gsl_integration_fixed_nodes(w%gsl_integration_fixed_workspace)
-    if (c_associated(p)) then
-       call c_f_pointer(p,fgsl_integration_fixed_nodes,[n])
-    else
-       nullify(fgsl_integration_fixed_nodes)
-    end if
-  end function fgsl_integration_fixed_nodes
-  function fgsl_integration_fixed_weights(w) 
-    real(fgsl_double), pointer :: fgsl_integration_fixed_weights(:)
-    type(fgsl_integration_fixed_workspace), intent(in) :: w
-    integer(fgsl_size_t) :: n
-    type(c_ptr) :: p
-    n = gsl_integration_fixed_n(w%gsl_integration_fixed_workspace)
-    p = gsl_integration_fixed_weights(w%gsl_integration_fixed_workspace)
-    if (c_associated(p)) then
-       call c_f_pointer(p,fgsl_integration_fixed_weights,[n])
-    else
-       nullify(fgsl_integration_fixed_weights)
-    end if
-  end function fgsl_integration_fixed_weights
-  function fgsl_integration_fixed(func, result, w)
-    integer(fgsl_int) :: fgsl_integration_fixed
-    type(fgsl_function), intent(inout) :: func
-    real(fgsl_double), target :: result
-    type(fgsl_integration_fixed_workspace), intent(in) :: w
-    fgsl_integration_fixed = gsl_integration_fixed(func%gsl_function, &
-         c_loc(result), w%gsl_integration_fixed_workspace)
-  end function fgsl_integration_fixed

@@ -273,7 +273,7 @@ module fgsl
        fgsl_sf_zetam1_e, fgsl_sf_hzeta, fgsl_sf_hzeta_e, fgsl_sf_eta, fgsl_sf_eta_e
 ! array processing
   public :: fgsl_vector_init, fgsl_vector_align, fgsl_vector_free,&
-  fgsl_vector_get_size, fgsl_vector_get_stride
+  fgsl_vector_get_size, fgsl_vector_get_stride, fgsl_vector_to_fptr
   public :: fgsl_matrix_init, fgsl_matrix_align, fgsl_matrix_free,&
   fgsl_matrix_get_size1, fgsl_matrix_get_size2, fgsl_matrix_get_tda
 ! interpolation
@@ -449,7 +449,8 @@ module fgsl
        fgsl_integration_qawo_table_alloc, fgsl_integration_qawo_table_set, &
        fgsl_integration_qawo_table_set_length, fgsl_integration_qawo, &
        fgsl_integration_cquad_workspace_alloc, fgsl_integration_cquad_workspace_free, &
-       fgsl_integration_cquad, &
+       fgsl_integration_cquad, fgsl_integration_romberg_alloc, &
+       fgsl_integration_romberg_free, fgsl_integration_romberg, &
        fgsl_integration_glfixed_point,&
        fgsl_integration_glfixed, &
        fgsl_integration_glfixed_table_alloc, fgsl_integration_glfixed_table_free, &
@@ -521,6 +522,7 @@ module fgsl
        fgsl_cdf_geometric_p, fgsl_cdf_geometric_q, fgsl_ran_hypergeometric, &
        fgsl_ran_hypergeometric_pdf, fgsl_cdf_hypergeometric_p, fgsl_cdf_hypergeometric_q, &
        fgsl_ran_logarithmic, fgsl_ran_logarithmic_pdf, &
+       fgsl_ran_wishart, fgsl_ran_wishart_pdf, fgsl_ran_wishart_log_pdf, &
        fgsl_ran_shuffle, fgsl_ran_choose, fgsl_ran_sample, &
        fgsl_ran_discrete_free
 ! simulated annealing
@@ -750,7 +752,14 @@ module fgsl
        fgsl_stats_min, fgsl_stats_minmax, fgsl_stats_max_index, &
        fgsl_stats_min_index, fgsl_stats_minmax_index, fgsl_stats_median_from_sorted_data, &
        fgsl_stats_quantile_from_sorted_data
-  public :: fgsl_stats_spearman
+  public :: fgsl_stats_spearman, &
+       fgsl_stats_median, fgsl_stats_select, &
+       fgsl_stats_trmean_from_sorted_data, &
+       fgsl_stats_gastwirth_from_sorted_data, &
+       fgsl_stats_mad, fgsl_stats_mad0, &
+       fgsl_stats_sn0_from_sorted_data, fgsl_stats_sn_from_sorted_data, &
+       fgsl_stats_qn0_from_sorted_data, fgsl_stats_qn_from_sorted_data
+       
 ! B-splines
   public :: fgsl_bspline_alloc, fgsl_bspline_free, fgsl_bspline_knots, &
        fgsl_bspline_knots_uniform, fgsl_bspline_eval, &
@@ -783,7 +792,22 @@ module fgsl
        fgsl_rstat_mean, fgsl_rstat_rms, fgsl_rstat_variance, fgsl_rstat_sd, &
        fgsl_rstat_sd_mean, fgsl_rstat_median, fgsl_rstat_skew, &
        fgsl_rstat_kurtosis, fgsl_rstat_reset
-
+! moving window statistics
+  public :: fgsl_movstat_alloc, fgsl_movstat_alloc2, fgsl_movstat_free, &
+       fgsl_movstat_mean, fgsl_movstat_variance, fgsl_movstat_sd, &
+       fgsl_movstat_min, fgsl_movstat_max, fgsl_movstat_minmax, &
+       fgsl_movstat_sum, fgsl_movstat_median, fgsl_movstat_mad0, &
+       fgsl_movstat_mad, fgsl_movstat_qqr, fgsl_movstat_sn, &
+       fgsl_movstat_qn, fgsl_movstat_apply, fgsl_movstat_fill
+! digital filtering
+  public :: fgsl_filter_gaussian_alloc, fgsl_filter_gaussian_free, &
+       fgsl_filter_gaussian, fgsl_filter_gaussian_kernel, &
+       fgsl_filter_median_alloc, fgsl_filter_median_free, &
+       fgsl_filter_median, fgsl_filter_rmedian_alloc, &
+       fgsl_filter_rmedian_free, fgsl_filter_rmedian, &
+       fgsl_filter_impulse_alloc, fgsl_filter_impulse_free, &
+       fgsl_filter_impulse
+  
 ! IEEE
   public :: fgsl_ieee_fprintf, fgsl_ieee_printf, fgsl_ieee_env_setup
 !
@@ -1187,6 +1211,9 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
   type, public :: fgsl_vector
      type(c_ptr) :: gsl_vector = c_null_ptr
   end type fgsl_vector
+   type, public :: fgsl_vector_int
+     type(c_ptr) :: gsl_vector_int = c_null_ptr
+  end type fgsl_vector_int
   type, public :: fgsl_matrix
      type(c_ptr) :: gsl_matrix = c_null_ptr
   end type fgsl_matrix
@@ -1420,6 +1447,10 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
      private
      type(c_ptr) :: gsl_integration_cquad_workspace = c_null_ptr
   end type fgsl_integration_cquad_workspace
+  type, public :: fgsl_integration_romberg_workspace
+     private
+     type(c_ptr) :: gsl_integration_romberg_workspace  = c_null_ptr
+  end type fgsl_integration_romberg_workspace
   type, public :: fgsl_integration_glfixed_table
      private
      type(c_ptr) :: gsl_integration_glfixed_table = c_null_ptr
@@ -1437,8 +1468,6 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
   integer(fgsl_int), parameter, public :: fgsl_integration_fixed_exponential = 7
   integer(fgsl_int), parameter, public :: fgsl_integration_fixed_rational = 8
   integer(fgsl_int), parameter, public :: fgsl_integration_fixed_chebyshev2 = 9
-
-
 
 
 !
@@ -2055,8 +2084,54 @@ type, public :: fgsl_rstat_workspace
   private
   type(c_ptr) :: gsl_rstat_workspace
 end type fgsl_rstat_workspace
+!
+! Types: Moving Window Statistics
+!
+integer(fgsl_int), public, parameter :: &
+     fgsl_movstat_end_padzero = 0, &
+     fgsl_movstat_end_padvalue = 1, &
+     fgsl_movstat_end_truncate = 2
+type, public :: fgsl_movstat_workspace
+   private
+   type(c_ptr) :: gsl_movstat_workspace
+end type fgsl_movstat_workspace
+!> fgsl_movstat_function interoperates with gsl_movstat_function
+type, public, bind(c) :: fgsl_movstat_function
+   type(c_funptr) :: function
+   type(c_ptr) :: params
+end type fgsl_movstat_function
+!> Note: gsl_movstat_accum is not matched since the publicized
+!! interface does not make explicit use of accumulators
 
 !
+! Types: Digital Filtering
+!
+integer(fgsl_int), public, parameter :: &
+     fgsl_filter_end_padzero = 0, &
+     fgsl_filter_end_padvalue = 1, &
+     fgsl_filter_end_truncate = 2, &
+     fgsl_filter_scale_mad = 0, &
+     fgsl_filter_scale_iqr = 1, &
+     fgsl_filter_scale_sn = 2, &
+     fgsl_filter_scale_qn = 3
+     
+
+type, public :: fgsl_filter_gaussian_workspace
+   private
+   type(c_ptr) :: gsl_filter_gaussian_workspace
+end type fgsl_filter_gaussian_workspace
+type, public :: fgsl_filter_median_workspace
+   private
+   type(c_ptr) :: gsl_filter_median_workspace
+end type fgsl_filter_median_workspace
+type, public :: fgsl_filter_rmedian_workspace
+   private
+   type(c_ptr) :: gsl_filter_rmedian_workspace
+end type fgsl_filter_rmedian_workspace
+type, public :: fgsl_filter_impulse_workspace
+   private
+   type(c_ptr) :: gsl_filter_impulse_workspace
+end type fgsl_filter_impulse_workspace
 ! required C interfaces
 ! FGSL names occurring here are auxiliary routines
 ! needed to transfer static C information to the Fortran subsystem
@@ -2101,6 +2176,8 @@ end type fgsl_rstat_workspace
 #include "interface/spmatrix.finc"
 #include "interface/splinalg.finc"
 #include "interface/rstat.finc"
+#include "interface/movstat.finc"
+#include "interface/filter.finc"
   end interface
 #include "interface/generics.finc"
 contains
@@ -2144,4 +2221,6 @@ contains
 #include "api/spmatrix.finc"
 #include "api/splinalg.finc"
 #include "api/rstat.finc"
+#include "api/movstat.finc"
+#include "api/filter.finc"
 end module fgsl
