@@ -1868,6 +1868,16 @@
     fgsl_sf_hermite_prob_e = gsl_sf_hermite_prob_e(n, x, res)
     result = res
   end function fgsl_sf_hermite_prob_e
+  function fgsl_sf_hermite_prob_deriv_e(m, n, x, result) 
+    integer(fgsl_int), intent(in) :: m, n
+    real(fgsl_double), intent(in) :: x
+    type(fgsl_sf_result), intent(out) :: result
+    integer(fgsl_int) :: fgsl_sf_hermite_prob_deriv_e
+!
+    type(gsl_sf_result) :: res
+    fgsl_sf_hermite_prob_deriv_e = gsl_sf_hermite_prob_deriv_e(m, n, x, res)
+    result = res
+  end function fgsl_sf_hermite_prob_deriv_e
   function fgsl_sf_hermite_prob_series_e(n, x, a, result) 
     integer(fgsl_int), intent(in) :: n
     real(fgsl_double), intent(in) :: x
@@ -1889,6 +1899,16 @@
     fgsl_sf_hermite_phys_e = gsl_sf_hermite_phys_e(n, x, res)
     result = res
   end function fgsl_sf_hermite_phys_e
+  function fgsl_sf_hermite_e(n, x, result) 
+    integer(fgsl_int), intent(in) :: n
+    real(fgsl_double), intent(in) :: x
+    type(fgsl_sf_result), intent(out) :: result
+    integer(fgsl_int) :: fgsl_sf_hermite_e
+!
+    type(gsl_sf_result) :: res
+    fgsl_sf_hermite_e = gsl_sf_hermite_e(n, x, res)
+    result = res
+  end function fgsl_sf_hermite_e
   function fgsl_sf_hermite_phys_series_e(n, x, a, result) 
     integer(fgsl_int), intent(in) :: n
     real(fgsl_double), intent(in) :: x
@@ -1900,6 +1920,17 @@
     fgsl_sf_hermite_phys_series_e = gsl_sf_hermite_phys_series_e(n, x, a, res)
     result = res
   end function fgsl_sf_hermite_phys_series_e
+  function fgsl_sf_hermite_series_e(n, x, a, result) 
+    integer(fgsl_int), intent(in) :: n
+    real(fgsl_double), intent(in) :: x
+    real(fgsl_double), dimension(*), intent(in) :: a
+    type(fgsl_sf_result), intent(out) :: result
+    integer(fgsl_int) :: fgsl_sf_hermite_series_e
+!
+    type(gsl_sf_result) :: res
+    fgsl_sf_hermite_series_e = gsl_sf_hermite_series_e(n, x, a, res)
+    result = res
+  end function fgsl_sf_hermite_series_e
   function fgsl_sf_hermite_func_e(n, x, result) 
     integer(fgsl_int), intent(in) :: n
     real(fgsl_double), intent(in) :: x
@@ -1910,6 +1941,16 @@
     fgsl_sf_hermite_func_e = gsl_sf_hermite_func_e(n, x, res)
     result = res
   end function fgsl_sf_hermite_func_e
+  function fgsl_sf_hermite_func_fast_e(n, x, result) 
+    integer(fgsl_int), intent(in) :: n
+    real(fgsl_double), intent(in) :: x
+    type(fgsl_sf_result), intent(out) :: result
+    integer(fgsl_int) :: fgsl_sf_hermite_func_fast_e
+!
+    type(gsl_sf_result) :: res
+    fgsl_sf_hermite_func_fast_e = gsl_sf_hermite_func_fast_e(n, x, res)
+    result = res
+  end function fgsl_sf_hermite_func_fast_e
   function fgsl_sf_hermite_func_series_e(n, x, a, result) 
     integer(fgsl_int), intent(in) :: n
     real(fgsl_double), intent(in) :: x

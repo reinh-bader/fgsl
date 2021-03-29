@@ -292,6 +292,15 @@
        real(c_double) :: z
        integer(c_int) :: gsl_interp2d_eval_e_extrap
      end function gsl_interp2d_eval_e_extrap
+     function gsl_interp2d_eval_extrap_e(interp, xarr, yarr, zarr, x, y, xa, ya, z) bind(c)
+       import :: c_ptr, c_double, c_int
+       type(c_ptr), value :: interp
+       type(c_ptr), value :: xarr, yarr, zarr
+       real(c_double), value :: x, y
+       type(c_ptr), value :: xa, ya
+       real(c_double) :: z
+       integer(c_int) :: gsl_interp2d_eval_extrap_e
+     end function gsl_interp2d_eval_extrap_e
      function gsl_interp2d_eval_deriv_x(interp, xarr, yarr, zarr, x, y, xa, ya) bind(c)
        import :: c_ptr, c_double
        type(c_ptr), value :: interp

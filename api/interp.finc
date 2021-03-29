@@ -398,6 +398,18 @@
     fgsl_interp2d_eval_e_extrap = gsl_interp2d_eval_e_extrap(interp%gsl_interp2d, c_loc(xarr), &
     c_loc(yarr), c_loc(zarr), x, y, xa%gsl_interp_accel, ya%gsl_interp_accel, z)
   end function fgsl_interp2d_eval_e_extrap
+  function fgsl_interp2d_eval_extrap_e(interp, xarr, yarr, zarr, x, y, xa, ya, z)
+    type(fgsl_interp2d), intent(in) :: interp
+    real(fgsl_double), dimension(:), intent(in), target, contiguous :: xarr, yarr
+    real(fgsl_double), dimension(:,:), intent(in), target, contiguous :: zarr
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double), intent(out) :: z
+    integer(fgsl_int) :: fgsl_interp2d_eval_extrap_e
+    ! I could do more bounds checking here, but seems like overkill
+    fgsl_interp2d_eval_extrap_e = gsl_interp2d_eval_extrap_e(interp%gsl_interp2d, c_loc(xarr), &
+    c_loc(yarr), c_loc(zarr), x, y, xa%gsl_interp_accel, ya%gsl_interp_accel, z)
+  end function fgsl_interp2d_eval_extrap_e
   function fgsl_interp2d_eval_deriv_x(interp, xarr, yarr, zarr, x, y, xa, ya)
     type(fgsl_interp2d), intent(in) :: interp
     real(fgsl_double), dimension(:), intent(in), target, contiguous :: xarr, yarr

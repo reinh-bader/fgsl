@@ -191,7 +191,7 @@ int fgsl_aux_vector_complex_align(double *a, size_t len,
     if (fvec == NULL || fvec->block == NULL) {
 	return GSL_EFAULT;
     }
-    if (offset + size*stride > len) {
+    if (offset + 1 + (size-1)*stride > len) {
 	return GSL_EINVAL;
     }
     fvec->block->size = len;
