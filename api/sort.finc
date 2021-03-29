@@ -42,6 +42,11 @@
     integer(fgsl_size_t), intent(in) :: stride, n
     call gsl_sort(c_loc(data), stride, n)
   end subroutine fgsl_sort_double
+  subroutine fgsl_sort2_double(data1, stride1, data2, stride2, n)
+    real(fgsl_double), intent(inout), target, contiguous :: data1(:), data2(:)
+    integer(fgsl_size_t), intent(in) :: stride1, stride2, n
+    call gsl_sort2(c_loc(data1), stride1, c_loc(data2), stride2, n)
+  end subroutine fgsl_sort2_double
   subroutine fgsl_sort_double_index(p, data, stride, n)
     integer(fgsl_size_t), intent(out), target, contiguous :: p(:)
     real(fgsl_double), intent(in), target, contiguous :: data(:)

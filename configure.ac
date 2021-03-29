@@ -1,4 +1,4 @@
-AC_INIT([fgsl],[1.4.0],[Reinhold.Bader@lrz.de])
+AC_INIT([fgsl],[1.5.0],[Reinhold.Bader@lrz.de])
 AC_PREREQ([2.69])
 
 AC_CONFIG_AUX_DIR([build-aux])
@@ -8,7 +8,7 @@ AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 AC_CANONICAL_HOST
 
 LIB_CURRENT=1
-LIB_REVISION=2
+LIB_REVISION=5
 LIB_AGE=0
 AC_SUBST(LIB_CURRENT)
 AC_SUBST(LIB_REVISION)
@@ -32,7 +32,7 @@ fi
 #initialize pkg-config
 PKG_PROG_PKG_CONFIG
 
-PKG_CHECK_MODULES([gsl], [gsl >= 2.5])
+PKG_CHECK_MODULES([gsl], [gsl >= 2.6])
 
 local_gsl_version=`$PKG_CONFIG --modversion gsl`
 AC_SUBST(GSL_VERSION,$local_gsl_version)

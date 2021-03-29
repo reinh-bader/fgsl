@@ -17,8 +17,8 @@ contains
     call fgsl_obj_c_ptr(f_f, f)
 !
 !   align fgsl_vector with Fortran POINTER
-    status = fgsl_vector_align(p_x, f_x)
-    status = fgsl_vector_align(p_f, f_f)
+    p_x => fgsl_vector_to_fptr(f_x)
+    p_f => fgsl_vector_to_fptr(f_f)
 !
     p_f(1) = 100._fgsl_double * (p_x(2) - p_x(1)**2) 
     p_f(2) = 1._fgsl_double - p_x(1)
@@ -33,8 +33,8 @@ contains
 
     call fgsl_obj_c_ptr(f_x, x)
     call fgsl_obj_c_ptr(f_j, j)
-    status = fgsl_vector_align(p_x, f_x)
-    status = fgsl_matrix_align(p_j, f_j)
+    p_x => fgsl_vector_to_fptr(f_x)
+    p_j => fgsl_matrix_to_fptr(f_j)
     p_j(1, 1) = -200._fgsl_double * p_x(1)
     p_j(2, 1) = 100._fgsl_double
     p_j(1, 2) = -1._fgsl_double
@@ -52,8 +52,8 @@ contains
     call fgsl_obj_c_ptr(f_fvv, fvv)
 !
 !   align fgsl_vector with Fortran POINTER
-    status = fgsl_vector_align(p_v, f_v)
-    status = fgsl_vector_align(p_fvv, f_fvv)
+    p_v => fgsl_vector_to_fptr(f_v)
+    p_fvv => fgsl_vector_to_fptr(f_fvv)
 
     p_fvv(1) = -200._fgsl_double * p_v(1)**2
     p_fvv(2) = 0._fgsl_double
@@ -67,7 +67,7 @@ contains
     integer(c_int) :: status
 
     x = fgsl_multifit_nlinear_position(fgsl_multifit_nlinear_workspace(wp))
-    status = fgsl_vector_align(p_x, x)
+    p_x => fgsl_vector_to_fptr(x)
     write(*, '(2(1PE12.5,2X))') p_x(1:2)
   end subroutine callback
   subroutine solve_system(x0, fdf, params)
@@ -89,8 +89,8 @@ contains
     work = fgsl_multifit_nlinear_alloc(t, params, n, p)
     f = fgsl_multifit_nlinear_residual(work)
     x = fgsl_multifit_nlinear_position(work)
-    status = fgsl_vector_align(p_x, x)
-    status = fgsl_vector_align(p_f, f)
+    p_x => fgsl_vector_to_fptr(x)
+    p_f => fgsl_vector_to_fptr(f)
 !
 ! initialize solver
     status = fgsl_multifit_nlinear_init(x0, fdf, work)
@@ -138,10 +138,8 @@ program nlfit2
 
   fdf_params = fgsl_multifit_nlinear_default_parameters()
 
-  f = fgsl_vector_init(type = 1.0_fgsl_double)
-  x = fgsl_vector_init(type = 1.0_fgsl_double)
-  status = fgsl_vector_align(tf, n, f, n, 0_fgsl_size_t, 1_fgsl_size_t)
-  status = fgsl_vector_align(tx, p, x, p, 0_fgsl_size_t, 1_fgsl_size_t)
+  f = fgsl_vector_init(tf)
+  x = fgsl_vector_init(tx)
 
   xmin(1) = -1.2_fgsl_double
   xmin(2) = -0.5_fgsl_double

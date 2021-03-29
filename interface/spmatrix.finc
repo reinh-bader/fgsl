@@ -71,17 +71,54 @@ function gsl_spmatrix_scale(m, x) bind(c)
   real(c_double), value :: x
   integer(c_int) :: gsl_spmatrix_scale
 end function gsl_spmatrix_scale
+function gsl_spmatrix_scale_columns(a, x) bind(c)
+  import :: c_ptr, c_double, c_int
+  type(c_ptr), value :: a, x
+  integer(c_int) :: gsl_spmatrix_scale_columns
+end function gsl_spmatrix_scale_columns
+function gsl_spmatrix_scale_rows(a, x) bind(c)
+  import :: c_ptr, c_double, c_int
+  type(c_ptr), value :: a, x
+  integer(c_int) :: gsl_spmatrix_scale_rows
+end function gsl_spmatrix_scale_rows
 function gsl_spmatrix_minmax(m, min_out, max_out) bind(c)
   import :: c_ptr, c_double, c_int
   type(c_ptr), value :: m
   real(c_double) :: min_out, max_out
   integer(c_int) :: gsl_spmatrix_minmax
 end function gsl_spmatrix_minmax
+function gsl_spmatrix_min_index(m, imin, jmin) bind(c)
+  import :: c_ptr, c_double, c_int
+  type(c_ptr), value :: m
+  real(c_double) :: imin, jmin
+  integer(c_int) :: gsl_spmatrix_min_index
+end function gsl_spmatrix_min_index
 function gsl_spmatrix_add(c, a, b) bind(c)
   import :: c_ptr, c_int
   type(c_ptr), value :: c, a, b
   integer(c_int) :: gsl_spmatrix_add
 end function gsl_spmatrix_add
+function gsl_spmatrix_add_to_dense(a, b) bind(c)
+  import :: c_ptr, c_int
+  type(c_ptr), value :: a, b
+  integer(c_int) :: gsl_spmatrix_add_to_dense
+end function gsl_spmatrix_add_to_dense
+function gsl_spmatrix_csc(dest, src) bind(c)
+  import :: c_ptr, c_double, c_int
+  type(c_ptr), value :: dest, src
+  integer(c_int) :: gsl_spmatrix_csc
+end function gsl_spmatrix_csc
+function gsl_spmatrix_csr(dest, src) bind(c)
+  import :: c_ptr, c_double, c_int
+  type(c_ptr), value :: dest, src
+  integer(c_int) :: gsl_spmatrix_csr
+end function gsl_spmatrix_csr
+function gsl_spmatrix_compress(src, sptype) bind(c)
+  import :: c_ptr, c_double, c_int
+  type(c_ptr), value :: src
+  integer(c_int), value :: sptype
+  type(c_ptr) :: gsl_spmatrix_compress
+end function gsl_spmatrix_compress
 function gsl_spmatrix_d2sp(S, A) bind(c)
   import :: c_ptr, c_int
   type(c_ptr), value :: S, A
@@ -102,6 +139,11 @@ function gsl_spmatrix_transpose_memcpy(dest, src) bind(c)
   type(c_ptr), value :: dest, src
   integer(c_int) :: gsl_spmatrix_transpose_memcpy
 end function gsl_spmatrix_transpose_memcpy
+function gsl_spmatrix_transpose(m) bind(c)
+  import :: c_ptr, c_int
+  type(c_ptr), value :: m
+  integer(c_int) :: gsl_spmatrix_transpose
+end function gsl_spmatrix_transpose
 function gsl_spblas_dgemv(transa, alpha, a, x, beta, y) bind(c)
   import :: c_ptr, c_int, c_double
   integer(c_int), value :: transa
@@ -115,3 +157,33 @@ function gsl_spblas_dgemm(alpha, a, b, c) bind(c)
   real(c_double), value :: alpha
   integer(c_int) :: gsl_spblas_dgemm
 end function gsl_spblas_dgemm
+!
+! I/O
+!
+integer(c_int) function gsl_spmatrix_fwrite(stream, m) bind(c)
+  import :: c_int, c_ptr
+  type(c_ptr), value :: stream, m
+end function gsl_spmatrix_fwrite
+integer(c_int) function gsl_spmatrix_fread(stream, m) bind(c)
+  import :: c_int, c_ptr
+  type(c_ptr), value :: stream, m
+end function gsl_spmatrix_fread
+integer(c_int) function gsl_spmatrix_fprintf(stream, m, format) bind(c)
+  import :: c_int, c_ptr, c_char
+  type(c_ptr), value :: stream, m
+  character(kind=c_char), intent(in) :: format(*)
+end function gsl_spmatrix_fprintf
+type(c_ptr) function gsl_spmatrix_fscanf(stream) bind(c)
+  import :: c_int, c_ptr
+  type(c_ptr), value :: stream
+end function gsl_spmatrix_fscanf
+!
+! helper
+!
+subroutine gsl_aux_spmatrix_getfields(m, ip, dp, pp, psize) bind(c)
+  import :: c_size_t, c_ptr
+  type(c_ptr), value :: m 
+  type(c_ptr) :: ip, dp, pp
+  integer(c_size_t) :: psize
+end subroutine
+

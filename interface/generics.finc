@@ -118,6 +118,7 @@
      module procedure fgsl_vector_int_init
      module procedure fgsl_vector_init_legacy
      module procedure fgsl_vector_complex_init
+     module procedure fgsl_vector_complex_init_legacy
   end interface
   interface fgsl_vector_free
      module procedure fgsl_vector_free
@@ -126,7 +127,9 @@
   end interface
   interface fgsl_matrix_init
      module procedure fgsl_matrix_init
+     module procedure fgsl_matrix_init_legacy
      module procedure fgsl_matrix_complex_init
+     module procedure fgsl_matrix_complex_init_legacy
   end interface
   interface fgsl_matrix_free
      module procedure fgsl_matrix_free
@@ -134,6 +137,7 @@
   end interface fgsl_matrix_free
   interface fgsl_vector_to_fptr
      module procedure fgsl_vector_to_fptr
+     module procedure fgsl_vector_complex_to_fptr
      module procedure fgsl_vector_int_to_fptr
   end interface fgsl_vector_to_fptr
   interface fgsl_vector_align
@@ -148,6 +152,10 @@
      module procedure fgsl_matrix_complex_align
      module procedure fgsl_matrix_complex_pointer_align
   end interface
+  interface fgsl_matrix_to_fptr
+     module procedure fgsl_matrix_to_fptr
+     module procedure fgsl_matrix_complex_to_fptr
+  end interface fgsl_matrix_to_fptr
 !
 ! Permutations and combinations
 !
@@ -164,8 +172,10 @@
 !
   interface fgsl_sort
      module procedure fgsl_sort_double
+     module procedure fgsl_sort2_double
      module procedure fgsl_sort_long
      module procedure fgsl_sort_vector
+     module procedure fgsl_sort_vector2
   end interface
   interface fgsl_sort_index
      module procedure fgsl_sort_double_index

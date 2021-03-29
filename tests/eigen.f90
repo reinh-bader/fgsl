@@ -15,19 +15,13 @@ program eigen
 !
   call unit_init(200)
 !
-  a = fgsl_matrix_init(1.0_fgsl_double)
-  evec = fgsl_matrix_init(1.0_fgsl_double)
-  eval = fgsl_vector_init(1.0_fgsl_double)
+  a = fgsl_matrix_init(af)
+  evec = fgsl_matrix_init(evecf)
+  eval = fgsl_vector_init(evalf)
   wks = fgsl_eigen_symm_alloc(3_fgsl_size_t)
   wksv = fgsl_eigen_symmv_alloc(3_fgsl_size_t)
   af = reshape((/ 1.0d0, -1.0d0, 0.0d0, -1.0d0, 2.0d0, 3.0d0, &
        0.0d0, 3.0d0, 1.0d0 /), (/3, 3/))
-  status = fgsl_matrix_align(af, 3_fgsl_size_t, 3_fgsl_size_t, &
-       3_fgsl_size_t,a)
-  status = fgsl_matrix_align(evecf, 3_fgsl_size_t, 3_fgsl_size_t, &
-       3_fgsl_size_t,evec)
-  status = fgsl_vector_align(evalf, 3_fgsl_size_t, eval, 3_fgsl_size_t, &
-       0_fgsl_size_t, 1_fgsl_size_t)
   status = fgsl_eigen_symm(a, eval, wks)
   call unit_assert_equal_within('fgsl_eigen_symm:eval',&
        (/(3.0d0+sqrt(41.0d0))/2.0d0, 1.0d0, (3.0d0-sqrt(41.0d0))/2.0d0 /), &

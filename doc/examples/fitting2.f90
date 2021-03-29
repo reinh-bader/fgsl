@@ -10,12 +10,6 @@ program fitting2
   real(fgsl_double) :: cov_m(3,3), c_v(3)
   type(fgsl_multifit_linear_workspace) :: work
 !
-  x = fgsl_matrix_init(type=1.0D0)
-  cov = fgsl_matrix_init(type=1.0D0)
-  y = fgsl_vector_init(type=1.0D0)
-  w = fgsl_vector_init(type=1.0D0)
-  c = fgsl_vector_init(type=1.0D0)
-!
   open(20, file='fitting2.dat', form='formatted', status='old', iostat=status)
   if (status > 0) then
      stop 'Could not open fitting2.dat. You may need to run fitting3.exe'
@@ -23,13 +17,11 @@ program fitting2
   read(20, *) n
   allocate(x_m(3, n), y_v(n), w_v(n))
 !
-  status = fgsl_vector_align(y_v, n, y, n, 0_fgsl_size_t, 1_fgsl_size_t)
-  status = fgsl_vector_align(w_v, n, w, n, 0_fgsl_size_t, 1_fgsl_size_t)
-  status = fgsl_matrix_align(x_m, 3_fgsl_size_t, 3_fgsl_size_t, n, x)
-  status = fgsl_vector_align(c_v, 3_fgsl_size_t, c, &
-       3_fgsl_size_t, 0_fgsl_size_t, 1_fgsl_size_t)
-  status = fgsl_matrix_align(cov_m, 3_fgsl_size_t, 3_fgsl_size_t, &
-       3_fgsl_size_t, cov)
+  x = fgsl_matrix_init(x_m)
+  cov = fgsl_matrix_init(cov_m)
+  y = fgsl_vector_init(y_v)
+  w = fgsl_vector_init(w_v)
+  c = fgsl_vector_init(c_v)
 !
   do i=1, n
      read(20, *) xi, yi, ei

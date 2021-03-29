@@ -191,7 +191,7 @@ int fgsl_aux_vector_complex_align(double *a, size_t len,
     if (fvec == NULL || fvec->block == NULL) {
 	return GSL_EFAULT;
     }
-    if (offset + size*stride > len) {
+    if (offset + 1 + (size-1)*stride > len) {
 	return GSL_EINVAL;
     }
     fvec->block->size = len;
@@ -1367,6 +1367,26 @@ const gsl_splinalg_itersolve_type *fgsl_aux_splinalg_itersolve_alloc(int i) {
 void gsl_spmatrix_size(gsl_spmatrix *m, size_t *n1, size_t *n2) {
   *n1 = m->size1;
   *n2 = m->size2;
+}
+
+void gsl_aux_spmatrix_getfields(gsl_spmatrix *m, int **i, double **data, int **p, size_t *psize) { 
+  *i    = m->i;
+  *data = m->data;
+  *p    = m->p;
+  switch (m->sptype) {
+    case GSL_SPMATRIX_COO:
+    *psize = m->nz;
+    break;
+    case GSL_SPMATRIX_CSC:
+    *psize = m->size2+1;
+    break;
+    case GSL_SPMATRIX_CSR:
+    *psize = m->size1+1;
+    break;
+    default:
+    *psize = 0;
+    break;
+  }
 }
 
 

@@ -1,3 +1,22 @@
+Changes in 1.5.0 (by R Bader):
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+This release introduces support for gsl 2.6. An overview:
+
+1. added linalg LQ and LDLT routines
+2. augmented the legacy triangular matrix interface by the
+   better designed one currently documented.
+   Note: the old interface will be eventually removed.
+3. added interfaces for banded systems (cholesky, LDLT)
+4. added missing calls from spmatrix module (note: some
+   remain unsupported).
+5. Updated specfunc Hermite polynomial and function interfaces.
+6. Added recursive QR solvers to linalg
+
+Comment:
+
+*  the gsl_bst module is not supported in this release.
+   
+
 Changes in 1.4.0 (by R Bader):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This release introduces support for gsl 2.5. An overview:

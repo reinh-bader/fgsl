@@ -16,12 +16,8 @@ program bspline
 !
   sw = fgsl_bspline_alloc(4_fgsl_size_t, nbreak)
   kv = (/ (dble(i-1), i=1,nbreak) /)
-  b = fgsl_vector_init(1.0d0) ; k = fgsl_vector_init(1.0d0)
-  status = fgsl_vector_align(kv, nbreak, k, nbreak, 0_fgsl_size_t, &
-       1_fgsl_size_t)
-  status = fgsl_vector_align(bv, ncbf, b, ncbf, 0_fgsl_size_t, &
-       1_fgsl_size_t)
-  status = fgsl_vector_align(bp, b)
+  b = fgsl_vector_init(bv) ; k = fgsl_vector_init(kv)
+  bp => fgsl_vector_to_fptr(b)
 !  write(6, *) 'Size = ',size(bp)
   status = fgsl_bspline_knots(k, sw)
   call unit_assert_equal('fgsl_bspline_knots:status',fgsl_success,status)

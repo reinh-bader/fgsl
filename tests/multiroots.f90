@@ -14,8 +14,8 @@ contains
     call fgsl_obj_c_ptr(fx, x)
     call fgsl_obj_c_ptr(ff, f)
     call c_f_pointer(params, par, (/ 2 /))
-    status = fgsl_vector_align(xv, fx)
-    status = fgsl_vector_align(yv, ff)
+    xv => fgsl_vector_to_fptr(fx)
+    yv => fgsl_vector_to_fptr(ff)
     yv(1) = par(1) * (1.0_fgsl_double - xv(1))
     yv(2) = par(2) * (xv(2) - xv(1)*xv(1))
     rosenbrock_f = fgsl_success
@@ -31,8 +31,8 @@ contains
     call fgsl_obj_c_ptr(fx, x)
     call fgsl_obj_c_ptr(dff, df)
     call c_f_pointer(params, par, (/ 2 /))
-    status = fgsl_vector_align(xv, fx)
-    status = fgsl_matrix_align(yv, dff)
+    xv => fgsl_vector_to_fptr(fx)
+    yv => fgsl_matrix_to_fptr(dff)
     yv(1:2,1:2) = reshape( source = (/ -par(1), 0.0_fgsl_double , &
          -2.0_fgsl_double*par(2)*xv(1), par(2)  /), &
          shape = (/ 2, 2 /))
@@ -79,16 +79,15 @@ program multiroots
   ptr = c_loc(fpar)
   mroot_f = fgsl_multiroot_function_init(rosenbrock_f,nrt,ptr)
   xv(1:2) = (/-10.0_fgsl_double, -5.0_fgsl_double/)
-  xvec = fgsl_vector_init(1.0_fgsl_double)
-  status = fgsl_vector_align(xv,nrt,xvec,nrt,0_fgsl_size_t,1_fgsl_size_t)
+  xvec = fgsl_vector_init(xv(1:nrt))
   status = fgsl_multiroot_fsolver_set(mroot_fslv, mroot_f, xvec)
   call unit_assert_equal('fgsl_multiroot_fsolver_set:status', &
        fgsl_success,status)
   fvec = fgsl_multiroot_fsolver_f(mroot_fslv)
-  status = fgsl_vector_align(fptr, fvec)
+  fptr => fgsl_vector_to_fptr(fvec)
   call fgsl_vector_free(xvec)
   xvec = fgsl_multiroot_fsolver_root(mroot_fslv)
-  status = fgsl_vector_align(xptr, xvec)
+  xptr => fgsl_vector_to_fptr(xvec)
   call unit_assert_true('fgsl_multiroot_fsolver_alloc', &
        fgsl_well_defined(mroot_fslv), .true.)
   i = 0
@@ -123,16 +122,15 @@ program multiroots
        rosenbrock_fdf,nrt,ptr)
 !
   xv(1:2) = (/-10.0_fgsl_double, -5.0_fgsl_double/)
-  xvec = fgsl_vector_init(1.0_fgsl_double)
-  status = fgsl_vector_align(xv,nrt,xvec,nrt,0_fgsl_size_t,1_fgsl_size_t)
+  xvec = fgsl_vector_init(xv(1:nrt))
   status = fgsl_multiroot_fdfsolver_set(mroot_fdfslv, mroot_fdf, xvec)
   call unit_assert_equal('fgsl_multiroot_fdfsolver_set:status', &
        fgsl_success,status)
   fvec = fgsl_multiroot_fdfsolver_f(mroot_fdfslv)
-  status = fgsl_vector_align(fptr, fvec)
+  fptr => fgsl_vector_to_fptr(fvec)
   call fgsl_vector_free(xvec)
   xvec = fgsl_multiroot_fdfsolver_root(mroot_fdfslv)
-  status = fgsl_vector_align(xptr, xvec)
+  xptr => fgsl_vector_to_fptr(xvec)
   call unit_assert_true('fgsl_multiroot_fdfsolver_alloc', &
        fgsl_well_defined(mroot_fdfslv), .true.)
   i = 0
