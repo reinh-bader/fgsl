@@ -172,8 +172,10 @@
 !
   interface fgsl_sort
      module procedure fgsl_sort_double
+     module procedure fgsl_sort2_double
      module procedure fgsl_sort_long
      module procedure fgsl_sort_vector
+     module procedure fgsl_sort_vector2
   end interface
   interface fgsl_sort_index
      module procedure fgsl_sort_double_index

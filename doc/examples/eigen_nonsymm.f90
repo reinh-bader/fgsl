@@ -11,20 +11,15 @@ program eigen_nonsymm
   complex(fgsl_double), target :: evecf(n, n), evalf(4)
   type(fgsl_eigen_nonsymmv_workspace) :: w
 !
-  a = fgsl_matrix_init(type=1.0_fgsl_double)
-  evec = fgsl_matrix_init(type=ai)
-  eval = fgsl_vector_init(type=ai)
+  a = fgsl_matrix_init(af)
+  evec = fgsl_matrix_init(evecf)
+  eval = fgsl_vector_init(evalf)
 
 
   af =    reshape((/-1.0d0, 1.0d0, -1.0d0, 1.0d0, &
                     -8.0d0, 4.0d0, -2.0d0, 1.0d0, &
                     27.0d0, 9.0d0,  3.0d0, 1.0d0, &
                     64.0d0,16.0d0,  4.0d0, 1.0d0  /), (/ 4, 4 /))
-  status = fgsl_matrix_align(af, n, n, n, a)
-  status = fgsl_matrix_align(evecf, n, n, n, evec)
-  status = fgsl_vector_align(evalf, n, eval, n, 0_fgsl_size_t, &
-       1_fgsl_size_t)
-
   w = fgsl_eigen_nonsymmv_alloc(n)
 
   status = fgsl_eigen_nonsymmv(a, eval, evec, w)

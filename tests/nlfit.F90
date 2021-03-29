@@ -23,8 +23,8 @@ contains
 !
     call fgsl_obj_c_ptr(f_x, x)
     call fgsl_obj_c_ptr(f_f, f)
-    status = fgsl_vector_align(p_x, f_x)
-    status = fgsl_vector_align(p_f, f_f)
+    p_x => fgsl_vector_to_fptr(f_x)
+    p_f => fgsl_vector_to_fptr(f_f)
     call c_f_pointer(cdata, f_data)
     do i=1,f_data%n
        yy = p_x(1) * exp(- p_x(2) * dble(i-1) ) + p_x(3)
@@ -46,8 +46,8 @@ contains
 !
     call fgsl_obj_c_ptr(f_x, x)
     call fgsl_obj_c_ptr(f_j, j)
-    status = fgsl_vector_align(p_x, f_x)
-    status = fgsl_matrix_align(p_j, f_j)
+    p_x => fgsl_vector_to_fptr(f_x)
+    p_j => fgsl_matrix_to_fptr(f_j)
     call c_f_pointer(cdata, f_data)
     do i=1,f_data%n
        yy = exp(- p_x(2) * dble(i-1) )
@@ -103,8 +103,7 @@ program nlfit
   nlfit_fdf = fgsl_multifit_function_fdf_init(expb_f, expb_df, expb_fdf, nmax, nrt, ptr)
   nlfit_slv = fgsl_multifit_fdfsolver_alloc(fgsl_multifit_fdfsolver_lmsder, nmax, nrt)
   xv(1:3) = (/1.0_fgsl_double, 0.0_fgsl_double, 0.0_fgsl_double/)
-  xvec = fgsl_vector_init(1.0_fgsl_double)
-  status = fgsl_vector_align(xv,nrt,xvec,nrt,0_fgsl_size_t,1_fgsl_size_t)
+  xvec = fgsl_vector_init(xv(1:nrt))
   call unit_assert_true('fgsl_multifit_fdfsolver_alloc', &
        fgsl_well_defined(nlfit_slv), .true.)
 
@@ -128,7 +127,7 @@ program nlfit
        fgsl_success,status)
 
   pos = fgsl_multifit_fdfsolver_position(nlfit_slv)
-  status = fgsl_vector_align(pv, pos)
+  pv => fgsl_vector_to_fptr(pos)
   call unit_assert_equal_within('fgsl_multifit_fdfsolver_position-1',&
        (/4.8799966121990526d0,0.10993467064985155d0,1.1946651536729409d0/), &
        pv, eps10)
@@ -138,8 +137,7 @@ program nlfit
   nlfit_fdf = fgsl_multifit_function_fdf_init(expb_f, expb_df, expb_fdf, nmax, nrt, ptr)
   nlfit_slv = fgsl_multifit_fdfsolver_alloc(fgsl_multifit_fdfsolver_lmsder, nmax, nrt)
   xv(1:3) = (/1.0_fgsl_double, 0.0_fgsl_double, 0.0_fgsl_double/)
-  xvec = fgsl_vector_init(1.0_fgsl_double)
-  status = fgsl_vector_align(xv,nrt,xvec,nrt,0_fgsl_size_t,1_fgsl_size_t)
+  xvec = fgsl_vector_init(xv(1:nrt))
   call unit_assert_true('fgsl_multifit_fdfsolver_alloc', &
        fgsl_well_defined(nlfit_slv), .true.)
 
@@ -151,7 +149,7 @@ program nlfit
   call unit_assert_equal('fgsl_multifit_fdfsolver_driver:status', &
        fgsl_success,status)
   pos = fgsl_multifit_fdfsolver_position(nlfit_slv)
-  status = fgsl_vector_align(pv, pos)
+  pv => fgsl_vector_to_fptr(pos)
   call unit_assert_equal_within('fgsl_multifit_fdfsolver_position-1',&
        (/4.8799966121990526d0,0.10993467064985155d0,1.1946651536729409d0/), &
        pv, eps7)

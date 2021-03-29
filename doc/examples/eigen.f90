@@ -8,19 +8,15 @@ program eigen
   real(fgsl_double), target :: af(n, n), evecf(n, n), evalf(4)
   type(fgsl_eigen_symmv_workspace) :: w
 !
-  a = fgsl_matrix_init(type=1.0_fgsl_double)
-  evec = fgsl_matrix_init(type=1.0_fgsl_double)
-  eval = fgsl_vector_init(type=1.0_fgsl_double)
+  a = fgsl_matrix_init(af)
+  evec = fgsl_matrix_init(evecf)
+  eval = fgsl_vector_init(evalf)
 
 
   af = reshape((/1.0d0  , 1/2.0d0, 1/3.0d0, 1/4.0d0, &
                  1/2.0d0, 1/3.0d0, 1/4.0d0, 1/5.0d0, &
                  1/3.0d0, 1/4.0d0, 1/5.0d0, 1/6.0d0, &
                  1/4.0d0, 1/5.0d0, 1/6.0d0, 1/7.0d0 /), (/ 4, 4 /))
-  status = fgsl_matrix_align(af, n, n, n, a)
-  status = fgsl_matrix_align(evecf, n, n, n, evec)
-  status = fgsl_vector_align(evalf, n, eval, n, 0_fgsl_size_t, &
-       1_fgsl_size_t)
 
   w = fgsl_eigen_symmv_alloc(n)
 

@@ -77,7 +77,7 @@ program nlfit
   type(data), target :: fitdata
   type(c_ptr) :: ptr
   integer(fgsl_int) :: info
-  real(fgsl_double), target :: v_params(nrt), v_cov(nrt,nrt), v_jac(nmax,nrt), v_wts(nmax)
+  real(fgsl_double), target :: v_params(nrt), v_cov(nrt,nrt), v_jac(nrt,nmax), v_wts(nmax)
   real(fgsl_double), pointer :: v_fun(:), v_parptr(:)
   real(fgsl_double) :: chi, c, dy, si, xtol, gtol, ftol
   integer :: i
@@ -95,8 +95,7 @@ program nlfit
      fitdata%y(i) = fitdata%y(i) + dy
      write(*, fmt='(I3,2X,2(F16.8,1X))') i, fitdata%y(i), si
   end do
-  wts = fgsl_vector_init(type = 1.0_fgsl_double)
-  status = fgsl_vector_align(v_wts, nmax, wts, nmax, 0_fgsl_size_t, 1_fgsl_size_t)
+  wts = fgsl_vector_init(v_wts)
 !
 ! set up default values for solver parameters, initialize function object
 ! and solver workspace
@@ -110,20 +109,14 @@ program nlfit
 !
 ! initial guess for fit parameters
   v_params(1:3) = (/1.0_fgsl_double, 0.0_fgsl_double, 0.0_fgsl_double/)
-  params = fgsl_vector_init(type = 1.0_fgsl_double)
-  status = fgsl_vector_align(v_params,nrt,params,nrt, &
-       0_fgsl_size_t,1_fgsl_size_t)
+  params = fgsl_vector_init(v_params)
 ! alignment of target function and parameter values only needed once
 ! storage is persistently allocated within the working spade
-  status = fgsl_vector_align(v_fun, &
-       fgsl_multifit_nlinear_residual(nlfit_w))
-  status = fgsl_vector_align(v_parptr, &
-       fgsl_multifit_nlinear_position(nlfit_w))
+  v_fun => fgsl_vector_to_fptr(fgsl_multifit_nlinear_residual(nlfit_w))
+  v_parptr => fgsl_vector_to_fptr(fgsl_multifit_nlinear_position(nlfit_w))
 ! storage for cov within Fortran
-  cov = fgsl_matrix_init(type = 1.0_fgsl_double)
-  jac = fgsl_matrix_init(type = 1.0_fgsl_double)
-  status = fgsl_matrix_align(v_cov,nrt,nrt,nrt,cov)
-  status = fgsl_matrix_align(v_jac,nrt,nrt,nmax,jac)
+  cov = fgsl_matrix_init(v_cov)
+  jac = fgsl_matrix_init(v_jac)
   if (fgsl_well_defined(nlfit_w)) then
 !
 ! initialize solver with starting points and weights
