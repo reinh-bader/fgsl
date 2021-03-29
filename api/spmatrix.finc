@@ -198,7 +198,25 @@ integer(fgsl_int) function fgsl_spmatrix_fprintf(stream, m, format)
   character(kind=fgsl_char, len=*), intent(in) :: format
   fgsl_spmatrix_fprintf = gsl_spmatrix_fprintf(stream%gsl_file, m%gsl_spmatrix, format)
 end function fgsl_spmatrix_fprintf
-integer(fgsl_int) function fgsl_spmatrix_fscanf(stream)
+type(fgsl_spmatrix) function fgsl_spmatrix_fscanf(stream)
   type(fgsl_file) :: stream
-  fgsl_spmatrix_fscanf = gsl_spmatrix_fscanf(stream%gsl_file)
+  fgsl_spmatrix_fscanf%gsl_spmatrix = gsl_spmatrix_fscanf(stream%gsl_file)
 end function fgsl_spmatrix_fscanf
+!
+! helper function
+!
+subroutine fgsl_spmatrix_getfields(m, i, p, d)
+  type(fgsl_spmatrix), intent(in) :: m
+  integer(fgsl_int), pointer, intent(inout) :: i(:), p(:)
+  real(fgsl_double), pointer, intent(inout) :: d(:)
+
+  type(c_ptr) :: ip, pp, dp
+  integer(fgsl_size_t) :: nz, psize
+
+  call gsl_aux_spmatrix_getfields(m%gsl_spmatrix, ip, dp, pp, psize)
+  nz = gsl_spmatrix_nnz(m%gsl_spmatrix) 
+  call c_f_pointer(ip, i, [nz])
+  call c_f_pointer(dp, d, [nz])
+  call c_f_pointer(pp, p, [psize])
+end subroutine fgsl_spmatrix_getfields
+

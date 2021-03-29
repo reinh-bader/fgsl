@@ -800,7 +800,8 @@ module fgsl
        fgsl_spmatrix_scale_rows, fgsl_spmatrix_add_to_dense, fgsl_spmatrix_min_index, &
        fgsl_spmatrix_csc,  fgsl_spmatrix_csr,  fgsl_spmatrix_compress, &
        fgsl_spmatrix_fwrite, fgsl_spmatrix_fread, fgsl_spmatrix_fscanf, &
-       fgsl_spmatrix_fprintf, fgsl_spblas_dgemv, fgsl_spblas_dgemm
+       fgsl_spmatrix_fprintf, fgsl_spblas_dgemv, fgsl_spblas_dgemm, &
+       fgsl_spmatrix_getfields
        
 
 ! sparse matrix linear algebra

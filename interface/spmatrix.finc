@@ -173,7 +173,17 @@ integer(c_int) function gsl_spmatrix_fprintf(stream, m, format) bind(c)
   type(c_ptr), value :: stream, m
   character(kind=c_char), intent(in) :: format(*)
 end function gsl_spmatrix_fprintf
-integer(c_int) function gsl_spmatrix_fscanf(stream) bind(c)
+type(c_ptr) function gsl_spmatrix_fscanf(stream) bind(c)
   import :: c_int, c_ptr
   type(c_ptr), value :: stream
 end function gsl_spmatrix_fscanf
+!
+! helper
+!
+subroutine gsl_aux_spmatrix_getfields(m, ip, dp, pp, psize) bind(c)
+  import :: c_size_t, c_ptr
+  type(c_ptr), value :: m 
+  type(c_ptr) :: ip, dp, pp
+  integer(c_size_t) :: psize
+end subroutine
+

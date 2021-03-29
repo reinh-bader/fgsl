@@ -19,10 +19,6 @@ addons:
 
 env:
   matrix:
-    - GCC=6 GSL=2.5
-    - GCC=7 GSL=2.5
-    - GCC=8 GSL=2.5
-    - GCC=9 GSL=2.5
     - GCC=6 GSL=2.6
     - GCC=7 GSL=2.6
     - GCC=8 GSL=2.6
@@ -31,12 +27,12 @@ env:
     - LD_LIBRARY_PATH=/usr/local/lib
     - LD_RUN_PATH=/usr/local/lib
     - PKG_CONFIG_LIBDIR=/usr/local/lib/pkgconfig
-matrix:
-  allow_failures:
-    - env: GCC=6 GSL=2.6
-    - env: GCC=7 GSL=2.6
-    - env: GCC=8 GSL=2.6
-    - env: GCC=9 GSL=2.6
+#matrix:
+#  allow_failures:
+#    - env: GCC=6 GSL=2.6
+#    - env: GCC=7 GSL=2.6
+#    - env: GCC=8 GSL=2.6
+#    - env: GCC=9 GSL=2.6
 before_install:
   - |
     if [ $TRAVIS_OS_NAME == osx ] ; then 
