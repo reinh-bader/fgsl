@@ -44,4 +44,7 @@ Some notes on the source management workflow
 
 * configure.ac contains the version info and may need an update
 * create a tarball after running configure: make dist
+* Update README file with release info
+* After merging a PR, create a new release (including tag) via the 
+  web interface
 
