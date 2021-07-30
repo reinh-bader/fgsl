@@ -32,3 +32,11 @@ Some notes on the source management workflow
 * if needed, keep making changes to the code, commit them and check the build results.
 * when done, merge the PR in and delete the local and remote working branch.
 
+(C) Documentation rebuild
+
+* Use Ubuntu-based system
+* Delete contents of html and latex folders in doc via "git rm -r *"
+* Run doxygen Doxyfile in base dir (may want to consider updates to Doxyfile)
+* Go to doc/latex and run make refman.pdf. Copy the file to ..
+* Run git add html in doc subdirectory.
+
