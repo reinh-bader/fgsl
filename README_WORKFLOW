@@ -40,3 +40,8 @@ Some notes on the source management workflow
 * Go to doc/latex and run make refman.pdf. Copy the file to ..
 * Run git add html in doc subdirectory.
 
+(D) packaging and release
+
+* configure.ac contains the version info and may need an update
+* create a tarball after running configure: make dist
+
