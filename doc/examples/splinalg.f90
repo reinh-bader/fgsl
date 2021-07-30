@@ -21,10 +21,8 @@ PROGRAM splinalg
   real(fgsl_double),dimension(0:n-1),target :: f_f, u_f
 
   A = fgsl_spmatrix_alloc(n,n)
-  f = fgsl_vector_init(1.0_fgsl_double)
-  u = fgsl_vector_init(1.0_fgsl_double)
-  status = fgsl_vector_align(f_f, n, f, n, 0_fgsl_size_t, 1_fgsl_size_t)
-  status = fgsl_vector_align(u_f, n, u, n, 0_fgsl_size_t, 1_fgsl_size_t)
+  f = fgsl_vector_init(f_f)
+  u = fgsl_vector_init(u_f)
   work = fgsl_splinalg_itersolve_alloc(T, n, 0_fgsl_size_t)
 
   ! construct the sparse matrix for the finite difference equation

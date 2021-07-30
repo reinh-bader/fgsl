@@ -93,9 +93,7 @@ program permutation
   call unit_assert_equal('fgsl_permute_long_inverse',&
         (/7,2,5,4,3,6,1,8/),int(ida))
   da = (/1.0d0,2.0d0,3.0d0,4.0d0,5.0d0,6.0d0,7.0d0,8.0d0/)
-  vec = fgsl_vector_init(1.0_fgsl_double)
-  status = fgsl_vector_align(da, 4_fgsl_size_t, vec, 4_fgsl_size_t, 0_fgsl_size_t, &
-       1_fgsl_size_t)
+  vec = fgsl_vector_init(da(1:4))
   status = fgsl_permute_vector(p2,vec)
   call unit_assert_equal_within('fgsl_permute',&
        (/4.0d0,3.0d0,2.0d0,1.0d0/),da(1:4),eps10)
@@ -104,9 +102,7 @@ program permutation
   call unit_assert_equal_within('fgsl_permute_inverse',&
        (/4.0d0,3.0d0,2.0d0,1.0d0/),da(1:4),eps10)
   call fgsl_vector_free(vec)
-  a = fgsl_matrix_init(1.0_fgsl_double)
-  status = fgsl_matrix_align(af, 4_fgsl_size_t, 4_fgsl_size_t, &
-       4_fgsl_size_t,a)
+  a = fgsl_matrix_init(af)
   af = reshape( [ 1.0d0, 0.0d0, 0.0d0, 0.0d0, &
                   0.0d0, 1.0d0, 0.0d0, 0.0d0, &
                   0.0d0, 0.0d0, 1.0d0, 0.0d0, &

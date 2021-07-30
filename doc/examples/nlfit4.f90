@@ -50,9 +50,9 @@ contains
     call c_f_pointer(params, par)
     sqrt_alpha = sqrt(par%alpha)
     call fgsl_obj_c_ptr(xx, x)
-    status = fgsl_vector_align(xxp, xx)
+    xxp => fgsl_vector_to_fptr(xx)
     call fgsl_obj_c_ptr(ff, f)
-    status = fgsl_vector_align(ffp, ff)
+    ffp => fgsl_vector_to_fptr(ff)
     sx = 0.0_fgsl_double
     do i = 1, size(xxp)
        ffp(i) = sqrt_alpha * (xxp(i) - 1.0_fgsl_double)
@@ -76,9 +76,9 @@ contains
 
     call c_f_pointer(params, par)
     call fgsl_obj_c_ptr(xx, x)
-    status = fgsl_vector_align(xxp, xx)
+    xxp => fgsl_vector_to_fptr(xx)
     call fgsl_obj_c_ptr(uu, u)
-    status = fgsl_vector_align(uup, uu)
+    uup => fgsl_vector_to_fptr(uu)
 !
 !   store 2*x in last row of J
     do i = 1, size(xxp)
@@ -117,11 +117,11 @@ contains
     integer(fgsl_int) :: status
 
     call fgsl_obj_c_ptr(f_v, v)
-    status = fgsl_vector_align(p_v, f_v)
+    p_v => fgsl_vector_to_fptr(f_v)
     call fgsl_obj_c_ptr(f_fvv, fvv)
-    status = fgsl_vector_align(p_fvv, f_fvv)
+    p_fvv => fgsl_vector_to_fptr(f_fvv)
     call fgsl_obj_c_ptr(xx, x)
-    status = fgsl_vector_align(p_xx, xx)
+    p_xx => fgsl_vector_to_fptr(xx)
    
     p_fvv = 0.0_fgsl_double
     p_fvv( size(p_xx) + 1 ) = 2.0_fgsl_double * sum(p_v * p_v)
@@ -150,8 +150,8 @@ contains
     work = fgsl_multilarge_nlinear_alloc(t, params, n, p)
     f = fgsl_multilarge_nlinear_residual(work)
     x = fgsl_multilarge_nlinear_position(work)
-    status = fgsl_vector_align(p_x, x)
-    status = fgsl_vector_align(p_f, f)
+    p_x => fgsl_vector_to_fptr(x)
+    p_f => fgsl_vector_to_fptr(f)
 
    ! write(*, *) 'SIzes n, p: ', n, p
    !write(*, *) 'SIzes f, x: ', size(p_f), size(p_x)
@@ -209,10 +209,8 @@ program nlfit4
 
   fdf_params = fgsl_multilarge_nlinear_default_parameters()
 
-  f = fgsl_vector_init(type = 1.0_fgsl_double)
-  x = fgsl_vector_init(type = 1.0_fgsl_double)
-  status = fgsl_vector_align(tf, n, f, n, 0_fgsl_size_t, 1_fgsl_size_t)
-  status = fgsl_vector_align(tx, p, x, p, 0_fgsl_size_t, 1_fgsl_size_t)
+  f = fgsl_vector_init(tf)
+  x = fgsl_vector_init(tx)
 !
 ! model params: sparse Jacobian matrix with 2*p non-zero elements
 ! in triplet format

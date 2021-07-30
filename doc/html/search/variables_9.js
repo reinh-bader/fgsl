@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['sigma_4970',['sigma',['../structfgsl_1_1fgsl__multifit__robust__stats.html#a5da53015a9d12f1c5efca715e3db852b',1,'fgsl::fgsl_multifit_robust_stats']]],
-  ['sigma_5fmad_4971',['sigma_mad',['../structfgsl_1_1fgsl__multifit__robust__stats.html#aa9d516d07e5792e733b0074d4b402999',1,'fgsl::fgsl_multifit_robust_stats']]],
-  ['sigma_5fols_4972',['sigma_ols',['../structfgsl_1_1fgsl__multifit__robust__stats.html#adf176fab65c7036d151f74de617d219a',1,'fgsl::fgsl_multifit_robust_stats']]],
-  ['sigma_5frob_4973',['sigma_rob',['../structfgsl_1_1fgsl__multifit__robust__stats.html#a5584eeb03f4001749227079089275075',1,'fgsl::fgsl_multifit_robust_stats']]],
-  ['sse_4974',['sse',['../structfgsl_1_1fgsl__multifit__robust__stats.html#a137f634721561413a40c1269d954a504',1,'fgsl::fgsl_multifit_robust_stats']]]
+  ['r_5120',['r',['../structfgsl_1_1fgsl__multifit__robust__stats.html#a3353b0664ef271acdce6aa4b92ace197',1,'fgsl::fgsl_multifit_robust_stats']]],
+  ['rmse_5121',['rmse',['../structfgsl_1_1fgsl__multifit__robust__stats.html#a9ab711f917ad9f632ab668ddfa73adfb',1,'fgsl::fgsl_multifit_robust_stats']]],
+  ['rsq_5122',['rsq',['../structfgsl_1_1fgsl__multifit__robust__stats.html#ad2d659d16fd8061bd781d1586a5f81d3',1,'fgsl::fgsl_multifit_robust_stats']]]
 ];

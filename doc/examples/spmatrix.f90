@@ -2,8 +2,11 @@ PROGRAM spmatrix
   use :: fgsl
   use, intrinsic :: iso_fortran_env, only : output_unit, error_unit
   implicit none
-  type(fgsl_spmatrix) :: A, C
+  type(fgsl_spmatrix) :: A, B, C
+  type(fgsl_file) :: stdout
   integer(fgsl_size_t) :: i, j
+  integer(fgsl_int), pointer :: pi(:), pp(:)
+  real(fgsl_double), pointer :: pd(:)
   integer(fgsl_int) :: status
 
   A = fgsl_spmatrix_alloc(5_fgsl_size_t, 4_fgsl_size_t) ! triplet format
@@ -27,9 +30,33 @@ PROGRAM spmatrix
     end do
   end do
 
+  write(output_unit, '(A)') 'matrix in triplet format:'
+  stdout = fgsl_stdout()
+  status = fgsl_spmatrix_fprintf(stdout, A, "%.1f")
+
   ! convert to compressed column format
-  C = fgsl_spmatrix_compcol(A);
+  B = fgsl_spmatrix_alloc_nzmax(5_fgsl_size_t, 4_fgsl_size_t, &
+        10_fgsl_size_t, fgsl_spmatrix_type_csc)
+  status = fgsl_spmatrix_csc(B,A)
+  call fgsl_spmatrix_getfields(B, pi, pp, pd)
+
+  write(output_unit, '(A)') 'matrix in compressed column format:'
+  write(output_unit, fmt='("i = ",*(i0,:,", "))') pi
+  write(output_unit, fmt='("p = ",*(i0,:,", "))') pp
+  write(output_unit, fmt='("d = ",*(f3.1,:,", "))') pd
+
+  ! convert to compressed row format
+  C = fgsl_spmatrix_alloc_nzmax(5_fgsl_size_t, 4_fgsl_size_t, &
+        10_fgsl_size_t, fgsl_spmatrix_type_csr)
+  status = fgsl_spmatrix_csr(C,A)
+  call fgsl_spmatrix_getfields(C, pi, pp, pd)
+
+  write(output_unit, '(A)') 'matrix in compressed row format:'
+  write(output_unit, fmt='("i = ",*(i0,:,", "))') pi
+  write(output_unit, fmt='("p = ",*(i0,:,", "))') pp
+  write(output_unit, fmt='("d = ",*(f3.1,:,", "))') pd
 
   call fgsl_spmatrix_free(A);
+  call fgsl_spmatrix_free(B);
   call fgsl_spmatrix_free(C);
 end program spmatrix

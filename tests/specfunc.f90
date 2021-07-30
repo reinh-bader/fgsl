@@ -9,7 +9,7 @@ program specfunc
   integer(fgsl_int) :: status
   real(fgsl_double) :: ra, ra_2, ra_3, ra_exp, ra_exp_2, x11, x21, &
        ra_arr(1), ra_arr_der(1), ra_arr_2(1), ra_arr_2_der(1), &
-       ra_arr_3(2), ra_arr_3_der(2)
+       ra_arr_3(2), ra_arr_3_der(2), ra_arr_4(3)
   type(fgsl_sf_result) :: sfres, sfres_der, sfres_2, sfres_2_der
   type(fgsl_sf_result_e10) :: sfres10
 !
@@ -1080,8 +1080,66 @@ program specfunc
       4.0d0,sfres%val,sfres%err)
   status = fgsl_sf_gegenpoly_array(3.0_fgsl_double,2.0_fgsl_double,ra_arr_3)
   call unit_assert_equal('fgsl_sf_gegenpoly_array:status',fgsl_success,status)
-  call unit_assert_equal_within('fgsl_sf_gegenpoly_1',1.d0,ra_arr_3(1),eps10)
-  call unit_assert_equal_within('fgsl_sf_gegenpoly_1',1.2d1,ra_arr_3(2),eps10)
+  call unit_assert_equal_within('fgsl_sf_gegenpoly_array',1.d0,ra_arr_3(1),eps10)
+  call unit_assert_equal_within('fgsl_sf_gegenpoly_array',1.2d1,ra_arr_3(2),eps10)
+!
+! Hermite polynomials and functions
+!
+  ra = fgsl_sf_hermite(2_fgsl_int, 2.0_fgsl_double)
+  call unit_assert_equal_within('fgsl_sf_hermite',1.4d1,ra,eps10)
+  status = fgsl_sf_hermite_e(2_fgsl_int, 2.0_fgsl_double, sfres)
+  call unit_assert_equal_within('fgsl_sf_hermite_e',&
+      1.4d1,sfres%val,sfres%err)
+  status = fgsl_sf_hermite_array(2_fgsl_int, 2.0_fgsl_double, ra_arr_4)
+  call unit_assert_equal_within('fgsl_sf_hermite_array',[ 1.0d0, 4.0d0, 1.4d1 ],ra_arr_4,eps10) 
+  ra = fgsl_sf_hermite_series(2_fgsl_int, 2.0_fgsl_double, [ 1.d0, 1.d0, 1.d0 ])
+  call unit_assert_equal_within('fgsl_sf_hermite_series', sum(ra_arr_4), ra, eps10)
+  status = fgsl_sf_hermite_series_e(2_fgsl_int, 2.0_fgsl_double, [ 1.d0, 1.d0, 1.d0 ], sfres)
+  call unit_assert_equal_within('fgsl_sf_hermite_series', sum(ra_arr_4), sfres%val, sfres%err)
+  ra = fgsl_sf_hermite_prob(2_fgsl_int, 2.0_fgsl_double)
+  call unit_assert_equal_within('fgsl_sf_hermite_prob',3.d0,ra,eps10)
+  status = fgsl_sf_hermite_prob_e(2_fgsl_int, 2.0_fgsl_double, sfres)
+  call unit_assert_equal_within('fgsl_sf_hermite_prob_e',&
+      3.d0,sfres%val,sfres%err)
+  status = fgsl_sf_hermite_prob_array(2_fgsl_int, 2.0_fgsl_double, ra_arr_4)
+  call unit_assert_equal_within('fgsl_sf_hermite_prob_array',[ 1.0d0, 2.0d0, 3.0d0 ],ra_arr_4,eps10) 
+  ra = fgsl_sf_hermite_prob_series(2_fgsl_int, 2.0_fgsl_double, [ 1.d0, 1.d0, 1.d0 ])
+  call unit_assert_equal_within('fgsl_sf_hermite_prob_series', sum(ra_arr_4), ra, eps10)
+  status = fgsl_sf_hermite_prob_series_e(2_fgsl_int, 2.0_fgsl_double, [ 1.d0, 1.d0, 1.d0 ], sfres)
+  call unit_assert_equal_within('fgsl_sf_hermite_prob_series', sum(ra_arr_4), sfres%val, sfres%err)
+  ra = fgsl_sf_hermite_deriv(1_fgsl_int, 2_fgsl_int, 2.0_fgsl_double)
+  call unit_assert_equal_within('fgsl_sf_hermite_deriv',1.6d1,ra,eps10)
+  status = fgsl_sf_hermite_deriv_e(1_fgsl_int, 2_fgsl_int, 2.0_fgsl_double, sfres)
+  call unit_assert_equal_within('fgsl_sf_hermite_deriv_e',&
+      1.6d1,sfres%val,sfres%err)
+  status = fgsl_sf_hermite_array_deriv(0_fgsl_int, 2_fgsl_int, 2.0_fgsl_double, ra_arr_4)
+  call unit_assert_equal_within('fgsl_sf_hermite_array_deriv',[ 1.0d0, 4.0d0, 1.4d1 ],ra_arr_4,eps10) 
+  status = fgsl_sf_hermite_deriv_array(1_fgsl_int, 2_fgsl_int, 2.0_fgsl_double, ra_arr_3)
+  call unit_assert_equal_within('fgsl_sf_hermite_deriv_array',1.6d1,ra_arr_3(2),eps10)
+  
+  ra = fgsl_sf_hermite_func(2_fgsl_int, 2.0_fgsl_double)
+  call unit_assert_equal_within('fgsl_sf_hermite_func',1.4d1/sqrt(8.d0*sqrt(m_pi))*exp(-2.0d0),ra,eps10)
+  status = fgsl_sf_hermite_func_e(2_fgsl_int, 2.0_fgsl_double, sfres)
+  call unit_assert_equal_within('fgsl_sf_hermite_func_e',&
+      1.4d1/sqrt(8.d0*sqrt(m_pi))*exp(-2.0d0),sfres%val,sfres%err)
+  ra = fgsl_sf_hermite_func_fast(2_fgsl_int, 2.0_fgsl_double)
+  call unit_assert_equal_within('fgsl_sf_hermite_func_fast',1.4d1/sqrt(8.d0*sqrt(m_pi))*exp(-2.0d0),ra,eps10)
+  status = fgsl_sf_hermite_func_fast_e(2_fgsl_int, 2.0_fgsl_double, sfres)
+  call unit_assert_equal_within('fgsl_sf_hermite_func_fast_e',&
+      1.4d1/sqrt(8.d0*sqrt(m_pi))*exp(-2.0d0),sfres%val,sfres%err)
+ 
+  ra = fgsl_sf_hermite_zero(2_fgsl_int, 1_fgsl_int)
+  call unit_assert_equal_within('fgsl_sf_hermite_zero',1.d0/sqrt(2.d0),ra,eps10)
+  status = fgsl_sf_hermite_zero_e(2_fgsl_int, 1_fgsl_int, sfres)
+  call unit_assert_equal_within('fgsl_sf_hermite_zero_e',&
+      1.d0/sqrt(2.d0),sfres%val,eps10)
+  ! sfres%err contains 0.d0 here, which is incorrect.
+  ra = fgsl_sf_hermite_prob_zero(2_fgsl_int, 1_fgsl_int)
+  call unit_assert_equal_within('fgsl_sf_hermite_prob_zero',1.d0,ra,eps10)
+  status = fgsl_sf_hermite_prob_zero_e(2_fgsl_int, 1_fgsl_int, sfres)
+  call unit_assert_equal_within('fgsl_sf_hermite_prob_zero_e',&
+      1.d0,sfres%val,eps10)
+
 !
 ! Hypergeometric functions
 !

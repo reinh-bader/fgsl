@@ -95,6 +95,10 @@ Functions/Subroutines</h2></td></tr>
 <tr class="separator:ae2390785aa3a33f1619b793bf2caecad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3df5d0ceea88fa0a7675a6a75e749e76"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a3df5d0ceea88fa0a7675a6a75e749e76">fgsl_linalg_complex_lu_invert</a> (lu, p, inverse)</td></tr>
 <tr class="separator:a3df5d0ceea88fa0a7675a6a75e749e76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0522eb821b84cbe12871d6bbfacff407"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a0522eb821b84cbe12871d6bbfacff407">fgsl_linalg_lu_invx</a> (lu, p)</td></tr>
+<tr class="separator:a0522eb821b84cbe12871d6bbfacff407"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6db0425bd4f8859300c8c7250d2323c0"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a6db0425bd4f8859300c8c7250d2323c0">fgsl_linalg_complex_lu_invx</a> (lu, p)</td></tr>
+<tr class="separator:a6db0425bd4f8859300c8c7250d2323c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f5f7d668125b203b30bcce6415e5cc4"><td class="memItemLeft" align="right" valign="top">real(fgsl_double) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a2f5f7d668125b203b30bcce6415e5cc4">fgsl_linalg_lu_det</a> (lu, signum)</td></tr>
 <tr class="separator:a2f5f7d668125b203b30bcce6415e5cc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b7c1ddb2195cc26e8040ac0bae5b957"><td class="memItemLeft" align="right" valign="top">complex(fgsl_double_complex) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a4b7c1ddb2195cc26e8040ac0bae5b957">fgsl_linalg_complex_lu_det</a> (lu, signum)</td></tr>
@@ -109,24 +113,36 @@ Functions/Subroutines</h2></td></tr>
 <tr class="separator:a3ac75e4a38e037d1b4b652e84030665b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abae4bc6bf64efb5860b999ae7001bda7"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#abae4bc6bf64efb5860b999ae7001bda7">fgsl_linalg_qr_decomp</a> (a, tau)</td></tr>
 <tr class="separator:abae4bc6bf64efb5860b999ae7001bda7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49008681610b8028697f4eee4503428c"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a49008681610b8028697f4eee4503428c">fgsl_linalg_qr_decomp_r</a> (a, t)</td></tr>
+<tr class="separator:a49008681610b8028697f4eee4503428c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a453aab0af228f854c2c4e21af6e0f950"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a453aab0af228f854c2c4e21af6e0f950">fgsl_linalg_qr_solve</a> (qr, tau, b, x)</td></tr>
 <tr class="separator:a453aab0af228f854c2c4e21af6e0f950"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf440ea7cfbdf4988d8d35de763708f6"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#abf440ea7cfbdf4988d8d35de763708f6">fgsl_linalg_qr_solve_r</a> (qr, t, b, x)</td></tr>
+<tr class="separator:abf440ea7cfbdf4988d8d35de763708f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7029ed3e4a0df13a7599a87f5260e377"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a7029ed3e4a0df13a7599a87f5260e377">fgsl_linalg_qr_svx</a> (qr, tau, x)</td></tr>
 <tr class="separator:a7029ed3e4a0df13a7599a87f5260e377"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afee3a0235231a2e3707a21e1fb07173a"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#afee3a0235231a2e3707a21e1fb07173a">fgsl_linalg_qr_lssolve</a> (qr, tau, b, x, residual)</td></tr>
 <tr class="separator:afee3a0235231a2e3707a21e1fb07173a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e787da96fe65c9ea707b5363934ccd1"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a9e787da96fe65c9ea707b5363934ccd1">fgsl_linalg_qr_lssolve_r</a> (qr, t, b, x, work)</td></tr>
+<tr class="separator:a9e787da96fe65c9ea707b5363934ccd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6987f9175c49215f6c78c48de3f01a1d"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a6987f9175c49215f6c78c48de3f01a1d">fgsl_linalg_qr_qtvec</a> (qr, tau, v)</td></tr>
 <tr class="separator:a6987f9175c49215f6c78c48de3f01a1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57e90a99f48784ad753a43e2fc1fa8d3"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a57e90a99f48784ad753a43e2fc1fa8d3">fgsl_linalg_qr_qtvec_r</a> (qr, t, v, work)</td></tr>
+<tr class="separator:a57e90a99f48784ad753a43e2fc1fa8d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8052f69f7485e6a05de0b1be501ed840"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a8052f69f7485e6a05de0b1be501ed840">fgsl_linalg_qr_qvec</a> (qr, tau, v)</td></tr>
 <tr class="separator:a8052f69f7485e6a05de0b1be501ed840"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a261ef794cdf8d3055ef837dd3691f785"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a261ef794cdf8d3055ef837dd3691f785">fgsl_linalg_qr_qtmat</a> (qr, tau, a)</td></tr>
 <tr class="separator:a261ef794cdf8d3055ef837dd3691f785"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acba176acb7e87adbe405cbd92bfd9e54"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#acba176acb7e87adbe405cbd92bfd9e54">fgsl_linalg_qr_qtmat_r</a> (qr, t, a, work)</td></tr>
+<tr class="separator:acba176acb7e87adbe405cbd92bfd9e54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1560faca27750ff17598a738727114e2"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a1560faca27750ff17598a738727114e2">fgsl_linalg_qr_rsolve</a> (qr, b, x)</td></tr>
 <tr class="separator:a1560faca27750ff17598a738727114e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ea403e6c3ec1e67b25bfe4d6b710077"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a0ea403e6c3ec1e67b25bfe4d6b710077">fgsl_linalg_qr_rsvx</a> (qr, x)</td></tr>
 <tr class="separator:a0ea403e6c3ec1e67b25bfe4d6b710077"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af11174059688ffdbc3f368d6b1a731ee"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#af11174059688ffdbc3f368d6b1a731ee">fgsl_linalg_qr_unpack</a> (qr, tau, q, r)</td></tr>
 <tr class="separator:af11174059688ffdbc3f368d6b1a731ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca2a971efdef91b19ee02f2343f71d12"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#aca2a971efdef91b19ee02f2343f71d12">fgsl_linalg_qr_unpack_r</a> (qr, t, q, r)</td></tr>
+<tr class="separator:aca2a971efdef91b19ee02f2343f71d12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36ef785b86019f22ea32594b5f8060af"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a36ef785b86019f22ea32594b5f8060af">fgsl_linalg_qr_qrsolve</a> (q, r, b, x)</td></tr>
 <tr class="separator:a36ef785b86019f22ea32594b5f8060af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50523f2137f82ac54ac5f406c4792799"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a50523f2137f82ac54ac5f406c4792799">fgsl_linalg_qr_update</a> (q, r, w, v)</td></tr>
@@ -159,6 +175,14 @@ Functions/Subroutines</h2></td></tr>
 <tr class="separator:a15cd7a4925481e17fe596f7350c7f788"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e9e7f34afc5f49ab848b33645c64c58"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a8e9e7f34afc5f49ab848b33645c64c58">fgsl_linalg_qrpt_rcond</a> (qr, rcond, work)</td></tr>
 <tr class="separator:a8e9e7f34afc5f49ab848b33645c64c58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a626b33869c23b422992b37da8a906b77"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a626b33869c23b422992b37da8a906b77">fgsl_linalg_lq_decomp</a> (a, tau)</td></tr>
+<tr class="separator:a626b33869c23b422992b37da8a906b77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5691130e4bd50653bd963611a1ab402"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#ab5691130e4bd50653bd963611a1ab402">fgsl_linalg_lq_lssolve</a> (lq, tau, b, x, residual)</td></tr>
+<tr class="separator:ab5691130e4bd50653bd963611a1ab402"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1ae798e808abc169cc972fc6bb959ab"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#ad1ae798e808abc169cc972fc6bb959ab">fgsl_linalg_lq_unpack</a> (lq, tau, q, l)</td></tr>
+<tr class="separator:ad1ae798e808abc169cc972fc6bb959ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a709aeebe997495ffc69d72b3e8550ccf"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a709aeebe997495ffc69d72b3e8550ccf">fgsl_linalg_lq_qtvec</a> (lq, tau, v)</td></tr>
+<tr class="separator:a709aeebe997495ffc69d72b3e8550ccf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af121515471c966f6d9d6618f84db341a"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#af121515471c966f6d9d6618f84db341a">fgsl_linalg_cod_decomp</a> (a, tau_q, tau_z, p, rank, work)</td></tr>
 <tr class="separator:af121515471c966f6d9d6618f84db341a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97ecd00bf84e95a4d68d4e3b8af08e5f"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a97ecd00bf84e95a4d68d4e3b8af08e5f">fgsl_linalg_cod_decomp_e</a> (a, tau_q, tau_z, p, tol, rank, work)</td></tr>
@@ -237,6 +261,14 @@ Functions/Subroutines</h2></td></tr>
 <tr class="separator:a9ad86aa5146a5fc21f5cced6ff414ab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a392a375f7834800a3f779bdae46f6ce5"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a392a375f7834800a3f779bdae46f6ce5">fgsl_linalg_mcholesky_rcond</a> (ldlt, p, rcond, work)</td></tr>
 <tr class="separator:a392a375f7834800a3f779bdae46f6ce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6b90428db7adbd50b5af52b318ddded"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#af6b90428db7adbd50b5af52b318ddded">fgsl_linalg_ldlt_decomp</a> (a)</td></tr>
+<tr class="separator:af6b90428db7adbd50b5af52b318ddded"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70b1a054dab82a4b75fa66416c217d32"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a70b1a054dab82a4b75fa66416c217d32">fgsl_linalg_ldlt_solve</a> (ldlt, b, x)</td></tr>
+<tr class="separator:a70b1a054dab82a4b75fa66416c217d32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae565c3082f1f77a5df7b185da25da904"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#ae565c3082f1f77a5df7b185da25da904">fgsl_linalg_ldlt_svx</a> (ldlt, x)</td></tr>
+<tr class="separator:ae565c3082f1f77a5df7b185da25da904"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a908f6566a68851af890f51a4c06bce1c"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a908f6566a68851af890f51a4c06bce1c">fgsl_linalg_ldlt_rcond</a> (ldlt, rcond, w)</td></tr>
+<tr class="separator:a908f6566a68851af890f51a4c06bce1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a529a24d383e0ed224830a3b5a45329b4"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a529a24d383e0ed224830a3b5a45329b4">fgsl_linalg_symmtd_decomp</a> (a, tau)</td></tr>
 <tr class="separator:a529a24d383e0ed224830a3b5a45329b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43c68814765ca38dd4054712c4dde774"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a43c68814765ca38dd4054712c4dde774">fgsl_linalg_symmtd_unpack</a> (a, tau, q, diag, subdiag)</td></tr>
@@ -295,14 +327,26 @@ Functions/Subroutines</h2></td></tr>
 <tr class="separator:a3a0cc14d7736d7e20be30ed7f07f093e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea909b87fb81242ac465f6651e63f536"><td class="memItemLeft" align="right" valign="top">integer(c_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#aea909b87fb81242ac465f6651e63f536">fgsl_linalg_solve_symm_cyc_tridiag</a> (diag, e, b, x)</td></tr>
 <tr class="separator:aea909b87fb81242ac465f6651e63f536"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82232b7f631cacda2a903f1d0fae1263"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a82232b7f631cacda2a903f1d0fae1263">fgsl_linalg_balance_matrix</a> (a, d)</td></tr>
-<tr class="separator:a82232b7f631cacda2a903f1d0fae1263"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83dceed1153771729fe0e1e3471550fe"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a83dceed1153771729fe0e1e3471550fe">fgsl_linalg_qr_matq</a> (QR, tau, A)</td></tr>
 <tr class="separator:a83dceed1153771729fe0e1e3471550fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0943d995c90a4c9582cb3b370045da60"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a0943d995c90a4c9582cb3b370045da60">fgsl_linalg_givens</a> (a, b, c, s)</td></tr>
 <tr class="separator:a0943d995c90a4c9582cb3b370045da60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6526d763707bb18b263f6552f283124"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#ae6526d763707bb18b263f6552f283124">fgsl_linalg_givens_gv</a> (v, i, j, c, s)</td></tr>
 <tr class="separator:ae6526d763707bb18b263f6552f283124"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4ba789679b2538fbaccfd1b1f8a0bfe"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#ac4ba789679b2538fbaccfd1b1f8a0bfe">fgsl_linalg_tri_invert</a> (uplo, diag, t)</td></tr>
+<tr class="separator:ac4ba789679b2538fbaccfd1b1f8a0bfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1b88d0e7beb70307f4c1751a473c546"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#aa1b88d0e7beb70307f4c1751a473c546">fgsl_linalg_complex_tri_invert</a> (uplo, diag, t)</td></tr>
+<tr class="separator:aa1b88d0e7beb70307f4c1751a473c546"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a410493db3a90b9755aff3224e287ce27"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a410493db3a90b9755aff3224e287ce27">fgsl_linalg_tri_ltl</a> (l)</td></tr>
+<tr class="separator:a410493db3a90b9755aff3224e287ce27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb1f1e762cbb0eae9390663fd862b636"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#aeb1f1e762cbb0eae9390663fd862b636">fgsl_linalg_complex_tri_lhl</a> (l)</td></tr>
+<tr class="separator:aeb1f1e762cbb0eae9390663fd862b636"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9079a0491ae2a9e6c4acc52cfc87de74"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a9079a0491ae2a9e6c4acc52cfc87de74">fgsl_linalg_tri_ul</a> (lu)</td></tr>
+<tr class="separator:a9079a0491ae2a9e6c4acc52cfc87de74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abddc8885bcfbed081464d909e333e8c3"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#abddc8885bcfbed081464d909e333e8c3">fgsl_linalg_complex_tri_ul</a> (lu)</td></tr>
+<tr class="separator:abddc8885bcfbed081464d909e333e8c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9546e435dfec96996b0428227fd55c43"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a9546e435dfec96996b0428227fd55c43">fgsl_linalg_tri_rcond</a> (uplo, a, rcond, work)</td></tr>
+<tr class="separator:a9546e435dfec96996b0428227fd55c43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11b28ce2bb452f7d1b2a7d8fbebddf47"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a11b28ce2bb452f7d1b2a7d8fbebddf47">fgsl_linalg_tri_upper_invert</a> (t)</td></tr>
 <tr class="separator:a11b28ce2bb452f7d1b2a7d8fbebddf47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1764de401aeff177e926a2b47ce8e886"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a1764de401aeff177e926a2b47ce8e886">fgsl_linalg_tri_lower_invert</a> (t)</td></tr>
@@ -315,6 +359,30 @@ Functions/Subroutines</h2></td></tr>
 <tr class="separator:ab63ae672f913bb6e0dd0ed7a89258fe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a477ac1f767b361dfb528ee6992ae50e6"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a477ac1f767b361dfb528ee6992ae50e6">fgsl_linalg_tri_lower_rcond</a> (t, rcond, work)</td></tr>
 <tr class="separator:a477ac1f767b361dfb528ee6992ae50e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6523f01f9fe025c37af042b8d7f4d5de"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a6523f01f9fe025c37af042b8d7f4d5de">fgsl_linalg_cholesky_band_decomp</a> (a)</td></tr>
+<tr class="separator:a6523f01f9fe025c37af042b8d7f4d5de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82e4f74c1aa8eadd5d52b55e18706b0d"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a82e4f74c1aa8eadd5d52b55e18706b0d">fgsl_linalg_cholesky_band_solve</a> (llt, b, x)</td></tr>
+<tr class="separator:a82e4f74c1aa8eadd5d52b55e18706b0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac040480bbf06655af0264fdca523e119"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#ac040480bbf06655af0264fdca523e119">fgsl_linalg_cholesky_band_svx</a> (llt, x)</td></tr>
+<tr class="separator:ac040480bbf06655af0264fdca523e119"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33898f3f867b862d2e6d8c389ec1934e"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a33898f3f867b862d2e6d8c389ec1934e">fgsl_linalg_cholesky_band_invert</a> (llt, ainv)</td></tr>
+<tr class="separator:a33898f3f867b862d2e6d8c389ec1934e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adaaeaf43f1600ea6189bf7ea6c3610f9"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#adaaeaf43f1600ea6189bf7ea6c3610f9">fgsl_linalg_cholesky_band_unpack</a> (llt, l)</td></tr>
+<tr class="separator:adaaeaf43f1600ea6189bf7ea6c3610f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ba551af37242a3ff1e0d8ebbbccdd8b"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a0ba551af37242a3ff1e0d8ebbbccdd8b">fgsl_linalg_cholesky_band_rcond</a> (llt, rcond, w)</td></tr>
+<tr class="separator:a0ba551af37242a3ff1e0d8ebbbccdd8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f2bdea030fd78ee073e45ebb5d7fa99"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a3f2bdea030fd78ee073e45ebb5d7fa99">fgsl_linalg_ldlt_band_decomp</a> (a)</td></tr>
+<tr class="separator:a3f2bdea030fd78ee073e45ebb5d7fa99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2245929782f01b41f58ab3e84432a80"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#ae2245929782f01b41f58ab3e84432a80">fgsl_linalg_ldlt_band_solve</a> (ldlt, b, x)</td></tr>
+<tr class="separator:ae2245929782f01b41f58ab3e84432a80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a5f962d9408ccd788edd0b13f7af3a9"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a9a5f962d9408ccd788edd0b13f7af3a9">fgsl_linalg_ldlt_band_svx</a> (ldlt, x)</td></tr>
+<tr class="separator:a9a5f962d9408ccd788edd0b13f7af3a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a765b36ff06a110e57aa73796cdde19f0"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a765b36ff06a110e57aa73796cdde19f0">fgsl_linalg_ldlt_band_unpack</a> (ldlt, l, d)</td></tr>
+<tr class="separator:a765b36ff06a110e57aa73796cdde19f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a642a83fc343da9c6fb1100527a42a905"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a642a83fc343da9c6fb1100527a42a905">fgsl_linalg_ldlt_band_rcond</a> (ldlt, rcond, w)</td></tr>
+<tr class="separator:a642a83fc343da9c6fb1100527a42a905"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82232b7f631cacda2a903f1d0fae1263"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="linalg_8finc.html#a82232b7f631cacda2a903f1d0fae1263">fgsl_linalg_balance_matrix</a> (a, d)</td></tr>
+<tr class="separator:a82232b7f631cacda2a903f1d0fae1263"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function/Subroutine Documentation</h2>
 <a id="a82232b7f631cacda2a903f1d0fae1263"></a>
@@ -500,6 +568,176 @@ Functions/Subroutines</h2></td></tr>
           <td></td>
           <td class="paramtype">type(fgsl_vector), intent(inout)&#160;</td>
           <td class="paramname"><em>superdiag</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6523f01f9fe025c37af042b8d7f4d5de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6523f01f9fe025c37af042b8d7f4d5de">&#9670;&nbsp;</a></span>fgsl_linalg_cholesky_band_decomp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_cholesky_band_decomp </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(inout)&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a33898f3f867b862d2e6d8c389ec1934e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33898f3f867b862d2e6d8c389ec1934e">&#9670;&nbsp;</a></span>fgsl_linalg_cholesky_band_invert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_cholesky_band_invert </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>llt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_matrix), intent(inout)&#160;</td>
+          <td class="paramname"><em>ainv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0ba551af37242a3ff1e0d8ebbbccdd8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ba551af37242a3ff1e0d8ebbbccdd8b">&#9670;&nbsp;</a></span>fgsl_linalg_cholesky_band_rcond()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_cholesky_band_rcond </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>llt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(fgsl_double), intent(inout)&#160;</td>
+          <td class="paramname"><em>rcond</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(inout)&#160;</td>
+          <td class="paramname"><em>w</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a82e4f74c1aa8eadd5d52b55e18706b0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82e4f74c1aa8eadd5d52b55e18706b0d">&#9670;&nbsp;</a></span>fgsl_linalg_cholesky_band_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_cholesky_band_solve </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>llt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(in)&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(inout)&#160;</td>
+          <td class="paramname"><em>x</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac040480bbf06655af0264fdca523e119"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac040480bbf06655af0264fdca523e119">&#9670;&nbsp;</a></span>fgsl_linalg_cholesky_band_svx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_cholesky_band_svx </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>llt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(inout)&#160;</td>
+          <td class="paramname"><em>x</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adaaeaf43f1600ea6189bf7ea6c3610f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adaaeaf43f1600ea6189bf7ea6c3610f9">&#9670;&nbsp;</a></span>fgsl_linalg_cholesky_band_unpack()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_cholesky_band_unpack </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>llt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_matrix), intent(inout)&#160;</td>
+          <td class="paramname"><em>l</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1499,6 +1737,34 @@ Functions/Subroutines</h2></td></tr>
 
 </div>
 </div>
+<a id="a6db0425bd4f8859300c8c7250d2323c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6db0425bd4f8859300c8c7250d2323c0">&#9670;&nbsp;</a></span>fgsl_linalg_complex_lu_invx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_complex_lu_invx </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix_complex), intent(inout)&#160;</td>
+          <td class="paramname"><em>lu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_permutation), intent(in)&#160;</td>
+          <td class="paramname"><em>p</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a92abce3042e05ad514f7f22b06ed8c27"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a92abce3042e05ad514f7f22b06ed8c27">&#9670;&nbsp;</a></span>fgsl_linalg_complex_lu_lndet()</h2>
 
@@ -1665,6 +1931,76 @@ Functions/Subroutines</h2></td></tr>
           <td></td>
           <td>)</td>
           <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa1b88d0e7beb70307f4c1751a473c546"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1b88d0e7beb70307f4c1751a473c546">&#9670;&nbsp;</a></span>fgsl_linalg_complex_tri_invert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_complex_tri_invert </td>
+          <td>(</td>
+          <td class="paramtype">integer(fgsl_int), intent(in)&#160;</td>
+          <td class="paramname"><em>uplo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer(fgsl_int), intent(in)&#160;</td>
+          <td class="paramname"><em>diag</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_matrix_complex), intent(inout)&#160;</td>
+          <td class="paramname"><em>t</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aeb1f1e762cbb0eae9390663fd862b636"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb1f1e762cbb0eae9390663fd862b636">&#9670;&nbsp;</a></span>fgsl_linalg_complex_tri_lhl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_complex_tri_lhl </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix_complex), intent(inout)&#160;</td>
+          <td class="paramname"><em>l</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abddc8885bcfbed081464d909e333e8c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abddc8885bcfbed081464d909e333e8c3">&#9670;&nbsp;</a></span>fgsl_linalg_complex_tri_ul()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_complex_tri_ul </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix_complex), intent(inout)&#160;</td>
+          <td class="paramname"><em>lu</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -2207,6 +2543,416 @@ Functions/Subroutines</h2></td></tr>
 
 </div>
 </div>
+<a id="a3f2bdea030fd78ee073e45ebb5d7fa99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f2bdea030fd78ee073e45ebb5d7fa99">&#9670;&nbsp;</a></span>fgsl_linalg_ldlt_band_decomp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_ldlt_band_decomp </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(inout)&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a642a83fc343da9c6fb1100527a42a905"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a642a83fc343da9c6fb1100527a42a905">&#9670;&nbsp;</a></span>fgsl_linalg_ldlt_band_rcond()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_ldlt_band_rcond </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>ldlt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(fgsl_double), intent(inout)&#160;</td>
+          <td class="paramname"><em>rcond</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(inout)&#160;</td>
+          <td class="paramname"><em>w</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae2245929782f01b41f58ab3e84432a80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2245929782f01b41f58ab3e84432a80">&#9670;&nbsp;</a></span>fgsl_linalg_ldlt_band_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_ldlt_band_solve </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>ldlt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(in)&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(inout)&#160;</td>
+          <td class="paramname"><em>x</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9a5f962d9408ccd788edd0b13f7af3a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a5f962d9408ccd788edd0b13f7af3a9">&#9670;&nbsp;</a></span>fgsl_linalg_ldlt_band_svx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_ldlt_band_svx </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>ldlt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(inout)&#160;</td>
+          <td class="paramname"><em>x</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a765b36ff06a110e57aa73796cdde19f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a765b36ff06a110e57aa73796cdde19f0">&#9670;&nbsp;</a></span>fgsl_linalg_ldlt_band_unpack()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_ldlt_band_unpack </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>ldlt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_matrix), intent(inout)&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(inout)&#160;</td>
+          <td class="paramname"><em>d</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af6b90428db7adbd50b5af52b318ddded"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6b90428db7adbd50b5af52b318ddded">&#9670;&nbsp;</a></span>fgsl_linalg_ldlt_decomp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_ldlt_decomp </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(inout)&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a908f6566a68851af890f51a4c06bce1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a908f6566a68851af890f51a4c06bce1c">&#9670;&nbsp;</a></span>fgsl_linalg_ldlt_rcond()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_ldlt_rcond </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>ldlt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(fgsl_double), intent(inout)&#160;</td>
+          <td class="paramname"><em>rcond</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(inout)&#160;</td>
+          <td class="paramname"><em>w</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a70b1a054dab82a4b75fa66416c217d32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70b1a054dab82a4b75fa66416c217d32">&#9670;&nbsp;</a></span>fgsl_linalg_ldlt_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_ldlt_solve </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>ldlt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(in)&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(inout)&#160;</td>
+          <td class="paramname"><em>x</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae565c3082f1f77a5df7b185da25da904"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae565c3082f1f77a5df7b185da25da904">&#9670;&nbsp;</a></span>fgsl_linalg_ldlt_svx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_ldlt_svx </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>ldlt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(inout)&#160;</td>
+          <td class="paramname"><em>x</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a626b33869c23b422992b37da8a906b77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a626b33869c23b422992b37da8a906b77">&#9670;&nbsp;</a></span>fgsl_linalg_lq_decomp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_lq_decomp </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(inout)&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(inout)&#160;</td>
+          <td class="paramname"><em>tau</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab5691130e4bd50653bd963611a1ab402"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5691130e4bd50653bd963611a1ab402">&#9670;&nbsp;</a></span>fgsl_linalg_lq_lssolve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_lq_lssolve </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>lq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(in)&#160;</td>
+          <td class="paramname"><em>tau</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(in)&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(inout)&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(inout)&#160;</td>
+          <td class="paramname"><em>residual</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a709aeebe997495ffc69d72b3e8550ccf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a709aeebe997495ffc69d72b3e8550ccf">&#9670;&nbsp;</a></span>fgsl_linalg_lq_qtvec()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_lq_qtvec </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>lq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(in)&#160;</td>
+          <td class="paramname"><em>tau</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(inout)&#160;</td>
+          <td class="paramname"><em>v</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad1ae798e808abc169cc972fc6bb959ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1ae798e808abc169cc972fc6bb959ab">&#9670;&nbsp;</a></span>fgsl_linalg_lq_unpack()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_lq_unpack </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>lq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(in)&#160;</td>
+          <td class="paramname"><em>tau</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_matrix), intent(inout)&#160;</td>
+          <td class="paramname"><em>q</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_matrix), intent(inout)&#160;</td>
+          <td class="paramname"><em>l</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a121a7317ed9ff3908280670e9df43236"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a121a7317ed9ff3908280670e9df43236">&#9670;&nbsp;</a></span>fgsl_linalg_lu_decomp()</h2>
 
@@ -2292,6 +3038,34 @@ Functions/Subroutines</h2></td></tr>
           <td></td>
           <td class="paramtype">type(fgsl_matrix), intent(inout)&#160;</td>
           <td class="paramname"><em>inverse</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0522eb821b84cbe12871d6bbfacff407"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0522eb821b84cbe12871d6bbfacff407">&#9670;&nbsp;</a></span>fgsl_linalg_lu_invx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_lu_invx </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>lu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_permutation), intent(in)&#160;</td>
+          <td class="paramname"><em>p</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -2981,6 +3755,34 @@ Functions/Subroutines</h2></td></tr>
 
 </div>
 </div>
+<a id="a49008681610b8028697f4eee4503428c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49008681610b8028697f4eee4503428c">&#9670;&nbsp;</a></span>fgsl_linalg_qr_decomp_r()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_qr_decomp_r </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(inout)&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_matrix), intent(inout)&#160;</td>
+          <td class="paramname"><em>t</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="afee3a0235231a2e3707a21e1fb07173a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afee3a0235231a2e3707a21e1fb07173a">&#9670;&nbsp;</a></span>fgsl_linalg_qr_lssolve()</h2>
 
@@ -3016,6 +3818,52 @@ Functions/Subroutines</h2></td></tr>
           <td></td>
           <td class="paramtype">type(fgsl_vector), intent(inout)&#160;</td>
           <td class="paramname"><em>residual</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9e787da96fe65c9ea707b5363934ccd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e787da96fe65c9ea707b5363934ccd1">&#9670;&nbsp;</a></span>fgsl_linalg_qr_lssolve_r()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_qr_lssolve_r </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>qr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(in)&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(inout)&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(inout)&#160;</td>
+          <td class="paramname"><em>work</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -3135,6 +3983,46 @@ Functions/Subroutines</h2></td></tr>
 
 </div>
 </div>
+<a id="acba176acb7e87adbe405cbd92bfd9e54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acba176acb7e87adbe405cbd92bfd9e54">&#9670;&nbsp;</a></span>fgsl_linalg_qr_qtmat_r()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_qr_qtmat_r </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>qr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_matrix), intent(inout)&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_matrix), intent(inout)&#160;</td>
+          <td class="paramname"><em>work</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a6987f9175c49215f6c78c48de3f01a1d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6987f9175c49215f6c78c48de3f01a1d">&#9670;&nbsp;</a></span>fgsl_linalg_qr_qtvec()</h2>
 
@@ -3158,6 +4046,46 @@ Functions/Subroutines</h2></td></tr>
           <td></td>
           <td class="paramtype">type(fgsl_vector), intent(inout)&#160;</td>
           <td class="paramname"><em>v</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a57e90a99f48784ad753a43e2fc1fa8d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57e90a99f48784ad753a43e2fc1fa8d3">&#9670;&nbsp;</a></span>fgsl_linalg_qr_qtvec_r()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_qr_qtvec_r </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>qr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(inout)&#160;</td>
+          <td class="paramname"><em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(inout)&#160;</td>
+          <td class="paramname"><em>work</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -3305,6 +4233,46 @@ Functions/Subroutines</h2></td></tr>
 
 </div>
 </div>
+<a id="abf440ea7cfbdf4988d8d35de763708f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf440ea7cfbdf4988d8d35de763708f6">&#9670;&nbsp;</a></span>fgsl_linalg_qr_solve_r()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_qr_solve_r </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>qr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(in)&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(inout)&#160;</td>
+          <td class="paramname"><em>x</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a7029ed3e4a0df13a7599a87f5260e377"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7029ed3e4a0df13a7599a87f5260e377">&#9670;&nbsp;</a></span>fgsl_linalg_qr_svx()</h2>
 
@@ -3356,6 +4324,46 @@ Functions/Subroutines</h2></td></tr>
           <td></td>
           <td class="paramtype">type(fgsl_vector), intent(in)&#160;</td>
           <td class="paramname"><em>tau</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_matrix), intent(inout)&#160;</td>
+          <td class="paramname"><em>q</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_matrix), intent(inout)&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aca2a971efdef91b19ee02f2343f71d12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca2a971efdef91b19ee02f2343f71d12">&#9670;&nbsp;</a></span>fgsl_linalg_qr_unpack_r()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_qr_unpack_r </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>qr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -4483,6 +5491,40 @@ Functions/Subroutines</h2></td></tr>
 
 </div>
 </div>
+<a id="ac4ba789679b2538fbaccfd1b1f8a0bfe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4ba789679b2538fbaccfd1b1f8a0bfe">&#9670;&nbsp;</a></span>fgsl_linalg_tri_invert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_tri_invert </td>
+          <td>(</td>
+          <td class="paramtype">integer(fgsl_int), intent(in)&#160;</td>
+          <td class="paramname"><em>uplo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer(fgsl_int), intent(in)&#160;</td>
+          <td class="paramname"><em>diag</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_matrix), intent(inout)&#160;</td>
+          <td class="paramname"><em>t</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a1764de401aeff177e926a2b47ce8e886"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1764de401aeff177e926a2b47ce8e886">&#9670;&nbsp;</a></span>fgsl_linalg_tri_lower_invert()</h2>
 
@@ -4546,6 +5588,82 @@ Functions/Subroutines</h2></td></tr>
           <td>(</td>
           <td class="paramtype">type(fgsl_matrix), intent(inout)&#160;</td>
           <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a410493db3a90b9755aff3224e287ce27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a410493db3a90b9755aff3224e287ce27">&#9670;&nbsp;</a></span>fgsl_linalg_tri_ltl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_tri_ltl </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(inout)&#160;</td>
+          <td class="paramname"><em>l</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9546e435dfec96996b0428227fd55c43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9546e435dfec96996b0428227fd55c43">&#9670;&nbsp;</a></span>fgsl_linalg_tri_rcond()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_tri_rcond </td>
+          <td>(</td>
+          <td class="paramtype">integer(fgsl_int), intent(in)&#160;</td>
+          <td class="paramname"><em>uplo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_matrix), intent(in)&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(fgsl_double), intent(inout)&#160;</td>
+          <td class="paramname"><em>rcond</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">type(fgsl_vector), intent(inout)&#160;</td>
+          <td class="paramname"><em>work</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9079a0491ae2a9e6c4acc52cfc87de74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9079a0491ae2a9e6c4acc52cfc87de74">&#9670;&nbsp;</a></span>fgsl_linalg_tri_ul()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer(fgsl_int) function fgsl_linalg_tri_ul </td>
+          <td>(</td>
+          <td class="paramtype">type(fgsl_matrix), intent(inout)&#160;</td>
+          <td class="paramname"><em>lu</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -4626,7 +5744,7 @@ Functions/Subroutines</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Mar 25 2021 07:56:59 for FGSL by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jul 30 2021 02:14:30 for FGSL by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.17
 </small></address>

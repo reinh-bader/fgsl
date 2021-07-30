@@ -20,15 +20,9 @@ program linalg
 ! remember that matrices are transposed vs. usual Fortran convention
 !
   call unit_init(200)
-  sd = fgsl_vector_init(1.0_fgsl_double)
-  work = fgsl_vector_init(1.0_fgsl_double)
-  wk2 = fgsl_vector_init(1.0_fgsl_double)
-  status = fgsl_vector_align(sdf, 3_fgsl_size_t, sd, 3_fgsl_size_t, &
-       0_fgsl_size_t, 1_fgsl_size_t)
-  status = fgsl_vector_align(workf, 9_fgsl_size_t, work, 9_fgsl_size_t, &
-       0_fgsl_size_t, 1_fgsl_size_t)
-  status = fgsl_vector_align(wk2f, 3_fgsl_size_t, wk2, 3_fgsl_size_t, &
-       0_fgsl_size_t, 1_fgsl_size_t)
+  sd = fgsl_vector_init(sdf)
+  work = fgsl_vector_init(workf)
+  wk2 = fgsl_vector_init(wk2f)
 !
 ! LU - real
 !
@@ -61,15 +55,9 @@ program linalg
   call unit_assert_equal('fgsl_linalg_lu_decomp:signum',&
        -1,signum)
   bf = (/1.0d0, 2.0d0, 3.0d0/)
-  b = fgsl_vector_init(1.0_fgsl_double)
-  x = fgsl_vector_init(1.0_fgsl_double)
-  res = fgsl_vector_init(1.0_fgsl_double)
-  status = fgsl_vector_align(bf, 3_fgsl_size_t, b, 3_fgsl_size_t, &
-       0_fgsl_size_t, 1_fgsl_size_t)
-  status = fgsl_vector_align(xf, 3_fgsl_size_t, x, 3_fgsl_size_t, &
-       0_fgsl_size_t, 1_fgsl_size_t)
-  status = fgsl_vector_align(resf, 3_fgsl_size_t, res, 3_fgsl_size_t, &
-       0_fgsl_size_t, 1_fgsl_size_t)
+  b = fgsl_vector_init(bf)
+  x = fgsl_vector_init(xf)
+  res = fgsl_vector_init(resf)
   status = fgsl_linalg_lu_solve(a, p, b, x)
   call unit_assert_equal('fgsl_linalg_lu_solve:status',fgsl_success,status)
   call unit_assert_equal_within('fgsl_linalg_lu_solve:x',&
@@ -116,15 +104,9 @@ program linalg
   status = fgsl_matrix_align(acf_orig, 3_fgsl_size_t, 3_fgsl_size_t, &
        3_fgsl_size_t,ac_orig)
   bcf = (/ai, 2.0d0*ui, ui+ai/)
-  bc = fgsl_vector_init(ai)
-  xc = fgsl_vector_init(ai)
-  resc = fgsl_vector_init(ai)
-  status = fgsl_vector_align(bcf, 3_fgsl_size_t, bc, 3_fgsl_size_t, &
-       0_fgsl_size_t, 1_fgsl_size_t)
-  status = fgsl_vector_align(xcf, 3_fgsl_size_t, xc, 3_fgsl_size_t, &
-       0_fgsl_size_t, 1_fgsl_size_t)
-  status = fgsl_vector_align(rescf, 3_fgsl_size_t, resc, 3_fgsl_size_t, &
-       0_fgsl_size_t, 1_fgsl_size_t)
+  bc = fgsl_vector_init(bcf)
+  xc = fgsl_vector_init(xcf)
+  resc = fgsl_vector_init(rescf)
   status = fgsl_linalg_complex_lu_decomp(ac, p, signum)
   call unit_assert_equal('fgsl_linalg_complex_lu_decomp:status',fgsl_success,status)
 !  write(6, *) acf
@@ -167,9 +149,7 @@ program linalg
        3_fgsl_size_t,q)
   status = fgsl_matrix_align(rf, 3_fgsl_size_t, 3_fgsl_size_t, &
        3_fgsl_size_t,r)
-  tau = fgsl_vector_init(1.0_fgsl_double)
-  status = fgsl_vector_align(tauf, 3_fgsl_size_t, tau, 3_fgsl_size_t, &
-       0_fgsl_size_t, 1_fgsl_size_t)
+  tau = fgsl_vector_init(tauf)
   af = af_orig
   status = fgsl_linalg_qr_decomp(a, tau)
   call unit_assert_equal('fgsl_linalg_qr_decomp:status',fgsl_success,status)
@@ -294,8 +274,8 @@ program linalg
   call unit_assert_equal_within('fgsl_linalg_qrpt_update:mf',&
        af,mf,eps10)
 
-  af = reshape((/ 1.0d0, 1.0d0, 0.0d0, 1.0d0, 0.0d0, 1.0d0, &
-       2.0d0, 1.0d0, 1.0d0 /), (/3, 3/))
+  af = reshape( [ 1.0d0, 1.0d0, 0.0d0, 1.0d0, 0.0d0, 1.0d0, &
+       2.0d0, 1.0d0, 1.0d0 ], [ 3, 3 ])
   status = fgsl_linalg_qrpt_decomp(a, tau, p, signum, res)
   call unit_assert_equal('fgsl_linalg_qrpt_decomp(singular):status',fgsl_success,status)
   rank = fgsl_linalg_qrpt_rank(a, tol=-1.0d0)
@@ -306,6 +286,15 @@ program linalg
        (/1.0d0, 0.0d0, 1.0d0 /),xf,eps10)
   call unit_assert_equal_within('fgsl_linalg_qrpt_lssolve2:residual',&
        (/0.0d0, 0.0d0, 0.0d0 /),sdf,eps10)
+!
+! LQ
+!
+  af = af_orig
+  status = fgsl_linalg_lq_decomp(a, tau)
+  call unit_assert_equal('fgsl_linalg_lq_decomp:status',fgsl_success,status)
+  status = fgsl_linalg_lq_lssolve(a, tau, b, x, res)
+  call unit_assert_equal_within('fgsl_linalg_lq_lssolve:x',&
+       (/1.0d0/3.0d0, 2.0d0/3.0d0, 5.0d0/3.0d0 /),xf,eps10)
 !
 ! COD
 !
@@ -454,8 +443,8 @@ program linalg
 !
 ! modified Cholesky
 !
-  af_orig = reshape((/0.0d0, 0.0d0, 0.0d0, 0.0d0, 0.0d0, 0.0d0, &
-       1.0d0, 1.0d0, 2.0d0 /), (/3, 3/))
+  af_orig = reshape( [ 0.0d0, 0.0d0, 0.0d0, 0.0d0, 0.0d0, 0.0d0, &
+       1.0d0, 1.0d0, 2.0d0 ], [ 3, 3 ])
   af = af_orig
   status = fgsl_linalg_mcholesky_decomp(a, p, sd)
   call unit_assert_equal('fgsl_linalg_mcholesky_decomp:status', &
@@ -473,7 +462,27 @@ program linalg
        fgsl_success,status)
   call unit_assert_equal_within('fgsl_linalg_mcholesky_svx:x',&
        (/-1.d0, 0.d0, 2.d0 /),xf,eps10)
-
+       
+!
+! LDLT decomposition
+!
+  af_orig = reshape( [ 2.0d0, 0.0d0, 0.0d0, 0.0d0, 2.0d0, 0.0d0, &
+       1.0d0, 1.0d0, 2.0d0 ], [ 3, 3 ])
+  af = af_orig
+  status = fgsl_linalg_ldlt_decomp(a)
+  call unit_assert_equal('fgsl_linalg_ldlt_decomp:status', &
+       fgsl_success,status)
+  status = fgsl_linalg_ldlt_solve (a, b, x)
+  call unit_assert_equal('fgsl_linalg_ldlt_solve:status',&
+       fgsl_success,status)   
+  call unit_assert_equal_within('fgsl_linalg_ldlt_solve:x',&
+       [ -.25d0, .25d0, 1.5d0 ],xf,eps10)  
+  xf = bf
+  status = fgsl_linalg_ldlt_svx (a, x)
+  call unit_assert_equal('fgsl_linalg_mcholesky_svx:status',&
+       fgsl_success,status)  
+  call unit_assert_equal_within('fgsl_linalg_ldlt_solve:x',&
+       [ -.25d0, .25d0, 1.5d0 ],xf,eps10)                     
 !
 ! cleanup
 !

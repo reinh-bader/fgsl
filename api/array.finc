@@ -255,10 +255,42 @@
 !> fgsl_vector_init.
 !> \param type - determine intrinsic type of vector object
 !> \return new object of type fgsl_vector
-  function fgsl_vector_complex_init(type)
+  function fgsl_vector_complex_init_legacy(type)
     complex(fgsl_double_complex), intent(in) :: type
+    type(fgsl_vector_complex) :: fgsl_vector_complex_init_legacy
+    fgsl_vector_complex_init_legacy%gsl_vector_complex = fgsl_aux_vector_complex_init()
+  end function fgsl_vector_complex_init_legacy
+  function fgsl_vector_complex_init(array, stride, stat)
+    complex(fgsl_double), target, contiguous, intent(in) :: array(:)
+    integer(fgsl_size_t), intent(in), optional :: stride
+    integer(fgsl_int), intent(inout), optional :: stat
     type(fgsl_vector_complex) :: fgsl_vector_complex_init
-    fgsl_vector_complex_init%gsl_vector_complex = fgsl_aux_vector_complex_init()
+    integer(fgsl_size_t) :: stride_local, array_size, section_size
+    integer(fgsl_int) :: stat_local
+
+    try : block
+
+      if (present(stride)) then
+         stride_local = stride
+      else
+         stride_local = 1_fgsl_size_t
+      end if
+      if (stride_local <= 0) then
+         stat_local = fgsl_einval
+         exit try
+      end if
+
+      array_size = size(array,dim=1,kind=fgsl_size_t)
+      section_size = (array_size - 1) / stride_local + 1
+      
+      fgsl_vector_complex_init%gsl_vector_complex = fgsl_aux_vector_complex_init()
+      stat_local = fgsl_aux_vector_complex_align(c_loc(array), &
+           array_size, fgsl_vector_complex_init%gsl_vector_complex, &
+           section_size, 0_fgsl_size_t, stride_local)
+    end block try
+    if ( present(stat) ) stat = stat_local
+    if ( .not. present(stat) .and. stat_local /= fgsl_success ) &
+         call fgsl_error("aligning failed", __FILE__, __LINE__, stat_local)
   end function fgsl_vector_complex_init
 !> Wrap a rank 1 Fortran array slice inside a double precision complex
 !> real GSL vector object. This is invoked via the generic
@@ -316,6 +348,27 @@
        fgsl_vector_complex_pointer_align = fgsl_success
     end if
   end function fgsl_vector_complex_pointer_align
+  function fgsl_vector_complex_to_fptr(fvec)
+    type(fgsl_vector_complex), intent(in) :: fvec
+    complex(fgsl_double), pointer :: fgsl_vector_complex_to_fptr(:)
+    complex(fgsl_double), pointer, contiguous :: fptr_local(:)
+    integer(fgsl_size_t) :: size, stride
+    type(c_ptr) :: cp
+
+    if ( fgsl_vector_complex_status(fvec) ) then
+       size = fgsl_aux_vector_complex_size(fvec%gsl_vector_complex)
+       stride = fgsl_aux_vector_complex_stride(fvec%gsl_vector_complex)
+       if (stride == 0) then
+          fgsl_vector_complex_to_fptr => null()
+       else
+          cp = gsl_vector_complex_ptr(fvec%gsl_vector_complex,0_fgsl_size_t)
+          call c_f_pointer(cp, fptr_local, [ size*stride ])
+          fgsl_vector_complex_to_fptr => fptr_local(1:size*stride:stride)
+       end if
+    else
+       fgsl_vector_complex_to_fptr => null()
+    end if
+  end function fgsl_vector_complex_to_fptr
 !> The assignment operator (see interface/generics.finc) is overloaded to enable
 !> copying of the content of a complex GSL vector into a Fortran array.
   subroutine fgsl_vector_complex_to_array(result, source)
@@ -366,16 +419,50 @@
 !
 ! matrices (real)
 !
-!> Initialize a GSL matrix object. This is invoked via the generic
+!> Legacy function to initialize a GSL matrix object. This is invoked via the generic
 !> fgsl_matrix_init.
 !> \param type - determine intrinsic type of vector object
 !> \return new object of type fgsl_matrix.
-   function fgsl_matrix_init(type)
+   function fgsl_matrix_init_legacy(type)
     real(fgsl_double), intent(in) :: type
+    type(fgsl_matrix) :: fgsl_matrix_init_legacy
+    fgsl_matrix_init_legacy%gsl_matrix = fgsl_aux_matrix_double_init()
+  end function fgsl_matrix_init_legacy
+!> Initialize a rank 2 Fortran array to become associated with a double precision
+!> GSL matrix object. This is invoked via the generic fgsl_matrix_init.
+!> \param array - requires the actual argument to have the
+!>  TARGET and CONTIGUOUS attributes. 
+!> \param n - number of rows in array
+!> \param m - number of columns in array
+!> \param fmat - double precision GSL matrix object, which is allocated
+!> \return Status
+  function fgsl_matrix_init(array, n, m, stat)
+    integer(fgsl_size_t), intent(in), optional :: n, m
+    real(fgsl_double), dimension(:,:), target, contiguous, intent(in) :: array
     type(fgsl_matrix) :: fgsl_matrix_init
+    integer(fgsl_int), optional :: stat
+    integer :: stat_local
+    integer(fgsl_size_t) :: mloc, nloc
+!
     fgsl_matrix_init%gsl_matrix = fgsl_aux_matrix_double_init()
+    if ( present(n) ) then
+       nloc = n
+    else
+       nloc =  size(array,1,KIND=c_size_t)
+    end if
+    if ( present(m) ) then
+       mloc = m
+    else
+       mloc =  size(array,2,KIND=c_size_t)
+    end if
+    stat_local = &
+         fgsl_aux_matrix_double_align(c_loc(array), size(array,1,KIND=c_size_t), &
+         nloc, mloc, fgsl_matrix_init%gsl_matrix)
+   if ( present(stat) ) stat = stat_local
+   if ( .not. present(stat) .and. stat_local /= fgsl_success ) &
+        call fgsl_error("aligning failed", __FILE__, __LINE__, stat_local)    
   end function fgsl_matrix_init
-!> Wrap a rank 2 Fortran array inside a double precision
+!> Legacy specific to wrap a rank 2 Fortran array inside a double precision
 !> real GSL matrix object. This is invoked via the generic
 !> fgsl_matrix_align.
 !> \param array - requires the actual argument to have the
@@ -418,6 +505,30 @@
     ptr => fp_local(1:n,1:m)
     fgsl_matrix_pointer_align = fgsl_success
   end function fgsl_matrix_pointer_align
+!> Associate a Fortran pointer with the data stored inside a GSL matrix object.
+!> This is invoked via the generic fgsl_matrix_to_fptr. Objects of type
+!> <CODE>gsl_matrix</CODE> which are returned by GSL routines often are
+!> persistent subobjects of other GSL objects. A Fortran pointer aligned with
+!> a subobject hence will remain up-to-date throughout the lifetime of the
+!> object; it may become undefined once the object ceases to exist.
+!> \param fmat - GSL matrix
+!> \return rank 2 Fortran pointer
+  function fgsl_matrix_to_fptr(fmat)
+    real(fgsl_double), pointer :: fgsl_matrix_to_fptr(:,:)
+    type(fgsl_matrix), intent(in) :: fmat
+!
+    real(fgsl_double), pointer :: fp_local(:,:)
+    type(c_ptr) :: cp
+    integer(fgsl_size_t) :: m, n, lda
+    if ( fgsl_matrix_status(fmat) ) then
+       call fgsl_aux_matrix_double_size(fmat%gsl_matrix, lda, n, m)
+       cp = gsl_matrix_ptr(fmat%gsl_matrix,0_fgsl_size_t,0_fgsl_size_t)
+       call c_f_pointer(cp, fp_local, (/ lda , m /))
+       fgsl_matrix_to_fptr => fp_local(1:n,1:m)
+    else
+       fgsl_matrix_to_fptr => null()
+    end if
+  end function fgsl_matrix_to_fptr
 !> The assignment operator (see interface/generics.finc) is overloaded to enable
 !> copying of the content of a GSL matrix into a rank 2 Fortran array.
   subroutine fgsl_matrix_to_array(result, source)
@@ -476,16 +587,50 @@
 !
 ! matrices (complex)
 !
-!> Initialize a GSL matrix object. This is invoked via the generic
+!> Legacy specifit to initialize a GSL matrix object. This is invoked via the generic
 !> fgsl_matrix_init.
 !> \param type - determine intrinsic type of vector object
 !> \return new object of type fgsl_matrix.
-  function fgsl_matrix_complex_init(type)
+  function fgsl_matrix_complex_init_legacy(type)
     complex(fgsl_double_complex), intent(in) :: type
+    type(fgsl_matrix_complex) :: fgsl_matrix_complex_init_legacy
+    fgsl_matrix_complex_init_legacy%gsl_matrix_complex = fgsl_aux_matrix_complex_init()
+  end function fgsl_matrix_complex_init_legacy
+!> Initialize a rank 2 Fortran array to become associated with a double precision
+!> complex GSL matrix object. This is invoked via the generic
+!> fgsl_matrix_init.
+!> \param array - requires the actual argument to have the
+!>  TARGET and CONTIGUOUS attributes. 
+!> \param n - number of rows in array
+!> \param m - number of columns in array
+!> \param fmat - double precision complex GSL matrix object, which is allocated
+!> \return Status
+  function fgsl_matrix_complex_init(array, n, m, stat)
+    integer(fgsl_size_t), intent(in), optional :: n, m
+    complex(fgsl_double_complex), dimension(:,:), target, contiguous, intent(in) :: array
     type(fgsl_matrix_complex) :: fgsl_matrix_complex_init
+    integer(fgsl_int), optional :: stat
+    integer(fgsl_int) :: stat_local
+    integer(fgsl_size_t) :: mloc, nloc
+!
     fgsl_matrix_complex_init%gsl_matrix_complex = fgsl_aux_matrix_complex_init()
+    if ( present(n) ) then
+       nloc = n
+    else
+       nloc =  size(array,1,KIND=c_size_t)
+    end if
+    if ( present(m) ) then
+       mloc = m
+    else
+       mloc =  size(array,2,KIND=c_size_t)
+    end if
+    stat_local = fgsl_aux_matrix_complex_align(c_loc(array), size(array,1,KIND=c_size_t), &
+         nloc, mloc, fgsl_matrix_complex_init%gsl_matrix_complex)
+    if ( present(stat) ) stat = stat_local
+    if ( .not. present(stat) .and. stat_local /= fgsl_success ) &
+         call fgsl_error("aligning failed", __FILE__, __LINE__, stat_local)
   end function fgsl_matrix_complex_init
-!> Wrap a rank 2 Fortran array inside a double precision
+!> Legacy function to wrap a rank 2 Fortran array inside a double precision
 !> complex GSL matrix object. This is invoked via the generic
 !> fgsl_matrix_align.
 !> \param array - requires the actual argument to have the
@@ -529,8 +674,24 @@
     ptr => fp_local(1:n,1:m)
     fgsl_matrix_complex_pointer_align = fgsl_success
   end function fgsl_matrix_complex_pointer_align
-!> The assignment operator (see interface/generics.finc) is overloaded to enable
-!> copying of the content of a complex GSL matrix into a rank 2 Fortran array.
+  function fgsl_matrix_complex_to_fptr(fmat)
+    complex(fgsl_double), pointer :: fgsl_matrix_complex_to_fptr(:,:)
+    type(fgsl_matrix_complex), intent(in) :: fmat
+!
+    complex(fgsl_double), pointer :: fp_local(:,:)
+    type(c_ptr) :: cp
+    integer(fgsl_size_t) :: m, n, lda
+    if ( fgsl_matrix_complex_status(fmat) ) then
+       call fgsl_aux_matrix_complex_size(fmat%gsl_matrix_complex, lda, n, m)
+       cp = gsl_matrix_complex_ptr(fmat%gsl_matrix_complex,0_fgsl_size_t,0_fgsl_size_t)
+       call c_f_pointer(cp, fp_local, (/ lda , m /))
+       fgsl_matrix_complex_to_fptr => fp_local(1:n,1:m)
+    else
+       fgsl_matrix_complex_to_fptr => null()
+    end if
+  end function fgsl_matrix_complex_to_fptr
+  !> The assignment operator (see interface/generics.finc) is overloaded to enable
+  !> copying of the content of a complex GSL matrix into a rank 2 Fortran array.
   subroutine fgsl_matrix_complex_to_array(result, source)
     complex(fgsl_double_complex), intent(inout) :: result(:,:)
     type(fgsl_matrix_complex), intent(in) :: source

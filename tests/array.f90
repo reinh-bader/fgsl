@@ -34,17 +34,8 @@ program array
      xca(i) = cmplx(dble(i), dble(2*i), fgsl_double)
   end do
 !  write(6, *) xca
-  fvec = fgsl_vector_init(1.0_fgsl_double)
-  call unit_assert_true('fgsl_vector_init',fgsl_well_defined(fvec),.true.)
-  fcvec = fgsl_vector_init((0.0_fgsl_double, 1.0_fgsl_double))
-  call unit_assert_true('fgsl_vector_init',fgsl_well_defined(fcvec),.true.)
-  status = fgsl_vector_align(xa,nmax,fvec,5_fgsl_size_t,2_fgsl_size_t,&
-       3_fgsl_size_t)
-  call unit_assert_equal('fgsl_vector_align(in):status',fgsl_success,status)
-  status = fgsl_vector_align(xca,nmax,fcvec,5_fgsl_size_t,2_fgsl_size_t,&
-       3_fgsl_size_t)
-  call unit_assert_equal('fgsl_vector_complex_align(in):status',&
-       fgsl_success,status)
+  fvec = fgsl_vector_init(xa(3:15),3_fgsl_size_t)
+  fcvec = fgsl_vector_init(xca(3:15),3_fgsl_size_t)
   ya(1:5) = fvec
   yca(1:5) = fcvec
   call unit_assert_equal_within('fgsl_vector:assign',&
@@ -54,12 +45,9 @@ program array
        (/(3.0d0,6.0d0),(6.0d0,1.2d1),(9.0d0,1.8d1),(1.20d1,2.4d1),&
        (1.5d1,3.0d1)/),yca(1:5),eps10)
 !  write(6, *) yca(1:5)
-  status = fgsl_vector_align(fptr,fvec)
-  call unit_assert_equal('fgsl_vector_align(out):status',fgsl_success,status)
-  status = fgsl_vector_align(fcptr,fcvec)
+  fptr => fgsl_vector_to_fptr(fvec)
+  fcptr => fgsl_vector_to_fptr(fcvec)
 !  write(6, *) fcptr(1:5)
-  call unit_assert_equal('fgsl_vector_complex_align(out):status',&
-       fgsl_success,status)
   call unit_assert_equal_within('fgsl_vector:align(out)',&
        (/3.0d0,6.0d0,9.0d0,12.0d0,15.0d0/),fptr,eps10)
   call fgsl_vector_free(fvec)
@@ -67,7 +55,6 @@ program array
        (/(3.0d0,6.0d0),(6.0d0,1.2d1),(9.0d0,1.8d1),(1.20d1,2.4d1),&
        (1.5d1,3.0d1)/),fcptr,eps10)
   call fgsl_vector_free(fcvec)
-! FIXME: add tests with wrong dimensioning
 ! 
   do j=1,6
      do i=1,3
@@ -75,30 +62,19 @@ program array
         ac2d(i, j) = cmplx(10*j+i, 10*j-i)
      end  do
   end do
-  fmat = fgsl_matrix_init(1.0_fgsl_double)
-  call unit_assert_true('fgsl_matrix_init',fgsl_well_defined(fmat),.true.)
-  status = fgsl_matrix_align(a2d, nmax, 3_fgsl_size_t,6_fgsl_size_t,fmat)
-  call unit_assert_equal('fgsl_matrix_align(in):status',fgsl_success,status)
+  fmat = fgsl_matrix_init(a2d, 3_fgsl_size_t,6_fgsl_size_t)
   b2d(1:3,1:6) = fmat
   call unit_assert_equal_within('fgsl_matrix:assign',a2d(1:3,1:6),&
        b2d(1:3,1:6),eps10)
-  status = fgsl_matrix_align(fmptr,fmat)
-  call unit_assert_equal('fgsl_matrix_align(out):status',fgsl_success,status)
+  fmptr => fgsl_matrix_to_fptr(fmat)
   call unit_assert_equal_within('fgsl_matrix:assign',a2d(1:3,1:6),&
        fmptr,eps10)
   call fgsl_matrix_free(fmat)
-  fcmat = fgsl_matrix_init((0.0_fgsl_double, 1.0_fgsl_double))
-  call unit_assert_true('fgsl_matrix_complex_init',&
-       fgsl_well_defined(fmat),.true.)
-  status = fgsl_matrix_align(ac2d, nmax, 3_fgsl_size_t,6_fgsl_size_t,fcmat)
-  call unit_assert_equal('fgsl_matrix_complex_align(in):status',&
-       fgsl_success,status)
+  fcmat = fgsl_matrix_init(ac2d, 3_fgsl_size_t,6_fgsl_size_t)
   bc2d(1:3,1:6) = fcmat
   call unit_assert_equal_within('fgsl_matrix_complex:assign',ac2d(1:3,1:6),&
        bc2d(1:3,1:6),eps10)
-  status = fgsl_matrix_align(fcmptr,fcmat)
-  call unit_assert_equal('fgsl_matrix_complex_align(out):status',&
-       fgsl_success,status)
+  fcmptr => fgsl_matrix_to_fptr(fcmat)
   call unit_assert_equal_within('fgsl_matrix_complex:assign',ac2d(1:3,1:6),&
        fcmptr,eps10)
   call fgsl_matrix_free(fcmat)

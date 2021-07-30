@@ -81,6 +81,8 @@ Functions/Subroutines</h2></td></tr>
 <tr class="separator:a3f576ca19a0cc0b7cc24ccd80ac5d7d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1dec49e9c2067642bb4a24ccd7939fe4"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sort_8finc.html#a1dec49e9c2067642bb4a24ccd7939fe4">fgsl_sort_double</a> (data, stride, n)</td></tr>
 <tr class="separator:a1dec49e9c2067642bb4a24ccd7939fe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae9134ff7a5c8484fac8e1384a63730e"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sort_8finc.html#aae9134ff7a5c8484fac8e1384a63730e">fgsl_sort2_double</a> (data1, stride1, data2, stride2, n)</td></tr>
+<tr class="separator:aae9134ff7a5c8484fac8e1384a63730e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf92649e442927793bb64d8e6c627b64"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sort_8finc.html#adf92649e442927793bb64d8e6c627b64">fgsl_sort_double_index</a> (p, data, stride, n)</td></tr>
 <tr class="separator:adf92649e442927793bb64d8e6c627b64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7737cd05792ca6276f0f0abf3ec7e35e"><td class="memItemLeft" align="right" valign="top">integer(fgsl_int) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sort_8finc.html#a7737cd05792ca6276f0f0abf3ec7e35e">fgsl_sort_double_smallest</a> (dest, k, src, stride, n)</td></tr>
@@ -194,6 +196,52 @@ Functions/Subroutines</h2></td></tr>
           <td></td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>compare</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aae9134ff7a5c8484fac8e1384a63730e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae9134ff7a5c8484fac8e1384a63730e">&#9670;&nbsp;</a></span>fgsl_sort2_double()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine fgsl_sort2_double </td>
+          <td>(</td>
+          <td class="paramtype">real(fgsl_double), dimension(:), intent(inout), target, contiguous&#160;</td>
+          <td class="paramname"><em>data1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer(fgsl_size_t), intent(in)&#160;</td>
+          <td class="paramname"><em>stride1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(fgsl_double), dimension(:), intent(inout), target, contiguous&#160;</td>
+          <td class="paramname"><em>data2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer(fgsl_size_t), intent(in)&#160;</td>
+          <td class="paramname"><em>stride2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer(fgsl_size_t), intent(in)&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -934,7 +982,7 @@ Functions/Subroutines</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Mar 25 2021 07:56:59 for FGSL by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jul 30 2021 02:14:30 for FGSL by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.17
 </small></address>

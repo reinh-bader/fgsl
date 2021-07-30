@@ -22,8 +22,8 @@ contains
 !
     call fgsl_obj_c_ptr(f_x, x)
     call fgsl_obj_c_ptr(f_f, f)
-    status = fgsl_vector_align(p_x, f_x)
-    status = fgsl_vector_align(p_f, f_f)
+    p_x => fgsl_vector_to_fptr(f_x)
+    p_f => fgsl_vector_to_fptr(f_f)
     call c_f_pointer(cdata, f_data)
     do i=1,f_data%n
        yy = p_x(1) * exp(- p_x(2) * dble(i-1) ) + p_x(3)
@@ -45,8 +45,8 @@ contains
 !
     call fgsl_obj_c_ptr(f_x, x)
     call fgsl_obj_c_ptr(f_j, j)
-    status = fgsl_vector_align(p_x, f_x)
-    status = fgsl_matrix_align(p_j, f_j)
+    p_x => fgsl_vector_to_fptr(f_x)
+    p_j => fgsl_matrix_to_fptr(f_j)
     call c_f_pointer(cdata, f_data)
     do i=1,f_data%n
        yy = exp(- p_x(2) * dble(i-1) )
@@ -80,7 +80,7 @@ program multifit
   type(fgsl_matrix) :: cov, jac
   type(data), target :: fitdata
   type(c_ptr) :: ptr
-  real(fgsl_double), target :: v_params(3), v_cov(3,3), v_jac(nmax,nrt)
+  real(fgsl_double), target :: v_params(3), v_cov(3,3), v_jac(nrt,nmax)
   real(fgsl_double), pointer :: v_fun(:), v_parptr(:)
   real(fgsl_double) :: chi, c
   integer :: i
@@ -104,20 +104,14 @@ program multifit
        nmax, nrt)
 ! initial guess for fit parameters
   v_params(1:3) = (/1.0_fgsl_double, 0.0_fgsl_double, 0.0_fgsl_double/)
-  params = fgsl_vector_init(type = 1.0_fgsl_double)
-  status = fgsl_vector_align(v_params,nrt,params,nrt, &
-       0_fgsl_size_t,1_fgsl_size_t)
+  params = fgsl_vector_init(v_params(1:nrt))
 ! alignment of target function and parameter values only needed once
 ! storage allocated within the nlfit_slv object
-  status = fgsl_vector_align(v_fun, &
-       fgsl_multifit_fdfsolver_f(nlfit_slv))
-  status = fgsl_vector_align(v_parptr, &
-       fgsl_multifit_fdfsolver_position(nlfit_slv))
+  v_fun => fgsl_vector_to_fptr(fgsl_multifit_fdfsolver_f(nlfit_slv))
+  v_parptr => fgsl_vector_to_fptr(fgsl_multifit_fdfsolver_position(nlfit_slv))
 ! storage for cov within Fortran
-  cov = fgsl_matrix_init(type = 1.0_fgsl_double)
-  jac = fgsl_matrix_init(type = 1.0_fgsl_double)
-  status = fgsl_matrix_align(v_cov,nrt,nrt,nrt,cov)
-  status = fgsl_matrix_align(v_jac,nrt,nrt,nmax,jac)
+  cov = fgsl_matrix_init(v_cov)
+  jac = fgsl_matrix_init(v_jac)
   if (fgsl_well_defined(nlfit_slv)) then
      status = fgsl_multifit_fdfsolver_set(nlfit_slv, nlfit_fdf, params)
      i = 0

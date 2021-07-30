@@ -136,22 +136,12 @@ program rng
   call unit_assert_equal_within('fgsl_ran_bivariate_gaussian',&
         8.620816273107094d-2,rd,eps10)
 
-  xx = fgsl_vector_init(1.0_fgsl_double)
-  mu = fgsl_vector_init(1.0_fgsl_double)
-  result = fgsl_vector_init(1.0_fgsl_double)
-  work = fgsl_vector_init(1.0_fgsl_double)
-  l = fgsl_matrix_init(1.0_fgsl_double)
-  status = fgsl_vector_align(xxf, 2_fgsl_size_t, xx, 2_fgsl_size_t, &
-       0_fgsl_size_t, 1_fgsl_size_t)
-  status = fgsl_vector_align(muf, 2_fgsl_size_t, mu, 2_fgsl_size_t, &
-       0_fgsl_size_t, 1_fgsl_size_t)
-  status = fgsl_vector_align(resultf, 2_fgsl_size_t, result, 2_fgsl_size_t, &
-       0_fgsl_size_t, 1_fgsl_size_t)
-  status = fgsl_vector_align(resultf, 2_fgsl_size_t, work, 2_fgsl_size_t, &
-       0_fgsl_size_t, 1_fgsl_size_t)
+  xx = fgsl_vector_init(xxf) 
+  mu = fgsl_vector_init(muf)
+  result = fgsl_vector_init(resultf)
+  work = fgsl_vector_init(resultf)
+  l = fgsl_matrix_init(lf)
 ! Note result and work are aliased against resultf
-  status = fgsl_matrix_align(lf, 2_fgsl_size_t, 2_fgsl_size_t, &
-       2_fgsl_size_t,l)
   muf = [ 0.2d0 , 0.8d0 ]
   lf = reshape( [ 2.0d0, 0.0d0, 0.0d0, 1.0d0 ], [ 2, 2 ] )
   status = fgsl_ran_multivariate_gaussian(r, mu, l, result)

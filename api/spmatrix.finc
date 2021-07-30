@@ -80,12 +80,48 @@ function fgsl_spmatrix_scale(m , x)
   integer(fgsl_int) :: fgsl_spmatrix_scale
   fgsl_spmatrix_scale = gsl_spmatrix_scale(m%gsl_spmatrix, x)
 end function fgsl_spmatrix_scale
+function fgsl_spmatrix_scale_columns(a , x)
+  type(fgsl_spmatrix), intent(inout) :: a
+  type(fgsl_vector), intent(in) :: x
+  integer(fgsl_int) :: fgsl_spmatrix_scale_columns
+  fgsl_spmatrix_scale_columns = gsl_spmatrix_scale_columns(a%gsl_spmatrix, x%gsl_vector)
+end function fgsl_spmatrix_scale_columns
+function fgsl_spmatrix_scale_rows(a , x)
+  type(fgsl_spmatrix), intent(inout) :: a
+  type(fgsl_vector), intent(in) :: x
+  integer(fgsl_int) :: fgsl_spmatrix_scale_rows
+  fgsl_spmatrix_scale_rows = gsl_spmatrix_scale_rows(a%gsl_spmatrix, x%gsl_vector)
+end function fgsl_spmatrix_scale_rows
 function fgsl_spmatrix_minmax(m , min_out, max_out)
   type(fgsl_spmatrix), intent(in) :: m
   real(fgsl_double), intent(out) :: min_out, max_out
   integer(fgsl_int) :: fgsl_spmatrix_minmax
   fgsl_spmatrix_minmax = gsl_spmatrix_minmax(m%gsl_spmatrix, min_out, max_out)
 end function fgsl_spmatrix_minmax
+function fgsl_spmatrix_min_index(m , imin, jmin)
+  type(fgsl_spmatrix), intent(in) :: m
+  real(fgsl_double), intent(out) :: imin, jmin
+  integer(fgsl_int) :: fgsl_spmatrix_min_index
+  fgsl_spmatrix_min_index = gsl_spmatrix_min_index(m%gsl_spmatrix, imin, jmin)
+end function fgsl_spmatrix_min_index
+function fgsl_spmatrix_csc(dest, src)
+  type(fgsl_spmatrix), intent(inout) :: dest
+  type(fgsl_spmatrix), intent(in) :: src
+  integer(fgsl_int) :: fgsl_spmatrix_csc
+  fgsl_spmatrix_csc = gsl_spmatrix_csc(dest%gsl_spmatrix, src%gsl_spmatrix)
+end function fgsl_spmatrix_csc
+function fgsl_spmatrix_csr(dest, src)
+  type(fgsl_spmatrix), intent(inout) :: dest
+  type(fgsl_spmatrix), intent(in) :: src
+  integer(fgsl_int) :: fgsl_spmatrix_csr
+  fgsl_spmatrix_csr = gsl_spmatrix_csr(dest%gsl_spmatrix, src%gsl_spmatrix)
+end function fgsl_spmatrix_csr
+function fgsl_spmatrix_compress(src, sptype)
+  type(fgsl_spmatrix), intent(in) :: src
+  integer(fgsl_int), intent(in) :: sptype
+  type(fgsl_spmatrix) :: fgsl_spmatrix_compress
+  fgsl_spmatrix_compress%gsl_spmatrix = gsl_spmatrix_compress(src%gsl_spmatrix, sptype)
+end function fgsl_spmatrix_compress
 function fgsl_spmatrix_add(c, a, b)
   type(fgsl_spmatrix), intent(inout) :: c
   type(fgsl_spmatrix), intent(in) :: a, b
@@ -93,6 +129,12 @@ function fgsl_spmatrix_add(c, a, b)
   fgsl_spmatrix_add = gsl_spmatrix_add(c%gsl_spmatrix, &
   a%gsl_spmatrix, b%gsl_spmatrix)
 end function fgsl_spmatrix_add
+function fgsl_spmatrix_add_to_dense(a, b)
+  type(fgsl_matrix), intent(inout) :: a
+  type(fgsl_spmatrix), intent(in) ::  b
+  integer(fgsl_int) :: fgsl_spmatrix_add_to_dense
+  fgsl_spmatrix_add_to_dense = gsl_spmatrix_add_to_dense(a%gsl_matrix, b%gsl_spmatrix)
+end function fgsl_spmatrix_add_to_dense
 function fgsl_spmatrix_d2sp(S, A)
   type(fgsl_spmatrix), intent(inout) :: S
   type(fgsl_matrix), intent(in) :: A
@@ -116,6 +158,11 @@ function fgsl_spmatrix_transpose_memcpy(dest, src)
   integer(fgsl_int) :: fgsl_spmatrix_transpose_memcpy
   fgsl_spmatrix_transpose_memcpy = gsl_spmatrix_transpose_memcpy(dest%gsl_spmatrix, src%gsl_spmatrix)
 end function fgsl_spmatrix_transpose_memcpy
+function fgsl_spmatrix_transpose(m)
+  type(fgsl_spmatrix), intent(inout) :: m
+  integer(fgsl_int) :: fgsl_spmatrix_transpose
+  fgsl_spmatrix_transpose = gsl_spmatrix_transpose(m%gsl_spmatrix)
+end function fgsl_spmatrix_transpose
 integer(fgsl_int) function fgsl_spblas_dgemv(transa, alpha, a, x, beta, y)
   integer(fgsl_int), intent(in) :: transa
   real(fgsl_double), intent(in) :: alpha, beta
@@ -132,3 +179,44 @@ integer(fgsl_int) function fgsl_spblas_dgemm(alpha, a, b, c)
   fgsl_spblas_dgemm = gsl_spblas_dgemm(alpha, a%gsl_spmatrix, b%gsl_spmatrix, &
        c%gsl_spmatrix)
 end function fgsl_spblas_dgemm
+!
+! I/O
+!
+integer(fgsl_int) function fgsl_spmatrix_fwrite(stream, m)
+  type(fgsl_file) :: stream
+  type(fgsl_spmatrix), intent(in) :: m
+  fgsl_spmatrix_fwrite = gsl_spmatrix_fwrite(stream%gsl_file, m%gsl_spmatrix)
+end function fgsl_spmatrix_fwrite
+integer(fgsl_int) function fgsl_spmatrix_fread(stream, m)
+  type(fgsl_file) :: stream
+  type(fgsl_spmatrix), intent(inout) :: m
+  fgsl_spmatrix_fread = gsl_spmatrix_fread(stream%gsl_file, m%gsl_spmatrix)
+end function fgsl_spmatrix_fread
+integer(fgsl_int) function fgsl_spmatrix_fprintf(stream, m, format)
+  type(fgsl_file) :: stream
+  type(fgsl_spmatrix), intent(in) :: m
+  character(kind=fgsl_char, len=*), intent(in) :: format
+  fgsl_spmatrix_fprintf = gsl_spmatrix_fprintf(stream%gsl_file, m%gsl_spmatrix, format)
+end function fgsl_spmatrix_fprintf
+type(fgsl_spmatrix) function fgsl_spmatrix_fscanf(stream)
+  type(fgsl_file) :: stream
+  fgsl_spmatrix_fscanf%gsl_spmatrix = gsl_spmatrix_fscanf(stream%gsl_file)
+end function fgsl_spmatrix_fscanf
+!
+! helper function
+!
+subroutine fgsl_spmatrix_getfields(m, i, p, d)
+  type(fgsl_spmatrix), intent(in) :: m
+  integer(fgsl_int), pointer, intent(inout) :: i(:), p(:)
+  real(fgsl_double), pointer, intent(inout) :: d(:)
+
+  type(c_ptr) :: ip, pp, dp
+  integer(fgsl_size_t) :: nz, psize
+
+  call gsl_aux_spmatrix_getfields(m%gsl_spmatrix, ip, dp, pp, psize)
+  nz = gsl_spmatrix_nnz(m%gsl_spmatrix) 
+  call c_f_pointer(ip, i, [nz])
+  call c_f_pointer(dp, d, [nz])
+  call c_f_pointer(pp, p, [psize])
+end subroutine fgsl_spmatrix_getfields
+

@@ -196,14 +196,22 @@ module fgsl
        fgsl_sf_gegenpoly_2_e, fgsl_sf_gegenpoly_3, fgsl_sf_gegenpoly_3_e, &
        fgsl_sf_gegenpoly_n, fgsl_sf_gegenpoly_n_e, fgsl_sf_gegenpoly_array
 
-  public :: fgsl_sf_hermite, fgsl_sf_hermite_prob, fgsl_sf_hermite_prob_e, &
-       fgsl_sf_hermite_prob_series_e, fgsl_sf_hermite_phys_e, &
-       fgsl_sf_hermite_phys_series_e, fgsl_sf_hermite_func_e, &
+  public :: fgsl_sf_hermite, fgsl_sf_hermite_deriv, fgsl_sf_hermite_deriv_e, &
+       fgsl_sf_hermite_prob, fgsl_sf_hermite_prob_deriv, &
+       fgsl_sf_hermite_prob_e, fgsl_sf_hermite_prob_deriv_e, &
+       fgsl_sf_hermite_prob_series_e, fgsl_sf_hermite_e, &
+       fgsl_sf_hermite_series_e, fgsl_sf_hermite_func, fgsl_sf_hermite_func_e, &
+       fgsl_sf_hermite_func_fast, fgsl_sf_hermite_func_fast_e, &
        fgsl_sf_hermite_func_series_e, fgsl_sf_hermite_prob_array, &
-       fgsl_sf_hermite_prob_series, fgsl_sf_hermite_phys, &
-       fgsl_sf_hermite_phys_array, fgsl_sf_hermite_phys_series, &
-       fgsl_sf_hermite_func, fgsl_sf_hermite_func_array, &
-       fgsl_sf_hermite_func_series
+       fgsl_sf_hermite_prob_series, fgsl_sf_hermite_array, fgsl_sf_hermite_series, &
+       fgsl_sf_hermite_func_array, fgsl_sf_hermite_func_series, &
+       fgsl_sf_hermite_array_deriv, fgsl_sf_hermite_deriv_array, &
+       fgsl_sf_hermite_prob_array_deriv, fgsl_sf_hermite_prob_deriv_array, &
+       fgsl_sf_hermite_zero, fgsl_sf_hermite_zero_e, &
+       fgsl_sf_hermite_prob_zero, fgsl_sf_hermite_prob_zero_e
+  ! deprecated
+  public fgsl_sf_hermite_phys, fgsl_sf_hermite_phys_e, fgsl_sf_hermite_phys_series_e, &
+       fgsl_sf_hermite_phys_array, fgsl_sf_hermite_phys_series
 
   public :: fgsl_sf_hyperg_0f1, fgsl_sf_hyperg_0f1_e, fgsl_sf_hyperg_1f1_int, &
        fgsl_sf_hyperg_1f1_int_e, fgsl_sf_hyperg_1f1, fgsl_sf_hyperg_1f1_e, &
@@ -274,7 +282,7 @@ module fgsl
 ! array processing
   public :: fgsl_vector_init, fgsl_vector_align, fgsl_vector_free,&
   fgsl_vector_get_size, fgsl_vector_get_stride, fgsl_vector_to_fptr
-  public :: fgsl_matrix_init, fgsl_matrix_align, fgsl_matrix_free,&
+  public :: fgsl_matrix_init, fgsl_matrix_align, fgsl_matrix_to_fptr, fgsl_matrix_free,&
   fgsl_matrix_get_size1, fgsl_matrix_get_size2, fgsl_matrix_get_tda
 ! interpolation
   public :: fgsl_interp_alloc, fgsl_interp_init, &
@@ -288,7 +296,7 @@ module fgsl
   public :: fgsl_interp2d_alloc, fgsl_interp2d_name, fgsl_interp2d_min_size, &
        fgsl_interp2d_type_min_size, fgsl_interp2d_init, fgsl_interp2d_free, fgsl_interp2d_eval, &
        fgsl_interp2d_eval_extrap, fgsl_interp2d_eval_e, fgsl_interp2d_eval_e_extrap, &
-       fgsl_interp2d_eval_deriv_x, fgsl_interp2d_eval_deriv_x_e, &
+       fgsl_interp2d_eval_extrap_e, fgsl_interp2d_eval_deriv_x, fgsl_interp2d_eval_deriv_x_e, &
        fgsl_interp2d_eval_deriv_y, fgsl_interp2d_eval_deriv_y_e, &
        fgsl_interp2d_eval_deriv_xx, fgsl_interp2d_eval_deriv_xx_e, &
        fgsl_interp2d_eval_deriv_yy, fgsl_interp2d_eval_deriv_yy_e, &
@@ -347,19 +355,25 @@ module fgsl
        fgsl_linalg_lu_svx, fgsl_linalg_complex_lu_svx, &
        fgsl_linalg_lu_refine, fgsl_linalg_complex_lu_refine, &
        fgsl_linalg_lu_invert, fgsl_linalg_complex_lu_invert, &
+       fgsl_linalg_lu_invx, fgsl_linalg_complex_lu_invx, &
        fgsl_linalg_lu_det, fgsl_linalg_complex_lu_det, &
        fgsl_linalg_lu_lndet, fgsl_linalg_complex_lu_lndet, &
        fgsl_linalg_lu_sgndet, fgsl_linalg_complex_lu_sgndet, &
        fgsl_linalg_qr_decomp, fgsl_linalg_qr_solve, fgsl_linalg_qr_svx, &
-       fgsl_linalg_qr_lssolve, fgsl_linalg_qr_qtvec, fgsl_linalg_qr_qvec, &
-       fgsl_linalg_qr_qtmat, fgsl_linalg_qr_rsolve, fgsl_linalg_qr_rsvx, &
-       fgsl_linalg_qr_unpack, fgsl_linalg_qr_qrsolve, fgsl_linalg_qr_update, &
+       fgsl_linalg_qr_decomp_r, fgsl_linalg_qr_solve_r, fgsl_linalg_qr_lssolve, &
+       fgsl_linalg_qr_lssolve_r, fgsl_linalg_qr_qtvec, &
+       fgsl_linalg_qr_qtvec_r, fgsl_linalg_qr_qvec, fgsl_linalg_qr_qtmat, &
+       fgsl_linalg_qr_qtmat_r, fgsl_linalg_qr_rsolve, fgsl_linalg_qr_rsvx, &
+       fgsl_linalg_qr_unpack, fgsl_linalg_qr_unpack_r, &
+       fgsl_linalg_qr_qrsolve, fgsl_linalg_qr_update, &
        fgsl_linalg_r_solve, fgsl_linalg_r_svx, fgsl_linalg_qrpt_decomp, &
        fgsl_linalg_qrpt_decomp2, fgsl_linalg_qrpt_solve, fgsl_linalg_qrpt_svx, &
        fgsl_linalg_qrpt_qrsolve, fgsl_linalg_qrpt_update, &
        fgsl_linalg_qrpt_rsolve, fgsl_linalg_qrpt_rsvx, &
        fgsl_linalg_qrpt_lssolve, fgsl_linalg_qrpt_lssolve2, &
        fgsl_linalg_qrpt_rank, fgsl_linalg_qrpt_rcond, &
+       fgsl_linalg_lq_decomp, fgsl_linalg_lq_lssolve, &
+       fgsl_linalg_lq_unpack, fgsl_linalg_lq_qtvec, &
        fgsl_linalg_cod_decomp, fgsl_linalg_cod_decomp_e, &
        fgsl_linalg_cod_lssolve, fgsl_linalg_cod_lssolve2, &
        fgsl_linalg_cod_unpack, fgsl_linalg_cod_matz, &
@@ -381,6 +395,8 @@ module fgsl
        fgsl_linalg_mcholesky_decomp, fgsl_linalg_mcholesky_solve, &
        fgsl_linalg_mcholesky_svx, fgsl_linalg_mcholesky_rcond, &
        fgsl_linalg_mcholesky_invert, &
+       fgsl_linalg_ldlt_decomp, fgsl_linalg_ldlt_solve, fgsl_linalg_ldlt_svx, &
+       fgsl_linalg_ldlt_rcond, &
        fgsl_linalg_symmtd_decomp, fgsl_linalg_symmtd_unpack, &
        fgsl_linalg_symmtd_unpack_t, fgsl_linalg_hermtd_decomp, &
        fgsl_linalg_hermtd_unpack, fgsl_linalg_hermtd_unpack_t, &
@@ -398,9 +414,18 @@ module fgsl
        fgsl_linalg_solve_symm_tridiag, fgsl_linalg_solve_cyc_tridiag, &
        fgsl_linalg_solve_symm_cyc_tridiag, fgsl_linalg_balance_matrix, &
        fgsl_linalg_qr_matq, fgsl_linalg_givens, fgsl_linalg_givens_gv, &
+       fgsl_linalg_tri_invert, fgsl_linalg_complex_tri_invert, &
+       fgsl_linalg_tri_ltl, fgsl_linalg_complex_tri_lhl, &
+       fgsl_linalg_tri_ul, fgsl_linalg_complex_tri_ul, &
+       fgsl_linalg_tri_rcond, &
        fgsl_linalg_tri_upper_invert, fgsl_linalg_tri_lower_invert, &
        fgsl_linalg_tri_upper_unit_invert, fgsl_linalg_tri_lower_unit_invert, &
-       fgsl_linalg_tri_upper_rcond, fgsl_linalg_tri_lower_rcond
+       fgsl_linalg_tri_upper_rcond, fgsl_linalg_tri_lower_rcond, &
+       fgsl_linalg_cholesky_band_decomp, fgsl_linalg_cholesky_band_solve, &
+       fgsl_linalg_cholesky_band_svx, fgsl_linalg_cholesky_band_invert, &
+       fgsl_linalg_cholesky_band_unpack, fgsl_linalg_cholesky_band_rcond, &
+       fgsl_linalg_ldlt_band_decomp, fgsl_linalg_ldlt_band_solve, &
+       fgsl_linalg_ldlt_band_svx, fgsl_linalg_ldlt_band_unpack, fgsl_linalg_ldlt_band_rcond
   public :: fgsl_linalg_sv_leverage
 ! eigensystems
   public :: fgsl_eigen_symm_alloc, fgsl_eigen_symm_free, fgsl_eigen_symm, &
@@ -408,8 +433,7 @@ module fgsl
        fgsl_eigen_herm_alloc, fgsl_eigen_herm_free, fgsl_eigen_herm, &
        fgsl_eigen_hermv_alloc, fgsl_eigen_hermv_free, fgsl_eigen_hermv, &
        fgsl_eigen_nonsymm_alloc, fgsl_eigen_nonsymm_free, fgsl_eigen_nonsymm, &
-       fgsl_eigen_nonsymm_params, &
-        fgsl_eigen_nonsymmv_params, &
+       fgsl_eigen_nonsymm_params, fgsl_eigen_nonsymmv_params, &
        fgsl_eigen_nonsymmv_alloc, fgsl_eigen_nonsymmv_free, fgsl_eigen_nonsymmv, &
        fgsl_eigen_nonsymm_z, fgsl_eigen_nonsymmv_z, &
        fgsl_eigen_gensymm_alloc, fgsl_eigen_gensymm_free, fgsl_eigen_gensymm, &
@@ -776,7 +800,13 @@ module fgsl
        fgsl_spmatrix_cumsum, fgsl_spmatrix_scale, fgsl_spmatrix_minmax, &
        fgsl_spmatrix_add, fgsl_spmatrix_d2sp, fgsl_spmatrix_sp2d, &
        fgsl_spmatrix_equal, fgsl_spmatrix_transpose_memcpy, &
-       fgsl_spblas_dgemv, fgsl_spblas_dgemm
+       fgsl_spmatrix_transpose, fgsl_spmatrix_scale_columns, &
+       fgsl_spmatrix_scale_rows, fgsl_spmatrix_add_to_dense, fgsl_spmatrix_min_index, &
+       fgsl_spmatrix_csc,  fgsl_spmatrix_csr,  fgsl_spmatrix_compress, &
+       fgsl_spmatrix_fwrite, fgsl_spmatrix_fread, fgsl_spmatrix_fscanf, &
+       fgsl_spmatrix_fprintf, fgsl_spblas_dgemv, fgsl_spblas_dgemm, &
+       fgsl_spmatrix_getfields
+       
 
 ! sparse matrix linear algebra
   public :: fgsl_splinalg_itersolve_alloc, fgsl_splinalg_itersolve_free, &
@@ -1342,9 +1372,24 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
        type(c_ptr) :: weights
        type(c_ptr) :: r
   end type gsl_multifit_robust_stats
-!
-! Types: Eigensystems
-!
+  !
+  ! Types: Linear Algebra
+  !
+  integer(fgsl_int), parameter, public :: &
+       cblasrowmajor = 101, &
+       cblascolmajor = 102, &
+       cblasnotrans = 111, &
+       cblastrans = 112, &
+       cblasconjtrans = 113, &
+       cblasupper = 121, &
+       cblaslower = 122, &
+       cblasnonunit = 131, &
+       cblasunit = 132, &
+       cblasleft = 141, &
+       cblasright = 142
+  !
+  ! Types: Eigensystems
+  !
   type, public :: fgsl_eigen_symm_workspace
      private
      type(c_ptr) :: gsl_eigen_symm_workspace = c_null_ptr
@@ -2050,12 +2095,15 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
      private
      type(c_ptr) :: gsl_bspline_workspace = c_null_ptr
   end type fgsl_bspline_workspace
-
 !
 ! Types: sparse matrices
 !
-  integer(fgsl_size_t), public, parameter :: fgsl_spmatrix_triplet = 0
-  integer(fgsl_size_t), public, parameter :: fgsl_spmatrix_ccs = 1
+  integer(fgsl_size_t), public, parameter :: fgsl_spmatrix_triplet = 0 
+  integer(fgsl_size_t), public, parameter :: fgsl_spmatrix_ccs = 1     
+  integer(fgsl_size_t), public, parameter :: fgsl_spmatrix_crs = 2     
+  integer(fgsl_size_t), public, parameter :: fgsl_spmatrix_type_coo = fgsl_spmatrix_triplet 
+  integer(fgsl_size_t), public, parameter :: fgsl_spmatrix_type_csc = fgsl_spmatrix_ccs
+  integer(fgsl_size_t), public, parameter :: fgsl_spmatrix_type_csr = fgsl_spmatrix_crs
   type, public :: fgsl_spmatrix
     private
     type(c_ptr) :: gsl_spmatrix = c_null_ptr
