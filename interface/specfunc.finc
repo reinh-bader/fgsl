@@ -1837,6 +1837,20 @@
        real(c_double), value :: x
        real(c_double) :: fgsl_sf_hermite
      end function fgsl_sf_hermite
+     function fgsl_sf_hermite_deriv(m, n, x) &
+          bind(c, name='gsl_sf_hermite_deriv') 
+       import
+       integer(c_int), value :: m, n
+       real(c_double), value :: x
+       real(c_double) :: fgsl_sf_hermite_deriv
+     end function fgsl_sf_hermite_deriv
+     function gsl_sf_hermite_deriv_e(m, n, x, result) bind(c)
+       import
+       integer(c_int), value :: m, n
+       real(c_double), value :: x
+       type(gsl_sf_result), intent(inout) :: result
+       integer(c_int) :: gsl_sf_hermite_deriv_e
+     end function gsl_sf_hermite_deriv_e
      function fgsl_sf_hermite_prob(n, x) bind(c, name='gsl_sf_hermite_prob') 
        import
        integer(c_int), value :: n
@@ -1916,6 +1930,61 @@
        real(c_double), intent(inout), dimension(*) :: result_array
        integer(c_int) :: fgsl_sf_hermite_array
      end function fgsl_sf_hermite_array
+     function fgsl_sf_hermite_array_deriv(m, nmax, x, result_array) &
+          bind(c, name='gsl_sf_hermite_array_deriv') 
+       import
+       integer(c_int), value :: m, nmax
+       real(c_double), value :: x
+       real(c_double), intent(inout), dimension(*) :: result_array
+       integer(c_int) :: fgsl_sf_hermite_array_deriv
+     end function fgsl_sf_hermite_array_deriv
+     function fgsl_sf_hermite_deriv_array(mmax, n, x, result_array) &
+          bind(c, name='gsl_sf_hermite_deriv_array') 
+       import
+       integer(c_int), value :: mmax, n
+       real(c_double), value :: x
+       real(c_double), intent(inout), dimension(*) :: result_array
+       integer(c_int) :: fgsl_sf_hermite_deriv_array
+     end function fgsl_sf_hermite_deriv_array
+     function fgsl_sf_hermite_prob_array_deriv(m, nmax, x, result_array) &
+          bind(c, name='gsl_sf_hermite_prob_array_deriv') 
+       import
+       integer(c_int), value :: m, nmax
+       real(c_double), value :: x
+       real(c_double), intent(inout), dimension(*) :: result_array
+       integer(c_int) :: fgsl_sf_hermite_prob_array_deriv
+     end function fgsl_sf_hermite_prob_array_deriv
+     function fgsl_sf_hermite_prob_deriv_array(mmax, n, x, result_array) &
+          bind(c, name='gsl_sf_hermite_prob_deriv_array') 
+       import
+       integer(c_int), value :: mmax, n
+       real(c_double), value :: x
+       real(c_double), intent(inout), dimension(*) :: result_array
+       integer(c_int) :: fgsl_sf_hermite_prob_deriv_array
+     end function fgsl_sf_hermite_prob_deriv_array
+     function fgsl_sf_hermite_zero(n, s) bind(c, name='gsl_sf_hermite_zero') 
+       import
+       integer(c_int), value :: n, s
+       real(c_double) :: fgsl_sf_hermite_zero
+     end function fgsl_sf_hermite_zero
+	 function gsl_sf_hermite_zero_e(n, s, result) bind(c)
+       import
+       integer(c_int), value :: n, s
+       type(gsl_sf_result), intent(inout) :: result
+       integer(c_int) :: gsl_sf_hermite_zero_e
+     end function gsl_sf_hermite_zero_e
+     function fgsl_sf_hermite_prob_zero(n, s) bind(c, name='gsl_sf_hermite_prob_zero') 
+       import
+       integer(c_int), value :: n, s
+       real(c_double) :: fgsl_sf_hermite_prob_zero
+     end function fgsl_sf_hermite_prob_zero
+	 function gsl_sf_hermite_prob_zero_e(n, s, result) bind(c)
+       import
+       integer(c_int), value :: n, s
+       type(gsl_sf_result), intent(inout) :: result
+       integer(c_int) :: gsl_sf_hermite_prob_zero_e
+     end function gsl_sf_hermite_prob_zero_e
+
      function fgsl_sf_hermite_phys_array(nmax, x, result_array) &
           bind(c, name='gsl_sf_hermite_phys_array') 
        import

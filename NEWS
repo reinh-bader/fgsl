@@ -14,7 +14,8 @@ This release introduces support for gsl 2.6. An overview:
 
 Comment:
 
-*  the gsl_bst module is not supported in this release.
+*  the gsl_bst module is not supported in this release. Note 
+   that the interface is not officially documented.
    
 
 Changes in 1.4.0 (by R Bader):

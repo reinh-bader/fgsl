@@ -1858,6 +1858,16 @@
          lambda, x, c_loc(result_array))
   end function fgsl_sf_gegenpoly_array
 ! hermite
+  function fgsl_sf_hermite_deriv_e(m, n, x, result) 
+    integer(fgsl_int), intent(in) :: m, n
+    real(fgsl_double), intent(in) :: x
+    type(fgsl_sf_result), intent(out) :: result
+    integer(fgsl_int) :: fgsl_sf_hermite_deriv_e
+!
+    type(gsl_sf_result) :: res
+    fgsl_sf_hermite_deriv_e = gsl_sf_hermite_deriv_e(m, n, x, res)
+    result = res
+  end function fgsl_sf_hermite_deriv_e
   function fgsl_sf_hermite_prob_e(n, x, result) 
     integer(fgsl_int), intent(in) :: n
     real(fgsl_double), intent(in) :: x
@@ -1909,6 +1919,25 @@
     fgsl_sf_hermite_e = gsl_sf_hermite_e(n, x, res)
     result = res
   end function fgsl_sf_hermite_e
+  function fgsl_sf_hermite_zero_e(n, s, result) 
+    integer(fgsl_int), intent(in) :: n, s
+    type(fgsl_sf_result), intent(out) :: result
+    integer(fgsl_int) :: fgsl_sf_hermite_zero_e
+!
+    type(gsl_sf_result) :: res
+    fgsl_sf_hermite_zero_e = gsl_sf_hermite_zero_e(n, s, res)
+    result = res
+  end function fgsl_sf_hermite_zero_e
+  function fgsl_sf_hermite_prob_zero_e(n, s, result) 
+    integer(fgsl_int), intent(in) :: n, s
+    type(fgsl_sf_result), intent(out) :: result
+    integer(fgsl_int) :: fgsl_sf_hermite_prob_zero_e
+!
+    type(gsl_sf_result) :: res
+    fgsl_sf_hermite_prob_zero_e = gsl_sf_hermite_prob_zero_e(n, s, res)
+    result = res
+  end function fgsl_sf_hermite_prob_zero_e
+  
   function fgsl_sf_hermite_phys_series_e(n, x, a, result) 
     integer(fgsl_int), intent(in) :: n
     real(fgsl_double), intent(in) :: x

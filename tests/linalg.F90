@@ -274,8 +274,8 @@ program linalg
   call unit_assert_equal_within('fgsl_linalg_qrpt_update:mf',&
        af,mf,eps10)
 
-  af = reshape((/ 1.0d0, 1.0d0, 0.0d0, 1.0d0, 0.0d0, 1.0d0, &
-       2.0d0, 1.0d0, 1.0d0 /), (/3, 3/))
+  af = reshape( [ 1.0d0, 1.0d0, 0.0d0, 1.0d0, 0.0d0, 1.0d0, &
+       2.0d0, 1.0d0, 1.0d0 ], [ 3, 3 ])
   status = fgsl_linalg_qrpt_decomp(a, tau, p, signum, res)
   call unit_assert_equal('fgsl_linalg_qrpt_decomp(singular):status',fgsl_success,status)
   rank = fgsl_linalg_qrpt_rank(a, tol=-1.0d0)
@@ -286,6 +286,15 @@ program linalg
        (/1.0d0, 0.0d0, 1.0d0 /),xf,eps10)
   call unit_assert_equal_within('fgsl_linalg_qrpt_lssolve2:residual',&
        (/0.0d0, 0.0d0, 0.0d0 /),sdf,eps10)
+!
+! LQ
+!
+  af = af_orig
+  status = fgsl_linalg_lq_decomp(a, tau)
+  call unit_assert_equal('fgsl_linalg_lq_decomp:status',fgsl_success,status)
+  status = fgsl_linalg_lq_lssolve(a, tau, b, x, res)
+  call unit_assert_equal_within('fgsl_linalg_lq_lssolve:x',&
+       (/1.0d0/3.0d0, 2.0d0/3.0d0, 5.0d0/3.0d0 /),xf,eps10)
 !
 ! COD
 !
@@ -434,8 +443,8 @@ program linalg
 !
 ! modified Cholesky
 !
-  af_orig = reshape((/0.0d0, 0.0d0, 0.0d0, 0.0d0, 0.0d0, 0.0d0, &
-       1.0d0, 1.0d0, 2.0d0 /), (/3, 3/))
+  af_orig = reshape( [ 0.0d0, 0.0d0, 0.0d0, 0.0d0, 0.0d0, 0.0d0, &
+       1.0d0, 1.0d0, 2.0d0 ], [ 3, 3 ])
   af = af_orig
   status = fgsl_linalg_mcholesky_decomp(a, p, sd)
   call unit_assert_equal('fgsl_linalg_mcholesky_decomp:status', &
@@ -453,7 +462,27 @@ program linalg
        fgsl_success,status)
   call unit_assert_equal_within('fgsl_linalg_mcholesky_svx:x',&
        (/-1.d0, 0.d0, 2.d0 /),xf,eps10)
-
+       
+!
+! LDLT decomposition
+!
+  af_orig = reshape( [ 2.0d0, 0.0d0, 0.0d0, 0.0d0, 2.0d0, 0.0d0, &
+       1.0d0, 1.0d0, 2.0d0 ], [ 3, 3 ])
+  af = af_orig
+  status = fgsl_linalg_ldlt_decomp(a)
+  call unit_assert_equal('fgsl_linalg_ldlt_decomp:status', &
+       fgsl_success,status)
+  status = fgsl_linalg_ldlt_solve (a, b, x)
+  call unit_assert_equal('fgsl_linalg_ldlt_solve:status',&
+       fgsl_success,status)   
+  call unit_assert_equal_within('fgsl_linalg_ldlt_solve:x',&
+       [ -.25d0, .25d0, 1.5d0 ],xf,eps10)  
+  xf = bf
+  status = fgsl_linalg_ldlt_svx (a, x)
+  call unit_assert_equal('fgsl_linalg_mcholesky_svx:status',&
+       fgsl_success,status)  
+  call unit_assert_equal_within('fgsl_linalg_ldlt_solve:x',&
+       [ -.25d0, .25d0, 1.5d0 ],xf,eps10)                     
 !
 ! cleanup
 !

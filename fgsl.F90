@@ -196,17 +196,21 @@ module fgsl
        fgsl_sf_gegenpoly_2_e, fgsl_sf_gegenpoly_3, fgsl_sf_gegenpoly_3_e, &
        fgsl_sf_gegenpoly_n, fgsl_sf_gegenpoly_n_e, fgsl_sf_gegenpoly_array
 
-  public :: fgsl_sf_hermite, fgsl_sf_hermite_prob, fgsl_sf_hermite_prob_deriv, &
+  public :: fgsl_sf_hermite, fgsl_sf_hermite_deriv, fgsl_sf_hermite_deriv_e, &
+       fgsl_sf_hermite_prob, fgsl_sf_hermite_prob_deriv, &
        fgsl_sf_hermite_prob_e, fgsl_sf_hermite_prob_deriv_e, &
        fgsl_sf_hermite_prob_series_e, fgsl_sf_hermite_e, &
        fgsl_sf_hermite_series_e, fgsl_sf_hermite_func, fgsl_sf_hermite_func_e, &
        fgsl_sf_hermite_func_fast, fgsl_sf_hermite_func_fast_e, &
        fgsl_sf_hermite_func_series_e, fgsl_sf_hermite_prob_array, &
-       fgsl_sf_hermite_prob_series, fgsl_sf_hermite_phys, &
-       fgsl_sf_hermite_array, fgsl_sf_hermite_series, &
-       fgsl_sf_hermite_func_array, fgsl_sf_hermite_func_series
+       fgsl_sf_hermite_prob_series, fgsl_sf_hermite_array, fgsl_sf_hermite_series, &
+       fgsl_sf_hermite_func_array, fgsl_sf_hermite_func_series, &
+       fgsl_sf_hermite_array_deriv, fgsl_sf_hermite_deriv_array, &
+       fgsl_sf_hermite_prob_array_deriv, fgsl_sf_hermite_prob_deriv_array, &
+       fgsl_sf_hermite_zero, fgsl_sf_hermite_zero_e, &
+       fgsl_sf_hermite_prob_zero, fgsl_sf_hermite_prob_zero_e
   ! deprecated
-  public fgsl_sf_hermite_phys_e, fgsl_sf_hermite_phys_series_e, &
+  public fgsl_sf_hermite_phys, fgsl_sf_hermite_phys_e, fgsl_sf_hermite_phys_series_e, &
        fgsl_sf_hermite_phys_array, fgsl_sf_hermite_phys_series
 
   public :: fgsl_sf_hyperg_0f1, fgsl_sf_hyperg_0f1_e, fgsl_sf_hyperg_1f1_int, &
