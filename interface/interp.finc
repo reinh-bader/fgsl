@@ -506,7 +506,8 @@
      end function gsl_spline2d_name
      function gsl_spline2d_set(interp, zarr, i, j, z) bind(c)
        import :: c_ptr, c_int, c_size_t, c_double
-       type(c_ptr), value :: interp, zarr
+       type(c_ptr), value :: interp
+       real(c_double) :: zarr(*)
        integer(c_size_t), value :: i, j
        real(c_double), value :: z
        integer(c_int) :: gsl_spline2d_set
@@ -514,7 +515,7 @@
      function gsl_spline2d_get(interp, zarr, i, j) bind(c)
        import :: c_ptr, c_double, c_size_t
        type(c_ptr), value :: interp
-       type(c_ptr), value :: zarr
+       real(c_double) :: zarr(*)
        integer(c_size_t), value :: i, j
        real(c_double) :: gsl_spline2d_get
      end function gsl_spline2d_get

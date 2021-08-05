@@ -314,7 +314,8 @@ module fgsl
        fgsl_spline2d_eval_deriv_xx, fgsl_spline2d_eval_deriv_xx_e, &
        fgsl_spline2d_eval_deriv_yy, fgsl_spline2d_eval_deriv_yy_e, &
        fgsl_spline2d_eval_deriv_xy, fgsl_spline2d_eval_deriv_xy_e, &
-       fgsl_spline2d_min_size, fgsl_spline2d_name
+       fgsl_spline2d_min_size, fgsl_spline2d_name, &
+       fgsl_spline2d_set, fgsl_spline2d_get
   public :: fgsl_interp_accel_alloc, fgsl_interp_accel_free, &
        fgsl_interp_accel_find, fgsl_interp_bsearch
 ! permutations, combinations and multisets

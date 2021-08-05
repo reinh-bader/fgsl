@@ -12,6 +12,7 @@ This release introduces support for gsl 2.7. An overview:
    interfaces
 8. added gsl_multifit_linear_lcurvature interface
 9. added gsl_spline2d_eval_extrap interface
+10. bug fixes for missing interfaces and status handling
 
 Changes in 1.5.0 (by R Bader):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
