@@ -40,10 +40,11 @@ PROGRAM spmatrix
   status = fgsl_spmatrix_csc(B,A)
   call fgsl_spmatrix_getfields(B, pi, pp, pd)
 
-  write(output_unit, '(A)') 'matrix in compressed column format:'
+  write(output_unit, fmt='(A)') 'matrix in compressed column format:'
   write(output_unit, fmt='("i = ",*(i0,:,", "))') pi
   write(output_unit, fmt='("p = ",*(i0,:,", "))') pp
   write(output_unit, fmt='("d = ",*(f3.1,:,", "))') pd
+  write(output_unit, fmt='("1-norm of CSC (expect 13.1)", f10.3)') fgsl_spmatrix_norm1(B)
 
   ! convert to compressed row format
   C = fgsl_spmatrix_alloc_nzmax(5_fgsl_size_t, 4_fgsl_size_t, &
@@ -51,10 +52,11 @@ PROGRAM spmatrix
   status = fgsl_spmatrix_csr(C,A)
   call fgsl_spmatrix_getfields(C, pi, pp, pd)
 
-  write(output_unit, '(A)') 'matrix in compressed row format:'
+  write(output_unit, fmt='(A)') 'matrix in compressed row format:'
   write(output_unit, fmt='("i = ",*(i0,:,", "))') pi
   write(output_unit, fmt='("p = ",*(i0,:,", "))') pp
   write(output_unit, fmt='("d = ",*(f3.1,:,", "))') pd
+  write(output_unit, fmt='("1-norm of CSR (expect 13.1)", f10.3)') fgsl_spmatrix_norm1(C)
 
   call fgsl_spmatrix_free(A);
   call fgsl_spmatrix_free(B);

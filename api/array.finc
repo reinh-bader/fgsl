@@ -432,8 +432,8 @@
 !> GSL matrix object. This is invoked via the generic fgsl_matrix_init.
 !> \param array - requires the actual argument to have the
 !>  TARGET and CONTIGUOUS attributes. 
-!> \param n - number of rows in array
-!> \param m - number of columns in array
+!> \param n - number of rows (C:columns) in array 
+!> \param m - number of columns (C:rows) in array
 !> \param fmat - double precision GSL matrix object, which is allocated
 !> \return Status
   function fgsl_matrix_init(array, n, m, stat)
@@ -601,8 +601,8 @@
 !> fgsl_matrix_init.
 !> \param array - requires the actual argument to have the
 !>  TARGET and CONTIGUOUS attributes. 
-!> \param n - number of rows in array
-!> \param m - number of columns in array
+!> \param n - number of rows (C:columns) in array
+!> \param m - number of columns (C:rows) in array
 !> \param fmat - double precision complex GSL matrix object, which is allocated
 !> \return Status
   function fgsl_matrix_complex_init(array, n, m, stat)

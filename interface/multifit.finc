@@ -335,6 +335,11 @@
     type(c_ptr), value :: y, reg_param, rho, eta, work
     integer(c_int) :: gsl_multifit_linear_lcurve
   end function gsl_multifit_linear_lcurve
+  function gsl_multifit_linear_lcurvature(y, reg_param, rho, eta, kappa, work) bind(c)
+    import :: c_ptr, c_int
+    type(c_ptr), value :: y, reg_param, rho, eta, kappa, work
+    integer(c_int) :: gsl_multifit_linear_lcurvature
+  end function gsl_multifit_linear_lcurvature
   function gsl_multifit_linear_lcorner(rho, eta, idx) bind(c)
     import :: c_int, c_size_t, c_ptr
     type(c_ptr), value :: rho, eta

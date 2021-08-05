@@ -573,13 +573,30 @@
     fgsl_spline2d_eval_e = gsl_spline2d_eval_e(interp%gsl_spline2d, x, y, &
     xa%gsl_interp_accel, ya%gsl_interp_accel, z)
   end function fgsl_spline2d_eval_e
-  function fgsl_spline2d_eval_deriv_x(interp, x, y, xa, ya)
+  function fgsl_spline2d_eval_extrap(interp, x, y, xa, ya)
+    type(fgsl_spline2d), intent(in) :: interp
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double) :: fgsl_spline2d_eval_extrap
+    fgsl_spline2d_eval_extrap = gsl_spline2d_eval_extrap(&
+         interp%gsl_spline2d, x, y, xa%gsl_interp_accel, ya%gsl_interp_accel)
+  end function fgsl_spline2d_eval_extrap
+  function fgsl_spline2d_eval_extrap_e(interp, x, y, xa, ya, z)
+    type(fgsl_spline2d), intent(in) :: interp
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double), intent(out) :: z
+    integer(fgsl_int) :: fgsl_spline2d_eval_extrap_e
+    fgsl_spline2d_eval_extrap_e = gsl_spline2d_eval_extrap_e(&
+         interp%gsl_spline2d, x, y, xa%gsl_interp_accel, ya%gsl_interp_accel, z)
+  end function fgsl_spline2d_eval_extrap_e
+   function fgsl_spline2d_eval_deriv_x(interp, x, y, xa, ya)
     type(fgsl_spline2d), intent(in) :: interp
     real(fgsl_double), intent(in) :: x, y
     type(fgsl_interp_accel), intent(inout) :: xa, ya
     real(fgsl_double) :: fgsl_spline2d_eval_deriv_x
-    fgsl_spline2d_eval_deriv_x = gsl_spline2d_eval_deriv_x(interp%gsl_spline2d, x, y, &
-    xa%gsl_interp_accel, ya%gsl_interp_accel)
+    fgsl_spline2d_eval_deriv_x = gsl_spline2d_eval_deriv_x(&
+         interp%gsl_spline2d, x, y, xa%gsl_interp_accel, ya%gsl_interp_accel)
   end function fgsl_spline2d_eval_deriv_x
   function fgsl_spline2d_eval_deriv_x_e(interp, x, y, xa, ya, z)
     type(fgsl_spline2d), intent(in) :: interp
@@ -587,8 +604,8 @@
     type(fgsl_interp_accel), intent(inout) :: xa, ya
     real(fgsl_double), intent(out) :: z
     integer(fgsl_int) :: fgsl_spline2d_eval_deriv_x_e
-    fgsl_spline2d_eval_deriv_x_e = gsl_spline2d_eval_deriv_x_e(interp%gsl_spline2d, x, y, &
-    xa%gsl_interp_accel, ya%gsl_interp_accel, z)
+    fgsl_spline2d_eval_deriv_x_e = gsl_spline2d_eval_deriv_x_e(&
+         interp%gsl_spline2d, x, y, xa%gsl_interp_accel, ya%gsl_interp_accel, z)
   end function fgsl_spline2d_eval_deriv_x_e
   function fgsl_spline2d_eval_deriv_y(interp, x, y, xa, ya)
     type(fgsl_spline2d), intent(in) :: interp

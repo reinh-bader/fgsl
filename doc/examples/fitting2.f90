@@ -12,7 +12,7 @@ program fitting2
 !
   open(20, file='fitting2.dat', form='formatted', status='old', iostat=status)
   if (status > 0) then
-     stop 'Could not open fitting2.dat. You may need to run fitting3.exe'
+     stop 'Could not open fitting2.dat. You need to run fitting3.exe first.'
   end if
   read(20, *) n
   allocate(x_m(3, n), y_v(n), w_v(n))

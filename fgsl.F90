@@ -308,6 +308,7 @@ module fgsl
        fgsl_spline_eval_integ, fgsl_spline_eval_integ_e
   public :: fgsl_spline2d_alloc, fgsl_spline2d_init, fgsl_spline2d_free, &
        fgsl_spline2d_eval, fgsl_spline2d_eval_e, &
+       fgsl_spline2d_eval_extrap, fgsl_spline2d_eval_extrap_e, &
        fgsl_spline2d_eval_deriv_x, fgsl_spline2d_eval_deriv_x_e, &
        fgsl_spline2d_eval_deriv_y, fgsl_spline2d_eval_deriv_y_e, &
        fgsl_spline2d_eval_deriv_xx, fgsl_spline2d_eval_deriv_xx_e, &
@@ -359,14 +360,24 @@ module fgsl
        fgsl_linalg_lu_det, fgsl_linalg_complex_lu_det, &
        fgsl_linalg_lu_lndet, fgsl_linalg_complex_lu_lndet, &
        fgsl_linalg_lu_sgndet, fgsl_linalg_complex_lu_sgndet, &
-       fgsl_linalg_qr_decomp, fgsl_linalg_qr_solve, fgsl_linalg_qr_svx, &
+       fgsl_linalg_qr_decomp, fgsl_linalg_complex_qr_decomp, &
+       fgsl_linalg_qr_solve, fgsl_linalg_complex_qr_solve, &
+       fgsl_linalg_qr_svx,  fgsl_linalg_complex_qr_svx, &
        fgsl_linalg_qr_decomp_r, fgsl_linalg_qr_solve_r, fgsl_linalg_qr_lssolve, &
        fgsl_linalg_qr_lssolve_r, fgsl_linalg_qr_qtvec, &
-       fgsl_linalg_qr_qtvec_r, fgsl_linalg_qr_qvec, fgsl_linalg_qr_qtmat, &
+       fgsl_linalg_complex_qr_decomp_r, fgsl_linalg_complex_qr_solve_r, &
+       fgsl_linalg_complex_qr_lssolve, &
+       fgsl_linalg_complex_qr_lssolve_r, fgsl_linalg_complex_qr_qhvec, &
+       fgsl_linalg_qr_qtvec_r, fgsl_linalg_complex_qr_qhvec_r, &
+       fgsl_linalg_qr_qvec, fgsl_linalg_complex_qr_qvec, fgsl_linalg_qr_qtmat, &
        fgsl_linalg_qr_qtmat_r, fgsl_linalg_qr_rsolve, fgsl_linalg_qr_rsvx, &
-       fgsl_linalg_qr_unpack, fgsl_linalg_qr_unpack_r, &
+       fgsl_linalg_qr_unpack, fgsl_linalg_qr_unpack_r, fgsl_linalg_complex_qr_unpack_r,&
        fgsl_linalg_qr_qrsolve, fgsl_linalg_qr_update, &
-       fgsl_linalg_r_solve, fgsl_linalg_r_svx, fgsl_linalg_qrpt_decomp, &
+       fgsl_linalg_r_solve, fgsl_linalg_r_svx, &
+       fgsl_linalg_qr_ur_decomp, fgsl_linalg_qr_uu_decomp, &
+       fgsl_linalg_qr_uu_lssolve, fgsl_linalg_qr_uu_qtvec, &
+       fgsl_linalg_qr_uz_decomp, fgsl_linalg_qr_ud_decomp, &
+       fgsl_linalg_qr_ud_lssolve, fgsl_linalg_qrpt_decomp, &
        fgsl_linalg_qrpt_decomp2, fgsl_linalg_qrpt_solve, fgsl_linalg_qrpt_svx, &
        fgsl_linalg_qrpt_qrsolve, fgsl_linalg_qrpt_update, &
        fgsl_linalg_qrpt_rsolve, fgsl_linalg_qrpt_rsvx, &
@@ -374,6 +385,7 @@ module fgsl
        fgsl_linalg_qrpt_rank, fgsl_linalg_qrpt_rcond, &
        fgsl_linalg_lq_decomp, fgsl_linalg_lq_lssolve, &
        fgsl_linalg_lq_unpack, fgsl_linalg_lq_qtvec, &
+       fgsl_linalg_ql_decomp, fgsl_linalg_ql_unpack, &
        fgsl_linalg_cod_decomp, fgsl_linalg_cod_decomp_e, &
        fgsl_linalg_cod_lssolve, fgsl_linalg_cod_lssolve2, &
        fgsl_linalg_cod_unpack, fgsl_linalg_cod_matz, &
@@ -425,7 +437,9 @@ module fgsl
        fgsl_linalg_cholesky_band_svx, fgsl_linalg_cholesky_band_invert, &
        fgsl_linalg_cholesky_band_unpack, fgsl_linalg_cholesky_band_rcond, &
        fgsl_linalg_ldlt_band_decomp, fgsl_linalg_ldlt_band_solve, &
-       fgsl_linalg_ldlt_band_svx, fgsl_linalg_ldlt_band_unpack, fgsl_linalg_ldlt_band_rcond
+       fgsl_linalg_ldlt_band_svx, fgsl_linalg_ldlt_band_unpack, fgsl_linalg_ldlt_band_rcond, &
+       fgsl_linalg_cholesky_band_solvem, fgsl_linalg_cholesky_band_svxm, &
+       fgsl_linalg_cholesky_band_scale, fgsl_linalg_cholesky_band_scale_apply
   public :: fgsl_linalg_sv_leverage
 ! eigensystems
   public :: fgsl_eigen_symm_alloc, fgsl_eigen_symm_free, fgsl_eigen_symm, &
@@ -696,6 +710,7 @@ module fgsl
        fgsl_multifit_linear_wstdform2, fgsl_multifit_linear_genform1, &
        fgsl_multifit_linear_genform2, fgsl_multifit_linear_wgenform2, &
        fgsl_multifit_linear_lreg, fgsl_multifit_linear_lcurve, &
+       fgsl_multifit_linear_lcurvature, &
        fgsl_multifit_linear_lcorner, fgsl_multifit_linear_lcorner2, &
        fgsl_multifit_linear_gcv_init, fgsl_multifit_linear_gcv_curve, &
        fgsl_multifit_linear_gcv_min, fgsl_multifit_linear_gcv_calc, &
@@ -756,6 +771,7 @@ module fgsl
        fgsl_multilarge_linear_name, fgsl_multilarge_linear_reset, &
        fgsl_multilarge_linear_accumulate, fgsl_multilarge_linear_solve, &
        fgsl_multilarge_linear_rcond, fgsl_multilarge_linear_lcurve, &
+       fgsl_multilarge_linear_matrix_ptr, fgsl_multilarge_linear_rhs_ptr, &
        fgsl_multilarge_linear_wstdform1, fgsl_multilarge_linear_stdform1, &
        fgsl_multilarge_linear_l_decomp, fgsl_multilarge_linear_wstdform2, &
        fgsl_multilarge_linear_stdform2, fgsl_multilarge_linear_genform1, &
@@ -797,15 +813,18 @@ module fgsl
        fgsl_spmatrix_free, fgsl_spmatrix_realloc, fgsl_spmatrix_set_zero, &
        fgsl_spmatrix_nnz, fgsl_spmatrix_memcpy, &
        fgsl_spmatrix_get, fgsl_spmatrix_set, fgsl_spmatrix_compcol, &
-       fgsl_spmatrix_cumsum, fgsl_spmatrix_scale, fgsl_spmatrix_minmax, &
+       fgsl_spmatrix_cumsum, fgsl_spmatrix_scale, fgsl_spmatrix_norm1, fgsl_spmatrix_minmax, &
        fgsl_spmatrix_add, fgsl_spmatrix_d2sp, fgsl_spmatrix_sp2d, &
        fgsl_spmatrix_equal, fgsl_spmatrix_transpose_memcpy, &
        fgsl_spmatrix_transpose, fgsl_spmatrix_scale_columns, &
-       fgsl_spmatrix_scale_rows, fgsl_spmatrix_add_to_dense, fgsl_spmatrix_min_index, &
+       fgsl_spmatrix_scale_rows, fgsl_spmatrix_dense_add, fgsl_spmatrix_min_index, &
        fgsl_spmatrix_csc,  fgsl_spmatrix_csr,  fgsl_spmatrix_compress, &
        fgsl_spmatrix_fwrite, fgsl_spmatrix_fread, fgsl_spmatrix_fscanf, &
        fgsl_spmatrix_fprintf, fgsl_spblas_dgemv, fgsl_spblas_dgemm, &
        fgsl_spmatrix_getfields
+
+  ! deprecated:
+  public :: fgsl_spmatrix_add_to_dense
        
 
 ! sparse matrix linear algebra
