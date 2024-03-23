@@ -123,59 +123,117 @@
     type(c_ptr), value :: a, tau
     integer(c_int) :: gsl_linalg_qr_decomp
   end function gsl_linalg_qr_decomp
+  function gsl_linalg_complex_qr_decomp (a, tau) bind(c, name='gsl_linalg_complex_QR_decomp')
+    import :: c_ptr, c_int
+    type(c_ptr), value :: a, tau
+    integer(c_int) :: gsl_linalg_complex_qr_decomp
+  end function gsl_linalg_complex_qr_decomp
   function gsl_linalg_qr_decomp_r (a, t) bind(c, name='gsl_linalg_QR_decomp_r')
     import :: c_ptr, c_int
     type(c_ptr), value :: a, t
     integer(c_int) :: gsl_linalg_qr_decomp_r
   end function gsl_linalg_qr_decomp_r
+  function gsl_linalg_complex_qr_decomp_r (a, t) bind(c, name='gsl_linalg_complex_QR_decomp_r')
+    import :: c_ptr, c_int
+    type(c_ptr), value :: a, t
+    integer(c_int) :: gsl_linalg_complex_qr_decomp_r
+  end function gsl_linalg_complex_qr_decomp_r
   function gsl_linalg_qr_solve (qr, tau, b, x) &
        bind(c, name='gsl_linalg_QR_solve')
     import :: c_ptr, c_int
     type(c_ptr), value :: qr, tau, b, x
     integer(c_int) :: gsl_linalg_qr_solve
   end function gsl_linalg_qr_solve
+  function gsl_linalg_complex_qr_solve (qr, tau, b, x) &
+       bind(c, name='gsl_linalg_complex_QR_solve')
+    import :: c_ptr, c_int
+    type(c_ptr), value :: qr, tau, b, x
+    integer(c_int) :: gsl_linalg_complex_qr_solve
+  end function gsl_linalg_complex_qr_solve
   function gsl_linalg_qr_solve_r (qr, t, b, x) &
        bind(c, name='gsl_linalg_QR_solve_r')
     import :: c_ptr, c_int
     type(c_ptr), value :: qr, t, b, x
     integer(c_int) :: gsl_linalg_qr_solve_r
   end function gsl_linalg_qr_solve_r
+  function gsl_linalg_complex_qr_solve_r (qr, t, b, x) &
+       bind(c, name='gsl_linalg_complex_QR_solve_r')
+    import :: c_ptr, c_int
+    type(c_ptr), value :: qr, t, b, x
+    integer(c_int) :: gsl_linalg_complex_qr_solve_r
+  end function gsl_linalg_complex_qr_solve_r
   function gsl_linalg_qr_svx (qr, tau, x) &
        bind(c, name='gsl_linalg_QR_svx')
     import :: c_ptr, c_int
     type(c_ptr), value :: qr, tau, x
     integer(c_int) :: gsl_linalg_qr_svx
   end function gsl_linalg_qr_svx
+  function gsl_linalg_complex_qr_svx (qr, tau, x) &
+       bind(c, name='gsl_linalg_complex_QR_svx')
+    import :: c_ptr, c_int
+    type(c_ptr), value :: qr, tau, x
+    integer(c_int) :: gsl_linalg_complex_qr_svx
+  end function gsl_linalg_complex_qr_svx
   function gsl_linalg_qr_lssolve (qr, tau, b, x, residual) &
        bind(c, name='gsl_linalg_QR_lssolve')
     import :: c_ptr, c_int
     type(c_ptr), value :: qr, tau, b, x, residual
     integer(c_int) :: gsl_linalg_qr_lssolve
   end function gsl_linalg_qr_lssolve
+  function gsl_linalg_complex_qr_lssolve (qr, tau, b, x, residual) &
+       bind(c, name='gsl_linalg_complex_QR_lssolve')
+    import :: c_ptr, c_int
+    type(c_ptr), value :: qr, tau, b, x, residual
+    integer(c_int) :: gsl_linalg_complex_qr_lssolve
+  end function gsl_linalg_complex_qr_lssolve
   function gsl_linalg_qr_lssolve_r (qr, t, b, x, work) &
        bind(c, name='gsl_linalg_QR_lssolve_r')
     import :: c_ptr, c_int
     type(c_ptr), value :: qr, t, b, x, work
     integer(c_int) :: gsl_linalg_qr_lssolve_r
   end function gsl_linalg_qr_lssolve_r
+  function gsl_linalg_complex_qr_lssolve_r (qr, t, b, x, work) &
+       bind(c, name='gsl_linalg_complex_QR_lssolve_r')
+    import :: c_ptr, c_int
+    type(c_ptr), value :: qr, t, b, x, work
+    integer(c_int) :: gsl_linalg_complex_qr_lssolve_r
+  end function gsl_linalg_complex_qr_lssolve_r
   function gsl_linalg_qr_qtvec (qr, tau, v) &
        bind(c, name='gsl_linalg_QR_QTvec')
     import :: c_ptr, c_int
     type(c_ptr), value :: qr, tau, v
     integer(c_int) :: gsl_linalg_qr_qtvec
   end function gsl_linalg_qr_qtvec
+  function gsl_linalg_complex_qr_qhvec (qr, tau, v) &
+       bind(c, name='gsl_linalg_complex_QR_QHvec')
+    import :: c_ptr, c_int
+    type(c_ptr), value :: qr, tau, v
+    integer(c_int) :: gsl_linalg_complex_qr_qhvec
+  end function gsl_linalg_complex_qr_qhvec
   function gsl_linalg_qr_qtvec_r (qr, t, v, work) &
        bind(c, name='gsl_linalg_QR_QTvec_r')
     import :: c_ptr, c_int
     type(c_ptr), value :: qr, t, v,work
     integer(c_int) :: gsl_linalg_qr_qtvec_r
   end function gsl_linalg_qr_qtvec_r
+  function gsl_linalg_complex_qr_qhvec_r (qr, t, v, work) &
+       bind(c, name='gsl_linalg_complex_QR_QHvec_r')
+    import :: c_ptr, c_int
+    type(c_ptr), value :: qr, t, v,work
+    integer(c_int) :: gsl_linalg_complex_qr_qhvec_r
+  end function gsl_linalg_complex_qr_qhvec_r
   function gsl_linalg_qr_qvec (qr, tau, v) &
        bind(c, name='gsl_linalg_QR_Qvec')
     import :: c_ptr, c_int
     type(c_ptr), value :: qr, tau, v
     integer(c_int) :: gsl_linalg_qr_qvec
   end function gsl_linalg_qr_qvec
+  function gsl_linalg_complex_qr_qvec (qr, tau, v) &
+       bind(c, name='gsl_linalg_complex_QR_Qvec')
+    import :: c_ptr, c_int
+    type(c_ptr), value :: qr, tau, v
+    integer(c_int) :: gsl_linalg_complex_qr_qvec
+  end function gsl_linalg_complex_qr_qvec
   function gsl_linalg_qr_qtmat (qr, tau, a) &
        bind(c, name='gsl_linalg_QR_QTmat')
     import :: c_ptr, c_int
@@ -212,6 +270,12 @@
     type(c_ptr), value :: qr, t, q, r
     integer(c_int) :: gsl_linalg_qr_unpack_r
   end function gsl_linalg_qr_unpack_r
+  function gsl_linalg_complex_qr_unpack_r (qr, t, q, r) &
+       bind(c, name='gsl_linalg_complex_QR_unpack_r')
+    import :: c_ptr, c_int
+    type(c_ptr), value :: qr, t, q, r
+    integer(c_int) :: gsl_linalg_complex_qr_unpack_r
+  end function gsl_linalg_complex_qr_unpack_r
   function gsl_linalg_qr_qrsolve (q, r, b, x) &
        bind(c, name='gsl_linalg_QR_QRsolve')
     import :: c_ptr, c_int
@@ -236,6 +300,48 @@
     type(c_ptr), value :: r, x
     integer(c_int) :: gsl_linalg_r_svx
   end function gsl_linalg_r_svx
+  function gsl_linalg_qr_ur_decomp(u, a, t) &
+       bind(c, name='gsl_linalg_QR_UR_decomp')
+    import :: c_ptr, c_int
+    type(c_ptr), value :: u, a, t
+    integer(c_int) :: gsl_linalg_qr_ur_decomp
+  end function gsl_linalg_qr_ur_decomp
+  function gsl_linalg_qr_uu_decomp(u1, u2, t) &
+       bind(c, name='gsl_linalg_QR_UU_decomp')
+    import :: c_ptr, c_int
+    type(c_ptr), value :: u1, u2, t
+    integer(c_int) :: gsl_linalg_qr_uu_decomp
+  end function gsl_linalg_qr_uu_decomp
+  function gsl_linalg_qr_uu_lssolve(r, y, t, b, x, work) &
+       bind(c, name='gsl_linalg_QR_UU_lssolve')
+    import :: c_ptr, c_int
+    type(c_ptr), value :: r, y, t, b, x, work
+    integer(c_int) :: gsl_linalg_qr_uu_lssolve
+  end function gsl_linalg_qr_uu_lssolve
+  function gsl_linalg_qr_uu_qtvec(y, t, b, work) &
+       bind(c, name='gsl_linalg_QR_UU_QTvec')
+    import :: c_ptr, c_int
+    type(c_ptr), value :: y, t, b, work
+    integer(c_int) :: gsl_linalg_qr_uu_qtvec
+  end function gsl_linalg_qr_uu_qtvec
+  function gsl_linalg_qr_uz_decomp(u, a, t) &
+       bind(c, name='gsl_linalg_QR_UZ_decomp')
+    import :: c_ptr, c_int
+    type(c_ptr), value :: u, a, t
+    integer(c_int) :: gsl_linalg_qr_uz_decomp
+  end function gsl_linalg_qr_uz_decomp
+  function gsl_linalg_qr_ud_decomp(u, d, y, t) &
+       bind(c, name='gsl_linalg_QR_UD_decomp')
+    import :: c_ptr, c_int
+    type(c_ptr), value :: u, d, y, t
+    integer(c_int) :: gsl_linalg_qr_ud_decomp
+  end function gsl_linalg_qr_ud_decomp
+  function gsl_linalg_qr_ud_lssolve(r, y, t, b, x, work) &
+       bind(c, name='gsl_linalg_QR_UD_lssolve')
+    import :: c_ptr, c_int
+    type(c_ptr), value :: r, y, t, b, x, work
+    integer(c_int) :: gsl_linalg_qr_ud_lssolve
+  end function gsl_linalg_qr_ud_lssolve
   function gsl_linalg_qrpt_decomp (a, tau, p, signum, norm) &
        bind(c, name='gsl_linalg_QRPT_decomp')
     import :: c_ptr, c_int
@@ -314,7 +420,7 @@
     integer(c_int) :: gsl_linalg_qrpt_rcond
   end function gsl_linalg_qrpt_rcond
 !
-! LQ decomposition
+! LQ and QL decompositions
 !
   integer(c_int) function gsl_linalg_lq_decomp(a, tau) &
        bind(c, name='gsl_linalg_LQ_decomp')
@@ -336,6 +442,16 @@
     import :: c_int, c_ptr
     type(c_ptr), value :: lq, tau, v
   end function gsl_linalg_lq_qtvec
+  integer(c_int) function gsl_linalg_ql_decomp(a, tau) &
+       bind(c, name='gsl_linalg_QL_decomp')
+    import :: c_int, c_ptr
+    type(c_ptr), value :: a, tau
+  end function gsl_linalg_ql_decomp
+  integer(c_int) function gsl_linalg_ql_unpack(ql, tau, q, l) &
+       bind(c, name='gsl_linalg_QL_unpack')
+    import :: c_int, c_ptr
+    type(c_ptr), value :: ql, tau, q, l
+  end function gsl_linalg_ql_unpack
 !  
 ! Complete orthogonal decomposition (COD)
 !
@@ -390,28 +506,24 @@
        bind(c, name='gsl_linalg_SV_decomp')
     import :: c_ptr, c_int
     type(c_ptr), value :: a, v, s, work
-    integer(c_int) :: signum
     integer(c_int) :: gsl_linalg_sv_decomp
   end function gsl_linalg_sv_decomp
   function gsl_linalg_sv_decomp_mod (a, x, v, s, work) &
        bind(c, name='gsl_linalg_SV_decomp_mod')
     import :: c_ptr, c_int
     type(c_ptr), value :: a, x, v, s, work
-    integer(c_int) :: signum
     integer(c_int) :: gsl_linalg_sv_decomp_mod
   end function gsl_linalg_sv_decomp_mod
   function gsl_linalg_sv_decomp_jacobi (a, v, s) &
        bind(c, name='gsl_linalg_SV_decomp_jacobi')
     import :: c_ptr, c_int
     type(c_ptr), value :: a, v, s
-    integer(c_int) :: signum
     integer(c_int) :: gsl_linalg_sv_decomp_jacobi
   end function gsl_linalg_sv_decomp_jacobi
   function gsl_linalg_sv_solve (u, v, s, b, x) &
        bind(c, name='gsl_linalg_SV_solve')
     import :: c_ptr, c_int
     type(c_ptr), value :: u, v, s, b, x
-    integer(c_int) :: signum
     integer(c_int) :: gsl_linalg_sv_solve
   end function gsl_linalg_sv_solve
   function gsl_linalg_sv_leverage(u, h) &
@@ -612,10 +724,6 @@
     import :: c_int, c_ptr
     type(c_ptr), value :: ldlt, x
   end function gsl_linalg_ldlt_svx
-  integer(c_int) function gsl_linalg_ldlt_invert(ldlt, ainv) bind(c)
-    import :: c_int, c_ptr
-    type(c_ptr), value :: ldlt, ainv
-  end function gsl_linalg_ldlt_invert
   integer(c_int) function gsl_linalg_ldlt_rcond(ldlt, rcond, w) bind(c)
     import :: c_int, c_ptr, c_double
     type(c_ptr), value :: ldlt, w
@@ -902,10 +1010,18 @@
     import :: c_int, c_ptr
     type(c_ptr), value :: llt, b, x
   end function gsl_linalg_cholesky_band_solve
+  integer(c_int) function gsl_linalg_cholesky_band_solvem(llt, b, x) bind(c)
+    import :: c_int, c_ptr
+    type(c_ptr), value :: llt, b, x
+  end function gsl_linalg_cholesky_band_solvem
   integer(c_int) function gsl_linalg_cholesky_band_svx(llt, x) bind(c)
     import :: c_int, c_ptr
     type(c_ptr), value :: llt, x
   end function gsl_linalg_cholesky_band_svx
+  integer(c_int) function gsl_linalg_cholesky_band_svxm(llt, x) bind(c)
+    import :: c_int, c_ptr
+    type(c_ptr), value :: llt, x
+  end function gsl_linalg_cholesky_band_svxm
   integer(c_int) function gsl_linalg_cholesky_band_invert(llt, ainv) bind(c)
     import :: c_int, c_ptr
     type(c_ptr), value :: llt, ainv
@@ -914,6 +1030,14 @@
     import :: c_int, c_ptr
     type(c_ptr), value :: llt, l
   end function gsl_linalg_cholesky_band_unpack
+  integer(c_int) function gsl_linalg_cholesky_band_scale(a, s) bind(c)
+    import :: c_int, c_ptr
+    type(c_ptr), value :: a, s
+  end function gsl_linalg_cholesky_band_scale
+  integer(c_int) function gsl_linalg_cholesky_band_scale_apply(a, s) bind(c)
+    import :: c_int, c_ptr
+    type(c_ptr), value :: a, s
+  end function gsl_linalg_cholesky_band_scale_apply
   integer(c_int) function gsl_linalg_cholesky_band_rcond(llt, rcond, w) bind(c)
     import :: c_int, c_ptr, c_double
     type(c_ptr), value :: llt, w
@@ -931,10 +1055,6 @@
     import :: c_int, c_ptr
     type(c_ptr), value :: ldlt, x
   end function gsl_linalg_ldlt_band_svx
-  integer(c_int) function gsl_linalg_ldlt_band_invert(ldlt, ainv) bind(c)
-    import :: c_int, c_ptr
-    type(c_ptr), value :: ldlt, ainv
-  end function gsl_linalg_ldlt_band_invert
   integer(c_int) function gsl_linalg_ldlt_band_unpack(ldlt, l, d) bind(c)
     import :: c_int, c_ptr
     type(c_ptr), value :: ldlt, l, d

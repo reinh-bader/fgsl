@@ -72,6 +72,24 @@ function fgsl_multilarge_linear_lcurve(reg_param, rho, eta, w)
   w%gsl_multilarge_linear_workspace)
 end function fgsl_multilarge_linear_lcurve
 
+function fgsl_multilarge_linear_matrix_ptr(work)
+  real(fgsl_double), pointer :: fgsl_multilarge_linear_matrix_ptr(:,:)
+  type(fgsl_multilarge_linear_workspace), intent(in) :: work
+  type(fgsl_matrix) :: matrix
+
+  matrix%gsl_matrix = gsl_multilarge_linear_matrix_ptr(work%gsl_multilarge_linear_workspace)
+  fgsl_multilarge_linear_matrix_ptr => fgsl_matrix_to_fptr(matrix)  
+end function fgsl_multilarge_linear_matrix_ptr
+
+function fgsl_multilarge_linear_rhs_ptr(work)
+  real(fgsl_double), pointer :: fgsl_multilarge_linear_rhs_ptr(:)
+  type(fgsl_multilarge_linear_workspace), intent(in) :: work
+  type(fgsl_vector) :: vector
+
+  vector%gsl_vector = gsl_multilarge_linear_rhs_ptr(work%gsl_multilarge_linear_workspace)
+  fgsl_multilarge_linear_rhs_ptr => fgsl_vector_to_fptr(vector)  
+end function fgsl_multilarge_linear_rhs_ptr
+
 function fgsl_multilarge_linear_wstdform1(L, X, w, y, Xs, ys, work)
   type(fgsl_vector), intent(in) :: L, X, w, y
   type(fgsl_matrix), intent(inout) :: Xs

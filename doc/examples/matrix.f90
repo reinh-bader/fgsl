@@ -1,7 +1,7 @@
 program matrix
   use fgsl
   implicit none
-  integer(fgsl_size_t), parameter :: n = 10, m = 3
+  integer(fgsl_size_t), parameter :: n = 6, m = 4
   integer(fgsl_size_t) :: i, j 
   integer(fgsl_int) :: status
   type(fgsl_matrix) :: mat
@@ -16,9 +16,21 @@ program matrix
      end do
   end do
   pfm => fgsl_matrix_to_fptr(mat)
-  do i=1, size(pfm(1,:))
-     do j=1, size(pfm(:,1))
-        write(6, '(''mat('',I2,'','',I2,'') = '',F6.2)') j, i, pfm(j,i)
+  write(*,'("Pointer to matrix")')
+  do i=1, size(pfm,2)
+     do j=1, size(pfm,1)
+        write(*, '(''mat('',I2,'','',I2,'') = '',F6.2)') j, i, pfm(j,i)
      end do
   end do
+  pfm => null()
+  call fgsl_matrix_free(mat)
+  mat = fgsl_matrix_init(fmat, 2_fgsl_size_t, 3_fgsl_size_t)
+  pfm => fgsl_matrix_to_fptr(mat)
+  write(*,'("Pointer to submatrix")')
+  do i=1, size(pfm,2)
+     do j=1, size(pfm,1)
+        write(*, '(''mat('',I2,'','',I2,'') = '',F6.2)') j, i, pfm(j,i)
+     end do
+  end do
+
 end program matrix

@@ -60,7 +60,7 @@ program error
   call unit_assert_equal('fgsl_interp_init:own handler', &
        'invalid argument supplied by user',trim(test_message))
 !  need to build with preprocessing for next line
-  call fgsl_error("my_own_call",__FILE__,__LINE__,2)
+  call fgsl_error("my_own_call",'fgsl_error',__LINE__,2)
 !  call fgsl_error("my_own_call","error.f90",80,2)
   write(6, *) trim(test_message)
   call unit_assert_equal('fgsl_interp_init:own handler', &

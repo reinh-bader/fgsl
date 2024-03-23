@@ -132,11 +132,14 @@
     type(fgsl_vector), intent(inout) :: v1, v2
     call gsl_sort_vector2(v1%gsl_vector, v2%gsl_vector)
   end subroutine fgsl_sort_vector2
-  subroutine fgsl_sort_vector_index(p,v)
+  subroutine fgsl_sort_vector_index(p,v,status)
     type(fgsl_permutation), intent(inout) :: p
     type(fgsl_vector), intent(in) :: v
-    integer(fgsl_int) :: status
-    status = gsl_sort_vector_index(p%gsl_permutation,v%gsl_vector)
+    integer(fgsl_int), optional :: status
+    integer(fgsl_int) :: status_loc
+    status_loc = gsl_sort_vector_index(&
+        p%gsl_permutation,v%gsl_vector)
+    if (present(status)) status = status_loc
   end subroutine fgsl_sort_vector_index
   function fgsl_sort_vector_smallest(dest, k, v)
     integer(fgsl_int) :: fgsl_sort_vector_smallest

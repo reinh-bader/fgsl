@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['chebyshev_2efinc_2731',['chebyshev.finc',['../chebyshev_8finc.html',1,'']]],
-  ['complex_2efinc_2732',['complex.finc',['../complex_8finc.html',1,'']]]
+  ['chebyshev_2efinc_4686',['chebyshev.finc',['../api_2chebyshev_8finc.html',1,'(Global Namespace)'],['../interface_2chebyshev_8finc.html',1,'(Global Namespace)']]],
+  ['complex_2efinc_4687',['complex.finc',['../api_2complex_8finc.html',1,'(Global Namespace)'],['../interface_2complex_8finc.html',1,'(Global Namespace)']]]
 ];

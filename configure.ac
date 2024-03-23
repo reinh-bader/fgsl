@@ -1,4 +1,4 @@
-AC_INIT([fgsl],[1.5.0],[Reinhold.Bader@lrz.de])
+AC_INIT([fgsl],[1.6.0],[Reinhold.Bader@lrz.de])
 AC_PREREQ([2.69])
 
 AC_CONFIG_AUX_DIR([build-aux])
@@ -8,7 +8,7 @@ AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 AC_CANONICAL_HOST
 
 LIB_CURRENT=1
-LIB_REVISION=5
+LIB_REVISION=6
 LIB_AGE=0
 AC_SUBST(LIB_CURRENT)
 AC_SUBST(LIB_REVISION)
@@ -32,7 +32,7 @@ fi
 #initialize pkg-config
 PKG_PROG_PKG_CONFIG
 
-PKG_CHECK_MODULES([gsl], [gsl >= 2.6])
+PKG_CHECK_MODULES([gsl], [gsl >= 2.7])
 
 local_gsl_version=`$PKG_CONFIG --modversion gsl`
 AC_SUBST(GSL_VERSION,$local_gsl_version)
@@ -66,6 +66,30 @@ ENDPROGRAM
 
 if test "x$IEEE_EXCEPTIONS" = xyes ; then
 	AC_DEFINE([IEEE_EXCEPTIONS],[],[Fortran 2003 ieee_exceptions intrinsic module found])
+fi
+
+#check for support for BLOCK
+AC_FC_SRCEXT([F90],[
+	AC_MSG_CHECKING([whether the fortran compiler supports the BLOCK construct])
+	AC_LANG_PUSH(Fortran)
+	AC_COMPILE_IFELSE([[
+PROGRAM main
+IMPLICIT NONE
+INTEGER :: i = 0
+
+  BLOCK
+	i = i+1
+  END BLOCK
+	
+
+ENDPROGRAM
+	]], [BLOCK=yes], [BLOCK=no])
+	AC_LANG_POP(Fortran)
+	AC_MSG_RESULT([$BLOCK])
+])
+
+if test "x$BLOCK" = xno ; then
+	AC_MSG_ERROR([Fortran 2008 BLOCK construct is not supported])
 fi
 
 #check for target support

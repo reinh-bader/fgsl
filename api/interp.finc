@@ -56,7 +56,7 @@
     integer(fgsl_int) :: fgsl_interp_init
     !check that the array dimensions match
     if (size(xa) /= size(ya)) then
-      call fgsl_error('xa and ya dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      call fgsl_error('xa and ya dimensions do not match', 'fgsl_interp', __LINE__, fgsl_ebadlen)
       fgsl_interp_init = fgsl_ebadlen
       return
     endif
@@ -200,7 +200,7 @@
     integer(fgsl_int) :: fgsl_spline_init
     !check if dimenions match
     if (size(xa) /= size(ya)) then
-      call fgsl_error('xa and ya dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      call fgsl_error('xa and ya dimensions do not match', 'fgsl_interp', __LINE__, fgsl_ebadlen)
       fgsl_spline_init = fgsl_ebadlen
       return
     endif
@@ -335,12 +335,12 @@
     integer(fgsl_int) :: fgsl_interp2d_init
     ! this may be a good time to check the dimensions of za vs those of xa and ya
     if (size(xa) /= size(za, dim=1)) then
-      call fgsl_error('xa and za dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      call fgsl_error('xa and za dimensions do not match', 'fgsl_interp', __LINE__, fgsl_ebadlen)
       fgsl_interp2d_init = fgsl_ebadlen
       return
     endif
     if (size(ya) /= size(za, dim=2)) then
-      call fgsl_error('ya and za dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      call fgsl_error('ya and za dimensions do not match', 'fgsl_interp', __LINE__, fgsl_ebadlen)
       fgsl_interp2d_init = fgsl_ebadlen
       return
     endif
@@ -539,12 +539,12 @@
     integer(fgsl_int) :: fgsl_spline2d_init
     ! this may be a good time to check the dimensions of za vs those of xa and ya
     if (size(xa) /= size(za, dim=1)) then
-      call fgsl_error('xa and za dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      call fgsl_error('xa and za dimensions do not match', 'fgsl_interp', __LINE__, fgsl_ebadlen)
       fgsl_spline2d_init = fgsl_ebadlen
       return
     endif
     if (size(ya) /= size(za, dim=2)) then
-      call fgsl_error('ya and za dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      call fgsl_error('ya and za dimensions do not match', 'fgsl_interp', __LINE__, fgsl_ebadlen)
       fgsl_spline2d_init = fgsl_ebadlen
       return
     endif
@@ -573,13 +573,30 @@
     fgsl_spline2d_eval_e = gsl_spline2d_eval_e(interp%gsl_spline2d, x, y, &
     xa%gsl_interp_accel, ya%gsl_interp_accel, z)
   end function fgsl_spline2d_eval_e
-  function fgsl_spline2d_eval_deriv_x(interp, x, y, xa, ya)
+  function fgsl_spline2d_eval_extrap(interp, x, y, xa, ya)
+    type(fgsl_spline2d), intent(in) :: interp
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double) :: fgsl_spline2d_eval_extrap
+    fgsl_spline2d_eval_extrap = gsl_spline2d_eval_extrap(&
+         interp%gsl_spline2d, x, y, xa%gsl_interp_accel, ya%gsl_interp_accel)
+  end function fgsl_spline2d_eval_extrap
+  function fgsl_spline2d_eval_extrap_e(interp, x, y, xa, ya, z)
+    type(fgsl_spline2d), intent(in) :: interp
+    real(fgsl_double), intent(in) :: x, y
+    type(fgsl_interp_accel), intent(inout) :: xa, ya
+    real(fgsl_double), intent(out) :: z
+    integer(fgsl_int) :: fgsl_spline2d_eval_extrap_e
+    fgsl_spline2d_eval_extrap_e = gsl_spline2d_eval_extrap_e(&
+         interp%gsl_spline2d, x, y, xa%gsl_interp_accel, ya%gsl_interp_accel, z)
+  end function fgsl_spline2d_eval_extrap_e
+   function fgsl_spline2d_eval_deriv_x(interp, x, y, xa, ya)
     type(fgsl_spline2d), intent(in) :: interp
     real(fgsl_double), intent(in) :: x, y
     type(fgsl_interp_accel), intent(inout) :: xa, ya
     real(fgsl_double) :: fgsl_spline2d_eval_deriv_x
-    fgsl_spline2d_eval_deriv_x = gsl_spline2d_eval_deriv_x(interp%gsl_spline2d, x, y, &
-    xa%gsl_interp_accel, ya%gsl_interp_accel)
+    fgsl_spline2d_eval_deriv_x = gsl_spline2d_eval_deriv_x(&
+         interp%gsl_spline2d, x, y, xa%gsl_interp_accel, ya%gsl_interp_accel)
   end function fgsl_spline2d_eval_deriv_x
   function fgsl_spline2d_eval_deriv_x_e(interp, x, y, xa, ya, z)
     type(fgsl_spline2d), intent(in) :: interp
@@ -587,8 +604,8 @@
     type(fgsl_interp_accel), intent(inout) :: xa, ya
     real(fgsl_double), intent(out) :: z
     integer(fgsl_int) :: fgsl_spline2d_eval_deriv_x_e
-    fgsl_spline2d_eval_deriv_x_e = gsl_spline2d_eval_deriv_x_e(interp%gsl_spline2d, x, y, &
-    xa%gsl_interp_accel, ya%gsl_interp_accel, z)
+    fgsl_spline2d_eval_deriv_x_e = gsl_spline2d_eval_deriv_x_e(&
+         interp%gsl_spline2d, x, y, xa%gsl_interp_accel, ya%gsl_interp_accel, z)
   end function fgsl_spline2d_eval_deriv_x_e
   function fgsl_spline2d_eval_deriv_y(interp, x, y, xa, ya)
     type(fgsl_spline2d), intent(in) :: interp
@@ -665,6 +682,21 @@
     name = gsl_spline2d_name(interp%gsl_spline2d)
     fgsl_spline2d_name = fgsl_name(name)
   end function fgsl_spline2d_name
+  function fgsl_spline2d_set(spline, za, i, j, z)
+    type(fgsl_spline2d), intent(in) :: spline
+    real(fgsl_double), intent(inout) :: za(*)
+    integer(fgsl_size_t), intent(in) :: i, j
+    real(fgsl_double), intent(in) :: z
+    integer(fgsl_int) :: fgsl_spline2d_set
+    fgsl_spline2d_set = gsl_spline2d_set(spline%gsl_spline2d, za, i, j, z)
+  end function fgsl_spline2d_set
+  function fgsl_spline2d_get(spline, za, i, j)
+    type(fgsl_spline2d), intent(in) :: spline
+    real(fgsl_double), intent(in) :: za(*)
+    integer(fgsl_size_t), intent(in) :: i, j
+    real(fgsl_double) :: fgsl_spline2d_get
+    fgsl_spline2d_get = gsl_spline2d_get(spline%gsl_spline2d, za, i, j)
+  end function fgsl_spline2d_get 
   function fgsl_spline2d_min_size(interp)
     type(fgsl_spline2d), intent(in) :: interp
     integer(fgsl_size_t) :: fgsl_spline2d_min_size

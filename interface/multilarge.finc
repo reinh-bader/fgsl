@@ -53,6 +53,18 @@ function gsl_multilarge_linear_lcurve(reg_param, rho, eta, w) bind(c)
   integer(c_int) :: gsl_multilarge_linear_lcurve
 end function gsl_multilarge_linear_lcurve
 
+function gsl_multilarge_linear_matrix_ptr(work) bind(c)
+  import :: c_ptr
+  type(c_ptr) :: gsl_multilarge_linear_matrix_ptr
+  type(c_ptr), value :: work
+end function gsl_multilarge_linear_matrix_ptr
+
+function gsl_multilarge_linear_rhs_ptr(work) bind(c)
+  import :: c_ptr
+  type(c_ptr) :: gsl_multilarge_linear_rhs_ptr
+  type(c_ptr), value :: work
+end function gsl_multilarge_linear_rhs_ptr
+
 function gsl_multilarge_linear_wstdform1(L, X, w, y, Xs, ys, work) bind(c)
   import :: c_ptr, c_int
   type(c_ptr), value :: L, X, w, y, Xs, ys, work

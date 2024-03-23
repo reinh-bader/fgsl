@@ -170,7 +170,7 @@
   function gsl_histogram_fprintf(stream, h, range_format, bin_format) bind(c)
     import :: c_ptr, c_int, c_char
     type(c_ptr), value :: stream, h
-    type(c_ptr), value :: range_format, bin_format
+    character(kind=c_char) :: range_format(*), bin_format(*)
     integer(c_int) :: gsl_histogram_fprintf
   end function gsl_histogram_fprintf
   function gsl_histogram_fscanf(stream, h) bind(c)
@@ -403,7 +403,7 @@
   function gsl_histogram2d_fprintf(stream, h, range_format, bin_format) bind(c)
     import :: c_ptr, c_int, c_char
     type(c_ptr), value :: stream, h
-    type(c_ptr), value :: range_format, bin_format
+    character(kind=c_char) :: range_format(*), bin_format(*)
     integer(c_int) :: gsl_histogram2d_fprintf
   end function gsl_histogram2d_fprintf
   function gsl_histogram2d_fscanf(stream, h) bind(c)

@@ -45,7 +45,7 @@
     !check dims
     if (size(x) /= size(y) .or.&
         size(x) /= size(dd)) then
-      call fgsl_error('x, y and dd dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      call fgsl_error('x, y and dd dimensions do not match', 'fgsl_poly', __LINE__, fgsl_ebadlen)
       fgsl_poly_dd_init = fgsl_ebadlen
       return
     endif
@@ -57,7 +57,7 @@
     real(fgsl_double), intent(in) :: x
     real(fgsl_double) :: fgsl_poly_dd_eval
     if (size(xa) /= size(dd)) then
-      call fgsl_error('xa and dd dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      call fgsl_error('xa and dd dimensions do not match', 'fgsl_poly', __LINE__, fgsl_ebadlen)
       fgsl_poly_dd_eval = fgsl_ebadlen
       return
     endif
@@ -72,7 +72,7 @@
     if (size(x) /= size(c) .or.&
         size(x) /= size(dd) .or.&
         size(x) /= size(w)) then
-      call fgsl_error('x, c, dd and w dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      call fgsl_error('x, c, dd and w dimensions do not match', 'fgsl_poly', __LINE__, fgsl_ebadlen)
       fgsl_poly_dd_taylor = fgsl_ebadlen
       return
     endif
@@ -87,7 +87,7 @@
         2*size(xa) /= size(z) .or.&
         size(xa) /= size(ya) .or.&
         size(xa) /= size(dya)) then
-      call fgsl_error('dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      call fgsl_error('dimensions do not match', 'fgsl_poly', __LINE__, fgsl_ebadlen)
       fgsl_poly_dd_hermite_init = fgsl_ebadlen
       return
     endif

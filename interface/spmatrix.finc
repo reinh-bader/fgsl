@@ -1,4 +1,4 @@
-  !-*-f90-*-
+!-*-f90-*-
 !
 !  Interfaces: Sparse matrices
 !
@@ -72,15 +72,20 @@ function gsl_spmatrix_scale(m, x) bind(c)
   integer(c_int) :: gsl_spmatrix_scale
 end function gsl_spmatrix_scale
 function gsl_spmatrix_scale_columns(a, x) bind(c)
-  import :: c_ptr, c_double, c_int
+  import :: c_ptr, c_int
   type(c_ptr), value :: a, x
   integer(c_int) :: gsl_spmatrix_scale_columns
 end function gsl_spmatrix_scale_columns
 function gsl_spmatrix_scale_rows(a, x) bind(c)
-  import :: c_ptr, c_double, c_int
+  import :: c_ptr, c_int
   type(c_ptr), value :: a, x
   integer(c_int) :: gsl_spmatrix_scale_rows
 end function gsl_spmatrix_scale_rows
+function gsl_spmatrix_norm1(a) bind(c)
+  import :: c_ptr, c_double
+  type(c_ptr), value :: a
+  real(c_double) :: gsl_spmatrix_norm1
+end function gsl_spmatrix_norm1
 function gsl_spmatrix_minmax(m, min_out, max_out) bind(c)
   import :: c_ptr, c_double, c_int
   type(c_ptr), value :: m
@@ -98,11 +103,16 @@ function gsl_spmatrix_add(c, a, b) bind(c)
   type(c_ptr), value :: c, a, b
   integer(c_int) :: gsl_spmatrix_add
 end function gsl_spmatrix_add
-function gsl_spmatrix_add_to_dense(a, b) bind(c)
+function gsl_spmatrix_dense_add(a, b) bind(c)
   import :: c_ptr, c_int
   type(c_ptr), value :: a, b
-  integer(c_int) :: gsl_spmatrix_add_to_dense
-end function gsl_spmatrix_add_to_dense
+  integer(c_int) :: gsl_spmatrix_dense_add
+end function gsl_spmatrix_dense_add
+function gsl_spmatrix_dense_sub(a, b) bind(c)
+  import :: c_ptr, c_int
+  type(c_ptr), value :: a, b
+  integer(c_int) :: gsl_spmatrix_dense_sub
+end function gsl_spmatrix_dense_sub
 function gsl_spmatrix_csc(dest, src) bind(c)
   import :: c_ptr, c_double, c_int
   type(c_ptr), value :: dest, src

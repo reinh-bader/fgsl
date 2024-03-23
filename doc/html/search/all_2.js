@@ -11,7 +11,7 @@ var searchData=
   ['cblastrans_12',['cblastrans',['../namespacefgsl.html#ac6569c6aac09f46e07c196e8eed9c24d',1,'fgsl']]],
   ['cblasunit_13',['cblasunit',['../namespacefgsl.html#a3f1a1a796c0ebe334b2827821def158c',1,'fgsl']]],
   ['cblasupper_14',['cblasupper',['../namespacefgsl.html#a389e1e2a1ac38e601131ab19ed117f20',1,'fgsl']]],
-  ['chebyshev_2efinc_15',['chebyshev.finc',['../chebyshev_8finc.html',1,'']]],
-  ['complex_2efinc_16',['complex.finc',['../complex_8finc.html',1,'']]],
-  ['complex_5fto_5ffgsl_5fcomplex_17',['complex_to_fgsl_complex',['../interfaceassignment_07_0a_08.html#a22cecc540b4b1701b3b05c433ab0e23e',1,'assignment(=)::complex_to_fgsl_complex()'],['../complex_8finc.html#a2cbad87c3e0a645db0b486c0f1fddf5a',1,'complex_to_fgsl_complex():&#160;complex.finc']]]
+  ['chebyshev_2efinc_15',['chebyshev.finc',['../api_2chebyshev_8finc.html',1,'(Global Namespace)'],['../interface_2chebyshev_8finc.html',1,'(Global Namespace)']]],
+  ['complex_2efinc_16',['complex.finc',['../api_2complex_8finc.html',1,'(Global Namespace)'],['../interface_2complex_8finc.html',1,'(Global Namespace)']]],
+  ['complex_5fto_5ffgsl_5fcomplex_17',['complex_to_fgsl_complex',['../interfaceassignment_07_0a_08.html#a22cecc540b4b1701b3b05c433ab0e23e',1,'assignment(=)::complex_to_fgsl_complex()'],['../api_2complex_8finc.html#a2cbad87c3e0a645db0b486c0f1fddf5a',1,'complex_to_fgsl_complex():&#160;complex.finc']]]
 ];

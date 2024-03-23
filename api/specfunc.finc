@@ -836,7 +836,7 @@
     real(fgsl_double), intent(out) :: f_exponent, g_exponent
     integer(fgsl_int) :: fgsl_sf_coulomb_wave_fg_array
     if (size(fc_array) /= size(gc_array)) then
-      call fgsl_error('fc_array and gc_array dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      call fgsl_error('fc_array and gc_array dimensions do not match', 'fgsl_specfunc', __LINE__, fgsl_ebadlen)
       fgsl_sf_coulomb_wave_fg_array = fgsl_ebadlen
       return
     endif
@@ -855,7 +855,7 @@
         size(fc_array) /= size(fcp_array) .or.&
         size(fc_array) /= size(gcp_array)) then
       call fgsl_error('fc_array, fcp_array, gc_array and gcp_array dimensions do not match',&
-       __FILE__, __LINE__, fgsl_ebadlen)
+       'fgsl_specfunc', __LINE__, fgsl_ebadlen)
       fgsl_sf_coulomb_wave_fgp_array = fgsl_ebadlen
       return
     endif
@@ -2231,7 +2231,7 @@
     real(fgsl_double) :: fgsl_sf_legendre_pl_deriv_array
     if (size(result_array) /= size(deriv_array)) then
       call fgsl_error('result_array and deriv_array dimensions do not match',&
-       __FILE__, __LINE__, fgsl_ebadlen)
+       'fgsl_specfunc', __LINE__, fgsl_ebadlen)
       fgsl_sf_legendre_pl_deriv_array = 0.0_fgsl_double
       return
     end if
@@ -2887,7 +2887,7 @@
   end function fgsl_sf_legendre_deriv2_alt_array_e
 !  fgsl_sf_legendre_array_n --> interface
 !  fgsl_sf_legendre_array_index --> interface
-!  fgsl_sf_legendre_nlm --> index
+!  fgsl_sf_legendre_nlm --> interface
   function fgsl_sf_mathieu_a_array(order_min, order_max, qq, work, result_array)
     integer(fgsl_int), intent(in) :: order_min, order_max
     real(fgsl_double), intent(in) :: qq

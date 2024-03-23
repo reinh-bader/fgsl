@@ -159,12 +159,24 @@
     integer(fgsl_int) :: fgsl_linalg_qr_decomp
     fgsl_linalg_qr_decomp = gsl_linalg_qr_decomp (a%gsl_matrix, tau%gsl_vector)
   end function fgsl_linalg_qr_decomp
+  function fgsl_linalg_complex_qr_decomp (a, tau)
+    type(fgsl_matrix_complex), intent(inout) :: a
+    type(fgsl_vector_complex), intent(inout) :: tau
+    integer(fgsl_int) :: fgsl_linalg_complex_qr_decomp
+    fgsl_linalg_complex_qr_decomp = gsl_linalg_complex_qr_decomp (a%gsl_matrix_complex, tau%gsl_vector_complex)
+  end function fgsl_linalg_complex_qr_decomp
   function fgsl_linalg_qr_decomp_r (a, t)
     type(fgsl_matrix), intent(inout) :: a
     type(fgsl_matrix), intent(inout) :: t
     integer(fgsl_int) :: fgsl_linalg_qr_decomp_r
     fgsl_linalg_qr_decomp_r = gsl_linalg_qr_decomp_r (a%gsl_matrix, t%gsl_matrix)
   end function fgsl_linalg_qr_decomp_r
+  function fgsl_linalg_complex_qr_decomp_r (a, t)
+    type(fgsl_matrix_complex), intent(inout) :: a
+    type(fgsl_matrix_complex), intent(inout) :: t
+    integer(fgsl_int) :: fgsl_linalg_complex_qr_decomp_r
+    fgsl_linalg_complex_qr_decomp_r = gsl_linalg_complex_qr_decomp_r (a%gsl_matrix_complex, t%gsl_matrix_complex)
+  end function fgsl_linalg_complex_qr_decomp_r
   function fgsl_linalg_qr_solve (qr, tau, b, x)
     type(fgsl_matrix), intent(in) :: qr
     type(fgsl_vector), intent(in) :: tau, b
@@ -173,6 +185,14 @@
     fgsl_linalg_qr_solve = gsl_linalg_qr_solve(qr%gsl_matrix, tau%gsl_vector, &
          b%gsl_vector, x%gsl_vector)
   end function fgsl_linalg_qr_solve
+  function fgsl_linalg_complex_qr_solve (qr, tau, b, x)
+    type(fgsl_matrix_complex), intent(in) :: qr
+    type(fgsl_vector_complex), intent(in) :: tau, b
+    type(fgsl_vector_complex), intent(inout) :: x
+    integer(fgsl_int) :: fgsl_linalg_complex_qr_solve
+    fgsl_linalg_complex_qr_solve = gsl_linalg_complex_qr_solve(qr%gsl_matrix_complex, tau%gsl_vector_complex, &
+         b%gsl_vector_complex, x%gsl_vector_complex)
+  end function fgsl_linalg_complex_qr_solve
   function fgsl_linalg_qr_solve_r (qr, t, b, x)
     type(fgsl_matrix), intent(in) :: qr, t
     type(fgsl_vector), intent(in) :: b
@@ -181,6 +201,14 @@
     fgsl_linalg_qr_solve_r = gsl_linalg_qr_solve_r(qr%gsl_matrix, t%gsl_matrix, &
          b%gsl_vector, x%gsl_vector)
   end function fgsl_linalg_qr_solve_r
+  function fgsl_linalg_complex_qr_solve_r (qr, t, b, x)
+    type(fgsl_matrix_complex), intent(in) :: qr, t
+    type(fgsl_vector_complex), intent(in) :: b
+    type(fgsl_vector_complex), intent(inout) :: x
+    integer(fgsl_int) :: fgsl_linalg_complex_qr_solve_r
+    fgsl_linalg_complex_qr_solve_r = gsl_linalg_complex_qr_solve_r(qr%gsl_matrix_complex, t%gsl_matrix_complex, &
+         b%gsl_vector_complex, x%gsl_vector_complex)
+  end function fgsl_linalg_complex_qr_solve_r
   function fgsl_linalg_qr_svx (qr, tau, x)
     type(fgsl_matrix), intent(in) :: qr
     type(fgsl_vector), intent(in) :: tau
@@ -189,6 +217,14 @@
     fgsl_linalg_qr_svx = gsl_linalg_qr_svx (qr%gsl_matrix, tau%gsl_vector, &
          x%gsl_vector)
   end function fgsl_linalg_qr_svx
+  function fgsl_linalg_complex_qr_svx (qr, tau, x)
+    type(fgsl_matrix_complex), intent(in) :: qr
+    type(fgsl_vector_complex), intent(in) :: tau
+    type(fgsl_vector_complex), intent(inout) :: x
+    integer(fgsl_int) :: fgsl_linalg_complex_qr_svx
+    fgsl_linalg_complex_qr_svx = gsl_linalg_complex_qr_svx (qr%gsl_matrix_complex, tau%gsl_vector_complex, &
+         x%gsl_vector_complex)
+  end function fgsl_linalg_complex_qr_svx
   function fgsl_linalg_qr_lssolve (qr, tau, b, x, residual)
     type(fgsl_matrix), intent(in) :: qr
     type(fgsl_vector), intent(in) :: tau, b
@@ -197,6 +233,14 @@
     fgsl_linalg_qr_lssolve = gsl_linalg_qr_lssolve (qr%gsl_matrix, tau%gsl_vector, &
          b%gsl_vector, x%gsl_vector, residual%gsl_vector)
   end function fgsl_linalg_qr_lssolve
+  function fgsl_linalg_complex_qr_lssolve (qr, tau, b, x, residual)
+    type(fgsl_matrix_complex), intent(in) :: qr
+    type(fgsl_vector_complex), intent(in) :: tau, b
+    type(fgsl_vector_complex), intent(inout) :: x, residual
+    integer(fgsl_int) :: fgsl_linalg_complex_qr_lssolve
+    fgsl_linalg_complex_qr_lssolve = gsl_linalg_complex_qr_lssolve (qr%gsl_matrix_complex, tau%gsl_vector_complex, &
+         b%gsl_vector_complex, x%gsl_vector_complex, residual%gsl_vector_complex)
+  end function fgsl_linalg_complex_qr_lssolve
   function fgsl_linalg_qr_lssolve_r (qr, t, b, x, work)
     type(fgsl_matrix), intent(in) :: qr, t
     type(fgsl_vector), intent(in) :: b
@@ -205,6 +249,14 @@
     fgsl_linalg_qr_lssolve_r = gsl_linalg_qr_lssolve_r (qr%gsl_matrix, t%gsl_matrix, &
          b%gsl_vector, x%gsl_vector, work%gsl_vector)
   end function fgsl_linalg_qr_lssolve_r
+  function fgsl_linalg_complex_qr_lssolve_r (qr, t, b, x, work)
+    type(fgsl_matrix_complex), intent(in) :: qr, t
+    type(fgsl_vector_complex), intent(in) :: b
+    type(fgsl_vector_complex), intent(inout) :: x, work
+    integer(fgsl_int) :: fgsl_linalg_complex_qr_lssolve_r
+    fgsl_linalg_complex_qr_lssolve_r = gsl_linalg_complex_qr_lssolve_r (qr%gsl_matrix_complex, t%gsl_matrix_complex, &
+         b%gsl_vector_complex, x%gsl_vector_complex, work%gsl_vector_complex)
+  end function fgsl_linalg_complex_qr_lssolve_r
   function fgsl_linalg_qr_qtvec (qr, tau, v)
     type(fgsl_matrix), intent(in) :: qr
     type(fgsl_vector), intent(in) :: tau
@@ -213,6 +265,14 @@
     fgsl_linalg_qr_qtvec = gsl_linalg_qr_qtvec (qr%gsl_matrix, tau%gsl_vector, &
          v%gsl_vector)
   end function fgsl_linalg_qr_qtvec
+  function fgsl_linalg_complex_qr_qhvec (qr, tau, v)
+    type(fgsl_matrix_complex), intent(in) :: qr
+    type(fgsl_vector_complex), intent(in) :: tau
+    type(fgsl_vector_complex), intent(inout) :: v
+    integer(fgsl_int) :: fgsl_linalg_complex_qr_qhvec
+    fgsl_linalg_complex_qr_qhvec = gsl_linalg_complex_qr_qhvec (qr%gsl_matrix_complex, tau%gsl_vector_complex, &
+         v%gsl_vector_complex)
+  end function fgsl_linalg_complex_qr_qhvec
   function fgsl_linalg_qr_qtvec_r (qr, t, v, work)
     type(fgsl_matrix), intent(in) :: qr
     type(fgsl_matrix), intent(in) :: t
@@ -221,6 +281,14 @@
     fgsl_linalg_qr_qtvec_r = gsl_linalg_qr_qtvec_r (qr%gsl_matrix, t%gsl_matrix, &
          v%gsl_vector, work%gsl_vector)
   end function fgsl_linalg_qr_qtvec_r
+  function fgsl_linalg_complex_qr_qhvec_r (qr, t, v, work)
+    type(fgsl_matrix_complex), intent(in) :: qr
+    type(fgsl_matrix_complex), intent(in) :: t
+    type(fgsl_vector_complex), intent(inout) :: v, work
+    integer(fgsl_int) :: fgsl_linalg_complex_qr_qhvec_r
+    fgsl_linalg_complex_qr_qhvec_r = gsl_linalg_complex_qr_qhvec_r (qr%gsl_matrix_complex, t%gsl_matrix_complex, &
+         v%gsl_vector_complex, work%gsl_vector_complex)
+  end function fgsl_linalg_complex_qr_qhvec_r
   function fgsl_linalg_qr_qvec (qr, tau, v)
     type(fgsl_matrix), intent(in) :: qr
     type(fgsl_vector), intent(in) :: tau
@@ -229,6 +297,14 @@
     fgsl_linalg_qr_qvec = gsl_linalg_qr_qvec (qr%gsl_matrix, tau%gsl_vector, &
          v%gsl_vector)
   end function fgsl_linalg_qr_qvec
+  function fgsl_linalg_complex_qr_qvec (qr, tau, v)
+    type(fgsl_matrix_complex), intent(in) :: qr
+    type(fgsl_vector_complex), intent(in) :: tau
+    type(fgsl_vector_complex), intent(inout) :: v
+    integer(fgsl_int) :: fgsl_linalg_complex_qr_qvec
+    fgsl_linalg_complex_qr_qvec = gsl_linalg_complex_qr_qvec (qr%gsl_matrix_complex, tau%gsl_vector_complex, &
+         v%gsl_vector_complex)
+  end function fgsl_linalg_complex_qr_qvec
   function fgsl_linalg_qr_qtmat (qr, tau, a)
     type(fgsl_matrix), intent(in) :: qr
     type(fgsl_vector), intent(in) :: tau
@@ -274,6 +350,13 @@
     fgsl_linalg_qr_unpack_r = gsl_linalg_qr_unpack_r (qr%gsl_matrix, &
          t%gsl_matrix, q%gsl_matrix, r%gsl_matrix)
   end function fgsl_linalg_qr_unpack_r
+  function fgsl_linalg_complex_qr_unpack_r (qr, t, q, r)
+    type(fgsl_matrix_complex), intent(in) :: qr, t
+    type(fgsl_matrix_complex), intent(inout) :: q, r
+    integer(fgsl_int) :: fgsl_linalg_complex_qr_unpack_r
+    fgsl_linalg_complex_qr_unpack_r = gsl_linalg_complex_qr_unpack_r (qr%gsl_matrix_complex, &
+         t%gsl_matrix_complex, q%gsl_matrix_complex, r%gsl_matrix_complex)
+  end function fgsl_linalg_complex_qr_unpack_r
   function fgsl_linalg_qr_qrsolve (q, r, b, x)
     type(fgsl_matrix), intent(in) :: q, r
     type(fgsl_vector), intent(in) :: b
@@ -304,6 +387,49 @@
     integer(fgsl_int) :: fgsl_linalg_r_svx
     fgsl_linalg_r_svx = gsl_linalg_r_svx(r%gsl_matrix, x%gsl_vector)
   end function fgsl_linalg_r_svx
+  function fgsl_linalg_qr_ur_decomp(u, a, t)
+    type(fgsl_matrix), intent(inout) :: u, a, t
+    integer(fgsl_int) :: fgsl_linalg_qr_ur_decomp
+    fgsl_linalg_qr_ur_decomp = gsl_linalg_qr_ur_decomp(u%gsl_matrix, a%gsl_matrix, t%gsl_matrix)
+  end function fgsl_linalg_qr_ur_decomp
+  function fgsl_linalg_qr_uu_decomp(u1, u2, t)
+    type(fgsl_matrix), intent(inout) :: u1, u2, t
+    integer(fgsl_int) :: fgsl_linalg_qr_uu_decomp
+    fgsl_linalg_qr_uu_decomp = gsl_linalg_qr_uu_decomp(u1%gsl_matrix, u2%gsl_matrix, t%gsl_matrix)
+  end function fgsl_linalg_qr_uu_decomp
+  function fgsl_linalg_qr_uu_lssolve(r, y, t, b, x, work)
+    type(fgsl_matrix), intent(in) :: r, y, t
+    type(fgsl_vector), intent(inout) :: b, x, work
+    integer(fgsl_int) :: fgsl_linalg_qr_uu_lssolve
+    fgsl_linalg_qr_uu_lssolve = gsl_linalg_qr_uu_lssolve(r%gsl_matrix, y%gsl_matrix, t%gsl_matrix, &
+         b%gsl_vector, x%gsl_vector, work%gsl_vector)
+  end function fgsl_linalg_qr_uu_lssolve
+  function fgsl_linalg_qr_uu_qtvec(y, t, b, work)
+    type(fgsl_matrix), intent(in) :: y, t
+    type(fgsl_vector), intent(inout) :: b, work
+    integer(fgsl_int) :: fgsl_linalg_qr_uu_qtvec
+    fgsl_linalg_qr_uu_qtvec = gsl_linalg_qr_uu_qtvec(y%gsl_matrix, t%gsl_matrix, &
+         b%gsl_vector, work%gsl_vector)
+  end function fgsl_linalg_qr_uu_qtvec
+  function fgsl_linalg_qr_uz_decomp(u, a, t)
+    type(fgsl_matrix), intent(inout) :: u, a, t
+    integer(fgsl_int) :: fgsl_linalg_qr_uz_decomp
+    fgsl_linalg_qr_uz_decomp = gsl_linalg_qr_uz_decomp(u%gsl_matrix, a%gsl_matrix, t%gsl_matrix)
+  end function fgsl_linalg_qr_uz_decomp
+  function fgsl_linalg_qr_ud_decomp(u, d, y, t)
+    type(fgsl_matrix), intent(inout) :: u, y, t
+    type(fgsl_vector), intent(inout) :: d
+    integer(fgsl_int) :: fgsl_linalg_qr_ud_decomp
+    fgsl_linalg_qr_ud_decomp = gsl_linalg_qr_ud_decomp(u%gsl_matrix, d%gsl_vector, &
+         y%gsl_matrix, t%gsl_matrix)
+  end function fgsl_linalg_qr_ud_decomp
+  function fgsl_linalg_qr_ud_lssolve(r, y, t, b, x, work)
+    type(fgsl_matrix), intent(in) :: r, y, t
+    type(fgsl_vector), intent(inout) :: b, x, work
+    integer(fgsl_int) :: fgsl_linalg_qr_ud_lssolve
+    fgsl_linalg_qr_ud_lssolve = gsl_linalg_qr_ud_lssolve(r%gsl_matrix, y%gsl_matrix, t%gsl_matrix, &
+         b%gsl_vector, x%gsl_vector, work%gsl_vector)
+  end function fgsl_linalg_qr_ud_lssolve
   function fgsl_linalg_qrpt_decomp (a, tau, p, signum, norm)
     type(fgsl_matrix), intent(inout) :: a
     type(fgsl_vector), intent(inout) :: tau, norm
@@ -412,7 +538,7 @@
     fgsl_linalg_qrpt_rcond = gsl_linalg_qrpt_rcond(qr%gsl_matrix, rcond, work%gsl_vector)
   end function fgsl_linalg_qrpt_rcond
 !
-! LQ decomposition
+! LQ and QL decompositions
 !
   integer(fgsl_int) function fgsl_linalg_lq_decomp(a, tau)
     type(fgsl_matrix), intent(inout) :: a
@@ -440,6 +566,19 @@
     fgsl_linalg_lq_qtvec = gsl_linalg_lq_qtvec(lq%gsl_matrix, tau%gsl_vector, &
          v%gsl_vector)
   end function fgsl_linalg_lq_qtvec
+  integer(fgsl_int) function fgsl_linalg_ql_decomp(a, tau)
+    type(fgsl_matrix), intent(inout) :: a
+    type(fgsl_vector), intent(inout) :: tau
+    fgsl_linalg_ql_decomp = gsl_linalg_ql_decomp(a%gsl_matrix, tau%gsl_vector)
+  end function fgsl_linalg_ql_decomp
+  integer(fgsl_int) function fgsl_linalg_ql_unpack(ql, tau, q, l)
+    type(fgsl_matrix), intent(in) :: ql
+    type(fgsl_vector), intent(in) :: tau
+    type(fgsl_matrix), intent(inout) :: q, l
+    fgsl_linalg_ql_unpack = gsl_linalg_ql_unpack(ql%gsl_matrix, tau%gsl_vector, &
+         q%gsl_matrix, l%gsl_matrix)
+  end function fgsl_linalg_ql_unpack
+  
 !
 ! Complete orthogonal decomposition (COD)
 !
@@ -1142,11 +1281,23 @@
     fgsl_linalg_cholesky_band_solve = gsl_linalg_cholesky_band_solve(llt%gsl_matrix, b%gsl_vector, &
          x%gsl_vector)
   end function fgsl_linalg_cholesky_band_solve
+  integer(fgsl_int) function fgsl_linalg_cholesky_band_solvem(llt, b, x)
+    type(fgsl_matrix), intent(in) :: llt
+    type(fgsl_matrix), intent(in) :: b
+    type(fgsl_matrix), intent(inout) :: x
+    fgsl_linalg_cholesky_band_solvem = gsl_linalg_cholesky_band_solvem(llt%gsl_matrix, b%gsl_matrix, &
+         x%gsl_matrix)
+  end function fgsl_linalg_cholesky_band_solvem
   integer(fgsl_int) function fgsl_linalg_cholesky_band_svx(llt, x)
     type(fgsl_matrix), intent(in) :: llt
     type(fgsl_vector), intent(inout) :: x
     fgsl_linalg_cholesky_band_svx = gsl_linalg_cholesky_band_svx(llt%gsl_matrix, x%gsl_vector)
   end function fgsl_linalg_cholesky_band_svx
+  integer(fgsl_int) function fgsl_linalg_cholesky_band_svxm(llt, x)
+    type(fgsl_matrix), intent(in) :: llt
+    type(fgsl_matrix), intent(inout) :: x
+    fgsl_linalg_cholesky_band_svxm = gsl_linalg_cholesky_band_svxm(llt%gsl_matrix, x%gsl_matrix)
+  end function fgsl_linalg_cholesky_band_svxm
   integer(fgsl_int) function fgsl_linalg_cholesky_band_invert(llt, ainv)
     type(fgsl_matrix), intent(in) :: llt
     type(fgsl_matrix), intent(inout) :: ainv
@@ -1157,6 +1308,16 @@
     type(fgsl_matrix), intent(inout) :: l
     fgsl_linalg_cholesky_band_unpack = gsl_linalg_cholesky_band_unpack(llt%gsl_matrix, l%gsl_matrix)
   end function fgsl_linalg_cholesky_band_unpack
+  integer(fgsl_int) function fgsl_linalg_cholesky_band_scale(a, s)
+    type(fgsl_matrix), intent(in) :: a
+    type(fgsl_vector), intent(inout) :: s
+    fgsl_linalg_cholesky_band_scale = gsl_linalg_cholesky_band_scale(a%gsl_matrix, s%gsl_vector)
+  end function fgsl_linalg_cholesky_band_scale
+  integer(fgsl_int) function fgsl_linalg_cholesky_band_scale_apply(a, s)
+    type(fgsl_matrix), intent(inout) :: a
+    type(fgsl_vector), intent(in) :: s
+    fgsl_linalg_cholesky_band_scale_apply = gsl_linalg_cholesky_band_scale_apply(a%gsl_matrix, s%gsl_vector)
+  end function fgsl_linalg_cholesky_band_scale_apply
   integer(fgsl_int) function fgsl_linalg_cholesky_band_rcond(llt, rcond, w)
     type(fgsl_matrix), intent(in) :: llt
     real(fgsl_double), intent(inout) :: rcond

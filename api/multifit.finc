@@ -549,6 +549,15 @@
     reg_param%gsl_vector, rho%gsl_vector, eta%gsl_vector, &
     work%gsl_multifit_linear_workspace)
   end function fgsl_multifit_linear_lcurve
+  function fgsl_multifit_linear_lcurvature(y, reg_param, rho, eta, kappa, work)
+    type(fgsl_vector), intent(in) :: y, reg_param, rho, eta
+    type(fgsl_vector), intent(inout) :: kappa
+    type(fgsl_multifit_linear_workspace), intent(inout) :: work
+    integer(fgsl_int) :: fgsl_multifit_linear_lcurvature
+    fgsl_multifit_linear_lcurvature = gsl_multifit_linear_lcurvature( &
+         y%gsl_vector, reg_param%gsl_vector, rho%gsl_vector, eta%gsl_vector, &
+         kappa%gsl_vector, work%gsl_multifit_linear_workspace)
+  end function fgsl_multifit_linear_lcurvature
   function fgsl_multifit_linear_lcorner(rho, eta, idx)
     type(fgsl_vector), intent(in) :: rho, eta
     integer(fgsl_size_t), intent(out) :: idx

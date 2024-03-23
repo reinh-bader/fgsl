@@ -13,7 +13,7 @@ BuildRequires:	gsl-devel >= @GSL_VERSION@ gcc gcc-gfortran glibc-headers glibc-d
 Requires: gsl >= @GSL_VERSION@ libgfortran
 
 %description
-Fortran 2003 bindings for the GNU Scientific Library
+Fortran bindings for the GNU Scientific Library
 
 
 %package devel
@@ -80,6 +80,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Mar 23 2024 R Bader
+- Remove specific 2003 standard level ref
+
 * Tue Feb 11 2014 Tom Schoonjans
 - added doc package
 

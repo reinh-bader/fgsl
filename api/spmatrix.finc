@@ -69,7 +69,7 @@ subroutine fgsl_spmatrix_cumsum(n, c)
   integer(fgsl_size_t), intent(in) :: n
   integer(fgsl_size_t), dimension(:), intent(inout), target, contiguous :: c
   if (size(c, dim=1) /= n+1) then
-    call fgsl_error('c must have n+1 elements', __FILE__, __LINE__, fgsl_ebadlen)
+    call fgsl_error('c must have n+1 elements', 'fgsl_spmatrix', __LINE__, fgsl_ebadlen)
     return
   endif
   call gsl_spmatrix_cumsum(n, c_loc(c))
@@ -92,6 +92,11 @@ function fgsl_spmatrix_scale_rows(a , x)
   integer(fgsl_int) :: fgsl_spmatrix_scale_rows
   fgsl_spmatrix_scale_rows = gsl_spmatrix_scale_rows(a%gsl_spmatrix, x%gsl_vector)
 end function fgsl_spmatrix_scale_rows
+function fgsl_spmatrix_norm1(a)
+  type(fgsl_spmatrix), intent(in) :: a
+  real(fgsl_double) :: fgsl_spmatrix_norm1
+  fgsl_spmatrix_norm1 = gsl_spmatrix_norm1(a%gsl_spmatrix)
+end function fgsl_spmatrix_norm1
 function fgsl_spmatrix_minmax(m , min_out, max_out)
   type(fgsl_spmatrix), intent(in) :: m
   real(fgsl_double), intent(out) :: min_out, max_out
@@ -129,12 +134,25 @@ function fgsl_spmatrix_add(c, a, b)
   fgsl_spmatrix_add = gsl_spmatrix_add(c%gsl_spmatrix, &
   a%gsl_spmatrix, b%gsl_spmatrix)
 end function fgsl_spmatrix_add
+function fgsl_spmatrix_dense_add(a, b)
+  type(fgsl_matrix), intent(inout) :: a
+  type(fgsl_spmatrix), intent(in) ::  b
+  integer(fgsl_int) :: fgsl_spmatrix_dense_add
+  fgsl_spmatrix_dense_add = gsl_spmatrix_dense_add(a%gsl_matrix, b%gsl_spmatrix)
+end function fgsl_spmatrix_dense_add
+! the following call deprecated
 function fgsl_spmatrix_add_to_dense(a, b)
   type(fgsl_matrix), intent(inout) :: a
   type(fgsl_spmatrix), intent(in) ::  b
   integer(fgsl_int) :: fgsl_spmatrix_add_to_dense
-  fgsl_spmatrix_add_to_dense = gsl_spmatrix_add_to_dense(a%gsl_matrix, b%gsl_spmatrix)
+  fgsl_spmatrix_add_to_dense = gsl_spmatrix_dense_add(a%gsl_matrix, b%gsl_spmatrix)
 end function fgsl_spmatrix_add_to_dense
+function fgsl_spmatrix_dense_sub(a, b)
+  type(fgsl_matrix), intent(inout) :: a
+  type(fgsl_spmatrix), intent(in) ::  b
+  integer(fgsl_int) :: fgsl_spmatrix_dense_sub
+  fgsl_spmatrix_dense_sub = gsl_spmatrix_dense_sub(a%gsl_matrix, b%gsl_spmatrix)
+end function fgsl_spmatrix_dense_sub
 function fgsl_spmatrix_d2sp(S, A)
   type(fgsl_spmatrix), intent(inout) :: S
   type(fgsl_matrix), intent(in) :: A
@@ -196,7 +214,7 @@ integer(fgsl_int) function fgsl_spmatrix_fprintf(stream, m, format)
   type(fgsl_file) :: stream
   type(fgsl_spmatrix), intent(in) :: m
   character(kind=fgsl_char, len=*), intent(in) :: format
-  fgsl_spmatrix_fprintf = gsl_spmatrix_fprintf(stream%gsl_file, m%gsl_spmatrix, format)
+  fgsl_spmatrix_fprintf = gsl_spmatrix_fprintf(stream%gsl_file, m%gsl_spmatrix, format // c_null_char)
 end function fgsl_spmatrix_fprintf
 type(fgsl_spmatrix) function fgsl_spmatrix_fscanf(stream)
   type(fgsl_file) :: stream
