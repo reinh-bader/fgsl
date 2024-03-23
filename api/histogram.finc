@@ -190,17 +190,9 @@
     character(kind=fgsl_char, len=*), intent(in) :: range_format, bin_format
     integer(fgsl_int) :: fgsl_histogram_fprintf
 !
-    character(kind=fgsl_char,len=fgsl_strmax), target :: lrf, lbf
-    if (len(trim(range_format)) < fgsl_strmax .and. &
-         len(trim(bin_format)) < fgsl_strmax) then
-       lrf = trim(range_format) // c_null_char
-       lbf = trim(bin_format) // c_null_char
-       fgsl_histogram_fprintf = &
-            gsl_histogram_fprintf(stream%gsl_file, h%gsl_histogram, &
-            c_loc(lrf), c_loc(lbf))
-    else
-       fgsl_histogram_fprintf = fgsl_failure
-    end if
+    fgsl_histogram_fprintf = &
+         gsl_histogram_fprintf(stream%gsl_file, h%gsl_histogram, &
+         range_format // c_null_char, bin_format // c_null_char)
   end function fgsl_histogram_fprintf
   function fgsl_histogram_fscanf(stream, h)
     type(fgsl_file), intent(in) :: stream
@@ -456,17 +448,9 @@
     character(kind=fgsl_char, len=*), intent(in) :: range_format, bin_format
     integer(fgsl_int) :: fgsl_histogram2d_fprintf
 !
-    character(kind=fgsl_char,len=fgsl_strmax), target :: lrf, lbf
-    if (len(trim(range_format)) < fgsl_strmax .and. &
-         len(trim(bin_format)) < fgsl_strmax) then
-       lrf = trim(range_format) // c_null_char
-       lbf = trim(bin_format) // c_null_char
-       fgsl_histogram2d_fprintf = &
-            gsl_histogram2d_fprintf(stream%gsl_file, h%gsl_histogram2d, &
-            c_loc(lrf), c_loc(lbf))
-    else
-       fgsl_histogram2d_fprintf = fgsl_failure
-    end if
+    fgsl_histogram2d_fprintf = &
+         gsl_histogram2d_fprintf(stream%gsl_file, h%gsl_histogram2d, &
+         range_format // c_null_char, bin_format // c_null_char)
   end function fgsl_histogram2d_fprintf
   function fgsl_histogram2d_fscanf(stream, h)
     type(fgsl_file), intent(in) :: stream

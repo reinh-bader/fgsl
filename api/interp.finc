@@ -56,7 +56,7 @@
     integer(fgsl_int) :: fgsl_interp_init
     !check that the array dimensions match
     if (size(xa) /= size(ya)) then
-      call fgsl_error('xa and ya dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      call fgsl_error('xa and ya dimensions do not match', 'fgsl_interp', __LINE__, fgsl_ebadlen)
       fgsl_interp_init = fgsl_ebadlen
       return
     endif
@@ -200,7 +200,7 @@
     integer(fgsl_int) :: fgsl_spline_init
     !check if dimenions match
     if (size(xa) /= size(ya)) then
-      call fgsl_error('xa and ya dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      call fgsl_error('xa and ya dimensions do not match', 'fgsl_interp', __LINE__, fgsl_ebadlen)
       fgsl_spline_init = fgsl_ebadlen
       return
     endif
@@ -335,12 +335,12 @@
     integer(fgsl_int) :: fgsl_interp2d_init
     ! this may be a good time to check the dimensions of za vs those of xa and ya
     if (size(xa) /= size(za, dim=1)) then
-      call fgsl_error('xa and za dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      call fgsl_error('xa and za dimensions do not match', 'fgsl_interp', __LINE__, fgsl_ebadlen)
       fgsl_interp2d_init = fgsl_ebadlen
       return
     endif
     if (size(ya) /= size(za, dim=2)) then
-      call fgsl_error('ya and za dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      call fgsl_error('ya and za dimensions do not match', 'fgsl_interp', __LINE__, fgsl_ebadlen)
       fgsl_interp2d_init = fgsl_ebadlen
       return
     endif
@@ -539,12 +539,12 @@
     integer(fgsl_int) :: fgsl_spline2d_init
     ! this may be a good time to check the dimensions of za vs those of xa and ya
     if (size(xa) /= size(za, dim=1)) then
-      call fgsl_error('xa and za dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      call fgsl_error('xa and za dimensions do not match', 'fgsl_interp', __LINE__, fgsl_ebadlen)
       fgsl_spline2d_init = fgsl_ebadlen
       return
     endif
     if (size(ya) /= size(za, dim=2)) then
-      call fgsl_error('ya and za dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      call fgsl_error('ya and za dimensions do not match', 'fgsl_interp', __LINE__, fgsl_ebadlen)
       fgsl_spline2d_init = fgsl_ebadlen
       return
     endif

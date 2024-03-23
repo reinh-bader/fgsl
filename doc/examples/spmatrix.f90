@@ -33,6 +33,7 @@ PROGRAM spmatrix
   write(output_unit, '(A)') 'matrix in triplet format:'
   stdout = fgsl_stdout()
   status = fgsl_spmatrix_fprintf(stdout, A, "%.1f")
+  status = fgsl_flush(stdout)
 
   ! convert to compressed column format
   B = fgsl_spmatrix_alloc_nzmax(5_fgsl_size_t, 4_fgsl_size_t, &

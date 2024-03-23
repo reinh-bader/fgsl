@@ -48,7 +48,7 @@
     end block try
     if ( present(stat) ) stat = stat_local
     if ( .not. present(stat) .and. stat_local /= fgsl_success ) &
-         call fgsl_error("aligning failed", __FILE__, __LINE__, stat_local)
+         call fgsl_error("aligning failed", 'fgsl_array', __LINE__, stat_local)
   end function fgsl_vector_init
   function fgsl_vector_int_init(array, stride, stat)
     integer(fgsl_int), target, contiguous, intent(in) :: array(:)
@@ -80,7 +80,7 @@
     end block try
     if ( present(stat) ) stat = stat_local
     if ( .not. present(stat) .and. stat_local /= fgsl_success ) &
-         call fgsl_error("aligning failed", __FILE__, __LINE__, stat_local)
+         call fgsl_error("aligning failed", 'fgsl_array', __LINE__, stat_local)
   end function fgsl_vector_int_init
 !> Legacy specific fgsl_vector_init of  for GSL vector initialization 
 !> \param type - determine intrinsic type of vector object
@@ -290,7 +290,7 @@
     end block try
     if ( present(stat) ) stat = stat_local
     if ( .not. present(stat) .and. stat_local /= fgsl_success ) &
-         call fgsl_error("aligning failed", __FILE__, __LINE__, stat_local)
+         call fgsl_error("aligning failed", 'fgsl_array', __LINE__, stat_local)
   end function fgsl_vector_complex_init
 !> Wrap a rank 1 Fortran array slice inside a double precision complex
 !> real GSL vector object. This is invoked via the generic
@@ -460,7 +460,7 @@
          nloc, mloc, fgsl_matrix_init%gsl_matrix)
    if ( present(stat) ) stat = stat_local
    if ( .not. present(stat) .and. stat_local /= fgsl_success ) &
-        call fgsl_error("aligning failed", __FILE__, __LINE__, stat_local)    
+        call fgsl_error("aligning failed", 'fgsl_array', __LINE__, stat_local)    
   end function fgsl_matrix_init
 !> Legacy specific to wrap a rank 2 Fortran array inside a double precision
 !> real GSL matrix object. This is invoked via the generic
@@ -628,7 +628,7 @@
          nloc, mloc, fgsl_matrix_complex_init%gsl_matrix_complex)
     if ( present(stat) ) stat = stat_local
     if ( .not. present(stat) .and. stat_local /= fgsl_success ) &
-         call fgsl_error("aligning failed", __FILE__, __LINE__, stat_local)
+         call fgsl_error("aligning failed", 'fgsl_array', __LINE__, stat_local)
   end function fgsl_matrix_complex_init
 !> Legacy function to wrap a rank 2 Fortran array inside a double precision
 !> complex GSL matrix object. This is invoked via the generic

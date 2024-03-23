@@ -10,17 +10,17 @@ program ieee
   fd = f
 
   stdout = fgsl_stdout()
-  write(6, advance='no', fmt='('' f='')') 
+  write(6, fmt='('' f='')') 
   call fgsl_ieee_printf(f)
   status = fgsl_flush(stdout)
   write(6, '('''')')
   
-  write(6, advance='no', fmt='('' fd='')') 
+  write(6, fmt='('' fd='')') 
   call fgsl_ieee_printf(fd)
   status = fgsl_flush(stdout)
   write(6, '('''')')
 
-  write(6, advance='no', fmt='('' d='')') 
+  write(6, fmt='('' d='')') 
   call fgsl_ieee_printf(d)
   status = fgsl_flush(stdout)
   write(6, '('''')')

@@ -135,7 +135,7 @@
   function gsl_permutation_fprintf(stream, p, format) bind(c)
     import :: c_ptr, c_int, c_char
     type(c_ptr), value :: stream, p
-    type(c_ptr), value :: format
+    character(kind=c_char) :: format
     integer(c_int) :: gsl_permutation_fprintf
   end function gsl_permutation_fprintf
   function gsl_permutation_fscanf(stream, p) bind(c)
@@ -250,7 +250,7 @@
   function gsl_combination_fprintf(stream, c, format) bind(c)
     import :: c_ptr, c_int, c_char
     type(c_ptr), value :: stream, c
-    type(c_ptr), value :: format
+    character(kind=c_char) :: format
     integer(c_int) :: gsl_combination_fprintf
   end function gsl_combination_fprintf
   function gsl_combination_fscanf(stream, c) bind(c)
@@ -338,7 +338,7 @@
   function gsl_multiset_fprintf(stream, c, format) bind(c)
     import :: c_ptr, c_int, c_char
     type(c_ptr), value :: stream, c
-    type(c_ptr), value :: format
+    character(kind=c_char) :: format
     integer(c_int) :: gsl_multiset_fprintf
   end function gsl_multiset_fprintf
   function gsl_multiset_fscanf(stream, c) bind(c)

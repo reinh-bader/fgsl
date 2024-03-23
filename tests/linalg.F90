@@ -296,6 +296,19 @@ program linalg
   call unit_assert_equal_within('fgsl_linalg_lq_lssolve:x',&
        (/1.0d0/3.0d0, 2.0d0/3.0d0, 5.0d0/3.0d0 /),xf,eps10)
 !
+! QL
+!
+  af = af_orig
+  status = fgsl_linalg_ql_decomp(a, tau)
+  call unit_assert_equal('fgsl_linalg_ql_decomp:status',fgsl_success,status)
+  call unit_assert_equal_within('fgsl_linalg_ql_decomp:af',&
+       reshape( [  1.22474487139D+00, -3.17837245195D-01, 0.D0, &
+                   1.11022302463D-16,  1.73205080757D+00, 4.14213562373D-01, &
+                  -7.07106781187D-01, -1.41421356237D+00,-1.41421356237D+00 &
+                ], shape(af)),af,eps10)
+  call unit_assert_equal_within('fgsl_linalg_ql_decomp:tau',&
+                [ 0.0D0,  1.8164965809D+00, 1.7071067812D+00  ],tauf,eps10)
+!
 ! COD
 !
   af = af_orig

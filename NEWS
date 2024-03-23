@@ -3,16 +3,18 @@ Changes in 1.6.0 (by R Bader):
 This release introduces support for gsl 2.7. An overview:
 
 1. added gsl_spmatrix interfaces norm1, dense_add, dens_sub
-2. added gsl_linalg_ql interfaces decomp, unpack
-3. added gsl_linalg_complex_qr_* interfaces
-4. added gsl_multilarge_linear_matrix_ptr and gsl_multilarge_linear_rhs_ptr interfaces
-5. added large dense linear regression example program
-6. added gsl_linalg_cholesky_band interfaces for solvem, svxm, scale, scale_apply
-7. added gsl_linalg_QR_UR, gsl_linalg_QR_UU, gsl_linalg_QR_UZ, gsl_linalg_QR_UD
+2. added gsl_linalg_QL interfaces decomp, unpack
+3. added gsl_multilarge_linear_matrix_ptr and gsl_multilarge_linear_rhs_ptr interfaces
+4. added large dense linear regression example program
+5. added gsl_linalg_cholesky_band interfaces for solvem, svxm, scale, scale_apply
+6. added gsl_linalg_QR_UR, gsl_linalg_QR_UU, gsl_linalg_QR_UZ, gsl_linalg_QR_UD
    interfaces
-8. added gsl_multifit_linear_lcurvature interface
-9. added gsl_spline2d_eval_extrap interface
-10. bug fixes for missing interfaces and status handling
+7. added gsl_multifit_linear_lcurvature interface
+8. added gsl_spline2d_eval_extrap interface
+9. bug fixes for missing interfaces and status handling, *fprintf revision, 
+   removal of __FILE__ (issue #36)
+10. gsl_linalg_LU_band remains unsupported, due to its use of gsl_vector_uint
+11. added a copy of the GSL 2.7 reference pdf to the doc folder.
 
 Changes in 1.5.0 (by R Bader):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

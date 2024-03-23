@@ -69,7 +69,7 @@ subroutine fgsl_spmatrix_cumsum(n, c)
   integer(fgsl_size_t), intent(in) :: n
   integer(fgsl_size_t), dimension(:), intent(inout), target, contiguous :: c
   if (size(c, dim=1) /= n+1) then
-    call fgsl_error('c must have n+1 elements', __FILE__, __LINE__, fgsl_ebadlen)
+    call fgsl_error('c must have n+1 elements', 'fgsl_spmatrix', __LINE__, fgsl_ebadlen)
     return
   endif
   call gsl_spmatrix_cumsum(n, c_loc(c))
@@ -214,7 +214,7 @@ integer(fgsl_int) function fgsl_spmatrix_fprintf(stream, m, format)
   type(fgsl_file) :: stream
   type(fgsl_spmatrix), intent(in) :: m
   character(kind=fgsl_char, len=*), intent(in) :: format
-  fgsl_spmatrix_fprintf = gsl_spmatrix_fprintf(stream%gsl_file, m%gsl_spmatrix, format)
+  fgsl_spmatrix_fprintf = gsl_spmatrix_fprintf(stream%gsl_file, m%gsl_spmatrix, format // c_null_char)
 end function fgsl_spmatrix_fprintf
 type(fgsl_spmatrix) function fgsl_spmatrix_fscanf(stream)
   type(fgsl_file) :: stream

@@ -11,7 +11,7 @@ check_PROGRAMS = cdf cheb combination diff dwt \
 		 fitting fitting3 fitting2 histogram \
 		 histogram2d ieee ieeeround integration \
 	         integration_fixed \
-		 interp interpp intro matrix min monte \
+		 interp interpp intro matrix matrix_legacy min monte \
                  largefit multifit nlfit nlfit2 nlfit4 \
 		 ntuplew ntupler \
 		 linalglu eigen eigen_nonsymm fft \
@@ -63,6 +63,8 @@ interpp_SOURCES = interpp.f90
 intro_SOURCES = intro.f90
 
 matrix_SOURCES = matrix.f90
+
+matrix_legacy_SOURCES = matrix_legacy.f90
 
 min_SOURCES = min.f90
 
@@ -151,7 +153,7 @@ dist_fgsl_example_DATA = $(data_files) cdf.f90 cheb.f90 combination.F90 diff.f90
 			fitting.f90 fitting3.f90 fitting2.f90 histogram.F90 \
 			histogram2d.f90 ieee.f90 ieeeround.f90 integration.f90 \
 	                integration_fixed.f90 interp.f90 interpp.f90 \
-			intro.f90 matrix.f90 min.f90 monte.f90 \
+			intro.f90 matrix.f90 matrix_legacy.f90 min.f90 monte.f90 \
 			largefit.f90 multifit.f90 nlfit.f90 nlfit2.f90 \
 			nlfit4.f90 ntuplew.f90 ntupler.f90 \
 			linalglu.f90 eigen.f90 eigen_nonsymm.f90 fft.f90 \

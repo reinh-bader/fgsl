@@ -125,6 +125,13 @@ contains
        end do
     end do
     call unit_toggle(description, ok)
+    if (unit_debug .and. .not. ok) then
+       do j=1,min(size(val_target, 2),size(val_check, 2))
+          do i=1,min(size(val_target, 1),size(val_check, 1))
+             write(6,fmt='(a,4x,2(1PD25.18),1PD8.1)') description,val_target(i,j),val_check(i,j),eps
+          end do
+       end do
+    end if
   end subroutine unit_assert_equal_within_double_2d_array
   subroutine unit_assert_equal_within_double_complex(description, &
        val_target, val_check, eps)

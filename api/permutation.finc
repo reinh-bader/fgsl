@@ -163,14 +163,9 @@
     character(kind=fgsl_char, len=*), intent(in) :: format
     integer(fgsl_int) :: fgsl_permutation_fprintf
 !
-    character(kind=fgsl_char,len=fgsl_strmax), target :: lrf
-    if (len(trim(format)) < fgsl_strmax) then
-       lrf = trim(format) // c_null_char
-       fgsl_permutation_fprintf = &
-            gsl_permutation_fprintf(stream%gsl_file, p%gsl_permutation, c_loc(lrf))
-    else
-       fgsl_permutation_fprintf = fgsl_failure
-    end if
+    fgsl_permutation_fprintf = &
+         gsl_permutation_fprintf(stream%gsl_file, p%gsl_permutation, &
+         format // c_null_char)
   end function fgsl_permutation_fprintf
   function fgsl_permutation_fscanf(stream, p)
     type(fgsl_file), intent(in) :: stream
@@ -309,14 +304,8 @@
     character(kind=fgsl_char, len=*), intent(in) :: format
     integer(fgsl_int) :: fgsl_combination_fprintf
 !
-    character(kind=fgsl_char,len=fgsl_strmax), target :: lrf
-    if (len(trim(format)) < fgsl_strmax) then
-       lrf = trim(format) // c_null_char
-       fgsl_combination_fprintf = &
-            gsl_combination_fprintf(stream%gsl_file, c%gsl_combination, c_loc(lrf))
-    else
-       fgsl_combination_fprintf = fgsl_failure
-    end if
+    fgsl_combination_fprintf = gsl_combination_fprintf(stream%gsl_file, &
+         c%gsl_combination, format // c_null_char)
   end function fgsl_combination_fprintf
   function fgsl_combination_fscanf(stream, c)
     type(fgsl_file), intent(in) :: stream
@@ -422,14 +411,8 @@
     character(kind=fgsl_char, len=*), intent(in) :: format
     integer(fgsl_int) :: fgsl_multiset_fprintf
 !
-    character(kind=fgsl_char,len=fgsl_strmax), target :: lrf
-    if (len(trim(format)) < fgsl_strmax) then
-       lrf = trim(format) // c_null_char
-       fgsl_multiset_fprintf = &
-            gsl_multiset_fprintf(stream%gsl_file, c%gsl_multiset, c_loc(lrf))
-    else
-       fgsl_multiset_fprintf = fgsl_failure
-    end if
+    fgsl_multiset_fprintf = gsl_multiset_fprintf(stream%gsl_file, &
+         c%gsl_multiset, format // c_null_char)
   end function fgsl_multiset_fprintf
   function fgsl_multiset_fscanf(stream, c)
     type(fgsl_file), intent(in) :: stream

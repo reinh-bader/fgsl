@@ -28,7 +28,7 @@ Installation procedure:
     includes into different packages e.g., gsl and gsl-devel.
     For building FGSL, both must be installed.
  2. The ANSI C compiler used to build the GSL installation
- 3. A Fortran 2003 compiler.
+ 3. A Fortran compiler that supports C interop.
 
 (B) autoconf setup:
 This section applies only if you have downloaded the github
@@ -131,4 +131,4 @@ Releases:
   * 1.3.0: August, 2019
   * 1.4.0: March, 2021
   * 1.5.0: July, 2021
-  * 1.6.0: August, 2021
+  * 1.6.0: March, 2024

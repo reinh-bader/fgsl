@@ -960,7 +960,7 @@
     real(fgsl_double), intent(out), target, contiguous :: theta(:)
     !check dims
     if (size(theta) /= size(alpha)) then
-      call fgsl_error('alpha and beta dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      call fgsl_error('alpha and beta dimensions do not match', 'fgsl_rng', __LINE__, fgsl_ebadlen)
       return
     endif
     call gsl_ran_dirichlet(r%gsl_rng, size(alpha, kind=fgsl_size_t), &
@@ -972,7 +972,7 @@
     real(fgsl_double) :: fgsl_ran_dirichlet_pdf
     !check dims
     if (size(theta) /= size(alpha)) then
-      call fgsl_error('alpha and beta dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      call fgsl_error('alpha and beta dimensions do not match', 'fgsl_rng', __LINE__, fgsl_ebadlen)
       fgsl_ran_dirichlet_pdf = 0.0_fgsl_double
       return
     endif
@@ -985,7 +985,7 @@
     real(fgsl_double) :: fgsl_ran_dirichlet_lnpdf
     !check dims
     if (size(theta) /= size(alpha)) then
-      call fgsl_error('alpha and beta dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      call fgsl_error('alpha and beta dimensions do not match', 'fgsl_rng', __LINE__, fgsl_ebadlen)
       fgsl_ran_dirichlet_lnpdf = 0.0_fgsl_double
       return
     endif
@@ -1082,7 +1082,7 @@
     integer(fgsl_int), intent(out), target, contiguous :: n(:)
     !check dims
     if (size(p) /= size(n)) then
-      call fgsl_error('p and n dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      call fgsl_error('p and n dimensions do not match', 'fgsl_rng', __LINE__, fgsl_ebadlen)
       return
     endif
     call gsl_ran_multinomial(r%gsl_rng, size(p, kind=fgsl_size_t), nn, c_loc(p), c_loc(n))
@@ -1093,7 +1093,7 @@
     real(fgsl_double) :: fgsl_ran_multinomial_pdf
     !check dims
     if (size(p) /= size(n)) then
-      call fgsl_error('p and n dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      call fgsl_error('p and n dimensions do not match', 'fgsl_rng', __LINE__, fgsl_ebadlen)
       fgsl_ran_multinomial_pdf = 0.0_fgsl_double
       return
     endif
@@ -1106,7 +1106,7 @@
     real(fgsl_double) :: fgsl_ran_multinomial_lnpdf
     !check dims
     if (size(p) /= size(n)) then
-      call fgsl_error('p and n dimensions do not match', __FILE__, __LINE__, fgsl_ebadlen)
+      call fgsl_error('p and n dimensions do not match', 'fgsl_rng', __LINE__, fgsl_ebadlen)
       fgsl_ran_multinomial_lnpdf = 0.0_fgsl_double
       return
     endif
