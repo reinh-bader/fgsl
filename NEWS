@@ -1,3 +1,16 @@
+Changes in 2.0.0:
+~~~~~~~~~~~~~~~~~
+
+This release is intended to refactor the source code to provide
+multiple modules, each one of which is easier to read and
+understand. The organization is analogous to the C source code,
+i.e. a Fortran module fgsl_interp exists in analogy to the
+C header gsl_interp.h. All fgsl_*.f90 files are placed in the
+modules folder. For modules that need explicit C glue code,
+a file fgsl_*.c exists in the csub folder.
+
+
+
 Changes in 1.6.0 (by R Bader):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This release introduces support for gsl 2.7. An overview:

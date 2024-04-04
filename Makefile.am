@@ -1,16 +1,29 @@
 SUBDIRS = . tests doc
 ACLOCAL_AMFLAGS = -I m4
+AUTOMAKE_OPTIONS=subdir-objects
+
 AM_CPPFLAGS = -I${top_srcdir} -I${top_builddir}
 
 fgslincludedir=${includedir}/fgsl
 
-BUILT_SOURCES = fgsl.mod
+BUILT_SOURCES = fgsl_base.mod \
+		fgsl_errno.mod \
+		fgsl_io.mod \
+		fgsl_math.mod \
+		fgsl.mod
 
 NULL =
 
 lib_LTLIBRARIES = libfgsl.la
 libfgsl_la_SOURCES = \
 	fgsl.F90 \
+	modules/fgsl_base.f90 \
+	modules/fgsl_errno.f90 \
+	modules/fgsl_io.f90 \
+	modules/fgsl_math.f90 \
+	csub/fgsl_base_c.c \
+	csub/fgsl_io_c.c \
+	csub/fgsl_math_c.c \
 	fgsl_utils.c \
 	api/array.finc \
 	api/dht.finc \
@@ -22,12 +35,10 @@ libfgsl_la_SOURCES = \
 	api/bspline.finc \
 	api/eigen.finc \
 	api/ieee.finc \
-	api/math.finc \
 	api/multimin.finc \
 	api/poly.finc \
 	api/specfunc.finc \
 	api/chebyshev.finc \
-	api/error.finc \
 	api/integration.finc \
 	api/min.finc \
 	api/multiroots.finc \
@@ -36,13 +47,11 @@ libfgsl_la_SOURCES = \
 	api/complex.finc \
 	api/fft.finc \
 	api/interp.finc \
-	api/misc.finc \
 	api/ntuple.finc \
 	api/roots.finc \
 	api/sum_levin.finc \
 	api/deriv.finc \
 	api/fit.finc \
-	api/io.finc \
 	api/montecarlo.finc \
 	api/ode.finc \
 	api/siman.finc \
@@ -62,8 +71,6 @@ libfgsl_la_SOURCES = \
 	interface/rng.finc \
 	interface/sum_levin.finc \
 	interface/bspline.finc \
-	interface/error.finc \
-	interface/math.finc \
 	interface/multiroots.finc \
 	interface/roots.finc \
 	interface/wavelet.finc \
@@ -75,7 +82,6 @@ libfgsl_la_SOURCES = \
 	interface/complex.finc \
 	interface/fit.finc \
 	interface/integration.finc \
-	interface/misc.finc \
 	interface/ode.finc \
 	interface/sort.finc \
 	interface/deriv.finc \
@@ -86,7 +92,6 @@ libfgsl_la_SOURCES = \
 	interface/specfunc.finc \
 	interface/dht.finc \
 	interface/histogram.finc \
-	interface/io.finc \
 	interface/multifit.finc \
 	interface/poly.finc \
 	interface/statistics.finc \
@@ -106,13 +111,21 @@ libfgsl_la_CFLAGS = @gsl_CFLAGS@ -I$(top_srcdir)
 libfgsl_la_LIBADD = @gsl_LIBS@
 
 fgsl.mod: fgsl.o libfgsl.la
+fgsl_base.mod: modules/fgsl_base.o
+fgsl_errno.mod: modules/fgsl_errno.o
+fgsl_io.mod: modules/fgsl_io.o
+fgsl_math.mod: modules/fgsl_math.o
 fgsl.lo: $(libfgsl_la_SOURCES)
 
 pkgconfigdir=$(libdir)/pkgconfig
 pkgconfig_DATA = fgsl.pc
-nodist_fgslinclude_HEADERS = fgsl.mod
+nodist_fgslinclude_HEADERS = fgsl.mod \
+			     fgsl_base.mod \
+			     fgsl_errno.mod \
+			     fgsl_io.mod \
+			     fgsl_math.mod
 
 EXTRA_DIST = Doxyfile
 
 clean-local:
-	rm -f fgsl.mod
+	rm -f *.mod 

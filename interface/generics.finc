@@ -17,7 +17,6 @@
      module procedure fgsl_interp_status
      module procedure fgsl_interp2d_status
      module procedure fgsl_dht_status
-     module procedure fgsl_error_handler_status
      module procedure fgsl_integration_workspace_status
      module procedure fgsl_integration_cquad_workspace_status
      module procedure fgsl_integration_qawo_table_status
@@ -73,14 +72,6 @@
      module procedure fgsl_multilarge_nlinear_setup
   end interface
   interface fgsl_sizeof
-     module procedure fgsl_sizeof_double
-     module procedure fgsl_sizeof_float
-     module procedure fgsl_sizeof_int
-#if SIZEOF_SIZE_T == 4
-#elif SIZEOF_SIZE_T == 8
-     module procedure fgsl_sizeof_size_t
-#endif
-     module procedure fgsl_sizeof_char
      module procedure fgsl_sizeof_vector
      module procedure fgsl_sizeof_matrix
      module procedure fgsl_sizeof_vector_complex
