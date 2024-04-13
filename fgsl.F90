@@ -64,6 +64,8 @@ module fgsl
   use fgsl_io
   use fgsl_math
   use fgsl_complex_math
+  use fgsl_poly
+  use fgsl_sf
   implicit none
 
 !
@@ -301,41 +303,8 @@ module fgsl
   real(fgsl_double), parameter, public :: fgsl_const_cgsm_thomson_cross_section = 6.65245893699e-25_fgsl_double
 
 
-!
-! Types: Polynomial
-!
-  type, public :: fgsl_poly_complex_workspace
-     private
-     type(c_ptr) :: gsl_poly_complex_workspace
-  end type fgsl_poly_complex_workspace
-!
 ! Types: Special Functions
 !
-! both interoperable and non-interoperable types are
-! made available. Overloaded assignment permits implicit copies
-! when necessary
-  type, public :: fgsl_sf_result
-     real(fgsl_double) :: val, err
-  end type fgsl_sf_result
-  type, public, bind(c) :: gsl_sf_result
-     real(c_double) :: val, err
-  end type
-  type, public :: fgsl_sf_result_e10
-     real(fgsl_double) :: val, err
-     integer(fgsl_int) :: e10
-  end type fgsl_sf_result_e10
-  type, public, bind(c) :: gsl_sf_result_e10
-     real(c_double) :: val, err
-     integer(c_int) :: e10
-  end type
-  type, public :: fgsl_mode_t
-     private
-     integer(c_int) :: gsl_mode = 0
-  end type fgsl_mode_t
-  type(fgsl_mode_t), parameter, public :: &
-       fgsl_prec_double = fgsl_mode_t(0), &
-       fgsl_prec_single = fgsl_mode_t(1), &
-       fgsl_prec_approx = fgsl_mode_t(2)
   type, public :: fgsl_sf_legendre_t
     private
     integer(c_int) :: gsl_sf_legendre_t = 0
@@ -1305,7 +1274,6 @@ end type fgsl_filter_impulse_workspace
 ! FGSL names occurring here are auxiliary routines
 ! needed to transfer static C information to the Fortran subsystem
   interface
-#include "interface/poly.finc"
 #include "interface/specfunc.finc"
 #include "interface/array.finc"
 #include "interface/interp.finc"
@@ -1345,7 +1313,6 @@ end type fgsl_filter_impulse_workspace
   end interface
 #include "interface/generics.finc"
 contains
-#include "api/poly.finc"
 #include "api/specfunc.finc"
 #include "api/array.finc"
 #include "api/interp.finc"

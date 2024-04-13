@@ -3,19 +3,14 @@ Changes in 2.0.0:
 
 This release restructures the source code to provide multiple
 modules, each one of which is easier to read and understand.
-The organization is analogous to the C source code,
-i.e. a Fortran module fgsl_interp exists in analogy to the
+The organization is mostly analogous to the C source code,
+i.e., a Fortran module fgsl_interp exists in analogy to the
 C header gsl_interp.h. All fgsl_*.f90 files are placed in the
 modules folder. For modules that need explicit C glue code,
 an appropriately named file fgsl_*.c exists in the csub folder.
 
 fgsl_complex_math: the legacy complex type has been removed.
     interface added: fgsl_complex_polar
-
-due to build issues with long path names, the __FILE__ macro
-is not used any more (issue #36)
- 
-
 
 
 Changes in 1.6.0 (by R Bader):

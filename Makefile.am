@@ -11,6 +11,11 @@ BUILT_SOURCES = fgsl_base.mod \
 		fgsl_io.mod \
 		fgsl_math.mod \
 		fgsl_complex_math.mod \
+		fgsl_poly.mod \
+		fgsl_sf_types.mod \
+		fgsl_sf_airy.mod \
+		fgsl_sf_bessel.mod \
+		fgsl_sf.mod \
 		fgsl.mod
 
 NULL =
@@ -23,6 +28,11 @@ libfgsl_la_SOURCES = \
 	modules/fgsl_io.f90 \
 	modules/fgsl_math.f90 \
 	modules/fgsl_complex_math.f90 \
+	modules/fgsl_poly.F90 \
+	modules/fgsl_sf_types.f90 \
+	modules/fgsl_sf_airy.f90 \
+	modules/fgsl_sf_bessel.f90 \
+	modules/fgsl_sf.f90 \
 	csub/fgsl_base_c.c \
 	csub/fgsl_io_c.c \
 	csub/fgsl_math_c.c \
@@ -38,7 +48,6 @@ libfgsl_la_SOURCES = \
 	api/eigen.finc \
 	api/ieee.finc \
 	api/multimin.finc \
-	api/poly.finc \
 	api/specfunc.finc \
 	api/chebyshev.finc \
 	api/integration.finc \
@@ -93,7 +102,6 @@ libfgsl_la_SOURCES = \
 	interface/dht.finc \
 	interface/histogram.finc \
 	interface/multifit.finc \
-	interface/poly.finc \
 	interface/statistics.finc \
 	interface/multilarge.finc \
 	interface/spmatrix.finc \
@@ -116,6 +124,11 @@ fgsl_errno.mod: modules/fgsl_errno.o
 fgsl_io.mod: modules/fgsl_io.o
 fgsl_math.mod: modules/fgsl_math.o
 fgsl_complex_math.mod: modules/fgsl_complex_math.o
+fgsl_poly.mod: modules/fgsl_poly.o
+fgsl_sf_types.mod: modules/fgsl_sf_types.o
+fgsl_sf_airy.mod: modules/fgsl_sf_airy.o
+fgsl_sf_bessel.mod: modules/fgsl_sf_bessel.o
+fgsl_sf.mod: modules/fgsl_sf.o
 fgsl.lo: $(libfgsl_la_SOURCES)
 
 pkgconfigdir=$(libdir)/pkgconfig
@@ -125,7 +138,12 @@ nodist_fgslinclude_HEADERS = fgsl.mod \
 			     fgsl_errno.mod \
 			     fgsl_io.mod \
 			     fgsl_math.mod \
-			     fgsl_complex_math.mod
+			     fgsl_complex_math.mod \
+			     fgsl_poly.mod \
+			     fgsl_sf_types.mod \
+			     fgsl_sf_airy.mod \
+			     fgsl_sf_bessel.mod \
+			     fgsl_sf.mod
 
 EXTRA_DIST = Doxyfile
 

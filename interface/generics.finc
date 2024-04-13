@@ -37,7 +37,6 @@
      module procedure fgsl_odeiv2_step_status
      module procedure fgsl_odeiv2_system_status
      module procedure fgsl_odeiv2_driver_status
-     module procedure fgsl_poly_complex_workspace_stat
      module procedure fgsl_rng_status
      module procedure fgsl_qrng_status
      module procedure fgsl_ran_discrete_t_status
@@ -92,8 +91,6 @@
      module procedure fgsl_matrix_c_ptr
   end interface
   interface assignment(=)
-     module procedure gsl_sf_to_fgsl_sf
-     module procedure gsl_sfe10_to_fgsl_sfe10
      module procedure fgsl_vector_to_array
      module procedure fgsl_vector_complex_to_array
      module procedure fgsl_matrix_to_array
