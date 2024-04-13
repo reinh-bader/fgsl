@@ -24,7 +24,7 @@
     import
     type(c_ptr), value :: v
     integer(c_size_t), value :: i
-    type(gsl_complex) :: gsl_vector_complex_get
+    complex(c_double_complex) :: gsl_vector_complex_get
   end function gsl_vector_complex_get
   function gsl_vector_complex_ptr(v, i) bind(c)
     import
@@ -42,7 +42,7 @@
     import
     type(c_ptr), value :: v
     integer(c_size_t), value :: j, i
-    type(gsl_complex) :: gsl_matrix_complex_get
+    complex(c_double_complex) :: gsl_matrix_complex_get
   end function gsl_matrix_complex_get
 !
 ! auxiliary functions within FGSL only

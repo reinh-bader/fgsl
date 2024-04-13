@@ -13,15 +13,15 @@
        import
        type(c_ptr), value :: c
        integer(c_int), value :: len
-       type(gsl_complex), value :: z
-       type(gsl_complex) :: gsl_poly_complex_eval
+       complex(c_double_complex), value :: z
+       complex(c_double_complex) :: gsl_poly_complex_eval
      end function gsl_poly_complex_eval
      function gsl_complex_poly_complex_eval(c, len, z) bind(c)
        import
        type(c_ptr), value :: c
        integer(c_int), value :: len
-       type(gsl_complex), value :: z
-       type(gsl_complex) :: gsl_complex_poly_complex_eval
+       complex(c_double_complex), value :: z
+       complex(c_double_complex) :: gsl_complex_poly_complex_eval
      end function gsl_complex_poly_complex_eval
      function gsl_poly_eval_derivs(c, lenc, x, res, lenres) bind(c)
        import :: c_double, c_size_t, c_int, c_ptr
@@ -70,7 +70,7 @@
      function gsl_poly_complex_solve_quadratic(a, b, c, x0, x1) bind(c, name='gsl_poly_complex_solve_quadratic')
        import
        real(c_double), value :: a, b, c
-       type(gsl_complex) :: x0, x1
+       complex(c_double_complex) :: x0, x1
        integer(c_int) :: gsl_poly_complex_solve_quadratic
      end function gsl_poly_complex_solve_quadratic
      function gsl_poly_solve_cubic(a, b, c, x0, x1, x2) bind(c)
@@ -82,7 +82,7 @@
      function gsl_poly_complex_solve_cubic(a, b, c, x0, x1, x2) bind(c, name='gsl_poly_complex_solve_cubic')
        import
        real(c_double), value :: a, b, c
-       type(gsl_complex) :: x0, x1, x2
+       complex(c_double_complex) :: x0, x1, x2
        integer(c_int) :: gsl_poly_complex_solve_cubic
      end function gsl_poly_complex_solve_cubic
      function gsl_poly_complex_workspace_alloc(n) bind(c, name='gsl_poly_complex_workspace_alloc')

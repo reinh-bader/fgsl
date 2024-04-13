@@ -15,7 +15,7 @@
     real(fgsl_double), intent(in), target, contiguous :: c(:)
     complex(fgsl_double_complex), intent(in) :: z
     complex(fgsl_double_complex) :: fgsl_poly_complex_eval
-    type(gsl_complex) :: zz
+    complex(c_double_complex) :: zz
     zz = z
     fgsl_poly_complex_eval = gsl_poly_complex_eval(c_loc(c), size(c, kind=fgsl_int), zz)
   end function fgsl_poly_complex_eval
@@ -23,7 +23,7 @@
     complex(fgsl_double_complex), intent(in) :: c(:)
     complex(fgsl_double_complex), intent(in) :: z
     complex(fgsl_double_complex) :: fgsl_complex_poly_complex_eval
-    type(gsl_complex) :: zz, cz(size(c))
+    complex(c_double_complex) :: zz, cz(size(c))
     target :: cz
     zz = z
     cz = c
@@ -105,7 +105,7 @@
     complex(fgsl_double_complex), intent(out) :: x0, x1
     integer(fgsl_int) :: fgsl_poly_complex_solve_quadratic
 !
-    type(gsl_complex) :: z0, z1
+    complex(c_double_complex) :: z0, z1
     fgsl_poly_complex_solve_quadratic = gsl_poly_complex_solve_quadratic(a, b, c, z0, z1)
     x0 = z0
     x1 = z1
@@ -121,7 +121,7 @@
     complex(fgsl_double_complex), intent(out) :: x0, x1, x2
     integer(fgsl_int) :: fgsl_poly_complex_solve_cubic
 !
-    type(gsl_complex) :: z0, z1, z2
+    complex(c_double_complex) :: z0, z1, z2
     fgsl_poly_complex_solve_cubic = gsl_poly_complex_solve_cubic(a, b, c, z0, z1, z2)
     x0 = z0
     x1 = z1

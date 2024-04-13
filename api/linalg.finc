@@ -1084,7 +1084,7 @@
     type(fgsl_matrix_complex), intent(inout) :: a
     integer(fgsl_int) :: fgsl_linalg_complex_householder_hm
 !
-    type(gsl_complex) :: targ
+    complex(c_double_complex) :: targ
     targ = tau
     fgsl_linalg_complex_householder_hm = &
          gsl_linalg_complex_householder_hm(targ, v%gsl_vector_complex, &
@@ -1104,7 +1104,7 @@
     type(fgsl_matrix_complex), intent(inout) :: a
     integer(fgsl_int) :: fgsl_linalg_complex_householder_mh
 !
-    type(gsl_complex) :: targ
+    complex(c_double_complex) :: targ
     targ = tau
     fgsl_linalg_complex_householder_mh = &
          gsl_linalg_complex_householder_mh(targ, v%gsl_vector_complex, &
@@ -1124,7 +1124,7 @@
     type(fgsl_vector_complex), intent(inout) :: w
     integer(fgsl_int) :: fgsl_linalg_complex_householder_hv
 !
-    type(gsl_complex) :: targ
+    complex(c_double_complex) :: targ
     targ = tau
     fgsl_linalg_complex_householder_hv = &
          gsl_linalg_complex_householder_hv(targ, v%gsl_vector_complex, &

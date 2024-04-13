@@ -63,6 +63,7 @@ module fgsl
   use fgsl_errno
   use fgsl_io
   use fgsl_math
+  use fgsl_complex_math
   implicit none
 
 !
@@ -303,10 +304,6 @@ module fgsl
 !
 ! Types: Polynomial
 !
-! FIXME ifort refuses = overload if not public
-  type, public, bind(c) :: gsl_complex
-     real(c_double) :: dat(2)
-  end type
   type, public :: fgsl_poly_complex_workspace
      private
      type(c_ptr) :: gsl_poly_complex_workspace
@@ -1308,7 +1305,6 @@ end type fgsl_filter_impulse_workspace
 ! FGSL names occurring here are auxiliary routines
 ! needed to transfer static C information to the Fortran subsystem
   interface
-#include "interface/complex.finc"
 #include "interface/poly.finc"
 #include "interface/specfunc.finc"
 #include "interface/array.finc"
@@ -1349,7 +1345,6 @@ end type fgsl_filter_impulse_workspace
   end interface
 #include "interface/generics.finc"
 contains
-#include "api/complex.finc"
 #include "api/poly.finc"
 #include "api/specfunc.finc"
 #include "api/array.finc"

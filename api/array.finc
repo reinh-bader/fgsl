@@ -374,7 +374,7 @@
   subroutine fgsl_vector_complex_to_array(result, source)
     complex(fgsl_double_complex), intent(inout) :: result(:)
     type(fgsl_vector_complex), intent(in) :: source
-!    type(gsl_complex) :: aux
+!    complex(c_double_complex) :: aux
 !
     integer(fgsl_size_t) :: i, n, k
     k = size(result)

@@ -92,8 +92,6 @@
      module procedure fgsl_matrix_c_ptr
   end interface
   interface assignment(=)
-     module procedure fgsl_complex_to_complex
-     module procedure complex_to_fgsl_complex
      module procedure gsl_sf_to_fgsl_sf
      module procedure gsl_sfe10_to_fgsl_sfe10
      module procedure fgsl_vector_to_array

@@ -10,6 +10,7 @@ BUILT_SOURCES = fgsl_base.mod \
 		fgsl_errno.mod \
 		fgsl_io.mod \
 		fgsl_math.mod \
+		fgsl_complex_math.mod \
 		fgsl.mod
 
 NULL =
@@ -21,6 +22,7 @@ libfgsl_la_SOURCES = \
 	modules/fgsl_errno.f90 \
 	modules/fgsl_io.f90 \
 	modules/fgsl_math.f90 \
+	modules/fgsl_complex_math.f90 \
 	csub/fgsl_base_c.c \
 	csub/fgsl_io_c.c \
 	csub/fgsl_math_c.c \
@@ -44,7 +46,6 @@ libfgsl_la_SOURCES = \
 	api/multiroots.finc \
 	api/rng.finc \
 	api/statistics.finc \
-	api/complex.finc \
 	api/fft.finc \
 	api/interp.finc \
 	api/ntuple.finc \
@@ -79,7 +80,6 @@ libfgsl_la_SOURCES = \
 	interface/min.finc \
 	interface/ntuple.finc \
 	interface/siman.finc \
-	interface/complex.finc \
 	interface/fit.finc \
 	interface/integration.finc \
 	interface/ode.finc \
@@ -115,6 +115,7 @@ fgsl_base.mod: modules/fgsl_base.o
 fgsl_errno.mod: modules/fgsl_errno.o
 fgsl_io.mod: modules/fgsl_io.o
 fgsl_math.mod: modules/fgsl_math.o
+fgsl_complex_math.mod: modules/fgsl_complex_math.o
 fgsl.lo: $(libfgsl_la_SOURCES)
 
 pkgconfigdir=$(libdir)/pkgconfig
@@ -123,7 +124,8 @@ nodist_fgslinclude_HEADERS = fgsl.mod \
 			     fgsl_base.mod \
 			     fgsl_errno.mod \
 			     fgsl_io.mod \
-			     fgsl_math.mod
+			     fgsl_math.mod \
+			     fgsl_complex_math.mod
 
 EXTRA_DIST = Doxyfile
 

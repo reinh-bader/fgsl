@@ -86,10 +86,10 @@
   end function gsl_linalg_lu_det
   function gsl_linalg_complex_lu_det(lu, signum) &
        bind(c, name='gsl_linalg_complex_LU_det')
-    import :: c_ptr, c_int, gsl_complex
+    import :: c_ptr, c_int, c_double_complex
     type(c_ptr), value :: lu
     integer(c_int), value :: signum
-    type(gsl_complex) :: gsl_linalg_complex_lu_det
+    complex(c_double_complex) :: gsl_linalg_complex_lu_det
   end function gsl_linalg_complex_lu_det
   function gsl_linalg_lu_lndet(lu) bind(c, name='gsl_linalg_LU_lndet')
     import :: c_ptr, c_double
@@ -110,10 +110,10 @@
   end function gsl_linalg_lu_sgndet
   function gsl_linalg_complex_lu_sgndet(lu, signum) &
        bind(c, name='gsl_linalg_complex_LU_sgndet')
-    import :: c_ptr, c_int, gsl_complex
+    import :: c_ptr, c_int, c_double_complex
     type(c_ptr), value :: lu
     integer(c_int), value :: signum
-    type(gsl_complex) :: gsl_linalg_complex_lu_sgndet
+    complex(c_double_complex) :: gsl_linalg_complex_lu_sgndet
   end function gsl_linalg_complex_lu_sgndet
 !
 ! QR
@@ -843,9 +843,9 @@
     real(c_double) :: gsl_linalg_householder_transform
   end function gsl_linalg_householder_transform
   function gsl_linalg_complex_householder_transform (v) bind(c)
-    import :: c_ptr, gsl_complex
+    import :: c_ptr, c_double_complex
     type(c_ptr), value :: v
-    type(gsl_complex) :: gsl_linalg_complex_householder_transform
+    complex(c_double_complex) :: gsl_linalg_complex_householder_transform
   end function gsl_linalg_complex_householder_transform
   function gsl_linalg_householder_hm (tau, v, a) bind(c)
     import :: c_ptr, c_double, c_int
@@ -854,8 +854,8 @@
     integer(c_int) :: gsl_linalg_householder_hm
   end function gsl_linalg_householder_hm
   function gsl_linalg_complex_householder_hm (tau, v, a) bind(c)
-    import :: c_ptr, c_int, gsl_complex
-    type(gsl_complex), value :: tau
+    import :: c_ptr, c_int, c_double_complex
+    complex(c_double_complex), value :: tau
     type(c_ptr), value :: v, a
     integer(c_int) :: gsl_linalg_complex_householder_hm
   end function gsl_linalg_complex_householder_hm
@@ -866,8 +866,8 @@
     integer(c_int) :: gsl_linalg_householder_mh
   end function gsl_linalg_householder_mh
   function gsl_linalg_complex_householder_mh (tau, v, a) bind(c)
-    import :: c_ptr, c_int, gsl_complex
-    type(gsl_complex), value :: tau
+    import :: c_ptr, c_int, c_double_complex
+    complex(c_double_complex), value :: tau
     type(c_ptr), value :: v, a
     integer(c_int) :: gsl_linalg_complex_householder_mh
   end function gsl_linalg_complex_householder_mh
@@ -878,8 +878,8 @@
     integer(c_int) :: gsl_linalg_householder_hv
   end function gsl_linalg_householder_hv
   function gsl_linalg_complex_householder_hv (tau, v, w) bind(c)
-    import :: c_ptr, c_int, gsl_complex
-    type(gsl_complex), value :: tau
+    import :: c_ptr, c_int, c_double_complex
+    complex(c_double_complex), value :: tau
     type(c_ptr), value :: v, w
     integer(c_int) :: gsl_linalg_complex_householder_hv
   end function gsl_linalg_complex_householder_hv
