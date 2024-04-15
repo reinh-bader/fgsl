@@ -3,9 +3,15 @@ module fgsl_sf
   !>  Special Functions
   !>
   !> The following modules are comprised  
-  !> - fgsl_sf_types (name pattern diverges due to naming collision): derived type definitions
+  !> - fgsl_sf_types     (name pattern diverges due to naming collision): derived type definitions
   !> - fgsl_sf_airy:     Airy functions
   !> - fgsl_sf_bessel:   Bessel functions
+  !> - fgsl_sf_claus     (name pattern diverges due to naming collision): Clausen functions
+  !> - fgsl_sf_coulomb:  Coulomb functions
+  !> - fgsl_sf_daws      (name pattern diverges due to naming collision): Dawson functions
+  !> - fgsl_sf_debye:    Debye functions
+  !> - fgsl_sf_dilogarithm: Dilogarithm
+  !> - fgsl_sr_elementary: Elementary Operations
   !> Functions for which two identical names would result due to LC/UC aliasing have been assigned
   !> new names. The name mappings are given in the following table. The additional letters
   !> <STRONG>c</STRONG> viz
@@ -102,5 +108,12 @@ module fgsl_sf
   use fgsl_sf_types
   use fgsl_sf_airy
   use fgsl_sf_bessel
+  use fgsl_sf_claus
+  use fgsl_sf_coulomb
+  use fgsl_sf_coupling
+  use fgsl_sf_daws
+  use fgsl_sf_debye
+  use fgsl_sf_dilogarithm
+  use fgsl_sf_elementary
   implicit none
 end module fgsl_sf

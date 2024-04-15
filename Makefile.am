@@ -15,6 +15,13 @@ BUILT_SOURCES = fgsl_base.mod \
 		fgsl_sf_types.mod \
 		fgsl_sf_airy.mod \
 		fgsl_sf_bessel.mod \
+		fgsl_sf_claus.mod \
+		fgsl_sf_coulomb.mod \
+		fgsl_sf_coupling.mod \
+		fgsl_sf_daws.mod \
+		fgsl_sf_debye.mod \
+		fgsl_sf_dilogarithm.mod \
+		fgsl_sf_elementary.mod \
 		fgsl_sf.mod \
 		fgsl.mod
 
@@ -32,6 +39,13 @@ libfgsl_la_SOURCES = \
 	modules/fgsl_sf_types.f90 \
 	modules/fgsl_sf_airy.f90 \
 	modules/fgsl_sf_bessel.f90 \
+	modules/fgsl_sf_claus.f90 \
+	modules/fgsl_sf_coulomb.F90 \
+	modules/fgsl_sf_coupling.f90 \
+	modules/fgsl_sf_daws.f90 \
+	modules/fgsl_sf_debye.f90 \
+	modules/fgsl_sf_dilogarithm.f90 \
+	modules/fgsl_sf_elementary.f90 \
 	modules/fgsl_sf.f90 \
 	csub/fgsl_base_c.c \
 	csub/fgsl_io_c.c \
@@ -128,6 +142,13 @@ fgsl_poly.mod: modules/fgsl_poly.o
 fgsl_sf_types.mod: modules/fgsl_sf_types.o
 fgsl_sf_airy.mod: modules/fgsl_sf_airy.o
 fgsl_sf_bessel.mod: modules/fgsl_sf_bessel.o
+fgsl_sf_claus.mod: modules/fgsl_sf_claus.o
+fgsl_sf_coulomb.mod: modules/fgsl_sf_coulomb.o
+fgsl_sf_coupling.mod: modules/fgsl_sf_coupling.o
+fgsl_sf_daws.mod: modules/fgsl_sf_daws.o
+fgsl_sf_debye.mod: modules/fgsl_sf_debye.o
+fgsl_sf_dilogarithm.mod: modules/fgsl_sf_dilogarithm.o
+fgsl_sf_elementary.mod: modules/fgsl_sf_elementary.o
 fgsl_sf.mod: modules/fgsl_sf.o
 fgsl.lo: $(libfgsl_la_SOURCES)
 
@@ -143,6 +164,13 @@ nodist_fgslinclude_HEADERS = fgsl.mod \
 			     fgsl_sf_types.mod \
 			     fgsl_sf_airy.mod \
 			     fgsl_sf_bessel.mod \
+			     fgsl_sf_claus.mod \
+			     fgsl_sf_coulomb.mod \
+			     fgsl_sf_coupling.mod \
+			     fgsl_sf_daws.mod \
+			     fgsl_sf_debye.mod \
+			     fgsl_sf_dilogarithm.mod \
+			     fgsl_sf_elementary.mod \
 			     fgsl_sf.mod
 
 EXTRA_DIST = Doxyfile
