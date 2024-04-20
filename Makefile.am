@@ -22,6 +22,13 @@ BUILT_SOURCES = fgsl_base.mod \
 		fgsl_sf_debye.mod \
 		fgsl_sf_dilogarithm.mod \
 		fgsl_sf_elementary.mod \
+		fgsl_sf_ellint.mod \
+		fgsl_sf_elljac.mod \
+		fgsl_sf_errorfunc.mod \
+		fgsl_sf_exponential.mod \
+		fgsl_sf_expint.mod \
+		fgsl_sf_fermi_dirac.mod \
+		fgsl_sf_gam.mod \
 		fgsl_sf.mod \
 		fgsl.mod
 
@@ -46,6 +53,13 @@ libfgsl_la_SOURCES = \
 	modules/fgsl_sf_debye.f90 \
 	modules/fgsl_sf_dilogarithm.f90 \
 	modules/fgsl_sf_elementary.f90 \
+	modules/fgsl_sf_ellint.f90 \
+	modules/fgsl_sf_elljac.f90 \
+	modules/fgsl_sf_errorfunc.f90 \
+	modules/fgsl_sf_exponential.f90 \
+	modules/fgsl_sf_expint.f90 \
+	modules/fgsl_sf_fermi_dirac.f90 \
+	modules/fgsl_sf_gam.f90 \
 	modules/fgsl_sf.f90 \
 	csub/fgsl_base_c.c \
 	csub/fgsl_io_c.c \
@@ -149,6 +163,13 @@ fgsl_sf_daws.mod: modules/fgsl_sf_daws.o
 fgsl_sf_debye.mod: modules/fgsl_sf_debye.o
 fgsl_sf_dilogarithm.mod: modules/fgsl_sf_dilogarithm.o
 fgsl_sf_elementary.mod: modules/fgsl_sf_elementary.o
+fgsl_sf_ellint.mod: modules/fgsl_sf_ellint.o
+fgsl_sf_elljac.mod: modules/fgsl_sf_elljac.o
+fgsl_sf_errorfunc.mod: modules/fgsl_sf_errorfunc.o
+fgsl_sf_exponential.mod: modules/fgsl_sf_exponential.o
+fgsl_sf_expint.mod: modules/fgsl_sf_expint.o
+fgsl_sf_fermi_dirac.mod: modules/fgsl_sf_fermi_dirac.o
+fgsl_sf_gam.mod: modules/fgsl_sf_gam.o
 fgsl_sf.mod: modules/fgsl_sf.o
 fgsl.lo: $(libfgsl_la_SOURCES)
 
@@ -171,6 +192,13 @@ nodist_fgslinclude_HEADERS = fgsl.mod \
 			     fgsl_sf_debye.mod \
 			     fgsl_sf_dilogarithm.mod \
 			     fgsl_sf_elementary.mod \
+			     fgsl_sf_ellint.mod \
+			     fgsl_sf_elljac.mod \
+			     fgsl_sf_errorfunc.mod \
+			     fgsl_sf_exponential.mod \
+			     fgsl_sf_expint.mod \
+			     fgsl_sf_fermi_dirac.mod \
+			     fgsl_sf_gam.mod \
 			     fgsl_sf.mod
 
 EXTRA_DIST = Doxyfile

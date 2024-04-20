@@ -11,7 +11,14 @@ module fgsl_sf
   !> - fgsl_sf_daws      (name pattern diverges due to naming collision): Dawson functions
   !> - fgsl_sf_debye:    Debye functions
   !> - fgsl_sf_dilogarithm: Dilogarithm
-  !> - fgsl_sr_elementary: Elementary Operations
+  !> - fgsl_sf_elementary: Elementary Operations
+  !> - fgsl_sf_ellint:   Elliptic Integrals
+  !> - fgsl_sf_elljac:   Elliptic Functions
+  !> - fgsl_sf_errorfunc (name pattern diverges due to naming collision): Error functions
+  !> - fgsl_sf_exponential: Exponential functions
+  !> - fgsl_sf_expint:   Exponential Integrals
+  !> - fgsl_sf_fermi_dirac: Fermi-Dirac Functions
+  !> - fgsl_sf_gam       (name pattern diverges due to naming collision): Gamma and Beta Functions
   !> Functions for which two identical names would result due to LC/UC aliasing have been assigned
   !> new names. The name mappings are given in the following table. The additional letters
   !> <STRONG>c</STRONG> viz
@@ -115,5 +122,12 @@ module fgsl_sf
   use fgsl_sf_debye
   use fgsl_sf_dilogarithm
   use fgsl_sf_elementary
+  use fgsl_sf_ellint
+  use fgsl_sf_elljac
+  use fgsl_sf_errorfunc
+  use fgsl_sf_exponential
+  use fgsl_sf_expint
+  use fgsl_sf_fermi_dirac
+  use fgsl_sf_gam
   implicit none
 end module fgsl_sf

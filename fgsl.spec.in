@@ -1,7 +1,7 @@
 Name: fgsl	
 Version: @VERSION@
-Release:	1%{?dist}
-Summary: Fortran 2003 bindings for the GNU Scientific Library	
+Release:	2%{?dist}
+Summary: Fortran bindings for the GNU Scientific Library	
 
 Group:	Applications/Engineering and Scientific
 License: GPL
