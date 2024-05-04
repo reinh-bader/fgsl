@@ -29,6 +29,11 @@ BUILT_SOURCES = fgsl_base.mod \
 		fgsl_sf_expint.mod \
 		fgsl_sf_fermi_dirac.mod \
 		fgsl_sf_gam.mod \
+		fgsl_sf_gegenbauer.mod \
+		fgsl_sf_herm.mod \
+		fgsl_sf_hyperg.mod \
+		fgsl_sf_laguerre.mod \
+		fgsl_sf_lambert.mod \
 		fgsl_sf.mod \
 		fgsl.mod
 
@@ -60,6 +65,11 @@ libfgsl_la_SOURCES = \
 	modules/fgsl_sf_expint.f90 \
 	modules/fgsl_sf_fermi_dirac.f90 \
 	modules/fgsl_sf_gam.f90 \
+	modules/fgsl_sf_gegenbauer.f90 \
+	modules/fgsl_sf_herm.f90 \
+	modules/fgsl_sf_hyperg.f90 \
+	modules/fgsl_sf_laguerre.f90 \
+	modules/fgsl_sf_lambert.f90 \
 	modules/fgsl_sf.f90 \
 	csub/fgsl_base_c.c \
 	csub/fgsl_io_c.c \
@@ -170,6 +180,11 @@ fgsl_sf_exponential.mod: modules/fgsl_sf_exponential.o
 fgsl_sf_expint.mod: modules/fgsl_sf_expint.o
 fgsl_sf_fermi_dirac.mod: modules/fgsl_sf_fermi_dirac.o
 fgsl_sf_gam.mod: modules/fgsl_sf_gam.o
+fgsl_sf_gegenbauer.mod: modules/fgsl_sf_gegenbauer.o
+fgsl_sf_herm.mod: modules/fgsl_sf_herm.o
+fgsl_sf_hyperg.mod: modules/fgsl_sf_hyperg.o
+fgsl_sf_laguerre.mod: modules/fgsl_sf_laguerre.o
+fgsl_sf_lambert.mod: modules/fgsl_sf_lambert.o
 fgsl_sf.mod: modules/fgsl_sf.o
 fgsl.lo: $(libfgsl_la_SOURCES)
 
@@ -199,6 +214,11 @@ nodist_fgslinclude_HEADERS = fgsl.mod \
 			     fgsl_sf_expint.mod \
 			     fgsl_sf_fermi_dirac.mod \
 			     fgsl_sf_gam.mod \
+			     fgsl_sf_gegenbauer.mod \
+			     fgsl_sf_herm.mod \
+			     fgsl_sf_hyperg.mod \
+			     fgsl_sf_laguerre.mod \
+			     fgsl_sf_lambert.mod \
 			     fgsl_sf.mod
 
 EXTRA_DIST = Doxyfile

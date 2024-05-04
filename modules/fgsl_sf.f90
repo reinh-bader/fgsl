@@ -2,13 +2,13 @@
 module fgsl_sf
   !>  Special Functions
   !>
-  !> The following modules are comprised  
-  !> - fgsl_sf_types     (name pattern diverges due to naming collision): derived type definitions
+  !> The following modules are accessed:  
+  !> - fgsl_sf_types (name pattern diverges due to naming collision): derived type definitions
   !> - fgsl_sf_airy:     Airy functions
   !> - fgsl_sf_bessel:   Bessel functions
-  !> - fgsl_sf_claus     (name pattern diverges due to naming collision): Clausen functions
+  !> - fgsl_sf_claus (name pattern diverges due to naming collision): Clausen functions
   !> - fgsl_sf_coulomb:  Coulomb functions
-  !> - fgsl_sf_daws      (name pattern diverges due to naming collision): Dawson functions
+  !> - fgsl_sf_daws (name pattern diverges due to naming collision): Dawson functions
   !> - fgsl_sf_debye:    Debye functions
   !> - fgsl_sf_dilogarithm: Dilogarithm
   !> - fgsl_sf_elementary: Elementary Operations
@@ -18,7 +18,13 @@ module fgsl_sf
   !> - fgsl_sf_exponential: Exponential functions
   !> - fgsl_sf_expint:   Exponential Integrals
   !> - fgsl_sf_fermi_dirac: Fermi-Dirac Functions
-  !> - fgsl_sf_gam       (name pattern diverges due to naming collision): Gamma and Beta Functions
+  !> - fgsl_sf_gam (name pattern diverges due to naming collision): Gamma and Beta Functions
+  !> - fgsl_sf_gegenbauer: Gegenbauer Functions
+  !> - fgsl_sf_herm (name pattern diverges due to naming collision): Hermite polynomials and functions
+  !> - fgsl_sf_hyperg:  Hypergeomatric Functions
+  !> - fgsl_sf_laguerre: Laguerre Functions
+  !> - fgsl_sf_lambert:  Lambert W Functions
+  !>
   !> Functions for which two identical names would result due to LC/UC aliasing have been assigned
   !> new names. The name mappings are given in the following table. The additional letters
   !> <STRONG>c</STRONG> viz
@@ -129,5 +135,10 @@ module fgsl_sf
   use fgsl_sf_expint
   use fgsl_sf_fermi_dirac
   use fgsl_sf_gam
+  use fgsl_sf_gegenbauer
+  use fgsl_sf_herm
+  use fgsl_sf_hyperg
+  use fgsl_sf_laguerre
+  use fgsl_sf_lambert
   implicit none
 end module fgsl_sf
