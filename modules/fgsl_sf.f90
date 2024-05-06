@@ -24,6 +24,9 @@ module fgsl_sf
   !> - fgsl_sf_hyperg:  Hypergeomatric Functions
   !> - fgsl_sf_laguerre: Laguerre Functions
   !> - fgsl_sf_lambert:  Lambert W Functions
+  !> - fgsl_sf_legendre: Legendre Functions and Spherical Harmonics
+  !> - fgsl_sf_logarithm (name pattern diverges due to naming collision): Logarithm and related functions
+  !> - fgsl_sf_mathieu:  Mathieu Functions
   !>
   !> Functions for which two identical names would result due to LC/UC aliasing have been assigned
   !> new names. The name mappings are given in the following table. The additional letters
@@ -140,5 +143,8 @@ module fgsl_sf
   use fgsl_sf_hyperg
   use fgsl_sf_laguerre
   use fgsl_sf_lambert
+  use fgsl_sf_legendre
+  use fgsl_sf_logarithm
+  use fgsl_sf_mathieu
   implicit none
 end module fgsl_sf

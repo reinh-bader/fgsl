@@ -303,28 +303,16 @@ module fgsl
   real(fgsl_double), parameter, public :: fgsl_const_cgsm_thomson_cross_section = 6.65245893699e-25_fgsl_double
 
 
-! Types: Special Functions
-!
-  type, public :: fgsl_sf_legendre_t
-    private
-    integer(c_int) :: gsl_sf_legendre_t = 0
-  end type fgsl_sf_legendre_t
-  type(fgsl_sf_legendre_t), parameter, public :: &
-    fgsl_sf_legendre_schmidt = fgsl_sf_legendre_t(0), &
-    fgsl_sf_legendre_spharm = fgsl_sf_legendre_t(1), &
-    fgsl_sf_legendre_full = fgsl_sf_legendre_t(2), &
-    fgsl_sf_legendre_none = fgsl_sf_legendre_t(3)
-  type, public :: fgsl_sf_mathieu_workspace
-    private
-    type(c_ptr) :: gsl_sf_mathieu_workspace
-  end type fgsl_sf_mathieu_workspace
+
 !
 ! Enum: legendre special Functions
-!
+! The below probably are not needed any more
 integer(fgsl_int), public, parameter :: gsl_sf_legendre_schmidt = 0
 integer(fgsl_int), public, parameter :: gsl_sf_legendre_spharm = 1
 integer(fgsl_int), public, parameter :: gsl_sf_legendre_full = 2
 integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
+
+
 !
 ! Types : Array support
 !

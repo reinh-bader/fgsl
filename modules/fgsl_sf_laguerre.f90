@@ -1,6 +1,6 @@
 !-*-f90-*-
 module fgsl_sf_laguerre
-  !>  Special functions - Laguerrecfunctions
+  !>  Special functions - Laguerre Functions
   use fgsl_sf_types
   implicit none
 
