@@ -1262,7 +1262,6 @@ end type fgsl_filter_impulse_workspace
 ! FGSL names occurring here are auxiliary routines
 ! needed to transfer static C information to the Fortran subsystem
   interface
-#include "interface/specfunc.finc"
 #include "interface/array.finc"
 #include "interface/interp.finc"
 #include "interface/permutation.finc"
@@ -1301,7 +1300,6 @@ end type fgsl_filter_impulse_workspace
   end interface
 #include "interface/generics.finc"
 contains
-#include "api/specfunc.finc"
 #include "api/array.finc"
 #include "api/interp.finc"
 #include "api/permutation.finc"

@@ -37,6 +37,12 @@ BUILT_SOURCES = fgsl_base.mod \
 		fgsl_sf_legendre.mod \
 		fgsl_sf_logarithm.mod \
 		fgsl_sf_mathieu.mod \
+		fgsl_sf_power.mod \
+		fgsl_sf_polygamma.mod \
+		fgsl_sf_synchrotron.mod \
+		fgsl_sf_transport.mod \
+		fgsl_sf_trig.mod \
+		fgsl_sf_zetafun.mod \
 		fgsl_sf.mod \
 		fgsl.mod
 
@@ -76,6 +82,12 @@ libfgsl_la_SOURCES = \
 	modules/fgsl_sf_legendre.F90 \
 	modules/fgsl_sf_logarithm.f90 \
 	modules/fgsl_sf_mathieu.f90 \
+	modules/fgsl_sf_power.f90 \
+	modules/fgsl_sf_polygamma.f90 \
+	modules/fgsl_sf_synchrotron.f90 \
+	modules/fgsl_sf_transport.f90 \
+	modules/fgsl_sf_trig.f90 \
+	modules/fgsl_sf_zetafun.f90 \
 	modules/fgsl_sf.f90 \
 	csub/fgsl_base_c.c \
 	csub/fgsl_io_c.c \
@@ -92,7 +104,6 @@ libfgsl_la_SOURCES = \
 	api/eigen.finc \
 	api/ieee.finc \
 	api/multimin.finc \
-	api/specfunc.finc \
 	api/chebyshev.finc \
 	api/integration.finc \
 	api/min.finc \
@@ -142,7 +153,6 @@ libfgsl_la_SOURCES = \
 	interface/interp.finc \
 	interface/montecarlo.finc \
 	interface/permutation.finc \
-	interface/specfunc.finc \
 	interface/dht.finc \
 	interface/histogram.finc \
 	interface/multifit.finc \
@@ -194,6 +204,12 @@ fgsl_sf_lambert.mod: modules/fgsl_sf_lambert.o
 fgsl_sf_legendre.mod: modules/fgsl_sf_legendre.o
 fgsl_sf_logarithm.mod: modules/fgsl_sf_logarithm.o
 fgsl_sf_mathieu.mod: modules/fgsl_sf_mathieu.o
+fgsl_sf_power.mod: modules/fgsl_sf_power.o
+fgsl_sf_polygamma.mod: modules/fgsl_sf_polygamma.o
+fgsl_sf_synchrotron.mod: modules/fgsl_sf_synchrotron.o
+fgsl_sf_transport.mod: modules/fgsl_sf_transport.o
+fgsl_sf_trig.mod: modules/fgsl_sf_trig.o
+fgsl_sf_zetafun.mod: modules/fgsl_sf_zetafun.o
 fgsl_sf.mod: modules/fgsl_sf.o
 fgsl.lo: $(libfgsl_la_SOURCES)
 
@@ -231,6 +247,12 @@ nodist_fgslinclude_HEADERS = fgsl.mod \
 			     fgsl_sf_legendre.mod \
 			     fgsl_sf_logarithm.mod \
 			     fgsl_sf_mathieu.mod \
+			     fgsl_sf_power.mod \
+			     fgsl_sf_polygamma.mod \
+			     fgsl_sf_synchrotron.mod \
+			     fgsl_sf_transport.mod \
+			     fgsl_sf_trig.mod \
+			     fgsl_sf_zetafun.mod \
 			     fgsl_sf.mod
 
 EXTRA_DIST = Doxyfile

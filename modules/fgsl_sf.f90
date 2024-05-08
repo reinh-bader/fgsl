@@ -27,6 +27,12 @@ module fgsl_sf
   !> - fgsl_sf_legendre: Legendre Functions and Spherical Harmonics
   !> - fgsl_sf_logarithm (name pattern diverges due to naming collision): Logarithm and related functions
   !> - fgsl_sf_mathieu:  Mathieu Functions
+  !> - fgsl_sf_power (name pattern diverges due to naming collision): Power function
+  !> - fgsl_sf_polygamma (name pattern diverges due to naming collision): Psi / Polygamma functions
+  !> - fgsl_sf_synchrotron: Synchrotron Functions
+  !> - fgsl_sf_transport: Transport Functions
+  !> - fgsl_sf_trig: Trigonometric Functions
+  !> - fgsl_sf_zetafun (name pattern diverges due to naming collision): Zeta functions
   !>
   !> Functions for which two identical names would result due to LC/UC aliasing have been assigned
   !> new names. The name mappings are given in the following table. The additional letters
@@ -146,5 +152,11 @@ module fgsl_sf
   use fgsl_sf_legendre
   use fgsl_sf_logarithm
   use fgsl_sf_mathieu
+  use fgsl_sf_power
+  use fgsl_sf_polygamma
+  use fgsl_sf_synchrotron
+  use fgsl_sf_transport
+  use fgsl_sf_trig
+  use fgsl_sf_zetafun
   implicit none
 end module fgsl_sf
