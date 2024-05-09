@@ -44,6 +44,8 @@ BUILT_SOURCES = fgsl_base.mod \
 		fgsl_sf_trig.mod \
 		fgsl_sf_zetafun.mod \
 		fgsl_sf.mod \
+		fgsl_array.mod \
+		fgsl_permutations.mod \
 		fgsl.mod
 
 NULL =
@@ -89,11 +91,14 @@ libfgsl_la_SOURCES = \
 	modules/fgsl_sf_trig.f90 \
 	modules/fgsl_sf_zetafun.f90 \
 	modules/fgsl_sf.f90 \
+	modules/fgsl_array.F90 \
+	modules/fgsl_permutations.f90 \
 	csub/fgsl_base_c.c \
 	csub/fgsl_io_c.c \
 	csub/fgsl_math_c.c \
+	csub/fgsl_array_c.c \
+	csub/fgsl_permutation_c.c \
 	fgsl_utils.c \
-	api/array.finc \
 	api/dht.finc \
 	api/histogram.finc \
 	api/linalg.finc \
@@ -128,7 +133,6 @@ libfgsl_la_SOURCES = \
 	api/nlfit.finc \
 	api/movstat.finc \
 	api/filter.finc \
-	interface/array.finc \
 	interface/eigen.finc \
 	interface/ieee.finc \
 	interface/linalg.finc \
@@ -211,6 +215,8 @@ fgsl_sf_transport.mod: modules/fgsl_sf_transport.o
 fgsl_sf_trig.mod: modules/fgsl_sf_trig.o
 fgsl_sf_zetafun.mod: modules/fgsl_sf_zetafun.o
 fgsl_sf.mod: modules/fgsl_sf.o
+fgsl_array.mod: modules/fgsl_array.o
+fgsl_permutations.mod: modules/fgsl_permutations.o
 fgsl.lo: $(libfgsl_la_SOURCES)
 
 pkgconfigdir=$(libdir)/pkgconfig
@@ -253,7 +259,9 @@ nodist_fgslinclude_HEADERS = fgsl.mod \
 			     fgsl_sf_transport.mod \
 			     fgsl_sf_trig.mod \
 			     fgsl_sf_zetafun.mod \
-			     fgsl_sf.mod
+			     fgsl_sf.mod \
+			     fgsl_array.mod \
+			     fgsl_permutations.mod 
 
 EXTRA_DIST = Doxyfile
 

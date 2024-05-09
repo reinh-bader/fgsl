@@ -8,11 +8,6 @@
 !     module procedure fgsl_err_noinfo
 !  end interface
   interface fgsl_well_defined
-     module procedure fgsl_vector_status
-     module procedure fgsl_vector_int_status
-     module procedure fgsl_matrix_status
-     module procedure fgsl_vector_complex_status
-     module procedure fgsl_matrix_complex_status
      module procedure fgsl_cheb_series_status
      module procedure fgsl_interp_status
      module procedure fgsl_interp2d_status
@@ -25,7 +20,6 @@
      module procedure fgsl_interp_accel_status
      module procedure fgsl_spline_status
      module procedure fgsl_spline2d_status
-     module procedure fgsl_permutation_status
      module procedure fgsl_combination_status
      module procedure fgsl_multiset_status
      module procedure fgsl_odeiv_control_status
@@ -71,12 +65,7 @@
      module procedure fgsl_multilarge_nlinear_setup
   end interface
   interface fgsl_sizeof
-     module procedure fgsl_sizeof_vector
-     module procedure fgsl_sizeof_matrix
-     module procedure fgsl_sizeof_vector_complex
-     module procedure fgsl_sizeof_matrix_complex
      module procedure fgsl_sizeof_interp
-     module procedure fgsl_sizeof_permutation
      module procedure fgsl_sizeof_combination
      module procedure fgsl_sizeof_multiset
      module procedure fgsl_sizeof_integration_workspace
@@ -90,70 +79,8 @@
      module procedure fgsl_vector_c_ptr
      module procedure fgsl_matrix_c_ptr
   end interface
-  interface assignment(=)
-     module procedure fgsl_vector_to_array
-     module procedure fgsl_vector_complex_to_array
-     module procedure fgsl_matrix_to_array
-     module procedure fgsl_matrix_complex_to_array
-  end interface
-!
-! Array processing
-!
-  interface fgsl_vector_init
-     module procedure fgsl_vector_init
-     module procedure fgsl_vector_int_init
-     module procedure fgsl_vector_init_legacy
-     module procedure fgsl_vector_complex_init
-     module procedure fgsl_vector_complex_init_legacy
-  end interface
-  interface fgsl_vector_free
-     module procedure fgsl_vector_free
-     module procedure fgsl_vector_int_free
-     module procedure fgsl_vector_complex_free
-  end interface
-  interface fgsl_matrix_init
-     module procedure fgsl_matrix_init
-     module procedure fgsl_matrix_init_legacy
-     module procedure fgsl_matrix_complex_init
-     module procedure fgsl_matrix_complex_init_legacy
-  end interface
-  interface fgsl_matrix_free
-     module procedure fgsl_matrix_free
-     module procedure fgsl_matrix_complex_free
-  end interface fgsl_matrix_free
-  interface fgsl_vector_to_fptr
-     module procedure fgsl_vector_to_fptr
-     module procedure fgsl_vector_complex_to_fptr
-     module procedure fgsl_vector_int_to_fptr
-  end interface fgsl_vector_to_fptr
-  interface fgsl_vector_align
-     module procedure fgsl_vector_align
-     module procedure fgsl_vector_complex_align
-     module procedure fgsl_vector_pointer_align
-     module procedure fgsl_vector_complex_pointer_align
-  end interface
-  interface fgsl_matrix_align
-     module procedure fgsl_matrix_align
-     module procedure fgsl_matrix_pointer_align
-     module procedure fgsl_matrix_complex_align
-     module procedure fgsl_matrix_complex_pointer_align
-  end interface
-  interface fgsl_matrix_to_fptr
-     module procedure fgsl_matrix_to_fptr
-     module procedure fgsl_matrix_complex_to_fptr
-  end interface fgsl_matrix_to_fptr
-!
-! Permutations and combinations
-!
-  interface fgsl_permute
-     module procedure fgsl_permute
-     module procedure fgsl_permute_long
-  end interface
-  interface fgsl_permute_inverse
-     module procedure fgsl_permute_inverse
-     module procedure fgsl_permute_long_inverse
-  end interface
-!
+
+
 ! Sorting
 !
   interface fgsl_sort

@@ -66,6 +66,8 @@ module fgsl
   use fgsl_complex_math
   use fgsl_poly
   use fgsl_sf
+  use fgsl_array
+  use fgsl_permutations 
   implicit none
 
 !
@@ -313,24 +315,7 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_full = 2
 integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
 
 
-!
-! Types : Array support
-!
-  type, public :: fgsl_vector
-     type(c_ptr) :: gsl_vector = c_null_ptr
-  end type fgsl_vector
-   type, public :: fgsl_vector_int
-     type(c_ptr) :: gsl_vector_int = c_null_ptr
-  end type fgsl_vector_int
-  type, public :: fgsl_matrix
-     type(c_ptr) :: gsl_matrix = c_null_ptr
-  end type fgsl_matrix
-  type, public :: fgsl_vector_complex
-     type(c_ptr) :: gsl_vector_complex = c_null_ptr
-  end type fgsl_vector_complex
-  type, public :: fgsl_matrix_complex
-     type(c_ptr) :: gsl_matrix_complex = c_null_ptr
-  end type fgsl_matrix_complex
+
 !
 ! Types: large linear least squares systems
 !
@@ -391,10 +376,7 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
 !
 ! Types: Permutations, Combinations and Multisets
 !
-  type, public :: fgsl_permutation
-     private
-     type(c_ptr) :: gsl_permutation = c_null_ptr
-  end type fgsl_permutation
+
   type, public :: fgsl_combination
      private
      type(c_ptr) :: gsl_combination = c_null_ptr
@@ -1262,7 +1244,6 @@ end type fgsl_filter_impulse_workspace
 ! FGSL names occurring here are auxiliary routines
 ! needed to transfer static C information to the Fortran subsystem
   interface
-#include "interface/array.finc"
 #include "interface/interp.finc"
 #include "interface/permutation.finc"
 #include "interface/sort.finc"
@@ -1300,7 +1281,6 @@ end type fgsl_filter_impulse_workspace
   end interface
 #include "interface/generics.finc"
 contains
-#include "api/array.finc"
 #include "api/interp.finc"
 #include "api/permutation.finc"
 #include "api/sort.finc"
