@@ -67,7 +67,9 @@ module fgsl
   use fgsl_poly
   use fgsl_sf
   use fgsl_array
-  use fgsl_permutations 
+  use fgsl_permutations
+  use fgsl_combinations
+  use fgsl_multisets
   implicit none
 
 !
@@ -374,17 +376,7 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
      type(c_ptr) :: gsl_interp2d = c_null_ptr
   end type fgsl_interp2d
 !
-! Types: Permutations, Combinations and Multisets
-!
 
-  type, public :: fgsl_combination
-     private
-     type(c_ptr) :: gsl_combination = c_null_ptr
-  end type fgsl_combination
-  type, public :: fgsl_multiset
-     private
-     type(c_ptr) :: gsl_multiset = c_null_ptr
-  end type fgsl_multiset
 !
 ! Types: Robust multifit
 !
@@ -1245,7 +1237,6 @@ end type fgsl_filter_impulse_workspace
 ! needed to transfer static C information to the Fortran subsystem
   interface
 #include "interface/interp.finc"
-#include "interface/permutation.finc"
 #include "interface/sort.finc"
 #include "interface/linalg.finc"
 #include "interface/eigen.finc"
@@ -1282,7 +1273,6 @@ end type fgsl_filter_impulse_workspace
 #include "interface/generics.finc"
 contains
 #include "api/interp.finc"
-#include "api/permutation.finc"
 #include "api/sort.finc"
 #include "api/linalg.finc"
 #include "api/eigen.finc"

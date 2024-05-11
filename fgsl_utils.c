@@ -1180,13 +1180,8 @@ size_t gsl_aux_sizeof_wavelet_workspace() {
     return sizeof(gsl_wavelet_workspace);
 }
 
-size_t gsl_aux_sizeof_combination() {
-    return sizeof(gsl_combination);
-}
 
-size_t gsl_aux_sizeof_multiset() {
-    return sizeof(gsl_multiset);
-}
+
 size_t gsl_aux_sizeof_vector() {
     return sizeof(gsl_vector);
 }

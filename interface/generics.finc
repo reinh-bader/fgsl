@@ -20,8 +20,6 @@
      module procedure fgsl_interp_accel_status
      module procedure fgsl_spline_status
      module procedure fgsl_spline2d_status
-     module procedure fgsl_combination_status
-     module procedure fgsl_multiset_status
      module procedure fgsl_odeiv_control_status
      module procedure fgsl_odeiv_evolve_status
      module procedure fgsl_odeiv_step_status
@@ -66,8 +64,6 @@
   end interface
   interface fgsl_sizeof
      module procedure fgsl_sizeof_interp
-     module procedure fgsl_sizeof_combination
-     module procedure fgsl_sizeof_multiset
      module procedure fgsl_sizeof_integration_workspace
      module procedure fgsl_sizeof_integration_qaws_table
      module procedure fgsl_sizeof_integration_qawo_table
