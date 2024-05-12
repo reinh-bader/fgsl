@@ -70,6 +70,7 @@ module fgsl
   use fgsl_permutations
   use fgsl_combinations
   use fgsl_multisets
+  use fgsl_sorting
   implicit none
 
 !
@@ -1237,7 +1238,6 @@ end type fgsl_filter_impulse_workspace
 ! needed to transfer static C information to the Fortran subsystem
   interface
 #include "interface/interp.finc"
-#include "interface/sort.finc"
 #include "interface/linalg.finc"
 #include "interface/eigen.finc"
 #include "interface/fft.finc"
@@ -1273,7 +1273,6 @@ end type fgsl_filter_impulse_workspace
 #include "interface/generics.finc"
 contains
 #include "api/interp.finc"
-#include "api/sort.finc"
 #include "api/linalg.finc"
 #include "api/eigen.finc"
 #include "api/fft.finc"

@@ -1,7 +1,7 @@
 AM_CPPFLAGS = -I${top_srcdir} -I${top_builddir}
 AM_FCFLAGS = -I${top_srcdir} -I${top_builddir}
 
-check_PROGRAMS = poly interp specfunc permutation integration \
+check_PROGRAMS = poly interp specfunc sf_mathieu permutation integration \
 	sort array linalg eigen fft rng histogram \
 	statistics ntuple siman ode deriv roots \
 	minim multiroots montecarlo bspline \
@@ -20,6 +20,9 @@ interp_LDADD = $(SHARED_LDADD)
 
 specfunc_SOURCES = specfunc.f90 mod_unit.f90 mod_unit.mod
 specfunc_LDADD = $(SHARED_LDADD)
+
+sf_mathieu_SOURCES = sf_mathieu.f90 mod_unit.f90 mod_unit.mod
+sf_mathieu_LDADD = $(SHARED_LDADD)
 
 permutation_SOURCES = permutation.F90 mod_unit.f90 mod_unit.mod
 permutation_LDADD = $(SHARED_LDADD)

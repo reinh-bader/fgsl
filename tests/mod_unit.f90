@@ -214,6 +214,7 @@ contains
     else
        write(6, fmt='(''FAIL: '',i0,'' of '',i0,'' tests failed'')') &
             count(.not. unit_ok),index_ok-1
+       stop 1
     end if
     deallocate(unit_ok)
     index_ok = 0

@@ -48,6 +48,7 @@ BUILT_SOURCES = fgsl_base.mod \
 		fgsl_permutations.mod \
 		fgsl_combinations.mod \
 		fgsl_multisets.mod \
+		fgsl_sorting.mod \
 		fgsl.mod
 
 NULL =
@@ -97,6 +98,7 @@ libfgsl_la_SOURCES = \
 	modules/fgsl_permutations.f90 \
 	modules/fgsl_combinations.f90 \
 	modules/fgsl_multisets.f90 \
+	modules/fgsl_sorting.f90 \
 	csub/fgsl_base_c.c \
 	csub/fgsl_io_c.c \
 	csub/fgsl_math_c.c \
@@ -109,7 +111,6 @@ libfgsl_la_SOURCES = \
 	api/histogram.finc \
 	api/linalg.finc \
 	api/multifit.finc \
-	api/sort.finc \
 	api/bspline.finc \
 	api/eigen.finc \
 	api/ieee.finc \
@@ -156,7 +157,6 @@ libfgsl_la_SOURCES = \
 	interface/fit.finc \
 	interface/integration.finc \
 	interface/ode.finc \
-	interface/sort.finc \
 	interface/deriv.finc \
 	interface/generics.finc \
 	interface/interp.finc \
@@ -223,7 +223,8 @@ fgsl_array.mod: modules/fgsl_array.o
 fgsl_permutations.mod: modules/fgsl_permutations.o
 fgsl_combinations.mod: modules/fgsl_combinations.o
 fgsl_multisets.mod: modules/fgsl_multisets.o
-fgsl.lo: $(libfgsl_la_SOURCES)
+fgsl_sorting.mod: modules/fgsl_sorting.o
+gsl.lo: $(libfgsl_la_SOURCES)
 
 pkgconfigdir=$(libdir)/pkgconfig
 pkgconfig_DATA = fgsl.pc
@@ -269,7 +270,8 @@ nodist_fgslinclude_HEADERS = fgsl.mod \
 			     fgsl_array.mod \
 			     fgsl_permutations.mod \
 			     fgsl_combinations.mod \
-			     fgsl_multisets.mod 
+			     fgsl_multisets.mod \
+			     fgsl_sorting.mod 
 
 EXTRA_DIST = Doxyfile
 

@@ -77,40 +77,7 @@
   end interface
 
 
-! Sorting
-!
-  interface fgsl_sort
-     module procedure fgsl_sort_double
-     module procedure fgsl_sort2_double
-     module procedure fgsl_sort_long
-     module procedure fgsl_sort_vector
-     module procedure fgsl_sort_vector2
-  end interface
-  interface fgsl_sort_index
-     module procedure fgsl_sort_double_index
-     module procedure fgsl_sort_long_index
-     module procedure fgsl_sort_vector_index
-  end interface
-  interface fgsl_sort_smallest
-     module procedure fgsl_sort_double_smallest
-     module procedure fgsl_sort_long_smallest
-     module procedure fgsl_sort_vector_smallest
- end interface
-  interface fgsl_sort_smallest_index
-     module procedure fgsl_sort_double_smallest_index
-     module procedure fgsl_sort_long_smallest_index
-     module procedure fgsl_sort_vector_smallest_index
-  end interface
-  interface fgsl_sort_largest
-     module procedure fgsl_sort_double_largest
-     module procedure fgsl_sort_long_largest
-     module procedure fgsl_sort_vector_largest
-  end interface
-  interface fgsl_sort_largest_index
-     module procedure fgsl_sort_double_largest_index
-     module procedure fgsl_sort_long_largest_index
-     module procedure fgsl_sort_vector_largest_index
-  end interface
+
 !
 ! Random number stuff
 !

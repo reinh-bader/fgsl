@@ -214,12 +214,12 @@ contains
 !  fgsl_sf_mathieu_b --> interface
 !  fgsl_sf_mathieu_a_coeff --> interface
 !  fgsl_sf_mathieu_b_coeff --> interface
-  function fgsl_sf_mathieu_alloc(nn, qq)
-    integer(fgsl_size_t), intent(in) :: nn
-    real(fgsl_double), intent(in) :: qq
+  function fgsl_sf_mathieu_alloc(n, qmax)
+    integer(fgsl_size_t), intent(in) :: n
+    real(fgsl_double), intent(in) :: qmax
     type(fgsl_sf_mathieu_workspace) :: fgsl_sf_mathieu_alloc
     fgsl_sf_mathieu_alloc%gsl_sf_mathieu_workspace = &
-    gsl_sf_mathieu_alloc(nn, qq)
+    gsl_sf_mathieu_alloc(n, qmax)
   end function fgsl_sf_mathieu_alloc
   subroutine fgsl_sf_mathieu_free(workspace)
     type(fgsl_sf_mathieu_workspace), intent(inout) :: workspace
