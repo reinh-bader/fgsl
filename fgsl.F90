@@ -71,6 +71,7 @@ module fgsl
   use fgsl_combinations
   use fgsl_multisets
   use fgsl_sorting
+  use fgsl_linalg
   implicit none
 
 !
@@ -425,21 +426,7 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
        type(c_ptr) :: weights
        type(c_ptr) :: r
   end type gsl_multifit_robust_stats
-  !
-  ! Types: Linear Algebra
-  !
-  integer(fgsl_int), parameter, public :: &
-       cblasrowmajor = 101, &
-       cblascolmajor = 102, &
-       cblasnotrans = 111, &
-       cblastrans = 112, &
-       cblasconjtrans = 113, &
-       cblasupper = 121, &
-       cblaslower = 122, &
-       cblasnonunit = 131, &
-       cblasunit = 132, &
-       cblasleft = 141, &
-       cblasright = 142
+  
   !
   ! Types: Eigensystems
   !
@@ -1238,7 +1225,6 @@ end type fgsl_filter_impulse_workspace
 ! needed to transfer static C information to the Fortran subsystem
   interface
 #include "interface/interp.finc"
-#include "interface/linalg.finc"
 #include "interface/eigen.finc"
 #include "interface/fft.finc"
 #include "interface/integration.finc"
@@ -1273,7 +1259,6 @@ end type fgsl_filter_impulse_workspace
 #include "interface/generics.finc"
 contains
 #include "api/interp.finc"
-#include "api/linalg.finc"
 #include "api/eigen.finc"
 #include "api/fft.finc"
 #include "api/integration.finc"

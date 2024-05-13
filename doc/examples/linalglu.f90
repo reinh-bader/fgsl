@@ -13,11 +13,11 @@ program linalglu
   x = fgsl_vector_init(xf)
   p = fgsl_permutation_alloc(n)
 
-  af = reshape((/0.18d0, 0.60d0, 0.57d0, 0.96d0, &
+  af = reshape([ 0.18d0, 0.60d0, 0.57d0, 0.96d0, &
                  0.41d0, 0.24d0, 0.99d0, 0.58d0, &
                  0.14d0, 0.30d0, 0.97d0, 0.66d0, &
-                 0.51d0, 0.13d0, 0.19d0, 0.85d0/), (/ 4, 4 /))
-  bf = (/ 1.0d0, 2.0d0, 3.0d0, 4.0d0 /) 
+                 0.51d0, 0.13d0, 0.19d0, 0.85d0 ], shape(af))
+  bf = [ 1.0d0, 2.0d0, 3.0d0, 4.0d0 ]
 
   status = fgsl_linalg_LU_decomp (a, p, signum)
   status = fgsl_linalg_LU_solve (a, p, b, x)

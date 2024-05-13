@@ -29,7 +29,7 @@ contains
   subroutine unit_init(num_tests)
     integer, intent(in) :: num_tests
     if (allocated(unit_ok)) then
-       write(6, *) 'unit_init: Please call unit_finalize before reinitializing.'
+       write(*, *) 'unit_init: Please call unit_finalize before reinitializing.'
        stop
     else
        allocate(unit_ok(num_tests))
@@ -65,7 +65,7 @@ contains
     call unit_toggle(description, ok)
     if (unit_debug .and. .not. ok) then
        do i=1,min(size(ival_target),size(ival_check))
-          write(6,fmt='(a,4x,2(I0,2X))') description,ival_target(i),ival_check(i)
+          write(*,fmt='(a,4x,2(I0,2X))') description,ival_target(i),ival_check(i)
        end do
     end if
   end subroutine unit_assert_equal_integer_array
@@ -84,7 +84,7 @@ contains
     if (abs(val_target - val_check) > eps) ok = .false.
     call unit_toggle(description, ok)
     if (unit_debug .and. .not. ok) then
-       write(6,fmt='(a,4x,2(1PD25.18),1PD8.1)') description,val_target,val_check,eps
+       write(*,fmt='(a,4x,2(1PD25.18),1PD8.1)') description,val_target,val_check,eps
     end if
   end subroutine unit_assert_equal_within_double
   subroutine unit_assert_equal_within_double_array(description, &
@@ -103,7 +103,7 @@ contains
     call unit_toggle(description, ok)
     if (unit_debug .and. .not. ok) then
        do i=1,min(size(val_target),size(val_check))
-          write(6,fmt='(a,4x,2(1PD25.18),1PD8.1)') description,val_target(i),val_check(i),eps
+          write(*,fmt='(a,4x,2(1PD25.18),1PD8.1)') description,val_target(i),val_check(i),eps
        end do
     end if
   end subroutine unit_assert_equal_within_double_array
@@ -128,7 +128,7 @@ contains
     if (unit_debug .and. .not. ok) then
        do j=1,min(size(val_target, 2),size(val_check, 2))
           do i=1,min(size(val_target, 1),size(val_check, 1))
-             write(6,fmt='(a,4x,2(1PD25.18),1PD8.1)') description,val_target(i,j),val_check(i,j),eps
+             write(*,fmt='(a,4x,2(1PD25.18),1PD8.1)') description,val_target(i,j),val_check(i,j),eps
           end do
        end do
     end if
@@ -138,9 +138,13 @@ contains
     character(len=*), intent(in) :: description
     complex(kind=dk), intent(in) :: val_target, val_check
     real(kind=dk), intent(in) :: eps
-    call unit_toggle(description, abs(val_target - val_check) <= eps)
-    if (unit_debug) then
-       write(6,fmt='(a,/,4x,2(1PD25.18),/,4x,2(1PD25.18),1PD8.1)') &
+    logical :: ok
+
+    ok = .true.
+    if (abs(val_target - val_check) > eps) ok = .false.
+    call unit_toggle(description, ok)
+    if (unit_debug .and. .not. ok) then
+       write(*,fmt='(a,/,4x,2(1PD25.18),/,4x,2(1PD25.18),1PD8.1)') &
             description,val_target,val_check,eps
     end if
   end subroutine unit_assert_equal_within_double_complex
@@ -159,6 +163,11 @@ contains
        if (abs(val_target(i) - val_check(i)) > eps) ok= .false.
     end do
     call unit_toggle(description, ok)
+    if (unit_debug .and. .not. ok) then
+       do i=1,min(size(val_target),size(val_check))
+          write(*,fmt='(a,4x,4(1PD25.18),1PD8.1)') description,val_target(i),val_check(i),eps
+       end do
+    end if    
   end subroutine unit_assert_equal_within_double_complex_array
   subroutine unit_assert_equal_within_double_complex_2d_array(&
        description, val_target, val_check, eps)
@@ -177,6 +186,13 @@ contains
        end do
     end do
     call unit_toggle(description, ok)
+    if (unit_debug .and. .not. ok) then
+       do j=1,min(size(val_target, 2),size(val_check, 2))
+          do i=1,min(size(val_target, 1),size(val_check, 1))
+             write(*,fmt='(a,4x,4(1PD25.18),1PD8.1)') description,val_target(i,j),val_check(i,j),eps
+          end do
+       end do
+    end if
   end subroutine unit_assert_equal_within_double_complex_2d_array
   subroutine unit_assert_true(description, check, abort)
     character(len=*), intent(in) :: description
@@ -184,7 +200,7 @@ contains
     call unit_toggle(description, check)
     if (.not. check .and. abort) then
        call unit_finalize()
-       write(6, *) description,': aborting Execution'
+       write(*, *) description,': aborting Execution'
        stop
     end if
   end subroutine unit_assert_true
@@ -192,16 +208,16 @@ contains
     character(len=*), intent(in) :: description
     logical, intent(in) :: test_ok
     if (.not. test_ok) then
-       write(6, *) 'FAIL: ', description
+       write(*, *) 'FAIL: ', description
     elseif (unit_debug) then
-       write(6, *) 'PASS: ', description
+       write(*, *) 'PASS: ', description
     end if
     if (.not. allocated(unit_ok)) then
-       write(6, *) 'Please in insert call to unit_init(). Aborting. '
+       write(*, *) 'Please in insert call to unit_init(). Aborting. '
        stop
     end if
     if (index_ok > size(unit_ok)) then
-       write(6, *) 'Please initialize unit tests with num_tests > ', &
+       write(*, *) 'Please initialize unit tests with num_tests > ', &
             size(unit_ok)
        stop
     end if
@@ -210,9 +226,9 @@ contains
  end subroutine unit_toggle
   subroutine unit_finalize()
     if (all(unit_ok)) then
-       write(6, fmt='(''OK: All '',i0,'' tests passed'')') index_ok-1
+       write(*, fmt='(''OK: All '',i0,'' tests passed'')') index_ok-1
     else
-       write(6, fmt='(''FAIL: '',i0,'' of '',i0,'' tests failed'')') &
+       write(*, fmt='(''FAIL: '',i0,'' of '',i0,'' tests failed'')') &
             count(.not. unit_ok),index_ok-1
        stop 1
     end if

@@ -478,7 +478,7 @@ contains
 !       cc(2) = gsl_vector_get(fvec%gsl_vector,1_c_size_t)
 !       cc(3) = gsl_vector_get(fvec%gsl_vector,2_c_size_t)
        call c_f_pointer(cp, fp_local, (/ size*stride /))
-!       write(6, *) 'size, stride, fp_local: ',size,stride,fp_local(1:3),cc(1:3)
+!       write(*, *) 'size, stride, fp_local: ',size,stride,fp_local(1:3),cc(1:3)
        ptr => fp_local(1:size*stride:stride)
        fgsl_vector_pointer_align = fgsl_success
     end if
@@ -492,8 +492,8 @@ contains
     integer(fgsl_size_t) :: i, n, k
     k = size(result)
     n = min(k,fgsl_aux_vector_double_size(source%gsl_vector))
-!    write(6,*) 'result length: ',size(result)
-!    write(6,*) 'vector length: ', &
+!    write(*,*) 'result length: ',size(result)
+!    write(*,*) 'vector length: ', &
 !    fgsl_aux_vector_double_size(source%gsl_vector)
     do i=1,n
        result(i) = gsl_vector_get(source%gsl_vector,i-1)
@@ -632,7 +632,7 @@ contains
 !       cc(2) = gsl_vector_complex_get(fvec%gsl_vector_complex,1_c_size_t)
 !       cc(3) = gsl_vector_complex_get(fvec%gsl_vector_complex,2_c_size_t)
        call c_f_pointer(cp, fp_local, (/ size*stride /))
-!       write(6, *) 'size, stride, fp_local: ',size,stride,fp_local(1:3),cc(1:3)
+!       write(*, *) 'size, stride, fp_local: ',size,stride,fp_local(1:3),cc(1:3)
        ptr => fp_local(1:size*stride:stride)
        fgsl_vector_complex_pointer_align = fgsl_success
     end if
@@ -668,14 +668,14 @@ contains
     integer(fgsl_size_t) :: i, n, k
     k = size(result)
     n = min(k,fgsl_aux_vector_complex_size(source%gsl_vector_complex))
-!    write(6,*) 'result length: ',size(result)
-!    write(6,*) 'vector_complex length: ', &
+!    write(*,*) 'result length: ',size(result)
+!    write(*,*) 'vector_complex length: ', &
 !         fgsl_aux_vector_complex_size(source%gsl_vector_complex)
     do i=1,n
        result(i) = gsl_vector_complex_get(source%gsl_vector_complex,i-1)
 !       aux = gsl_vector_complex_get(source%gsl_vector_complex,i-1)
 !       result(i) = aux
-!       write(6, *) 'i=',i,' res = ',result(i)
+!       write(*, *) 'i=',i,' res = ',result(i)
     end do
     do i=n+1,size(result)
        result(i) = 0.0_fgsl_double
@@ -831,8 +831,8 @@ contains
     nl = min(kl,n)
     kl = size(result,2)
     ml = min(kl,m)
-!    write(6, *) 'Number of rows: ', nl, n
-!    write(6, *) 'Number of cols: ', ml, m
+!    write(*, *) 'Number of rows: ', nl, n
+!    write(*, *) 'Number of cols: ', ml, m
     do j=1,ml
        do i=1,nl
           result(i,j) = gsl_matrix_get(source%gsl_matrix,j-1,i-1)
@@ -992,8 +992,8 @@ contains
     nl = min(kl,n)
     kl = size(result,2)
     ml = min(kl,m)
-!    write(6, *) 'Number of rows: ', nl, n
-!    write(6, *) 'Number of cols: ', ml, m
+!    write(*, *) 'Number of rows: ', nl, n
+!    write(*, *) 'Number of cols: ', ml, m
     do j=1,ml
        do i=1,nl
           result(i,j) = gsl_matrix_complex_get(source%gsl_matrix_complex,j-1,i-1)
@@ -1048,24 +1048,21 @@ contains
     type(fgsl_matrix), intent(in) :: matr
     integer(fgsl_size_t) :: tda, size1, size2
     integer(fgsl_size_t) :: fgsl_matrix_get_size1
-    call fgsl_aux_matrix_double_size(matr%gsl_matrix, tda, size2,&
-    size1)
+    call fgsl_aux_matrix_double_size(matr%gsl_matrix, tda, size2, size1)
     fgsl_matrix_get_size1 = size1
   end function fgsl_matrix_get_size1
   function fgsl_matrix_get_size2(matr)
     type(fgsl_matrix), intent(in) :: matr
     integer(fgsl_size_t) :: tda, size1, size2
     integer(fgsl_size_t) :: fgsl_matrix_get_size2
-    call fgsl_aux_matrix_double_size(matr%gsl_matrix, tda, size2,&
-    size1)
+    call fgsl_aux_matrix_double_size(matr%gsl_matrix, tda, size2, size1)
     fgsl_matrix_get_size2 = size2
   end function fgsl_matrix_get_size2
   function fgsl_matrix_get_tda(matr)
     type(fgsl_matrix), intent(in) :: matr
     integer(fgsl_size_t) :: tda, size1, size2
     integer(fgsl_size_t) :: fgsl_matrix_get_tda
-    call fgsl_aux_matrix_double_size(matr%gsl_matrix, tda, size2,&
-    size1)
+    call fgsl_aux_matrix_double_size(matr%gsl_matrix, tda, size2, size1)
     fgsl_matrix_get_tda = tda
   end function fgsl_matrix_get_tda
 end module fgsl_array
