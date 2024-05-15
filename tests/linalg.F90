@@ -3,7 +3,7 @@ program linalg
   use mod_unit
   implicit none
   real(fgsl_double), parameter :: eps10 = 1.0d-10
-  complex(fgsl_double), parameter :: ai = (0.0d0, 1.0d0), ui=(1.0d0, 0.0d0)
+  complex(fgsl_double_complex), parameter :: ai = (0.0d0, 1.0d0), ui=(1.0d0, 0.0d0)
   type(fgsl_matrix) :: a, a_orig, inv, q, r
   type(fgsl_matrix_complex) :: ac, ac_orig, invc
   type(fgsl_vector) :: b, x, res, tau, sd, work, wk2

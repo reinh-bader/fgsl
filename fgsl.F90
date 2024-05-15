@@ -72,6 +72,7 @@ module fgsl
   use fgsl_multisets
   use fgsl_sorting
   use fgsl_linalg
+  use fgsl_eigen
   implicit none
 
 !
@@ -427,62 +428,7 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
        type(c_ptr) :: r
   end type gsl_multifit_robust_stats
   
-  !
-  ! Types: Eigensystems
-  !
-  type, public :: fgsl_eigen_symm_workspace
-     private
-     type(c_ptr) :: gsl_eigen_symm_workspace = c_null_ptr
-  end type fgsl_eigen_symm_workspace
-  type, public :: fgsl_eigen_symmv_workspace
-     private
-     type(c_ptr) :: gsl_eigen_symmv_workspace = c_null_ptr
-  end type fgsl_eigen_symmv_workspace
-  type, public :: fgsl_eigen_herm_workspace
-     private
-     type(c_ptr) :: gsl_eigen_herm_workspace = c_null_ptr
-  end type fgsl_eigen_herm_workspace
-  type, public :: fgsl_eigen_hermv_workspace
-     private
-     type(c_ptr) :: gsl_eigen_hermv_workspace = c_null_ptr
-  end type fgsl_eigen_hermv_workspace
-  type, public :: fgsl_eigen_nonsymm_workspace
-     private
-     type(c_ptr) :: gsl_eigen_nonsymm_workspace = c_null_ptr
-  end type fgsl_eigen_nonsymm_workspace
-  type, public :: fgsl_eigen_nonsymmv_workspace
-     private
-     type(c_ptr) :: gsl_eigen_nonsymmv_workspace = c_null_ptr
-  end type fgsl_eigen_nonsymmv_workspace
-  type, public :: fgsl_eigen_gensymm_workspace
-     private
-     type(c_ptr) :: gsl_eigen_gensymm_workspace = c_null_ptr
-  end type fgsl_eigen_gensymm_workspace
-  type, public :: fgsl_eigen_gensymmv_workspace
-     private
-     type(c_ptr) :: gsl_eigen_gensymmv_workspace = c_null_ptr
-  end type fgsl_eigen_gensymmv_workspace
-  type, public :: fgsl_eigen_genherm_workspace
-     private
-     type(c_ptr) :: gsl_eigen_genherm_workspace = c_null_ptr
-  end type fgsl_eigen_genherm_workspace
-  type, public :: fgsl_eigen_genhermv_workspace
-     private
-     type(c_ptr) :: gsl_eigen_genhermv_workspace = c_null_ptr
-  end type fgsl_eigen_genhermv_workspace
-  type, public :: fgsl_eigen_gen_workspace
-     private
-     type(c_ptr) :: gsl_eigen_gen_workspace = c_null_ptr
-  end type fgsl_eigen_gen_workspace
-  type, public :: fgsl_eigen_genv_workspace
-     private
-     type(c_ptr) :: gsl_eigen_genv_workspace = c_null_ptr
-  end type fgsl_eigen_genv_workspace
-  integer(c_int), parameter, public :: fgsl_eigen_sort_val_asc = 0
-  integer(c_int), parameter, public :: fgsl_eigen_sort_val_desc = 1
-  integer(c_int), parameter, public :: fgsl_eigen_sort_abs_asc = 2
-  integer(c_int), parameter, public :: fgsl_eigen_sort_abs_desc = 3
-!
+
 ! Types: FFT
 !
   type, public :: fgsl_fft_complex_wavetable
@@ -1225,7 +1171,6 @@ end type fgsl_filter_impulse_workspace
 ! needed to transfer static C information to the Fortran subsystem
   interface
 #include "interface/interp.finc"
-#include "interface/eigen.finc"
 #include "interface/fft.finc"
 #include "interface/integration.finc"
 #include "interface/rng.finc"
@@ -1259,7 +1204,6 @@ end type fgsl_filter_impulse_workspace
 #include "interface/generics.finc"
 contains
 #include "api/interp.finc"
-#include "api/eigen.finc"
 #include "api/fft.finc"
 #include "api/integration.finc"
 #include "api/rng.finc"
