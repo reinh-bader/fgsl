@@ -1,10 +1,364 @@
-!-*-f90-*-
-!
-! API: Numerical Integration
-!
-!> \page "Comments on numerical integration routines"
-!> Please go to api/integration.finc for the API documentation.
+module fgsl_integration
+  !> Numerical integration
+  use fgsl_base
+  use fgsl_math
+  implicit none
 
+  private :: gsl_integration_qng, gsl_integration_workspace_alloc, &
+    gsl_integration_workspace_free, gsl_integration_qag, gsl_integration_qags, &
+    gsl_integration_qagp, gsl_integration_qagi, gsl_integration_qagiu, &
+    gsl_integration_qagil, gsl_integration_qawc, gsl_integration_qaws_table_alloc, &
+    gsl_integration_qaws_table_set, gsl_integration_qaws_table_free, &
+    gsl_integration_qaws, gsl_integration_qawo_table_alloc, &
+    gsl_integration_qawo_table_set, gsl_integration_qawo_table_set_length, &
+    gsl_integration_qawo_table_free, gsl_integration_qawo, gsl_integration_qawf, &
+    gsl_integration_cquad_workspace_alloc, gsl_integration_cquad_workspace_free, &
+    gsl_integration_cquad, gsl_integration_romberg_alloc, gsl_integration_romberg_free, &
+    gsl_integration_romberg, gsl_integration_glfixed_table_alloc, &
+    gsl_integration_glfixed_table_free, gsl_integration_glfixed, &
+    gsl_integration_glfixed_point, gsl_integration_fixed_free, gsl_integration_fixed_n, &
+    gsl_integration_fixed_nodes, gsl_integration_fixed_weights, gsl_integration_fixed
+    
+   private :: gsl_aux_sizeof_integration_workspace, gsl_aux_sizeof_integration_qaws_table, &
+     gsl_aux_sizeof_integration_qawo_table, gsl_aux_integration_fixed_alloc
+     
+  ! Types and Constants
+  !
+  type, public :: fgsl_integration_workspace
+     private
+     type(c_ptr) :: gsl_integration_workspace = c_null_ptr
+  end type fgsl_integration_workspace
+  integer(fgsl_int), parameter, public :: fgsl_integ_gauss15 = 1
+  integer(fgsl_int), parameter, public :: fgsl_integ_gauss21 = 2
+  integer(fgsl_int), parameter, public :: fgsl_integ_gauss31 = 3
+  integer(fgsl_int), parameter, public :: fgsl_integ_gauss41 = 4
+  integer(fgsl_int), parameter, public :: fgsl_integ_gauss51 = 5
+  integer(fgsl_int), parameter, public :: fgsl_integ_gauss61 = 6
+  type, public :: fgsl_integration_qaws_table
+     private
+     type(c_ptr) :: gsl_integration_qaws_table = c_null_ptr
+  end type fgsl_integration_qaws_table
+  type, public :: fgsl_integration_qawo_table
+     private
+     type(c_ptr) :: gsl_integration_qawo_table = c_null_ptr
+  end type fgsl_integration_qawo_table
+  integer(fgsl_int), parameter, public :: fgsl_integ_cosine = 0
+  integer(fgsl_int), parameter, public :: fgsl_integ_sine = 1
+  type, public :: fgsl_integration_cquad_workspace
+     private
+     type(c_ptr) :: gsl_integration_cquad_workspace = c_null_ptr
+  end type fgsl_integration_cquad_workspace
+  type, public :: fgsl_integration_romberg_workspace
+     private
+     type(c_ptr) :: gsl_integration_romberg_workspace  = c_null_ptr
+  end type fgsl_integration_romberg_workspace
+  type, public :: fgsl_integration_glfixed_table
+     private
+     type(c_ptr) :: gsl_integration_glfixed_table = c_null_ptr
+  end type fgsl_integration_glfixed_table
+  type, public :: fgsl_integration_fixed_workspace
+     private
+     type(c_ptr) :: gsl_integration_fixed_workspace = c_null_ptr
+  end type fgsl_integration_fixed_workspace
+  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_legendre = 1
+  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_chebyshev = 2
+  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_gegenbauer = 3
+  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_jacobi = 4
+  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_laguerre = 5
+  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_hermite = 6
+  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_exponential = 7
+  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_rational = 8
+  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_chebyshev2 = 9
+  
+  !
+  ! Generics
+  interface fgsl_well_defined
+     module procedure fgsl_integration_workspace_status
+     module procedure fgsl_integration_cquad_workspace_status
+     module procedure fgsl_integration_qawo_table_status
+     module procedure fgsl_integration_qaws_table_status
+     module procedure fgsl_integration_glfixed_table_status    
+  end interface
+  interface fgsl_sizeof
+     module procedure fgsl_sizeof_integration_workspace
+     module procedure fgsl_sizeof_integration_qaws_table
+     module procedure fgsl_sizeof_integration_qawo_table  
+  end interface
+  !
+  ! C interfaces
+  interface
+    function gsl_integration_qng(f, a, b, epsabs, epsrel, result, abserr, neval) bind(c)
+      import
+      type(c_ptr), value :: f
+      real(c_double), value :: a, b, epsabs, epsrel
+      real(c_double), intent(out) :: result, abserr
+      integer(c_size_t), intent(inout) :: neval
+      integer(c_int) :: gsl_integration_qng
+    end function gsl_integration_qng
+    function gsl_integration_workspace_alloc (n) bind(c)
+      import
+      integer(c_size_t), value :: n
+      type(c_ptr) :: gsl_integration_workspace_alloc
+    end function gsl_integration_workspace_alloc
+    subroutine gsl_integration_workspace_free (w) bind(c)
+      import
+      type(c_ptr), value :: w
+    end subroutine gsl_integration_workspace_free
+    function gsl_integration_qag(f, a, b, epsabs, epsrel, limit, key, &
+         workspace, result, abserr) bind(c)
+      import
+      type(c_ptr), value :: f
+      real(c_double), value :: a, b, epsabs, epsrel
+      integer(c_size_t), value :: limit
+      integer(c_int), value :: key
+      type(c_ptr), value :: workspace
+      real(c_double), intent(out) :: result, abserr
+      integer(c_int) :: gsl_integration_qag
+    end function gsl_integration_qag
+    function gsl_integration_qags(f, a, b, epsabs, epsrel, limit, &
+         workspace, result, abserr) bind(c)
+      import
+      type(c_ptr), value :: f
+      real(c_double), value :: a, b, epsabs, epsrel
+      integer(c_size_t), value :: limit
+      type(c_ptr), value :: workspace
+      real(c_double), intent(out) :: result, abserr
+      integer(c_int) :: gsl_integration_qags
+    end function gsl_integration_qags
+    function gsl_integration_qagp(f, pts, npts, epsabs, epsrel, limit, &
+         workspace, result, abserr) bind(c)
+      import
+      type(c_ptr), value :: f
+      type(c_ptr), value :: pts
+      integer(c_size_t), value :: npts
+      real(c_double), value :: epsabs, epsrel
+      integer(c_size_t), value :: limit
+      type(c_ptr), value :: workspace
+      real(c_double), intent(out) :: result, abserr
+      integer(c_int) :: gsl_integration_qagp
+    end function gsl_integration_qagp
+    function gsl_integration_qagi(f, epsabs, epsrel, limit, &
+         workspace, result, abserr) bind(c)
+      import
+      type(c_ptr), value :: f
+      real(c_double), value :: epsabs, epsrel
+      integer(c_size_t), value :: limit
+      type(c_ptr), value :: workspace
+      real(c_double), intent(out) :: result, abserr
+      integer(c_int) :: gsl_integration_qagi
+    end function gsl_integration_qagi
+    function gsl_integration_qagiu(f, a, epsabs, epsrel, limit, &
+         workspace, result, abserr) bind(c)
+      import
+      type(c_ptr), value :: f
+      real(c_double), value :: a, epsabs, epsrel
+      integer(c_size_t), value :: limit
+      type(c_ptr), value :: workspace
+      real(c_double), intent(out) :: result, abserr
+      integer(c_int) :: gsl_integration_qagiu
+    end function gsl_integration_qagiu
+    function gsl_integration_qagil(f, b, epsabs, epsrel, limit, &
+         workspace, result, abserr) bind(c)
+      import
+      type(c_ptr), value :: f
+      real(c_double), value :: b, epsabs, epsrel
+      integer(c_size_t), value :: limit
+      type(c_ptr), value :: workspace
+      real(c_double), intent(out) :: result, abserr
+      integer(c_int) :: gsl_integration_qagil
+    end function gsl_integration_qagil
+    function gsl_integration_qawc(f, a, b, c, epsabs, epsrel, limit, &
+         workspace, result, abserr) bind(c)
+      import
+      type(c_ptr), value :: f
+      real(c_double), value :: a, b, c, epsabs, epsrel
+      integer(c_size_t), value :: limit
+      type(c_ptr), value :: workspace
+      real(c_double), intent(out) :: result, abserr
+      integer(c_int) :: gsl_integration_qawc
+    end function gsl_integration_qawc
+    function gsl_integration_qaws_table_alloc (alpha, beta, mu, nu) bind(c)
+      import
+      real(c_double), value :: alpha, beta
+      integer(c_int), value :: mu, nu
+      type(c_ptr) :: gsl_integration_qaws_table_alloc
+    end function gsl_integration_qaws_table_alloc
+    function gsl_integration_qaws_table_set(t, alpha, beta, mu, nu) bind(c)
+      import
+      type(c_ptr), value :: t
+      real(c_double), value :: alpha, beta
+      integer(c_int), value :: mu, nu
+      integer(c_int) :: gsl_integration_qaws_table_set
+    end function gsl_integration_qaws_table_set
+    subroutine gsl_integration_qaws_table_free (w) bind(c)
+      import
+      type(c_ptr), value :: w
+    end subroutine gsl_integration_qaws_table_free
+    function gsl_integration_qaws(f, a, b, t, epsabs, epsrel, limit, workspace, &
+         result, abserr) bind(c)
+      import
+      type(c_ptr), value :: f
+      real(c_double), value :: a, b, epsabs, epsrel
+      type(c_ptr), value :: t
+      integer(c_size_t), value :: limit
+      type(c_ptr), value :: workspace
+      real(c_double), intent(out) :: result, abserr
+      integer(c_int) :: gsl_integration_qaws
+    end function gsl_integration_qaws
+    function gsl_integration_qawo_table_alloc(omega, l, sine, n) bind(c)
+      import
+      real(c_double), value :: omega, l
+      integer(c_int), value :: sine
+      integer(c_size_t), value :: n
+      type(c_ptr) :: gsl_integration_qawo_table_alloc
+    end function gsl_integration_qawo_table_alloc
+    function gsl_integration_qawo_table_set(t, omega, l, sine) bind(c)
+      import
+      type(c_ptr), value :: t
+      real(c_double), value :: omega, l
+      integer(c_int), value :: sine
+      integer(c_int) :: gsl_integration_qawo_table_set
+    end function gsl_integration_qawo_table_set
+    function gsl_integration_qawo_table_set_length(t, l) bind(c)
+      import
+      type(c_ptr), value :: t
+      real(c_double), value :: l
+      integer(c_int) :: gsl_integration_qawo_table_set_length
+    end function gsl_integration_qawo_table_set_length
+    subroutine gsl_integration_qawo_table_free (w) bind(c)
+      import
+      type(c_ptr), value :: w
+    end subroutine gsl_integration_qawo_table_free
+    function gsl_integration_qawo(f, a, epsabs, epsrel, limit, workspace, &
+         wf, result, abserr) bind(c)
+      import
+      type(c_ptr), value :: f
+      real(c_double), value :: a,  epsabs, epsrel
+      integer(c_size_t), value :: limit
+      type(c_ptr), value :: workspace, wf
+      real(c_double), intent(out) :: result, abserr
+      integer(c_int) :: gsl_integration_qawo
+    end function gsl_integration_qawo
+    function gsl_integration_qawf(f, a, epsabs, limit, workspace, cyc_workspace, &
+         wf, result, abserr) bind(c)
+      import
+      type(c_ptr), value :: f
+      real(c_double), value :: a,  epsabs
+      integer(c_size_t), value :: limit
+      type(c_ptr), value :: workspace, cyc_workspace, wf
+      real(c_double), intent(out) :: result, abserr
+      integer(c_int) :: gsl_integration_qawf
+    end function gsl_integration_qawf
+    function gsl_integration_cquad_workspace_alloc (n) bind(c)
+      import
+      integer(c_size_t), value :: n
+      type(c_ptr) :: gsl_integration_cquad_workspace_alloc
+    end function gsl_integration_cquad_workspace_alloc
+    subroutine gsl_integration_cquad_workspace_free (w) bind(c)
+      import
+      type(c_ptr), value :: w
+    end subroutine gsl_integration_cquad_workspace_free
+    function gsl_integration_cquad(f, a, b, epsabs, epsrel, &
+         workspace, result, abserr, nevals) bind(c)
+      import
+      type(c_ptr), value :: f
+      real(c_double), value :: a, b, epsabs, epsrel
+      type(c_ptr), value :: workspace
+      real(c_double), intent(out) :: result, abserr
+      integer(c_size_t) :: nevals
+      integer(c_int) :: gsl_integration_cquad
+    end function gsl_integration_cquad
+    function gsl_integration_romberg_alloc(n) bind(c)
+      import :: c_ptr, c_size_t
+      type(c_ptr) :: gsl_integration_romberg_alloc
+      integer(c_size_t), value :: n
+    end function gsl_integration_romberg_alloc
+    subroutine gsl_integration_romberg_free(w) bind(c)
+      import :: c_ptr
+      type(c_ptr), value :: w 
+    end subroutine gsl_integration_romberg_free
+    function gsl_integration_romberg(f, a, b, epsabs, epsrel, result, neval, w) &
+         bind(c)
+      import :: c_ptr, c_double, c_size_t, c_int
+      integer(c_int) :: gsl_integration_romberg
+      type(c_ptr), value :: f
+      real(c_double), value :: a, b, epsabs, epsrel
+      real(c_double) :: result
+      integer(c_size_t) :: neval
+      type(c_ptr), value :: w
+    end function gsl_integration_romberg
+    function gsl_integration_glfixed_table_alloc(n) bind(c)
+      import :: c_size_t, c_ptr
+      integer(c_size_t), value :: n
+      type(c_ptr) :: gsl_integration_glfixed_table_alloc
+    end function gsl_integration_glfixed_table_alloc
+    subroutine gsl_integration_glfixed_table_free(t) bind(c)
+      import :: c_ptr
+      type(c_ptr), value :: t
+    end subroutine gsl_integration_glfixed_table_free
+    function gsl_integration_glfixed(f, a, b, t) bind(c)
+      import :: c_double, c_ptr
+      real(c_double) :: gsl_integration_glfixed
+      type(c_ptr), value :: f
+      real(c_double), value :: a, b
+      type(c_ptr), value :: t
+    end function gsl_integration_glfixed
+    function gsl_integration_glfixed_point(a, b, i, xi, wi, t) bind(c)
+      import :: c_double, c_ptr, c_size_t, c_int
+      integer(c_int) :: gsl_integration_glfixed_point
+      real(c_double), value :: a, b
+      integer(c_size_t), value :: i
+      real(c_double) :: xi, wi
+      type(c_ptr), value :: t
+    end function gsl_integration_glfixed_point
+    subroutine gsl_integration_fixed_free(w) bind(c)
+      import :: c_ptr
+      type(c_ptr), value :: w
+    end subroutine gsl_integration_fixed_free
+    function gsl_integration_fixed_n(w) bind(c)
+      import :: c_size_t, c_ptr
+      integer(c_size_t) :: gsl_integration_fixed_n
+      type(c_ptr), value :: w
+    end function gsl_integration_fixed_n
+    function gsl_integration_fixed_nodes(w) bind(c)
+      import :: c_ptr
+      type(c_ptr) :: gsl_integration_fixed_nodes
+      type(c_ptr), value :: w
+    end function gsl_integration_fixed_nodes
+    function gsl_integration_fixed_weights(w) bind(c)
+      import :: c_ptr
+      type(c_ptr) :: gsl_integration_fixed_weights
+      type(c_ptr), value :: w
+    end function gsl_integration_fixed_weights
+    function gsl_integration_fixed(func, result, w) bind(c)
+      import :: c_ptr, c_int
+      integer(c_int) :: gsl_integration_fixed
+      type(c_ptr), value :: func, w, result
+    end function gsl_integration_fixed
+!
+    function gsl_aux_sizeof_integration_workspace() bind(c)
+      import :: c_size_t
+      integer(c_size_t) :: gsl_aux_sizeof_integration_workspace
+    end function gsl_aux_sizeof_integration_workspace
+    function gsl_aux_sizeof_integration_qaws_table() bind(c)
+      import :: c_size_t
+      integer(c_size_t) :: gsl_aux_sizeof_integration_qaws_table
+    end function gsl_aux_sizeof_integration_qaws_table
+    function gsl_aux_sizeof_integration_qawo_table() bind(c)
+      import :: c_size_t
+      integer(c_size_t) :: gsl_aux_sizeof_integration_qawo_table
+    end function gsl_aux_sizeof_integration_qawo_table
+    function gsl_aux_integration_fixed_alloc(t, n, a, b, alpha, beta) bind(c)
+      import :: c_ptr, c_size_t, c_double, c_int
+      type(c_ptr) :: gsl_aux_integration_fixed_alloc
+      integer(c_int), value :: t
+      integer(c_size_t), value :: n
+      real(c_double), value :: a, b, alpha, beta
+    end function gsl_aux_integration_fixed_alloc
+ 
+  end interface
+contains	
+! API
   function fgsl_integration_qng(f, a, b, epsabs, epsrel, result, abserr, neval)
     type(fgsl_function), intent(in) :: f
     real(fgsl_double), intent(in) :: a, b, epsabs, epsrel
@@ -379,3 +733,5 @@
     fgsl_sizeof_integration_qawo_table = &
          gsl_aux_sizeof_integration_qawo_table()
   end function fgsl_sizeof_integration_qawo_table
+
+end module fgsl_integration 

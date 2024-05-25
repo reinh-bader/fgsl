@@ -1,139 +1,1147 @@
-!-*-f90-*-
+module fgsl_cdf
+  !> Random number distributions
+  use fgsl_base
+  use fgsl_rngen
+  use fgsl_array
+  implicit none
+  
+  private :: gsl_ran_gaussian, gsl_ran_gaussian_pdf, gsl_ran_gaussian_ziggurat, &
+    gsl_ran_gaussian_ratio_method, gsl_ran_ugaussian, gsl_ran_ugaussian_pdf, &
+    gsl_ran_ugaussian_ratio_method, gsl_cdf_gaussian_p, gsl_cdf_gaussian_q, &
+    gsl_cdf_gaussian_pinv, gsl_cdf_gaussian_qinv, gsl_cdf_ugaussian_p, &
+    gsl_cdf_ugaussian_q, gsl_cdf_ugaussian_pinv, gsl_cdf_ugaussian_qinv, &
+    gsl_ran_gaussian_tail, gsl_ran_gaussian_tail_pdf, gsl_ran_ugaussian_tail, &
+    gsl_ran_ugaussian_tail_pdf, gsl_ran_bivariate_gaussian, &
+    gsl_ran_bivariate_gaussian_pdf, gsl_ran_multivariate_gaussian, &
+    gsl_ran_multivariate_gaussian_pdf, gsl_ran_multivariate_gaussian_log_pdf, &
+    gsl_ran_multivariate_gaussian_mean, gsl_ran_multivariate_gaussian_vcov, &
+    gsl_ran_exponential, gsl_ran_exponential_pdf, gsl_cdf_exponential_p, &
+    gsl_cdf_exponential_q, gsl_cdf_exponential_pinv, gsl_cdf_exponential_qinv, &
+    gsl_ran_laplace, gsl_ran_laplace_pdf, gsl_cdf_laplace_p, gsl_cdf_laplace_q, &
+    gsl_cdf_laplace_pinv, gsl_cdf_laplace_qinv, gsl_ran_exppow, gsl_ran_exppow_pdf, &
+    gsl_cdf_exppow_p, gsl_cdf_exppow_q, gsl_ran_cauchy, gsl_ran_cauchy_pdf, &
+    gsl_cdf_cauchy_p, gsl_cdf_cauchy_q, gsl_cdf_cauchy_pinv, gsl_cdf_cauchy_qinv, &
+    gsl_ran_rayleigh, gsl_ran_rayleigh_pdf, gsl_cdf_rayleigh_p, gsl_cdf_rayleigh_q, &
+    gsl_cdf_rayleigh_pinv, gsl_cdf_rayleigh_qinv, gsl_ran_rayleigh_tail, &
+    gsl_ran_rayleigh_tail_pdf, gsl_ran_landau, gsl_ran_landau_pdf, gsl_ran_levy, &
+    gsl_ran_levy_skew, gsl_ran_gamma, gsl_ran_gamma_mt, gsl_ran_gamma_pdf, &
+    gsl_cdf_gamma_p, gsl_cdf_gamma_q, gsl_cdf_gamma_pinv, gsl_cdf_gamma_qinv, &
+    gsl_ran_flat, gsl_ran_flat_pdf, gsl_cdf_flat_p, gsl_cdf_flat_q, &
+    gsl_cdf_flat_pinv, gsl_cdf_flat_qinv, gsl_ran_lognormal, gsl_ran_lognormal_pdf, &
+    gsl_cdf_lognormal_p, gsl_cdf_lognormal_q, gsl_cdf_lognormal_pinv, &
+    gsl_cdf_lognormal_qinv, gsl_ran_chisq, gsl_ran_chisq_pdf, gsl_cdf_chisq_p, &
+    gsl_cdf_chisq_q, gsl_cdf_chisq_pinv, gsl_cdf_chisq_qinv, gsl_ran_fdist, &
+    gsl_ran_fdist_pdf, gsl_cdf_fdist_p, gsl_cdf_fdist_q, gsl_cdf_fdist_pinv, &
+    gsl_cdf_fdist_qinv, gsl_ran_tdist, gsl_ran_tdist_pdf, gsl_cdf_tdist_p, &
+    gsl_cdf_tdist_q, gsl_cdf_tdist_pinv, gsl_cdf_tdist_qinv, gsl_ran_beta, &
+    gsl_ran_beta_pdf, gsl_cdf_beta_p, gsl_cdf_beta_q, gsl_cdf_beta_pinv, &
+    gsl_cdf_beta_qinv, gsl_ran_logistic, gsl_ran_logistic_pdf, gsl_cdf_logistic_p, &
+    gsl_cdf_logistic_q, gsl_cdf_logistic_pinv, gsl_cdf_logistic_qinv, &
+    gsl_ran_pareto, gsl_ran_pareto_pdf, gsl_cdf_pareto_p, gsl_cdf_pareto_q, &
+    gsl_cdf_pareto_pinv, gsl_cdf_pareto_qinv, gsl_ran_dir_2d, &
+    gsl_ran_dir_2d_trig_method, gsl_ran_dir_3d, gsl_ran_dir_nd, &
+    gsl_ran_weibull, gsl_ran_weibull_pdf, gsl_cdf_weibull_p, gsl_cdf_weibull_q, &
+    gsl_cdf_weibull_pinv, gsl_cdf_weibull_qinv, gsl_ran_gumbel1, &
+    gsl_ran_gumbel1_pdf, gsl_cdf_gumbel1_p, gsl_cdf_gumbel1_q, &
+    gsl_cdf_gumbel1_pinv, gsl_cdf_gumbel1_qinv, gsl_ran_gumbel2, &
+    gsl_ran_gumbel2_pdf, gsl_cdf_gumbel2_p, gsl_cdf_gumbel2_q, &
+    gsl_cdf_gumbel2_pinv, gsl_cdf_gumbel2_qinv, gsl_ran_dirichlet, &
+    gsl_ran_dirichlet_pdf, gsl_ran_dirichlet_lnpdf, gsl_ran_discrete_preproc, &
+    gsl_ran_discrete, gsl_ran_discrete_pdf, gsl_ran_discrete_free, &
+    gsl_ran_poisson, gsl_ran_poisson_pdf, gsl_cdf_poisson_p, gsl_cdf_poisson_q, &
+    gsl_ran_bernoulli, gsl_ran_bernoulli_pdf, gsl_ran_binomial, gsl_ran_binomial_pdf, &
+    gsl_cdf_binomial_p, gsl_cdf_binomial_q, gsl_ran_multinomial, &
+    gsl_ran_multinomial_pdf, gsl_ran_multinomial_lnpdf, gsl_ran_negative_binomial, &
+    gsl_ran_negative_binomial_pdf, gsl_cdf_negative_binomial_p, &
+    gsl_cdf_negative_binomial_q, gsl_ran_pascal, gsl_ran_pascal_pdf, &
+    gsl_cdf_pascal_p, gsl_cdf_pascal_q, gsl_ran_geometric, gsl_ran_geometric_pdf, &
+    gsl_cdf_geometric_p, gsl_cdf_geometric_q, gsl_ran_hypergeometric, &
+    gsl_ran_hypergeometric_pdf, gsl_cdf_hypergeometric_p, gsl_cdf_hypergeometric_q, &
+    gsl_ran_logarithmic, gsl_ran_logarithmic_pdf, gsl_ran_wishart, gsl_ran_wishart_pdf, &
+    gsl_ran_wishart_log_pdf, gsl_ran_shuffle, gsl_ran_choose, gsl_ran_sample
+  !
+  ! Types
+  type, public :: fgsl_ran_discrete_t
+     private
+     type(c_ptr) :: gsl_ran_discrete_t
+  end type fgsl_ran_discrete_t
+  !
+  ! Generics
+  interface fgsl_well_defined
+     module procedure fgsl_ran_discrete_t_status
+  end interface
+  !
+  ! C interfaces
+  interface
+	  function gsl_ran_gaussian(r, sigma) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: sigma
+	    real(c_double) :: gsl_ran_gaussian
+	  end function gsl_ran_gaussian
+	  function gsl_ran_gaussian_pdf(x, sigma) bind(c)
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: sigma
+	    real(c_double) :: gsl_ran_gaussian_pdf
+	  end function gsl_ran_gaussian_pdf
+	  function gsl_ran_gaussian_ziggurat(r, sigma) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: sigma
+	    real(c_double) :: gsl_ran_gaussian_ziggurat
+	  end function gsl_ran_gaussian_ziggurat
+	  function gsl_ran_gaussian_ratio_method(r, sigma) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: sigma
+	    real(c_double) :: gsl_ran_gaussian_ratio_method
+	  end function gsl_ran_gaussian_ratio_method
+	  function gsl_ran_ugaussian(r) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double) :: gsl_ran_ugaussian
+	  end function gsl_ran_ugaussian
+	  function gsl_ran_ugaussian_pdf(x) bind(c)
+	    import
+	    real(c_double), value :: x
+	    real(c_double) :: gsl_ran_ugaussian_pdf
+	  end function gsl_ran_ugaussian_pdf
+	  function gsl_ran_ugaussian_ratio_method(r) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double) :: gsl_ran_ugaussian_ratio_method
+	  end function gsl_ran_ugaussian_ratio_method
+	  function gsl_cdf_gaussian_p(x, sigma) bind(c, name='gsl_cdf_gaussian_P')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: sigma
+	    real(c_double) :: gsl_cdf_gaussian_p
+	  end function gsl_cdf_gaussian_p
+	  function gsl_cdf_gaussian_q(x, sigma) bind(c, name='gsl_cdf_gaussian_Q')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: sigma
+	    real(c_double) :: gsl_cdf_gaussian_q
+	  end function gsl_cdf_gaussian_q
+	  function gsl_cdf_gaussian_pinv(p, sigma) bind(c, name='gsl_cdf_gaussian_Pinv')
+	    import
+	    real(c_double), value :: p
+	    real(c_double), value :: sigma
+	    real(c_double) :: gsl_cdf_gaussian_pinv
+	  end function gsl_cdf_gaussian_pinv
+	  function gsl_cdf_gaussian_qinv(q, sigma) bind(c, name='gsl_cdf_gaussian_Qinv')
+	    import
+	    real(c_double), value :: q
+	    real(c_double), value :: sigma
+	    real(c_double) :: gsl_cdf_gaussian_qinv
+	  end function gsl_cdf_gaussian_qinv
+	  function gsl_cdf_ugaussian_p(x) bind(c, name='gsl_cdf_ugaussian_P')
+	    import
+	    real(c_double), value :: x
+	    real(c_double) :: gsl_cdf_ugaussian_p
+	  end function gsl_cdf_ugaussian_p
+	  function gsl_cdf_ugaussian_q(x) bind(c, name='gsl_cdf_ugaussian_Q')
+	    import
+	    real(c_double), value :: x
+	    real(c_double) :: gsl_cdf_ugaussian_q
+	  end function gsl_cdf_ugaussian_q
+	  function gsl_cdf_ugaussian_pinv(p) bind(c, name='gsl_cdf_ugaussian_Pinv')
+	    import
+	    real(c_double), value :: p
+	    real(c_double) :: gsl_cdf_ugaussian_pinv
+	  end function gsl_cdf_ugaussian_pinv
+	  function gsl_cdf_ugaussian_qinv(q) bind(c, name='gsl_cdf_ugaussian_Qinv')
+	    import
+	    real(c_double), value :: q
+	    real(c_double) :: gsl_cdf_ugaussian_qinv
+	  end function gsl_cdf_ugaussian_qinv
+	  function gsl_ran_gaussian_tail(r, a, sigma) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: a, sigma
+	    real(c_double) :: gsl_ran_gaussian_tail
+	  end function gsl_ran_gaussian_tail
+	  function gsl_ran_gaussian_tail_pdf(x, a, sigma) bind(c)
+	    import
+	    real(c_double), value :: x, a
+	    real(c_double), value :: sigma
+	    real(c_double) :: gsl_ran_gaussian_tail_pdf
+	  end function gsl_ran_gaussian_tail_pdf
+	  function gsl_ran_ugaussian_tail(r, a) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: a
+	    real(c_double) :: gsl_ran_ugaussian_tail
+	  end function gsl_ran_ugaussian_tail
+	  function gsl_ran_ugaussian_tail_pdf(x, a) bind(c)
+	    import
+	    real(c_double), value :: x, a
+	    real(c_double) :: gsl_ran_ugaussian_tail_pdf
+	  end function gsl_ran_ugaussian_tail_pdf
+	  subroutine gsl_ran_bivariate_gaussian(r, sigma_x, sigma_y, rho, x, y) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: sigma_x, sigma_y, rho
+	    real(c_double), intent(out) :: x, y
+	  end subroutine gsl_ran_bivariate_gaussian
+	  function gsl_ran_bivariate_gaussian_pdf(x, y, sigma_x, sigma_y, rho) bind(c)
+	    import
+	    real(c_double), value :: x, y, sigma_x, sigma_y, rho
+	    real(c_double) :: gsl_ran_bivariate_gaussian_pdf
+	  end function gsl_ran_bivariate_gaussian_pdf
+	  integer(c_int) function gsl_ran_multivariate_gaussian(r, mu, l, result) bind(c)
+	    import
+	    type(c_ptr), value :: r, mu, l, result
+	  end function gsl_ran_multivariate_gaussian
+	  integer(c_int) function gsl_ran_multivariate_gaussian_pdf( &
+	       x, mu, l, result, work) bind(c)
+	    import
+	    type(c_ptr), value :: x, mu, l, work
+	    real(fgsl_double) ::  result
+	  end function gsl_ran_multivariate_gaussian_pdf
+	  integer(c_int) function gsl_ran_multivariate_gaussian_log_pdf( &
+	       x, mu, l, result, work) bind(c)
+	    import
+	    type(c_ptr), value :: x, mu, l, work
+	    real(fgsl_double) ::  result
+	  end function gsl_ran_multivariate_gaussian_log_pdf
+	  integer(c_int) function gsl_ran_multivariate_gaussian_mean( &
+	       x, mu_hat) bind(c)
+	    import
+	    type(c_ptr), value :: x, mu_hat
+	  end function gsl_ran_multivariate_gaussian_mean
+	  integer(c_int) function gsl_ran_multivariate_gaussian_vcov( &
+	       x, sigma_hat) bind(c)
+	    import
+	    type(c_ptr), value :: x, sigma_hat
+	  end function gsl_ran_multivariate_gaussian_vcov
+	  function gsl_ran_exponential(r, mu) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: mu
+	    real(c_double) :: gsl_ran_exponential
+	  end function gsl_ran_exponential
+	  function gsl_ran_exponential_pdf(x, mu) bind(c)
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: mu
+	    real(c_double) :: gsl_ran_exponential_pdf
+	  end function gsl_ran_exponential_pdf
+	  function gsl_cdf_exponential_p(x, mu) bind(c, name='gsl_cdf_exponential_P')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: mu
+	    real(c_double) :: gsl_cdf_exponential_p
+	  end function gsl_cdf_exponential_p
+	  function gsl_cdf_exponential_q(x, mu) bind(c, name='gsl_cdf_exponential_Q')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: mu
+	    real(c_double) :: gsl_cdf_exponential_q
+	  end function gsl_cdf_exponential_q
+	  function gsl_cdf_exponential_pinv(p, mu) bind(c, name='gsl_cdf_exponential_Pinv')
+	    import
+	    real(c_double), value :: p
+	    real(c_double), value :: mu
+	    real(c_double) :: gsl_cdf_exponential_pinv
+	  end function gsl_cdf_exponential_pinv
+	  function gsl_cdf_exponential_qinv(q, mu) bind(c, name='gsl_cdf_exponential_Qinv')
+	    import
+	    real(c_double), value :: q
+	    real(c_double), value :: mu
+	    real(c_double) :: gsl_cdf_exponential_qinv
+	  end function gsl_cdf_exponential_qinv
+	  function gsl_ran_laplace(r, a) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: a
+	    real(c_double) :: gsl_ran_laplace
+	  end function gsl_ran_laplace
+	  function gsl_ran_laplace_pdf(x, a) bind(c)
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a
+	    real(c_double) :: gsl_ran_laplace_pdf
+	  end function gsl_ran_laplace_pdf
+	  function gsl_cdf_laplace_p(x, a) bind(c, name='gsl_cdf_laplace_P')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a
+	    real(c_double) :: gsl_cdf_laplace_p
+	  end function gsl_cdf_laplace_p
+	  function gsl_cdf_laplace_q(x, a) bind(c, name='gsl_cdf_laplace_Q')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a
+	    real(c_double) :: gsl_cdf_laplace_q
+	  end function gsl_cdf_laplace_q
+	  function gsl_cdf_laplace_pinv(p, a) bind(c, name='gsl_cdf_laplace_Pinv')
+	    import
+	    real(c_double), value :: p
+	    real(c_double), value :: a
+	    real(c_double) :: gsl_cdf_laplace_pinv
+	  end function gsl_cdf_laplace_pinv
+	  function gsl_cdf_laplace_qinv(q, a) bind(c, name='gsl_cdf_laplace_Qinv')
+	    import
+	    real(c_double), value :: q
+	    real(c_double), value :: a
+	    real(c_double) :: gsl_cdf_laplace_qinv
+	  end function gsl_cdf_laplace_qinv
+	  function gsl_ran_exppow(r, a, b) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_ran_exppow
+	  end function gsl_ran_exppow
+	  function gsl_ran_exppow_pdf(x, a, b) bind(c)
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_ran_exppow_pdf
+	  end function gsl_ran_exppow_pdf
+	  function gsl_cdf_exppow_p(x, a, b) bind(c, name='gsl_cdf_exppow_P')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_exppow_p
+	  end function gsl_cdf_exppow_p
+	  function gsl_cdf_exppow_q(x, a, b) bind(c, name='gsl_cdf_exppow_Q')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_exppow_q
+	  end function gsl_cdf_exppow_q
+	  function gsl_ran_cauchy(r, a) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: a
+	    real(c_double) :: gsl_ran_cauchy
+	  end function gsl_ran_cauchy
+	  function gsl_ran_cauchy_pdf(x, a) bind(c)
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a
+	    real(c_double) :: gsl_ran_cauchy_pdf
+	  end function gsl_ran_cauchy_pdf
+	  function gsl_cdf_cauchy_p(x, a) bind(c, name='gsl_cdf_cauchy_P')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a
+	    real(c_double) :: gsl_cdf_cauchy_p
+	  end function gsl_cdf_cauchy_p
+	  function gsl_cdf_cauchy_q(x, a) bind(c, name='gsl_cdf_cauchy_Q')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a
+	    real(c_double) :: gsl_cdf_cauchy_q
+	  end function gsl_cdf_cauchy_q
+	  function gsl_cdf_cauchy_pinv(p, a) bind(c, name='gsl_cdf_cauchy_Pinv')
+	    import
+	    real(c_double), value :: p
+	    real(c_double), value :: a
+	    real(c_double) :: gsl_cdf_cauchy_pinv
+	  end function gsl_cdf_cauchy_pinv
+	  function gsl_cdf_cauchy_qinv(q, a) bind(c, name='gsl_cdf_cauchy_Qinv')
+	    import
+	    real(c_double), value :: q
+	    real(c_double), value :: a
+	    real(c_double) :: gsl_cdf_cauchy_qinv
+	  end function gsl_cdf_cauchy_qinv
+	  function gsl_ran_rayleigh(r, sigma) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: sigma
+	    real(c_double) :: gsl_ran_rayleigh
+	  end function gsl_ran_rayleigh
+	  function gsl_ran_rayleigh_pdf(x, sigma) bind(c)
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: sigma
+	    real(c_double) :: gsl_ran_rayleigh_pdf
+	  end function gsl_ran_rayleigh_pdf
+	  function gsl_cdf_rayleigh_p(x, sigma) bind(c, name='gsl_cdf_rayleigh_P')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: sigma
+	    real(c_double) :: gsl_cdf_rayleigh_p
+	  end function gsl_cdf_rayleigh_p
+	  function gsl_cdf_rayleigh_q(x, sigma) bind(c, name='gsl_cdf_rayleigh_Q')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: sigma
+	    real(c_double) :: gsl_cdf_rayleigh_q
+	  end function gsl_cdf_rayleigh_q
+	  function gsl_cdf_rayleigh_pinv(p, sigma) bind(c, name='gsl_cdf_rayleigh_Pinv')
+	    import
+	    real(c_double), value :: p
+	    real(c_double), value :: sigma
+	    real(c_double) :: gsl_cdf_rayleigh_pinv
+	  end function gsl_cdf_rayleigh_pinv
+	  function gsl_cdf_rayleigh_qinv(q, sigma) bind(c, name='gsl_cdf_rayleigh_Qinv')
+	    import
+	    real(c_double), value :: q
+	    real(c_double), value :: sigma
+	    real(c_double) :: gsl_cdf_rayleigh_qinv
+	  end function gsl_cdf_rayleigh_qinv
+	  function gsl_ran_rayleigh_tail(r, a, sigma) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: a, sigma
+	    real(c_double) :: gsl_ran_rayleigh_tail
+	  end function gsl_ran_rayleigh_tail
+	  function gsl_ran_rayleigh_tail_pdf(x, a, sigma) bind(c)
+	    import
+	    real(c_double), value :: x, a
+	    real(c_double), value :: sigma
+	    real(c_double) :: gsl_ran_rayleigh_tail_pdf
+	  end function gsl_ran_rayleigh_tail_pdf
+	  function gsl_ran_landau(r) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double) :: gsl_ran_landau
+	  end function gsl_ran_landau
+	  function gsl_ran_landau_pdf(x) bind(c)
+	    import
+	    real(c_double), value :: x
+	    real(c_double) :: gsl_ran_landau_pdf
+	  end function gsl_ran_landau_pdf
+	  function gsl_ran_levy(r, c, alpha) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: c, alpha
+	    real(c_double) :: gsl_ran_levy
+	  end function gsl_ran_levy
+	  function gsl_ran_levy_skew(r, c, alpha, beta) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: c, alpha, beta
+	    real(c_double) :: gsl_ran_levy_skew
+	  end function gsl_ran_levy_skew
+	  function gsl_ran_gamma(r, a, b) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_ran_gamma
+	  end function gsl_ran_gamma
+	  function gsl_ran_gamma_mt(r, a, b) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_ran_gamma_mt
+	  end function gsl_ran_gamma_mt
+	  function gsl_ran_gamma_pdf(x, a, b) bind(c)
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_ran_gamma_pdf
+	  end function gsl_ran_gamma_pdf
+	  function gsl_cdf_gamma_p(x, a, b) bind(c, name='gsl_cdf_gamma_P')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_gamma_p
+	  end function gsl_cdf_gamma_p
+	  function gsl_cdf_gamma_q(x, a, b) bind(c, name='gsl_cdf_gamma_Q')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_gamma_q
+	  end function gsl_cdf_gamma_q
+	  function gsl_cdf_gamma_pinv(p, a, b) bind(c, name='gsl_cdf_gamma_Pinv')
+	    import
+	    real(c_double), value :: p
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_gamma_pinv
+	  end function gsl_cdf_gamma_pinv
+	  function gsl_cdf_gamma_qinv(q, a, b) bind(c, name='gsl_cdf_gamma_Qinv')
+	    import
+	    real(c_double), value :: q
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_gamma_qinv
+	  end function gsl_cdf_gamma_qinv
+	  function gsl_ran_flat(r, a, b) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_ran_flat
+	  end function gsl_ran_flat
+	  function gsl_ran_flat_pdf(x, a, b) bind(c)
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_ran_flat_pdf
+	  end function gsl_ran_flat_pdf
+	  function gsl_cdf_flat_p(x, a, b) bind(c, name='gsl_cdf_flat_P')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_flat_p
+	  end function gsl_cdf_flat_p
+	  function gsl_cdf_flat_q(x, a, b) bind(c, name='gsl_cdf_flat_Q')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_flat_q
+	  end function gsl_cdf_flat_q
+	  function gsl_cdf_flat_pinv(p, a, b) bind(c, name='gsl_cdf_flat_Pinv')
+	    import
+	    real(c_double), value :: p
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_flat_pinv
+	  end function gsl_cdf_flat_pinv
+	  function gsl_cdf_flat_qinv(q, a, b) bind(c, name='gsl_cdf_flat_Qinv')
+	    import
+	    real(c_double), value :: q
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_flat_qinv
+	  end function gsl_cdf_flat_qinv
+	  function gsl_ran_lognormal(r, zeta, sigma) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: zeta, sigma
+	    real(c_double) :: gsl_ran_lognormal
+	  end function gsl_ran_lognormal
+	  function gsl_ran_lognormal_pdf(x, zeta, sigma) bind(c)
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: zeta, sigma
+	    real(c_double) :: gsl_ran_lognormal_pdf
+	  end function gsl_ran_lognormal_pdf
+	  function gsl_cdf_lognormal_p(x, zeta, sigma) bind(c, name='gsl_cdf_lognormal_P')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: zeta, sigma
+	    real(c_double) :: gsl_cdf_lognormal_p
+	  end function gsl_cdf_lognormal_p
+	  function gsl_cdf_lognormal_q(x, zeta, sigma) bind(c, name='gsl_cdf_lognormal_Q')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: zeta, sigma
+	    real(c_double) :: gsl_cdf_lognormal_q
+	  end function gsl_cdf_lognormal_q
+	  function gsl_cdf_lognormal_pinv(p, zeta, sigma) bind(c, name='gsl_cdf_lognormal_Pinv')
+	    import
+	    real(c_double), value :: p
+	    real(c_double), value :: zeta, sigma
+	    real(c_double) :: gsl_cdf_lognormal_pinv
+	  end function gsl_cdf_lognormal_pinv
+	  function gsl_cdf_lognormal_qinv(q, zeta, sigma) bind(c, name='gsl_cdf_lognormal_Qinv')
+	    import
+	    real(c_double), value :: q
+	    real(c_double), value :: zeta, sigma
+	    real(c_double) :: gsl_cdf_lognormal_qinv
+	  end function gsl_cdf_lognormal_qinv
+	  function gsl_ran_chisq(r, nu) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: nu
+	    real(c_double) :: gsl_ran_chisq
+	  end function gsl_ran_chisq
+	  function gsl_ran_chisq_pdf(x, nu) bind(c)
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: nu
+	    real(c_double) :: gsl_ran_chisq_pdf
+	  end function gsl_ran_chisq_pdf
+	  function gsl_cdf_chisq_p(x, nu) bind(c, name='gsl_cdf_chisq_P')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: nu
+	    real(c_double) :: gsl_cdf_chisq_p
+	  end function gsl_cdf_chisq_p
+	  function gsl_cdf_chisq_q(x, nu) bind(c, name='gsl_cdf_chisq_Q')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: nu
+	    real(c_double) :: gsl_cdf_chisq_q
+	  end function gsl_cdf_chisq_q
+	  function gsl_cdf_chisq_pinv(p, nu) bind(c, name='gsl_cdf_chisq_Pinv')
+	    import
+	    real(c_double), value :: p
+	    real(c_double), value :: nu
+	    real(c_double) :: gsl_cdf_chisq_pinv
+	  end function gsl_cdf_chisq_pinv
+	  function gsl_cdf_chisq_qinv(q, nu) bind(c, name='gsl_cdf_chisq_Qinv')
+	    import
+	    real(c_double), value :: q
+	    real(c_double), value :: nu
+	    real(c_double) :: gsl_cdf_chisq_qinv
+	  end function gsl_cdf_chisq_qinv
+	  function gsl_ran_fdist(r, nu1, nu2) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: nu1, nu2
+	    real(c_double) :: gsl_ran_fdist
+	  end function gsl_ran_fdist
+	  function gsl_ran_fdist_pdf(x, nu1, nu2) bind(c)
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: nu1, nu2
+	    real(c_double) :: gsl_ran_fdist_pdf
+	  end function gsl_ran_fdist_pdf
+	  function gsl_cdf_fdist_p(x, nu1, nu2) bind(c, name='gsl_cdf_fdist_P')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: nu1, nu2
+	    real(c_double) :: gsl_cdf_fdist_p
+	  end function gsl_cdf_fdist_p
+	  function gsl_cdf_fdist_q(x, nu1, nu2) bind(c, name='gsl_cdf_fdist_Q')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: nu1, nu2
+	    real(c_double) :: gsl_cdf_fdist_q
+	  end function gsl_cdf_fdist_q
+	  function gsl_cdf_fdist_pinv(p, nu1, nu2) bind(c, name='gsl_cdf_fdist_Pinv')
+	    import
+	    real(c_double), value :: p
+	    real(c_double), value :: nu1, nu2
+	    real(c_double) :: gsl_cdf_fdist_pinv
+	  end function gsl_cdf_fdist_pinv
+	  function gsl_cdf_fdist_qinv(q, nu1, nu2) bind(c, name='gsl_cdf_fdist_Qinv')
+	    import
+	    real(c_double), value :: q
+	    real(c_double), value :: nu1, nu2
+	    real(c_double) :: gsl_cdf_fdist_qinv
+	  end function gsl_cdf_fdist_qinv
+	  function gsl_ran_tdist(r, nu) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: nu
+	    real(c_double) :: gsl_ran_tdist
+	  end function gsl_ran_tdist
+	  function gsl_ran_tdist_pdf(x, nu) bind(c)
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: nu
+	    real(c_double) :: gsl_ran_tdist_pdf
+	  end function gsl_ran_tdist_pdf
+	  function gsl_cdf_tdist_p(x, nu) bind(c, name='gsl_cdf_tdist_P')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: nu
+	    real(c_double) :: gsl_cdf_tdist_p
+	  end function gsl_cdf_tdist_p
+	  function gsl_cdf_tdist_q(x, nu) bind(c, name='gsl_cdf_tdist_Q')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: nu
+	    real(c_double) :: gsl_cdf_tdist_q
+	  end function gsl_cdf_tdist_q
+	  function gsl_cdf_tdist_pinv(p, nu) bind(c, name='gsl_cdf_tdist_Pinv')
+	    import
+	    real(c_double), value :: p
+	    real(c_double), value :: nu
+	    real(c_double) :: gsl_cdf_tdist_pinv
+	  end function gsl_cdf_tdist_pinv
+	  function gsl_cdf_tdist_qinv(q, nu) bind(c, name='gsl_cdf_tdist_Qinv')
+	    import
+	    real(c_double), value :: q
+	    real(c_double), value :: nu
+	    real(c_double) :: gsl_cdf_tdist_qinv
+	  end function gsl_cdf_tdist_qinv
+	  function gsl_ran_beta(r, a, b) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_ran_beta
+	  end function gsl_ran_beta
+	  function gsl_ran_beta_pdf(x, a, b) bind(c)
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_ran_beta_pdf
+	  end function gsl_ran_beta_pdf
+	  function gsl_cdf_beta_p(x, a, b) bind(c, name='gsl_cdf_beta_P')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_beta_p
+	  end function gsl_cdf_beta_p
+	  function gsl_cdf_beta_q(x, a, b) bind(c, name='gsl_cdf_beta_Q')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_beta_q
+	  end function gsl_cdf_beta_q
+	  function gsl_cdf_beta_pinv(p, a, b) bind(c, name='gsl_cdf_beta_Pinv')
+	    import
+	    real(c_double), value :: p
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_beta_pinv
+	  end function gsl_cdf_beta_pinv
+	  function gsl_cdf_beta_qinv(q, a, b) bind(c, name='gsl_cdf_beta_Qinv')
+	    import
+	    real(c_double), value :: q
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_beta_qinv
+	  end function gsl_cdf_beta_qinv
+	  function gsl_ran_logistic(r, a) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: a
+	    real(c_double) :: gsl_ran_logistic
+	  end function gsl_ran_logistic
+	  function gsl_ran_logistic_pdf(x, a) bind(c)
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a
+	    real(c_double) :: gsl_ran_logistic_pdf
+	  end function gsl_ran_logistic_pdf
+	  function gsl_cdf_logistic_p(x, a) bind(c, name='gsl_cdf_logistic_P')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a
+	    real(c_double) :: gsl_cdf_logistic_p
+	  end function gsl_cdf_logistic_p
+	  function gsl_cdf_logistic_q(x, a) bind(c, name='gsl_cdf_logistic_Q')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a
+	    real(c_double) :: gsl_cdf_logistic_q
+	  end function gsl_cdf_logistic_q
+	  function gsl_cdf_logistic_pinv(p, a) bind(c, name='gsl_cdf_logistic_Pinv')
+	    import
+	    real(c_double), value :: p
+	    real(c_double), value :: a
+	    real(c_double) :: gsl_cdf_logistic_pinv
+	  end function gsl_cdf_logistic_pinv
+	  function gsl_cdf_logistic_qinv(q, a) bind(c, name='gsl_cdf_logistic_Qinv')
+	    import
+	    real(c_double), value :: q
+	    real(c_double), value :: a
+	    real(c_double) :: gsl_cdf_logistic_qinv
+	  end function gsl_cdf_logistic_qinv
+	  function gsl_ran_pareto(r, a, b) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_ran_pareto
+	  end function gsl_ran_pareto
+	  function gsl_ran_pareto_pdf(x, a, b) bind(c)
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_ran_pareto_pdf
+	  end function gsl_ran_pareto_pdf
+	  function gsl_cdf_pareto_p(x, a, b) bind(c, name='gsl_cdf_pareto_P')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_pareto_p
+	  end function gsl_cdf_pareto_p
+	  function gsl_cdf_pareto_q(x, a, b) bind(c, name='gsl_cdf_pareto_Q')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_pareto_q
+	  end function gsl_cdf_pareto_q
+	  function gsl_cdf_pareto_pinv(p, a, b) bind(c, name='gsl_cdf_pareto_Pinv')
+	    import
+	    real(c_double), value :: p
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_pareto_pinv
+	  end function gsl_cdf_pareto_pinv
+	  function gsl_cdf_pareto_qinv(q, a, b) bind(c, name='gsl_cdf_pareto_Qinv')
+	    import
+	    real(c_double), value :: q
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_pareto_qinv
+	  end function gsl_cdf_pareto_qinv
+	  subroutine gsl_ran_dir_2d(r, x, y) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), intent(out) :: x, y
+	  end subroutine gsl_ran_dir_2d
+	  subroutine gsl_ran_dir_2d_trig_method(r, x, y) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), intent(out) :: x, y
+	  end subroutine gsl_ran_dir_2d_trig_method
+	  subroutine gsl_ran_dir_3d(r, x, y, z) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), intent(out) :: x, y, z
+	  end subroutine gsl_ran_dir_3d
+	  subroutine gsl_ran_dir_nd(r, n, x) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    integer(c_size_t), value :: n
+	    real(c_double), intent(out) :: x
+	  end subroutine gsl_ran_dir_nd
+	  function gsl_ran_weibull(r, a, b) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_ran_weibull
+	  end function gsl_ran_weibull
+	  function gsl_ran_weibull_pdf(x, a, b) bind(c)
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_ran_weibull_pdf
+	  end function gsl_ran_weibull_pdf
+	  function gsl_cdf_weibull_p(x, a, b) bind(c, name='gsl_cdf_weibull_P')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_weibull_p
+	  end function gsl_cdf_weibull_p
+	  function gsl_cdf_weibull_q(x, a, b) bind(c, name='gsl_cdf_weibull_Q')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_weibull_q
+	  end function gsl_cdf_weibull_q
+	  function gsl_cdf_weibull_pinv(p, a, b) bind(c, name='gsl_cdf_weibull_Pinv')
+	    import
+	    real(c_double), value :: p
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_weibull_pinv
+	  end function gsl_cdf_weibull_pinv
+	  function gsl_cdf_weibull_qinv(p, a, b) bind(c, name='gsl_cdf_weibull_Qinv')
+	    import
+	    real(c_double), value :: p
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_weibull_qinv
+	  end function gsl_cdf_weibull_qinv
+	  function gsl_ran_gumbel1(r, a, b) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_ran_gumbel1
+	  end function gsl_ran_gumbel1
+	  function gsl_ran_gumbel1_pdf(x, a, b) bind(c)
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_ran_gumbel1_pdf
+	  end function gsl_ran_gumbel1_pdf
+	  function gsl_cdf_gumbel1_p(x, a, b) bind(c, name='gsl_cdf_gumbel1_P')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_gumbel1_p
+	  end function gsl_cdf_gumbel1_p
+	  function gsl_cdf_gumbel1_q(x, a, b) bind(c, name='gsl_cdf_gumbel1_Q')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_gumbel1_q
+	  end function gsl_cdf_gumbel1_q
+	  function gsl_cdf_gumbel1_pinv(p, a, b) bind(c, name='gsl_cdf_gumbel1_Pinv')
+	    import
+	    real(c_double), value :: p
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_gumbel1_pinv
+	  end function gsl_cdf_gumbel1_pinv
+	  function gsl_cdf_gumbel1_qinv(p, a, b) bind(c, name='gsl_cdf_gumbel1_Qinv')
+	    import
+	    real(c_double), value :: p
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_gumbel1_qinv
+	  end function gsl_cdf_gumbel1_qinv
+	  function gsl_ran_gumbel2(r, a, b) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_ran_gumbel2
+	  end function gsl_ran_gumbel2
+	  function gsl_ran_gumbel2_pdf(x, a, b) bind(c)
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_ran_gumbel2_pdf
+	  end function gsl_ran_gumbel2_pdf
+	  function gsl_cdf_gumbel2_p(x, a, b) bind(c, name='gsl_cdf_gumbel2_P')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_gumbel2_p
+	  end function gsl_cdf_gumbel2_p
+	  function gsl_cdf_gumbel2_q(x, a, b) bind(c, name='gsl_cdf_gumbel2_Q')
+	    import
+	    real(c_double), value :: x
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_gumbel2_q
+	  end function gsl_cdf_gumbel2_q
+	  function gsl_cdf_gumbel2_pinv(p, a, b) bind(c, name='gsl_cdf_gumbel2_Pinv')
+	    import
+	    real(c_double), value :: p
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_gumbel2_pinv
+	  end function gsl_cdf_gumbel2_pinv
+	  function gsl_cdf_gumbel2_qinv(p, a, b) bind(c, name='gsl_cdf_gumbel2_Qinv')
+	    import
+	    real(c_double), value :: p
+	    real(c_double), value :: a, b
+	    real(c_double) :: gsl_cdf_gumbel2_qinv
+	  end function gsl_cdf_gumbel2_qinv
+	  subroutine gsl_ran_dirichlet(r, k, alpha, theta) bind(c)
+	    import
+	    type(c_ptr), value :: r, alpha, theta
+	    integer(c_size_t), value :: k
+	  end subroutine gsl_ran_dirichlet
+	  function gsl_ran_dirichlet_pdf(k, alpha, theta) bind(c)
+	    import
+	    integer(c_size_t), value :: k
+	    type(c_ptr), value :: alpha, theta
+	    real(c_double) :: gsl_ran_dirichlet_pdf
+	  end function gsl_ran_dirichlet_pdf
+	  function gsl_ran_dirichlet_lnpdf(k, alpha, theta) bind(c)
+	    import
+	    integer(c_size_t), value :: k
+	    type(c_ptr), value :: alpha, theta
+	    real(c_double) :: gsl_ran_dirichlet_lnpdf
+	  end function gsl_ran_dirichlet_lnpdf
+	  function gsl_ran_discrete_preproc(k, p) bind(c)
+	    import
+	    integer(c_size_t), value :: k
+	    type(c_ptr), value :: p
+	    type(c_ptr) :: gsl_ran_discrete_preproc
+	  end function gsl_ran_discrete_preproc
+	  function gsl_ran_discrete(r, g) bind(c)
+	    import
+	    type(c_ptr), value :: r, g
+	    integer(c_size_t) :: gsl_ran_discrete
+	  end function gsl_ran_discrete
+	  function gsl_ran_discrete_pdf(k, g) bind(c)
+	    import
+	    integer(c_size_t), value :: k
+	    type(c_ptr), value :: g
+	    real(c_double) :: gsl_ran_discrete_pdf
+	  end function gsl_ran_discrete_pdf
+	  subroutine gsl_ran_discrete_free(g) bind(c)
+	    import
+	    type(c_ptr), value :: g
+	  end subroutine gsl_ran_discrete_free
+	  function gsl_ran_poisson(r, mu) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: mu
+	    integer(c_int) :: gsl_ran_poisson
+	  end function gsl_ran_poisson
+	  function gsl_ran_poisson_pdf(k, mu) bind(c)
+	    import
+	    integer(c_int), value :: k
+	    real(c_double), value :: mu
+	    real(c_double) :: gsl_ran_poisson_pdf
+	  end function gsl_ran_poisson_pdf
+	  function gsl_cdf_poisson_p(k, mu) bind(c, name='gsl_cdf_poisson_P')
+	    import
+	    integer(c_int), value :: k
+	    real(c_double), value :: mu
+	    real(c_double) :: gsl_cdf_poisson_p
+	  end function gsl_cdf_poisson_p
+	  function gsl_cdf_poisson_q(k, mu) bind(c, name='gsl_cdf_poisson_Q')
+	    import
+	    integer(c_int), value :: k
+	    real(c_double), value :: mu
+	    real(c_double) :: gsl_cdf_poisson_q
+	  end function gsl_cdf_poisson_q
+	  function gsl_ran_bernoulli(r, p) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: p
+	    integer(c_int) :: gsl_ran_bernoulli
+	  end function gsl_ran_bernoulli
+	  function gsl_ran_bernoulli_pdf(k, p) bind(c)
+	    import
+	    integer(c_int), value :: k
+	    real(c_double), value :: p
+	    real(c_double) :: gsl_ran_bernoulli_pdf
+	  end function gsl_ran_bernoulli_pdf
+	  function gsl_ran_binomial(r, p, n) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: p
+	    integer(c_int), value :: n
+	    real(c_double) :: gsl_ran_binomial
+	  end function gsl_ran_binomial
+	  function gsl_ran_binomial_pdf(k, p, n) bind(c)
+	    import
+	    integer(c_int), value :: k, n
+	    real(c_double), value :: p
+	    real(c_double) :: gsl_ran_binomial_pdf
+	  end function gsl_ran_binomial_pdf
+	  function gsl_cdf_binomial_p(k, p, n) bind(c, name='gsl_cdf_binomial_P')
+	    import
+	    integer(c_int), value :: k, n
+	    real(c_double), value :: p
+	    real(c_double) :: gsl_cdf_binomial_p
+	  end function gsl_cdf_binomial_p
+	  function gsl_cdf_binomial_q(k, p, n) bind(c, name='gsl_cdf_binomial_Q')
+	    import
+	    integer(c_int), value :: k, n
+	    real(c_double), value :: p
+	    real(c_double) :: gsl_cdf_binomial_q
+	  end function gsl_cdf_binomial_q
+	  subroutine gsl_ran_multinomial(r, k, nn, p, n) bind(c)
+	    import
+	    type(c_ptr), value :: r, p, n
+	    integer(c_size_t), value :: k
+	    integer(c_int), value :: nn
+	  end subroutine gsl_ran_multinomial
+	  function gsl_ran_multinomial_pdf(k, p, n) bind(c)
+	    import
+	    integer(c_size_t), value :: k
+	    type(c_ptr), value :: p, n
+	    real(c_double) :: gsl_ran_multinomial_pdf
+	  end function gsl_ran_multinomial_pdf
+	  function gsl_ran_multinomial_lnpdf(k, p, n) bind(c)
+	    import
+	    integer(c_size_t), value :: k
+	    type(c_ptr), value :: p, n
+	    real(c_double) :: gsl_ran_multinomial_lnpdf
+	  end function gsl_ran_multinomial_lnpdf
+	  function gsl_ran_negative_binomial(r, p, n) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: p, n
+	    integer(c_int) :: gsl_ran_negative_binomial
+	  end function gsl_ran_negative_binomial
+	  function gsl_ran_negative_binomial_pdf(k, p, n) bind(c)
+	    import
+	    integer(c_int), value :: k
+	    real(c_double), value :: p, n
+	    real(c_double) :: gsl_ran_negative_binomial_pdf
+	  end function gsl_ran_negative_binomial_pdf
+	  function gsl_cdf_negative_binomial_p(k, p, n) bind(c, name='gsl_cdf_negative_binomial_P')
+	    import
+	    integer(c_int), value :: k
+	    real(c_double), value :: p, n
+	    real(c_double) :: gsl_cdf_negative_binomial_p
+	  end function gsl_cdf_negative_binomial_p
+	  function gsl_cdf_negative_binomial_q(k, p, n) bind(c, name='gsl_cdf_negative_binomial_Q')
+	    import
+	    integer(c_int), value :: k
+	    real(c_double), value :: p, n
+	    real(c_double) :: gsl_cdf_negative_binomial_q
+	  end function gsl_cdf_negative_binomial_q
+	  function gsl_ran_pascal(r, p, n) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: p, n
+	    integer(c_int) :: gsl_ran_pascal
+	  end function gsl_ran_pascal
+	  function gsl_ran_pascal_pdf(k, p, n) bind(c)
+	    import
+	    integer(c_int), value :: k
+	    real(c_double), value :: p, n
+	    real(c_double) :: gsl_ran_pascal_pdf
+	  end function gsl_ran_pascal_pdf
+	  function gsl_cdf_pascal_p(k, p, n) bind(c, name='gsl_cdf_pascal_P')
+	    import
+	    integer(c_int), value :: k
+	    real(c_double), value :: p, n
+	    real(c_double) :: gsl_cdf_pascal_p
+	  end function gsl_cdf_pascal_p
+	  function gsl_cdf_pascal_q(k, p, n) bind(c, name='gsl_cdf_pascal_Q')
+	    import
+	    integer(c_int), value :: k
+	    real(c_double), value :: p, n
+	    real(c_double) :: gsl_cdf_pascal_q
+	  end function gsl_cdf_pascal_q
+	  function gsl_ran_geometric(r, p) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: p
+	    integer(c_int) :: gsl_ran_geometric
+	  end function gsl_ran_geometric
+	  function gsl_ran_geometric_pdf(k, p) bind(c)
+	    import
+	    integer(c_int), value :: k
+	    real(c_double), value :: p
+	    real(c_double) :: gsl_ran_geometric_pdf
+	  end function gsl_ran_geometric_pdf
+	  function gsl_cdf_geometric_p(k, p) bind(c, name='gsl_cdf_geometric_P')
+	    import
+	    integer(c_int), value :: k
+	    real(c_double), value :: p
+	    real(c_double) :: gsl_cdf_geometric_p
+	  end function gsl_cdf_geometric_p
+	  function gsl_cdf_geometric_q(k, p) bind(c, name='gsl_cdf_geometric_Q')
+	    import
+	    integer(c_int), value :: k
+	    real(c_double), value :: p
+	    real(c_double) :: gsl_cdf_geometric_q
+	  end function gsl_cdf_geometric_q
+	  function gsl_ran_hypergeometric(r, n1, n2, t) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    integer(c_int), value :: n1, n2, t
+	    integer(c_int) :: gsl_ran_hypergeometric
+	  end function gsl_ran_hypergeometric
+	  function gsl_ran_hypergeometric_pdf(k, n1, n2, t) bind(c)
+	    import
+	    integer(c_int), value :: k
+	    integer(c_int), value :: n1, n2, t
+	    real(c_double) :: gsl_ran_hypergeometric_pdf
+	  end function gsl_ran_hypergeometric_pdf
+	  function gsl_cdf_hypergeometric_p(k, n1, n2, t) bind(c, name='gsl_cdf_hypergeometric_P')
+	    import
+	    integer(c_int), value :: k
+	    integer(c_int), value :: n1, n2, t
+	    real(c_double) :: gsl_cdf_hypergeometric_p
+	  end function gsl_cdf_hypergeometric_p
+	  function gsl_cdf_hypergeometric_q(k, n1, n2, t) bind(c, name='gsl_cdf_hypergeometric_Q')
+	    import
+	    integer(c_int), value :: k
+	    integer(c_int), value :: n1, n2, t
+	    real(c_double) :: gsl_cdf_hypergeometric_q
+	  end function gsl_cdf_hypergeometric_q
+	  function gsl_ran_logarithmic(r, p) bind(c)
+	    import
+	    type(c_ptr), value :: r
+	    real(c_double), value :: p
+	    integer(c_int) :: gsl_ran_logarithmic
+	  end function gsl_ran_logarithmic
+	  function gsl_ran_logarithmic_pdf(k, p) bind(c)
+	    import
+	    integer(c_int), value :: k
+	    real(c_double), value :: p
+	    real(c_double) :: gsl_ran_logarithmic_pdf
+	  end function gsl_ran_logarithmic_pdf
+	  function gsl_ran_wishart(r, df, l, result, work) bind(c)
+	    import :: c_int, c_ptr, c_double
+	    type(c_ptr), value :: r, l, result, work
+	    real(c_double), value :: df
+	    integer(c_int) :: gsl_ran_wishart
+	  end function gsl_ran_wishart
+	  function gsl_ran_wishart_pdf(x, l_x, df, l, result, work) bind(c)
+	    import :: c_int, c_ptr, c_double
+	    type(c_ptr), value :: x, l_x, l, work
+	    real(c_double), value :: df
+	    real(c_double), intent(inout) :: result
+	    integer(c_int) :: gsl_ran_wishart_pdf
+	  end function gsl_ran_wishart_pdf
+	  function gsl_ran_wishart_log_pdf(x, l_x, df, l, result, work) bind(c)
+	    import :: c_int, c_ptr, c_double
+	    type(c_ptr), value :: x, l_x, l, work
+	    real(c_double), value :: df
+	    real(c_double), intent(inout) :: result
+	    integer(c_int) :: gsl_ran_wishart_log_pdf
+	  end function gsl_ran_wishart_log_pdf
+	  subroutine gsl_ran_shuffle(r, base, n, size) bind(c)
+	    import :: c_ptr, c_size_t
+	    type(c_ptr), value :: r, base
+	    integer(c_size_t), value :: n, size
+	  end subroutine gsl_ran_shuffle
+	  function gsl_ran_choose(r, dest, k, src, n, size) bind(c)
+	    import :: c_ptr, c_size_t, c_int
+	    type(c_ptr), value :: r, dest, src
+	    integer(c_size_t), value :: k, n, size
+	    integer(c_int) :: gsl_ran_choose
+	  end function gsl_ran_choose
+	  subroutine gsl_ran_sample(r, dest, k, src, n, size) bind(c)  
+	    import :: c_ptr, c_size_t
+	    type(c_ptr), value :: r, dest, src
+	    integer(c_size_t), value :: k, n, size
+	  end subroutine gsl_ran_sample
+  end interface
+contains
 !
-! API: Random and Quasi-random numbers, distributions
-!
-!> \page "Comments on random numbers"
-!> Please go to api/rng.finc for the API documentation.
-
-  function fgsl_rng_alloc(t)
-    type(fgsl_rng_type), intent(inout) :: t
-    type(fgsl_rng) :: fgsl_rng_alloc
-    if (.not. c_associated(t%gsl_rng_type)) then
-       t%gsl_rng_type = fgsl_aux_rng_assign(t%type)
-    end if
-    if (c_associated(t%gsl_rng_type)) &
-         fgsl_rng_alloc%gsl_rng = gsl_rng_alloc(t%gsl_rng_type)
-  end function fgsl_rng_alloc
-  subroutine fgsl_rng_set(r, s)
-    type(fgsl_rng), intent(inout) :: r
-    integer(fgsl_long), intent(in) :: s
-    call gsl_rng_set(r%gsl_rng, s)
-  end subroutine fgsl_rng_set
-  subroutine fgsl_rng_free(r)
-    type(fgsl_rng), intent(inout) :: r
-    call gsl_rng_free(r%gsl_rng)
-  end subroutine fgsl_rng_free
-  function fgsl_rng_get(r)
-    type(fgsl_rng), intent(in) :: r
-    integer(fgsl_long) :: fgsl_rng_get
-    fgsl_rng_get = gsl_rng_get(r%gsl_rng)
-  end function fgsl_rng_get
-  function fgsl_rng_uniform(r)
-    type(fgsl_rng), intent(in) :: r
-    real(fgsl_double) :: fgsl_rng_uniform
-    fgsl_rng_uniform = gsl_rng_uniform(r%gsl_rng)
-  end function fgsl_rng_uniform
-  function fgsl_rng_uniform_pos(r)
-    type(fgsl_rng), intent(in) :: r
-    real(fgsl_double) :: fgsl_rng_uniform_pos
-    fgsl_rng_uniform_pos = gsl_rng_uniform_pos(r%gsl_rng)
-  end function fgsl_rng_uniform_pos
-  function fgsl_rng_uniform_int(r, n)
-    type(fgsl_rng), intent(in) :: r
-    integer(fgsl_long), intent(in) :: n
-    integer(fgsl_long) :: fgsl_rng_uniform_int
-    fgsl_rng_uniform_int = gsl_rng_uniform_int(r%gsl_rng, n)
-  end function fgsl_rng_uniform_int
-  function fgsl_rng_name(r)
-    type(fgsl_rng), intent(in) :: r
-    character(kind=fgsl_char, len=fgsl_strmax) :: fgsl_rng_name
-!
-    type(c_ptr) :: name
-    name = gsl_rng_name(r%gsl_rng)
-    fgsl_rng_name = fgsl_name(name)
-  end function fgsl_rng_name
-  function fgsl_rng_max(r)
-    type(fgsl_rng), intent(in) :: r
-    integer(fgsl_long) :: fgsl_rng_max
-    fgsl_rng_max = gsl_rng_max(r%gsl_rng)
-  end function fgsl_rng_max
-  function fgsl_rng_min(r)
-    type(fgsl_rng), intent(in) :: r
-    integer(fgsl_long) :: fgsl_rng_min
-    fgsl_rng_min = gsl_rng_min(r%gsl_rng)
-  end function fgsl_rng_min
-! FIXME: state, size and types_setup routines not (yet?) implemented
-  function fgsl_rng_env_setup()
-    type(fgsl_rng_type) :: fgsl_rng_env_setup
-    fgsl_rng_env_setup%gsl_rng_type = gsl_rng_env_setup()
-  end function fgsl_rng_env_setup
-  function fgsl_rng_memcpy(cpy, src)
-    type(fgsl_rng), intent(inout) :: cpy
-    type(fgsl_rng), intent(in) :: src
-    integer(fgsl_int) :: fgsl_rng_memcpy
-    fgsl_rng_memcpy = gsl_rng_memcpy(cpy%gsl_rng, src%gsl_rng)
-  end function fgsl_rng_memcpy
-  function fgsl_rng_clone(r)
-    type(fgsl_rng), intent(in) :: r
-    type(fgsl_rng) :: fgsl_rng_clone
-    fgsl_rng_clone%gsl_rng = gsl_rng_clone(r%gsl_rng)
-  end function fgsl_rng_clone
-  function fgsl_rng_fwrite(stream, r)
-    type(fgsl_file), intent(in) :: stream
-    type(fgsl_rng), intent(in) :: r
-    integer(fgsl_int) :: fgsl_rng_fwrite
-    fgsl_rng_fwrite = gsl_rng_fwrite(stream%gsl_file, r%gsl_rng)
-  end function fgsl_rng_fwrite
-  function fgsl_rng_fread(stream, r)
-    type(fgsl_file), intent(in) :: stream
-    type(fgsl_rng), intent(inout) :: r
-    integer(fgsl_int) :: fgsl_rng_fread
-    fgsl_rng_fread = gsl_rng_fread(stream%gsl_file, r%gsl_rng)
-  end function fgsl_rng_fread
-  function fgsl_qrng_alloc(t, d)
-    type(fgsl_qrng_type), intent(in) :: t
-    integer(fgsl_int), intent(in) :: d
-    type(fgsl_qrng) :: fgsl_qrng_alloc
-!
-    type(c_ptr) :: type
-    type = fgsl_aux_qrng_assign(t%type)
-    fgsl_qrng_alloc%gsl_qrng = gsl_qrng_alloc(type, d)
-  end function fgsl_qrng_alloc
-  subroutine fgsl_qrng_free(r)
-    type(fgsl_qrng), intent(inout) :: r
-    call gsl_qrng_free(r%gsl_qrng)
-  end subroutine fgsl_qrng_free
-  subroutine fgsl_qrng_init(r)
-    type(fgsl_qrng), intent(inout) :: r
-    call gsl_qrng_init(r%gsl_qrng)
-  end subroutine fgsl_qrng_init
-  function fgsl_qrng_get(q, x)
-    type(fgsl_qrng), intent(in) :: q
-    real(fgsl_double), intent(out), target, contiguous :: x(:)
-    integer(fgsl_int) :: fgsl_qrng_get
-    fgsl_qrng_get = gsl_qrng_get(q%gsl_qrng, c_loc(x))
-  end function fgsl_qrng_get
-  function fgsl_qrng_name(q)
-    type(fgsl_qrng), intent(in) :: q
-    character(kind=fgsl_char, len=fgsl_strmax) :: fgsl_qrng_name
-!
-    type(c_ptr) :: name
-    name = gsl_qrng_name(q%gsl_qrng)
-    fgsl_qrng_name = fgsl_name(name)
-  end function fgsl_qrng_name
-! FIXME: state and size routines not (yet?) implemented
-  function fgsl_qrng_memcpy(cpy, src)
-    type(fgsl_qrng), intent(inout) :: cpy
-    type(fgsl_qrng), intent(in) :: src
-    integer(fgsl_int) :: fgsl_qrng_memcpy
-    fgsl_qrng_memcpy = gsl_qrng_memcpy(cpy%gsl_qrng, src%gsl_qrng)
-  end function fgsl_qrng_memcpy
-  function fgsl_qrng_clone(q)
-    type(fgsl_qrng), intent(in) :: q
-    type(fgsl_qrng) :: fgsl_qrng_clone
-    fgsl_qrng_clone%gsl_qrng = gsl_qrng_clone(q%gsl_qrng)
-  end function fgsl_qrng_clone
-!
+! API
   function fgsl_ran_gaussian(r, sigma)
     type(fgsl_rng), intent(in) :: r
     real(fgsl_double), intent(in) :: sigma
@@ -1290,23 +2298,9 @@
     call gsl_ran_sample(r%gsl_rng, dest, k, src, n, size)
   end subroutine fgsl_ran_sample
 ! Add-ons
-  subroutine fgsl_rng_c_ptr(res, src)
-    type(c_ptr), intent(in) :: src
-    type(fgsl_rng), intent(out) :: res
-    res%gsl_rng = src
-  end subroutine fgsl_rng_c_ptr
-  function fgsl_rng_status(rng)
-    type(fgsl_rng), intent(in) :: rng
-    logical :: fgsl_rng_status
-    fgsl_rng_status = .true.
-    if (.not. c_associated(rng%gsl_rng)) fgsl_rng_status = .false.
-  end function fgsl_rng_status
-  function fgsl_qrng_status(qrng)
-    type(fgsl_qrng), intent(in) :: qrng
-    logical :: fgsl_qrng_status
-    fgsl_qrng_status = .true.
-    if (.not. c_associated(qrng%gsl_qrng)) fgsl_qrng_status = .false.
-  end function fgsl_qrng_status
+
+
+
   function fgsl_ran_discrete_t_status(ran_discrete_t)
     type(fgsl_ran_discrete_t), intent(in) :: ran_discrete_t
     logical :: fgsl_ran_discrete_t_status
@@ -1314,3 +2308,4 @@
     if (.not. c_associated(ran_discrete_t%gsl_ran_discrete_t)) &
          fgsl_ran_discrete_t_status = .false.
   end function fgsl_ran_discrete_t_status
+end module fgsl_cdf

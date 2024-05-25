@@ -51,6 +51,11 @@ BUILT_SOURCES = fgsl_base.mod \
 		fgsl_sorting.mod \
 		fgsl_linalg.mod \
 		fgsl_eigen.mod \
+		fgsl_fft.mod \
+		fgsl_integration.mod \
+		fgsl_rngen.mod \
+		fgsl_qrngen.mod \
+		fgsl_cdf.mod \
 		fgsl.mod
 
 NULL =
@@ -103,6 +108,11 @@ libfgsl_la_SOURCES = \
 	modules/fgsl_sorting.f90 \
 	modules/fgsl_linalg.f90 \
 	modules/fgsl_eigen.f90 \
+	modules/fgsl_fft.f90 \
+	modules/fgsl_integration.f90 \
+	modules/fgsl_rngen.f90 \
+	modules/fgsl_qrngen.f90 \
+	modules/fgsl_cdf.f90 \
 	csub/fgsl_base_c.c \
 	csub/fgsl_io_c.c \
 	csub/fgsl_math_c.c \
@@ -110,6 +120,9 @@ libfgsl_la_SOURCES = \
 	csub/fgsl_permutations_c.c \
 	csub/fgsl_combinations_c.c \
 	csub/fgsl_multisets_c.c \
+	csub/fgsl_integration_c.c \
+	csub/fgsl_rngen_c.c \
+	csub/fgsl_qrngen_c.c \
 	fgsl_utils.c \
 	api/dht.finc \
 	api/histogram.finc \
@@ -118,12 +131,9 @@ libfgsl_la_SOURCES = \
 	api/ieee.finc \
 	api/multimin.finc \
 	api/chebyshev.finc \
-	api/integration.finc \
 	api/min.finc \
 	api/multiroots.finc \
-	api/rng.finc \
 	api/statistics.finc \
-	api/fft.finc \
 	api/interp.finc \
 	api/ntuple.finc \
 	api/roots.finc \
@@ -143,19 +153,16 @@ libfgsl_la_SOURCES = \
 	api/filter.finc \
 	interface/ieee.finc \
 	interface/multimin.finc \
-	interface/rng.finc \
 	interface/sum_levin.finc \
 	interface/bspline.finc \
 	interface/multiroots.finc \
 	interface/roots.finc \
 	interface/wavelet.finc \
 	interface/chebyshev.finc \
-	interface/fft.finc \
 	interface/min.finc \
 	interface/ntuple.finc \
 	interface/siman.finc \
 	interface/fit.finc \
-	interface/integration.finc \
 	interface/ode.finc \
 	interface/deriv.finc \
 	interface/generics.finc \
@@ -226,6 +233,11 @@ fgsl_multisets.mod: modules/fgsl_multisets.o
 fgsl_sorting.mod: modules/fgsl_sorting.o
 fgsl_linalg.mod: modules/fgsl_linalg.o
 fgsl_eigen.mod: modules/fgsl_eigen.o
+fgsl_fft.mod: modules/fgsl_fft.o
+fgsl_integration.mod: modules/fgsl_integration.o
+fgsl_rngen.mod: modules/fgsl_rngen.o
+fgsl_qrngen.mod: modules/fgsl_qrngen.o
+fgsl_cdf.mod: modules/fgsl_cdf.o
 gsl.lo: $(libfgsl_la_SOURCES)
 
 pkgconfigdir=$(libdir)/pkgconfig
@@ -275,7 +287,12 @@ nodist_fgslinclude_HEADERS = fgsl.mod \
 			     fgsl_multisets.mod \
 			     fgsl_sorting.mod \
 			     fgsl_linalg.mod \
-			     fgsl_eigen.mod 
+			     fgsl_eigen.mod \
+			     fgsl_integration.mod \
+			     fgsl_fft.mod \
+			     fgsl_rngen.mod \
+			     fgsl_qrngen.mod \
+			     fgsl_cdf.mod
 
 EXTRA_DIST = Doxyfile
 

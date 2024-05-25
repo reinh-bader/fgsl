@@ -73,6 +73,11 @@ module fgsl
   use fgsl_sorting
   use fgsl_linalg
   use fgsl_eigen
+  use fgsl_fft
+  use fgsl_integration
+  use fgsl_rngen
+  use fgsl_qrngen
+  use fgsl_cdf
   implicit none
 
 !
@@ -429,181 +434,6 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
   end type gsl_multifit_robust_stats
   
 
-! Types: FFT
-!
-  type, public :: fgsl_fft_complex_wavetable
-     private
-     type(c_ptr) :: gsl_fft_complex_wavetable = c_null_ptr
-  end type fgsl_fft_complex_wavetable
-  type, public :: fgsl_fft_real_wavetable
-     private
-     type(c_ptr) :: gsl_fft_real_wavetable = c_null_ptr
-  end type fgsl_fft_real_wavetable
-  type, public :: fgsl_fft_halfcomplex_wavetable
-     private
-     type(c_ptr) :: gsl_fft_halfcomplex_wavetable = c_null_ptr
-  end type fgsl_fft_halfcomplex_wavetable
-  type, public :: fgsl_fft_complex_workspace
-     private
-     type(c_ptr) :: gsl_fft_complex_workspace = c_null_ptr
-  end type fgsl_fft_complex_workspace
-  type, public :: fgsl_fft_real_workspace
-     private
-     type(c_ptr) :: gsl_fft_real_workspace = c_null_ptr
-  end type fgsl_fft_real_workspace
-!
-! Types: Numerical Integration
-!
-  type, public :: fgsl_integration_workspace
-     private
-     type(c_ptr) :: gsl_integration_workspace = c_null_ptr
-  end type fgsl_integration_workspace
-  integer(fgsl_int), parameter, public :: fgsl_integ_gauss15 = 1
-  integer(fgsl_int), parameter, public :: fgsl_integ_gauss21 = 2
-  integer(fgsl_int), parameter, public :: fgsl_integ_gauss31 = 3
-  integer(fgsl_int), parameter, public :: fgsl_integ_gauss41 = 4
-  integer(fgsl_int), parameter, public :: fgsl_integ_gauss51 = 5
-  integer(fgsl_int), parameter, public :: fgsl_integ_gauss61 = 6
-  type, public :: fgsl_integration_qaws_table
-     private
-     type(c_ptr) :: gsl_integration_qaws_table = c_null_ptr
-  end type fgsl_integration_qaws_table
-  type, public :: fgsl_integration_qawo_table
-     private
-     type(c_ptr) :: gsl_integration_qawo_table = c_null_ptr
-  end type fgsl_integration_qawo_table
-  integer(fgsl_int), parameter, public :: fgsl_integ_cosine = 0
-  integer(fgsl_int), parameter, public :: fgsl_integ_sine = 1
-  type, public :: fgsl_integration_cquad_workspace
-     private
-     type(c_ptr) :: gsl_integration_cquad_workspace = c_null_ptr
-  end type fgsl_integration_cquad_workspace
-  type, public :: fgsl_integration_romberg_workspace
-     private
-     type(c_ptr) :: gsl_integration_romberg_workspace  = c_null_ptr
-  end type fgsl_integration_romberg_workspace
-  type, public :: fgsl_integration_glfixed_table
-     private
-     type(c_ptr) :: gsl_integration_glfixed_table = c_null_ptr
-  end type fgsl_integration_glfixed_table
-  type, public :: fgsl_integration_fixed_workspace
-     private
-     type(c_ptr) :: gsl_integration_fixed_workspace = c_null_ptr
-  end type fgsl_integration_fixed_workspace
-  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_legendre = 1
-  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_chebyshev = 2
-  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_gegenbauer = 3
-  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_jacobi = 4
-  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_laguerre = 5
-  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_hermite = 6
-  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_exponential = 7
-  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_rational = 8
-  integer(fgsl_int), parameter, public :: fgsl_integration_fixed_chebyshev2 = 9
-
-
-!
-! Types: Random and Quasi-random numbers
-!
-  type, public :: fgsl_rng
-     private
-     type(c_ptr) :: gsl_rng = c_null_ptr
-  end type fgsl_rng
-  type, public :: fgsl_rng_type
-     private
-     type(c_ptr) :: gsl_rng_type = c_null_ptr
-     integer(fgsl_int) :: type = 0
-  end type fgsl_rng_type
-! Note: we need a dynamic component here, since
-! fgsl_rng_default needs to change at run time.
-! fgsl_rng_default will be set by fgsl_rng_env_setup,
-! and the static objects will be all set at the
-! first call of fgsl_rng_alloc
-!  integer, parameter :: rngmax = 61
-! check new g95  type(fgsl_rng_type) :: fgsl_rng_allgen(rngmax) = (/(fgsl_rng_type(c_null_ptr, i)), i=1, rngmax/)
-! cannot have protected attribute since modified by fgsl_rng_alloc
-  type(fgsl_rng_type), public :: &
-       fgsl_rng_default = fgsl_rng_type(c_null_ptr, -1), &
-       fgsl_rng_borosh13 = fgsl_rng_type(c_null_ptr, 1), &
-       fgsl_rng_coveyou = fgsl_rng_type(c_null_ptr, 2), &
-       fgsl_rng_cmrg = fgsl_rng_type(c_null_ptr, 3), &
-       fgsl_rng_fishman18 = fgsl_rng_type(c_null_ptr, 4), &
-       fgsl_rng_fishman20 = fgsl_rng_type(c_null_ptr, 5), &
-       fgsl_rng_fishman2x = fgsl_rng_type(c_null_ptr, 6), &
-       fgsl_rng_gfsr4 = fgsl_rng_type(c_null_ptr, 7), &
-       fgsl_rng_knuthran = fgsl_rng_type(c_null_ptr, 8), &
-       fgsl_rng_knuthran2 = fgsl_rng_type(c_null_ptr, 9), &
-       fgsl_rng_lecuyer21 = fgsl_rng_type(c_null_ptr, 10), &
-       fgsl_rng_minstd = fgsl_rng_type(c_null_ptr, 11), &
-       fgsl_rng_mrg = fgsl_rng_type(c_null_ptr, 12), &
-       fgsl_rng_mt19937 = fgsl_rng_type(c_null_ptr, 13), &
-       fgsl_rng_mt19937_1999 = fgsl_rng_type(c_null_ptr, 14), &
-       fgsl_rng_mt19937_1998 = fgsl_rng_type(c_null_ptr, 15), &
-       fgsl_rng_r250 = fgsl_rng_type(c_null_ptr, 16), &
-       fgsl_rng_ran0 = fgsl_rng_type(c_null_ptr, 17), &
-       fgsl_rng_ran1 = fgsl_rng_type(c_null_ptr, 18), &
-       fgsl_rng_ran2 = fgsl_rng_type(c_null_ptr, 19), &
-       fgsl_rng_ran3 = fgsl_rng_type(c_null_ptr, 20), &
-       fgsl_rng_rand = fgsl_rng_type(c_null_ptr, 21), &
-       fgsl_rng_rand48 = fgsl_rng_type(c_null_ptr, 22), &
-       fgsl_rng_random128_bsd = fgsl_rng_type(c_null_ptr, 23), &
-       fgsl_rng_random128_glibc2 = fgsl_rng_type(c_null_ptr, 24), &
-       fgsl_rng_random128_libc5 = fgsl_rng_type(c_null_ptr, 25), &
-       fgsl_rng_random256_bsd = fgsl_rng_type(c_null_ptr, 26), &
-       fgsl_rng_random256_glibc2 = fgsl_rng_type(c_null_ptr, 27), &
-       fgsl_rng_random256_libc5 = fgsl_rng_type(c_null_ptr, 28), &
-       fgsl_rng_random32_bsd = fgsl_rng_type(c_null_ptr, 29), &
-       fgsl_rng_random32_glibc2 = fgsl_rng_type(c_null_ptr, 30), &
-       fgsl_rng_random32_libc5 = fgsl_rng_type(c_null_ptr, 31), &
-       fgsl_rng_random64_bsd = fgsl_rng_type(c_null_ptr, 32), &
-       fgsl_rng_random64_glibc2 = fgsl_rng_type(c_null_ptr, 33), &
-       fgsl_rng_random64_libc5 = fgsl_rng_type(c_null_ptr, 34), &
-       fgsl_rng_random8_bsd = fgsl_rng_type(c_null_ptr, 35)
-  type(fgsl_rng_type), public ::  &
-       fgsl_rng_random8_glibc2 = fgsl_rng_type(c_null_ptr, 36), &
-       fgsl_rng_random8_libc5 = fgsl_rng_type(c_null_ptr, 37), &
-       fgsl_rng_random_bsd = fgsl_rng_type(c_null_ptr, 38), &
-       fgsl_rng_random_glibc2 = fgsl_rng_type(c_null_ptr, 39), &
-       fgsl_rng_random_libc5 = fgsl_rng_type(c_null_ptr, 40), &
-       fgsl_rng_randu = fgsl_rng_type(c_null_ptr, 41), &
-       fgsl_rng_ranf = fgsl_rng_type(c_null_ptr, 42), &
-       fgsl_rng_ranlux = fgsl_rng_type(c_null_ptr, 43), &
-       fgsl_rng_ranlux389 = fgsl_rng_type(c_null_ptr, 44), &
-       fgsl_rng_ranlxd1 = fgsl_rng_type(c_null_ptr, 45), &
-       fgsl_rng_ranlxd2 = fgsl_rng_type(c_null_ptr, 46), &
-       fgsl_rng_ranlxs0 = fgsl_rng_type(c_null_ptr, 47), &
-       fgsl_rng_ranlxs1 = fgsl_rng_type(c_null_ptr, 48), &
-       fgsl_rng_ranlxs2 = fgsl_rng_type(c_null_ptr, 49), &
-       fgsl_rng_ranmar = fgsl_rng_type(c_null_ptr, 50), &
-       fgsl_rng_slatec = fgsl_rng_type(c_null_ptr, 51), &
-       fgsl_rng_taus = fgsl_rng_type(c_null_ptr, 52), &
-       fgsl_rng_taus2 = fgsl_rng_type(c_null_ptr, 53), &
-       fgsl_rng_taus113 = fgsl_rng_type(c_null_ptr, 54), &
-       fgsl_rng_transputer = fgsl_rng_type(c_null_ptr, 55), &
-       fgsl_rng_tt800 = fgsl_rng_type(c_null_ptr, 56), &
-       fgsl_rng_uni = fgsl_rng_type(c_null_ptr, 57), &
-       fgsl_rng_uni32 = fgsl_rng_type(c_null_ptr, 58), &
-       fgsl_rng_vax = fgsl_rng_type(c_null_ptr, 59), &
-       fgsl_rng_waterman14 = fgsl_rng_type(c_null_ptr, 60), &
-       fgsl_rng_zuf = fgsl_rng_type(c_null_ptr, 61), &
-       fgsl_rng_knuthran2002 = fgsl_rng_type(c_null_ptr, 62)
-  integer(fgsl_long), public, bind(c, name='gsl_rng_default_seed') :: fgsl_rng_default_seed
-  type, public :: fgsl_qrng
-     private
-     type(c_ptr) :: gsl_qrng
-  end type fgsl_qrng
-  type, public :: fgsl_qrng_type
-     private
-     integer(fgsl_int) :: type = 0
-  end type fgsl_qrng_type
-  type(fgsl_qrng_type), parameter, public :: &
-       fgsl_qrng_niederreiter_2 = fgsl_qrng_type(1), &
-       fgsl_qrng_sobol = fgsl_qrng_type(2), &
-       fgsl_qrng_halton =  fgsl_qrng_type(3), &
-       fgsl_qrng_reversehalton =  fgsl_qrng_type(4)
-  type, public :: fgsl_ran_discrete_t
-     private
-     type(c_ptr) :: gsl_ran_discrete_t
-  end type fgsl_ran_discrete_t
 !
 ! Types: Histograms
 !
@@ -1171,9 +1001,6 @@ end type fgsl_filter_impulse_workspace
 ! needed to transfer static C information to the Fortran subsystem
   interface
 #include "interface/interp.finc"
-#include "interface/fft.finc"
-#include "interface/integration.finc"
-#include "interface/rng.finc"
 #include "interface/statistics.finc"
 #include "interface/histogram.finc"
 #include "interface/ntuple.finc"
@@ -1204,9 +1031,6 @@ end type fgsl_filter_impulse_workspace
 #include "interface/generics.finc"
 contains
 #include "api/interp.finc"
-#include "api/fft.finc"
-#include "api/integration.finc"
-#include "api/rng.finc"
 #include "api/statistics.finc"
 #include "api/histogram.finc"
 #include "api/ntuple.finc"

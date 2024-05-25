@@ -5,7 +5,8 @@ module fgsl_io
   use fgsl_errno
   implicit none
 
-  private :: fopen, fclose, fgsl_cstdin, fgsl_cstdout, fgsl_cstderr, fflush
+  private :: fopen, fclose, fgsl_cstdin, fgsl_cstdout, fgsl_cstderr, fflush, &
+    fgsl_file_status
 
   !
   !> Types
@@ -15,7 +16,13 @@ module fgsl_io
      type(c_ptr) :: gsl_file = c_null_ptr
   end type fgsl_file
   !
-  !>  Interfaces
+  !> Generic interfaces
+  !
+  interface fgsl_well_defined
+     module procedure fgsl_file_status
+  end interface
+  !
+  !>  C Interfaces
   !
   interface
      function fopen(path, mode) bind(c)
