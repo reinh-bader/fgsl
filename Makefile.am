@@ -56,6 +56,13 @@ BUILT_SOURCES = fgsl_base.mod \
 		fgsl_rngen.mod \
 		fgsl_qrngen.mod \
 		fgsl_cdf.mod \
+		fgsl_statistics.mod \
+		fgsl_rstat.mod \
+		fgsl_movstat.mod \
+		fgsl_filter.mod \
+		fgsl_histograms.mod \
+		fgsl_ntuples.mod \
+		fgsl_montecarlo.mod \
 		fgsl.mod
 
 NULL =
@@ -113,6 +120,13 @@ libfgsl_la_SOURCES = \
 	modules/fgsl_rngen.f90 \
 	modules/fgsl_qrngen.f90 \
 	modules/fgsl_cdf.f90 \
+	modules/fgsl_statistics.f90 \
+	modules/fgsl_rstat.f90 \
+	modules/fgsl_movstat.f90 \
+	modules/fgsl_filter.f90 \
+	modules/fgsl_histograms.f90 \
+	modules/fgsl_ntuples.f90 \
+	modules/fgsl_montecarlo.f90 \
 	csub/fgsl_base_c.c \
 	csub/fgsl_io_c.c \
 	csub/fgsl_math_c.c \
@@ -123,9 +137,10 @@ libfgsl_la_SOURCES = \
 	csub/fgsl_integration_c.c \
 	csub/fgsl_rngen_c.c \
 	csub/fgsl_qrngen_c.c \
+	csub/fgsl_ntuples_c.c \
+	csub/fgsl_montecarlo_c.c \
 	fgsl_utils.c \
 	api/dht.finc \
-	api/histogram.finc \
 	api/multifit.finc \
 	api/bspline.finc \
 	api/ieee.finc \
@@ -133,24 +148,18 @@ libfgsl_la_SOURCES = \
 	api/chebyshev.finc \
 	api/min.finc \
 	api/multiroots.finc \
-	api/statistics.finc \
 	api/interp.finc \
-	api/ntuple.finc \
 	api/roots.finc \
 	api/sum_levin.finc \
 	api/deriv.finc \
 	api/fit.finc \
-	api/montecarlo.finc \
 	api/ode.finc \
 	api/siman.finc \
 	api/wavelet.finc \
 	api/multilarge.finc \
 	api/spmatrix.finc \
 	api/splinalg.finc \
-	api/rstat.finc \
 	api/nlfit.finc \
-	api/movstat.finc \
-	api/filter.finc \
 	interface/ieee.finc \
 	interface/multimin.finc \
 	interface/sum_levin.finc \
@@ -160,25 +169,18 @@ libfgsl_la_SOURCES = \
 	interface/wavelet.finc \
 	interface/chebyshev.finc \
 	interface/min.finc \
-	interface/ntuple.finc \
 	interface/siman.finc \
 	interface/fit.finc \
 	interface/ode.finc \
 	interface/deriv.finc \
 	interface/generics.finc \
 	interface/interp.finc \
-	interface/montecarlo.finc \
 	interface/dht.finc \
-	interface/histogram.finc \
 	interface/multifit.finc \
-	interface/statistics.finc \
 	interface/multilarge.finc \
 	interface/spmatrix.finc \
 	interface/splinalg.finc \
-	interface/rstat.finc \
 	interface/nlfit.finc \
-	interface/movstat.finc \
-	interface/filter.finc \
 	$(NULL)
 
 libfgsl_la_DEPENDENCIES = $(libfgsl_la_SOURCES)
@@ -238,7 +240,14 @@ fgsl_integration.mod: modules/fgsl_integration.o
 fgsl_rngen.mod: modules/fgsl_rngen.o
 fgsl_qrngen.mod: modules/fgsl_qrngen.o
 fgsl_cdf.mod: modules/fgsl_cdf.o
-gsl.lo: $(libfgsl_la_SOURCES)
+fgsl_statistics.mod: modules/fgsl_statistics.o
+fgsl_rstat.mod: modules/fgsl_rstat.o
+fgsl_movstat.mod: modules/fgsl_movstat.o
+fgsl_filter.mod: modules/fgsl_filter.o
+fgsl_histograms.mod: modules/fgsl_histograms.o
+fgsl_ntuples.mod: modules/fgsl_ntuples.o
+fgsl_montecarlo.mod: modules/fgsl_montecarlo.o
+fgsl.lo: $(libfgsl_la_SOURCES)
 
 pkgconfigdir=$(libdir)/pkgconfig
 pkgconfig_DATA = fgsl.pc
@@ -292,7 +301,14 @@ nodist_fgslinclude_HEADERS = fgsl.mod \
 			     fgsl_fft.mod \
 			     fgsl_rngen.mod \
 			     fgsl_qrngen.mod \
-			     fgsl_cdf.mod
+			     fgsl_cdf.mod \
+			     fgsl_statistics.mod \
+			     fgsl_rstat.mod \
+			     fgsl_movstat.mod \
+			     fgsl_filter.mod \
+			     fgsl_histograms.mod \
+			     fgsl_ntuples.mod \
+			     fgsl_montecarlo.mod
 
 EXTRA_DIST = Doxyfile
 

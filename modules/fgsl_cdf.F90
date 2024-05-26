@@ -67,6 +67,11 @@ module fgsl_cdf
   end type fgsl_ran_discrete_t
   !
   ! Generics
+  interface fgsl_ran_shuffle
+     module procedure fgsl_ran_shuffle
+     module procedure fgsl_ran_shuffle_double
+     module procedure fgsl_ran_shuffle_size_t
+  end interface 
   interface fgsl_well_defined
      module procedure fgsl_ran_discrete_t_status
   end interface

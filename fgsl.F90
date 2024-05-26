@@ -78,6 +78,15 @@ module fgsl
   use fgsl_rngen
   use fgsl_qrngen
   use fgsl_cdf
+  use fgsl_statistics
+  use fgsl_rstat
+  use fgsl_movstat
+  use fgsl_filter
+  use fgsl_histograms
+  use fgsl_ntuples
+  use fgsl_montecarlo
+  use fgsl_siman
+  
   implicit none
 
 !
@@ -434,74 +443,10 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
   end type gsl_multifit_robust_stats
   
 
-!
-! Types: Histograms
-!
-  type, public :: fgsl_histogram
-     private
-     type(c_ptr) :: gsl_histogram = c_null_ptr
-  end type fgsl_histogram
-  type, public :: fgsl_histogram_pdf
-     private
-     type(c_ptr) :: gsl_histogram_pdf = c_null_ptr
-  end type fgsl_histogram_pdf
-  type, public :: fgsl_histogram2d
-     private
-     type(c_ptr) :: gsl_histogram2d = c_null_ptr
-  end type fgsl_histogram2d
-  type, public :: fgsl_histogram2d_pdf
-     private
-     type(c_ptr) :: gsl_histogram2d_pdf = c_null_ptr
-  end type fgsl_histogram2d_pdf
-!
-! Types: Ntuples
-!
-  type, public :: fgsl_ntuple
-     private
-     type(c_ptr) :: gsl_ntuple = c_null_ptr
-  end type fgsl_ntuple
-  type, public :: fgsl_ntuple_select_fn
-     private
-     type(c_ptr) :: gsl_ntuple_select_fn = c_null_ptr
-  end type fgsl_ntuple_select_fn
-  type, public :: fgsl_ntuple_value_fn
-     private
-     type(c_ptr) :: gsl_ntuple_value_fn = c_null_ptr
-  end type fgsl_ntuple_value_fn
-!
-! Types: Monte Carlo integration
-!
-  type, public :: fgsl_monte_function
-     private
-     type(c_ptr) :: gsl_monte_function = c_null_ptr
-  end type fgsl_monte_function
-  type, public :: fgsl_monte_plain_state
-     private
-     type(c_ptr) :: gsl_monte_plain_state = c_null_ptr
-  end type fgsl_monte_plain_state
-  type, public :: fgsl_monte_miser_state
-     private
-     type(c_ptr) :: gsl_monte_miser_state = c_null_ptr
-  end type fgsl_monte_miser_state
-  type, public :: fgsl_monte_vegas_state
-     private
-     type(c_ptr) :: gsl_monte_vegas_state = c_null_ptr
-  end type fgsl_monte_vegas_state
-! NOTE: not all compilers support enum yet
-  integer(c_int), parameter, public :: fgsl_vegas_mode_importance = 1
-  integer(c_int), parameter, public :: fgsl_vegas_mode_importance_only = 0
-  integer(c_int), parameter, public :: fgsl_vegas_mode_stratified = -1
-!
-! Types: Simulated Annealing
-!
-  type, bind(c) :: gsl_siman_params_t
-     integer(c_int) :: n_tries, iters_fixed_t
-     real(c_double) :: step_size, k, t_initial, mu_t, t_min
-  end type gsl_siman_params_t
-  type, public :: fgsl_siman_params_t
-     private
-     type(gsl_siman_params_t), pointer :: gsl_siman_params_t => null()
-  end type fgsl_siman_params_t
+
+
+
+
 !
 ! Types: Ordinary Differential Equations
 !
@@ -937,75 +882,15 @@ type, public :: fgsl_splinalg_itersolve
   private
   type(c_ptr) :: gsl_splinalg_itersolve
 end type fgsl_splinalg_itersolve
-!
-! Types: Running Statistics
-!
-type, public :: fgsl_rstat_quantile_workspace
-  private
-  type(c_ptr) :: gsl_rstat_quantile_workspace
-end type fgsl_rstat_quantile_workspace
-type, public :: fgsl_rstat_workspace
-  private
-  type(c_ptr) :: gsl_rstat_workspace
-end type fgsl_rstat_workspace
-!
-! Types: Moving Window Statistics
-!
-integer(fgsl_int), public, parameter :: &
-     fgsl_movstat_end_padzero = 0, &
-     fgsl_movstat_end_padvalue = 1, &
-     fgsl_movstat_end_truncate = 2
-type, public :: fgsl_movstat_workspace
-   private
-   type(c_ptr) :: gsl_movstat_workspace
-end type fgsl_movstat_workspace
-!> fgsl_movstat_function interoperates with gsl_movstat_function
-type, public, bind(c) :: fgsl_movstat_function
-   type(c_funptr) :: function
-   type(c_ptr) :: params
-end type fgsl_movstat_function
-!> Note: gsl_movstat_accum is not matched since the publicized
-!! interface does not make explicit use of accumulators
 
-!
-! Types: Digital Filtering
-!
-integer(fgsl_int), public, parameter :: &
-     fgsl_filter_end_padzero = 0, &
-     fgsl_filter_end_padvalue = 1, &
-     fgsl_filter_end_truncate = 2, &
-     fgsl_filter_scale_mad = 0, &
-     fgsl_filter_scale_iqr = 1, &
-     fgsl_filter_scale_sn = 2, &
-     fgsl_filter_scale_qn = 3
-     
 
-type, public :: fgsl_filter_gaussian_workspace
-   private
-   type(c_ptr) :: gsl_filter_gaussian_workspace
-end type fgsl_filter_gaussian_workspace
-type, public :: fgsl_filter_median_workspace
-   private
-   type(c_ptr) :: gsl_filter_median_workspace
-end type fgsl_filter_median_workspace
-type, public :: fgsl_filter_rmedian_workspace
-   private
-   type(c_ptr) :: gsl_filter_rmedian_workspace
-end type fgsl_filter_rmedian_workspace
-type, public :: fgsl_filter_impulse_workspace
-   private
-   type(c_ptr) :: gsl_filter_impulse_workspace
-end type fgsl_filter_impulse_workspace
+
+
 ! required C interfaces
 ! FGSL names occurring here are auxiliary routines
 ! needed to transfer static C information to the Fortran subsystem
   interface
 #include "interface/interp.finc"
-#include "interface/statistics.finc"
-#include "interface/histogram.finc"
-#include "interface/ntuple.finc"
-#include "interface/montecarlo.finc"
-#include "interface/siman.finc"
 #include "interface/ode.finc"
 #include "interface/deriv.finc"
 #include "interface/chebyshev.finc"
@@ -1024,18 +909,10 @@ end type fgsl_filter_impulse_workspace
 #include "interface/multilarge.finc"
 #include "interface/spmatrix.finc"
 #include "interface/splinalg.finc"
-#include "interface/rstat.finc"
-#include "interface/movstat.finc"
-#include "interface/filter.finc"
   end interface
 #include "interface/generics.finc"
 contains
 #include "api/interp.finc"
-#include "api/statistics.finc"
-#include "api/histogram.finc"
-#include "api/ntuple.finc"
-#include "api/montecarlo.finc"
-#include "api/siman.finc"
 #include "api/ode.finc"
 #include "api/deriv.finc"
 #include "api/chebyshev.finc"
@@ -1054,7 +931,4 @@ contains
 #include "api/multilarge.finc"
 #include "api/spmatrix.finc"
 #include "api/splinalg.finc"
-#include "api/rstat.finc"
-#include "api/movstat.finc"
-#include "api/filter.finc"
 end module fgsl

@@ -28,16 +28,12 @@
 
      module procedure fgsl_root_fsolver_status
      module procedure fgsl_root_fdfsolver_status
-     module procedure fgsl_siman_params_t_status
      module procedure fgsl_min_fminimizer_status
      module procedure fgsl_histogram_status
      module procedure fgsl_ntuple_status
      module procedure fgsl_ntuple_value_fn_status
      module procedure fgsl_ntuple_select_fn_status
-     module procedure fgsl_monte_function_status
-     module procedure fgsl_monte_plain_status
-     module procedure fgsl_monte_miser_status
-     module procedure fgsl_monte_vegas_status
+ 
      module procedure fgsl_multiroot_fsolver_status
      module procedure fgsl_multiroot_fdfsolver_status
      module procedure fgsl_multimin_fminimizer_status
@@ -68,14 +64,6 @@
 
 
 
-!
-! Random number stuff
-!
-  interface fgsl_ran_shuffle
-     module procedure fgsl_ran_shuffle
-     module procedure fgsl_ran_shuffle_double
-     module procedure fgsl_ran_shuffle_size_t
-  end interface
 !
 ! IEEE
 !

@@ -1,13 +1,184 @@
-!-*-f90-*-
-!
-! API: Monte Carlo integration
-!
-!> \page "Comments on monte carlo routines"
-!> Please go to api/montecarlo.finc for the API documentation.
+module fgsl_montecarlo
+  !> Monte Carlo Integration
+  !> Note: this module contains the routines for plain, vegas and miser
+  use fgsl_base
+  use fgsl_io
+  use fgsl_rngen
+  
+  implicit none
+  
+  private :: fgsl_monte_function_cinit, fgsl_monte_function_cfree, &
+    gsl_monte_plain_alloc, gsl_monte_plain_init, gsl_monte_plain_integrate, &
+    gsl_monte_plain_free, gsl_monte_miser_alloc, gsl_monte_miser_init, &
+    gsl_monte_miser_integrate, gsl_monte_miser_free, gsl_monte_vegas_alloc, &
+    gsl_monte_vegas_init, gsl_monte_vegas_integrate, gsl_monte_vegas_free, &
+    gsl_monte_vegas_chisq, gsl_monte_vegas_runval, fgsl_monte_miser_csetparams, &
+    fgsl_monte_miser_cgetparams, fgsl_monte_vegas_csetparams, &
+    fgsl_monte_vegas_cgetparams
+  
+  !
+  ! Types
+  type, public :: fgsl_monte_function
+     private
+     type(c_ptr) :: gsl_monte_function = c_null_ptr
+  end type fgsl_monte_function
+  type, public :: fgsl_monte_plain_state
+     private
+     type(c_ptr) :: gsl_monte_plain_state = c_null_ptr
+  end type fgsl_monte_plain_state
+  type, public :: fgsl_monte_miser_state
+     private
+     type(c_ptr) :: gsl_monte_miser_state = c_null_ptr
+  end type fgsl_monte_miser_state
+  type, public :: fgsl_monte_vegas_state
+     private
+     type(c_ptr) :: gsl_monte_vegas_state = c_null_ptr
+  end type fgsl_monte_vegas_state
+! NOTE: not all compilers support enum yet
+  integer(c_int), parameter, public :: fgsl_vegas_mode_importance = 1
+  integer(c_int), parameter, public :: fgsl_vegas_mode_importance_only = 0
+  integer(c_int), parameter, public :: fgsl_vegas_mode_stratified = -1
+  
+  !
+  ! Generics
+  interface fgsl_well_defined
+     module procedure fgsl_monte_function_status
+     module procedure fgsl_monte_plain_status
+     module procedure fgsl_monte_miser_status
+     module procedure fgsl_monte_vegas_status
+  end interface fgsl_well_defined
+  !
+  ! C interface
+  interface
+	  function fgsl_monte_function_cinit(func, dim, params) bind(c)
+	    import :: c_funptr, c_ptr, c_size_t
+	    type(c_funptr), value :: func
+	    integer(c_size_t), value :: dim
+	    type(c_ptr), value :: params
+	    type(c_ptr) :: fgsl_monte_function_cinit
+	  end function fgsl_monte_function_cinit
+	  subroutine fgsl_monte_function_cfree(func) bind(c)
+	    import
+	    type(c_ptr), value :: func
+	  end subroutine fgsl_monte_function_cfree
+	  function gsl_monte_plain_alloc(dim) bind(c)
+	    import
+	    integer(c_size_t), value :: dim
+	    type(c_ptr) :: gsl_monte_plain_alloc
+	  end function gsl_monte_plain_alloc
+	  function gsl_monte_plain_init(s) bind(c)
+	    import
+	    type(c_ptr), value :: s
+	    integer(c_int) :: gsl_monte_plain_init
+	  end function gsl_monte_plain_init
+	  function gsl_monte_plain_integrate(f, xl, xu, dim, calls, r, s, result, abserr) bind(c)
+	    import
+	    type(c_ptr), value :: f
+	    integer(c_size_t), value :: dim, calls
+	    real(c_double), intent(in) :: xl(dim), xu(dim)
+	    type(c_ptr), value :: r, s
+	    real(c_double), intent(out) :: result, abserr
+	    integer(c_int) :: gsl_monte_plain_integrate
+	  end function gsl_monte_plain_integrate
+	  subroutine gsl_monte_plain_free(s) bind(c)
+	    import
+	    type(c_ptr), value :: s
+	  end subroutine gsl_monte_plain_free
+	  function gsl_monte_miser_alloc(dim) bind(c)
+	    import
+	    integer(c_size_t), value :: dim
+	    type(c_ptr) :: gsl_monte_miser_alloc 
+	  end function gsl_monte_miser_alloc
+	  function gsl_monte_miser_init(s) bind(c)
+	    import
+	    type(c_ptr), value :: s
+	    integer(c_int) :: gsl_monte_miser_init
+	  end function gsl_monte_miser_init
+	  function gsl_monte_miser_integrate(f, xl, xu, dim, calls, r, s, result, abserr) bind(c)
+	    import
+	    type(c_ptr), value :: f
+	    integer(c_size_t), value :: dim, calls
+	    real(c_double), intent(in) :: xl(dim), xu(dim)
+	    type(c_ptr), value :: r, s
+	    real(c_double), intent(out) :: result, abserr
+	    integer(c_int) :: gsl_monte_miser_integrate
+	  end function gsl_monte_miser_integrate
+	  subroutine gsl_monte_miser_free(s) bind(c)
+	    import
+	    type(c_ptr), value :: s
+	  end subroutine gsl_monte_miser_free
+	  function gsl_monte_vegas_alloc(dim) bind(c)
+	    import
+	    integer(c_size_t), value :: dim
+	    type(c_ptr) :: gsl_monte_vegas_alloc 
+	  end function gsl_monte_vegas_alloc
+	  function gsl_monte_vegas_init(s) bind(c)
+	    import
+	    type(c_ptr), value :: s
+	    integer(c_int) :: gsl_monte_vegas_init
+	  end function gsl_monte_vegas_init
+	  function gsl_monte_vegas_integrate(f, xl, xu, dim, calls, r, s, result, abserr) bind(c)
+	    import
+	    type(c_ptr), value :: f
+	    integer(c_size_t), value :: dim, calls
+	    real(c_double), intent(in) :: xl(dim), xu(dim)
+	    type(c_ptr), value :: r, s
+	    real(c_double), intent(out) :: result, abserr
+	    integer(c_int) :: gsl_monte_vegas_integrate
+	  end function gsl_monte_vegas_integrate
+	  subroutine gsl_monte_vegas_free(s) bind(c)
+	    import :: c_ptr
+	    type(c_ptr), value :: s
+	  end subroutine gsl_monte_vegas_free
+	  function gsl_monte_vegas_chisq(s) bind(c)
+	    import :: c_double, c_ptr 
+	    real(c_double) :: gsl_monte_vegas_chisq
+	    type(c_ptr), value :: s
+	  end function gsl_monte_vegas_chisq
+	  subroutine gsl_monte_vegas_runval(s, result, sigma) bind(c)
+	    import :: c_double, c_ptr 
+	    type(c_ptr), value :: s
+	    real(c_double) :: result, sigma
+	  end subroutine gsl_monte_vegas_runval
+	! add-on routines
+	  subroutine fgsl_monte_miser_csetparams(s, estimate_frac, min_calls, &
+	       min_calls_per_bisection, alpha, dither) bind(c)
+	    import :: c_size_t, c_double, c_ptr
+	    type(c_ptr), value :: s
+	    real(c_double), value :: estimate_frac, alpha, dither
+	    integer(c_size_t), value ::  min_calls, min_calls_per_bisection
+	  end subroutine fgsl_monte_miser_csetparams
+	  subroutine fgsl_monte_miser_cgetparams(s, estimate_frac, min_calls, &
+	       min_calls_per_bisection, alpha, dither) bind(c)
+	    import :: c_size_t, c_double, c_ptr
+	    type(c_ptr), value :: s
+	    real(c_double), intent(out) :: estimate_frac, alpha, dither
+	    integer(c_size_t), intent(out) ::  min_calls, min_calls_per_bisection
+	  end subroutine fgsl_monte_miser_cgetparams
+	  subroutine fgsl_monte_vegas_csetparams(s, result, sigma, chisq, alpha, &
+	       iterations, stage, mode, verbose, ostream) bind(c)
+	    import :: c_size_t, c_double, c_ptr, c_int
+	    type(c_ptr), value :: s, ostream
+	    real(c_double), value :: result, sigma, chisq, alpha
+	    integer(c_size_t), value ::  iterations
+	    integer(c_int), value :: stage, mode, verbose
+	  end subroutine fgsl_monte_vegas_csetparams
+	  subroutine fgsl_monte_vegas_cgetparams(s, result, sigma, chisq, alpha, &
+	       iterations, stage, mode, verbose, ostream) bind(c)
+	    import :: c_size_t, c_double, c_ptr, c_int
+	    type(c_ptr), value :: s, ostream
+	    real(c_double), intent(out) :: result, sigma, chisq, alpha
+	    integer(c_size_t), intent(out) ::  iterations
+	    integer(c_int), intent(out) :: stage, mode, verbose
+	  end subroutine fgsl_monte_vegas_cgetparams
+  end interface
+  
+contains
 !> Note: in GSL 1.13, accessors were also added to GSL. They're
 !> slightly different named and have a differing interface from
 !> fgsl_monte_*_?etparams routines already existing in FGSL.
 !> To preserve backward compatibility, the FGSL accessors are retained.
+! FIXME: add the new accessors and deprecate the older ones
 
   function fgsl_monte_function_init(func, dim, params)
     interface
@@ -193,3 +364,5 @@
          sigma, chisq, alpha, iterations, stage, mode, verbose, &
          ostream%gsl_file)
   end subroutine fgsl_monte_vegas_getparams
+
+end module fgsl_montecarlo

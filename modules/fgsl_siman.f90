@@ -1,10 +1,44 @@
-!-*-f90-*-
-!
-! API: Simulated annealing
-!
-!> \page "Comments on simulated annealing"
-!> Please go to api/siman.finc for the API documentation.
-
+module fgsl_siman
+  !> Simulated Annealing
+  !> Note: this module contains the routines for plain, vegas and miser
+  use fgsl_base
+  
+  implicit none
+  
+  private :: gsl_siman_solve, fgsl_siman_params_t_status
+  
+  !
+  ! Types
+  type, bind(c) :: gsl_siman_params_t
+     integer(c_int) :: n_tries, iters_fixed_t
+     real(c_double) :: step_size, k, t_initial, mu_t, t_min
+  end type gsl_siman_params_t
+  type, public :: fgsl_siman_params_t
+     private
+     type(gsl_siman_params_t), pointer :: gsl_siman_params_t => null()
+  end type fgsl_siman_params_t
+  
+  !
+  !> Generics
+  interface fgsl_well_defined
+     module procedure fgsl_siman_params_t_status
+  end interface fgsl_well_defined
+  !
+  !> C interfaces
+  interface
+	  subroutine gsl_siman_solve(rng, x0_p, ef, take_step, distance, &
+	       print_position, copy_func, copy_constructor, destructor, &
+	       element_size, params) bind(c)
+	    import :: c_size_t, c_ptr, c_funptr, gsl_siman_params_t
+	    type(c_funptr), value :: ef, take_step, distance, print_position, &
+	         copy_func, copy_constructor, destructor
+	    type(c_ptr), value :: rng, x0_p
+	    integer(c_size_t), value :: element_size
+	    type(gsl_siman_params_t), value :: params
+	  end subroutine gsl_siman_solve
+  end interface
+contains
+!> API
   subroutine fgsl_siman_params_init(params, n_tries, iters_fixed_t, &
        step_size, k, t_initial, mu_t, t_min)
     type(fgsl_siman_params_t), intent(inout) :: params
@@ -107,3 +141,5 @@
          fgsl_siman_params_t_status = .false.
   end function fgsl_siman_params_t_status
 
+ 
+end module
