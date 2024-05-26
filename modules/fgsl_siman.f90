@@ -2,7 +2,8 @@ module fgsl_siman
   !> Simulated Annealing
   !> Note: this module contains the routines for plain, vegas and miser
   use fgsl_base
-  
+  use fgsl_rngen
+
   implicit none
   
   private :: gsl_siman_solve, fgsl_siman_params_t_status

@@ -63,6 +63,7 @@ BUILT_SOURCES = fgsl_base.mod \
 		fgsl_histograms.mod \
 		fgsl_ntuples.mod \
 		fgsl_montecarlo.mod \
+		fgsl_siman.mod \
 		fgsl.mod
 
 NULL =
@@ -127,6 +128,7 @@ libfgsl_la_SOURCES = \
 	modules/fgsl_histograms.f90 \
 	modules/fgsl_ntuples.f90 \
 	modules/fgsl_montecarlo.f90 \
+	modules/fgsl_siman.f90 \
 	csub/fgsl_base_c.c \
 	csub/fgsl_io_c.c \
 	csub/fgsl_math_c.c \
@@ -154,7 +156,6 @@ libfgsl_la_SOURCES = \
 	api/deriv.finc \
 	api/fit.finc \
 	api/ode.finc \
-	api/siman.finc \
 	api/wavelet.finc \
 	api/multilarge.finc \
 	api/spmatrix.finc \
@@ -169,7 +170,6 @@ libfgsl_la_SOURCES = \
 	interface/wavelet.finc \
 	interface/chebyshev.finc \
 	interface/min.finc \
-	interface/siman.finc \
 	interface/fit.finc \
 	interface/ode.finc \
 	interface/deriv.finc \
@@ -247,6 +247,7 @@ fgsl_filter.mod: modules/fgsl_filter.o
 fgsl_histograms.mod: modules/fgsl_histograms.o
 fgsl_ntuples.mod: modules/fgsl_ntuples.o
 fgsl_montecarlo.mod: modules/fgsl_montecarlo.o
+fgsl_siman.mod: modules/fgsl_siman.o
 fgsl.lo: $(libfgsl_la_SOURCES)
 
 pkgconfigdir=$(libdir)/pkgconfig
@@ -308,7 +309,8 @@ nodist_fgslinclude_HEADERS = fgsl.mod \
 			     fgsl_filter.mod \
 			     fgsl_histograms.mod \
 			     fgsl_ntuples.mod \
-			     fgsl_montecarlo.mod
+			     fgsl_montecarlo.mod \
+			     fgsl_siman.mod
 
 EXTRA_DIST = Doxyfile
 
