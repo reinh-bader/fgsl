@@ -16,15 +16,7 @@
      module procedure fgsl_interp_accel_status
      module procedure fgsl_spline_status
      module procedure fgsl_spline2d_status
-     module procedure fgsl_odeiv_control_status
-     module procedure fgsl_odeiv_evolve_status
-     module procedure fgsl_odeiv_step_status
-     module procedure fgsl_odeiv_system_status
-     module procedure fgsl_odeiv2_control_status
-     module procedure fgsl_odeiv2_evolve_status
-     module procedure fgsl_odeiv2_step_status
-     module procedure fgsl_odeiv2_system_status
-     module procedure fgsl_odeiv2_driver_status
+
 
      module procedure fgsl_root_fsolver_status
      module procedure fgsl_root_fdfsolver_status

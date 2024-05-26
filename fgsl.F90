@@ -86,6 +86,8 @@ module fgsl
   use fgsl_ntuples
   use fgsl_montecarlo
   use fgsl_siman
+  use fgsl_odeiv2 !> Note: legacy fgsl_odeiv not associated here
+  use fgsl_odeiv  ! FIXME test case ode needs update
   
   implicit none
 
@@ -442,87 +444,6 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
        type(c_ptr) :: r
   end type gsl_multifit_robust_stats
   
-
-
-
-
-
-!
-! Types: Ordinary Differential Equations
-!
-  type, public :: fgsl_odeiv2_system
-     private
-     type(c_ptr) :: gsl_odeiv2_system = c_null_ptr
-  end type fgsl_odeiv2_system
-  type, public :: fgsl_odeiv2_step_type
-     private
-     integer(c_int) :: which = 0
-  end type fgsl_odeiv2_step_type
-  type(fgsl_odeiv2_step_type), parameter, public :: &
-       fgsl_odeiv2_step_rk2 = fgsl_odeiv2_step_type(1), &
-       fgsl_odeiv2_step_rk4 = fgsl_odeiv2_step_type(2), &
-       fgsl_odeiv2_step_rkf45 = fgsl_odeiv2_step_type(3), &
-       fgsl_odeiv2_step_rkck = fgsl_odeiv2_step_type(4), &
-       fgsl_odeiv2_step_rk8pd = fgsl_odeiv2_step_type(5), &
-       fgsl_odeiv2_step_rk1imp = fgsl_odeiv2_step_type(6), &
-       fgsl_odeiv2_step_rk2imp = fgsl_odeiv2_step_type(7), &
-       fgsl_odeiv2_step_rk4imp = fgsl_odeiv2_step_type(8), &
-       fgsl_odeiv2_step_bsimp = fgsl_odeiv2_step_type(9), &
-       fgsl_odeiv2_step_msadams = fgsl_odeiv2_step_type(10), &
-       fgsl_odeiv2_step_msbdf = fgsl_odeiv2_step_type(11)
-  type, public :: fgsl_odeiv2_step
-     type(c_ptr) :: gsl_odeiv2_step = c_null_ptr
-  end type fgsl_odeiv2_step
-  type, public :: fgsl_odeiv2_driver
-     private
-     type(c_ptr) :: gsl_odeiv2_driver = c_null_ptr
-  end type fgsl_odeiv2_driver
-  type, public :: fgsl_odeiv2_control_type
-     type(c_ptr) :: gsl_odeiv2_control_type = c_null_ptr
-  end type fgsl_odeiv2_control_type
-  type, public :: fgsl_odeiv2_control
-     type(c_ptr) :: gsl_odeiv2_control = c_null_ptr
-  end type fgsl_odeiv2_control
-  type, public :: fgsl_odeiv2_evolve
-     type(c_ptr) :: gsl_odeiv2_evolve
-  end type fgsl_odeiv2_evolve
-
-! obsolescent legacy interface
-  type, public :: fgsl_odeiv_system
-     private
-     type(c_ptr) :: gsl_odeiv_system = c_null_ptr
-  end type fgsl_odeiv_system
-  type, public :: fgsl_odeiv_step_type
-     private
-     integer(c_int) :: which = 0
-  end type fgsl_odeiv_step_type
-  type(fgsl_odeiv_step_type), parameter, public :: &
-       fgsl_odeiv_step_rk2 = fgsl_odeiv_step_type(1), &
-       fgsl_odeiv_step_rk4 = fgsl_odeiv_step_type(2), &
-       fgsl_odeiv_step_rkf45 = fgsl_odeiv_step_type(3), &
-       fgsl_odeiv_step_rkck = fgsl_odeiv_step_type(4), &
-       fgsl_odeiv_step_rk8pd = fgsl_odeiv_step_type(5), &
-       fgsl_odeiv_step_rk2imp = fgsl_odeiv_step_type(6), &
-       fgsl_odeiv_step_rk2simp = fgsl_odeiv_step_type(7), &
-       fgsl_odeiv_step_rk4imp = fgsl_odeiv_step_type(8), &
-       fgsl_odeiv_step_bsimp = fgsl_odeiv_step_type(9), &
-       fgsl_odeiv_step_gear1 = fgsl_odeiv_step_type(10), &
-       fgsl_odeiv_step_gear2 = fgsl_odeiv_step_type(11)
-  type, public :: fgsl_odeiv_step
-     type(c_ptr) :: gsl_odeiv_step = c_null_ptr
-  end type fgsl_odeiv_step
-  type, public :: fgsl_odeiv_control
-     type(c_ptr) :: gsl_odeiv_control = c_null_ptr
-  end type fgsl_odeiv_control
-  type, public :: fgsl_odeiv_control_type
-     type(c_ptr) :: gsl_odeiv_control_type = c_null_ptr
-  end type fgsl_odeiv_control_type
-  integer(fgsl_int), parameter, public :: fgsl_odeiv_hadj_inc = 1
-  integer(fgsl_int), parameter, public :: fgsl_odeiv_hadj_nil = 0
-  integer(fgsl_int), parameter, public :: fgsl_odeiv_hadj_dec = -1
-  type, public :: fgsl_odeiv_evolve
-     type(c_ptr) :: gsl_odeiv_evolve
-  end type fgsl_odeiv_evolve
 !
 ! Types: Chebyshev approximation
 !
@@ -891,7 +812,6 @@ end type fgsl_splinalg_itersolve
 ! needed to transfer static C information to the Fortran subsystem
   interface
 #include "interface/interp.finc"
-#include "interface/ode.finc"
 #include "interface/deriv.finc"
 #include "interface/chebyshev.finc"
 #include "interface/sum_levin.finc"
@@ -913,7 +833,6 @@ end type fgsl_splinalg_itersolve
 #include "interface/generics.finc"
 contains
 #include "api/interp.finc"
-#include "api/ode.finc"
 #include "api/deriv.finc"
 #include "api/chebyshev.finc"
 #include "api/sum_levin.finc"
