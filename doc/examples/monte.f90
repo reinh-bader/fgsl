@@ -17,11 +17,11 @@ contains
   subroutine display_results(title,result,error)
     character(kind=fgsl_char,len=*), intent(in) :: title
     real(fgsl_double), intent(in) :: result, error
-    write(6, '(A,'' ================='')') trim(title)
-    write(6, '(''result = '',F10.6)') result
-    write(6, '(''sigma  = '',F10.6)') error
-    write(6, '(''exact  = '',F10.6)') exact
-    write(6, '(''error  = '',F10.6,'' = '',F5.1,'' sigma'')') &
+    write(*, '(A,'' ================='')') trim(title)
+    write(*, '(''result = '',F10.6)') result
+    write(*, '(''sigma  = '',F10.6)') error
+    write(*, '(''exact  = '',F10.6)') exact
+    write(*, '(''error  = '',F10.6,'' = '',F5.1,'' sigma'')') &
          result - exact, abs(result - exact) / error
   end subroutine display_results
 end module mod_monte
@@ -73,13 +73,13 @@ program monte
   status = fgsl_monte_vegas_integrate(gfun, xl, xu, 3_fgsl_size_t, &
        10000_fgsl_size_t, r, v, res, err)
   call display_results('vegas warm-up',res,err)
-  write(6, *) 'converging ...'
+  write(*, *) 'converging ...'
   do
      status = fgsl_monte_vegas_integrate(gfun, xl, xu, 3_fgsl_size_t, &
           calls/5_fgsl_size_t, r, v, res, err)
      call fgsl_monte_vegas_getparams(v, y, yy, chisq, yyy, &
        its, stage, mode, verbose, file)
-     write(6, '(''result = '',F10.6,'' sigma = '',F10.6, &
+     write(*, '(''result = '',F10.6,'' sigma = '',F10.6, &
           & '' chisq/dof = '',F6.1)') res,err,chisq
      if (abs(chisq - 1.0_fgsl_double) <= 0.5_fgsl_double) exit
   end do

@@ -29,7 +29,7 @@ program histogram2d
      v = fgsl_rng_uniform(r)
      status = fgsl_histogram2d_pdf_sample (p, u, v, x, y)
      if (status /= FGSL_SUCCESS) exit
-     write(6, '(2(F15.8,2X))') x, y
+     write(*, '(2(F15.8,2X))') x, y
   end do
   call fgsl_histogram2d_free(h)
   call fgsl_histogram2d_pdf_free(p)

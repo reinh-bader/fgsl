@@ -14,11 +14,11 @@ program sum
      sum_t = sum_t + t(i)
   end do
   status = fgsl_sum_levin_u_accel (t, n, w, sum_accel, err)
-  write(6,'(''term-by-term sum = '',1PE25.16,'' using '',I2,'' terms.'')') &
+  write(*,'(''term-by-term sum = '',1PE25.16,'' using '',I2,'' terms.'')') &
        sum_t, n
-  write(6,'(''Exact value      = '',1PE25.16)') zeta_2
-  write(6,'(''Accelerated sum  = '',1PE25.16)') sum_accel
-  write(6,'(''Estimated error  = '',1PE25.16)') err
-  write(6,'(''Actual error     = '',1PE25.16)') sum_accel - zeta_2
+  write(*,'(''Exact value      = '',1PE25.16)') zeta_2
+  write(*,'(''Accelerated sum  = '',1PE25.16)') sum_accel
+  write(*,'(''Estimated error  = '',1PE25.16)') err
+  write(*,'(''Actual error     = '',1PE25.16)') sum_accel - zeta_2
   status = fgsl_sum_levin_u_free(w)
 end program sum

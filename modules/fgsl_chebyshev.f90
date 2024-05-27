@@ -1,10 +1,100 @@
-!-*-f90-*-
-!
-! API: Chebyshev Approximations
-!
-!> \page "Comments on chebyshev approximation"
-!> Please go to api/chebyshev.finc for the API documentation.
+module fgsl_chebyshev
+  !> Chebyshev Approximations
+  use fgsl_base
+  use fgsl_math
 
+  implicit none
+  
+  private :: gsl_cheb_alloc, gsl_cheb_free, gsl_cheb_init, &
+    gsl_cheb_order, gsl_cheb_size, gsl_cheb_coeffs, gsl_cheb_eval, &
+    gsl_cheb_eval_err, gsl_cheb_eval_n, gsl_cheb_eval_n_err, &
+    gsl_cheb_calc_deriv, gsl_cheb_calc_integ
+  !
+  !> Types
+  type, public :: fgsl_cheb_series
+     private
+     type(c_ptr) :: gsl_cheb_series = c_null_ptr
+  end type fgsl_cheb_series
+  
+  !
+  !> Generics
+  interface fgsl_well_defined
+     module procedure fgsl_cheb_series_status
+  end interface fgsl_well_defined
+  !
+  !> C interfaces
+  interface
+	  function gsl_cheb_alloc(n) bind(c)
+	    import
+	    integer(c_int), value :: n
+	    type(c_ptr) :: gsl_cheb_alloc
+	  end function gsl_cheb_alloc
+	  subroutine gsl_cheb_free(cs) bind(c)
+	    import
+	    type(c_ptr), value :: cs
+	  end subroutine gsl_cheb_free
+	  function gsl_cheb_init(cs, f, a, b) bind(c)
+	    import
+	    type(c_ptr), value :: cs, f
+	    real(c_double), value :: a, b
+	    integer(c_int) :: gsl_cheb_init
+	  end function gsl_cheb_init
+	  function gsl_cheb_order(cs) bind(c)
+	    import :: c_ptr, c_size_t
+	    integer(c_size_t) :: gsl_cheb_order
+	    type(c_ptr), value :: cs
+	  end function gsl_cheb_order
+	  function gsl_cheb_size(cs) bind(c)
+	    import :: c_ptr, c_size_t
+	    integer(c_size_t) :: gsl_cheb_size
+	    type(c_ptr), value :: cs
+	  end function gsl_cheb_size
+	  function gsl_cheb_coeffs(cs) bind(c)
+	    import :: c_ptr
+	    type(c_ptr) :: gsl_cheb_coeffs
+	    type(c_ptr), value :: cs
+	  end function gsl_cheb_coeffs
+	  function gsl_cheb_eval(cs, x) bind(c)
+	    import
+	    type(c_ptr), value :: cs
+	    real(c_double), value :: x
+	    real(c_double) :: gsl_cheb_eval
+	  end function gsl_cheb_eval
+	  function gsl_cheb_eval_err(cs, x, result, abserr) bind(c)
+	    import
+	    type(c_ptr), value :: cs
+	    real(c_double), value :: x
+	    real(c_double), intent(out) :: result, abserr
+	    integer(c_int) :: gsl_cheb_eval_err
+	  end function gsl_cheb_eval_err
+	  function gsl_cheb_eval_n(cs, order, x) bind(c)
+	    import
+	    type(c_ptr), value :: cs
+	    integer(c_size_t), value :: order
+	    real(c_double), value :: x
+	    real(c_double) :: gsl_cheb_eval_n
+	  end function gsl_cheb_eval_n
+	  function gsl_cheb_eval_n_err(cs, order, x, result, abserr) bind(c)
+	    import
+	    type(c_ptr), value :: cs
+	    integer(c_size_t), value :: order
+	    real(c_double), value :: x
+	    real(c_double), intent(out) :: result, abserr
+	    integer(c_int) :: gsl_cheb_eval_n_err
+	  end function gsl_cheb_eval_n_err
+	  function gsl_cheb_calc_deriv(deriv, cs) bind(c)
+	    import
+	    type(c_ptr), value :: deriv, cs
+	    integer(c_int) :: gsl_cheb_calc_deriv
+	  end function gsl_cheb_calc_deriv
+	  function gsl_cheb_calc_integ(integ, cs) bind(c)
+	    import
+	    type(c_ptr), value :: integ, cs
+	    integer(c_int) :: gsl_cheb_calc_integ
+	  end function gsl_cheb_calc_integ
+  end interface
+contains
+!> API
   function fgsl_cheb_alloc(n)
     integer(fgsl_int), intent(in) :: n
     type(fgsl_cheb_series) :: fgsl_cheb_alloc
@@ -91,3 +181,4 @@
     if (.not. c_associated(cheb_series%gsl_cheb_series)) &
          fgsl_cheb_series_status = .false.
   end function fgsl_cheb_series_status
+end module fgsl_chebyshev

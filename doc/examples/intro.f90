@@ -5,5 +5,5 @@ program intro
 !
   x = 5.0_fgsl_double
   y = fgsl_sf_bessel_jc0(x)
-  write(6,fmt='(''J0(5) = '',1PE25.18E2)') y
+  write(*,fmt='(''J0(5) = '',1PE25.18E2)') y
 end program intro

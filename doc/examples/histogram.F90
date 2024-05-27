@@ -8,20 +8,21 @@ program histogram
   type(fgsl_histogram) :: h
   type(fgsl_file) :: stdout
   namelist / histpar / a, b, n
+  integer :: iu
 !
-  write(*, *) 'Reading histogram parameters from file histogram.dat ... '
-  open(20, file=HISTOGRAM_DAT, form='formatted', status='old')
-  read(20, nml=histpar) 
-  close(20)
+  write(*,*) 'Reading histogram parameters from file histogram.dat ... '
+  open(newunit=iu, file=HISTOGRAM_DAT, form='formatted', status='old')
+  read(iu, nml=histpar) 
+  close(iu)
   stdout = fgsl_stdout()
   h = fgsl_histogram_alloc(n)
   status = fgsl_histogram_set_ranges_uniform(h, a, b)
-  open(20, file=CAUCHY_DAT,  status='old')
+  open(newunit=iu, file=CAUCHY_DAT, status='old')
   do i=1,10000
-     read(20, fmt='(F15.7)') x 
+     read(iu, fmt='(F15.7)') x 
      status = fgsl_histogram_increment (h, x)
   end do
-  close(20)
+  close(iu)
   write(*, *) 'Printing histogram:'
   status = fgsl_histogram_fprintf(stdout, h,'%12.5f','%7.0f')
   call fgsl_histogram_free(h)

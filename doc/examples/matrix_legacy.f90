@@ -19,7 +19,7 @@ program matrix
   status = fgsl_matrix_align(pfm, mat)
   do i=1, size(pfm(1,:))
      do j=1, size(pfm(:,1))
-        write(6, '(''mat('',I2,'','',I2,'') = '',F6.2)') j, i, pfm(j,i)
+        write(*, '(''mat('',I2,'','',I2,'') = '',F6.2)') j, i, pfm(j,i)
      end do
   end do
 end program matrix

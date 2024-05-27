@@ -19,17 +19,17 @@ program diff
   type(fgsl_function) :: pwr
 !
   pwr = fgsl_function_init(f, c_null_ptr)
-  write(6, *) 'f(x) = x^(3/2)'
+  write(*, *) 'f(x) = x^(3/2)'
   status = fgsl_deriv_central (pwr, 2.0_fgsl_double, 1.E-8_fgsl_double, &
        result, abserr)
-  write(6, *) 'x = 2.0'
-  write(6, '(''df/dx = '',F17.10,'' +/- '',F17.10)') result, abserr
-  write(6, '(''exact = '',F17.10)') 1.5D0*sqrt(2.0D0)
+  write(*, *) 'x = 2.0'
+  write(*, '(''df/dx = '',F17.10,'' +/- '',F17.10)') result, abserr
+  write(*, '(''exact = '',F17.10)') 1.5D0*sqrt(2.0D0)
  
   status = fgsl_deriv_forward (pwr, 0.0_fgsl_double, 1.E-8_fgsl_double, &
        result, abserr)
-  write(6, *) 'x = 0.0'
-  write(6, '(''df/dx = '',F17.10,'' +/- '',F17.10)') result, abserr
-  write(6, '(''exact = '',F17.10)') 0.0D0
+  write(*, *) 'x = 0.0'
+  write(*, '(''df/dx = '',F17.10,'' +/- '',F17.10)') result, abserr
+  write(*, '(''exact = '',F17.10)') 0.0D0
   
 end program diff

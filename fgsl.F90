@@ -59,6 +59,7 @@ module fgsl
 !>
 !-------------------------------------------------------------------------------
   use, intrinsic :: iso_c_binding
+  
   use fgsl_base
   use fgsl_errno
   use fgsl_io
@@ -88,6 +89,12 @@ module fgsl
   use fgsl_siman
   use fgsl_odeiv2 !> Note: legacy fgsl_odeiv not associated here
   use fgsl_odeiv  ! FIXME test case ode needs update
+  use fgsl_interpolation
+  use fgsl_deriv
+  use fgsl_chebyshev
+  use fgsl_sum_levin
+  use fgsl_wavelets
+  use fgsl_dhtransforms
   
   implicit none
 
@@ -353,47 +360,6 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
     type(c_ptr) :: gsl_multilarge_linear_workspace
   end type fgsl_multilarge_linear_workspace
 !
-! Types : Interpolation
-!
-  type, public :: fgsl_interp_type
-     private
-     integer(fgsl_int) :: which = 0
-  end type fgsl_interp_type
-  type(fgsl_interp_type), parameter, public :: &
-       fgsl_interp_linear = fgsl_interp_type(1), &
-       fgsl_interp_polynomial = fgsl_interp_type(2), &
-       fgsl_interp_cspline = fgsl_interp_type(3), &
-       fgsl_interp_cspline_periodic = fgsl_interp_type(4), &
-       fgsl_interp_akima = fgsl_interp_type(5), &
-       fgsl_interp_akima_periodic = fgsl_interp_type(6), &
-       fgsl_interp_steffen = fgsl_interp_type(7)
-  type, public :: fgsl_interp
-     private
-     type(c_ptr) :: gsl_interp = c_null_ptr
-  end type fgsl_interp
-  type, public :: fgsl_interp_accel
-     private
-     type(c_ptr) :: gsl_interp_accel = c_null_ptr
-  end type fgsl_interp_accel
-  type, public :: fgsl_spline
-     private
-     type(c_ptr) :: gsl_spline = c_null_ptr
-  end type fgsl_spline
-  type, public :: fgsl_spline2d
-     private
-     type(c_ptr) :: gsl_spline2d = c_null_ptr
-  end type fgsl_spline2d
-  type, public :: fgsl_interp2d_type
-    private
-    integer(fgsl_int) :: which = 0
-  end type fgsl_interp2d_type
-  type(fgsl_interp2d_type), parameter, public :: &
-       fgsl_interp2d_bilinear = fgsl_interp2d_type(1), &
-       fgsl_interp2d_bicubic = fgsl_interp2d_type(2)
-  type, public :: fgsl_interp2d
-     private
-     type(c_ptr) :: gsl_interp2d = c_null_ptr
-  end type fgsl_interp2d
 !
 
 !
@@ -444,53 +410,10 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
        type(c_ptr) :: r
   end type gsl_multifit_robust_stats
   
-!
-! Types: Chebyshev approximation
-!
-  type, public :: fgsl_cheb_series
-     private
-     type(c_ptr) :: gsl_cheb_series = c_null_ptr
-  end type fgsl_cheb_series
-!
-! Types: Series acceleration
-!
-  type, public :: fgsl_sum_levin_u_workspace
-     private
-     type(c_ptr) :: gsl_sum_levin_u_workspace = c_null_ptr
-  end type fgsl_sum_levin_u_workspace
-  type, public :: fgsl_sum_levin_utrunc_workspace
-     private
-     type(c_ptr) :: gsl_sum_levin_utrunc_workspace = c_null_ptr
-  end type fgsl_sum_levin_utrunc_workspace
-!
-! Types: Wavelet transforms
-!
-  type, public :: fgsl_wavelet
-     private
-     type(c_ptr) :: gsl_wavelet = c_null_ptr
-  end type fgsl_wavelet
-  type, public :: fgsl_wavelet_type
-     private
-     integer(c_int) :: which = 0
-  end type fgsl_wavelet_type
-  type(fgsl_wavelet_type), public, parameter :: &
-       fgsl_wavelet_daubechies = fgsl_wavelet_type(1), &
-       fgsl_wavelet_daubechies_centered = fgsl_wavelet_type(2), &
-       fgsl_wavelet_haar = fgsl_wavelet_type(3), &
-       fgsl_wavelet_haar_centered = fgsl_wavelet_type(4), &
-       fgsl_wavelet_bspline = fgsl_wavelet_type(5), &
-       fgsl_wavelet_bspline_centered = fgsl_wavelet_type(6)
-  type, public :: fgsl_wavelet_workspace
-     private
-     type(c_ptr) :: gsl_wavelet_workspace
-  end type fgsl_wavelet_workspace
-!
-! Types: Hankel transforms
-!
-  type, public :: fgsl_dht
-     private
-     type(c_ptr) :: gsl_dht = c_null_ptr
-  end type fgsl_dht
+
+
+
+
 !
 ! Types: Root finding
 !
@@ -811,12 +734,6 @@ end type fgsl_splinalg_itersolve
 ! FGSL names occurring here are auxiliary routines
 ! needed to transfer static C information to the Fortran subsystem
   interface
-#include "interface/interp.finc"
-#include "interface/deriv.finc"
-#include "interface/chebyshev.finc"
-#include "interface/sum_levin.finc"
-#include "interface/wavelet.finc"
-#include "interface/dht.finc"
 #include "interface/roots.finc"
 #include "interface/min.finc"
 #include "interface/multiroots.finc"
@@ -832,12 +749,6 @@ end type fgsl_splinalg_itersolve
   end interface
 #include "interface/generics.finc"
 contains
-#include "api/interp.finc"
-#include "api/deriv.finc"
-#include "api/chebyshev.finc"
-#include "api/sum_levin.finc"
-#include "api/wavelet.finc"
-#include "api/dht.finc"
 #include "api/roots.finc"
 #include "api/min.finc"
 #include "api/multiroots.finc"

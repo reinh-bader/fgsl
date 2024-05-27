@@ -66,6 +66,12 @@ BUILT_SOURCES = fgsl_base.mod \
 		fgsl_siman.mod \
 		fgsl_odeiv.mod \
 		fgsl_odeiv2.mod \
+		fgsl_interpolation.mod \
+		fgsl_deriv.mod \
+		fgsl_chebyshev.mod \
+		fgsl_sum_levin.mod \
+		fgsl_wavelets.mod \
+		fgsl_dhtransforms.mod \
 		fgsl.mod
 
 NULL =
@@ -122,7 +128,7 @@ libfgsl_la_SOURCES = \
 	modules/fgsl_integration.f90 \
 	modules/fgsl_rngen.f90 \
 	modules/fgsl_qrngen.f90 \
-	modules/fgsl_cdf.f90 \
+	modules/fgsl_cdf.F90 \
 	modules/fgsl_statistics.f90 \
 	modules/fgsl_rstat.f90 \
 	modules/fgsl_movstat.f90 \
@@ -133,6 +139,12 @@ libfgsl_la_SOURCES = \
 	modules/fgsl_siman.f90 \
 	modules/fgsl_odeiv.f90 \
 	modules/fgsl_odeiv2.f90 \
+	modules/fgsl_interpolation.F90 \
+	modules/fgsl_deriv.f90 \
+	modules/fgsl_chebyshev.f90 \
+	modules/fgsl_sum_levin.f90 \
+	modules/fgsl_wavelets.f90 \
+	modules/fgsl_dhtransforms.f90 \
 	csub/fgsl_base_c.c \
 	csub/fgsl_io_c.c \
 	csub/fgsl_math_c.c \
@@ -147,39 +159,29 @@ libfgsl_la_SOURCES = \
 	csub/fgsl_montecarlo_c.c \
 	csub/fgsl_odeiv_c.c \
 	csub/fgsl_odeiv2_c.c \
+	csub/fgsl_interpolation_c.c \
+	csub/fgsl_wavelets_c.c \
 	fgsl_utils.c \
-	api/dht.finc \
 	api/multifit.finc \
 	api/bspline.finc \
 	api/ieee.finc \
 	api/multimin.finc \
-	api/chebyshev.finc \
 	api/min.finc \
 	api/multiroots.finc \
-	api/interp.finc \
 	api/roots.finc \
-	api/sum_levin.finc \
-	api/deriv.finc \
 	api/fit.finc \
-	api/wavelet.finc \
 	api/multilarge.finc \
 	api/spmatrix.finc \
 	api/splinalg.finc \
 	api/nlfit.finc \
 	interface/ieee.finc \
 	interface/multimin.finc \
-	interface/sum_levin.finc \
 	interface/bspline.finc \
 	interface/multiroots.finc \
 	interface/roots.finc \
-	interface/wavelet.finc \
-	interface/chebyshev.finc \
 	interface/min.finc \
 	interface/fit.finc \
-	interface/deriv.finc \
 	interface/generics.finc \
-	interface/interp.finc \
-	interface/dht.finc \
 	interface/multifit.finc \
 	interface/multilarge.finc \
 	interface/spmatrix.finc \
@@ -254,6 +256,12 @@ fgsl_montecarlo.mod: modules/fgsl_montecarlo.o
 fgsl_siman.mod: modules/fgsl_siman.o
 fgsl_odeiv.mod: modules/fgsl_odeiv.o
 fgsl_odeiv2.mod: modules/fgsl_odeiv2.o
+fgsl_interpolation.mod: modules/fgsl_interpolation.o
+fgsl_deriv.mod: modules/fgsl_deriv.o
+fgsl_chebyshev.mod: modules/fgsl_chebyshev.o
+fgsl_sum_levin.mod: modules/fgsl_sum_levin.o
+fgsl_wavelets.mod: modules/fgsl_wavelets.o
+fgsl_dhtransforms.mod: modules/fgsl_dhtransforms.o
 fgsl.lo: $(libfgsl_la_SOURCES)
 
 pkgconfigdir=$(libdir)/pkgconfig
@@ -318,7 +326,13 @@ nodist_fgslinclude_HEADERS = fgsl.mod \
 			     fgsl_montecarlo.mod \
 			     fgsl_siman.mod \
 			     fgsl_odeiv.mod \
-			     fgsl_odeiv2.mod
+			     fgsl_odeiv2.mod \
+			     fgsl_interpolation.mod \
+			     fgsl_deriv.mod \
+			     fgsl_chebyshev.mod \
+			     fgsl_sum_levin.mod \
+			     fgsl_wavelets.mod \
+			     fgsl_dhtransforms.mod
 
 EXTRA_DIST = Doxyfile
 

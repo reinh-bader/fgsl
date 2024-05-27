@@ -32,7 +32,7 @@ program cheb
      x = dble(i-1)/dble(n)
      r10 = fgsl_cheb_eval_n(cs, 10_fgsl_size_t, x)
      r40 = fgsl_cheb_eval(cs, x)
-     write(6, fmt='(2(F7.4,1X),2(1PE13.6,1X))') x, f(x,ptr), r10, r40
+     write(*, fmt='(2(F7.4,1X),2(1PE13.6,1X))') x, f(x,ptr), r10, r40
   end do
   call fgsl_cheb_free(cs)
   call fgsl_function_free(fun)

@@ -11,7 +11,7 @@ program rngunif
   r = fgsl_rng_alloc (t)
   do i=1, 10
      u = fgsl_rng_uniform (r)
-     write(6, '(F7.5)') u
+     write(*, '(F7.5)') u
   end do
   call fgsl_rng_free(r)
 end program rngunif

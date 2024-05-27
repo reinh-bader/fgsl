@@ -11,11 +11,11 @@ program randwalk
   t = fgsl_rng_env_setup()
   t = fgsl_rng_default
   r = fgsl_rng_alloc (t)
-  write (6, '(''Starting with '',2(F10.5,1X))') x, y
+  write(*, '(''Starting with '',2(F10.5,1X))') x, y
   do i=1, 10
      call fgsl_ran_dir_2d(r, dx, dy)
      x = x + dx; y = y + dy
-     write (6, '(4X,2(F10.5,1X))') x, y
+     write(*, '(4X,2(F10.5,1X))') x, y
   end do
   call fgsl_rng_free(r)
 end program randwalk

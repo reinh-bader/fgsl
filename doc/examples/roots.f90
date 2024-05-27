@@ -41,7 +41,7 @@ program roots
         i = i + 1
         status = fgsl_root_fsolver_iterate(root_fslv)
         if (status /= fgsl_success .or. i > itmax) then
-           write(6, *) 'Failed to converge or iterate'
+           write(*, *) 'Failed to converge or iterate'
            exit
         end if
         root = fgsl_root_fsolver_root(root_fslv)
@@ -51,11 +51,11 @@ program roots
         if (status == fgsl_success) exit
      end do
   end if
-  write(6, '(''Output for root finding algorithm '',A,'':'')') trim(name)
-  write(6, '(''Number of iterations needed: '',i2)') i
-  write(6, '(''Root of '',F5.2,''*x*x + '',F5.2,''*x +'',F5.2,'' is: '',1PE18.10)') &
+  write(*, '(''Output for root finding algorithm '',A,'':'')') trim(name)
+  write(*, '(''Number of iterations needed: '',i2)') i
+  write(*, '(''Root of '',F5.2,''*x*x + '',F5.2,''*x +'',F5.2,'' is: '',1PE18.10)') &
        fpar, root
-  write(6, '(''Function value at root is: '',1PE18.10)') quadratic(root,ptr)
+  write(*, '(''Function value at root is: '',1PE18.10)') quadratic(root,ptr)
   call fgsl_root_fsolver_free(root_fslv)
   call fgsl_function_free(func)
 end program roots

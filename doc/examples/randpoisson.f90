@@ -17,6 +17,6 @@ program randpoisson
      k = fgsl_ran_poisson (r, mu)
      write (6, advance='no', fmt='(I2)') k
   end do
-  write(6, '('''')')
+  write(*, '('''')')
   call fgsl_rng_free(r)
 end program randpoisson

@@ -38,7 +38,7 @@ module fgsl_histograms
     gsl_histogram2d_pdf_init, gsl_histogram2d_pdf_free, gsl_histogram2d_pdf_sample
     
   !
-  ! Types
+  !> Types
   type, public :: fgsl_histogram
      type(c_ptr) :: gsl_histogram = c_null_ptr
   end type fgsl_histogram
@@ -56,7 +56,13 @@ module fgsl_histograms
   end type fgsl_histogram2d_pdf  
   
   !
-  ! C interfaces
+  !> Generics
+  interface fgsl_well_defined
+     module procedure fgsl_histogram_status
+  end interface fgsl_well_defined
+  
+  !
+  !> C interfaces
   interface
 	  function gsl_histogram_alloc(n) bind(c)
 	    import

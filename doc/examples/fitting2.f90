@@ -9,12 +9,13 @@ program fitting2
   real(fgsl_double), allocatable :: x_m(:,:), y_v(:), w_v(:)
   real(fgsl_double) :: cov_m(3,3), c_v(3)
   type(fgsl_multifit_linear_workspace) :: work
+  integer :: iu
 !
-  open(20, file='fitting2.dat', form='formatted', status='old', iostat=status)
+  open(newunit=iu, file='fitting2.dat', form='formatted', status='old', iostat=status)
   if (status > 0) then
      stop 'Could not open fitting2.dat. You need to run fitting3.exe first.'
   end if
-  read(20, *) n
+  read(iu, *) n
   allocate(x_m(3, n), y_v(n), w_v(n))
 !
   x = fgsl_matrix_init(x_m)
@@ -24,14 +25,14 @@ program fitting2
   c = fgsl_vector_init(c_v)
 !
   do i=1, n
-     read(20, *) xi, yi, ei
+     read(iu, *) xi, yi, ei
      x_m(1, i) = 1.0D0
      x_m(2, i) = xi
      x_m(3, i) = xi * xi
      y_v(i) = yi
      w_v(i) = 1.0D0/(ei * ei)
   end do
-  close(20)
+  close(iu)
   work = fgsl_multifit_linear_alloc(n, 3_fgsl_size_t)
   status = fgsl_multifit_wlinear(x, w, y, c, cov, chisq, work)
   rk = fgsl_multifit_linear_rank(1.0d-4, work)

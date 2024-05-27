@@ -11,7 +11,7 @@ program ieeeround
      oldsum = sum
      sum = sum + x
      x = x/dble(i)
-     write(6, '(''i='',I0,'' sum='',F20.18,'' error='',e10.3)') &
+     write(*, '(''i='',I0,'' sum='',F20.18,'' error='',e10.3)') &
           i, sum, sum - m_e
      if (i > 30) exit
   end do

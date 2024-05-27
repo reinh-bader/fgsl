@@ -35,9 +35,9 @@ program integration_omp
      status = fgsl_integration_qags(f_obj, 0.0_fgsl_double, 1.0_fgsl_double, &
           0.0_fgsl_double, 1.0e-7_fgsl_double, nmax, wk, result, error)
 !$omp ordered
-     write(6, fmt='(''Integration result        : '',F20.16)') result
-     write(6, fmt='(''Integration error estimate: '',F20.16)') error
-     write(6, fmt='(''Exact result              : '',F20.16)') &
+     write(*, fmt='(''Integration result        : '',F20.16)') result
+     write(*, fmt='(''Integration error estimate: '',F20.16)') error
+     write(*, fmt='(''Exact result              : '',F20.16)') &
           2*log(alpha)-4.0D0
 !$omp end ordered
   end do

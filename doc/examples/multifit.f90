@@ -88,14 +88,14 @@ program multifit
   rng = fgsl_rng_alloc(fgsl_rng_default)
   fitdata%n = nmax
   allocate(fitdata%y(nmax),fitdata%sigma(nmax))
-  write(6, fmt='('' No.       Data value       Sigma'')')
+  write(*, fmt='('' No.       Data value       Sigma'')')
   do i=1, nmax
      fitdata%y(i) = 1.0_fgsl_double + &
           5.0_fgsl_double * exp(-0.1_fgsl_double*dble(i-1)) + &
           fgsl_ran_gaussian(rng, 0.1_fgsl_double)
      fitdata%sigma(i) = 0.1_fgsl_double * (1.0_fgsl_double + &
           5.0_fgsl_double * exp(-0.1_fgsl_double*dble(i-1)))
-     write(6, fmt='(I3,2X,2(F16.8,1X))') i, fitdata%y(i), fitdata%sigma(i)
+     write(*, fmt='(I3,2X,2(F16.8,1X))') i, fitdata%y(i), fitdata%sigma(i)
   end do
   ptr = c_loc(fitdata)
   nlfit_fdf = fgsl_multifit_function_fdf_init(expb_f, expb_df, &
@@ -115,15 +115,15 @@ program multifit
   if (fgsl_well_defined(nlfit_slv)) then
      status = fgsl_multifit_fdfsolver_set(nlfit_slv, nlfit_fdf, params)
      i = 0
-     write(6, fmt= &
+     write(*, fmt= &
           '(''Iteration   <--------- Fit Parameter Values --------->   Targ. function'')')
      do
-        write(6, fmt='(2X,I3,2X,3(F15.8,1X),2X,1PD12.5)') i, v_parptr(1:nrt), &
+        write(*, fmt='(2X,I3,2X,3(F15.8,1X),2X,1PD12.5)') i, v_parptr(1:nrt), &
              sqrt(dot_product(v_fun,v_fun))
         i = i + 1
         status = fgsl_multifit_fdfsolver_iterate(nlfit_slv)
         if (status /= fgsl_success .or. i > itmax) then
-           write(6, *) 'Iteration or Convergence failure'
+           write(*, *) 'Iteration or Convergence failure'
            exit
         end if
         status = fgsl_multifit_test_delta( &
@@ -138,15 +138,15 @@ program multifit
      chi = sqrt(dot_product(v_fun,v_fun))
      c = max(1.0d0, chi/sqrt(dble(nmax-nrt)))
 !  c only relevant for error estimate if chi*chi/dof exceeds 1
-     write(6, '(''Iteration complete. Final Results for '')')
-     write(6, '(''  fit function A exp (-lambda x) + b: '')')
-     write(6, '(''  A      = '',1PE15.8,'' +/- '',1PE12.5)') v_parptr(1), &
+     write(*, '(''Iteration complete. Final Results for '')')
+     write(*, '(''  fit function A exp (-lambda x) + b: '')')
+     write(*, '(''  A      = '',1PE15.8,'' +/- '',1PE12.5)') v_parptr(1), &
           c * v_cov(1,1)
-     write(6, '(''  lambda = '',1PE15.8,'' +/- '',1PE12.5)') v_parptr(2), &
+     write(*, '(''  lambda = '',1PE15.8,'' +/- '',1PE12.5)') v_parptr(2), &
           c * v_cov(2,2)
-     write(6, '(''  b      = '',1PE15.8,'' +/- '',1PE12.5)') v_parptr(3), &
+     write(*, '(''  b      = '',1PE15.8,'' +/- '',1PE12.5)') v_parptr(3), &
           c * v_cov(3,3)
-     write(6, '(''  chisq / degrees_of_freedom: '',1PE10.3)') chi*chi/dble(nmax-nrt)
+     write(*, '(''  chisq / degrees_of_freedom: '',1PE10.3)') chi*chi/dble(nmax-nrt)
   end if
   call fgsl_vector_free(params)
   call fgsl_matrix_free(cov)

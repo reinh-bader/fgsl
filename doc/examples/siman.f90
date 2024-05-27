@@ -77,7 +77,7 @@ program siman
 ! prevent interleaving of Fortran and C output.
   stdout = fgsl_stdout()
   status = fgsl_flush(stdout)
-  write(6, '(''Final Result (should be 1.3633498): '',F12.7)') tg
+  write(*, '(''Final Result (should be 1.3633498): '',F12.7)') tg
   call fgsl_siman_params_free(params)
   call fgsl_rng_free(rng)
 end program siman

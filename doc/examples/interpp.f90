@@ -11,16 +11,16 @@ program interpp
   type(fgsl_spline) :: spline
 
   spline =  fgsl_spline_alloc(fgsl_interp_cspline_periodic, n)
-  write(6, '(''#m=0,S=5'')')
+  write(*, '(''#m=0,S=5'')')
   do i=1,n
-     write(6, '(2(F10.5,1X))') x(i), y(i)
+     write(*, '(2(F10.5,1X))') x(i), y(i)
   end do
-  write(6, '(''#m=1,S=0'')')
+  write(*, '(''#m=1,S=0'')')
   status = fgsl_spline_init(spline, x, y)
   do i=1, 100
      xi = (1.D0 - dble(i-1)/100.D0) * x(1) + dble(i-1)/100.D0 * x(n)
      yi = fgsl_spline_eval(spline, xi, acc)
-     write(6, '(2(F10.5,1X))') xi, yi
+     write(*, '(2(F10.5,1X))') xi, yi
   end do
   call fgsl_spline_free (spline)
   call fgsl_interp_accel_free (acc)

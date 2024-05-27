@@ -8,7 +8,7 @@ program qrng
   q = fgsl_qrng_alloc(fgsl_qrng_sobol, 2)
   do i=1, 1024
      status = fgsl_qrng_get(q, v)
-     write(6, '(2(F7.5,1X))') v
+     write(*, '(2(F7.5,1X))') v
   end do
   call fgsl_qrng_free(q)
 end program qrng

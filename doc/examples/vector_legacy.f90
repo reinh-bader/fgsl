@@ -13,13 +13,13 @@ program vector
        3_fgsl_size_t)
   if (status == fgsl_success) then
      status = fgsl_vector_align(p_v, vec)
-     write(6, '(''Size of pointer is: '',i3)') size(p_v)
-     write(6, '(''Components: '',3F12.5)') p_v(1:size(p_v))
-     write(6, '(''Should be : '',3F12.5)') (/3.1D0,6.1D0,9.1D0/)
+     write(*, '(''Size of pointer is: '',i3)') size(p_v)
+     write(*, '(''Components: '',3F12.5)') p_v(1:size(p_v))
+     write(*, '(''Should be : '',3F12.5)') (/3.1D0,6.1D0,9.1D0/)
      v(6) = v(6) + 1.0_fgsl_double
-     write(6, '(''Increased 2nd component by one: '',F12.5)') p_v(2)
+     write(*, '(''Increased 2nd component by one: '',F12.5)') p_v(2)
   else
-     write(6, *) 'Failed to properly initialize vector object.'
+     write(*, *) 'Failed to properly initialize vector object.'
   end if
   call fgsl_vector_free(vec)
 end program vector

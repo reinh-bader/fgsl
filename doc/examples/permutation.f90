@@ -12,7 +12,7 @@ program permutation
   do 
      status = fgsl_permutation_fprintf(stdout, p, " %u")
      status = fgsl_flush(stdout)
-     write(6, '('''')')
+     write(*, '('''')')
      if (fgsl_permutation_next(p) /= FGSL_SUCCESS) exit 
   end do
   call fgsl_permutation_free(p)

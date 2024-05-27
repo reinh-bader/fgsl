@@ -16,26 +16,26 @@ program permshuffle
   t = fgsl_rng_default
   r = fgsl_rng_alloc (t)
  
-  write(6, advance='no', fmt='(''initial permutation:'')') 
+  write(*, advance='no', fmt='(''initial permutation:'')') 
   call fgsl_permutation_init(p)
   stdout = fgsl_stdout()
   status = fgsl_permutation_fprintf (stdout, p, ' %u')
-  status = fgsl_flush(stdout); write(6, '('''')')
+  status = fgsl_flush(stdout); write(*, '('''')')
 
-  write(6, advance='no', fmt='(''random permutation:'')') 
+  write(*, advance='no', fmt='(''random permutation:'')') 
   data => fgsl_permutation_data(p)
   if (associated(data)) then
      call fgsl_ran_shuffle (r, data, n);
      status = fgsl_permutation_fprintf (stdout, p, ' %u')
-     status = fgsl_flush(stdout); write(6, '('''')')
+     status = fgsl_flush(stdout); write(*, '('''')')
   else
-     write(6, '('' failed to acquire pointer to permutation data'')')
+     write(*, '('' failed to acquire pointer to permutation data'')')
   end if
 
-  write(6, advance='no', fmt='(''inverse permutation:'')') 
+  write(*, advance='no', fmt='(''inverse permutation:'')') 
   status = fgsl_permutation_inverse(q, p)
   status = fgsl_permutation_fprintf (stdout, q, ' %u')
-  status = fgsl_flush(stdout);  write(6, '('''')')
+  status = fgsl_flush(stdout);  write(*, '('''')')
 
   call fgsl_permutation_free(p)
   call fgsl_permutation_free(q)

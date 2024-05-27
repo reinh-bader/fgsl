@@ -11,6 +11,6 @@ program polyroots
   call fgsl_poly_complex_workspace_free (w)
 
   do i=1, 5
-     write(6, '(''z'',I0,'' = '',F20.18,'' + i*'',F20.18)') i,z(i) 
+     write(*, '(''z'',I0,'' = '',F20.18,'' + i*'',F20.18)') i,z(i) 
   end do
 end program polyroots

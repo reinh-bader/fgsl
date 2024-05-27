@@ -17,22 +17,22 @@ program fitting
        c0, c1, cov00, cov01, cov11, chisq)
 
 
-  write(6, '(''# best fit: Y = '',F12.5,'' + '',F12.5, &
+  write(*, '(''# best fit: Y = '',F12.5,'' + '',F12.5, &
        & ''*X'')') c0, c1
-  write(6, '(''# covariance matrix: '')')
-  write(6, '(''# [ '',F12.5,'', '',F12.5, '' ]'')') cov00, cov01
-  write(6, '(''# [ '',F12.5,'', '',F12.5, '' ]'')') cov01, cov11
-  write(6, '(''# chisq = '',F12.5)') chisq
+  write(*, '(''# covariance matrix: '')')
+  write(*, '(''# [ '',F12.5,'', '',F12.5, '' ]'')') cov00, cov01
+  write(*, '(''# [ '',F12.5,'', '',F12.5, '' ]'')') cov01, cov11
+  write(*, '(''# chisq = '',F12.5)') chisq
 
   do i=1, n
-     write(6, '(''data: '',2(F6.1,1X),F12.5)') x(i), y(i), 1.0D0/sqrt(w(i))
+     write(*, '(''data: '',2(F6.1,1X),F12.5)') x(i), y(i), 1.0D0/sqrt(w(i))
   end do
 
   do i=-30,129
      xf = x(1) + dble(i)/100.D0 * (x(n) - x(1))
      status = fgsl_fit_linear_est (xf, c0, c1, cov00, cov01, cov11, &
           yf, yf_err)
-     write(6, '(''fit, error: '',F6.1,1X,F10.5,'' +/-'',F10.5)') &
+     write(*, '(''fit, error: '',F6.1,1X,F10.5,'' +/-'',F10.5)') &
           xf, yf, yf_err
   end do
 end program fitting

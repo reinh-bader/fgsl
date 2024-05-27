@@ -65,12 +65,12 @@ program ode
   t = 0.0_fgsl_double; t1 = 100.0_fgsl_double
   h = 1.0e-6_fgsl_double
   y = (/1.0_c_double, 0.0_c_double /)
-  write(6, '(''# Using the '',A,'' algorithm'')') trim(name)
+  write(*, '(''# Using the '',A,'' algorithm'')') trim(name)
   do while (t < t1)
      status = fgsl_odeiv2_evolve_apply(ode_evlv, ode_ctrl, ode_step, &
           ode_system, t, t1, h, y)
      if (status /= FGSL_SUCCESS) exit
-     write(6,fmt='(3(1PE15.8,1X))') t, y(1), y(2)
+     write(*,fmt='(3(1PE15.8,1X))') t, y(1), y(2)
   end do
   call fgsl_odeiv2_evolve_free (ode_evlv)
   call fgsl_odeiv2_control_free (ode_ctrl)

@@ -1,11 +1,206 @@
-!-*-f90-*-
-!
-! API: wavelet transforms
-!
-!
-!> \page "Comments on wavelet transforms"
-!> Please go to api/wavelet.finc for the API documentation.
+module fgsl_wavelets
+  !> Wavelet Transforms
+  !> Note: This module maps the functions from gsl_wavelet.h and gsl_wavelet2d.h
+  use fgsl_base
+  use fgsl_array
 
+  implicit none
+  
+  private :: gsl_wavelet_alloc, gsl_wavelet_name, gsl_wavelet_free, &
+    gsl_wavelet_workspace_alloc, gsl_wavelet_workspace_free, &
+    gsl_wavelet_transform, gsl_wavelet_transform_forward, &
+    gsl_wavelet_transform_inverse
+  private :: gsl_wavelet2d_transform, gsl_wavelet2d_transform_forward, &
+    gsl_wavelet2d_transform_inverse, gsl_wavelet2d_transform_matrix, &
+    gsl_wavelet2d_transform_matrix_forward, gsl_wavelet2d_transform_matrix_inverse, &
+    gsl_wavelet2d_nstransform, gsl_wavelet2d_nstransform_forward, &
+    gsl_wavelet2d_nstransform_inverse, gsl_wavelet2d_nstransform_matrix, &
+    gsl_wavelet2d_nstransform_matrix_forward, &
+    gsl_wavelet2d_nstransform_matrix_inverse
+  private :: fgsl_aux_wavelet_alloc, gsl_aux_sizeof_wavelet_workspace, &
+    gsl_aux_sizeof_wavelet
+  !
+  !> Generics
+  interface fgsl_well_defined
+     module procedure fgsl_wavelet_status
+     module procedure fgsl_wavelet_workspace_status
+  end interface fgsl_well_defined
+  interface fgsl_sizeof
+     module procedure fgsl_sizeof_wavelet
+     module procedure fgsl_sizeof_wavelet_workspace
+  end interface
+  !
+  !> Types
+  type, public :: fgsl_wavelet
+     private
+     type(c_ptr) :: gsl_wavelet = c_null_ptr
+  end type fgsl_wavelet
+  type, public :: fgsl_wavelet_type
+     private
+     integer(c_int) :: which = 0
+  end type fgsl_wavelet_type
+  type(fgsl_wavelet_type), public, parameter :: &
+       fgsl_wavelet_daubechies = fgsl_wavelet_type(1), &
+       fgsl_wavelet_daubechies_centered = fgsl_wavelet_type(2), &
+       fgsl_wavelet_haar = fgsl_wavelet_type(3), &
+       fgsl_wavelet_haar_centered = fgsl_wavelet_type(4), &
+       fgsl_wavelet_bspline = fgsl_wavelet_type(5), &
+       fgsl_wavelet_bspline_centered = fgsl_wavelet_type(6)
+  type, public :: fgsl_wavelet_workspace
+     private
+     type(c_ptr) :: gsl_wavelet_workspace
+  end type fgsl_wavelet_workspace
+  !
+  !> C interfaces
+  interface
+	  function gsl_wavelet_alloc(t, k) bind(c)
+	    import
+	    type(c_ptr), value :: t
+	    integer(c_size_t), value :: k
+	    type(c_ptr) :: gsl_wavelet_alloc
+	  end function gsl_wavelet_alloc
+	  function gsl_wavelet_name(wavelet) bind(c)
+	    import
+	    type(c_ptr), value :: wavelet
+	    type(c_ptr) :: gsl_wavelet_name
+	  end function gsl_wavelet_name
+	  subroutine gsl_wavelet_free(w) bind(c)
+	    import
+	    type(c_ptr), value :: w
+	  end subroutine gsl_wavelet_free
+	  function gsl_wavelet_workspace_alloc(n) bind(c)
+	    import
+	    integer(c_size_t), value :: n
+	    type(c_ptr) :: gsl_wavelet_workspace_alloc
+	  end function gsl_wavelet_workspace_alloc
+	  subroutine gsl_wavelet_workspace_free(w) bind(c)
+	    import
+	    type(c_ptr), value :: w
+	  end subroutine gsl_wavelet_workspace_free
+	  function gsl_wavelet_transform(w, data, stride, n, dir, work) bind(c)
+	    import
+	    type(c_ptr), value :: w
+	    type(c_ptr), value :: data
+	    integer(c_size_t), value :: stride, n
+	    integer(c_int), value :: dir
+	    type(c_ptr), value :: work
+	    integer(c_int) :: gsl_wavelet_transform
+	  end function gsl_wavelet_transform
+	  function gsl_wavelet_transform_forward(w, data, stride, n, work) bind(c)
+	    import
+	    type(c_ptr), value :: w
+	    type(c_ptr), value :: data
+	    integer(c_size_t), value :: stride, n
+	    type(c_ptr), value :: work
+	    integer(c_int) :: gsl_wavelet_transform_forward
+	  end function gsl_wavelet_transform_forward
+	  function gsl_wavelet_transform_inverse(w, data, stride, n, work) bind(c)
+	    import
+	    type(c_ptr), value :: w
+	    type(c_ptr), value :: data
+	    integer(c_size_t), value :: stride, n
+	    type(c_ptr), value :: work
+	    integer(c_int) :: gsl_wavelet_transform_inverse
+	  end function gsl_wavelet_transform_inverse
+	  function gsl_wavelet2d_transform(w, data, tda, size1, size2, dir, work) bind(c)
+	    import
+	    type(c_ptr), value :: w
+	    type(c_ptr), value :: data
+	    integer(c_size_t), value :: tda, size1, size2
+	    integer(c_int), value :: dir
+	    type(c_ptr), value :: work
+	    integer(c_int) :: gsl_wavelet2d_transform
+	  end function gsl_wavelet2d_transform
+	  function gsl_wavelet2d_transform_forward(w, data, tda, size1, size2, work) bind(c)
+	    import
+	    type(c_ptr), value :: w
+	    type(c_ptr), value :: data
+	    integer(c_size_t), value :: tda, size1, size2
+	    type(c_ptr), value :: work
+	    integer(c_int) :: gsl_wavelet2d_transform_forward
+	  end function gsl_wavelet2d_transform_forward
+	  function gsl_wavelet2d_transform_inverse(w, data, tda, size1, size2, work) bind(c)
+	    import
+	    type(c_ptr), value :: w
+	    type(c_ptr), value :: data
+	    integer(c_size_t), value :: tda, size1, size2
+	    type(c_ptr), value :: work
+	    integer(c_int) :: gsl_wavelet2d_transform_inverse
+	  end function gsl_wavelet2d_transform_inverse
+	  function gsl_wavelet2d_transform_matrix(w, m, dir, work) bind(c)
+	    import :: c_ptr, c_int
+	    type(c_ptr), value :: w, m, work
+	    integer(c_int), value :: dir
+	    integer(c_int) :: gsl_wavelet2d_transform_matrix
+	  end function gsl_wavelet2d_transform_matrix
+	  function gsl_wavelet2d_transform_matrix_forward(w, m, work) bind(c)
+	    import :: c_ptr, c_int
+	    type(c_ptr), value :: w, m, work
+	    integer(c_int) :: gsl_wavelet2d_transform_matrix_forward
+	  end function gsl_wavelet2d_transform_matrix_forward
+	  function gsl_wavelet2d_transform_matrix_inverse(w, m, work) bind(c)
+	    import :: c_ptr, c_int
+	    type(c_ptr), value :: w, m, work
+	    integer(c_int) :: gsl_wavelet2d_transform_matrix_inverse
+	  end function gsl_wavelet2d_transform_matrix_inverse
+	  function gsl_wavelet2d_nstransform(w, data, tda, size1, size2, dir, work) bind(c)
+	    import
+	    type(c_ptr), value :: w
+	    type(c_ptr), value :: data
+	    integer(c_size_t), value :: tda, size1, size2
+	    integer(c_int), value :: dir
+	    type(c_ptr), value :: work
+	    integer(c_int) :: gsl_wavelet2d_nstransform
+	  end function gsl_wavelet2d_nstransform
+	  function gsl_wavelet2d_nstransform_forward(w, data, tda, size1, size2, work) bind(c)
+	    import
+	    type(c_ptr), value :: w
+	    type(c_ptr), value :: data
+	    integer(c_size_t), value :: tda, size1, size2
+	    type(c_ptr), value :: work
+	    integer(c_int) :: gsl_wavelet2d_nstransform_forward
+	  end function gsl_wavelet2d_nstransform_forward
+	  function gsl_wavelet2d_nstransform_inverse(w, data, tda, size1, size2, work) bind(c)
+	    import
+	    type(c_ptr), value :: w
+	    type(c_ptr), value :: data
+	    integer(c_size_t), value :: tda, size1, size2
+	    type(c_ptr), value :: work
+	    integer(c_int) :: gsl_wavelet2d_nstransform_inverse
+	  end function gsl_wavelet2d_nstransform_inverse
+	  function gsl_wavelet2d_nstransform_matrix(w, m, dir, work) bind(c)
+	    import :: c_ptr, c_int
+	    type(c_ptr), value :: w, m, work
+	    integer(c_int), value :: dir
+	    integer(c_int) :: gsl_wavelet2d_nstransform_matrix
+	  end function gsl_wavelet2d_nstransform_matrix
+	  function gsl_wavelet2d_nstransform_matrix_forward(w, m, work) bind(c)
+	    import :: c_ptr, c_int
+	    type(c_ptr), value :: w, m, work
+	    integer(c_int) :: gsl_wavelet2d_nstransform_matrix_forward
+	  end function gsl_wavelet2d_nstransform_matrix_forward
+	  function gsl_wavelet2d_nstransform_matrix_inverse(w, m, work) bind(c)
+	    import :: c_ptr, c_int
+	    type(c_ptr), value :: w, m, work
+	    integer(c_int) :: gsl_wavelet2d_nstransform_matrix_inverse
+	  end function gsl_wavelet2d_nstransform_matrix_inverse
+	!
+	  function fgsl_aux_wavelet_alloc(i) bind(c)
+	    import
+	    integer(c_int), value :: i
+	    type(c_ptr) :: fgsl_aux_wavelet_alloc
+	  end function fgsl_aux_wavelet_alloc
+	  function gsl_aux_sizeof_wavelet_workspace() bind(c)
+	    import :: c_size_t
+	    integer(c_size_t) :: gsl_aux_sizeof_wavelet_workspace
+	  end function gsl_aux_sizeof_wavelet_workspace
+	  function gsl_aux_sizeof_wavelet() bind(c)
+	    import :: c_size_t
+	    integer(c_size_t) :: gsl_aux_sizeof_wavelet
+	  end function gsl_aux_sizeof_wavelet
+  end interface
+contains
+!> API
   function fgsl_wavelet_alloc(t, k)
     type(fgsl_wavelet_type), intent(in) :: t
     integer(fgsl_size_t), intent(in) :: k
@@ -207,3 +402,4 @@
     integer(fgsl_size_t) :: fgsl_sizeof_wavelet_workspace
     fgsl_sizeof_wavelet_workspace = gsl_aux_sizeof_wavelet_workspace()
   end function fgsl_sizeof_wavelet_workspace
+end module fgsl_wavelets

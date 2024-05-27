@@ -33,7 +33,7 @@ program min
         i = i + 1
         status = fgsl_min_fminimizer_iterate(min_fslv)
         if (status /= FGSL_SUCCESS .or. i > itmax) then
-           write(6, *) 'Failed to iterate or converge. Aborting.'
+           write(*, *) 'Failed to iterate or converge. Aborting.'
            exit
         end if
         xmin = fgsl_min_fminimizer_x_minimum(min_fslv)
@@ -43,9 +43,9 @@ program min
         if (status == FGSL_SUCCESS) exit
      end do
   end if
-  write(6, '(''Using the '',A,'' algorithm'')') trim(name)
-  write(6, '(''Minimum at: '',1PE20.13)') xmin
-  write(6, '(''should be : '',1PE20.13)') m_pi
+  write(*, '(''Using the '',A,'' algorithm'')') trim(name)
+  write(*, '(''Minimum at: '',1PE20.13)') xmin
+  write(*, '(''should be : '',1PE20.13)') m_pi
   call fgsl_min_fminimizer_free(min_fslv)
   call fgsl_function_free(func)
 end program min

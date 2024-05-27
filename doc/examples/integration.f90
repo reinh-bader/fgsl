@@ -29,9 +29,9 @@ program integration
   wk = fgsl_integration_workspace_alloc(nmax)
   status = fgsl_integration_qags(f_obj, 0.0_fgsl_double, 1.0_fgsl_double, &
        0.0_fgsl_double, 1.0e-7_fgsl_double, nmax, wk, result, error)
-  write(6, fmt='(''Integration result        : '',F20.16)') result
-  write(6, fmt='(''Integration error estimate: '',F20.16)') error
-  write(6, fmt='(''Exact result              : '',F20.16)') -4.0D0
+  write(*, fmt='(''Integration result        : '',F20.16)') result
+  write(*, fmt='(''Integration error estimate: '',F20.16)') error
+  write(*, fmt='(''Exact result              : '',F20.16)') -4.0D0
   call fgsl_function_free(f_obj)
   call fgsl_integration_workspace_free(wk)
 end program integration

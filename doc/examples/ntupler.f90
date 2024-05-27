@@ -73,6 +73,6 @@ program ntupler
      call fgsl_ntuple_select_fn_free(s)
      call fgsl_ntuple_value_fn_free(v)
   else
-     write(6, '('' Could not open ntuple. Please run ntuplew.exe first. '')')
+     write(*, '('' Could not open ntuple. Please run ntuplew.exe first. '')')
   end if
 end program ntupler

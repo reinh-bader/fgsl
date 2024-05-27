@@ -6,14 +6,15 @@ program dwt
   integer(fgsl_size_t) :: p(N)
   type(fgsl_wavelet) :: w
   type(fgsl_wavelet_workspace) :: work
+  integer :: iu
 !
   w = fgsl_wavelet_alloc(fgsl_wavelet_daubechies, 4_fgsl_size_t)
   work = fgsl_wavelet_workspace_alloc (N)
-  open(unit=20, file=DWT_DAT, form='FORMATTED', status='OLD')
+  open(newunit=iu, file=DWT_DAT, form='FORMATTED', status='OLD')
   do i=1,N
-     read(20, fmt=*) data(i)
+     read(iu, fmt=*) data(i)
   end do
-  close(unit=20)
+  close(unit=iu)
   status = fgsl_wavelet_transform_forward(w, data, 1_fgsl_size_t, N, work)
   do i=1,N
      abscoeff(i) = abs(data(i))
@@ -24,7 +25,7 @@ program dwt
   end do
   status = fgsl_wavelet_transform_inverse(w, data, 1_fgsl_size_t, N, work)
   do i=1,N
-     write(6, '(F15.12)') data(i)
+     write(*, '(F15.12)') data(i)
   end do
   call fgsl_wavelet_workspace_free(work)
   call fgsl_wavelet_free(w)

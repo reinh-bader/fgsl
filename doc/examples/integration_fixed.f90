@@ -36,11 +36,11 @@ program integration_fixed
 
   status = fgsl_integration_fixed(f_obj, result, wk)
   
-  write(6, fmt='(''m                         : '',I0)') m
-  write(6, fmt='(''Intervals                 : '',I0)') n
-  write(6, fmt='(''Integration result        : '',F20.16)') result
-  write(6, fmt='(''Expected result           : '',F20.16)') expected
-  write(6, fmt='(''Actual error              : '',F20.16)') result - expected
+  write(*, fmt='(''m                         : '',I0)') m
+  write(*, fmt='(''Intervals                 : '',I0)') n
+  write(*, fmt='(''Integration result        : '',F20.16)') result
+  write(*, fmt='(''Expected result           : '',F20.16)') expected
+  write(*, fmt='(''Actual error              : '',F20.16)') result - expected
 
   call fgsl_function_free(f_obj)
   call fgsl_integration_fixed_free(wk)

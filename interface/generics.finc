@@ -8,24 +8,13 @@
 !     module procedure fgsl_err_noinfo
 !  end interface
   interface fgsl_well_defined
-     module procedure fgsl_cheb_series_status
-     module procedure fgsl_interp_status
-     module procedure fgsl_interp2d_status
-     module procedure fgsl_dht_status
-
-     module procedure fgsl_interp_accel_status
-     module procedure fgsl_spline_status
-     module procedure fgsl_spline2d_status
-
 
      module procedure fgsl_root_fsolver_status
      module procedure fgsl_root_fdfsolver_status
      module procedure fgsl_min_fminimizer_status
-     module procedure fgsl_histogram_status
      module procedure fgsl_ntuple_status
      module procedure fgsl_ntuple_value_fn_status
      module procedure fgsl_ntuple_select_fn_status
- 
      module procedure fgsl_multiroot_fsolver_status
      module procedure fgsl_multiroot_fdfsolver_status
      module procedure fgsl_multimin_fminimizer_status
@@ -35,8 +24,7 @@
      module procedure fgsl_multifit_fdfsolver_status
      module procedure fgsl_multifit_nlinear_status
 
-     module procedure fgsl_wavelet_status
-     module procedure fgsl_wavelet_workspace_status
+
   end interface
   interface fgsl_multifit_nlinear_type
      module procedure fgsl_multifit_nlinear_setup
@@ -44,11 +32,7 @@
   interface fgsl_multilarge_nlinear_type
      module procedure fgsl_multilarge_nlinear_setup
   end interface
-  interface fgsl_sizeof
-     module procedure fgsl_sizeof_interp
-     module procedure fgsl_sizeof_wavelet
-     module procedure fgsl_sizeof_wavelet_workspace
-  end interface
+
   interface fgsl_obj_c_ptr
      module procedure fgsl_vector_c_ptr
      module procedure fgsl_matrix_c_ptr
