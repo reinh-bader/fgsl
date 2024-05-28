@@ -72,6 +72,8 @@ BUILT_SOURCES = fgsl_base.mod \
 		fgsl_sum_levin.mod \
 		fgsl_wavelets.mod \
 		fgsl_dhtransforms.mod \
+		fgsl_roots.mod \
+		fgsl_min.mod \
 		fgsl.mod
 
 NULL =
@@ -145,6 +147,8 @@ libfgsl_la_SOURCES = \
 	modules/fgsl_sum_levin.f90 \
 	modules/fgsl_wavelets.f90 \
 	modules/fgsl_dhtransforms.f90 \
+	modules/fgsl_roots.f90 \
+	modules/fgsl_min.f90 \
 	csub/fgsl_base_c.c \
 	csub/fgsl_io_c.c \
 	csub/fgsl_math_c.c \
@@ -161,14 +165,14 @@ libfgsl_la_SOURCES = \
 	csub/fgsl_odeiv2_c.c \
 	csub/fgsl_interpolation_c.c \
 	csub/fgsl_wavelets_c.c \
+	csub/fgsl_roots_c.c \
+	csub/fgsl_min_c.c \
 	fgsl_utils.c \
 	api/multifit.finc \
 	api/bspline.finc \
 	api/ieee.finc \
 	api/multimin.finc \
-	api/min.finc \
 	api/multiroots.finc \
-	api/roots.finc \
 	api/fit.finc \
 	api/multilarge.finc \
 	api/spmatrix.finc \
@@ -178,8 +182,6 @@ libfgsl_la_SOURCES = \
 	interface/multimin.finc \
 	interface/bspline.finc \
 	interface/multiroots.finc \
-	interface/roots.finc \
-	interface/min.finc \
 	interface/fit.finc \
 	interface/generics.finc \
 	interface/multifit.finc \
@@ -262,6 +264,8 @@ fgsl_chebyshev.mod: modules/fgsl_chebyshev.o
 fgsl_sum_levin.mod: modules/fgsl_sum_levin.o
 fgsl_wavelets.mod: modules/fgsl_wavelets.o
 fgsl_dhtransforms.mod: modules/fgsl_dhtransforms.o
+fgsl_roots.mod: modules/fgsl_roots.o
+fgsl_min.mod: modules/fgsl_min.o
 fgsl.lo: $(libfgsl_la_SOURCES)
 
 pkgconfigdir=$(libdir)/pkgconfig
@@ -332,7 +336,9 @@ nodist_fgslinclude_HEADERS = fgsl.mod \
 			     fgsl_chebyshev.mod \
 			     fgsl_sum_levin.mod \
 			     fgsl_wavelets.mod \
-			     fgsl_dhtransforms.mod
+			     fgsl_dhtransforms.mod \
+			     fgsl_roots.mod \
+			     fgsl_min.mod
 
 EXTRA_DIST = Doxyfile
 

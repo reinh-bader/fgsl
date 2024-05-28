@@ -1,10 +1,149 @@
-!-*-f90-*-
-!
-! API: Root finding
-!
-!> \page "Comments on root finding"
-!> Please go to api/roots.finc for the API documentation.
+module fgsl_roots
+  !> One-dimensional Root Finding
+  use fgsl_base
+  use fgsl_math
+  implicit none
 
+  private :: gsl_root_fsolver_alloc, fgsl_aux_fsolver_alloc, gsl_root_fdfsolver_alloc, &
+    fgsl_aux_fdfsolver_alloc, gsl_root_fsolver_set, gsl_root_fdfsolver_set, &
+    gsl_root_fsolver_free, gsl_root_fdfsolver_free, gsl_root_fsolver_name, &
+    gsl_root_fdfsolver_name, gsl_root_fsolver_iterate, gsl_root_fdfsolver_iterate, &
+    gsl_root_fsolver_root, gsl_root_fdfsolver_root, gsl_root_fsolver_x_lower, &
+    gsl_root_fsolver_x_upper, gsl_root_test_interval, gsl_root_test_delta, &
+    gsl_root_test_residual
+
+!
+!> Types
+  type, public :: fgsl_root_fsolver_type
+     private
+     integer(c_int) :: which = 0
+  end type fgsl_root_fsolver_type
+  type(fgsl_root_fsolver_type), public, parameter :: &
+       fgsl_root_fsolver_bisection = fgsl_root_fsolver_type(1), &
+       fgsl_root_fsolver_brent = fgsl_root_fsolver_type(2), &
+       fgsl_root_fsolver_falsepos = fgsl_root_fsolver_type(3)
+  type, public :: fgsl_root_fdfsolver_type
+     private
+     integer(c_int) :: which = 0
+  end type fgsl_root_fdfsolver_type
+  type(fgsl_root_fdfsolver_type), public, parameter :: &
+       fgsl_root_fdfsolver_newton = fgsl_root_fdfsolver_type(1), &
+       fgsl_root_fdfsolver_secant = fgsl_root_fdfsolver_type(2), &
+       fgsl_root_fdfsolver_steffenson = fgsl_root_fdfsolver_type(3)
+  type, public :: fgsl_root_fsolver
+     private
+     type(c_ptr) :: gsl_root_fsolver = c_null_ptr
+  end type fgsl_root_fsolver
+  type, public :: fgsl_root_fdfsolver
+     private
+     type(c_ptr) :: gsl_root_fdfsolver = c_null_ptr
+  end type fgsl_root_fdfsolver
+  !
+  !> Generics
+  interface fgsl_well_defined
+     module procedure fgsl_root_fsolver_status
+     module procedure fgsl_root_fdfsolver_status
+  end interface
+  ! 
+  !> C interfaces
+  interface
+	  function gsl_root_fsolver_alloc(t) bind(c)
+	    import
+	    type(c_ptr), value :: t
+	    type(c_ptr) :: gsl_root_fsolver_alloc
+	  end function gsl_root_fsolver_alloc
+	  function fgsl_aux_fsolver_alloc(it) bind(c)
+	    import
+	    integer(c_int), value :: it
+	    type(c_ptr) :: fgsl_aux_fsolver_alloc
+	  end function fgsl_aux_fsolver_alloc
+	  function gsl_root_fdfsolver_alloc(t) bind(c)
+	    import
+	    type(c_ptr), value :: t
+	    type(c_ptr) :: gsl_root_fdfsolver_alloc
+	  end function gsl_root_fdfsolver_alloc
+	  function fgsl_aux_fdfsolver_alloc(it) bind(c)
+	    import
+	    integer(c_int), value :: it
+	    type(c_ptr) :: fgsl_aux_fdfsolver_alloc
+	  end function fgsl_aux_fdfsolver_alloc
+	  function gsl_root_fsolver_set(s, f, x_lower, x_upper) bind(c)
+	    import
+	    type(c_ptr), value :: s, f
+	    real(c_double), value :: x_lower, x_upper
+	    integer(c_int) :: gsl_root_fsolver_set
+	  end function gsl_root_fsolver_set
+	  function gsl_root_fdfsolver_set(s, f, x) bind(c)
+	    import
+	    type(c_ptr), value :: s, f
+	    real(c_double), value :: x
+	    integer(c_int) :: gsl_root_fdfsolver_set
+	  end function gsl_root_fdfsolver_set
+	  subroutine gsl_root_fsolver_free(s) bind(c)
+	    import
+	    type(c_ptr), value :: s
+	  end subroutine gsl_root_fsolver_free
+	  subroutine gsl_root_fdfsolver_free(s) bind(c)
+	    import
+	    type(c_ptr), value :: s
+	  end subroutine gsl_root_fdfsolver_free
+	  function gsl_root_fsolver_name(s) bind(c)
+	    import
+	    type(c_ptr), value :: s
+	    type(c_ptr) :: gsl_root_fsolver_name
+	  end function gsl_root_fsolver_name
+	  function gsl_root_fdfsolver_name(s) bind(c)
+	    import
+	    type(c_ptr), value :: s
+	    type(c_ptr) :: gsl_root_fdfsolver_name
+	  end function gsl_root_fdfsolver_name
+	  function gsl_root_fsolver_iterate(s) bind(c)
+	    import
+	    type(c_ptr), value :: s
+	    integer(c_int) :: gsl_root_fsolver_iterate
+	  end function gsl_root_fsolver_iterate
+	  function gsl_root_fdfsolver_iterate(s) bind(c)
+	    import
+	    type(c_ptr), value :: s
+	    integer(c_int) :: gsl_root_fdfsolver_iterate
+	  end function gsl_root_fdfsolver_iterate
+	  function gsl_root_fsolver_root(s) bind(c)
+	    import
+	    type(c_ptr), value :: s
+	    real(c_double) :: gsl_root_fsolver_root
+	  end function gsl_root_fsolver_root
+	  function gsl_root_fdfsolver_root(s) bind(c)
+	    import
+	    type(c_ptr), value :: s
+	    real(c_double) :: gsl_root_fdfsolver_root
+	  end function gsl_root_fdfsolver_root
+	  function gsl_root_fsolver_x_lower(s) bind(c)
+	    import
+	    type(c_ptr), value :: s
+	    real(c_double) :: gsl_root_fsolver_x_lower
+	  end function gsl_root_fsolver_x_lower
+	  function gsl_root_fsolver_x_upper(s) bind(c)
+	    import
+	    type(c_ptr), value :: s
+	    real(c_double) :: gsl_root_fsolver_x_upper
+	  end function gsl_root_fsolver_x_upper
+	  function gsl_root_test_interval(x_lower, x_upper, epsabs, epsrel) bind(c)
+	    import
+	    real(c_double), value :: x_lower, x_upper, epsabs, epsrel
+	    integer(c_int) :: gsl_root_test_interval
+	  end function gsl_root_test_interval
+	  function gsl_root_test_delta(x1, x0, epsabs, epsrel) bind(c)
+	    import
+	    real(c_double), value :: x1, x0, epsabs, epsrel
+	    integer(c_int) :: gsl_root_test_delta
+	  end function gsl_root_test_delta
+	  function gsl_root_test_residual(f, epsabs) bind(c)
+	    import
+	    real(c_double), value :: f, epsabs
+	    integer(c_int) :: gsl_root_test_residual
+	  end function gsl_root_test_residual
+  end interface
+contains
   function fgsl_root_fsolver_alloc(t)
     type(fgsl_root_fsolver_type), intent(in) :: t
     type(fgsl_root_fsolver) :: fgsl_root_fsolver_alloc
@@ -129,4 +268,4 @@
     if (c_associated(s%gsl_root_fdfsolver)) &
          fgsl_root_fdfsolver_status = .true.
   end function fgsl_root_fdfsolver_status
-  
+end module fgsl_roots

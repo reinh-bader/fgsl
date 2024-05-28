@@ -8,8 +8,6 @@
 #include <gsl/gsl_math.h>
 
 #include <gsl/gsl_wavelet.h>
-#include <gsl/gsl_roots.h>
-#include <gsl/gsl_min.h>
 #include <gsl/gsl_multiroots.h>
 #include <gsl/gsl_multimin.h>
 #include <gsl/gsl_multifit_nlin.h>
@@ -72,61 +70,8 @@ const gsl_multifit_robust_type *fgsl_aux_multifit_robust_alloc(int i) {
 
 
 
-const gsl_root_fsolver_type *fgsl_aux_fsolver_alloc(int i) {
-    const gsl_root_fsolver_type *res;
-    switch(i) {
-	case 1:
-	    res = gsl_root_fsolver_bisection;
-	    break;
-	case 2:
-	    res = gsl_root_fsolver_brent;
-	    break;
-	case 3:
-	    res = gsl_root_fsolver_falsepos;
-	    break;
-	default:
-	    res = NULL;
-	    break;
-    }
-    return res;
-}
-const gsl_root_fdfsolver_type *fgsl_aux_fdfsolver_alloc(int i) {
-    const gsl_root_fdfsolver_type *res;
-    switch(i) {
-	case 1:
-	    res = gsl_root_fdfsolver_newton;
-	    break;
-	case 2:
-	    res = gsl_root_fdfsolver_secant;
-	    break;
-	case 3:
-	    res = gsl_root_fdfsolver_steffenson;
-	    break;
-	default:
-	    res = NULL;
-	    break;
-    }
-    return res;
-}
 
-const gsl_min_fminimizer_type *fgsl_aux_fminimizer_alloc(int i) {
-    const gsl_min_fminimizer_type *res;
-    switch(i) {
-	case 1:
-	    res = gsl_min_fminimizer_goldensection;
-	    break;
-	case 2:
-	    res = gsl_min_fminimizer_brent;
-	    break;
-	case 3:
-	    res = gsl_min_fminimizer_quad_golden;
-	    break;
-	default:
-	    res = NULL;
-	    break;
-    }
-    return res;
-}
+
 
 gsl_multiroot_function *fgsl_multiroot_function_cinit(int (*f)(const gsl_vector *x, void *params,
 							       gsl_vector *f), size_t n, void *params) {

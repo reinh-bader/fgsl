@@ -95,6 +95,8 @@ module fgsl
   use fgsl_sum_levin
   use fgsl_wavelets
   use fgsl_dhtransforms
+  use fgsl_roots
+  use fgsl_min
   
   implicit none
 
@@ -414,49 +416,7 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
 
 
 
-!
-! Types: Root finding
-!
-  type, public :: fgsl_root_fsolver_type
-     private
-     integer(c_int) :: which = 0
-  end type fgsl_root_fsolver_type
-  type(fgsl_root_fsolver_type), public, parameter :: &
-       fgsl_root_fsolver_bisection = fgsl_root_fsolver_type(1), &
-       fgsl_root_fsolver_brent = fgsl_root_fsolver_type(2), &
-       fgsl_root_fsolver_falsepos = fgsl_root_fsolver_type(3)
-  type, public :: fgsl_root_fdfsolver_type
-     private
-     integer(c_int) :: which = 0
-  end type fgsl_root_fdfsolver_type
-  type(fgsl_root_fdfsolver_type), public, parameter :: &
-       fgsl_root_fdfsolver_newton = fgsl_root_fdfsolver_type(1), &
-       fgsl_root_fdfsolver_secant = fgsl_root_fdfsolver_type(2), &
-       fgsl_root_fdfsolver_steffenson = fgsl_root_fdfsolver_type(3)
-  type, public :: fgsl_root_fsolver
-     private
-     type(c_ptr) :: gsl_root_fsolver = c_null_ptr
-  end type fgsl_root_fsolver
-  type, public :: fgsl_root_fdfsolver
-     private
-     type(c_ptr) :: gsl_root_fdfsolver = c_null_ptr
-  end type fgsl_root_fdfsolver
-!
-! Types: Minimization
-!
-  type, public :: fgsl_min_fminimizer_type
-     private
-     integer(c_int) :: which = 0
-  end type fgsl_min_fminimizer_type
-  type(fgsl_min_fminimizer_type), public, parameter :: &
-       fgsl_min_fminimizer_goldensection = fgsl_min_fminimizer_type(1), &
-       fgsl_min_fminimizer_brent = fgsl_min_fminimizer_type(2), &
-       fgsl_min_fminimizer_quad_golden = fgsl_min_fminimizer_type(3)
-  type, public :: fgsl_min_fminimizer
-     private
-     type(c_ptr) :: gsl_min_fminimizer = c_null_ptr
-  end type fgsl_min_fminimizer
-!
+
 ! Types: Multi-Root
 !
   type, public :: fgsl_multiroot_function
@@ -734,8 +694,6 @@ end type fgsl_splinalg_itersolve
 ! FGSL names occurring here are auxiliary routines
 ! needed to transfer static C information to the Fortran subsystem
   interface
-#include "interface/roots.finc"
-#include "interface/min.finc"
 #include "interface/multiroots.finc"
 #include "interface/multimin.finc"
 #include "interface/fit.finc"
@@ -749,8 +707,6 @@ end type fgsl_splinalg_itersolve
   end interface
 #include "interface/generics.finc"
 contains
-#include "api/roots.finc"
-#include "api/min.finc"
 #include "api/multiroots.finc"
 #include "api/multimin.finc"
 #include "api/fit.finc"

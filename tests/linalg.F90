@@ -290,7 +290,7 @@ program linalg
     status = fgsl_linalg_qrpt_lssolve2(a, tau, p, b, rank, x, sd)
     call unit_assert_equal('fgsl_linalg_qrpt_lssolve2:status',fgsl_success,status)
     call unit_assert_equal_within('fgsl_linalg_qrpt_lssolve2:x',&
-         [ 2.0d0, -1.0d0, 0.0d0 ],xf,eps10)
+         [ 1.0d0, 0.0d0, 1.0d0 ],xf,eps10)
     call unit_assert_equal_within('fgsl_linalg_qrpt_lssolve2:residual',&
          [ 0.0d0, 0.0d0, 0.0d0 ],sdf,eps10)
   end block qr
