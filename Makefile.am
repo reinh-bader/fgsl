@@ -74,6 +74,12 @@ BUILT_SOURCES = fgsl_base.mod \
 		fgsl_dhtransforms.mod \
 		fgsl_roots.mod \
 		fgsl_min.mod \
+		fgsl_multiroots.mod \
+		fgsl_multimin.mod \
+		fgsl_fit.mod \
+		fgsl_multifit.mod \
+		fgsl_multilarge.mod \
+		fgsl_multi_nlinear.mod \
 		fgsl.mod
 
 NULL =
@@ -149,6 +155,12 @@ libfgsl_la_SOURCES = \
 	modules/fgsl_dhtransforms.f90 \
 	modules/fgsl_roots.f90 \
 	modules/fgsl_min.f90 \
+	modules/fgsl_multiroots.f90 \
+	modules/fgsl_multimin.f90 \
+	modules/fgsl_fit.f90 \
+	modules/fgsl_multifit.f90 \
+	modules/fgsl_multilarge.f90 \
+	modules/fgsl_multi_nlinear.f90 \
 	csub/fgsl_base_c.c \
 	csub/fgsl_io_c.c \
 	csub/fgsl_math_c.c \
@@ -167,25 +179,20 @@ libfgsl_la_SOURCES = \
 	csub/fgsl_wavelets_c.c \
 	csub/fgsl_roots_c.c \
 	csub/fgsl_min_c.c \
+	csub/fgsl_multiroots_c.c \
+	csub/fgsl_multimin_c.c \
+	csub/fgsl_multifit_c.c \
+	csub/fgsl_multilarge_c.c \
+	csub/fgsl_multi_nlinear_c.c \
 	fgsl_utils.c \
-	api/multifit.finc \
 	api/bspline.finc \
 	api/ieee.finc \
-	api/multimin.finc \
-	api/multiroots.finc \
-	api/fit.finc \
-	api/multilarge.finc \
 	api/spmatrix.finc \
 	api/splinalg.finc \
 	api/nlfit.finc \
 	interface/ieee.finc \
-	interface/multimin.finc \
 	interface/bspline.finc \
-	interface/multiroots.finc \
-	interface/fit.finc \
 	interface/generics.finc \
-	interface/multifit.finc \
-	interface/multilarge.finc \
 	interface/spmatrix.finc \
 	interface/splinalg.finc \
 	interface/nlfit.finc \
@@ -266,6 +273,12 @@ fgsl_wavelets.mod: modules/fgsl_wavelets.o
 fgsl_dhtransforms.mod: modules/fgsl_dhtransforms.o
 fgsl_roots.mod: modules/fgsl_roots.o
 fgsl_min.mod: modules/fgsl_min.o
+fgsl_multiroots.mod: modules/fgsl_multiroots.o
+fgsl_multimin.mod: modules/fgsl_multimin.o
+fgsl_fit.mod: modules/fgsl_fit.o
+fgsl_multifit.mod: modules/fgsl_multifit.o
+fgsl_multilarge.mod: modules/fgsl_multilarge.o
+fgsl_multi_nlinear.mod: modules/fgsl_multi_nlinear.o
 fgsl.lo: $(libfgsl_la_SOURCES)
 
 pkgconfigdir=$(libdir)/pkgconfig
@@ -338,7 +351,13 @@ nodist_fgslinclude_HEADERS = fgsl.mod \
 			     fgsl_wavelets.mod \
 			     fgsl_dhtransforms.mod \
 			     fgsl_roots.mod \
-			     fgsl_min.mod
+			     fgsl_min.mod \
+			     fgsl_multiroots.mod \
+			     fgsl_multimin.mod \
+			     fgsl_fit.mod \
+			     fgsl_multifit.mod \
+			     fgsl_multilarge.mod \
+			     fgsl_multi_nlinear.mod
 
 EXTRA_DIST = Doxyfile
 

@@ -97,6 +97,12 @@ module fgsl
   use fgsl_dhtransforms
   use fgsl_roots
   use fgsl_min
+  use fgsl_multiroots
+  use fgsl_multimin
+  use fgsl_fit
+  use fgsl_multifit
+  use fgsl_multilarge
+  use fgsl_multi_nlinear
   
   implicit none
 
@@ -346,313 +352,10 @@ integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
 
 
 
-!
-! Types: large linear least squares systems
-!
-  type, public :: fgsl_multilarge_linear_type
-    private
-    integer(fgsl_int) :: which = 0
-  end type fgsl_multilarge_linear_type
-  type(fgsl_multilarge_linear_type), parameter, public :: &
-    fgsl_multilarge_linear_normal = fgsl_multilarge_linear_type(1), &
-    fgsl_multilarge_linear_tsqr = fgsl_multilarge_linear_type(2)
-
-  type, public :: fgsl_multilarge_linear_workspace
-    private
-    type(c_ptr) :: gsl_multilarge_linear_workspace
-  end type fgsl_multilarge_linear_workspace
-!
-!
 
 !
-! Types: Robust multifit
 !
-  type, public :: fgsl_multifit_robust_type
-     private
-     integer(fgsl_int) :: which = 0
-  end type fgsl_multifit_robust_type
-  type(fgsl_multifit_robust_type), parameter, public :: &
-       fgsl_multifit_robust_default = fgsl_multifit_robust_type(1), &
-       fgsl_multifit_robust_bisquare = fgsl_multifit_robust_type(2), &
-       fgsl_multifit_robust_cauchy = fgsl_multifit_robust_type(3), &
-       fgsl_multifit_robust_fair = fgsl_multifit_robust_type(4), &
-       fgsl_multifit_robust_huber = fgsl_multifit_robust_type(5), &
-       fgsl_multifit_robust_ols = fgsl_multifit_robust_type(6), &
-       fgsl_multifit_robust_welsch = fgsl_multifit_robust_type(7)
-  type, public :: fgsl_multifit_robust_workspace
-       private
-       type(c_ptr) :: gsl_multifit_robust_workspace
-  end type fgsl_multifit_robust_workspace
-  type, public :: fgsl_multifit_robust_stats
-       real(fgsl_double) :: sigma_ols
-       real(fgsl_double) :: sigma_mad
-       real(fgsl_double) :: sigma_rob
-       real(fgsl_double) :: sigma
-       real(fgsl_double) :: Rsq
-       real(fgsl_double) :: adj_Rsq
-       real(fgsl_double) :: rmse
-       real(fgsl_double) :: sse
-       real(fgsl_double) :: dof
-       real(fgsl_double) :: numit
-       type(fgsl_vector) :: weights
-       type(fgsl_vector) :: r
-  end type fgsl_multifit_robust_stats
-  type, bind(c) :: gsl_multifit_robust_stats
-       real(c_double) :: sigma_ols
-       real(c_double) :: sigma_mad
-       real(c_double) :: sigma_rob
-       real(c_double) :: sigma
-       real(c_double) :: Rsq
-       real(c_double) :: adj_Rsq
-       real(c_double) :: rmse
-       real(c_double) :: sse
-       real(c_double) :: dof
-       real(c_double) :: numit
-       type(c_ptr) :: weights
-       type(c_ptr) :: r
-  end type gsl_multifit_robust_stats
   
-
-
-
-
-
-! Types: Multi-Root
-!
-  type, public :: fgsl_multiroot_function
-     private
-     type(c_ptr) :: gsl_multiroot_function = c_null_ptr
-  end type fgsl_multiroot_function
-  type, public :: fgsl_multiroot_function_fdf
-     private
-     type(c_ptr) :: gsl_multiroot_function_fdf = c_null_ptr
-  end type fgsl_multiroot_function_fdf
-  type, public :: fgsl_multiroot_fsolver
-     private
-     type(c_ptr) :: gsl_multiroot_fsolver = c_null_ptr
-  end type fgsl_multiroot_fsolver
-  type, public :: fgsl_multiroot_fsolver_type
-     private
-     integer(c_int) :: which = 0
-  end type fgsl_multiroot_fsolver_type
-  type(fgsl_multiroot_fsolver_type), public, parameter :: &
-       fgsl_multiroot_fsolver_dnewton = fgsl_multiroot_fsolver_type(1), &
-       fgsl_multiroot_fsolver_broyden = fgsl_multiroot_fsolver_type(2), &
-       fgsl_multiroot_fsolver_hybrid = fgsl_multiroot_fsolver_type(3), &
-       fgsl_multiroot_fsolver_hybrids = fgsl_multiroot_fsolver_type(4)
-  type, public :: fgsl_multiroot_fdfsolver
-     private
-     type(c_ptr) :: gsl_multiroot_fdfsolver = c_null_ptr
-  end type fgsl_multiroot_fdfsolver
-  type, public :: fgsl_multiroot_fdfsolver_type
-     private
-     integer(c_int) :: which = 0
-  end type fgsl_multiroot_fdfsolver_type
-  type(fgsl_multiroot_fdfsolver_type), public, parameter :: &
-       fgsl_multiroot_fdfsolver_newton = fgsl_multiroot_fdfsolver_type(1), &
-       fgsl_multiroot_fdfsolver_gnewton = fgsl_multiroot_fdfsolver_type(2), &
-       fgsl_multiroot_fdfsolver_hybridj = fgsl_multiroot_fdfsolver_type(3), &
-       fgsl_multiroot_fdfsolver_hybridsj = fgsl_multiroot_fdfsolver_type(4)
-!
-! Types: Multi-Min
-!
-  type, public :: fgsl_multimin_function
-     private
-     type(c_ptr) :: gsl_multimin_function = c_null_ptr
-  end type fgsl_multimin_function
-  type, public :: fgsl_multimin_function_fdf
-     private
-     type(c_ptr) :: gsl_multimin_function_fdf = c_null_ptr
-  end type fgsl_multimin_function_fdf
-  type, public :: fgsl_multimin_fminimizer
-     private
-     type(c_ptr) :: gsl_multimin_fminimizer = c_null_ptr
-  end type fgsl_multimin_fminimizer
-  type, public :: fgsl_multimin_fminimizer_type
-     private
-     integer(c_int) :: which = 0
-  end type fgsl_multimin_fminimizer_type
-  type(fgsl_multimin_fminimizer_type), public, parameter :: &
-       fgsl_multimin_fminimizer_nmsimplex = fgsl_multimin_fminimizer_type(1), &
-       fgsl_multimin_fminimizer_nmsimplex2 = fgsl_multimin_fminimizer_type(2), &
-       fgsl_multimin_fminimizer_nmsimplex2rand = fgsl_multimin_fminimizer_type(3)
-  type, public :: fgsl_multimin_fdfminimizer
-     private
-     type(c_ptr) :: gsl_multimin_fdfminimizer = c_null_ptr
-  end type fgsl_multimin_fdfminimizer
-  type, public :: fgsl_multimin_fdfminimizer_type
-     private
-     integer(c_int) :: which = 0
-  end type fgsl_multimin_fdfminimizer_type
-  type(fgsl_multimin_fdfminimizer_type), public, parameter :: &
-       fgsl_multimin_fdfminimizer_steepest_descent = fgsl_multimin_fdfminimizer_type(1), &
-       fgsl_multimin_fdfminimizer_conjugate_pr = fgsl_multimin_fdfminimizer_type(2), &
-       fgsl_multimin_fdfminimizer_conjugate_fr = fgsl_multimin_fdfminimizer_type(3), &
-       fgsl_multimin_fdfminimizer_vector_bfgs = fgsl_multimin_fdfminimizer_type(4), &
-       fgsl_multimin_fdfminimizer_vector_bfgs2 = fgsl_multimin_fdfminimizer_type(5)
-!
-! Types and constants: Fitting
-!
-  type, public :: fgsl_multifit_linear_workspace
-     private
-     type(c_ptr) :: gsl_multifit_linear_workspace = c_null_ptr
-  end type fgsl_multifit_linear_workspace
-!
-! new nonlinear interfaces for both small and large problems
-  type, public :: fgsl_multifit_nlinear_type
-     private
-     type(c_ptr) :: gsl_multifit_nlinear_type = c_null_ptr
-  end type fgsl_multifit_nlinear_type
-  type, public :: fgsl_multifit_nlinear_workspace
-     type(c_ptr) :: gsl_multifit_nlinear_workspace = c_null_ptr
-  end type fgsl_multifit_nlinear_workspace
-  type, BIND(C) :: gsl_multifit_nlinear_parameters
-     type(c_ptr) :: trs, scale, solver
-     integer(c_int) :: fdtype
-     real(c_double) :: factor_up, factor_down, avmax, h_df, h_fvv
-  end type
-  type, public :: fgsl_multifit_nlinear_parameters
-     private
-     type(gsl_multifit_nlinear_parameters) :: gsl_multifit_nlinear_parameters 
-  end type fgsl_multifit_nlinear_parameters
-  type, public :: fgsl_multilarge_nlinear_type
-     private
-     type(c_ptr) :: gsl_multilarge_nlinear_type = c_null_ptr
-  end type fgsl_multilarge_nlinear_type
-  type, public :: fgsl_multilarge_nlinear_workspace
-     type(c_ptr) :: gsl_multilarge_nlinear_workspace = c_null_ptr
-  end type fgsl_multilarge_nlinear_workspace
-  type, BIND(C) :: gsl_multilarge_nlinear_parameters
-     type(c_ptr) :: trs, scale, solver
-     integer(c_int) :: fdtype
-     real(c_double) :: factor_up, factor_down, avmax, h_df, h_fvv
-     integer(c_size_t) :: max_iter    
-     real(c_double) :: tol
-  end type
-  type, public :: fgsl_multilarge_nlinear_parameters
-     private
-     type(gsl_multilarge_nlinear_parameters) :: gsl_multilarge_nlinear_parameters
-  end type fgsl_multilarge_nlinear_parameters
-  type, public :: fgsl_multifit_nlinear_fdf
-     private
-     type(c_ptr) :: gsl_multifit_nlinear_fdf = c_null_ptr
-  end type fgsl_multifit_nlinear_fdf
-  type, public :: fgsl_multilarge_nlinear_fdf
-     private
-     type(c_ptr) :: gsl_multilarge_nlinear_fdf = c_null_ptr
-  end type fgsl_multilarge_nlinear_fdf
-  abstract interface
-    subroutine fgsl_nlinear_callback(iter, params, w) BIND(C)
-      import :: fgsl_size_t, c_ptr, c_funptr
-      integer(fgsl_size_t), value :: iter
-      type(c_ptr), value :: params, w
-    end subroutine
-    integer(c_int) function fgsl_nlinear_fdf_func(x, params, f) bind(c)
-      import :: c_ptr, c_int
-      type(c_ptr), value :: x, params, f
-    end function 
-    integer(c_int) function fgsl_nlinear_fdf_dfunc(x, params, df) bind(c)
-      import :: c_ptr, c_int
-      type(c_ptr), value :: x, params, df
-    end function 
-    integer(c_int) function fgsl_nlinear_fdf_dlfunc(t, x, u, params, v, jtj) bind(c)
-      import :: c_ptr, c_int
-!     assuming int is the correct integer for enum type
-      integer(c_int), value :: t
-      type(c_ptr), value :: x, u, params, v, jtj
-    end function 
-    integer(c_int) function fgsl_nlinear_fdf_fvv(x, v, params, vv) bind(c)
-      import :: c_ptr, c_int
-      type(c_ptr), value :: x, v, params, vv
-    end function
-  end interface
-!
-! trust region subproblem methods
-  type, private :: fgsl_multifit_nlinear_trs
-    integer(c_int) :: which = 0
-  end type
-  type(fgsl_multifit_nlinear_trs), public, parameter :: &
-          fgsl_multifit_nlinear_trs_lm = fgsl_multifit_nlinear_trs(1), &
-          fgsl_multifit_nlinear_trs_lmaccel = fgsl_multifit_nlinear_trs(2), &
-          fgsl_multifit_nlinear_trs_dogleg = fgsl_multifit_nlinear_trs(3), &
-          fgsl_multifit_nlinear_trs_ddogleg = fgsl_multifit_nlinear_trs(4), &
-          fgsl_multifit_nlinear_trs_subspace2d = fgsl_multifit_nlinear_trs(5)
-  type, private :: fgsl_multilarge_nlinear_trs
-    integer(c_int) :: which = 0
-  end type
-  type(fgsl_multilarge_nlinear_trs), public, parameter :: &
-          fgsl_multilarge_nlinear_trs_lm = fgsl_multilarge_nlinear_trs(1), &
-          fgsl_multilarge_nlinear_trs_lmaccel = fgsl_multilarge_nlinear_trs(2), &
-          fgsl_multilarge_nlinear_trs_dogleg = fgsl_multilarge_nlinear_trs(3), &
-          fgsl_multilarge_nlinear_trs_ddogleg = fgsl_multilarge_nlinear_trs(4), &
-          fgsl_multilarge_nlinear_trs_subspace2d = fgsl_multilarge_nlinear_trs(5), &
-          fgsl_multilarge_nlinear_trs_cgst = fgsl_multilarge_nlinear_trs(6)
-! 
-! scaling matrix strategies
-  type, private :: fgsl_multifit_nlinear_scale
-    integer(c_int) :: which = 0
-  end type
-  type(fgsl_multifit_nlinear_scale), public, parameter :: &
-          fgsl_multifit_nlinear_scale_levenberg = fgsl_multifit_nlinear_scale(1), &
-          fgsl_multifit_nlinear_scale_marquardt = fgsl_multifit_nlinear_scale(2), &
-          fgsl_multifit_nlinear_scale_more = fgsl_multifit_nlinear_scale(3)
-  type, private :: fgsl_multilarge_nlinear_scale
-    integer(c_int) :: which = 0
-  end type
-  type(fgsl_multilarge_nlinear_scale), public, parameter :: &
-          fgsl_multilarge_nlinear_scale_levenberg = fgsl_multilarge_nlinear_scale(1), &
-          fgsl_multilarge_nlinear_scale_marquardt = fgsl_multilarge_nlinear_scale(2), &
-          fgsl_multilarge_nlinear_scale_more = fgsl_multilarge_nlinear_scale(3)
-!
-! linear solvers
-  type, private :: fgsl_multifit_nlinear_solver
-    integer(c_int) :: which = 0
-  end type
-  type(fgsl_multifit_nlinear_solver), public, parameter :: &
-          fgsl_multifit_nlinear_solver_cholesky = fgsl_multifit_nlinear_solver(1), &
-          fgsl_multifit_nlinear_solver_qr = fgsl_multifit_nlinear_solver(2), &
-          fgsl_multifit_nlinear_solver_svd = fgsl_multifit_nlinear_solver(3)
-  integer(fgsl_int), parameter, public :: FGSL_MULTIFIT_NLINEAR_FWDIFF = 0, & 
-                                  FGSL_MULTIFIT_NLINEAR_CTRDIFF = 1
-  type, private :: fgsl_multilarge_nlinear_solver
-    integer(c_int) :: which = 0
-  end type
-  type(fgsl_multilarge_nlinear_solver), public, parameter :: &
-          fgsl_multilarge_nlinear_solver_cholesky = fgsl_multilarge_nlinear_solver(1)
-!
-! nonlinear fitting legacy interface
-  type, public :: fgsl_multifit_function
-     private
-     type(c_ptr) :: gsl_multifit_function = c_null_ptr
-  end type fgsl_multifit_function
-  type, public :: fgsl_multifit_function_fdf
-     private
-     type(c_ptr) :: gsl_multifit_function_fdf = c_null_ptr
-  end type fgsl_multifit_function_fdf
-  type, public :: fgsl_multifit_fsolver
-     private
-     type(c_ptr) :: gsl_multifit_fsolver = c_null_ptr
-  end type fgsl_multifit_fsolver
-  type, public :: fgsl_multifit_fsolver_type
-     private
-     integer(c_int) :: which = 0
-  end type fgsl_multifit_fsolver_type
-  type, public :: fgsl_multifit_fdfsolver
-     private
-     type(c_ptr) :: gsl_multifit_fdfsolver = c_null_ptr
-  end type fgsl_multifit_fdfsolver
-  type, public :: fgsl_multifit_fdfsolver_type
-     private
-     integer(c_int) :: which = 0
-  end type fgsl_multifit_fdfsolver_type
-  type(fgsl_multifit_fdfsolver_type), public, parameter :: &
-       fgsl_multifit_fdfsolver_lmder = fgsl_multifit_fdfsolver_type(1), &
-       fgsl_multifit_fdfsolver_lmsder = fgsl_multifit_fdfsolver_type(2), &
-       fgsl_multifit_fdfsolver_lmniel = fgsl_multifit_fdfsolver_type(3)
-  type, public:: fgsl_multifit_fdfridge
-    private
-    type(c_ptr) :: gsl_multifit_fdfridge = c_null_ptr
-  end type fgsl_multifit_fdfridge
 !
 ! Types: B-Splines
 !
@@ -694,27 +397,15 @@ end type fgsl_splinalg_itersolve
 ! FGSL names occurring here are auxiliary routines
 ! needed to transfer static C information to the Fortran subsystem
   interface
-#include "interface/multiroots.finc"
-#include "interface/multimin.finc"
-#include "interface/fit.finc"
-#include "interface/nlfit.finc"
-#include "interface/multifit.finc"
 #include "interface/bspline.finc"
 #include "interface/ieee.finc"
-#include "interface/multilarge.finc"
 #include "interface/spmatrix.finc"
 #include "interface/splinalg.finc"
   end interface
 #include "interface/generics.finc"
 contains
-#include "api/multiroots.finc"
-#include "api/multimin.finc"
-#include "api/fit.finc"
-#include "api/nlfit.finc"
-#include "api/multifit.finc"
 #include "api/bspline.finc"
 #include "api/ieee.finc"
-#include "api/multilarge.finc"
 #include "api/spmatrix.finc"
 #include "api/splinalg.finc"
 end module fgsl

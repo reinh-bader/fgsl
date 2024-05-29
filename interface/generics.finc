@@ -13,23 +13,10 @@
      module procedure fgsl_ntuple_status
      module procedure fgsl_ntuple_value_fn_status
      module procedure fgsl_ntuple_select_fn_status
-     module procedure fgsl_multiroot_fsolver_status
-     module procedure fgsl_multiroot_fdfsolver_status
-     module procedure fgsl_multimin_fminimizer_status
-     module procedure fgsl_multimin_fdfminimizer_status
-     module procedure fgsl_multifit_status
-     module procedure fgsl_multifit_fsolver_status
-     module procedure fgsl_multifit_fdfsolver_status
-     module procedure fgsl_multifit_nlinear_status
 
 
   end interface
-  interface fgsl_multifit_nlinear_type
-     module procedure fgsl_multifit_nlinear_setup
-  end interface
-  interface fgsl_multilarge_nlinear_type
-     module procedure fgsl_multilarge_nlinear_setup
-  end interface
+
 
   interface fgsl_obj_c_ptr
      module procedure fgsl_vector_c_ptr
@@ -49,21 +36,4 @@
      module procedure fgsl_ieee_printf_float
      module procedure fgsl_ieee_printf_double
   end interface
-!
-! Multifit: with or without weights
-! The C API allows a user to pass NULL if weights are not required,
-! however this cannot be done easily with Fortran. This seems to be
-! an elegant solution
-!
-  interface fgsl_multifit_fdfsolver_dif_df
-    module procedure fgsl_multifit_fdfsolver_dif_df_wts
-    module procedure fgsl_multifit_fdfsolver_dif_df_nowts
-  end interface fgsl_multifit_fdfsolver_dif_df
-  interface fgsl_multifit_eval_wf
-    module procedure fgsl_multifit_eval_wf_wts
-    module procedure fgsl_multifit_eval_wf_nowts
-  end interface fgsl_multifit_eval_wf
-  interface fgsl_multifit_eval_wdf
-    module procedure fgsl_multifit_eval_wdf_wts
-    module procedure fgsl_multifit_eval_wdf_nowts
-  end interface fgsl_multifit_eval_wdf
+

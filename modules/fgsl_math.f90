@@ -11,7 +11,7 @@ module fgsl_math
        fgsl_function_fdf_cfree, fgsl_fn_eval_aux, fgsl_fn_fdf_eval_f_aux, &
        fgsl_fn_fdf_eval_df_aux, fgsl_fn_fdf_eval_f_df_aux
   !
-  !> types
+  !> Types
   !> components are public since other modules need access to them
   type, public :: fgsl_function
      type(c_ptr) :: gsl_function = c_null_ptr
@@ -45,9 +45,10 @@ module fgsl_math
   ! probably should throw this out - use IEEE_VALUE intrinsic if these are needed.
   !
 
+! FIXME: add abstract interfaces
 
-  !   public interfaces
-  !
+  !   public C interfaces
+  ! 
   interface
      function fgsl_isnan(x) bind(c, name='gsl_isnan')
        import
@@ -117,7 +118,7 @@ module fgsl_math
        integer(c_int) :: fgsl_fcmp
      end function fgsl_fcmp
   end interface
-  !> private interfaces
+  !> private C interfaces
   interface
   !> constructors for abstract types
      function fgsl_function_cinit(func, params) bind(c)
