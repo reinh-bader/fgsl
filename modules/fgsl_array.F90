@@ -102,6 +102,10 @@ module fgsl_array
      module procedure fgsl_matrix_to_fptr
      module procedure fgsl_matrix_complex_to_fptr
   end interface fgsl_matrix_to_fptr
+  interface fgsl_obj_c_ptr
+     module procedure fgsl_vector_c_ptr
+     module procedure fgsl_matrix_c_ptr
+  end interface
   !
   ! C interfaces
   interface

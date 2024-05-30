@@ -1,3 +1,4 @@
+!FIXME - add spblas calls for illustration
 PROGRAM spmatrix
   use :: fgsl
   use, intrinsic :: iso_fortran_env, only : output_unit, error_unit

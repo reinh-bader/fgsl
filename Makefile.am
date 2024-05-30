@@ -7,6 +7,7 @@ AM_CPPFLAGS = -I${top_srcdir} -I${top_builddir}
 fgslincludedir=${includedir}/fgsl
 
 BUILT_SOURCES = fgsl_base.mod \
+		fgsl_ver.mod \
 		fgsl_errno.mod \
 		fgsl_io.mod \
 		fgsl_math.mod \
@@ -80,6 +81,14 @@ BUILT_SOURCES = fgsl_base.mod \
 		fgsl_multifit.mod \
 		fgsl_multilarge.mod \
 		fgsl_multi_nlinear.mod \
+		fgsl_bspline.mod \
+		fgsl_sparse_matrix.mod \
+		fgsl_spblas.mod \
+		fgsl_splinalg.mod \
+		fgsl_const_num.mod \
+		fgsl_const_mksa.mod \
+		fgsl_const_cgsm.mod \
+		fgsl_ieee_utils.mod \
 		fgsl.mod
 
 NULL =
@@ -88,6 +97,7 @@ lib_LTLIBRARIES = libfgsl.la
 libfgsl_la_SOURCES = \
 	fgsl.F90 \
 	modules/fgsl_base.f90 \
+	modules/fgsl_ver.F90 \
 	modules/fgsl_errno.f90 \
 	modules/fgsl_io.f90 \
 	modules/fgsl_math.f90 \
@@ -161,6 +171,14 @@ libfgsl_la_SOURCES = \
 	modules/fgsl_multifit.f90 \
 	modules/fgsl_multilarge.f90 \
 	modules/fgsl_multi_nlinear.f90 \
+	modules/fgsl_bspline.f90 \
+	modules/fgsl_sparse_matrix.F90 \
+	modules/fgsl_spblas.f90 \
+	modules/fgsl_splinalg.f90 \
+	modules/fgsl_const_num.f90 \
+	modules/fgsl_const_mksa.f90 \
+	modules/fgsl_const_cgsm.f90 \
+	modules/fgsl_ieee_utils.f90 \
 	csub/fgsl_base_c.c \
 	csub/fgsl_io_c.c \
 	csub/fgsl_math_c.c \
@@ -184,18 +202,8 @@ libfgsl_la_SOURCES = \
 	csub/fgsl_multifit_c.c \
 	csub/fgsl_multilarge_c.c \
 	csub/fgsl_multi_nlinear_c.c \
-	fgsl_utils.c \
-	api/bspline.finc \
-	api/ieee.finc \
-	api/spmatrix.finc \
-	api/splinalg.finc \
-	api/nlfit.finc \
-	interface/ieee.finc \
-	interface/bspline.finc \
-	interface/generics.finc \
-	interface/spmatrix.finc \
-	interface/splinalg.finc \
-	interface/nlfit.finc \
+	csub/fgsl_sparse_matrix_c.c \
+	csub/fgsl_splinalg_c.c \
 	$(NULL)
 
 libfgsl_la_DEPENDENCIES = $(libfgsl_la_SOURCES)
@@ -206,6 +214,7 @@ libfgsl_la_LIBADD = @gsl_LIBS@
 
 fgsl.mod: fgsl.o libfgsl.la
 fgsl_base.mod: modules/fgsl_base.o
+fgsl_ver.mod: modules/fgsl_ver.o
 fgsl_errno.mod: modules/fgsl_errno.o
 fgsl_io.mod: modules/fgsl_io.o
 fgsl_math.mod: modules/fgsl_math.o
@@ -279,12 +288,21 @@ fgsl_fit.mod: modules/fgsl_fit.o
 fgsl_multifit.mod: modules/fgsl_multifit.o
 fgsl_multilarge.mod: modules/fgsl_multilarge.o
 fgsl_multi_nlinear.mod: modules/fgsl_multi_nlinear.o
+fgsl_bspline.mod: modules/fgsl_bspline.o
+fgsl_sparse_matrix.mod: modules/fgsl_sparse_matrix.o
+fgsl_spblas.mod: modules/fgsl_spblas.o
+fgsl_splinalg.mod: modules/fgsl_splinalg.o
+fgsl_const_num.mod: modules/fgsl_const_num.o
+fgsl_const_mksa.mod: modules/fgsl_const_mksa.o
+fgsl_const_cgsm.mod: modules/fgsl_const_cgsm.o
+fgsl_ieee_utils.mod: modules/fgsl_ieee_utils.o
 fgsl.lo: $(libfgsl_la_SOURCES)
 
 pkgconfigdir=$(libdir)/pkgconfig
 pkgconfig_DATA = fgsl.pc
 nodist_fgslinclude_HEADERS = fgsl.mod \
 			     fgsl_base.mod \
+				 fgsl_ver.mod \
 			     fgsl_errno.mod \
 			     fgsl_io.mod \
 			     fgsl_math.mod \
@@ -357,7 +375,15 @@ nodist_fgslinclude_HEADERS = fgsl.mod \
 			     fgsl_fit.mod \
 			     fgsl_multifit.mod \
 			     fgsl_multilarge.mod \
-			     fgsl_multi_nlinear.mod
+			     fgsl_multi_nlinear.mod \
+			     fgsl_bspline.mod \
+			     fgsl_sparse_matrix.mod \
+			     fgsl_spblas.mod \
+     		     fgsl_splinalg.mod \
+			     fgsl_const_num.mod \
+			     fgsl_const_mksa.mod \
+			     fgsl_const_cgsm.mod \
+			     fgsl_ieee_utils.mod 
 
 EXTRA_DIST = Doxyfile
 

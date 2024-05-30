@@ -205,3 +205,17 @@ void fgsl_aux_matrix_complex_size(gsl_matrix_complex *fvec,
     if (lda != NULL)
     	*lda = fvec->tda;
 }
+
+size_t gsl_aux_sizeof_vector() {
+    return sizeof(gsl_vector);
+}
+size_t gsl_aux_sizeof_vector_complex() {
+    return sizeof(gsl_vector_complex);
+}
+size_t gsl_aux_sizeof_matrix() {
+    return sizeof(gsl_matrix);
+}
+size_t gsl_aux_sizeof_matrix_complex() {
+    return sizeof(gsl_matrix_complex);
+}
+

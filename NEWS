@@ -1,16 +1,37 @@
 Changes in 2.0.0:
 ~~~~~~~~~~~~~~~~~
 
-This release restructures the source code to provide multiple
-modules, each one of which is easier to read and understand.
-The organization is mostly analogous to the C source code,
+This release restructures the source code by providing multiple
+modules, each one of which is easier to read, understand, and
+maintain. The organization is mostly analogous to the C source code,
 i.e., a Fortran module fgsl_interp exists in analogy to the
-C header gsl_interp.h. All fgsl_*.f90 files are placed in the
+C header gsl_interp.h. This rule is only violated in cases of name
+collitions. All fgsl_*.?90 files are placed in the
 modules folder. For modules that need explicit C glue code,
-an appropriately named file fgsl_*.c exists in the csub folder.
+an appropriately named file fgsl_*_c.c exists in the csub folder.
 
-fgsl_complex_math: the legacy complex type has been removed.
-    interface added: fgsl_complex_polar
+The release also introduces support for gsl 2.8.
+
+Here an overview of the relevant additions:
+
+1. fgsl_complex_math: the legacy complex type has been removed;
+   interface added: fgsl_complex_polar
+2. mappings of the gsl_linalg routines
+   - gsl_linalg_sv_{solve2, lssolve}
+   - gsl_linalg_qr_lssolvem_r, gsl_linalg_complex_qr_lssolvem_r
+   - gsl_linalg_complex_qr_qhmat_r
+   - gsl_linalg_qr_ud_lssvx,
+   - gsl_linalg_qr_ur_{lssolve, lssvx, qtvec}
+   
+   
+Fixes:
+
+-  the examples now all use the standard output unit for writes to stdout; 
+   newunit= is used for dynamically creating unit values otherwise.
+-  unit testing now returns exit status 1 on error, assuring that 
+   failures are signalled.
+ 
+
 
 
 Changes in 1.6.0 (by R Bader):

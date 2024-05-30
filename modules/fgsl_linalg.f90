@@ -22,18 +22,20 @@ module fgsl_linalg
        gsl_linalg_complex_qr_solve_r, gsl_linalg_qr_svx, &
        gsl_linalg_complex_qr_svx, gsl_linalg_qr_lssolve, &
        gsl_linalg_complex_qr_lssolve, gsl_linalg_qr_lssolve_r, &
+       gsl_linalg_qr_lssolvem_r, gsl_linalg_complex_qr_lssolvem_r, &
        gsl_linalg_complex_qr_lssolve_r, gsl_linalg_qr_qtvec, &
        gsl_linalg_complex_qr_qhvec, gsl_linalg_qr_qtvec_r, &
-       gsl_linalg_complex_qr_qhvec_r, gsl_linalg_qr_qvec, &
-       gsl_linalg_complex_qr_qvec, gsl_linalg_qr_qtmat, &
+       gsl_linalg_complex_qr_qhvec_r, gsl_linalg_complex_qr_qhmat_r, &
+       gsl_linalg_qr_qvec, gsl_linalg_complex_qr_qvec, gsl_linalg_qr_qtmat, &
        gsl_linalg_qr_qtmat_r, gsl_linalg_qr_rsolve, gsl_linalg_qr_rsvx, &
        gsl_linalg_qr_unpack, gsl_linalg_qr_unpack_r, &
        gsl_linalg_complex_qr_unpack_r, gsl_linalg_qr_qrsolve, &
        gsl_linalg_qr_update, gsl_linalg_r_solve, gsl_linalg_r_svx, &
-       gsl_linalg_qr_ur_decomp, gsl_linalg_qr_uu_decomp, &
-       gsl_linalg_qr_uu_lssolve,  gsl_linalg_qr_uu_qtvec, &
+       gsl_linalg_qr_ur_decomp, gsl_linalg_qr_ur_lssolve, gsl_linalg_qr_ur_lssvx, &
+       gsl_linalg_qr_ur_qtvec, gsl_linalg_qr_uu_decomp, &
+       gsl_linalg_qr_uu_lssolve, gsl_linalg_qr_uu_lssvx, gsl_linalg_qr_uu_qtvec, &
        gsl_linalg_qr_uz_decomp, gsl_linalg_qr_ud_decomp, &
-       gsl_linalg_qr_ud_lssolve, gsl_linalg_qrpt_decomp, &
+       gsl_linalg_qr_ud_lssolve, gsl_linalg_qr_ud_lssvx, gsl_linalg_qrpt_decomp, &
        gsl_linalg_qrpt_decomp2, gsl_linalg_qrpt_solve, gsl_linalg_qrpt_svx, &
        gsl_linalg_qrpt_lssolve, gsl_linalg_qrpt_lssolve2, &
        gsl_linalg_qrpt_qrsolve, gsl_linalg_qrpt_update, gsl_linalg_qrpt_rsolve, &
@@ -45,7 +47,7 @@ module fgsl_linalg
        gsl_linalg_cod_unpack, gsl_linalg_cod_matz
   private :: gsl_linalg_sv_decomp, gsl_linalg_sv_decomp_mod, &
        gsl_linalg_sv_decomp_jacobi, gsl_linalg_sv_solve, &
-       gsl_linalg_sv_leverage
+       gsl_linalg_sv_solve2, gsl_linalg_sv_lssolve, gsl_linalg_sv_leverage
   private :: gsl_linalg_cholesky_decomp1, gsl_linalg_cholesky_decomp, &
        gsl_linalg_complex_cholesky_decomp, gsl_linalg_cholesky_solve, &
        gsl_linalg_complex_cholesky_solve, gsl_linalg_cholesky_svx, &
@@ -304,12 +306,24 @@ module fgsl_linalg
        type(c_ptr), value :: qr, t, b, x, work
        integer(c_int) :: gsl_linalg_qr_lssolve_r
      end function gsl_linalg_qr_lssolve_r
+     function gsl_linalg_qr_lssolvem_r (qr, t, b, x, work) &
+          bind(c, name='gsl_linalg_QR_lssolvem_r')
+       import :: c_ptr, c_int
+       type(c_ptr), value :: qr, t, b, x, work
+       integer(c_int) :: gsl_linalg_qr_lssolvem_r
+     end function gsl_linalg_qr_lssolvem_r    
      function gsl_linalg_complex_qr_lssolve_r (qr, t, b, x, work) &
           bind(c, name='gsl_linalg_complex_QR_lssolve_r')
        import :: c_ptr, c_int
        type(c_ptr), value :: qr, t, b, x, work
        integer(c_int) :: gsl_linalg_complex_qr_lssolve_r
-     end function gsl_linalg_complex_qr_lssolve_r
+     end function gsl_linalg_complex_qr_lssolve_r 
+     function gsl_linalg_complex_qr_lssolvem_r (qr, t, b, x, work) &
+          bind(c, name='gsl_linalg_complex_QR_lssolvem_r')
+       import :: c_ptr, c_int
+       type(c_ptr), value :: qr, t, b, x, work
+       integer(c_int) :: gsl_linalg_complex_qr_lssolvem_r
+     end function gsl_linalg_complex_qr_lssolvem_r
      function gsl_linalg_qr_qtvec (qr, tau, v) &
           bind(c, name='gsl_linalg_QR_QTvec')
        import :: c_ptr, c_int
@@ -334,6 +348,12 @@ module fgsl_linalg
        type(c_ptr), value :: qr, t, v,work
        integer(c_int) :: gsl_linalg_complex_qr_qhvec_r
      end function gsl_linalg_complex_qr_qhvec_r
+     function gsl_linalg_complex_qr_qhmat_r (qr, t, v, work) &
+          bind(c, name='gsl_linalg_complex_QR_QHmat_r')
+       import :: c_ptr, c_int
+       type(c_ptr), value :: qr, t, v,work
+       integer(c_int) :: gsl_linalg_complex_qr_qhmat_r
+     end function gsl_linalg_complex_qr_qhmat_r
      function gsl_linalg_qr_qvec (qr, tau, v) &
           bind(c, name='gsl_linalg_QR_Qvec')
        import :: c_ptr, c_int
@@ -418,6 +438,24 @@ module fgsl_linalg
        type(c_ptr), value :: u, a, t
        integer(c_int) :: gsl_linalg_qr_ur_decomp
      end function gsl_linalg_qr_ur_decomp
+     function gsl_linalg_qr_ur_lssolve(r, y, t, b, x, work) &
+          bind(c, name='gsl_linalg_QR_UR_lssolve')
+       import :: c_ptr, c_int
+       type(c_ptr), value :: r, y, t, b, x, work
+       integer(c_int) :: gsl_linalg_qr_ur_lssolve
+     end function gsl_linalg_qr_ur_lssolve
+     function gsl_linalg_qr_ur_lssvx(r, y, t, x, work) &
+          bind(c, name='gsl_linalg_QR_UR_lssvx')
+       import :: c_ptr, c_int
+       type(c_ptr), value :: r, y, t, x, work
+       integer(c_int) :: gsl_linalg_qr_ur_lssvx
+     end function gsl_linalg_qr_ur_lssvx
+     function gsl_linalg_qr_ur_qtvec(y, t, b, work) &
+          bind(c, name='gsl_linalg_QR_UR_QTvec')
+       import :: c_ptr, c_int
+       type(c_ptr), value :: y, t, b, work
+       integer(c_int) :: gsl_linalg_qr_ur_qtvec
+     end function gsl_linalg_qr_ur_qtvec
      function gsl_linalg_qr_uu_decomp(u1, u2, t) &
           bind(c, name='gsl_linalg_QR_UU_decomp')
        import :: c_ptr, c_int
@@ -430,6 +468,12 @@ module fgsl_linalg
        type(c_ptr), value :: r, y, t, b, x, work
        integer(c_int) :: gsl_linalg_qr_uu_lssolve
      end function gsl_linalg_qr_uu_lssolve
+     function gsl_linalg_qr_uu_lssvx(r, y, t, x, work) &
+          bind(c, name='gsl_linalg_QR_UU_lssvx')
+       import :: c_ptr, c_int
+       type(c_ptr), value :: r, y, t, x, work
+       integer(c_int) :: gsl_linalg_qr_uu_lssvx
+     end function gsl_linalg_qr_uu_lssvx
      function gsl_linalg_qr_uu_qtvec(y, t, b, work) &
           bind(c, name='gsl_linalg_QR_UU_QTvec')
        import :: c_ptr, c_int
@@ -454,6 +498,12 @@ module fgsl_linalg
        type(c_ptr), value :: r, y, t, b, x, work
        integer(c_int) :: gsl_linalg_qr_ud_lssolve
      end function gsl_linalg_qr_ud_lssolve
+     function gsl_linalg_qr_ud_lssvx(r, y, t, x, work) &
+          bind(c, name='gsl_linalg_QR_UD_lssvx')
+       import :: c_ptr, c_int
+       type(c_ptr), value :: r, y, t, x, work
+       integer(c_int) :: gsl_linalg_qr_ud_lssvx
+     end function gsl_linalg_qr_ud_lssvx
      function gsl_linalg_qrpt_decomp (a, tau, p, signum, norm) &
           bind(c, name='gsl_linalg_QRPT_decomp')
        import :: c_ptr, c_int
@@ -638,6 +688,21 @@ module fgsl_linalg
        type(c_ptr), value :: u, v, s, b, x
        integer(c_int) :: gsl_linalg_sv_solve
      end function gsl_linalg_sv_solve
+     function gsl_linalg_sv_solve2 (tol, u, v, s, b, x, work) &
+          bind(c, name='gsl_linalg_SV_solve2')
+       import :: c_ptr, c_int, c_double
+       real(c_double), value :: tol
+       type(c_ptr), value :: u, v, s, b, x, work
+       integer(c_int) :: gsl_linalg_sv_solve2
+     end function gsl_linalg_sv_solve2
+     function gsl_linalg_sv_lssolve (lambda, u, v, s, b, x, rnorm, work) &
+          bind(c, name='gsl_linalg_SV_lssolve')
+       import :: c_ptr, c_int, c_double
+       real(c_double), value :: lambda
+       real(c_double), intent(inout) :: rnorm
+       type(c_ptr), value :: u, v, s, b, x, work
+       integer(c_int) :: gsl_linalg_sv_lssolve
+     end function gsl_linalg_sv_lssolve
      function gsl_linalg_sv_leverage(u, h) &
           bind(c, name='gsl_linalg_SV_leverage')
        import :: c_ptr, c_int
@@ -1431,6 +1496,14 @@ contains
     fgsl_linalg_qr_lssolve_r = gsl_linalg_qr_lssolve_r (qr%gsl_matrix, t%gsl_matrix, &
          b%gsl_vector, x%gsl_vector, work%gsl_vector)
   end function fgsl_linalg_qr_lssolve_r
+  function fgsl_linalg_qr_lssolvem_r (qr, t, b, x, work)
+    type(fgsl_matrix), intent(in) :: qr, t
+    type(fgsl_matrix), intent(in) :: b
+    type(fgsl_matrix), intent(inout) :: x, work
+    integer(fgsl_int) :: fgsl_linalg_qr_lssolvem_r
+    fgsl_linalg_qr_lssolvem_r = gsl_linalg_qr_lssolvem_r (qr%gsl_matrix, t%gsl_matrix, &
+         b%gsl_matrix, x%gsl_matrix, work%gsl_matrix)
+  end function fgsl_linalg_qr_lssolvem_r
   function fgsl_linalg_complex_qr_lssolve_r (qr, t, b, x, work)
     type(fgsl_matrix_complex), intent(in) :: qr, t
     type(fgsl_vector_complex), intent(in) :: b
@@ -1439,6 +1512,14 @@ contains
     fgsl_linalg_complex_qr_lssolve_r = gsl_linalg_complex_qr_lssolve_r (qr%gsl_matrix_complex, t%gsl_matrix_complex, &
          b%gsl_vector_complex, x%gsl_vector_complex, work%gsl_vector_complex)
   end function fgsl_linalg_complex_qr_lssolve_r
+  function fgsl_linalg_complex_qr_lssolvem_r (qr, t, b, x, work)
+    type(fgsl_matrix_complex), intent(in) :: qr, t
+    type(fgsl_matrix_complex), intent(in) :: b
+    type(fgsl_matrix_complex), intent(inout) :: x, work
+    integer(fgsl_int) :: fgsl_linalg_complex_qr_lssolvem_r
+    fgsl_linalg_complex_qr_lssolvem_r = gsl_linalg_complex_qr_lssolvem_r (qr%gsl_matrix_complex, &
+         t%gsl_matrix_complex, b%gsl_matrix_complex, x%gsl_matrix_complex, work%gsl_matrix_complex)
+  end function fgsl_linalg_complex_qr_lssolvem_r  
   function fgsl_linalg_qr_qtvec (qr, tau, v)
     type(fgsl_matrix), intent(in) :: qr
     type(fgsl_vector), intent(in) :: tau
@@ -1471,6 +1552,14 @@ contains
     fgsl_linalg_complex_qr_qhvec_r = gsl_linalg_complex_qr_qhvec_r (qr%gsl_matrix_complex, t%gsl_matrix_complex, &
          v%gsl_vector_complex, work%gsl_vector_complex)
   end function fgsl_linalg_complex_qr_qhvec_r
+  function fgsl_linalg_complex_qr_qhmat_r (qr, t, v, work)
+    type(fgsl_matrix_complex), intent(in) :: qr
+    type(fgsl_matrix_complex), intent(in) :: t
+    type(fgsl_matrix_complex), intent(inout) :: v, work
+    integer(fgsl_int) :: fgsl_linalg_complex_qr_qhmat_r
+    fgsl_linalg_complex_qr_qhmat_r = gsl_linalg_complex_qr_qhmat_r (qr%gsl_matrix_complex, t%gsl_matrix_complex, &
+         v%gsl_matrix_complex, work%gsl_matrix_complex)
+  end function fgsl_linalg_complex_qr_qhmat_r
   function fgsl_linalg_qr_qvec (qr, tau, v)
     type(fgsl_matrix), intent(in) :: qr
     type(fgsl_vector), intent(in) :: tau
@@ -1574,6 +1663,30 @@ contains
     integer(fgsl_int) :: fgsl_linalg_qr_ur_decomp
     fgsl_linalg_qr_ur_decomp = gsl_linalg_qr_ur_decomp(u%gsl_matrix, a%gsl_matrix, t%gsl_matrix)
   end function fgsl_linalg_qr_ur_decomp
+  function fgsl_linalg_qr_ur_lssolve(r, y, t, b, x, work) 
+    type(fgsl_matrix), intent(in) :: r, y, t
+    type(fgsl_vector), intent(in) :: b
+    type(fgsl_vector), intent(inout) :: x, work
+    integer(fgsl_int) :: fgsl_linalg_qr_ur_lssolve
+    fgsl_linalg_qr_ur_lssolve = gsl_linalg_qr_ur_lssolve(r%gsl_matrix, y%gsl_matrix, &
+        t%gsl_matrix, b%gsl_vector, x%gsl_vector, work%gsl_vector)
+  end function fgsl_linalg_qr_ur_lssolve
+ function fgsl_linalg_qr_ur_lssvx(r, y, t, x, work) 
+    type(fgsl_matrix), intent(in) :: r, y, t
+    type(fgsl_vector), intent(inout) :: x, work
+    integer(fgsl_int) :: fgsl_linalg_qr_ur_lssvx
+
+    fgsl_linalg_qr_ur_lssvx = gsl_linalg_qr_ur_lssvx(r%gsl_matrix, y%gsl_matrix, &
+        t%gsl_matrix, x%gsl_vector, work%gsl_vector)
+  end function fgsl_linalg_qr_ur_lssvx
+ function fgsl_linalg_qr_ur_qtvec(y, t, b, work) 
+    type(fgsl_matrix), intent(in) :: y, t
+    type(fgsl_vector), intent(inout) :: b, work
+    integer(fgsl_int) :: fgsl_linalg_qr_ur_qtvec
+    
+    fgsl_linalg_qr_ur_qtvec = gsl_linalg_qr_ur_qtvec(y%gsl_matrix, &
+        t%gsl_matrix, b%gsl_vector, work%gsl_vector)
+  end function fgsl_linalg_qr_ur_qtvec
   function fgsl_linalg_qr_uu_decomp(u1, u2, t)
     type(fgsl_matrix), intent(inout) :: u1, u2, t
     integer(fgsl_int) :: fgsl_linalg_qr_uu_decomp
@@ -1586,6 +1699,13 @@ contains
     fgsl_linalg_qr_uu_lssolve = gsl_linalg_qr_uu_lssolve(r%gsl_matrix, y%gsl_matrix, t%gsl_matrix, &
          b%gsl_vector, x%gsl_vector, work%gsl_vector)
   end function fgsl_linalg_qr_uu_lssolve
+  function fgsl_linalg_qr_uu_lssvx(r, y, t, x, work)
+    type(fgsl_matrix), intent(in) :: r, y, t
+    type(fgsl_vector), intent(inout) :: x, work
+    integer(fgsl_int) :: fgsl_linalg_qr_uu_lssvx
+    fgsl_linalg_qr_uu_lssvx = gsl_linalg_qr_uu_lssvx(r%gsl_matrix, y%gsl_matrix, t%gsl_matrix, &
+         x%gsl_vector, work%gsl_vector)
+  end function fgsl_linalg_qr_uu_lssvx
   function fgsl_linalg_qr_uu_qtvec(y, t, b, work)
     type(fgsl_matrix), intent(in) :: y, t
     type(fgsl_vector), intent(inout) :: b, work
@@ -1612,6 +1732,13 @@ contains
     fgsl_linalg_qr_ud_lssolve = gsl_linalg_qr_ud_lssolve(r%gsl_matrix, y%gsl_matrix, t%gsl_matrix, &
          b%gsl_vector, x%gsl_vector, work%gsl_vector)
   end function fgsl_linalg_qr_ud_lssolve
+  function fgsl_linalg_qr_ud_lssvx(r, y, t, x, work)
+    type(fgsl_matrix), intent(in) :: r, y, t
+    type(fgsl_vector), intent(inout) :: x, work
+    integer(fgsl_int) :: fgsl_linalg_qr_ud_lssvx
+    fgsl_linalg_qr_ud_lssvx = gsl_linalg_qr_ud_lssvx(r%gsl_matrix, y%gsl_matrix, t%gsl_matrix, &
+         x%gsl_vector, work%gsl_vector)
+  end function fgsl_linalg_qr_ud_lssvx
   function fgsl_linalg_qrpt_decomp (a, tau, p, signum, norm)
     type(fgsl_matrix), intent(inout) :: a
     type(fgsl_vector), intent(inout) :: tau, norm
@@ -1854,6 +1981,27 @@ contains
     fgsl_linalg_sv_solve = gsl_linalg_sv_solve(u%gsl_matrix, &
          v%gsl_matrix, s%gsl_vector, b%gsl_vector, x%gsl_vector)
   end function fgsl_linalg_sv_solve
+  function fgsl_linalg_sv_solve2(tol, u, v, s, b, x, work)
+    real(fgsl_double), intent(in) :: tol
+    type(fgsl_matrix), intent(in)  :: u, v
+    type(fgsl_vector), intent(in) :: s, b
+    type(fgsl_vector), intent(inout) :: x, work
+    integer(fgsl_int) :: fgsl_linalg_sv_solve2
+    fgsl_linalg_sv_solve2 = gsl_linalg_sv_solve2(tol, u%gsl_matrix, &
+         v%gsl_matrix, s%gsl_vector, b%gsl_vector, x%gsl_vector, &
+         work%gsl_vector)
+  end function fgsl_linalg_sv_solve2
+  function fgsl_linalg_sv_lssolve(lambda, u, v, s, b, x, rnorm, work)
+    real(fgsl_double), intent(in) :: lambda
+    type(fgsl_matrix), intent(in)  :: u, v
+    type(fgsl_vector), intent(in) :: s, b
+    type(fgsl_vector), intent(inout) :: x, work
+    real(fgsl_double), intent(inout) :: rnorm
+    integer(fgsl_int) :: fgsl_linalg_sv_lssolve
+    fgsl_linalg_sv_lssolve = gsl_linalg_sv_lssolve(lambda, u%gsl_matrix, &
+         v%gsl_matrix, s%gsl_vector, b%gsl_vector, x%gsl_vector, &
+         rnorm, work%gsl_vector)
+  end function fgsl_linalg_sv_lssolve
   function fgsl_linalg_sv_leverage(u, h)
     type(fgsl_matrix), intent(in)  :: u
     type(fgsl_vector), intent(inout) :: h

@@ -12,7 +12,7 @@ module fgsl_ntuples
     fgsl_aux_ntuple_data, fgsl_aux_ntuple_size
     
   !
-  ! Types
+  !> Types
   type, public :: fgsl_ntuple
      private
      type(c_ptr) :: gsl_ntuple = c_null_ptr
@@ -26,7 +26,14 @@ module fgsl_ntuples
      type(c_ptr) :: gsl_ntuple_value_fn = c_null_ptr
   end type fgsl_ntuple_value_fn
   !
-  ! C interfaces
+  !> Generics
+  interface fgsl_well_defined
+     module procedure fgsl_ntuple_status
+     module procedure fgsl_ntuple_value_fn_status
+     module procedure fgsl_ntuple_select_fn_status
+  end interface
+  !
+  !> C interfaces
   interface
 	  function gsl_ntuple_create(fname, data, size) bind(c)
 	    import

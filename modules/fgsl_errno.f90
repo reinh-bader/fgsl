@@ -79,9 +79,14 @@ module fgsl_errno
   integer(fgsl_int), parameter, public :: fgsl_etolg = 31    ! can't reach specified tolerance in gradient
   integer(fgsl_int), parameter, public :: fgsl_eof = 32      ! end of file
 
-  
+!  FIXME: missing still
+!  interface fgsl_error
+!     module procedure fgsl_err_info
+!     module procedure fgsl_err_noinfo
+!  end interface
+
   !
-  !> private interfaces 
+  !> private C interfaces 
   interface
      function gsl_set_error_handler(new_handler) bind(c)
        import
