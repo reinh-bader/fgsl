@@ -10,7 +10,7 @@ check_PROGRAMS = cdf cheb combination diff dwt \
 		 error_1 error_2 error_3 error_4 \
 		 fitting fitting3 fitting2 histogram \
 		 histogram2d ieee ieeeround integration \
-	         integration_fixed \
+	     integration_fixed integration_lebedev \
 		 interp interpp intro matrix matrix_legacy min monte \
                  largefit multifit nlfit nlfit2 nlfit4 \
 		 ntuplew ntupler \
@@ -55,6 +55,8 @@ ieeeround_SOURCES = ieeeround.f90
 integration_SOURCES = integration.f90
 
 integration_fixed_SOURCES = integration_fixed.f90
+
+integration_lebedev_SOURCES = integration_lebedev.f90
 
 interp_SOURCES = interp.f90
 
@@ -152,7 +154,7 @@ dist_fgsl_example_DATA = $(data_files) cdf.f90 cheb.f90 combination.F90 diff.f90
 			error_1.f90 error_2.f90 error_3.F90 error_4.f90 \
 			fitting.f90 fitting3.f90 fitting2.f90 histogram.F90 \
 			histogram2d.f90 ieee.f90 ieeeround.f90 integration.f90 \
-	                integration_fixed.f90 interp.f90 interpp.f90 \
+	        integration_fixed.f90 integration_lebedev.f90 interp.f90 interpp.f90 \
 			intro.f90 matrix.f90 matrix_legacy.f90 min.f90 monte.f90 \
 			largefit.f90 multifit.f90 nlfit.f90 nlfit2.f90 \
 			nlfit4.f90 ntuplew.f90 ntupler.f90 \

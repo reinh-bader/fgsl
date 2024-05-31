@@ -8,7 +8,8 @@ module fgsl_rstat
     gsl_rstat_alloc, gsl_rstat_free, gsl_rstat_n, gsl_rstat_add, &
     gsl_rstat_min, gsl_rstat_max, gsl_rstat_mean, gsl_rstat_rms, &
     gsl_rstat_variance, gsl_rstat_sd, gsl_rstat_sd_mean, &
-    gsl_rstat_median, gsl_rstat_skew, gsl_rstat_kurtosis, gsl_rstat_reset
+    gsl_rstat_median, gsl_rstat_norm, gsl_rstat_skew, gsl_rstat_kurtosis, &
+    gsl_rstat_reset
   
   !  
   ! Types: Running Statistics
@@ -107,6 +108,11 @@ module fgsl_rstat
 	  type(c_ptr), value :: w
 	  real(c_double) :: gsl_rstat_median
 	end function gsl_rstat_median
+	function gsl_rstat_norm(w) bind(c)
+	  import :: c_ptr, c_double
+	  type(c_ptr), value :: w
+	  real(c_double) :: gsl_rstat_norm
+	end function gsl_rstat_norm
 	function gsl_rstat_skew(w) bind(c)
 	  import :: c_ptr, c_double
 	  type(c_ptr), value :: w
@@ -207,6 +213,11 @@ contains
 	  real(fgsl_double) :: fgsl_rstat_median
 	  fgsl_rstat_median = gsl_rstat_median(w%gsl_rstat_workspace)
 	end function fgsl_rstat_median
+		function fgsl_rstat_norm(w)
+	  type(fgsl_rstat_workspace), intent(inout) :: w
+	  real(fgsl_double) :: fgsl_rstat_norm
+	  fgsl_rstat_norm = gsl_rstat_norm(w%gsl_rstat_workspace)
+	end function fgsl_rstat_norm
 	function fgsl_rstat_skew(w)
 	  type(fgsl_rstat_workspace), intent(inout) :: w
 	  real(fgsl_double) :: fgsl_rstat_skew

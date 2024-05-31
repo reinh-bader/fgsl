@@ -1,7 +1,7 @@
 
 This is release 2.0.0 of the Fortran interface 
 to the GNU Scientific Library. 
-It is currently based on version 2.7 of GSL, and should not be used with 
+It is currently based on version 2.8 of GSL, and should not be used with 
 earlier GSL releases.
 
 Please use the release 1.0.0 in combination with GSL 1.x
@@ -17,7 +17,7 @@ Please consult the NEWS file for a change log.
 License:
 ~~~~~~~~
 
-FGSL is released under Version 2 or later of the GPL.
+FGSL is released under Version 3 or later of the GPL.
 
 Installation procedure:
 ~~~~~~~~~~~~~~~~~~~~~~~

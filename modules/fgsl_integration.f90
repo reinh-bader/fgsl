@@ -17,13 +17,15 @@ module fgsl_integration
     gsl_integration_romberg, gsl_integration_glfixed_table_alloc, &
     gsl_integration_glfixed_table_free, gsl_integration_glfixed, &
     gsl_integration_glfixed_point, gsl_integration_fixed_free, gsl_integration_fixed_n, &
-    gsl_integration_fixed_nodes, gsl_integration_fixed_weights, gsl_integration_fixed
+    gsl_integration_fixed_nodes, gsl_integration_fixed_weights, gsl_integration_fixed, &
+    gsl_integration_lebedev_alloc, gsl_integration_lebedev_free, gsl_integration_lebedev_n
     
    private :: gsl_aux_sizeof_integration_workspace, gsl_aux_sizeof_integration_qaws_table, &
-     gsl_aux_sizeof_integration_qawo_table, gsl_aux_integration_fixed_alloc
+     gsl_aux_sizeof_integration_qawo_table, gsl_aux_integration_fixed_alloc, &
+     gsl_aux_integration_lebedev_pointers
      
-  ! Types and Constants
-  !
+  ! 
+  !> Types and Constants
   type, public :: fgsl_integration_workspace
      private
      type(c_ptr) :: gsl_integration_workspace = c_null_ptr
@@ -69,15 +71,22 @@ module fgsl_integration
   integer(fgsl_int), parameter, public :: fgsl_integration_fixed_exponential = 7
   integer(fgsl_int), parameter, public :: fgsl_integration_fixed_rational = 8
   integer(fgsl_int), parameter, public :: fgsl_integration_fixed_chebyshev2 = 9
+  type, public :: fgsl_integration_lebedev_workspace
+     type(c_ptr), private :: gsl_integration_lebedev_workspace = c_null_ptr
+     real(fgsl_double), pointer, contiguous :: weights(:) => null(), &
+                                               theta(:) => null(), &
+                                               phi(:) => null()
+  end type 
   
   !
-  ! Generics
+  !> Generics
   interface fgsl_well_defined
      module procedure fgsl_integration_workspace_status
      module procedure fgsl_integration_cquad_workspace_status
      module procedure fgsl_integration_qawo_table_status
      module procedure fgsl_integration_qaws_table_status
-     module procedure fgsl_integration_glfixed_table_status    
+     module procedure fgsl_integration_glfixed_table_status 
+     module procedure fgsl_integration_lebedev_workspace_status   
   end interface
   interface fgsl_sizeof
      module procedure fgsl_sizeof_integration_workspace
@@ -335,6 +344,20 @@ module fgsl_integration
       integer(c_int) :: gsl_integration_fixed
       type(c_ptr), value :: func, w, result
     end function gsl_integration_fixed
+    function gsl_integration_lebedev_alloc(n) bind(c)
+      import :: c_ptr, c_size_t
+      integer(c_size_t), value :: n
+      type(c_ptr) :: gsl_integration_lebedev_alloc
+    end function gsl_integration_lebedev_alloc
+    subroutine gsl_integration_lebedev_free(w) bind(c)
+      import :: c_ptr
+      type(c_ptr), value :: w
+    end subroutine gsl_integration_lebedev_free
+    function gsl_integration_lebedev_n(w) bind(c)
+      import :: c_ptr, c_size_t
+      integer(c_size_t) :: gsl_integration_lebedev_n
+      type(c_ptr), value :: w
+    end function gsl_integration_lebedev_n
 !
     function gsl_aux_sizeof_integration_workspace() bind(c)
       import :: c_size_t
@@ -355,7 +378,11 @@ module fgsl_integration
       integer(c_size_t), value :: n
       real(c_double), value :: a, b, alpha, beta
     end function gsl_aux_integration_fixed_alloc
- 
+    subroutine gsl_aux_integration_lebedev_pointers(w, weights, theta, phi) bind(c)
+      import :: c_ptr
+      type(c_ptr), value :: w
+      type(c_ptr) :: weights, theta, phi
+    end subroutine gsl_aux_integration_lebedev_pointers
   end interface
 contains	
 ! API
@@ -675,6 +702,30 @@ contains
     fgsl_integration_fixed = gsl_integration_fixed(func%gsl_function, &
          c_loc(result), w%gsl_integration_fixed_workspace)
   end function fgsl_integration_fixed
+  function fgsl_integration_lebedev_alloc(n)
+    integer(fgsl_size_t), intent(in) :: n
+    type(fgsl_integration_lebedev_workspace) :: fgsl_integration_lebedev_alloc
+    type(c_ptr) :: weights, theta, phi
+    fgsl_integration_lebedev_alloc%gsl_integration_lebedev_workspace = &
+         gsl_integration_lebedev_alloc(n)
+    call gsl_aux_integration_lebedev_pointers(&
+         fgsl_integration_lebedev_alloc%gsl_integration_lebedev_workspace, &
+         weights, theta, phi)
+    call c_f_pointer(weights, fgsl_integration_lebedev_alloc%weights, [n])
+    call c_f_pointer(theta, fgsl_integration_lebedev_alloc%theta, [n])
+    call c_f_pointer(phi, fgsl_integration_lebedev_alloc%phi, [n])
+  end function fgsl_integration_lebedev_alloc
+  subroutine fgsl_integration_lebedev_free(w)
+    type(fgsl_integration_lebedev_workspace), intent(inout) :: w
+    call gsl_integration_lebedev_free(w%gsl_integration_lebedev_workspace)
+    nullify (w%weights, w%theta, w%phi)
+  end subroutine fgsl_integration_lebedev_free
+  function fgsl_integration_lebedev_n(w) 
+    integer(fgsl_size_t) :: fgsl_integration_lebedev_n
+    type(fgsl_integration_lebedev_workspace), intent(in) :: w
+    fgsl_integration_lebedev_n = gsl_integration_lebedev_n( &
+                                 w%gsl_integration_lebedev_workspace)
+  end function fgsl_integration_lebedev_n
 !
 ! additional utilities
 !
@@ -716,6 +767,13 @@ contains
          integration_glfixed_table%gsl_integration_glfixed_table)) &
          fgsl_integration_glfixed_table_status = .false.
   end function fgsl_integration_glfixed_table_status
+  function fgsl_integration_lebedev_workspace_status(lebedev_workspace)
+    type(fgsl_integration_lebedev_workspace), intent(in) :: lebedev_workspace
+    logical :: fgsl_integration_lebedev_workspace_status
+    fgsl_integration_lebedev_workspace_status = .true.
+    if (.not. c_associated(lebedev_workspace%gsl_integration_lebedev_workspace)) &
+         fgsl_integration_lebedev_workspace_status = .false.
+  end function fgsl_integration_lebedev_workspace_status
   function fgsl_sizeof_integration_workspace(w)
     type(fgsl_integration_workspace), intent(in) :: w
     integer(fgsl_size_t) :: fgsl_sizeof_integration_workspace

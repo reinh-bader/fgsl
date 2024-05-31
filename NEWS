@@ -22,6 +22,10 @@ Here an overview of the relevant additions:
    - gsl_linalg_complex_qr_qhmat_r
    - gsl_linalg_qr_ud_lssvx,
    - gsl_linalg_qr_ur_{lssolve, lssvx, qtvec}
+   - gsl_linalg_complex_cholesky_{scale, scale_apply, decomp2, 
+     svx2, solve2}
+3. mapping of gsl_rstat_norm
+4. mappings for Lebedev integration (unit sphere)
    
    
 Fixes:

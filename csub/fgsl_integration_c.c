@@ -47,3 +47,9 @@ const gsl_integration_fixed_workspace *gsl_aux_integration_fixed_alloc(int t, co
     }
     return gsl_integration_fixed_alloc(T, n, a, b, alpha, beta);
 }
+
+void gsl_aux_integration_lebedev_pointers(gsl_integration_lebedev_workspace *w, double **weights, double **theta, double **phi) {
+	*weights = w->weights; 
+	*theta   = w->theta;
+	*phi     = w->phi;
+}

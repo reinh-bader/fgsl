@@ -52,7 +52,10 @@ module fgsl_linalg
        gsl_linalg_complex_cholesky_decomp, gsl_linalg_cholesky_solve, &
        gsl_linalg_complex_cholesky_solve, gsl_linalg_cholesky_svx, &
        gsl_linalg_complex_cholesky_svx, gsl_linalg_cholesky_invert, &
-       gsl_linalg_complex_cholesky_invert, gsl_linalg_cholesky_decomp2, &
+       gsl_linalg_complex_cholesky_invert, gsl_linalg_complex_cholesky_scale, &
+       gsl_linalg_complex_cholesky_scale_apply, gsl_linalg_complex_cholesky_decomp2, &
+       gsl_linalg_complex_cholesky_svx2, gsl_linalg_complex_cholesky_solve2, &
+       gsl_linalg_cholesky_decomp2, &
        gsl_linalg_cholesky_svx2, gsl_linalg_cholesky_scale, &
        gsl_linalg_cholesky_scale_apply, gsl_linalg_cholesky_rcond, &
        gsl_linalg_pcholesky_decomp, gsl_linalg_pcholesky_solve, &
@@ -764,6 +767,33 @@ module fgsl_linalg
        integer(c_int) :: gsl_linalg_complex_cholesky_invert
        type(c_ptr), value :: chol
      end function gsl_linalg_complex_cholesky_invert
+     function gsl_linalg_complex_cholesky_scale (a, s) bind(c)
+       import :: c_ptr, c_int
+       integer(c_int) :: gsl_linalg_complex_cholesky_scale
+       type(c_ptr), value :: a, s
+     end function gsl_linalg_complex_cholesky_scale
+     function gsl_linalg_complex_cholesky_scale_apply (a, s) bind(c)
+       import :: c_ptr, c_int
+       integer(c_int) :: gsl_linalg_complex_cholesky_scale_apply
+       type(c_ptr), value :: a, s
+     end function gsl_linalg_complex_cholesky_scale_apply
+     function gsl_linalg_complex_cholesky_decomp2 (a, s) bind(c)
+       import :: c_ptr, c_int
+       integer(c_int) :: gsl_linalg_complex_cholesky_decomp2
+       type(c_ptr), value :: a, s
+     end function gsl_linalg_complex_cholesky_decomp2
+     function gsl_linalg_complex_cholesky_svx2 (chol, s, x) &
+          bind(c)
+       import :: c_ptr, c_int
+       type(c_ptr), value :: chol, s, x
+       integer(c_int) :: gsl_linalg_complex_cholesky_svx2
+     end function gsl_linalg_complex_cholesky_svx2
+     function gsl_linalg_complex_cholesky_solve2 (chol, s, b, x) &
+          bind(c)
+       import :: c_ptr, c_int
+       type(c_ptr), value :: chol, s, b, x
+       integer(c_int) :: gsl_linalg_complex_cholesky_solve2
+     end function gsl_linalg_complex_cholesky_solve2
      function gsl_linalg_cholesky_decomp2 (a,s) &
           bind(c)
        import :: c_ptr, c_int
@@ -2093,6 +2123,43 @@ contains
     type(fgsl_matrix_complex), intent(inout) :: chol
     fgsl_linalg_complex_cholesky_invert = gsl_linalg_complex_cholesky_invert(chol%gsl_matrix_complex)
   end function fgsl_linalg_complex_cholesky_invert
+  function fgsl_linalg_complex_cholesky_scale (chol, s)
+    integer(fgsl_int) :: fgsl_linalg_complex_cholesky_scale
+    type(fgsl_matrix_complex), intent(in) :: chol
+    type(fgsl_vector), intent(inout) :: s
+    fgsl_linalg_complex_cholesky_scale = gsl_linalg_complex_cholesky_scale(chol%gsl_matrix_complex, &
+                s%gsl_vector)
+  end function fgsl_linalg_complex_cholesky_scale
+  function fgsl_linalg_complex_cholesky_scale_apply (chol, s)
+    integer(fgsl_int) :: fgsl_linalg_complex_cholesky_scale_apply
+    type(fgsl_matrix_complex), intent(inout) :: chol
+    type(fgsl_vector), intent(in) :: s
+    fgsl_linalg_complex_cholesky_scale_apply = gsl_linalg_complex_cholesky_scale_apply( &
+                chol%gsl_matrix_complex, s%gsl_vector)
+  end function fgsl_linalg_complex_cholesky_scale_apply
+  function fgsl_linalg_complex_cholesky_decomp2 (chol, s)
+    integer(fgsl_int) :: fgsl_linalg_complex_cholesky_decomp2
+    type(fgsl_matrix_complex), intent(inout) :: chol
+    type(fgsl_vector), intent(inout) :: s
+    fgsl_linalg_complex_cholesky_decomp2 = gsl_linalg_complex_cholesky_decomp2(chol%gsl_matrix_complex, &
+                s%gsl_vector)
+  end function fgsl_linalg_complex_cholesky_decomp2
+  function fgsl_linalg_complex_cholesky_svx2 (chol, s, x)
+    integer(fgsl_int) :: fgsl_linalg_complex_cholesky_svx2
+    type(fgsl_matrix_complex), intent(in) :: chol
+    type(fgsl_vector), intent(in) :: s
+    type(fgsl_vector), intent(inout) :: x
+    fgsl_linalg_complex_cholesky_svx2 = gsl_linalg_complex_cholesky_svx2(chol%gsl_matrix_complex, &
+                s%gsl_vector, x%gsl_vector)
+  end function fgsl_linalg_complex_cholesky_svx2
+  function fgsl_linalg_complex_cholesky_solve2 (chol, s, b, x)
+    integer(fgsl_int) :: fgsl_linalg_complex_cholesky_solve2
+    type(fgsl_matrix_complex), intent(in) :: chol
+    type(fgsl_vector), intent(in) :: s, b
+    type(fgsl_vector), intent(inout) :: x
+    fgsl_linalg_complex_cholesky_solve2 = gsl_linalg_complex_cholesky_solve2(chol%gsl_matrix_complex, &
+                s%gsl_vector, b%gsl_vector, x%gsl_vector)
+  end function fgsl_linalg_complex_cholesky_solve2
   function fgsl_linalg_cholesky_scale(a,s)
     type(fgsl_matrix), intent(in)  :: a
     type(fgsl_vector), intent(inout) :: s
