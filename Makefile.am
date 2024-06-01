@@ -202,6 +202,7 @@ libfgsl_la_SOURCES = \
 	csub/fgsl_multifit_c.c \
 	csub/fgsl_multilarge_c.c \
 	csub/fgsl_multi_nlinear_c.c \
+	csub/fgsl_bspline_c.c \
 	csub/fgsl_sparse_matrix_c.c \
 	csub/fgsl_splinalg_c.c \
 	$(NULL)

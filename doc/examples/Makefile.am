@@ -13,7 +13,7 @@ check_PROGRAMS = cdf cheb combination diff dwt \
 	     integration_fixed integration_lebedev \
 		 interp interpp intro matrix matrix_legacy min monte \
                  largefit multifit nlfit nlfit2 nlfit4 \
-		 ntuplew ntupler \
+		 bspline_knots ntuplew ntupler \
 		 linalglu eigen eigen_nonsymm fft \
 		 ode-initval permutation permshuffle \
 		 polyroots qrng randpoisson randwalk \
@@ -81,6 +81,8 @@ nlfit_SOURCES = nlfit.f90
 nlfit2_SOURCES = nlfit2.f90
 
 nlfit4_SOURCES = nlfit4.f90
+
+bspline_knots_SOURCES = bspline_knots.f90
 
 ntupler_SOURCES = ntupler.f90
 
@@ -157,7 +159,7 @@ dist_fgsl_example_DATA = $(data_files) cdf.f90 cheb.f90 combination.F90 diff.f90
 	        integration_fixed.f90 integration_lebedev.f90 interp.f90 interpp.f90 \
 			intro.f90 matrix.f90 matrix_legacy.f90 min.f90 monte.f90 \
 			largefit.f90 multifit.f90 nlfit.f90 nlfit2.f90 \
-			nlfit4.f90 ntuplew.f90 ntupler.f90 \
+			nlfit4.f90 bspline_knots.f90 ntuplew.f90 ntupler.f90 \
 			linalglu.f90 eigen.f90 eigen_nonsymm.f90 fft.f90 \
 			ode-initval.F90 permutation.f90 permshuffle.f90 \
 			polyroots.f90 qrng.f90 randpoisson.f90 randwalk.f90 \
@@ -171,4 +173,4 @@ TESTS = $(check_PROGRAMS)
 XFAIL_TESTS = error_1
 
 clean-local:
-	rm -rf *mod fitting2.dat test.dat
+	rm -rf *mod fitting2.dat test.dat bspline*.txt
