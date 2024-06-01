@@ -70,7 +70,7 @@ contains
       status = fgsl_bspline_basis(xi, bvk, istart, w)
       write(iu_spline_alt,  advance='NO', fmt='(F8.6,1X,I2, 1X)') xi, istart
       do j=1, k
-        ! bvkf(j) corresponds to bvk(istart+j)
+        ! bvkf(j) corresponds to bvf(istart+j)
         write(iu_spline_alt, advance='NO', fmt='(F8.6,1X)') bvkf(j)
       end do
       write(iu_spline_alt, fmt=*)      
