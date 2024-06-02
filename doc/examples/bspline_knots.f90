@@ -1,4 +1,6 @@
 program bspline_knots
+  !> Transcription of first bspline example to Fortran
+  !> Basis splines and uniform knots 
   use fgsl_bspline
   use fgsl_array
   implicit none
@@ -21,6 +23,7 @@ program bspline_knots
   
   close(iu_knots)
   close(iu_spline)
+  close(iu_spline_alt)
 contains
   subroutine print_basis(order)
     integer(fgsl_size_t), intent(in) :: order
@@ -53,9 +56,11 @@ contains
     knots = fgsl_bspline_return_knots_vector(w)
     knotsf => fgsl_vector_to_fptr(knots)
    
+    ! output knot vector    
+    write(iu_knots, fmt='(F8.6)') knotsf 
+    write(iu_knots, fmt='(/)')   
+   
     do i = 1, n
-      write(iu_knots, fmt='(F8.6)') knotsf(i)
-     
       xi = (real(i-1, fgsl_double) * dx)
       
       ! variant 1 uses undocumented API call

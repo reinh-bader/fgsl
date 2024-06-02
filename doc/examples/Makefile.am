@@ -12,8 +12,9 @@ check_PROGRAMS = cdf cheb combination diff dwt \
 		 histogram2d ieee ieeeround integration \
 	     integration_fixed integration_lebedev \
 		 interp interpp intro matrix matrix_legacy min monte \
-                 largefit multifit nlfit nlfit2 nlfit4 \
-		 bspline_knots ntuplew ntupler \
+         largefit multifit nlfit nlfit2 nlfit4 \
+		 bspline_knots bspline_deriv bspline_lsbreak bspline_lsorder \
+		 bspline_gram ntuplew ntupler \
 		 linalglu eigen eigen_nonsymm fft \
 		 ode-initval permutation permshuffle \
 		 polyroots qrng randpoisson randwalk \
@@ -83,6 +84,14 @@ nlfit2_SOURCES = nlfit2.f90
 nlfit4_SOURCES = nlfit4.f90
 
 bspline_knots_SOURCES = bspline_knots.f90
+
+bspline_deriv_SOURCES = bspline_deriv.f90
+
+bspline_lsbreak_SOURCES = bspline_lsbreak.f90
+
+bspline_lsorder_SOURCES = bspline_lsorder.f90
+
+bspline_gram_SOURCES = bspline_gram.f90
 
 ntupler_SOURCES = ntupler.f90
 
@@ -159,7 +168,8 @@ dist_fgsl_example_DATA = $(data_files) cdf.f90 cheb.f90 combination.F90 diff.f90
 	        integration_fixed.f90 integration_lebedev.f90 interp.f90 interpp.f90 \
 			intro.f90 matrix.f90 matrix_legacy.f90 min.f90 monte.f90 \
 			largefit.f90 multifit.f90 nlfit.f90 nlfit2.f90 \
-			nlfit4.f90 bspline_knots.f90 ntuplew.f90 ntupler.f90 \
+			nlfit4.f90 bspline_knots.f90 bspline_deriv.f90 bspline_lsbreak.f90 \
+			bspline_lsorder.f90 bspline_gram.f90 ntuplew.f90 ntupler.f90 \
 			linalglu.f90 eigen.f90 eigen_nonsymm.f90 fft.f90 \
 			ode-initval.F90 permutation.f90 permshuffle.f90 \
 			polyroots.f90 qrng.f90 randpoisson.f90 randwalk.f90 \

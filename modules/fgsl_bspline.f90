@@ -14,7 +14,8 @@ module fgsl_bspline
     gsl_bspline_lssolve, gsl_bspline_wlssolve, gsl_bspline_lsnormal, &
     gsl_bspline_lsnormalm, gsl_bspline_residuals, gsl_bspline_covariance, &
     gsl_bspline_err, gsl_bspline_rcond, gsl_bspline_plssolve, gsl_bspline_pwlssolve, &
-    gsl_bspline_plsqr
+    gsl_bspline_plsqr, &
+    gsl_bspline_oprod, gsl_bspline_gram, gsl_bspline_gram_interval
   private :: gsl_bspline_return_knots_vector
   private :: gsl_bspline_knots, &
     gsl_bspline_knots_uniform, gsl_bspline_eval, gsl_bspline_eval_nonzero, &
@@ -139,18 +140,18 @@ module fgsl_bspline
 	  type(c_ptr), value :: result
 	  integer(c_int) :: gsl_bspline_vector_calc_deriv
 	end function gsl_bspline_vector_calc_deriv
-	function gsl_bspline_basis_deriv(x, b, nderiv, istart, w) bind(c)
+	function gsl_bspline_basis_deriv(x, nderiv, db, istart, w) bind(c)
 	  import :: c_int, c_ptr, c_double, c_size_t
 	  real(c_double), value :: x
-	  type(c_ptr), value :: b, w
+	  type(c_ptr), value :: db, w
 	  integer(c_size_t), value :: nderiv
 	  integer(c_size_t), intent(inout) :: istart
 	  integer(c_int) :: gsl_bspline_basis_deriv
 	end function gsl_bspline_basis_deriv
-	function gsl_bspline_eval_deriv_basis(x, b, nderiv, w) bind(c)
+	function gsl_bspline_eval_deriv_basis(x, nderiv, db, w) bind(c)
 	  import :: c_int, c_ptr, c_double, c_size_t
 	  real(c_double), value :: x
-	  type(c_ptr), value :: b, w
+	  type(c_ptr), value :: db, w
 	  integer(c_size_t), value :: nderiv
 	  integer(c_int) :: gsl_bspline_eval_deriv_basis
 	end function gsl_bspline_eval_deriv_basis
@@ -232,6 +233,27 @@ module fgsl_bspline
 	  real(c_double) :: rnorm
 	  integer(c_int) :: gsl_bspline_plsqr
 	end function gsl_bspline_plsqr
+	!
+	function gsl_bspline_oprod(nderiv, x, a, w) bind(c)
+	  import :: c_size_t, c_double, c_ptr, c_int
+	  integer(c_size_t), value :: nderiv
+	  real(c_double), value :: x
+	  type(c_ptr), value :: a, w
+	  integer(c_int) :: gsl_bspline_oprod
+	end function gsl_bspline_oprod
+	function gsl_bspline_gram(nderiv, g, w) bind(c)
+	  import :: c_size_t, c_ptr, c_int
+	  integer(c_size_t), value :: nderiv
+	  type(c_ptr), value :: g, w
+	  integer(c_int) :: gsl_bspline_gram
+	end function gsl_bspline_gram
+	function gsl_bspline_gram_interval(a, b, nderiv, g, w) bind(c)
+	  import :: c_size_t, c_ptr, c_int, c_double
+	  real(c_double), value :: a, b
+	  integer(c_size_t), value :: nderiv
+	  type(c_ptr), value :: g, w
+	  integer(c_int) :: gsl_bspline_gram_interval
+	end function gsl_bspline_gram_interval
 	!
     function gsl_bspline_return_knots_vector(w) bind(c)
       import :: c_ptr
@@ -428,23 +450,23 @@ contains
 	  fgsl_bspline_vector_calc_deriv = gsl_bspline_vector_calc_deriv(x, c%gsl_matrix, &
 	                      nderiv, result%gsl_vector, w%gsl_bspline_workspace)
 	end function fgsl_bspline_vector_calc_deriv
-	function fgsl_bspline_basis_deriv(x, b, nderiv, istart, w) 
+	function fgsl_bspline_basis_deriv(x, nderiv, db, istart, w) 
 	  real(fgsl_double), intent(in) :: x
-	  type(fgsl_vector), intent(in) :: b
+	  type(fgsl_matrix), intent(in) :: db
 	  integer(fgsl_size_t), intent(in) :: nderiv
 	  integer(fgsl_size_t), intent(inout) :: istart
 	  type(fgsl_bspline_workspace), intent(in) :: w
 	  integer(fgsl_int) :: fgsl_bspline_basis_deriv
-	  fgsl_bspline_basis_deriv = gsl_bspline_basis_deriv(x, b%gsl_vector, nderiv, istart, &
+	  fgsl_bspline_basis_deriv = gsl_bspline_basis_deriv(x, nderiv, db%gsl_matrix, istart, &
 	                      w%gsl_bspline_workspace)
 	end function fgsl_bspline_basis_deriv
-	function fgsl_bspline_eval_deriv_basis(x, b, nderiv, w) 
+	function fgsl_bspline_eval_deriv_basis(x, nderiv, db, w) 
 	  real(fgsl_double), intent(in) :: x
-	  type(fgsl_vector), intent(in) :: b
+	  type(fgsl_matrix), intent(in) :: db
 	  integer(fgsl_size_t), intent(in) :: nderiv
 	  type(fgsl_bspline_workspace), intent(in) :: w
 	  integer(fgsl_int) :: fgsl_bspline_eval_deriv_basis
-	  fgsl_bspline_eval_deriv_basis = gsl_bspline_eval_deriv_basis(x, b%gsl_vector, nderiv, &
+	  fgsl_bspline_eval_deriv_basis = gsl_bspline_eval_deriv_basis(x, nderiv, db%gsl_matrix, &
 	                      w%gsl_bspline_workspace)
 	end function fgsl_bspline_eval_deriv_basis
 	function fgsl_bspline_calc_integ(a, b, c, result, w) 
@@ -485,11 +507,12 @@ contains
 	end function fgsl_bspline_wlssolve
 	function fgsl_bspline_lsnormal(x, y, wts, xty, xtx, w) 
 	  type(fgsl_vector), intent(in) :: x, y, wts
-	  type(fgsl_vector), intent(inout) :: xtx, xty
+	  type(fgsl_vector), intent(inout) :: xty
+	  type(fgsl_matrix), intent(inout) :: xtx
 	  type(fgsl_bspline_workspace), intent(inout) :: w
 	  integer(fgsl_int) :: fgsl_bspline_lsnormal
 	  fgsl_bspline_lsnormal = gsl_bspline_lsnormal(x%gsl_vector, y%gsl_vector, &
-	              wts%gsl_vector, xty%gsl_vector, xtx%gsl_vector, w%gsl_bspline_workspace)
+	              wts%gsl_vector, xty%gsl_vector, xtx%gsl_matrix, w%gsl_bspline_workspace)
 	end function fgsl_bspline_lsnormal
 	function fgsl_bspline_lsnormalm(x, y, wts, xty, xtx, w) 
 	  type(fgsl_vector), intent(in) :: x, y, wts
@@ -560,6 +583,34 @@ contains
 	  fgsl_bspline_plsqr = gsl_bspline_plsqr(x%gsl_vector, y%gsl_vector, &
 	       wts%gsl_vector, r%gsl_matrix, qty%gsl_vector, rnorm, w%gsl_bspline_workspace)
 	end function fgsl_bspline_plsqr
+	!
+    function fgsl_bspline_oprod(nderiv, x, a, w)
+	  integer(fgsl_size_t), intent(in):: nderiv
+	  real(fgsl_double), intent(in) :: x
+	  type(fgsl_matrix), intent(inout) :: a
+	  type(fgsl_bspline_workspace), intent(inout) :: w
+	  integer(c_int) :: fgsl_bspline_oprod
+	  
+	  fgsl_bspline_oprod = gsl_bspline_oprod(nderiv, x, a%gsl_matrix, w%gsl_bspline_workspace)
+	end function fgsl_bspline_oprod
+    function fgsl_bspline_gram(nderiv, g, w)
+	  integer(fgsl_size_t), intent(in):: nderiv
+	  type(fgsl_matrix), intent(inout) :: g
+	  type(fgsl_bspline_workspace), intent(inout) :: w
+	  integer(c_int) :: fgsl_bspline_gram
+	  
+	  fgsl_bspline_gram = gsl_bspline_gram(nderiv, g%gsl_matrix, w%gsl_bspline_workspace)
+	end function fgsl_bspline_gram
+   function fgsl_bspline_gram_interval(a, b, nderiv, g, w)
+      real(fgsl_double), intent(in) :: a, b
+	  integer(fgsl_size_t), intent(in):: nderiv
+	  type(fgsl_matrix), intent(inout) :: g
+	  type(fgsl_bspline_workspace), intent(inout) :: w
+	  integer(c_int) :: fgsl_bspline_gram_interval
+	  
+	  fgsl_bspline_gram_interval = gsl_bspline_gram_interval(a, b, nderiv, g%gsl_matrix, &
+	                               w%gsl_bspline_workspace)
+	end function fgsl_bspline_gram_interval
 	!
     function fgsl_bspline_return_knots_vector(w) 
       type(fgsl_bspline_workspace), intent(in):: w
