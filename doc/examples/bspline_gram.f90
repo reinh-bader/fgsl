@@ -60,7 +60,8 @@ program bspline_gram
   cov_reg = fgsl_matrix_init(cov_regf)
   g = fgsl_matrix_init(gf)
   
-  ! determine whether to regularize
+  ! determine whether to regularize on a smaller interval
+  reg_a = -1.0_fgsl_double; reg_b = -1.0_double
   reg_interval = .false.
   try_nml : block
     open(newunit=iu, form='FORMATTED', action='READ', status='OLD', &
@@ -149,7 +150,6 @@ program bspline_gram
                                        err_unreg, result_reg, err_reg
     xi = xi + .01_fgsl_double
   end do
-  
   
   call fgsl_rng_free(r)
   call fgsl_bspline_free(work)
