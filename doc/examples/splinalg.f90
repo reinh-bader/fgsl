@@ -1,6 +1,6 @@
 PROGRAM splinalg
   use :: fgsl
-  use, intrinsic :: iso_fortran_env, only : output_unit, error_unit
+  use, intrinsic :: iso_fortran_env, only : output_unit
   implicit none
   integer(fgsl_size_t), parameter :: bigN = 100           !number of grid points
   integer(fgsl_size_t), parameter :: n = bigN - 2         !subtract 2 to exclude boundaries

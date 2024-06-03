@@ -4,7 +4,7 @@ program vector_int
   integer(fgsl_size_t), parameter :: ndim = 12
   integer(fgsl_int), target :: v(ndim)
   integer(fgsl_int), pointer :: p_slice(:), p_vec(:)
-  integer(fgsl_int) :: i, status
+  integer(fgsl_int) :: i
   type(fgsl_vector_int) :: vec, slice
 
   v(1:ndim) = [ (i, i=1,ndim) ]

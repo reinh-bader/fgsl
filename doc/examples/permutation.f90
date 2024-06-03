@@ -1,7 +1,6 @@
 program permutation
   use fgsl
   implicit none
-  integer(fgsl_size_t) :: i
   integer(fgsl_int) :: status
   type(fgsl_permutation) :: p
   type(fgsl_file) :: stdout

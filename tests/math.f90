@@ -3,7 +3,7 @@ program math
   use mod_unit
   implicit none
 
-  real(fgsl_double) :: x, y, z, r
+  real(fgsl_double) :: r
 
   call unit_init(10)
 

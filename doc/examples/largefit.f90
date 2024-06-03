@@ -67,7 +67,7 @@ contains
           ! set right hand side value with added noise
           yf(i) = fi + ei
 
-          if (print_data .and. mod(i, 100) == 1) then
+          if (print_data .and. mod(i, 100_fgsl_size_t) == 1) then
              write(*,fmt='(3(F12.5,1X))') t, fi, yf(i)
           end if
           t = t + dt

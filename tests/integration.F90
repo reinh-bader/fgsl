@@ -45,6 +45,7 @@ contains
     type(c_ptr), value :: params
     real(c_double) :: integrate_fun4
 !
+    if (c_associated(params)) continue
     integrate_fun4 = 1.0_c_double / sqrt(abs(x))
   end function integrate_fun4
   function integrate_fun5(x, params) bind(c)
@@ -52,6 +53,7 @@ contains
     type(c_ptr), value :: params
     real(c_double) :: integrate_fun5
 !
+    if (c_associated(params)) continue
     integrate_fun5 = exp(-x*x)
   end function integrate_fun5
   function integrate_fun6(x, params) bind(c)
@@ -59,6 +61,7 @@ contains
     type(c_ptr), value :: params
     real(c_double) :: integrate_fun6
 !
+    if (c_associated(params)) continue
     integrate_fun6 = 2*x
   end function integrate_fun6
   function integrate_fun7(x, params) bind(c)

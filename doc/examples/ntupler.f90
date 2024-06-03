@@ -12,6 +12,9 @@ contains
     type(data), pointer :: data_ptr
     real(fgsl_double) :: x, y, z, e2
     real(c_double), pointer :: scale
+    
+    if (c_associated(params)) continue
+    
     call c_f_pointer(ntuple_data, data_ptr)
     call c_f_pointer(params, scale)
     x = data_ptr%x

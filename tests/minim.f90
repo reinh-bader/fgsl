@@ -9,6 +9,7 @@ contains
     type(c_ptr), value :: params
     real(c_double) :: cosp1
 !   
+    if (c_associated(params)) continue
     cosp1 = cos(x) + 1.0d0
   end function cosp1
 end module mod_minim

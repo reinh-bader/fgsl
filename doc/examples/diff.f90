@@ -8,6 +8,7 @@ contains
     type(c_ptr), value :: params
     real(c_double) :: f
 !
+    if (c_associated(params)) continue
     f = x**1.5_c_double
   end function f
 end module mod_diff

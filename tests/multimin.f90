@@ -10,7 +10,6 @@ contains
 !
     type(fgsl_vector) :: vec
     real(fgsl_double), pointer :: par(:), pvec(:)
-    integer(fgsl_int) :: status
     call fgsl_obj_c_ptr(vec, v)
     call c_f_pointer(p, par, (/ 2 /))
     pvec => fgsl_vector_to_fptr(vec)
@@ -22,7 +21,6 @@ contains
 !
     type(fgsl_vector) :: vec, grad
     real(fgsl_double), pointer :: par(:), pvec(:), pdf(:)
-    integer(fgsl_int) :: status
     call fgsl_obj_c_ptr(vec, v)
     call fgsl_obj_c_ptr(grad, df)
     call c_f_pointer(p, par, (/ 2 /))

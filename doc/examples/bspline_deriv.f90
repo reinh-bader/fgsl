@@ -9,7 +9,7 @@ program bspline_deriv
 	integer(c_size_t), parameter :: spline_order = 4 ! cubic splines
 	
 	type(fgsl_bspline_workspace) :: w
-	integer(c_size_t) :: i, istart, j, k, p, n
+	integer(c_size_t) :: i, j, k, p, n
 	integer(c_int) :: status
 	real(fgsl_double) :: a, b, dx, xj
 	

@@ -2,7 +2,7 @@ program fitting3
 ! generate fitting data for fitting2
   use fgsl
   implicit none
-  integer(fgsl_int) :: status, i, n
+  integer(fgsl_int) :: i, n
   real(fgsl_double) :: x, y, dy, sigma
   type(fgsl_rng_type) :: t 
   type(fgsl_rng) :: r

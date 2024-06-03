@@ -8,6 +8,7 @@ contains
     type(c_ptr), value :: params
     real(c_double) :: f
 !
+    if (c_associated(params)) continue
     if (x < 0.5_c_double) then
        f = 0.25_c_double
     else

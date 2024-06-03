@@ -10,7 +10,6 @@ contains
 !
     type(fgsl_vector) :: fx, ff
     real(fgsl_double), pointer :: par(:), xv(:), yv(:)
-    integer(fgsl_int) :: status
     call fgsl_obj_c_ptr(fx, x)
     call fgsl_obj_c_ptr(ff, f)
     call c_f_pointer(params, par, (/ 2 /))
@@ -27,7 +26,6 @@ contains
     type(fgsl_vector) :: fx
     type(fgsl_matrix) :: dff
     real(fgsl_double), pointer :: par(:), xv(:), yv(:,:)
-    integer(fgsl_int) :: status
     call fgsl_obj_c_ptr(fx, x)
     call fgsl_obj_c_ptr(dff, df)
     call c_f_pointer(params, par, (/ 2 /))
@@ -64,7 +62,9 @@ program multiroots
   integer(fgsl_int) :: status, i
   integer(fgsl_size_t) :: nrt
   character(kind=fgsl_char,len=fgsl_strmax) :: name
-  real(fgsl_double), pointer :: fptr(:), xptr(:)
+  real(fgsl_double), pointer :: xptr(:)
+!  real(fgsl_double), pointer :: fptr(:)
+
 !
 ! Test multiroot finding routines
 !
@@ -84,7 +84,7 @@ program multiroots
   call unit_assert_equal('fgsl_multiroot_fsolver_set:status', &
        fgsl_success,status)
   fvec = fgsl_multiroot_fsolver_f(mroot_fslv)
-  fptr => fgsl_vector_to_fptr(fvec)
+!  fptr => fgsl_vector_to_fptr(fvec)
   call fgsl_vector_free(xvec)
   xvec = fgsl_multiroot_fsolver_root(mroot_fslv)
   xptr => fgsl_vector_to_fptr(xvec)
@@ -127,7 +127,7 @@ program multiroots
   call unit_assert_equal('fgsl_multiroot_fdfsolver_set:status', &
        fgsl_success,status)
   fvec = fgsl_multiroot_fdfsolver_f(mroot_fdfslv)
-  fptr => fgsl_vector_to_fptr(fvec)
+!  fptr => fgsl_vector_to_fptr(fvec)
   call fgsl_vector_free(xvec)
   xvec = fgsl_multiroot_fdfsolver_root(mroot_fdfslv)
   xptr => fgsl_vector_to_fptr(xvec)

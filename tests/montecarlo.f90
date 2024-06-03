@@ -11,6 +11,8 @@ contains
     real(c_double), dimension(:), pointer :: v
     type(c_ptr), value :: params, v_c
     real(c_double) :: g
+    
+    if (c_associated(params)) continue
     call c_f_pointer(v_c, v, [n])
     g = 1.0_c_double/(m_pi**3)/ &
          (1.0_fgsl_double - cos(v(1))*cos(v(2))*cos(v(3)))

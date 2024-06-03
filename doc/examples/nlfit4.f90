@@ -4,7 +4,7 @@ module timer
   implicit none
   private
   public :: dwalltime
-  integer, parameter :: ik = selected_int_kind(6)
+  integer, parameter :: ik = selected_int_kind(12)
   logical, save :: first = .true.
   integer(ik), save ::  count_rate, count_max
   double precision, save :: conversion = 0.0d0
@@ -37,7 +37,7 @@ module mod_nlfit4
 contains
 !
 ! penalty function
-  integer(c_int) function penalty_f(x, params, f) BIND(C)
+  integer(c_int) function penalty_f(x, params, f) bind(c)
     type(c_ptr), value :: x, params, f
 
     type(model_params), pointer :: par
@@ -45,7 +45,6 @@ contains
     type(fgsl_vector) :: xx, ff
     real(fgsl_double), pointer :: xxp(:), ffp(:)
     integer(fgsl_size_t) :: i
-    integer(fgsl_int) :: status
 
     call c_f_pointer(params, par)
     sqrt_alpha = sqrt(par%alpha)
@@ -62,13 +61,13 @@ contains
     penalty_f = fgsl_success
   end function penalty_f
   integer(c_int) function penalty_df(transj, x, u, params, &
-       v, jtj) BIND(C)
+       v, jtj) bind(c)
     integer(c_int), value :: transj
     type(c_ptr), value :: x, u, params, v, jtj
     
     type(model_params), pointer :: par
     type(fgsl_vector) :: xx, uu, vv
-    real(fgsl_double), pointer :: xxp(:), uup(:)
+    real(fgsl_double), pointer :: xxp(:)
     type(fgsl_matrix) :: jj
     real(fgsl_double), pointer :: jtjp(:,:)
     integer(fgsl_size_t) :: i, j
@@ -78,7 +77,6 @@ contains
     call fgsl_obj_c_ptr(xx, x)
     xxp => fgsl_vector_to_fptr(xx)
     call fgsl_obj_c_ptr(uu, u)
-    uup => fgsl_vector_to_fptr(uu)
 !
 !   store 2*x in last row of J
     do i = 1, size(xxp)
@@ -114,7 +112,6 @@ contains
     type(c_ptr), value :: x, v, params, fvv
     type(fgsl_vector) :: xx, f_v, f_fvv
     real(fgsl_double), pointer :: p_xx(:), p_v(:), p_fvv(:)
-    integer(fgsl_int) :: status
 
     call fgsl_obj_c_ptr(f_v, v)
     p_v => fgsl_vector_to_fptr(f_v)
@@ -143,7 +140,6 @@ contains
     integer(fgsl_int) :: info, status
     integer(fgsl_size_t) :: nevalf, nevaldfu, nevaldf2, nevalfvv
     real(fgsl_double) :: chisq0, chisq, rcond, xsq, ti
-
 
     t = fgsl_multilarge_nlinear_type('trust')
     call fgsl_multilarge_nlinear_fdf_get(fdf, N=n, P=p)

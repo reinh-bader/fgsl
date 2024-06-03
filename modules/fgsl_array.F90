@@ -240,7 +240,7 @@ module fgsl_array
        import
        type(c_ptr), value :: a, fvec
        integer(c_size_t), value :: len, size, offset, stride
-       integer(c_int) :: fgsl_aux_vector_int_align
+       integer(c_int) :: fgsl_aux_vector_uint_align
      end function fgsl_aux_vector_uint_align
      function fgsl_aux_vector_uint_size(fvec) bind(c)
        import

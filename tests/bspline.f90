@@ -8,7 +8,7 @@ program bspline
   type(fgsl_bspline_workspace) :: sw
   type(fgsl_vector) :: b, k
   real(fgsl_double), target :: bv(ncbf), kv(nbreak)
-  real(fgsl_double), pointer :: bp(:)
+!  real(fgsl_double), pointer :: bp(:)
 !
 ! Test B-Spline API
 !
@@ -17,7 +17,7 @@ program bspline
   sw = fgsl_bspline_alloc(4_fgsl_size_t, nbreak)
   kv = (/ (dble(i-1), i=1,nbreak) /)
   b = fgsl_vector_init(bv) ; k = fgsl_vector_init(kv)
-  bp => fgsl_vector_to_fptr(b)
+!  bp => fgsl_vector_to_fptr(b)
 !  write(6, *) 'Size = ',size(bp)
   status = fgsl_bspline_knots(k, sw)
   call unit_assert_equal('fgsl_bspline_knots:status',fgsl_success,status)

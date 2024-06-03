@@ -1,7 +1,7 @@
 program randwalk
   use fgsl
   implicit none
-  integer(fgsl_int) :: i, status
+  integer(fgsl_int) :: i
   real(fgsl_double) :: x, y, dx, dy
   type(fgsl_rng) :: r
   type(fgsl_rng_type) :: t

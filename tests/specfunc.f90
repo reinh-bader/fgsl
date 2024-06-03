@@ -7,7 +7,7 @@ program specfunc
   real(fgsl_double), parameter :: eps10 = 1.0E-10_fgsl_double
   real(fgsl_double), parameter :: eps15 = 1.0E-15_fgsl_double
   integer(fgsl_int) :: status
-  real(fgsl_double) :: ra, ra_2, ra_3, ra_exp, ra_exp_2, x11, x21, &
+  real(fgsl_double) :: ra, ra_2, ra_3, ra_exp, ra_exp_2, x21, &
        ra_arr(1), ra_arr_der(1), ra_arr_2(1), ra_arr_2_der(1), &
        ra_arr_3(2), ra_arr_3_der(2), ra_arr_4(3)
   type(fgsl_sf_result) :: sfres, sfres_der, sfres_2, sfres_2_der
@@ -634,9 +634,9 @@ program specfunc
   call unit_assert_equal('fgsl_sf_ellint_e_e:status',fgsl_success,status)
   call unit_assert_equal_within('fgsl_sf_ellint_e_e',&
        1.4674622093394274d0,sfres%val,sfres%err)
-  ra = fgsl_sf_ellint_p(m_pi/2, dsqrt(0.75d0), -0.5_fgsl_double, fgsl_prec_double)
+  ra = fgsl_sf_ellint_p(m_pi/2, sqrt(0.75d0), -0.5_fgsl_double, fgsl_prec_double)
   call unit_assert_equal_within('fgsl_sf_ellint_p',3.234773471249d0,ra,eps10)
-  status = fgsl_sf_ellint_p_e(m_pi/2,dsqrt(0.75d0),-0.5_fgsl_double,&
+  status = fgsl_sf_ellint_p_e(m_pi/2,sqrt(0.75d0),-0.5_fgsl_double,&
        fgsl_prec_double,sfres)
   call unit_assert_equal('fgsl_sf_ellint_p_e:status',fgsl_success,status)
   call unit_assert_equal_within('fgsl_sf_ellint_p_e',&
@@ -1342,7 +1342,6 @@ program specfunc
   call unit_assert_equal_within('fgsl_sf_legendre_plm_e',&
        -0.75d0*sqrt(3.0d0),sfres%val,sfres%err)
   x21=sqrt(5.0d0/(24.0d0*m_pi))
-  x11=sqrt(3.0d0/(8.0d0*m_pi))
   ra = fgsl_sf_legendre_sphplm(2,1,0.5d0)
   call unit_assert_equal_within('fgsl_sf_legendre_sphplm',&
        -x21*0.75d0*sqrt(3.0d0),ra,eps10)

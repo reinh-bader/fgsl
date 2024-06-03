@@ -4,7 +4,7 @@ program array
   implicit none
   integer(fgsl_size_t), parameter :: nmax = 20
   real(fgsl_double), parameter :: eps10 = 1.0d-10
-  integer :: i, j, status
+  integer :: i, j
   real(fgsl_double), dimension(nmax), target :: xa
   real(fgsl_double), dimension(nmax) :: ya
   real(fgsl_double), dimension(nmax,nmax), target :: a2d

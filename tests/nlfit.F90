@@ -17,7 +17,6 @@ contains
     type(fgsl_vector) :: f_x, f_f
     type(data), pointer :: f_data
     integer(fgsl_size_t) :: i
-    integer(fgsl_int) :: status
     real(fgsl_double) :: yy
     real(fgsl_double), pointer :: p_x(:), p_f(:)
 !
@@ -40,7 +39,6 @@ contains
     type(fgsl_matrix) :: f_j
     type(data), pointer :: f_data
     integer(fgsl_size_t) :: i
-    integer(fgsl_int) :: status
     real(fgsl_double) :: yy
     real(fgsl_double), pointer :: p_x(:), p_j(:,:)
 !

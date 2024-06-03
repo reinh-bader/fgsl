@@ -10,7 +10,8 @@ contains
     type(c_ptr), value :: x, params, f
     type(fgsl_vector) :: f_x, f_f
     real(fgsl_double), pointer :: p_x(:), p_f(:)
-    integer(c_int) :: status
+    
+    if (c_associated(params)) continue
 !
 !   cast *void to an fgsl_vector
     call fgsl_obj_c_ptr(f_x, x)
@@ -29,7 +30,8 @@ contains
     type(fgsl_vector) :: f_x
     type(fgsl_matrix) :: f_j
     real(fgsl_double), pointer :: p_x(:), p_j(:,:)
-    integer(c_int) :: status
+    
+    if (c_associated(params)) continue
 
     call fgsl_obj_c_ptr(f_x, x)
     call fgsl_obj_c_ptr(f_j, j)
@@ -45,7 +47,8 @@ contains
     type(c_ptr), value :: x, v, params, fvv
     type(fgsl_vector) :: f_v, f_fvv
     real(fgsl_double), pointer :: p_v(:), p_fvv(:)
-    integer(c_int) :: status
+    
+    if (c_associated(params)) continue
 !
 !   cast *void to an fgsl_vector
     call fgsl_obj_c_ptr(f_v, v)
@@ -65,6 +68,8 @@ contains
     type(fgsl_vector) :: x
     real(fgsl_double), pointer :: p_x(:)
     integer(c_int) :: status
+
+    if (c_associated(params)) continue
 
     x = fgsl_multifit_nlinear_position(fgsl_multifit_nlinear_workspace(wp))
     p_x => fgsl_vector_to_fptr(x)

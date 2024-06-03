@@ -20,8 +20,8 @@ gsl_vector_int *fgsl_aux_vector_int_init() {
     result->size = 0;
     return result;
 }
-gsl_vector_int *fgsl_aux_vector_uint_init() {
-    gsl_vector_int *result;
+gsl_vector_uint *fgsl_aux_vector_uint_init() {
+    gsl_vector_uint *result;
     result = (gsl_vector_uint *) malloc(sizeof(gsl_vector_uint));
     result->block = (gsl_block_uint *) malloc(sizeof(gsl_block_uint));
     result->owner = 0;
