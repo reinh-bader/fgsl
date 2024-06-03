@@ -2,12 +2,12 @@ Changes in 2.0.0:
 ~~~~~~~~~~~~~~~~~
 
 This release restructures the source code by providing multiple
-modules, each one of which is easier to read, understand, and
+modules, which individually are easier to read, understand, and
 maintain. The organization is mostly analogous to the C source code,
 i.e., a Fortran module fgsl_interp exists in analogy to the
-C header gsl_interp.h. This rule is only violated in cases of name
-collitions. All fgsl_*.?90 files are placed in the
-modules folder. For modules that need explicit C glue code,
+C header gsl_interp.h. This rule is only ignored in cases of name
+collisions. All fgsl_*.?90 files are placed in the
+modules folder. For modules that need additional C glue code,
 an appropriately named file fgsl_*_c.c exists in the csub folder.
 
 The release also introduces support for gsl 2.8.
@@ -26,6 +26,13 @@ Here an overview of the relevant additions:
      svx2, solve2}
 3. mapping of gsl_rstat_norm
 4. mappings for Lebedev integration (unit sphere)
+5. removed gsl_bspline_eval_nonzero, gsl_bspline_deriv_eval_nonzero
+   since these do not appear in gsl_bspline.h any more; other
+   deprecated calls are appropriately marked
+6. new mappings from gsl_bspline.h, including the nine example 
+   programs
+7. mappings to gsl_linalg_LU_band* from gsl_linalg.h added; 
+   includes limited and non-portable (!) support for gsl_vector_uint.
    
    
 Fixes:

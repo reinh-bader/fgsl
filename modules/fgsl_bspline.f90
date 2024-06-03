@@ -2,6 +2,7 @@ module fgsl_bspline
   !> Basis Splines
   use fgsl_base
   use fgsl_array
+  use fgsl_math
   implicit none
   
   private :: gsl_bspline_alloc, gsl_bspline_alloc_ncontrol, gsl_bspline_free, &
@@ -14,16 +15,13 @@ module fgsl_bspline
     gsl_bspline_lssolve, gsl_bspline_wlssolve, gsl_bspline_lsnormal, &
     gsl_bspline_lsnormalm, gsl_bspline_residuals, gsl_bspline_covariance, &
     gsl_bspline_err, gsl_bspline_rcond, gsl_bspline_plssolve, gsl_bspline_pwlssolve, &
-    gsl_bspline_plsqr, &
-    gsl_bspline_oprod, gsl_bspline_gram, gsl_bspline_gram_interval
+    gsl_bspline_plsqr, gsl_bspline_oprod, gsl_bspline_gram, gsl_bspline_gram_interval, &
+    gsl_bspline_col_interp, gsl_bspline_interp_chermite, & 
+    gsl_bspline_proj_rhs, gsl_bspline_greville_abscissa
   private :: gsl_bspline_return_knots_vector
-  private :: gsl_bspline_knots, &
-    gsl_bspline_knots_uniform, gsl_bspline_eval, gsl_bspline_eval_nonzero, &
-    gsl_bspline_deriv_eval, gsl_bspline_deriv_eval_nonzero, &
-    gsl_bspline_ncoeffs, gsl_bspline_greville_abscissa, &
-    gsl_bspline_knots_greville
   !> Legacy 
-  ! private :: TBD
+  private :: gsl_bspline_knots, gsl_bspline_knots_uniform, gsl_bspline_eval, &
+    gsl_bspline_deriv_eval, gsl_bspline_ncoeffs, gsl_bspline_knots_greville
   !
   !> Types
   type, public :: fgsl_bspline_workspace
@@ -38,9 +36,9 @@ module fgsl_bspline
 	  integer(c_size_t), value :: k, nbreak
 	  type(c_ptr) :: gsl_bspline_alloc
 	end function gsl_bspline_alloc
-	function gsl_bspline_alloc_ncontrol(ncontrol) bind(c)
+	function gsl_bspline_alloc_ncontrol(k, ncontrol) bind(c)
 	  import :: c_size_t, c_ptr
-	  integer(c_size_t), value :: ncontrol
+	  integer(c_size_t), value :: k, ncontrol
 	  type(c_ptr) :: gsl_bspline_alloc_ncontrol
 	end function gsl_bspline_alloc_ncontrol
 	subroutine gsl_bspline_free (w) bind(c)
@@ -255,12 +253,36 @@ module fgsl_bspline
 	  integer(c_int) :: gsl_bspline_gram_interval
 	end function gsl_bspline_gram_interval
 	!
+    function gsl_bspline_col_interp(x, xb, w) bind(c)
+      import :: c_ptr, c_int
+      type(c_ptr), value :: x, xb, w
+      integer(c_int) :: gsl_bspline_col_interp
+    end function gsl_bspline_col_interp
+    function gsl_bspline_interp_chermite(x, y, dy, c, w) bind(c)
+      import :: c_ptr, c_int
+      type(c_ptr), value :: x, y, dy, c, w
+      integer(c_int) :: gsl_bspline_interp_chermite
+    end function gsl_bspline_interp_chermite
+    !
+    function gsl_bspline_proj_rhs(f, y, w) bind(c)
+     import :: c_ptr, c_int
+      type(c_ptr), value :: f, y, w
+      integer(c_int) :: gsl_bspline_proj_rhs
+    end function gsl_bspline_proj_rhs
+  	function gsl_bspline_greville_abscissa(i, w) bind(c)
+	  import :: c_size_t, c_double, c_ptr
+	  real(c_double) :: gsl_bspline_greville_abscissa
+	  integer(c_size_t), value :: i
+	  type(c_ptr), value :: w
+	end function gsl_bspline_greville_abscissa
+	!> additional accessor
     function gsl_bspline_return_knots_vector(w) bind(c)
       import :: c_ptr
       type(c_ptr), value :: w
       type(c_ptr) :: gsl_bspline_return_knots_vector
     end function gsl_bspline_return_knots_vector
-	!		
+	!	
+	!> Legacy interfaces - to be removed at some time
 	function gsl_bspline_knots(breakpts, w) bind(c)
 	  import :: c_int, c_ptr
 	  integer(c_int) :: gsl_bspline_knots
@@ -278,13 +300,6 @@ module fgsl_bspline
 	  real(c_double), value :: x
 	  type(c_ptr), value :: b, w
 	end function gsl_bspline_eval
-	function gsl_bspline_eval_nonzero(x, b, istart, iend, w) bind(c)
-	  import :: c_int, c_ptr, c_double, c_size_t
-	  integer(c_int) :: gsl_bspline_eval_nonzero
-	  real(c_double), value :: x
-	  integer(c_size_t) :: istart, iend
-	  type(c_ptr), value :: b, w
-	end function gsl_bspline_eval_nonzero
 	function gsl_bspline_deriv_eval(x, nderiv, db, w) bind(c)
 	  import :: c_int, c_ptr, c_double, c_size_t
 	  integer(c_int) :: gsl_bspline_deriv_eval
@@ -292,26 +307,11 @@ module fgsl_bspline
 	  real(c_double), value :: x
 	  type(c_ptr), value :: db, w
 	end function gsl_bspline_deriv_eval
-	function gsl_bspline_deriv_eval_nonzero(x, nderiv, db, istart, &
-	     iend, w) bind(c)
-	  import :: c_int, c_ptr, c_double, c_size_t
-	  integer(c_int) :: gsl_bspline_deriv_eval_nonzero
-	  real(c_double), value :: x
-	  integer(c_size_t), value :: nderiv
-	  integer(c_size_t) :: istart, iend
-	  type(c_ptr), value :: db, w
-	end function gsl_bspline_deriv_eval_nonzero
 	function gsl_bspline_ncoeffs(w) bind(c)
 	  import :: c_size_t, c_ptr
 	  integer(c_size_t) :: gsl_bspline_ncoeffs
 	  type(c_ptr), value :: w
 	end function gsl_bspline_ncoeffs
-	function gsl_bspline_greville_abscissa(i, w) bind(c)
-	  import :: c_size_t, c_double, c_ptr
-	  real(c_double) :: gsl_bspline_greville_abscissa
-	  integer(c_size_t) :: i
-	  type(c_ptr), value :: w
-	end function gsl_bspline_greville_abscissa
 	function gsl_bspline_knots_greville(abscissae, w, abserr) bind(c)
 	  import :: c_ptr, c_double, c_int
 	  type(c_ptr), value :: abscissae, w
@@ -326,10 +326,10 @@ contains
 	  type(fgsl_bspline_workspace) :: fgsl_bspline_alloc
 	  fgsl_bspline_alloc%gsl_bspline_workspace = gsl_bspline_alloc(k, nbreak)
 	end function fgsl_bspline_alloc
-	function fgsl_bspline_alloc_ncontrol(ncontrol)
-	  integer(fgsl_size_t), intent(in) :: ncontrol
+	function fgsl_bspline_alloc_ncontrol(k, ncontrol)
+	  integer(fgsl_size_t), intent(in) :: k, ncontrol
 	  type(fgsl_bspline_workspace) :: fgsl_bspline_alloc_ncontrol
-	  fgsl_bspline_alloc_ncontrol%gsl_bspline_workspace = gsl_bspline_alloc_ncontrol(ncontrol)
+	  fgsl_bspline_alloc_ncontrol%gsl_bspline_workspace = gsl_bspline_alloc_ncontrol(k, ncontrol)
 	end function fgsl_bspline_alloc_ncontrol
 	subroutine fgsl_bspline_free (w)
 	  type(fgsl_bspline_workspace), intent(inout) :: w
@@ -612,6 +612,41 @@ contains
 	                               w%gsl_bspline_workspace)
 	end function fgsl_bspline_gram_interval
 	!
+	function fgsl_bspline_col_interp(x, xb, w) 
+	  type(fgsl_vector), intent(in) :: x
+	  type(fgsl_matrix), intent(inout) :: xb
+	  type(fgsl_bspline_workspace), intent(inout) :: w
+	  integer(c_int) :: fgsl_bspline_col_interp
+      fgsl_bspline_col_interp = gsl_bspline_col_interp(x%gsl_vector, &
+                         xb%gsl_matrix, w%gsl_bspline_workspace)
+	end function fgsl_bspline_col_interp
+    function fgsl_bspline_interp_chermite(x, y, dy, c, w)
+      type(fgsl_vector), intent(in) :: x, y, dy
+      type(fgsl_vector), intent(inout) :: c
+	  type(fgsl_bspline_workspace), intent(in) :: w
+      integer(fgsl_int) :: fgsl_bspline_interp_chermite
+      
+      fgsl_bspline_interp_chermite = gsl_bspline_interp_chermite(x%gsl_vector, &
+                   y%gsl_vector, dy%gsl_vector, c%gsl_vector, w%gsl_bspline_workspace)
+    end function fgsl_bspline_interp_chermite
+    !
+    function fgsl_bspline_proj_rhs(f, y, w) 
+      type(fgsl_function), intent(in) :: f
+      type(fgsl_vector), intent(inout) :: y
+      type(fgsl_bspline_workspace), intent(inout) ::  w
+      integer(c_int) :: fgsl_bspline_proj_rhs
+      fgsl_bspline_proj_rhs = gsl_bspline_proj_rhs(f%gsl_function, y%gsl_vector, &
+                              w%gsl_bspline_workspace)
+    end function fgsl_bspline_proj_rhs
+	function fgsl_bspline_greville_abscissa(i, w)
+	  real(fgsl_double) :: fgsl_bspline_greville_abscissa
+	  integer(fgsl_size_t), intent(in) :: i
+	  type(fgsl_bspline_workspace), intent(in) :: w
+	  fgsl_bspline_greville_abscissa = gsl_bspline_greville_abscissa(i, w%gsl_bspline_workspace)
+	end function fgsl_bspline_greville_abscissa
+
+	!
+	!> additional accessor
     function fgsl_bspline_return_knots_vector(w) 
       type(fgsl_bspline_workspace), intent(in):: w
       type(fgsl_vector) :: fgsl_bspline_return_knots_vector
@@ -619,7 +654,8 @@ contains
       fgsl_bspline_return_knots_vector%gsl_vector = &
            gsl_bspline_return_knots_vector(w%gsl_bspline_workspace) 
     end function fgsl_bspline_return_knots_vector	
-	!
+    !
+	!> Legacy API - to be removed at some time
 	function fgsl_bspline_knots(breakpts, w)
 	  integer(fgsl_int) :: fgsl_bspline_knots
 	  type(fgsl_vector), intent(in) :: breakpts
@@ -642,15 +678,6 @@ contains
 	  fgsl_bspline_eval = gsl_bspline_eval(x, b%gsl_vector, &
 	       w%gsl_bspline_workspace)
 	end function fgsl_bspline_eval
-	function fgsl_bspline_eval_nonzero(x, bk, istart, iend, w)
-	  integer(fgsl_int) :: fgsl_bspline_eval_nonzero
-	  real(fgsl_double), intent(in) :: x
-	  type(fgsl_vector), intent(inout) :: bk
-	  integer(fgsl_size_t), intent(inout) :: istart, iend
-	  type(fgsl_bspline_workspace), intent(inout) :: w
-	  fgsl_bspline_eval_nonzero = gsl_bspline_eval_nonzero(x, bk%gsl_vector, &
-	       istart, iend, w%gsl_bspline_workspace)
-	end function fgsl_bspline_eval_nonzero
 	function fgsl_bspline_deriv_eval(x, nderiv, db, w)
 	  integer(fgsl_int) :: fgsl_bspline_deriv_eval
 	  real(fgsl_double), intent(in) :: x
@@ -660,27 +687,11 @@ contains
 	  fgsl_bspline_deriv_eval = gsl_bspline_deriv_eval(x, nderiv, db%gsl_matrix, &
 	       w%gsl_bspline_workspace)
 	end function fgsl_bspline_deriv_eval
-	function fgsl_bspline_deriv_eval_nonzero(x, nderiv, db, istart, iend, w)
-	  integer(fgsl_int) :: fgsl_bspline_deriv_eval_nonzero
-	  real(fgsl_double), intent(in) :: x
-	  integer(fgsl_size_t), intent(in) :: nderiv
-	  type(fgsl_matrix), intent(inout) :: db
-	  integer(fgsl_size_t), intent(inout) :: istart, iend
-	  type(fgsl_bspline_workspace), intent(inout) :: w
-	  fgsl_bspline_deriv_eval_nonzero = gsl_bspline_deriv_eval_nonzero(x, nderiv, &
-	       db%gsl_matrix, istart, iend, w%gsl_bspline_workspace)
-	end function fgsl_bspline_deriv_eval_nonzero
 	function fgsl_bspline_ncoeffs(w)
 	  integer(fgsl_size_t) :: fgsl_bspline_ncoeffs
 	  type(fgsl_bspline_workspace), intent(inout) :: w
 	  fgsl_bspline_ncoeffs = gsl_bspline_ncoeffs(w%gsl_bspline_workspace)
 	end function fgsl_bspline_ncoeffs
-	function fgsl_bspline_greville_abscissa(i, w)
-	  real(fgsl_double) :: fgsl_bspline_greville_abscissa
-	  integer(fgsl_size_t) :: i
-	  type(fgsl_bspline_workspace), intent(in) :: w
-	  fgsl_bspline_greville_abscissa = gsl_bspline_greville_abscissa(i, w%gsl_bspline_workspace)
-	end function fgsl_bspline_greville_abscissa
 	function fgsl_bspline_knots_greville(abscissae,w,abserr)
 	  type(fgsl_vector) :: abscissae
 	  type(fgsl_bspline_workspace) :: w

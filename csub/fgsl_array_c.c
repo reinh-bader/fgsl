@@ -20,11 +20,25 @@ gsl_vector_int *fgsl_aux_vector_int_init() {
     result->size = 0;
     return result;
 }
+gsl_vector_int *fgsl_aux_vector_uint_init() {
+    gsl_vector_int *result;
+    result = (gsl_vector_uint *) malloc(sizeof(gsl_vector_uint));
+    result->block = (gsl_block_uint *) malloc(sizeof(gsl_block_uint));
+    result->owner = 0;
+    result->stride = 0;
+    result->size = 0;
+    return result;
+}
+
 void fgsl_aux_vector_double_free(gsl_vector *vec) {
     free(vec->block);
     free(vec);
 }
 void fgsl_aux_vector_int_free(gsl_vector_int *vec) {
+    free(vec->block);
+    free(vec);
+}
+void fgsl_aux_vector_uint_free(gsl_vector_uint *vec) {
     free(vec->block);
     free(vec);
 }
@@ -63,12 +77,32 @@ int fgsl_aux_vector_int_align(int *a, size_t len, gsl_vector_int *fvec, size_t s
     fvec->owner = 0;
     return GSL_SUCCESS;
 }
+int fgsl_aux_vector_uint_align(int *a, size_t len, gsl_vector_uint *fvec, size_t size,
+         size_t offset, size_t stride) {
+
+    if (fvec == NULL || fvec->block == NULL) {
+  return GSL_EFAULT;
+    }
+    if (offset + 1 + (size-1)*stride > len) {
+  return GSL_EINVAL;
+    }
+    fvec->block->size = len;
+    fvec->block->data = a;
+    fvec->size = size;
+    fvec->stride = stride;
+    fvec->data = a+offset;
+    fvec->owner = 0;
+    return GSL_SUCCESS;
+}
 
 
 size_t fgsl_aux_vector_double_size(gsl_vector *fvec) {
     return fvec->size;
 }
 size_t fgsl_aux_vector_int_size(gsl_vector_int *fvec) {
+    return fvec->size;
+}
+size_t fgsl_aux_vector_uint_size(gsl_vector_uint *fvec) {
     return fvec->size;
 }
 
@@ -78,7 +112,9 @@ size_t fgsl_aux_vector_double_stride(gsl_vector *fvec) {
 size_t fgsl_aux_vector_int_stride(gsl_vector_int *fvec) {
     return fvec->stride;
 }
-
+size_t fgsl_aux_vector_uint_stride(gsl_vector_uint *fvec) {
+    return fvec->stride;
+}
 
 gsl_vector_complex *fgsl_aux_vector_complex_init() {
     gsl_vector_complex *result;

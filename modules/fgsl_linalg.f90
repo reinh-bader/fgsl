@@ -91,7 +91,9 @@ module fgsl_linalg
        gsl_linalg_tri_upper_invert, gsl_linalg_tri_lower_invert, &
        gsl_linalg_tri_upper_unit_invert, gsl_linalg_tri_lower_unit_invert, &
        gsl_linalg_tri_upper_rcond,  gsl_linalg_tri_lower_rcond
-  private :: gsl_linalg_cholesky_band_decomp, gsl_linalg_cholesky_band_solve, &
+  private :: gsl_linalg_lu_band_decomp, gsl_linalg_lu_band_solve, &
+       gsl_linalg_lu_band_svx, gsl_linalg_lu_band_unpack, &
+       gsl_linalg_cholesky_band_decomp, gsl_linalg_cholesky_band_solve, &
        gsl_linalg_cholesky_band_solvem, gsl_linalg_cholesky_band_svx, &
        gsl_linalg_cholesky_band_svxm, gsl_linalg_cholesky_band_invert, &
        gsl_linalg_cholesky_band_unpack, gsl_linalg_cholesky_band_scale, &
@@ -1209,6 +1211,34 @@ module fgsl_linalg
      !
      ! Banded systems
      !
+     function gsl_linalg_lu_band_decomp (m, lb, ub, ab, piv) bind(c, &
+              name='gsl_linalg_LU_band_decomp')
+       import :: c_int, c_size_t, c_ptr
+       integer(c_size_t), value :: m, lb, ub
+       type(c_ptr), value :: ab, piv
+       integer(c_int) :: gsl_linalg_lu_band_decomp
+     end function gsl_linalg_lu_band_decomp
+     function gsl_linalg_lu_band_solve (lb, ub, lub, piv, b, x) bind(c, &
+              name='gsl_linalg_LU_band_solve')
+       import :: c_int, c_size_t, c_ptr
+       integer(c_size_t), value :: lb, ub
+       type(c_ptr), value :: lub, piv, b, x
+       integer(c_int) :: gsl_linalg_lu_band_solve
+     end function gsl_linalg_lu_band_solve
+     function gsl_linalg_lu_band_svx (lb, ub, lub, piv, x) bind(c, &
+              name='gsl_linalg_LU_band_svx')
+       import :: c_int, c_size_t, c_ptr
+       integer(c_size_t), value :: lb, ub
+       type(c_ptr), value :: lub, piv, x
+       integer(c_int) :: gsl_linalg_lu_band_svx
+     end function gsl_linalg_lu_band_svx
+     function gsl_linalg_lu_band_unpack (m, lb, ub, lub, piv, l, u) bind(c, &
+              name='gsl_linalg_LU_band_unpack')
+       import :: c_int, c_size_t, c_ptr
+       integer(c_size_t), value :: m, lb, ub
+       type(c_ptr), value :: lub, piv, l, u
+       integer(c_int) :: gsl_linalg_lu_band_unpack
+     end function gsl_linalg_lu_band_unpack
      integer(c_int) function gsl_linalg_cholesky_band_decomp(a) bind(c)
        import :: c_int, c_ptr
        type(c_ptr), value :: a
@@ -2667,6 +2697,41 @@ contains
   !
   ! Banded systems
   !
+  function fgsl_linalg_lu_band_decomp (m, lb, ub, ab, piv) 
+    integer(fgsl_size_t), intent(in) :: m, lb, ub
+    type(fgsl_matrix), intent(inout) :: ab
+    type(fgsl_vector_uint), intent(inout) :: piv
+    integer(fgsl_int) :: fgsl_linalg_lu_band_decomp
+    fgsl_linalg_lu_band_decomp = gsl_linalg_lu_band_decomp(m, lb, ub, ab%gsl_matrix, &
+                                 piv%gsl_vector_uint)
+  end function fgsl_linalg_lu_band_decomp
+  function fgsl_linalg_lu_band_solve (lb, ub, lub, piv, b, x) 
+    integer(fgsl_size_t), intent(in) :: lb, ub
+    type(fgsl_matrix), intent(in) :: lub
+    type(fgsl_vector_uint), intent(in) :: piv
+    type(fgsl_vector), intent(inout) :: b, x
+    integer(fgsl_int) :: fgsl_linalg_lu_band_solve
+    fgsl_linalg_lu_band_solve = gsl_linalg_lu_band_solve(lb, ub, lub%gsl_matrix, &
+                                 piv%gsl_vector_uint, b%gsl_vector, x%gsl_vector)
+  end function fgsl_linalg_lu_band_solve
+  function fgsl_linalg_lu_band_svx (lb, ub, lub, piv, x) 
+    integer(fgsl_size_t), intent(in) :: lb, ub
+    type(fgsl_matrix), intent(in) :: lub
+    type(fgsl_vector_uint), intent(in) :: piv
+    type(fgsl_vector), intent(inout) :: x
+    integer(fgsl_int) :: fgsl_linalg_lu_band_svx
+    fgsl_linalg_lu_band_svx = gsl_linalg_lu_band_svx(lb, ub, lub%gsl_matrix, &
+                                 piv%gsl_vector_uint, x%gsl_vector)
+  end function fgsl_linalg_lu_band_svx
+  function fgsl_linalg_lu_band_unpack (m, lb, ub, lub, piv, l, u) 
+    integer(fgsl_size_t), intent(in) :: m, lb, ub
+    type(fgsl_matrix), intent(in) :: lub
+    type(fgsl_vector_uint), intent(in) :: piv
+    type(fgsl_matrix), intent(inout) :: l, u
+    integer(fgsl_int) :: fgsl_linalg_lu_band_unpack
+    fgsl_linalg_lu_band_unpack = gsl_linalg_lu_band_unpack(m, lb, ub, lub%gsl_matrix, &
+                                 piv%gsl_vector_uint, l%gsl_matrix, u%gsl_matrix)
+  end function fgsl_linalg_lu_band_unpack
   integer(fgsl_int) function fgsl_linalg_cholesky_band_decomp(a)
     type(fgsl_matrix), intent(inout) :: a
     fgsl_linalg_cholesky_band_decomp = gsl_linalg_cholesky_band_decomp(a%gsl_matrix)

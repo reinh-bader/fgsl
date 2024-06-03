@@ -26,9 +26,9 @@ program bspline_deriv
 	a = 0._fgsl_double; b = 1._fgsl_double
 	dx = (b - a) / (real(n, fgsl_double) - 1.0_fgsl_double)
 	
-	open(newunit=iu_knots, file='bspline2_knots.txt', form='FORMATTED', &
+	open(newunit=iu_knots, file='bspline_deriv_knotsvetor.txt', form='FORMATTED', &
 		 status='REPLACE', action='WRITE')
-	open(newunit=iu_spline, file='bspline2.txt', form='FORMATTED', &
+	open(newunit=iu_spline, file='bspline_deriv.txt', form='FORMATTED', &
 		 status='REPLACE', action='WRITE')
 		 
 	allocate(dbf(spline_order, p))

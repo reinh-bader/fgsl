@@ -40,7 +40,7 @@ program bspline_lsorder
   r = fgsl_rng_alloc(fgsl_rng_default)
   
   ! prepare I/O
-  open(newunit=iu_fit, file='bspline4_fit.txt', form='FORMATTED', &
+  open(newunit=iu_fit, file='bspline_lsorder.txt', form='FORMATTED', &
 	   status='REPLACE', action='WRITE')
   
   ! create the data to be fitted

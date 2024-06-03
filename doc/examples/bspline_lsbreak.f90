@@ -6,9 +6,9 @@ program bspline_lsbreak
   use fgsl_cdf
   implicit none
   
-  integer(c_size_t), parameter :: n = 500   ! number of data points to fit
-  integer(c_size_t), parameter :: k = 4     ! spline order
-                                            ! data interval [a,b] 
+  integer(fgsl_size_t), parameter :: n = 500   ! number of data points to fit
+  integer(fgsl_size_t), parameter :: k = 4     ! spline order
+                                               ! data interval [a,b] 
   real(fgsl_double), parameter :: a = 0._fgsl_double
   real(fgsl_double), parameter :: b = 15._fgsl_double
   real(fgsl_double), parameter :: sigma = 0.2_fgsl_double ! noise
@@ -20,8 +20,8 @@ program bspline_lsbreak
   type(fgsl_rng) :: r
   type(fgsl_rng_type) :: t
   
-  integer(c_size_t) :: dof1, dof2, i, p1, p2
-  integer(c_int) :: iu_data, iu_fit, status
+  integer(fgsl_size_t) :: dof1, dof2, i, p1, p2
+  integer(fgsl_int) :: iu_data, iu_fit, status
   real(fgsl_double) :: chisq1, chisq2, dyi, result1, result2, xi, yi
   
   ! work spaces with 40 and 10 breakbpoints, respectively
@@ -45,9 +45,9 @@ program bspline_lsbreak
   r = fgsl_rng_alloc(fgsl_rng_default)
   
   ! prepare I/O
-  open(newunit=iu_data, file='bspline3_data.txt', form='FORMATTED', &
+  open(newunit=iu_data, file='bspline_lsbreak_data.txt', form='FORMATTED', &
 	   status='REPLACE', action='WRITE')
-  open(newunit=iu_fit, file='bspline3_fit.txt', form='FORMATTED', &
+  open(newunit=iu_fit, file='bspline_lsbreak_fit.txt', form='FORMATTED', &
 	   status='REPLACE', action='WRITE')
   
   ! create the data to be fitted

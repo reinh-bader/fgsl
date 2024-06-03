@@ -9,11 +9,11 @@ program bspline_knots
   integer iu_knots, iu_spline, iu_spline_alt
   
   
-  open(newunit=iu_knots, file='bspline1_knots.txt', form='FORMATTED', &
+  open(newunit=iu_knots, file='bspline_knotsvector.txt', form='FORMATTED', &
        status='REPLACE', action='WRITE')
-  open(newunit=iu_spline, file='bspline1.txt', form='FORMATTED', &
+  open(newunit=iu_spline, file='bspline_knots.txt', form='FORMATTED', &
        status='REPLACE', action='WRITE')
-  open(newunit=iu_spline_alt, file='bspline1_alt.txt', form='FORMATTED', &
+  open(newunit=iu_spline_alt, file='bspline_knots_alt.txt', form='FORMATTED', &
        status='REPLACE', action='WRITE')
        
   call print_basis(2_fgsl_size_t) ! linear splines

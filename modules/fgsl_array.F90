@@ -20,14 +20,28 @@ module fgsl_array
        gsl_matrix_ptr, gsl_aux_sizeof_vector, gsl_aux_sizeof_matrix, &
        gsl_matrix_complex_ptr, gsl_aux_sizeof_vector_complex, gsl_aux_sizeof_matrix_complex
        
+  private :: gsl_vector_uint_ptr, fgsl_aux_vector_uint_init, fgsl_aux_vector_uint_free, &
+       fgsl_aux_vector_uint_align, fgsl_aux_vector_uint_size, fgsl_aux_vector_uint_stride 
+       
   !
-  ! Types
+  !> Types
   type, public :: fgsl_vector
      type(c_ptr) :: gsl_vector = c_null_ptr
   end type fgsl_vector
   type, public :: fgsl_vector_int
      type(c_ptr) :: gsl_vector_int = c_null_ptr
   end type fgsl_vector_int
+  !> Warning: the integer(c_int) vector's used on the Fortran side
+  !! for fgsl_vector_uint
+  !! represent signed integers; negative values are therefore spurious
+  !! Should Fortran ever support an unsigned type, there will be an 
+  !! incompatible change to fix this
+  type, public :: fgsl_uint ! enable generic disambiguation
+    integer(c_int), allocatable :: array(:)
+  end type
+  type, public :: fgsl_vector_uint
+     type(c_ptr) :: gsl_vector_uint = c_null_ptr
+  end type fgsl_vector_uint
   type, public :: fgsl_matrix
      type(c_ptr) :: gsl_matrix = c_null_ptr
   end type fgsl_matrix
@@ -37,12 +51,12 @@ module fgsl_array
   type, public :: fgsl_matrix_complex
      type(c_ptr) :: gsl_matrix_complex = c_null_ptr
   end type fgsl_matrix_complex
-
   !
-  ! generic interfaces
+  !> Generic interfaces
   interface fgsl_well_defined
      module procedure fgsl_vector_status
      module procedure fgsl_vector_int_status
+     module procedure fgsl_vector_uint_status
      module procedure fgsl_matrix_status
      module procedure fgsl_vector_complex_status
      module procedure fgsl_matrix_complex_status
@@ -62,6 +76,7 @@ module fgsl_array
   interface fgsl_vector_init
      module procedure fgsl_vector_init
      module procedure fgsl_vector_int_init
+     module procedure fgsl_vector_uint_init
      module procedure fgsl_vector_init_legacy
      module procedure fgsl_vector_complex_init
      module procedure fgsl_vector_complex_init_legacy
@@ -69,6 +84,7 @@ module fgsl_array
   interface fgsl_vector_free
      module procedure fgsl_vector_free
      module procedure fgsl_vector_int_free
+     module procedure fgsl_vector_uint_free
      module procedure fgsl_vector_complex_free
   end interface fgsl_vector_free
   interface fgsl_matrix_init
@@ -85,7 +101,8 @@ module fgsl_array
      module procedure fgsl_vector_to_fptr
      module procedure fgsl_vector_complex_to_fptr
      module procedure fgsl_vector_int_to_fptr
-  end interface fgsl_vector_to_fptr
+     module procedure fgsl_vector_uint_to_fptr
+ end interface fgsl_vector_to_fptr
   interface fgsl_vector_align
      module procedure fgsl_vector_align
      module procedure fgsl_vector_complex_align
@@ -127,6 +144,12 @@ module fgsl_array
        integer(c_size_t), value :: i
        type(c_ptr) :: gsl_vector_int_ptr
      end function gsl_vector_int_ptr
+     function gsl_vector_uint_ptr(v, i) bind(c)
+       import
+       type(c_ptr), value :: v
+       integer(c_size_t), value :: i
+       type(c_ptr) :: gsl_vector_uint_ptr
+     end function gsl_vector_uint_ptr
      function gsl_vector_complex_get(v, i) bind(c)
        import
        type(c_ptr), value :: v
@@ -178,6 +201,8 @@ module fgsl_array
        type(c_ptr), value :: fvec
        integer(c_size_t) fgsl_aux_vector_double_stride
      end function fgsl_aux_vector_double_stride
+     !
+     ! vectors of int
      function fgsl_aux_vector_int_init() bind(c)
        import
        type(c_ptr) :: fgsl_aux_vector_int_init
@@ -202,6 +227,32 @@ module fgsl_array
        type(c_ptr), value :: fvec
        integer(c_size_t) fgsl_aux_vector_int_stride
      end function fgsl_aux_vector_int_stride
+     ! vectors of uint
+      function fgsl_aux_vector_uint_init() bind(c)
+       import
+       type(c_ptr) :: fgsl_aux_vector_uint_init
+     end function fgsl_aux_vector_uint_init
+     subroutine fgsl_aux_vector_uint_free(v) bind(c)
+       import
+       type(c_ptr), value :: v
+     end subroutine fgsl_aux_vector_uint_free
+     function fgsl_aux_vector_uint_align(a, len, fvec, size, offset, stride) bind(c)
+       import
+       type(c_ptr), value :: a, fvec
+       integer(c_size_t), value :: len, size, offset, stride
+       integer(c_int) :: fgsl_aux_vector_int_align
+     end function fgsl_aux_vector_uint_align
+     function fgsl_aux_vector_uint_size(fvec) bind(c)
+       import
+       type(c_ptr), value :: fvec
+       integer(c_size_t) fgsl_aux_vector_uint_size
+     end function fgsl_aux_vector_uint_size
+     function fgsl_aux_vector_uint_stride(fvec) bind(c)
+       import
+       type(c_ptr), value :: fvec
+       integer(c_size_t) fgsl_aux_vector_uint_stride
+     end function fgsl_aux_vector_uint_stride
+     !    
      function fgsl_aux_matrix_double_init() bind(c)
        import
        type(c_ptr) :: fgsl_aux_matrix_double_init
@@ -375,6 +426,39 @@ contains
     if ( .not. present(stat) .and. stat_local /= fgsl_success ) &
          call fgsl_error("aligning failed", 'fgsl_array', __LINE__, stat_local)
   end function fgsl_vector_int_init
+  
+  function fgsl_vector_uint_init(c, stride, stat)
+    type(fgsl_uint), target, intent(in) :: c
+    integer(fgsl_size_t), intent(in), optional :: stride
+    integer(fgsl_int), intent(inout), optional :: stat
+    type(fgsl_vector_uint) :: fgsl_vector_uint_init
+    integer(fgsl_size_t) :: stride_local, array_size, section_size
+    integer(fgsl_int) :: stat_local
+
+    try : block
+
+      if (present(stride)) then
+         stride_local = stride
+      else
+         stride_local = 1_fgsl_size_t
+      end if
+      if (stride_local <= 0) then
+         stat_local = fgsl_einval
+         exit try
+      end if
+
+      array_size = size(c%array,dim=1,kind=fgsl_size_t)
+      section_size = (array_size - 1) / stride_local + 1
+      
+      fgsl_vector_uint_init%gsl_vector_uint = fgsl_aux_vector_uint_init()
+      stat_local = fgsl_aux_vector_uint_align(c_loc(c%array), &
+           array_size, fgsl_vector_uint_init%gsl_vector_uint, &
+           section_size, 0_fgsl_size_t, stride_local)
+    end block try
+    if ( present(stat) ) stat = stat_local
+    if ( .not. present(stat) .and. stat_local /= fgsl_success ) &
+         call fgsl_error("aligning failed", 'fgsl_array', __LINE__, stat_local)
+  end function fgsl_vector_uint_init
 !> Legacy specific fgsl_vector_init of  for GSL vector initialization 
 !> \param type - determine intrinsic type of vector object
 !> \return new object of type fgsl_vector
@@ -452,6 +536,27 @@ contains
        fgsl_vector_int_to_fptr => null()
     end if
   end function fgsl_vector_int_to_fptr
+  function fgsl_vector_uint_to_fptr(fvec)
+    type(fgsl_vector_uint), intent(in) :: fvec
+    integer(fgsl_int), pointer :: fgsl_vector_uint_to_fptr(:)
+    integer(fgsl_int), pointer, contiguous :: fptr_local(:)
+    integer(fgsl_size_t) :: size, stride
+    type(c_ptr) :: cp
+
+    if ( fgsl_vector_uint_status(fvec) ) then
+       size = fgsl_aux_vector_uint_size(fvec%gsl_vector_uint)
+       stride = fgsl_aux_vector_uint_stride(fvec%gsl_vector_uint)
+       if (stride == 0) then
+          fgsl_vector_uint_to_fptr => null()
+       else
+          cp = gsl_vector_uint_ptr(fvec%gsl_vector_uint,0_fgsl_size_t)
+          call c_f_pointer(cp, fptr_local, [ size*stride ])
+          fgsl_vector_uint_to_fptr => fptr_local(1:size*stride:stride)
+       end if
+    else
+       fgsl_vector_uint_to_fptr => null()
+    end if
+  end function fgsl_vector_uint_to_fptr
 !> Legacy function to associate a Fortran pointer with the data stored inside
 !> a GSL vector object. Codes should be updated to use fgsl_vector_ptr.
 !> This is invoked via the generic fgsl_vector_align. Objects of type
@@ -518,6 +623,10 @@ contains
     type(fgsl_vector_int), intent(inout) :: fvec
     call fgsl_aux_vector_int_free(fvec%gsl_vector_int)
   end subroutine fgsl_vector_int_free
+  subroutine fgsl_vector_uint_free(fvec)
+    type(fgsl_vector_uint), intent(inout) :: fvec
+    call fgsl_aux_vector_uint_free(fvec%gsl_vector_uint)
+  end subroutine fgsl_vector_uint_free
   subroutine fgsl_vector_c_ptr(res, src)
     type(c_ptr), intent(in) :: src
     type(fgsl_vector), intent(out) :: res
@@ -536,6 +645,12 @@ contains
     fgsl_vector_int_status = .true.
     if (.not. c_associated(vector%gsl_vector_int)) fgsl_vector_int_status = .false.
   end function fgsl_vector_int_status
+  function fgsl_vector_uint_status(vector)
+    type(fgsl_vector_uint), intent(in) :: vector
+    logical :: fgsl_vector_uint_status
+    fgsl_vector_uint_status = .true.
+    if (.not. c_associated(vector%gsl_vector_uint)) fgsl_vector_uint_status = .false.
+  end function fgsl_vector_uint_status
   function fgsl_sizeof_vector(w)
     type(fgsl_vector), intent(in) :: w
     integer(fgsl_size_t) :: fgsl_sizeof_vector
