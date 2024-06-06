@@ -2440,11 +2440,23 @@ contains
          gsl_linalg_hessenberg_set_zero(h%gsl_matrix)
   end function fgsl_linalg_hessenberg_set_zero
   function fgsl_linalg_hesstri_decomp(a, b, u, v, work)
-    type(fgsl_matrix), intent(inout)  :: a, b, u, v
+    type(fgsl_matrix), intent(inout)  :: a, b
+    type(fgsl_matrix), intent(inout), optional :: u, v
     type(fgsl_vector), intent(inout) :: work
     integer(fgsl_int) :: fgsl_linalg_hesstri_decomp
+    type(c_ptr) :: uptr, vptr
+    if (present(u)) then
+       uptr = u%gsl_matrix
+    else
+       uptr = c_null_ptr
+    end if
+    if (present(v)) then
+       vptr = v%gsl_matrix
+    else
+       vptr = c_null_ptr
+    end if
     fgsl_linalg_hesstri_decomp = gsl_linalg_hesstri_decomp(a%gsl_matrix, &
-         b%gsl_matrix, u%gsl_matrix, v%gsl_matrix, work%gsl_vector)
+         b%gsl_matrix, uptr, vptr, work%gsl_vector)
   end function fgsl_linalg_hesstri_decomp
 !
 ! Bidiag
