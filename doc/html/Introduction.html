@@ -60,6 +60,10 @@ $(function() {
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="index.html">Fortran GSL interface</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="PageDoc"><div class="contents">
 <div class="textblock"><ol>
@@ -70,13 +74,13 @@ In Fortran code, GSL_* must be replaced by FGSL_* for each API call, abstract da
 <li>
 Some names were changed due to UC/LC aliasing. See the documentation chapter on special functions for details. </li>
 <li>
-Intrinsic type matching:<ol type="1">
+Intrinsic type matching (see <a class="el" href="fgsl__base_8f90.html">modules/fgsl_base.f90</a>)<ol type="1">
 <li>real(fgsl_double) is used for double precision values</li>
 <li>real(fgsl_float) is used for single precision values</li>
 <li>integer(fgsl_int) for integer</li>
 <li>integer(fgsl_long) for long integer</li>
 <li>integer(fgsl_size_t) for size_t integer</li>
-<li>complex(fgsl_double_complex) for <a class="el" href="structfgsl_1_1gsl__complex.html">gsl_complex</a></li>
+<li>complex(fgsl_double_complex) for gsl_complex</li>
 <li>character(fgsl_char) for characters</li>
 <li>no value attributes and mostly no pointers in Fortran calls</li>
 <li>unsigned int must be converted to integer(fgsl_long).</li>
@@ -88,13 +92,13 @@ Intrinsic type matching:<ol type="1">
 <li>
 Additional routines: <ul>
 <li>
-Generic interface <a class="el" href="interfacefgsl__well__defined.html">fgsl_well_defined</a> for checking status of FGSL objects (which are typically opaque). </li>
+Generic interface fgsl_well_defined for checking status of FGSL objects (which are typically opaque). </li>
 <li>
-See <a class="el" href="api_2array_8finc.html">api/array.finc</a> for array alignment routines. </li>
+See api/array.finc for array alignment routines. </li>
 <li>
-See <a class="el" href="api_2math_8finc.html">api/math.finc</a> for function object constructors. </li>
+See api/math.finc for function object constructors. </li>
 <li>
-See <a class="el" href="api_2io_8finc.html">api/io.finc</a> for I/O related add-ons. </li>
+See <a class="el" href="fgsl__io_8f90.html">modules/fgsl_io.f90</a> for I/O related add-ons. </li>
 </ul>
 </li>
 <li>
@@ -124,7 +128,7 @@ Inf/Nan need to use IEEE_VALUE (if available) </li>
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Mar 23 2024 18:10:39 for FGSL by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jun 8 2024 20:07:16 for FGSL by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.17
 </small></address>

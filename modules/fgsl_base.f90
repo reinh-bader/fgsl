@@ -1,5 +1,7 @@
 !-*-f90-*-
 module fgsl_base
+  !> \page Base Base type support
+  !> See \ref fgsl_base for details.
   !> definition of kind parameters and inquiry functions
   use, intrinsic :: iso_c_binding
   implicit none
@@ -7,7 +9,7 @@ module fgsl_base
   private :: gsl_aux_sizeof_double, gsl_aux_sizeof_float, gsl_aux_sizeof_int, &
        gsl_aux_sizeof_long, gsl_aux_sizeof_size_t, gsl_aux_sizeof_char
 
-  !> Generic interfaces
+  ! Generic interfaces
   interface fgsl_sizeof
      module procedure fgsl_sizeof_double
      module procedure fgsl_sizeof_float
@@ -17,7 +19,7 @@ module fgsl_base
   end interface fgsl_sizeof
   
   !  
-  !> Kind and length parameters are default integer
+  ! Kind and length parameters are default integer
   !
   integer, parameter, public :: fgsl_double = c_double
   integer, parameter, public :: fgsl_double_complex = c_double_complex
@@ -32,7 +34,7 @@ module fgsl_base
   integer, parameter, public :: fgsl_strmax = 128
   integer, parameter, public :: fgsl_pathmax = 2048
   !  
-  !>  private interfaces: miscellaneous additions
+  !  private interfaces: miscellaneous additions
   interface
      function gsl_aux_sizeof_double() bind(c)
        import :: c_size_t
@@ -63,7 +65,7 @@ contains
   !
   !  API: miscellaneous additions
   !
-  !> C string to Fortran string conversion
+  ! C string to Fortran string conversion
   function fgsl_name(c_name)
     type(c_ptr), intent(in) :: c_name
     character(kind=fgsl_char, len=fgsl_strmax) :: fgsl_name

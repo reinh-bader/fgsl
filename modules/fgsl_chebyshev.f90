@@ -1,5 +1,6 @@
 module fgsl_chebyshev
-  !> Chebyshev Approximations
+  !> \page chebyshev Chebyshev Approximations
+  !> See \ref fgsl_chebyshev for details.
   use fgsl_base
   use fgsl_math
 

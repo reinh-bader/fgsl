@@ -2,15 +2,27 @@
 module fgsl
 #include "config.h"
 !-------------------------------------------------------------------------------
-!>  \mainpage
+!>  \mainpage Fortran GSL interface
 !>  \brief Interface module for use of GSL from Fortran
 !>  \author R. Bader, T. Schoonjans
+!>
+!>  Manual pages: 
+!>  - \subpage Introduction
+!>  - \subpage Arrays
+!>  - \subpage Base
+!>  - \subpage Bspline 
+!>  - \subpage Randomdist
+!>  - \subpage chebyshev
+!>  - \subpage combination
+!>  - \subpage Complex
+!>  - \subpage constcgsm
+!>  - \subpage constmksa
+!>  - \subpage constnum
+!>  - \subpage Deriv
+!>  - \subpage eigen
+!>
+!>  \page Introduction
 !>  \details
-!>  Please see the <a href="pages.html">Related Pages</a> section
-!>  for the information about the conventions used in the interface.
-!>  Examples on how to use the interface are available in the
-!>  <p><b>doc/examples</b><p> subdirectory of the source package.
-!>  \page "Introduction"
 !>  <OL>
 !>  <LI> Introductory notes:
 !>      <UL>
@@ -122,10 +134,10 @@ module fgsl
 !
 ! Enum: legendre special Functions
 ! The below probably are not needed any more
-integer(fgsl_int), public, parameter :: gsl_sf_legendre_schmidt = 0
-integer(fgsl_int), public, parameter :: gsl_sf_legendre_spharm = 1
-integer(fgsl_int), public, parameter :: gsl_sf_legendre_full = 2
-integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
+!integer(fgsl_int), public, parameter :: gsl_sf_legendre_schmidt = 0
+!integer(fgsl_int), public, parameter :: gsl_sf_legendre_spharm = 1
+!integer(fgsl_int), public, parameter :: gsl_sf_legendre_full = 2
+!integer(fgsl_int), public, parameter :: gsl_sf_legendre_none = 3
 
 
 end module fgsl

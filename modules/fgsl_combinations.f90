@@ -1,5 +1,7 @@
 module fgsl_combinations
-  !> Combinations
+  !> \page combination Combinations
+  !> See \ref fgsl_combinations for details.
+  !> Module name deviates from gsl_combination.h due to naming collision.
   use fgsl_array
   use fgsl_io
   implicit none

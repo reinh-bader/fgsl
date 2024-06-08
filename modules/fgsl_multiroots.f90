@@ -191,12 +191,8 @@ module fgsl_multiroots
 	  end function fgsl_aux_multiroot_fdfsolver_alloc
   end interface
 contains
-!-*-f90-*-
 !
-!  API: multi-dimensional root finding
-!
-!> \page "Comments on multidimensional root finding"
-!> Please go to api/multiroots.finc for the API documentation.
+!>  API: multi-dimensional root finding
 !
   function fgsl_multiroot_function_init(func, ndim, params)
     interface

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['linalg_2efinc_4458',['linalg.finc',['../api_2linalg_8finc.html',1,'(Global Namespace)'],['../interface_2linalg_8finc.html',1,'(Global Namespace)']]]
+  ['k_4690',['k',['../structfgsl__siman_1_1gsl__siman__params__t.html#a7a3c17d812f3598d4a8e7c78d91b4cc0',1,'fgsl_siman::gsl_siman_params_t']]]
 ];

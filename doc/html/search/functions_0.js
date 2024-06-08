@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['complex_5fto_5ffgsl_5fcomplex_4728',['complex_to_fgsl_complex',['../interfaceassignment_07_0a_08.html#a22cecc540b4b1701b3b05c433ab0e23e',1,'assignment(=)::complex_to_fgsl_complex()'],['../api_2complex_8finc.html#a2cbad87c3e0a645db0b486c0f1fddf5a',1,'complex_to_fgsl_complex():&#160;complex.finc']]]
+  ['compare_5ffunc_7076',['compare_func',['../interfacefgsl__sorting_1_1compare__func.html#ad0e9fde2de3395065f3bd3d4366396f6',1,'fgsl_sorting::compare_func']]]
 ];

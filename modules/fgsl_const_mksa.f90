@@ -1,5 +1,6 @@
 module fgsl_const_mksa
-  !> Physical constants in MKSA uhits
+  !> \page constmksa Physical constants in MKSA units
+  !> See \ref fgsl_const_mksa for details.
   use fgsl_base
   
   implicit none

@@ -1,5 +1,6 @@
 module fgsl_deriv
-  !> Numerical Differentiation
+  !> \page Deriv Numerical Differentiation
+  !> See \ref fgsl_deriv for details.
   use fgsl_base
   use fgsl_math
 
@@ -8,7 +9,7 @@ module fgsl_deriv
   private :: gsl_deriv_central, gsl_deriv_forward, gsl_deriv_backward
 
   !
-  !> C interfaces
+  ! C interfaces
   interface
 	  function gsl_deriv_central(f, x, h, result, abserr) bind(c)
 	    import

@@ -1,5 +1,6 @@
 module fgsl_eigen
-  !> Eigensystems
+  !> \page eigen Eigensystems
+  !> See \ref fgsl_eigen for details.
   use fgsl_array
   implicit none
 

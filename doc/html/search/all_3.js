@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['dat_18',['dat',['../structfgsl_1_1gsl__complex.html#a50388c80381b51ae88a07ed9726edf27',1,'fgsl::gsl_complex']]],
-  ['deriv_2efinc_19',['deriv.finc',['../api_2deriv_8finc.html',1,'(Global Namespace)'],['../interface_2deriv_8finc.html',1,'(Global Namespace)']]],
-  ['dht_2efinc_20',['dht.finc',['../api_2dht_8finc.html',1,'(Global Namespace)'],['../interface_2dht_8finc.html',1,'(Global Namespace)']]],
-  ['dof_21',['dof',['../structfgsl_1_1fgsl__multifit__robust__stats.html#a4490c5d81e7802e064b1ad9910b42b3b',1,'fgsl::fgsl_multifit_robust_stats']]]
+  ['dimensionless_20numerical_20constants_22',['Dimensionless numerical constants',['../constnum.html',1,'index']]],
+  ['discrete_20hankel_20transforms_23',['Discrete Hankel Transforms',['../dhtransforms.html',1,'']]],
+  ['dof_24',['dof',['../structfgsl__multifit_1_1fgsl__multifit__robust__stats.html#a3ae3871d840407733979b73a5acaadd2',1,'fgsl_multifit::fgsl_multifit_robust_stats::dof()'],['../structfgsl__multifit_1_1gsl__multifit__robust__stats.html#a5fa4e3d79c2ebe6c95cb82d1f9819d71',1,'fgsl_multifit::gsl_multifit_robust_stats::dof()']]]
 ];

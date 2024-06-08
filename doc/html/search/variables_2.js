@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['dat_8408',['dat',['../structfgsl_1_1gsl__complex.html#a50388c80381b51ae88a07ed9726edf27',1,'fgsl::gsl_complex']]],
-  ['dof_8409',['dof',['../structfgsl_1_1fgsl__multifit__robust__stats.html#a4490c5d81e7802e064b1ad9910b42b3b',1,'fgsl::fgsl_multifit_robust_stats']]]
+  ['dof_10825',['dof',['../structfgsl__multifit_1_1fgsl__multifit__robust__stats.html#a3ae3871d840407733979b73a5acaadd2',1,'fgsl_multifit::fgsl_multifit_robust_stats::dof()'],['../structfgsl__multifit_1_1gsl__multifit__robust__stats.html#a5fa4e3d79c2ebe6c95cb82d1f9819d71',1,'fgsl_multifit::gsl_multifit_robust_stats::dof()']]]
 ];

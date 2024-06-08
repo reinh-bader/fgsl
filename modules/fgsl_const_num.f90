@@ -1,5 +1,6 @@
 module fgsl_const_num
-  !> Dimensionless numerical constants
+  !> \page constnum Dimensionless numerical constants
+  !> See \ref fgsl_const_num for details.
   use fgsl_base
   
   implicit none

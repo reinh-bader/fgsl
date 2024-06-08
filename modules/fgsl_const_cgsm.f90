@@ -1,5 +1,7 @@
 module fgsl_const_cgsm
-  !> Physical constants in CGSM units
+  !> \page constcgsm Physical constants in CGSM units
+  !> See \ref fgsl_const_cgsm for details.
+
   use fgsl_base
   
   implicit none

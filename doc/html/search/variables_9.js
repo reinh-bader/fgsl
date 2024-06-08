@@ -1,6 +1,22 @@
 var searchData=
 [
-  ['r_9030',['r',['../structfgsl_1_1fgsl__multifit__robust__stats.html#a3353b0664ef271acdce6aa4b92ace197',1,'fgsl::fgsl_multifit_robust_stats']]],
-  ['rmse_9031',['rmse',['../structfgsl_1_1fgsl__multifit__robust__stats.html#a9ab711f917ad9f632ab668ddfa73adfb',1,'fgsl::fgsl_multifit_robust_stats']]],
-  ['rsq_9032',['rsq',['../structfgsl_1_1fgsl__multifit__robust__stats.html#ad2d659d16fd8061bd781d1586a5f81d3',1,'fgsl::fgsl_multifit_robust_stats']]]
+  ['m_5f1_5fpi_11431',['m_1_pi',['../namespacefgsl__math.html#a408f85b58007c03a3e7bfea82cbfc82f',1,'fgsl_math']]],
+  ['m_5f2_5fpi_11432',['m_2_pi',['../namespacefgsl__math.html#af7eec125545216eac6d5e5e0b6bb0a6f',1,'fgsl_math']]],
+  ['m_5f2_5fsqrtpi_11433',['m_2_sqrtpi',['../namespacefgsl__math.html#a26fb403e35d3673a6a5953ad13572897',1,'fgsl_math']]],
+  ['m_5fe_11434',['m_e',['../namespacefgsl__math.html#ae7b237f22c2357ff4f1c93bbf53a12ad',1,'fgsl_math']]],
+  ['m_5feuler_11435',['m_euler',['../namespacefgsl__math.html#ae4e8fadf3c68ce9d1b0d16c5396705d9',1,'fgsl_math']]],
+  ['m_5fln10_11436',['m_ln10',['../namespacefgsl__math.html#abf77ba3474033dec9369382272abfb63',1,'fgsl_math']]],
+  ['m_5fln2_11437',['m_ln2',['../namespacefgsl__math.html#a87c60f55c36292a864cad0f87ebd52b7',1,'fgsl_math']]],
+  ['m_5flnpi_11438',['m_lnpi',['../namespacefgsl__math.html#a1c694394f1fb33e3ef9433fedecfebb1',1,'fgsl_math']]],
+  ['m_5flog10e_11439',['m_log10e',['../namespacefgsl__math.html#a33b54d8921ff4cfb0526bc5f1a487d83',1,'fgsl_math']]],
+  ['m_5flog2e_11440',['m_log2e',['../namespacefgsl__math.html#a604b6b5970c429e1f11487747fe10bf3',1,'fgsl_math']]],
+  ['m_5fpi_11441',['m_pi',['../namespacefgsl__math.html#a33164496052e122f8d86b3bf777f4ddb',1,'fgsl_math']]],
+  ['m_5fpi_5f2_11442',['m_pi_2',['../namespacefgsl__math.html#a9d38b6509c109a9765b1dc0053150a2b',1,'fgsl_math']]],
+  ['m_5fpi_5f4_11443',['m_pi_4',['../namespacefgsl__math.html#a849d87166b56ce68c02c70bba4a0b77d',1,'fgsl_math']]],
+  ['m_5fsqrt1_5f2_11444',['m_sqrt1_2',['../namespacefgsl__math.html#a4c495c935b394d36ef7008adf570a2d3',1,'fgsl_math']]],
+  ['m_5fsqrt2_11445',['m_sqrt2',['../namespacefgsl__math.html#a132f379afa6f3fcec387c163b1b22e30',1,'fgsl_math']]],
+  ['m_5fsqrt3_11446',['m_sqrt3',['../namespacefgsl__math.html#a2c0adbf9387e430de299138e43445a05',1,'fgsl_math']]],
+  ['m_5fsqrtpi_11447',['m_sqrtpi',['../namespacefgsl__math.html#a3ad3e159a01ea461f240a92624d6a7f6',1,'fgsl_math']]],
+  ['max_5fiter_11448',['max_iter',['../structfgsl__multi__nlinear_1_1gsl__multilarge__nlinear__parameters.html#aa0723c2218e128444e942acc90ad0fcd',1,'fgsl_multi_nlinear::gsl_multilarge_nlinear_parameters']]],
+  ['mu_5ft_11449',['mu_t',['../structfgsl__siman_1_1gsl__siman__params__t.html#ac1434a2f3d7adfad251a942368a66cad',1,'fgsl_siman::gsl_siman_params_t']]]
 ];

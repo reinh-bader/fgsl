@@ -1,6 +1,9 @@
 module fgsl_dhtransforms
+  !> \page dhtransforms Discrete Hankel Transforms
+  !> See \ref fgsl_dhtransforms for details.
+
   !> Discrete Hankel Transforms
-  !> Note: This module maps the functions from gsl_dht.h
+  !> This module maps the functions from gsl_dht.h
   use fgsl_base
 
   implicit none
@@ -9,18 +12,18 @@ module fgsl_dhtransforms
     gsl_dht_apply, gsl_dht_x_sample, gsl_dht_k_sample
   
   !
-  !> Types
+  ! Types
   type, public :: fgsl_dht
      private
      type(c_ptr) :: gsl_dht = c_null_ptr
   end type fgsl_dht
   !
-  !> Generics
+  ! Generics
   interface fgsl_well_defined
      module procedure fgsl_dht_status  
   end interface
   !
-  !> C interfaces
+  ! C interfaces
   interface
 	  function gsl_dht_alloc(size) bind(c)
 	    import
@@ -64,7 +67,7 @@ module fgsl_dhtransforms
 	  end function gsl_dht_k_sample
   end interface
 contains
-!> API
+! API
   function fgsl_dht_alloc(size)
     integer(fgsl_size_t), intent(in) :: size
     type(fgsl_dht) :: fgsl_dht_alloc

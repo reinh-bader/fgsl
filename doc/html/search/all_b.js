@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['nlfit_2efinc_4485',['nlfit.finc',['../api_2nlfit_8finc.html',1,'(Global Namespace)'],['../interface_2nlfit_8finc.html',1,'(Global Namespace)']]],
-  ['ntuple_2efinc_4486',['ntuple.finc',['../api_2ntuple_8finc.html',1,'(Global Namespace)'],['../interface_2ntuple_8finc.html',1,'(Global Namespace)']]],
-  ['numit_4487',['numit',['../structfgsl_1_1fgsl__multifit__robust__stats.html#a9dcebe91b1e3a34ccb49129f10c861bc',1,'fgsl::fgsl_multifit_robust_stats']]]
+  ['numerical_20differentiation_4710',['Numerical Differentiation',['../Deriv.html',1,'index']]],
+  ['n_5ftries_4711',['n_tries',['../structfgsl__siman_1_1gsl__siman__params__t.html#a23d51374b5165c5c824f1cab60eeb664',1,'fgsl_siman::gsl_siman_params_t']]],
+  ['numit_4712',['numit',['../structfgsl__multifit_1_1fgsl__multifit__robust__stats.html#a659191c999bc17cf6a2a6bb4cf987bc8',1,'fgsl_multifit::fgsl_multifit_robust_stats::numit()'],['../structfgsl__multifit_1_1gsl__multifit__robust__stats.html#a1f4426760dcfb8d66d89ad1560390225',1,'fgsl_multifit::gsl_multifit_robust_stats::numit()']]]
 ];

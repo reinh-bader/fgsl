@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['type_9038',['type',['../structfgsl_1_1fgsl__rng__type.html#a124544a893fbccaf500ab420de1dfa6b',1,'fgsl::fgsl_rng_type::type()'],['../structfgsl_1_1fgsl__qrng__type.html#a3e0ae09be0c95e66fe6bef740c4d2688',1,'fgsl::fgsl_qrng_type::type()']]]
+  ['params_11452',['params',['../structfgsl__movstat_1_1fgsl__movstat__function.html#ac418f5af7986ee108977e3db7883c3be',1,'fgsl_movstat::fgsl_movstat_function']]],
+  ['phi_11453',['phi',['../structfgsl__integration_1_1fgsl__integration__lebedev__workspace.html#a6cf1b22564c630648774e0cb38e173c8',1,'fgsl_integration::fgsl_integration_lebedev_workspace']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['numit_9028',['numit',['../structfgsl_1_1fgsl__multifit__robust__stats.html#a9dcebe91b1e3a34ccb49129f10c861bc',1,'fgsl::fgsl_multifit_robust_stats']]]
+  ['iters_5ffixed_5ft_11429',['iters_fixed_t',['../structfgsl__siman_1_1gsl__siman__params__t.html#a1c987023199174ee6e7c1205a97f8932',1,'fgsl_siman::gsl_siman_params_t']]]
 ];

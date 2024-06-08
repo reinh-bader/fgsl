@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['sigma_9033',['sigma',['../structfgsl_1_1fgsl__multifit__robust__stats.html#a5da53015a9d12f1c5efca715e3db852b',1,'fgsl::fgsl_multifit_robust_stats']]],
-  ['sigma_5fmad_9034',['sigma_mad',['../structfgsl_1_1fgsl__multifit__robust__stats.html#aa9d516d07e5792e733b0074d4b402999',1,'fgsl::fgsl_multifit_robust_stats']]],
-  ['sigma_5fols_9035',['sigma_ols',['../structfgsl_1_1fgsl__multifit__robust__stats.html#adf176fab65c7036d151f74de617d219a',1,'fgsl::fgsl_multifit_robust_stats']]],
-  ['sigma_5frob_9036',['sigma_rob',['../structfgsl_1_1fgsl__multifit__robust__stats.html#a5584eeb03f4001749227079089275075',1,'fgsl::fgsl_multifit_robust_stats']]],
-  ['sse_9037',['sse',['../structfgsl_1_1fgsl__multifit__robust__stats.html#a137f634721561413a40c1269d954a504',1,'fgsl::fgsl_multifit_robust_stats']]]
+  ['n_5ftries_11450',['n_tries',['../structfgsl__siman_1_1gsl__siman__params__t.html#a23d51374b5165c5c824f1cab60eeb664',1,'fgsl_siman::gsl_siman_params_t']]],
+  ['numit_11451',['numit',['../structfgsl__multifit_1_1fgsl__multifit__robust__stats.html#a659191c999bc17cf6a2a6bb4cf987bc8',1,'fgsl_multifit::fgsl_multifit_robust_stats::numit()'],['../structfgsl__multifit_1_1gsl__multifit__robust__stats.html#a1f4426760dcfb8d66d89ad1560390225',1,'fgsl_multifit::gsl_multifit_robust_stats::numit()']]]
 ];

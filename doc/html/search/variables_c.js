@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['val_9039',['val',['../structfgsl_1_1fgsl__sf__result.html#a7a6ae6b70ef97531a1dd832ef464c1cf',1,'fgsl::fgsl_sf_result::val()'],['../structfgsl_1_1gsl__sf__result.html#a3cf49c46128f015cdb174291cf9b10fb',1,'fgsl::gsl_sf_result::val()'],['../structfgsl_1_1fgsl__sf__result__e10.html#a5b7c6b37adb7724bdf69637b74f65395',1,'fgsl::fgsl_sf_result_e10::val()'],['../structfgsl_1_1gsl__sf__result__e10.html#acb74f78fcd7f067d10432958045ebe8b',1,'fgsl::gsl_sf_result_e10::val()']]]
+  ['r_11454',['r',['../structfgsl__multifit_1_1fgsl__multifit__robust__stats.html#acb822292cf04b91d64b7e4c0c1963418',1,'fgsl_multifit::fgsl_multifit_robust_stats::r()'],['../structfgsl__multifit_1_1gsl__multifit__robust__stats.html#a1b2caea2c34abdd3baeef2ed15a8996d',1,'fgsl_multifit::gsl_multifit_robust_stats::r()']]],
+  ['rmse_11455',['rmse',['../structfgsl__multifit_1_1fgsl__multifit__robust__stats.html#a123064d82d7ce8ca341f24113d0ab6dc',1,'fgsl_multifit::fgsl_multifit_robust_stats::rmse()'],['../structfgsl__multifit_1_1gsl__multifit__robust__stats.html#acbc2a6c4b82cfa8f48b882d5a375fa58',1,'fgsl_multifit::gsl_multifit_robust_stats::rmse()']]],
+  ['rsq_11456',['rsq',['../structfgsl__multifit_1_1fgsl__multifit__robust__stats.html#a4f1c7684e9e4d5dc41e2b5875be49185',1,'fgsl_multifit::fgsl_multifit_robust_stats::rsq()'],['../structfgsl__multifit_1_1gsl__multifit__robust__stats.html#ae914dbdd75b92fd36b6aed0cb88321b9',1,'fgsl_multifit::gsl_multifit_robust_stats::rsq()']]]
 ];

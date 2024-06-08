@@ -1,6 +1,7 @@
 !-*-f90-*-
 module fgsl_complex_math
-  !> Complex numbers 
+  !> \page Complex Complex Number support
+  !> See \ref fgsl_complex_math for details.
   !>
   !> Since the Fortran standard provides extensive support for complex
   !> numbers, ony those routines for which no Fortran intrinsic is

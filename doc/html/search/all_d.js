@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['params_4490',['params',['../structfgsl_1_1fgsl__movstat__function.html#a35da58e8d84fbce097a1200c34da3766',1,'fgsl::fgsl_movstat_function']]],
-  ['permutation_2efinc_4491',['permutation.finc',['../api_2permutation_8finc.html',1,'(Global Namespace)'],['../interface_2permutation_8finc.html',1,'(Global Namespace)']]],
-  ['poly_2efinc_4492',['poly.finc',['../api_2poly_8finc.html',1,'(Global Namespace)'],['../interface_2poly_8finc.html',1,'(Global Namespace)']]]
+  ['r_4717',['r',['../structfgsl__multifit_1_1fgsl__multifit__robust__stats.html#acb822292cf04b91d64b7e4c0c1963418',1,'fgsl_multifit::fgsl_multifit_robust_stats::r()'],['../structfgsl__multifit_1_1gsl__multifit__robust__stats.html#a1b2caea2c34abdd3baeef2ed15a8996d',1,'fgsl_multifit::gsl_multifit_robust_stats::r()']]],
+  ['random_20number_20distributions_4718',['Random number distributions',['../Randomdist.html',1,'index']]],
+  ['rmse_4719',['rmse',['../structfgsl__multifit_1_1fgsl__multifit__robust__stats.html#a123064d82d7ce8ca341f24113d0ab6dc',1,'fgsl_multifit::fgsl_multifit_robust_stats::rmse()'],['../structfgsl__multifit_1_1gsl__multifit__robust__stats.html#acbc2a6c4b82cfa8f48b882d5a375fa58',1,'fgsl_multifit::gsl_multifit_robust_stats::rmse()']]],
+  ['rsq_4720',['rsq',['../structfgsl__multifit_1_1fgsl__multifit__robust__stats.html#a4f1c7684e9e4d5dc41e2b5875be49185',1,'fgsl_multifit::fgsl_multifit_robust_stats::rsq()'],['../structfgsl__multifit_1_1gsl__multifit__robust__stats.html#ae914dbdd75b92fd36b6aed0cb88321b9',1,'fgsl_multifit::gsl_multifit_robust_stats::rsq()']]]
 ];

@@ -1,9 +1,10 @@
 !-*-f90-*-
 module fgsl_array
-  !> Array support
+  !> \page Arrays Array support
   !> Since array processing is one of the strengths of Fortran, FGSL focuses on
   !> leveraging Fortran-style array processing for those GSL routines which
   !> require arguments of type <CODE>fgsl_vector*</CODE> or <CODE>fgsl_matrix*</CODE>.
+  !> See \ref fgsl_array for details.
   use fgsl_base
   use fgsl_errno
   implicit none
@@ -24,7 +25,7 @@ module fgsl_array
        fgsl_aux_vector_uint_align, fgsl_aux_vector_uint_size, fgsl_aux_vector_uint_stride 
        
   !
-  !> Types
+  ! Types
   type, public :: fgsl_vector
      type(c_ptr) :: gsl_vector = c_null_ptr
   end type fgsl_vector
@@ -52,7 +53,7 @@ module fgsl_array
      type(c_ptr) :: gsl_matrix_complex = c_null_ptr
   end type fgsl_matrix_complex
   !
-  !> Generic interfaces
+  ! Generic interfaces
   interface fgsl_well_defined
      module procedure fgsl_vector_status
      module procedure fgsl_vector_int_status

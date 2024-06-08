@@ -1,5 +1,6 @@
 module fgsl_bspline
-  !> Basis Splines
+  !> \page Bspline Basis splines
+  !> See \ref fgsl_bspline for details.
   use fgsl_base
   use fgsl_array
   use fgsl_math
@@ -19,17 +20,18 @@ module fgsl_bspline
     gsl_bspline_col_interp, gsl_bspline_interp_chermite, & 
     gsl_bspline_proj_rhs, gsl_bspline_greville_abscissa
   private :: gsl_bspline_return_knots_vector
-  !> Legacy 
+  
+  ! Legacy API calls
   private :: gsl_bspline_knots, gsl_bspline_knots_uniform, gsl_bspline_eval, &
     gsl_bspline_deriv_eval, gsl_bspline_ncoeffs, gsl_bspline_knots_greville
   !
-  !> Types
+  ! Types
   type, public :: fgsl_bspline_workspace
      private
      type(c_ptr) :: gsl_bspline_workspace = c_null_ptr
   end type fgsl_bspline_workspace
   !
-  !> C interfaces
+  ! C interfaces
   interface
 	function gsl_bspline_alloc(k, nbreak) bind(c)
 	  import :: c_size_t, c_ptr
@@ -655,7 +657,12 @@ contains
            gsl_bspline_return_knots_vector(w%gsl_bspline_workspace) 
     end function fgsl_bspline_return_knots_vector	
     !
-	!> Legacy API - to be removed at some time
+	!> Legacy API - to be removed at some time:
+        !> - fgsl_bspline_knots
+        !> - fgsl_bspline_knots_uniform
+        !> - fgsl_bspline_eval
+        !> - fgsl_bspline_deriv_eval
+        !> - fgsl_bspline_knots_greville
 	function fgsl_bspline_knots(breakpts, w)
 	  integer(fgsl_int) :: fgsl_bspline_knots
 	  type(fgsl_vector), intent(in) :: breakpts

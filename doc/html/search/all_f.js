@@ -1,15 +1,9 @@
 var searchData=
 [
-  ['sigma_4499',['sigma',['../structfgsl_1_1fgsl__multifit__robust__stats.html#a5da53015a9d12f1c5efca715e3db852b',1,'fgsl::fgsl_multifit_robust_stats']]],
-  ['sigma_5fmad_4500',['sigma_mad',['../structfgsl_1_1fgsl__multifit__robust__stats.html#aa9d516d07e5792e733b0074d4b402999',1,'fgsl::fgsl_multifit_robust_stats']]],
-  ['sigma_5fols_4501',['sigma_ols',['../structfgsl_1_1fgsl__multifit__robust__stats.html#adf176fab65c7036d151f74de617d219a',1,'fgsl::fgsl_multifit_robust_stats']]],
-  ['sigma_5frob_4502',['sigma_rob',['../structfgsl_1_1fgsl__multifit__robust__stats.html#a5584eeb03f4001749227079089275075',1,'fgsl::fgsl_multifit_robust_stats']]],
-  ['siman_2efinc_4503',['siman.finc',['../api_2siman_8finc.html',1,'(Global Namespace)'],['../interface_2siman_8finc.html',1,'(Global Namespace)']]],
-  ['sort_2efinc_4504',['sort.finc',['../api_2sort_8finc.html',1,'(Global Namespace)'],['../interface_2sort_8finc.html',1,'(Global Namespace)']]],
-  ['specfunc_2efinc_4505',['specfunc.finc',['../api_2specfunc_8finc.html',1,'(Global Namespace)'],['../interface_2specfunc_8finc.html',1,'(Global Namespace)']]],
-  ['splinalg_2efinc_4506',['splinalg.finc',['../api_2splinalg_8finc.html',1,'(Global Namespace)'],['../interface_2splinalg_8finc.html',1,'(Global Namespace)']]],
-  ['spmatrix_2efinc_4507',['spmatrix.finc',['../api_2spmatrix_8finc.html',1,'(Global Namespace)'],['../interface_2spmatrix_8finc.html',1,'(Global Namespace)']]],
-  ['sse_4508',['sse',['../structfgsl_1_1fgsl__multifit__robust__stats.html#a137f634721561413a40c1269d954a504',1,'fgsl::fgsl_multifit_robust_stats']]],
-  ['statistics_2efinc_4509',['statistics.finc',['../api_2statistics_8finc.html',1,'(Global Namespace)'],['../interface_2statistics_8finc.html',1,'(Global Namespace)']]],
-  ['sum_5flevin_2efinc_4510',['sum_levin.finc',['../api_2sum__levin_8finc.html',1,'(Global Namespace)'],['../interface_2sum__levin_8finc.html',1,'(Global Namespace)']]]
+  ['t_5finitial_4729',['t_initial',['../structfgsl__siman_1_1gsl__siman__params__t.html#ab36a4043ec97373b538e7904f08e587c',1,'fgsl_siman::gsl_siman_params_t']]],
+  ['t_5fmin_4730',['t_min',['../structfgsl__siman_1_1gsl__siman__params__t.html#a1a28194dc12df77675b2dea5caf3761c',1,'fgsl_siman::gsl_siman_params_t']]],
+  ['theta_4731',['theta',['../structfgsl__integration_1_1fgsl__integration__lebedev__workspace.html#ab2ef442163fa853f77721adf8aa223aa',1,'fgsl_integration::fgsl_integration_lebedev_workspace']]],
+  ['tol_4732',['tol',['../structfgsl__multi__nlinear_1_1gsl__multilarge__nlinear__parameters.html#addc9b1fd2a5bcc936b4bc96b8b10f742',1,'fgsl_multi_nlinear::gsl_multilarge_nlinear_parameters']]],
+  ['trs_4733',['trs',['../structfgsl__multi__nlinear_1_1gsl__multifit__nlinear__parameters.html#a54b341b2085abd7f3948c91074577911',1,'fgsl_multi_nlinear::gsl_multifit_nlinear_parameters::trs()'],['../structfgsl__multi__nlinear_1_1gsl__multilarge__nlinear__parameters.html#adacf263b3e88f106332201e6702ae8f0',1,'fgsl_multi_nlinear::gsl_multilarge_nlinear_parameters::trs()']]],
+  ['type_4734',['type',['../structfgsl__qrngen_1_1fgsl__qrng__type.html#ac00acc16ff777d8bdb2ac485f0ce20d9',1,'fgsl_qrngen::fgsl_qrng_type::type()'],['../structfgsl__rngen_1_1fgsl__rng__type.html#a92dc352e527fd7eb93d762a5b1da8c10',1,'fgsl_rngen::fgsl_rng_type::type()']]]
 ];

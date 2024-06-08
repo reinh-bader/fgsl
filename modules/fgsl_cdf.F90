@@ -1,5 +1,6 @@
 module fgsl_cdf
-  !> Random number distributions
+  !> \page Randomdist Random number distributions
+  !> See \ref fgsl_cdf for details.
   use fgsl_base
   use fgsl_rngen
   use fgsl_array
