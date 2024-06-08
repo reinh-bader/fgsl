@@ -32,7 +32,8 @@ Here an overview of the relevant additions:
 6. new mappings from gsl_bspline.h, including the nine example 
    programs
 7. mappings to gsl_linalg_LU_band* from gsl_linalg.h added; 
-   includes limited and non-portable (!) support for gsl_vector_uint.
+   includes limited and non-portable (!) support for gsl_vector_uint
+8. Reworked statistics, added TSS functions
    
    
 Fixes:

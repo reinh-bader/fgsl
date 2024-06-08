@@ -5,7 +5,7 @@ program statistics
   integer(fgsl_size_t), parameter :: nsize = 50
   real(fgsl_double), parameter :: eps10 = 1.0d-10
   real(fgsl_double) :: s_array(nsize), s_arr2(nsize), w(nsize), wk(2*nsize)
-  real(fgsl_double) :: s_mean, s_m2, s_var, s_kur, s_sd, s_skew, &
+  real(fgsl_double) :: s_mean, s_m2, s_var, s_kur, s_sd, s_tss, s_skew, &
        s_auto, s_cov, s_cor, s_spear, xc, xv
   integer(fgsl_long) :: i
   integer(fgsl_size_t) :: mx, mn
@@ -14,7 +14,7 @@ program statistics
 !
   call unit_init(200)
 !
-  s_array = (/ (dble(i), i=1, nsize) /)
+  s_array = [ (dble(i), i=1, nsize) ]
   s_mean = fgsl_stats_mean(s_array,1_fgsl_size_t,nsize)
   call unit_assert_equal_within('fgsl_stats_mean:1',&
        2.55d1,s_mean,eps10)
@@ -33,6 +33,12 @@ program statistics
   s_sd = fgsl_stats_sd_m(s_array,1_fgsl_size_t,nsize,2.55d1)
   call unit_assert_equal_within('fgsl_stats_sd_m',&
        sqrt(2.125d2),s_sd,eps10)
+  s_tss = fgsl_stats_tss(s_array,1_fgsl_size_t,nsize)
+  call unit_assert_equal_within('fgsl_stats_tss',&
+       1.04125D+04,s_tss,eps10)
+  s_tss = fgsl_stats_tss_m(s_array,1_fgsl_size_t,nsize,2.55d1)
+  call unit_assert_equal_within('fgsl_stats_tss_m',&
+       1.04125D+04,s_tss,eps10)
   s_var = fgsl_stats_variance_with_fixed_mean(s_array,1_fgsl_size_t,&
        nsize,2.55d1)
   call unit_assert_equal_within('fgsl_stats_variance_with_fixed_mean',&
@@ -47,7 +53,7 @@ program statistics
   s_var = fgsl_stats_absdev_m(s_array,1_fgsl_size_t,nsize,2.55d1)
   call unit_assert_equal_within('fgsl_stats_absdev',&
        1.25d1,s_var,eps10)
-  s_array = (/ (dble(i)**2, i=1, nsize) /)
+  s_array = [ (dble(i)**2, i=1, nsize) ]
   s_mean = fgsl_stats_mean(s_array,1_fgsl_size_t,nsize)
   s_sd = fgsl_stats_sd(s_array,1_fgsl_size_t,nsize)
   xc = 0.0d0
@@ -86,7 +92,7 @@ program statistics
        nsize,s_mean)
   call unit_assert_equal_within('fgsl_stats_lag1_autocorrelation_m',&
        xc,s_auto,eps10)
-  s_arr2 = (/ (dble(i), i=1, nsize) /)
+  s_arr2 = [ (dble(i), i=1, nsize) ]
   s_m2 = fgsl_stats_mean(s_arr2,1_fgsl_size_t,nsize)
   xc = 0.0d0
   do i=1,nsize
@@ -107,17 +113,17 @@ program statistics
   call unit_assert_equal_within('fgsl_stats_correlation',&
        0.9694696278887304786d0,s_cor,eps10)
 !
-  s_array = (/ (cos(dble(i)), i=1, nsize) /)
-  s_arr2 = (/ (dble(i)**1.2, i=1, nsize) /)
+  s_array = [ (cos(dble(i)), i=1, nsize) ]
+  s_arr2 = [ (dble(i)**1.2, i=1, nsize) ]
   s_spear = fgsl_stats_spearman(s_array,1_fgsl_size_t,s_arr2,1_fgsl_size_t, &
        nsize, wk)
   call unit_assert_equal_within('fgsl_stats_spearman',&
        4.5858343337334934D-02,s_spear,eps10)
 
 !
-  s_array = (/ (dble(i)**2, i=1, nsize) /)
-  s_arr2 = (/ (dble(i), i=1, nsize) /)
-  w = (/ (0.43d0, i=1, nsize) /)
+  s_array = [ (dble(i)**2, i=1, nsize) ]
+  s_arr2 = [ (dble(i), i=1, nsize) ]
+  w = [ (0.43d0, i=1, nsize) ]
   s_mean = fgsl_stats_wmean(w,1_fgsl_size_t,s_arr2,1_fgsl_size_t,nsize)
   call unit_assert_equal_within('fgsl_stats_wmean',&
        2.55d1,s_mean,eps10)
@@ -202,9 +208,6 @@ program statistics
   xv = fgsl_stats_quantile_from_sorted_data(s_array,1_fgsl_size_t,nsize,0.5d0)
   call unit_assert_equal_within('fgsl_stats_quantile_from_sorted_data',&
        xc,xv,eps10)
-
-
-
 !
 ! Done
 !
